@@ -1,0 +1,21 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+
+.cabinet__logout {
+  display: flex;
+  align-items: center;
+  font-family: $title-font;
+  color: var(--color-red);
+  font-weight: 700;
+  margin-bottom: 10px;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.cabinet__logout-icon {
+  margin-left: 9px;
+}

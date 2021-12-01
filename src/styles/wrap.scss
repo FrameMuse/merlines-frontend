@@ -1,0 +1,12 @@
+@import "vars";
+
+.wrap {
+  @media #{$media-xl} {
+    display: grid;
+    grid-template-columns: 730px 255px;
+    gap: 0 124px;
+    max-width: 1110px;
+    margin: 0 auto;
+    position: relative;
+  }
+}

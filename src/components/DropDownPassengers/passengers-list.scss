@@ -1,0 +1,128 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+
+.passengers-list {
+  @include ul;
+
+  width: 250px;
+  margin-top: 5px;
+  background-color: var(--color-white);
+  border-radius: 4px;
+  box-shadow: $shadow-2;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  &::before { @include rectangle; }
+}
+
+.passengers-list__item {
+  padding: 20px 20px 25px;
+  border-bottom: 1px solid var(--color-blue);
+
+  &:last-child {
+    padding-bottom: 20px;
+    border-bottom: none;
+  }
+}
+
+.passengers-list__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.passengers-list__left {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.passengers-list__item-info {
+  color: var(--color-grey);
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+.passengers-list__counter {
+  display: flex;
+}
+
+.passengers-list__counter-btn {
+  @include resetBtn;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-grey);
+  font-size: 14px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--color-blue);
+  box-sizing: border-box;
+  transition: .2s;
+
+  &:first-child { border-radius: 4px 0 0 4px; }
+  &:last-child { border-radius: 0 4px 4px 0; }
+
+  &:hover,
+  &:focus {
+    color: var(--color-white);
+    background-color: var(--color-blue);
+  }
+
+  &--active {
+    color: var(--color-white);
+    background-color: var(--color-btn);
+  }
+
+  &--disabled {
+    &:hover,
+    &:focus {
+      color: var(--color-grey);
+      background-color: transparent;
+    }
+  }
+}
+
+.passengers-list__counter-num {
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-top: 1px solid var(--color-blue);
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--color-blue);
+  box-sizing: border-box;
+  outline: none;
+  appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+}
+
+.passengers-list__checkbox {
+  margin-bottom: 15px;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.passengers-list__checkbox-input {
+  display: none;
+
+  &:checked + .passengers-list__checkbox-label::after {
+    opacity: 1;
+  }
+}
+
+.passengers-list__checkbox-label {
+  @include checkboxLabel;
+}

@@ -1,0 +1,86 @@
+@import "../../../styles/vars.scss";
+@import "../../../styles/mixin.scss";
+
+.transfer__container {
+  @include container;
+}
+
+.transfer__content {
+  color: var(--color-base);
+  text-align: center;
+  padding: 52px 45px 61px;
+  background-color: var(--color-white);
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  @media #{$media-md} {
+    width: 570px;
+    padding: 38px 60px 53px;
+  }
+  @media #{$media-lg} {
+    width: 610px;
+    padding-left: 105px;
+    padding-right: 105px;
+  }
+  @media #{$media-xl} {
+    width: 730px;
+    padding-left: 65px;
+    padding-right: 65px;
+  }
+}
+
+.transfer__loading {
+  color: var(--color-blue);
+  margin-bottom: 30px;
+  transform-origin: center;
+  animation-name: rotate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  @media #{$media-md} {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.transfer__text {
+  font-family: $title-font;
+  font-size: 18px;
+  font-weight: 500;
+
+  @media #{$media-md} {
+    font-size: 24px;
+  }
+  @media #{$media-xl} {
+    font-size: 36px;
+  }
+}
+
+.transfer__link {
+  color: var(--color-base);
+  font-weight: 700;
+}
+
+.transfer__logo {
+  margin-top: 30px;
+
+  @media #{$media-md} {
+    img {
+      width: 104px;
+      height: 41px;
+    }
+  }
+  @media #{$media-lg} {
+    img {
+      width: 112px;
+      height: 41px;
+    }
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

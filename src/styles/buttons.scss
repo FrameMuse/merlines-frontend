@@ -1,0 +1,218 @@
+@import "vars";
+@import "mixin";
+
+
+.btn {
+  @include button;
+
+  width: 100%;
+  min-height: 50px;
+  color: var(--color-white);
+  padding: 16px 15px 15px;
+  background-color: var(--color-btn);
+  border-radius: 4px;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-blue);
+  }
+
+  &--sm {
+    max-height: 40px;
+    min-height: 40px;
+    padding: 0;
+  }
+
+  &--profile {
+    border: none;
+    background-color: var(--color-blue);
+    box-shadow: $shadow;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-btn);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--color-blue);
+    font-weight: 700;
+    box-shadow: $shadow;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-btn);
+    }
+  }
+
+  &--subscribe {
+    border-radius: 0 0 4px 4px;
+    min-height: 48px;
+  }
+
+  &--info {
+    min-height: 40px;
+    padding-top: 10px;
+    padding-bottom: 12px;
+    border: none;
+    border-radius: 0 0 4px 0;
+  }
+
+  &--form {
+    margin-top: 15px;
+    background-color: var(--color-blue);
+    box-shadow: $shadow;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-btn);
+    }
+  }
+
+  @media #{$media-md} {
+    &--profile {
+      width: 270px;
+    }
+
+    &--subscribe {
+      width: auto;
+      padding: 20px 18px 21px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    &--form {
+      width: 270px;
+      margin-right: auto;
+    }
+  }
+  @media #{$media-lg} {
+    &--profile {
+      width: 290px;
+    }
+
+    &--cabinet {
+      display: block;
+    }
+
+    &--form {
+      width: 255px;
+      margin-right: auto;
+    }
+  }
+  @media #{$media-xl} {
+    min-width: 160px;
+
+    &--sm {
+      min-width: 130px;
+    }
+
+    &--profile {
+      width: 255px;
+    }
+  }
+}
+
+.button-text {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 14px;
+  border-top: 1px solid var(--color-grey);
+
+  &--cabinet {
+    margin-top: 0;
+    margin-bottom: 16px;
+    text-align: left;
+    border: none;
+
+    .button-text__btn {
+      @include crossIcon;
+
+      color: var(--color-blue);
+      font-size: 14px;
+      font-weight: 500;
+      width: auto;
+      padding: 0 22px 0 0;
+      position: relative;
+
+      &::before,
+      &::after {
+        margin-top: 0;
+      }
+
+      &:hover,
+      &:focus {
+        color: var(--color-red);
+
+        &::before,
+        &::after {
+          background-color: var(--color-red);
+        }
+      }
+    }
+  }
+
+  &--right {
+    text-align: right;
+    margin-right: -2px;
+  }
+
+  &--articles {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  @media #{$media-md} {
+    margin-top: 24px;
+    margin-bottom: 19px;
+
+    &--cabinet {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    &--articles {
+      margin-top: -10px;
+      margin-bottom: 40px;
+    }
+  }
+  @media #{$media-lg} {
+    &--cabinet {
+      margin-right: -2px;
+    }
+  }
+  @media #{$media-xl} {
+    &--articles {
+      margin-top: -4px;
+    }
+
+    &--cabinet {
+      margin-right: 14px;
+    }
+
+    &--right {
+      margin-right: -2px;
+    }
+  }
+}
+
+.button-text__btn {
+  @include resetBtn;
+
+  color: var(--color-grey);
+  font-size: 12px;
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  transition: .2s;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    color: var(--color-blue);
+  }
+}
+
+.button-text__arrow {
+  margin-left: 5px;
+}
+

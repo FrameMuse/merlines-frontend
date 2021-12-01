@@ -1,0 +1,59 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+.cards {
+  @include ul;
+
+  display: grid;
+  gap: 20px;
+
+  @media #{$media-md} {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
+.cards__item {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 199px;
+  padding: 0 20px 20px;
+  background-color: var(--color-border-third);
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  @media (max-width: 767px) {
+    &:nth-child(even) {
+      color: var(--color-white);
+      background-color: var(--color-blue);
+    }
+  }
+  @media #{$media-md} {
+    &:nth-child(4n + 3) {
+      color: var(--color-white);
+      background-color: var(--color-blue);
+    }
+
+    &:nth-child(2n):not(:nth-child(4n)) {
+      color: var(--color-white);
+      background-color: var(--color-blue);
+    }
+  }
+}
+
+.cards__number {
+  display: inline-block;
+  font-family: $title-font;
+  font-size: 48px;
+  line-height: 1.25;
+  margin-bottom: 30px;
+}
+
+.cards__text {
+  line-height: 1.25;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

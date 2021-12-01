@@ -1,0 +1,54 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+
+.advertising {
+  padding-top: 34px;
+  padding-bottom: 40px;
+
+  @media #{$media-md} {
+    padding-top: 80px;
+    padding-bottom: 50px;
+  }
+}
+
+.advertising__container {
+  @include container;
+}
+
+.advertising__list {
+  @include ul;
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  @media #{$media-md} {
+    margin-top: 70px;
+    margin-bottom: 70px;
+  }
+}
+
+.advertising__item {
+  margin-bottom: 30px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.advertising__list-title {
+  font-size: 24px;
+  margin-bottom: 21px;
+}
+
+.advertising__text {
+  color: var(--color-grey-2);
+  margin-bottom: 20px;
+
+  @media #{$media-md} {
+    font-size: 18px;
+    margin-bottom: 23px;
+  }
+}
+
+

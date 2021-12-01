@@ -1,0 +1,171 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+.error {
+  color: var(--color-white);
+  text-align: center;
+  min-height: 418px;
+  padding-bottom: 40px;
+  background-color: var(--color-blue);
+  box-sizing: border-box;
+
+  &--404 {
+    padding-top: 277px;
+    background-image: url("./../../img/error404/mobile.png");
+    background-repeat: no-repeat;
+    background-position: 0 25px;
+
+    @media (min-width: 321px) {
+      background-position: center 25px;
+    }
+    @media (min-resolution: 2dppx) {
+      background-image: url("./../../img/error404/mobile@2x.png");
+      background-size: 295px 231px;
+    }
+
+    .error__title {
+      margin: 0 auto 15px;
+    }
+
+    @media #{$media-md} {
+      min-height: 649px;
+      padding-top: 451px;
+      background-image: url("./../../img/error404/tablet.png");
+      background-position: 43% 30px;
+
+      @media (min-resolution: 2dppx) {
+        background-image: url("./../../img/error404/tablet@2x.png");
+        background-size: 502px 379px;
+      }
+
+      .error__title {
+        width: auto;
+        margin-bottom: 20px;
+      }
+    }
+    @media #{$media-lg} {
+      padding-top: 459px;
+      background-position: 46% 58px;
+    }
+    @media #{$media-xl} {
+      min-height: 737px;
+      padding-top: 542px;
+      background-image: url("./../../img/error404/desktop.png");
+      background-position: center 48px;
+
+      @media (min-resolution: 2dppx) {
+        background-image: url("./../../img/error404/desktop@2x.png");
+        background-size: 618px 465px;
+      }
+
+      .error__link {
+        margin-left: -20px;
+      }
+    }
+  }
+
+
+  &--500 {
+    padding-top: 244px;
+    padding-bottom: 38px;
+    background-image: url("./../../img/error500/mobile.png");
+    background-color: var(--color-blue);
+    background-repeat: no-repeat;
+    background-position: 18px -10px;
+
+    @media (min-width: 321px) {
+      background-position: center -10px;
+    }
+    @media (min-resolution: 2dppx) {
+      background-image: url("./../../img/error500/mobile@2x.png");
+      background-size: 302px 244px;
+    }
+
+    .error__title {
+      margin-bottom: 16px;
+    }
+
+    .error__text {
+      margin-bottom: 16px;
+    }
+
+    @media #{$media-md} {
+      min-height: 650px;
+      padding-top: 410px;
+      background-image: url("./../../img/error500/tablet.png");
+      background-color: var(--color-blue);
+      background-repeat: no-repeat;
+      background-position: 49% -14px;
+
+      .error__title {
+        font-size: 36px;
+        margin-bottom: 19px;
+      }
+
+      .error__text {
+        margin-bottom: 20px;
+      }
+    }
+    @media #{$media-lg} {
+      padding-top: 432px;
+      background-image: url("./../../img/error500/tablet.png");
+      background-color: var(--color-blue);
+      background-repeat: no-repeat;
+      background-position: center 8px;
+    }
+    @media #{$media-xl} {
+      min-height: 738px;
+      padding-top: 538px;
+      background-image: url("./../../img/error500/desktop.png");
+      background-color: var(--color-blue);
+      background-repeat: no-repeat;
+      background-position: 56% -9px;
+    }
+  }
+}
+
+.error__container {
+  @include container;
+}
+
+.error__title {
+  font-family: $title-font;
+  font-size: 18px;
+
+  @media #{$media-md} {
+    font-size: 24px;
+  }
+  @media #{$media-lg} {
+    font-size: 36px;
+  }
+}
+
+.error__br {
+  @media #{$media-md} {
+    display: none;
+  }
+}
+
+.error__text {
+  font-size: 14px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.error__link {
+  color: var(--color-light-blue);
+  font-family: $main-font;
+
+  &::before {
+    display: inline-block;
+    content: "";
+    width: 12px;
+    height: 8px;
+    margin-right: 10px;
+    background-image: url("./../../img/icons/arrow.svg");
+    background-repeat: no-repeat;
+  }
+}

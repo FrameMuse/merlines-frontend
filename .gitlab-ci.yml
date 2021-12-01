@@ -1,0 +1,25 @@
+stages:
+  - build
+  - upload
+
+upload:
+  stage: upload
+  image: node
+  script:
+  - node --version  # Print out node version
+  - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - touch ~/.ssh/id.rsa
+  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id.rsa
+  - chmod 700 ~/.ssh/id.rsa
+  - git config --global user.email "dev@merlines.com"
+  - git config --global user.name "DEV server"
+  - pwd && ls -la
+  - yarn add react-scripts
+  - yarn install
+  - yarn build
+  - scp -o StrictHostKeyChecking=no -i ~/.ssh/id.rsa -r build/ merlines@188.120.238.123:/home/merlines/react/
+  # - ssh -o StrictHostKeyChecking=no -i ~/.ssh/id.rsa build/ merlines@188.120.238.123 'pwd'

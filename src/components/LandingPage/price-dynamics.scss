@@ -1,0 +1,340 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+
+.price-dynamics__container {
+  @include container;
+
+  @media #{$media-lg} {
+    max-width: 770px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.price-dynamics__title-wrap {
+  @media #{$media-md} {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.price-dynamics__title {
+  @include h2;
+
+  @media #{$media-md} {
+    margin-bottom: 16px;
+  }
+}
+
+.price-dynamics__nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  margin-top: 24px;
+  box-shadow: $shadow;
+
+  @media #{$media-md} {
+    margin-top: 50px;
+  }
+}
+
+.price-dynamics__nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+  font-size: 12px;
+  padding: 11px 7px;
+  background-color: var(--color-white);
+  transition: .2s;
+
+  &:first-child { border-radius: 4px 0 0 4px; }
+  &:last-child { border-radius: 0 4px 4px 0; }
+
+  & + & {
+    border-left: 1px solid var(--color-border-third);
+  }
+
+  &:hover {
+    @include hoverBlock;
+
+    text-decoration: none;
+  }
+
+  &--active {
+    color: var(--color-white);
+    font-weight: 700;
+    background-color: var(--color-blue);
+  }
+
+  @media #{$media-md} {
+    font-size: 14px;
+    padding: 16px 20px 18px;
+  }
+}
+
+.price-dynamics__schedule {
+  @include container;
+
+  overflow: hidden;
+  padding-bottom: 1px;
+
+  @media #{$media-lg} {
+    width: 770px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.price-dynamics__schedule-list {
+  @include ul;
+
+  display: flex;
+  align-items: flex-end;
+  width: 290px;
+  height: 205px;
+  margin-top: 18px;
+
+  @media #{$media-md} {
+    width: 690px;
+  }
+  @media #{$media-lg} {
+    width: 770px;
+  }
+}
+
+.price-dynamics__schedule-item {
+  & + & {
+    margin-left: 7px;
+  }
+
+  &--Jan {
+    .price-dynamics__schedule-thumb {
+      height: 112px;
+    }
+  }
+
+  &--Feb {
+    .price-dynamics__schedule-thumb {
+      width: 55px;
+      height: 75px;
+    }
+  }
+
+  &--Mar {
+    .price-dynamics__schedule-thumb {
+      height: 93px;
+    }
+  }
+
+  &--Apr {
+    .price-dynamics__schedule-thumb {
+      height: 100px;
+    }
+  }
+
+  &--May {
+    .price-dynamics__schedule-thumb {
+      height: 81px;
+    }
+  }
+
+  &--Jun {
+    .price-dynamics__schedule-thumb {
+      height: 64px;
+    }
+  }
+
+  &--Jul {
+    .price-dynamics__schedule-thumb {
+      width: 55px;
+      height: 121px;
+    }
+  }
+
+  &--Aug {
+    .price-dynamics__schedule-thumb {
+      height: 105px;
+    }
+  }
+
+  &--Sep {
+    .price-dynamics__schedule-thumb {
+      width: 55px;
+      height: 100px;
+    }
+  }
+
+  &--Oct {
+    .price-dynamics__schedule-thumb {
+      height: 105px;
+    }
+  }
+
+  &--Nov {
+    .price-dynamics__schedule-thumb {
+      width: 55px;
+      height: 100px;
+    }
+  }
+
+  &--Dec {
+    .price-dynamics__schedule-thumb {
+      width: 55px;
+      height: 87px;
+    }
+  }
+
+  &--secondary {
+    .price-dynamics__schedule-thumb {
+      background-color: var(--color-green);
+    }
+  }
+
+  &--year {
+    .price-dynamics__schedule-thumb {
+      position: relative;
+
+      &::before {
+        display: block;
+        content: "  2021";
+        color: var(--color-grey);
+        line-height: 1;
+        white-space: pre;
+        width: 1px;
+        height: 180px;
+        background-color: var(--color-border-third);
+        position: absolute;
+        bottom: 0;
+        right: -4px;
+      }
+    }
+  }
+
+  @media #{$media-lg} {
+    &--Jan {
+      .price-dynamics__schedule-thumb { width: 57px; }
+    }
+
+    &--Feb {
+      .price-dynamics__schedule-thumb { width: 58px; }
+    }
+
+    &--Mar {
+      .price-dynamics__schedule-thumb { width: 58px; }
+    }
+
+    &--Apr {
+      .price-dynamics__schedule-thumb { width: 57px; }
+    }
+
+    &--May {
+      .price-dynamics__schedule-thumb { width: 57px; }
+    }
+
+    &--Jun {
+      .price-dynamics__schedule-thumb { width: 58px; }
+    }
+
+    &--Jul {
+      .price-dynamics__schedule-thumb { width: 58px; }
+    }
+
+    &--Aug {
+      .price-dynamics__schedule-thumb { width: 57px; }
+    }
+
+    &--Sep {
+      .price-dynamics__schedule-thumb { width: 59px; }
+    }
+
+    &--Oct {
+      .price-dynamics__schedule-thumb { width: 57px; }
+    }
+
+    &--Nov {
+      .price-dynamics__schedule-thumb { width: 57px; }
+    }
+
+    &--Dec {
+      .price-dynamics__schedule-thumb { width: 59px; }
+    }
+  }
+  @media #{$media-xl} {
+    &--Jan {
+      .price-dynamics__schedule-thumb { width: 54px; }
+    }
+
+    &--Feb {
+      .price-dynamics__schedule-thumb { width: 55px; }
+    }
+
+    &--Mar {
+      .price-dynamics__schedule-thumb { width: 54px; }
+    }
+
+    &--Apr {
+      .price-dynamics__schedule-thumb { width: 54px; }
+    }
+
+    &--May {
+      .price-dynamics__schedule-thumb { width: 54px; }
+    }
+
+    &--Jun {
+      .price-dynamics__schedule-thumb { width: 54px; }
+    }
+
+    &--Jul {
+      .price-dynamics__schedule-thumb { width: 55px; }
+    }
+
+    &--Aug {
+      .price-dynamics__schedule-thumb { width: 54px; }
+    }
+
+    &--Sep {
+      .price-dynamics__schedule-thumb { width: 55px; }
+    }
+
+    &--Oct {
+      .price-dynamics__schedule-thumb { width: 55px; }
+    }
+
+    &--Nov {
+      .price-dynamics__schedule-thumb { width: 54px; }
+    }
+
+    &--Dec {
+      .price-dynamics__schedule-thumb { width: 55px; }
+    }
+  }
+}
+
+.price-dynamics__schedule-price {
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 3px;
+}
+
+.price-dynamics__schedule-thumb {
+  width: 54px;
+  height: 100px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: var(--color-btn);
+  border-radius: 4px 4px 0 0;
+}
+
+.price-dynamics__schedule-month {
+  display: block;
+  color: var(--color-grey);
+  font-weight: 400;
+  text-align: center;
+}
+
+.price-dynamics__scroll {
+  margin-top: 20px;
+}
+

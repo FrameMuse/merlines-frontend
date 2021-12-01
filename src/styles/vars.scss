@@ -1,0 +1,57 @@
+//Шрифты
+$main-font: "Inter", "Arial", "Helvetica Neue", "Helvetica", sans-serif;
+$title-font: "Montserrat", "Verdana", "Geneva", "Helvetica Neue", "Helvetica", sans-serif;
+
+$font-size: 14px;
+$font-weight: 500;
+$line-height: 1.2;
+$letter-spacing: 0;
+
+//Цвета
+$color-white: #fff;
+$color-black: #000;
+$color-base: #333;
+$color-blue: #235ef5;
+$color-hover-blue: #396ef6;
+$color-btn: #396ef6;
+$color-light-blue: #a5beff;
+$color-light-blue-2: #658ef8;
+$color-border: #acacac;
+$color-border-secondary: #f2f2f2;
+$color-border-third: #eee;
+$color-grey: #a1a1a1;
+$color-grey-2: #747679;
+$color-grey-3: #e5e5e5;
+$color-green: #63cc61;
+$color-vk: #4b729f;
+$color-tg: #039be5;
+$color-fb: #3b5999;
+$color-icon: #5785fc;
+$color-red: #ff4b55;
+$color-simple-white: #fbfbfb;
+
+// Тени
+$shadow: 0 0 15px rgba(24, 50, 115, .1);
+$shadow-2: 0 4px 5px rgba(0, 0, 0, .1);
+$shadow-3: 0 -15px 15px rgba(24, 50, 115, .1);
+$shadow-special: 2px 6px 16px rgba(24, 50, 115, .06);
+$shadow-special-2: 2px 6px 16px rgba(24, 50, 115, .2);
+
+//Размеры
+$width-xs: 320px;
+$width-sm: 500px;
+$width-md: 768px;
+$width-lg: 992px;
+$width-xl: 1170px;
+
+//Медиа
+$media-sm: "screen and (min-width: #{$width-sm})";
+$media-md: "screen and (min-width: #{$width-md})";
+$media-before-lg: "screen and (max-width: #{$width-lg - 1})";
+$media-lg: "screen and (min-width: #{$width-lg})";
+$media-xl: "screen and (min-width: #{$width-xl})";
+
+// Отступы у контейнера
+$gapSm: 15px;
+$gapMd: 30px;
+$gapLg: 39px;

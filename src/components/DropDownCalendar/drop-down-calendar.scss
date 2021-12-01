@@ -1,0 +1,336 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+
+.drop-down-calendar {
+  height: 100vh;
+  background-color: var(--color-blue);
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+
+  @media #{$media-md} {
+    width: 588px;
+    height: auto;
+    margin-top: 5px;
+    padding: 25px 30px;
+    background-color: var(--color-white);
+    border-radius: 4px;
+    box-shadow: $shadow;
+    box-sizing: border-box;
+    overflow-y: visible;
+    position: absolute;
+    top: 100%;
+    left: 15px;
+    right: auto;
+    z-index: 2;
+
+    &::before {
+      @include rectangle;
+
+      left: 77px;
+      transform: none;
+    }
+  }
+  @media #{$media-lg} {
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &--offset {
+    @media #{$media-md} {
+      left: 40%;
+
+      &::before { left: 30%; }
+    }
+    @media #{$media-lg} {
+      left: 150%;
+
+      &::before { left: 50%; }
+    }
+  }
+}
+
+.drop-down-calendar__container {
+  padding: 47px 15px;
+  width: 290px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media #{$media-md} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 38px;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+  }
+}
+
+.drop-down-calendar__wrap {
+  text-align: center;
+  padding: 15px 16px;
+  background-color: var(--color-white);
+  border-radius: 4px;
+  box-shadow: $shadow-2;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media #{$media-md} {
+    display: none;
+    padding: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+    position: static;
+
+    &--active {
+      display: block;
+    }
+  }
+}
+
+.drop-down-calendar__header {
+  display: inline-block;
+  margin-bottom: 20px;
+  position: relative;
+
+  &--active {
+    .drop-down-calendar__list { visibility: visible; }
+  }
+}
+
+.drop-down-calendar__title {
+  @media #{$media-md} {
+    cursor: pointer;
+  }
+}
+
+.drop-down-calendar__month {
+  &::after { content: ","; }
+}
+
+.drop-down-calendar__month-control {
+  display: none;
+
+  @media #{$media-md} {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3px;
+    position: absolute;
+    top: 0;
+    right: -18px;
+  }
+}
+
+.drop-down-calendar-arrow {
+  @media #{$media-md} {
+    color: inherit;
+    cursor: pointer;
+
+    &--top {
+      margin-bottom: 3px;
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.drop-down-calendar__list {
+  display: none;
+
+  @media #{$media-md} {
+    @include ul;
+
+    display: block;
+    text-align: left;
+    width: 102px;
+    margin-top: 7px;
+    padding: 11px;
+    background-color: var(--color-white);
+    border-radius: 2px;
+    box-shadow: $shadow-2;
+    box-sizing: border-box;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 2;
+  }
+}
+
+.drop-down-calendar__item {
+  @media #{$media-md} {
+    margin-bottom: 3px;
+    transition: .2s;
+    cursor: pointer;
+
+    &:hover,
+    &:focus { color: var(--color-blue); }
+
+    &--current { color: var(--color-btn); }
+
+    &--year {
+      color: var(--color-grey);
+
+      &:hover,
+      &:focus {
+        color: var(--color-grey);
+        cursor: auto;
+      }
+    }
+  }
+}
+
+.drop-down-calendar__dates {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+}
+
+.drop-down-calendar__row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.drop-down-calendar__day-name {
+  color: var(--color-blue);
+  margin-bottom: 5px;
+}
+
+.drop-down-calendar__days-list {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0 5px;
+  justify-items: center;
+  overflow: hidden;
+}
+
+.drop-down-calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    color: var(--color-white);
+    background-color: var(--color-btn);
+  }
+
+  &--disabled {
+    color: var(--color-grey);
+    background-color: transparent;
+    pointer-events: none;
+  }
+
+  &--group {
+    color: var(--color-white);
+    background-color: var(--color-light-blue-2);
+
+    & + &::before {
+      content: "";
+      height: inherit;
+      background-color: var(--color-light-blue-2);
+      position: absolute;
+      left: -50%;
+      right: 50%;
+      z-index: -1;
+    }
+  }
+
+  &--active {
+    background-color: var(--color-blue);
+  }
+}
+
+.drop-down-calendar__control {
+  display: none;
+
+  @media #{$media-md} {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    top: 120px;
+    left: 0;
+  }
+}
+
+.drop-down-calendar__control-btn {
+  @media #{$media-md} {
+    @include resetBtn;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-blue);
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-blue);
+    border-radius: 50%;
+    box-shadow: $shadow-2;
+    box-sizing: border-box;
+
+    &--prev { transform: translateX(-50%) rotate(90deg); }
+    &--next { transform: translateX(50%) rotate(-90deg); }
+
+    &--disabled {
+      color: transparentize($color-blue, .6);
+      border-color: transparentize($color-blue, .6);
+      cursor: default;
+    }
+  }
+}
+
+.drop-down-calendar__close-btn {
+  @include resetBtn;
+  @include crossIcon;
+
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 500;
+  padding-right: 20px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  &::before,
+  &::after {
+    background-color: var(--color-white);
+  }
+
+  @media #{$media-md} {
+    display: none;
+  }
+}
+
+.drop-down-calendar__form {
+  margin-bottom: 15px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--color-white);
+
+  @media #{$media-md} {
+    display: none;
+  }
+}

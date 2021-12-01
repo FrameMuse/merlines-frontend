@@ -1,0 +1,70 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+
+
+.banner {
+  background-color: var(--color-white);
+  border-radius: 4px;
+  box-shadow: $shadow;
+}
+
+.banner__content {
+  padding: 20px 23px;
+  border-bottom: 1px solid var(--color-border-third);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  @media #{$media-md} {
+    display: grid;
+    grid-template-columns: 1fr 330px 1fr;
+    gap: 0 29px;
+    padding: 20px 20px 20px 24px;
+  }
+  @media #{$media-lg} {
+    grid-template-columns: 269px 370px 1fr;
+  }
+  @media #{$media-xl} {
+    grid-template-columns: 320px 350px 1fr;
+    padding-left: 30px;
+  }
+}
+
+.banner__title {
+  color: var(--color-blue);
+  font-family: $title-font;
+  font-size: 14px;
+  margin-bottom: 15px;
+
+  @media #{$media-md} {
+    margin-bottom: 0;
+  }
+  @media #{$media-lg} {
+    font-size: 18px;
+  }
+}
+
+.banner__text {
+  color: var(--color--grey-2);
+  margin-bottom: 17px;
+  line-height: 1.25;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.banner__price {
+  display: block;
+  font-family: $title-font;
+  font-weight: 700;
+
+  @media #{$media-lg} {
+    font-size: 18px;
+  }
+  @media #{$media-xl} {
+    padding-left: 95px;
+  }
+}

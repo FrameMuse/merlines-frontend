@@ -1,0 +1,135 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+
+.subscribe {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: var(--color-blue);
+
+  @media #{$media-md} {
+    padding-top: 52px;
+    padding-bottom: 60px;
+  }
+}
+
+.subscribe__container {
+  @include container;
+
+  @media #{$media-lg} { max-width: 930px; }
+  @media #{$media-xl} { max-width: 920px; }
+}
+
+.subscribe__title {
+  @include h2;
+
+  color: var(--color-white);
+
+  @media #{$media-md} {
+    font-size: 36px;
+    margin-bottom: 15px;
+  }
+}
+
+.subscribe__text {
+  color: var(--color-light-blue);
+
+  @media #{$media-md} {
+    max-width: 230px;
+  }
+}
+
+.subscribe__rule {
+  color: var(--color-light-blue);
+  font-size: 12px;
+  line-height: 1.25;
+  max-width: 285px;
+
+  @media #{$media-md} {
+    max-width: 490px;
+  }
+}
+
+.subscribe__rule-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.subscribe__form {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: $shadow-2;
+
+  @media #{$media-md} {
+    display: flex;
+    max-width: 690px;
+    margin-top: 52px;
+    margin-bottom: 9px;
+  }
+  @media #{$media-xl} { max-width: 730px; }
+}
+
+.subscribe__form-group {
+  width: 100%;
+  position: relative;
+}
+
+.subscribe__form-email {
+  color: var(--color-base);
+  font-family: $main-font;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+  padding: 21px 20px 9px;
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 4px 4px 0 0;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:invalid {
+    box-shadow: none;
+  }
+
+  @include floatingLabel(subscribe__form-label, 10px, 7px, 20px);
+
+  @media #{$media-md} {
+    padding-top: 25px;
+    padding-bottom: 15px;
+    border-radius: 4px 0 0 4px;
+
+    @include floatingLabel(subscribe__form-label, 10px, 12px, 20px);
+  }
+}
+
+.subscribe__form-label {
+  @include formLabel;
+
+  top: 16px;
+
+  @media #{$media-md} {
+    top: 21px;
+  }
+}
+
+.subscribe__form-btn {
+  @include buttonSubmit;
+
+  line-height: 1;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 100%;
+  border: 1px solid var(--color-white);
+  border-radius: 0 0 4px 4px;
+
+  @media #{$media-md} {
+    padding: 20px;
+    width: auto;
+    border-radius: 0 4px 4px 0;
+  }
+  @media #{$media-xl} { padding: 20px 34px 19px; }
+}

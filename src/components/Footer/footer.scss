@@ -1,0 +1,134 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+
+.footer {
+  padding-top: 32px;
+  padding-bottom: 20px;
+  background-color: var(--color-white);
+
+  @media #{$media-md} {
+    padding-top: 53px;
+    padding-bottom: 25px;
+  }
+  @media #{$media-lg} { padding-bottom: 31px; }
+}
+
+.footer__container { @include container; }
+
+.footer__inner {
+  width: 290px;
+  margin: 0 auto;
+
+  @media #{$media-sm} { text-align: center; }
+  @media #{$media-md} {
+    display: grid;
+    grid-template-columns: repeat(4, 90px) 208px;
+    gap: 30px;
+    text-align: left;
+    width: 690px;
+  }
+  @media #{$media-lg} {
+    grid-template-columns: repeat(4, 130px) 290px;
+    width: 930px;
+  }
+  @media #{$media-xl} {
+    grid-template-columns: repeat(6, 160px);
+    width: 1110px;
+  }
+}
+
+.footer__col {
+  margin-bottom: 14px;
+  &:last-child { margin-bottom: 0; }
+
+  @media #{$media-md} {
+    margin-bottom: 0;
+    &:last-child { padding-left: 60px; }
+  }
+  @media #{$media-lg} {
+    &:last-child { padding-left: 80px; }
+  }
+  @media #{$media-xl} {
+    &:last-child { padding-left: 0; }
+
+    &--social {
+      grid-column-start: 6;
+      grid-column-end: 7;
+    }
+  }
+}
+
+.footer__title {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--color-blue);
+  font-size: 14px;
+  text-transform: uppercase;
+
+  a { color: inherit; }
+
+  @media #{$media-md} { margin-bottom: 10px; }
+  @media #{$media-lg} { margin-bottom: 10px; }
+}
+
+.footer__list {
+  display: flex;
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+
+  @media #{$media-sm} { justify-content: center; }
+  @media #{$media-md} {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}
+
+.footer__item {
+  margin-right: 15px;
+  &:last-child { margin-right: 0; }
+
+  @media #{$media-md} {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.footer__link {
+  display: flex;
+  align-items: center;
+  color: var(--color-base);
+  font-size: 12px;
+  line-height: 1.25;
+  transition: .2s;
+
+  &:hover,
+  &:focus { color: var(--color-blue); }
+}
+
+.footer__link-icon { margin-right: 10px; }
+
+.footer__copyright {
+  margin-top: 40px;
+
+  @media #{$media-md} {
+    text-align: center;
+    margin-top: 80px;
+  }
+  @media #{$media-lg} {
+    text-align: left;
+    margin-top: 88px;
+  }
+  @media #{$media-xl} {
+    margin-top: 88px;
+  }
+}
+
+.footer__copyright-text {
+  font-size: 12px;
+  line-height: 1.25;
+  margin-top: 0;
+  margin-bottom: 0;
+}

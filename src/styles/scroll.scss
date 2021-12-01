@@ -1,0 +1,37 @@
+.scroll {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.scroll__bar {
+  width: inherit;
+  height: 1px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: var(--color-grey);
+  position: relative;
+}
+
+.scroll__toggle {
+  width: 90px;
+  height: 5px;
+  background-color: var(--color-blue);
+  border-radius: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 40px;
+  transform: translateY(-2px);
+
+
+  @media #{$media-md} {
+    width: 290px;
+  }
+  @media #{$media-lg} {
+    width: 360px;
+  }
+  @media #{$media-xl} {
+    width: 340px;
+  }
+}

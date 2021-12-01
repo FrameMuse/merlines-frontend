@@ -1,0 +1,107 @@
+@import "vars";
+@import "mixin";
+
+
+.button-text {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 14px;
+  border-top: 1px solid var(--color-grey);
+
+  &--cabinet {
+    margin-top: 0;
+    margin-bottom: 16px;
+    text-align: left;
+    border: none;
+
+    .button-text__btn {
+      @include crossIcon;
+
+      color: var(--color-blue);
+      font-size: 14px;
+      font-weight: 500;
+      width: auto;
+      padding: 0 22px 0 0;
+      position: relative;
+
+      &::before,
+      &::after {
+        margin-top: 0;
+      }
+
+      &:hover,
+      &:focus {
+        color: var(--color-red);
+
+        &::before,
+        &::after {
+          background-color: var(--color-red);
+        }
+      }
+    }
+  }
+
+  &--right {
+    text-align: right;
+    margin-right: -2px;
+  }
+
+  &--articles {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  @media #{$media-md} {
+    margin-top: 24px;
+    margin-bottom: 19px;
+
+    &--cabinet {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    &--articles {
+      margin-top: -10px;
+      margin-bottom: 40px;
+    }
+  }
+  @media #{$media-lg} {
+    &--cabinet {
+      margin-right: -2px;
+    }
+  }
+  @media #{$media-xl} {
+    &--articles {
+      margin-top: -4px;
+    }
+
+    &--cabinet {
+      margin-right: 14px;
+    }
+
+    &--right {
+      margin-right: -2px;
+    }
+  }
+}
+
+.button-text__btn {
+  @include resetBtn;
+
+  color: var(--color-grey);
+  font-size: 12px;
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  transition: .2s;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    color: var(--color-blue);
+  }
+}
+
+.button-text__arrow {
+  margin-left: 5px;
+}
