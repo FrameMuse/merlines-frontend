@@ -1,133 +1,91 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useClickAway } from 'react-use';
-import { DateTime } from 'luxon';
+// SCSS
+import './form.scss'
+// ...
+import { DateTime } from 'luxon'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { useClickAway } from 'react-use'
+import api from '../../api/api'
+import { monthNamesDate } from '../../constants'
+import useDebounce from '../../hooks/useDebounce'
 import {
-  selectMainSearchParams,
-  setPassengersInfo,
+  setCalendarToInitial, setDateIntervalFrom, setIsDateInterval, setIsOneClick, setIsOpenCalendar
+} from '../../reducers/dropDownCalendarSlice'
+import {
+  detectCityByGeoIp, setChangedInputFrom, setChangedInputTo, setDateFrom, setDateTo, setOneWay, setPassengersInfo,
   setPassengersInfoMini,
   setRouteFrom,
-  setRouteTo,
-  setOneWay,
-  setDateTo,
-  setDateFrom,
-  setChangedInputTo,
-  detectCityByGeoIp,
-  setChangedInputFrom
-} from '../../reducers/mainSearchSlice';
-import {
-  setIsOpenCalendar,
-  selectDropDownCalendar,
-  setCalendarToInitial,
-  setIsOneClick,
-  setIsDateInterval,
-  setDateIntervalFrom
-} from '../../reducers/dropDownCalendarSlice';
-import { setSearchData } from '../../reducers/searchResultSlice';
-import { pluralize } from '../../utils';
-import api from '../../api/api';
-import useDebounce from '../../hooks/useDebounce';
-import DropDown from '../DropDown/DropDown';
-import DropDownCalendar from '../DropDownCalendar/DropDownCalendar';
-import DropDownPassengers from '../DropDownPassengers/DropDownPassengers';
-import { selectAccessData } from '../../reducers/accessDataSlice';
-import OpenBooking from '../common/OpenBooking';
-import { monthNamesDate } from '../../constants';
-import { firstToUpperCase } from '../../utils';
-import './form.scss'
+  setRouteTo
+} from '../../reducers/mainSearchSlice'
+import { createQuery, firstToUpperCase, pluralize } from '../../utils'
+import OpenBooking from '../common/OpenBooking'
+import DropDown from '../DropDown/DropDown'
+import DropDownCalendar from '../DropDownCalendar/DropDownCalendar'
+import DropDownPassengers from '../DropDownPassengers/DropDownPassengers'
 
 function SearchForm({ searchResult }) {
-  const [isOffsetCal, setIsOffsetCal] = useState(false);
-  const dateToInput = useRef(null);
-  const dateFromInput = useRef(null);
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const mainSearchParams = useSelector(selectMainSearchParams);
-  const dropDownCal = useSelector(selectDropDownCalendar);
-  const [inputValue, setInputValue] = useState('');
-  const [currentCitiesData, setCurrentCitiesData] = useState('');
-  const [historyCitiesData, setHistoryCitiesData] = useState({
-    from: [],
-    to: []
-  });
-  const [inputDirection, setInputDirection] = useState('');
-  const inputEl = useRef(null);
-  const debouncedSearchInput = useDebounce(inputValue, 500);
-  const [passengersAmount, setPassengersAmount] = useState(1);
-  const [isPassengersOpen, setIsPassengersOpen] = useState(false);
-  const [formError, setFormError] = useState(false);
-  const accessData = useSelector(selectAccessData);
+  const history = useHistory()
+  const dispatch = useDispatch()
+  // If calendar has offset, it will be placed under the second input (returnDateInput)
+  const [hasCalendarOffset, setHasCalendarOffset] = useState(false)
 
-  const node = useRef();
-  const nodeDropDown = useRef();
-  const nodeDropDown2 = useRef();
+  const citiesInfoInputRef = useRef(null)
+
+  const calendarDropDownRef = useRef(null)
+  const toCitiesDropDownRef = useRef(null)
+  const fromCitiesDropDownRef = useRef(null)
+
+  const departureDateInputRef = useRef(null)
+  const returnDateInputRef = useRef(null)
+
+  const passengersInputRef = useRef(null)
+  const passengersDropDownRef = useRef(null)
+
+
+  const accessData = useSelector(state => state.accessData)
+  const mainSearchParams = useSelector(state => state.mainSearchParams)
+  const dropDownCalendar = useSelector(state => state.dropDownCalendar)
+
+  const [formError, setFormError] = useState(false)
+
+  const [citiesInput, setCitiesInput] = useState({ from: "", to: "" })
+  const citiesInputDebounced = useDebounce(citiesInput, 250)
+
+  const [currentDirection, setCurrentDirection] = useState("from")
+  const [currentCitiesData, setCurrentCitiesData] = useState({ from: [], to: [] })
+  const [cachedCitiesData, setCachedCitiesData] = useState({ from: {}, to: {} })
+
+  const [passengersAmount, setPassengersAmount] = useState(1)
+  const [isPassengersOpen, setIsPassengersOpen] = useState(false)
 
   useEffect(() => {
-    const cityApiFrom = sessionStorage.getItem('cityApiFrom');
-    const cityFrontFrom = sessionStorage.getItem('cityFrontFrom');
-    const isCityGeoIpError = sessionStorage.getItem('isCityGeoIpError');
-    const dateFrom = sessionStorage.getItem('dateFrom');
+    const dateFrom = sessionStorage.getItem('dateFrom')
+    const cityApiFrom = sessionStorage.getItem('cityApiFrom')
+    const cityFrontFrom = sessionStorage.getItem('cityFrontFrom')
+    const isCityGeoIpError = sessionStorage.getItem('isCityGeoIpError')
 
-    if (dateFrom) dispatch(setDateFrom(DateTime.fromISO(dateFrom).toISODate()));
-
-    if (cityApiFrom && cityFrontFrom)
-      dispatch(
-        setRouteFrom({ apiRoute: cityApiFrom, frontRoute: cityFrontFrom })
-      );
-
-    if (!cityApiFrom && !cityFrontFrom && !isCityGeoIpError)
-      dispatch(detectCityByGeoIp());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const toggleCal = (e, a) => {
-    if (e && node.current && node?.current.contains(e.target)) {
-      return;
+    if (dateFrom) {
+      dispatch(setDateFrom(DateTime.fromISO(dateFrom).toISODate()))
     }
 
-    if (
-      !mainSearchParams.date.api.to &&
-      !mainSearchParams.date.changedInput.to &&
-      dropDownCal.isOpenCalendar
-    )
-      dispatch(setOneWay(true));
-
-    dispatch(setIsOpenCalendar());
-  };
-
-  useEffect(() => {
-    if (debouncedSearchInput) {
-      if (
-        !historyCitiesData[inputDirection].find(
-          (item) =>
-            item.keyWord === inputValue[inputDirection].toLowerCase() ||
-            !inputValue[inputDirection]
-        )
-      ) {
-        getCitiesData(inputValue[inputDirection].toLowerCase(), inputDirection);
-      } else {
-        inputValue[inputDirection]
-          ? setCurrentCitiesData({
-              [inputDirection]: historyCitiesData[inputDirection].find(
-                (item) =>
-                  item.keyWord === inputValue[inputDirection].toLowerCase()
-              )
-            })
-          : setCurrentCitiesData([]);
-      }
+    if (cityApiFrom && cityFrontFrom) {
+      dispatch(setRouteFrom({ apiRoute: cityApiFrom, frontRoute: cityFrontFrom }))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchInput]);
+
+    if (!cityApiFrom && !cityFrontFrom && !isCityGeoIpError) {
+      dispatch(detectCityByGeoIp())
+    }
+  }, [dispatch])
 
   useEffect(() => {
-    const amount = mainSearchParams.passengers;
+    const amount = mainSearchParams.passengers
     setPassengersAmount(
       amount.passengers_adults +
-        amount.passengers_children +
-        amount.passengers_infants
-    );
-  }, [mainSearchParams.passengers]);
+      amount.passengers_children +
+      amount.passengers_infants
+    )
+  }, [mainSearchParams.passengers])
 
   useEffect(() => {
     dispatch(
@@ -138,7 +96,7 @@ function SearchForm({ searchResult }) {
           'пассажиров'
         ])}, ${mainSearchParams.airClasses.economy ? 'эконом' : 'бизнес'}`
       )
-    );
+    )
     dispatch(
       setPassengersInfoMini(
         `${passengersAmount} ${pluralize(passengersAmount, [
@@ -147,242 +105,208 @@ function SearchForm({ searchResult }) {
           'пассажиров'
         ])} / ${mainSearchParams.airClasses.economy ? 'эконом' : 'бизнес'}`
       )
-    );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [passengersAmount, mainSearchParams.airClasses]);
+    )
+  }, [passengersAmount, mainSearchParams.airClasses, dispatch])
 
+  // If there is cached data
   useEffect(() => {
-    const handleOverlayClose = (evt) => {
-      if (
-        !(
-          evt.target.classList.contains('form__input--passenger') ||
-          (evt.target.closest('ul')
-            ? evt.target.closest('ul').classList.contains('passengers-list')
-            : '')
-        )
-      ) {
-        setIsPassengersOpen(false);
-      }
-    };
+    const city = citiesInput[currentDirection]
 
-    document.addEventListener('click', handleOverlayClose);
+    if (!city) return
+    if (!(city in cachedCitiesData[currentDirection])) return
 
-    return () => {
-      document.removeEventListener('click', handleOverlayClose);
-    };
-  });
+    setCurrentCitiesData({
+      ...currentCitiesData,
+      [currentDirection]: cachedCitiesData[currentDirection][city] || []
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [citiesInput])
+  // If there isn't
+  useEffect(() => {
+    const city = citiesInputDebounced[currentDirection]
 
-  const openPassengers = () => setIsPassengersOpen(!isPassengersOpen);
+    if (!city) return
+    if (city in cachedCitiesData[currentDirection]) return
 
-  const getCitiesData = async (word, direction) => {
-    try {
-      const cities = await api.getCities(word, accessData.loginToken);
+    getCitiesData(city, currentDirection)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [citiesInputDebounced])
 
-      setHistoryCitiesData({
-        ...historyCitiesData,
-        [direction]: [
-          ...historyCitiesData[direction],
-          {
-            keyWord: word,
-            citiesInfo: cities.data
+  /**
+   * 
+   * @param {string} keyWord 
+   * @param {"from" | "to"} direction 
+   */
+  function getCitiesData(keyWord, direction) {
+    return api.getCities(keyWord, accessData.loginToken)
+      .then(({ data }) => {
+        setCurrentCitiesData({ ...currentCitiesData, [direction]: data })
+        setCachedCitiesData({
+          ...cachedCitiesData,
+          [direction]: {
+            ...cachedCitiesData[direction],
+            [keyWord]: data
           }
-        ]
-      });
-      setCurrentCitiesData({
-        [direction]: {
-          keyWord: word,
-          citiesInfo: cities.data
-        }
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        })
+      })
+  }
 
-  const getValue = (evt) => {
-    setInputDirection(evt.target.dataset.direction);
-    setInputValue({
-      ...inputValue,
-      [evt.target.dataset.direction]: evt.target.value
-    });
+  /**
+   * 
+   * @param {*} event 
+   * @param {"from" | "to"} direction 
+   */
+  function onCitiesChange(event, direction) {
+    const value = event.currentTarget.value
 
-    if (evt.target.dataset.direction === 'from') {
-      dispatch(setRouteFrom({ apiRoute: '', frontRoute: evt.target.value }));
+    setCurrentDirection(direction)
+    setCitiesInput({ ...citiesInput, [direction]: value })
+
+    if (direction === 'from') {
+      dispatch(setRouteFrom({ apiRoute: '', frontRoute: value }))
     } else {
-      dispatch(setRouteTo({ apiRoute: '', frontRoute: evt.target.value }));
+      dispatch(setRouteTo({ apiRoute: '', frontRoute: value }))
     }
-  };
+  }
 
-  const changeRoutes = () => {
+  function switchRoutes() {
     dispatch(
       setRouteFrom({
         apiRoute: mainSearchParams.route.api.to,
         frontRoute: mainSearchParams.route.front.to
       })
-    );
+    )
     dispatch(
       setRouteTo({
         apiRoute: mainSearchParams.route.api.from,
         frontRoute: mainSearchParams.route.front.from
       })
-    );
-  };
+    )
+  }
 
-  const search = async (evt) => {
-    evt.preventDefault();
+  function chooseOneWay() {
+    dispatch(setOneWay(true))
+    dispatch(setDateTo())
+    dispatch(setChangedInputTo(''))
+    dispatch(setCalendarToInitial())
 
-    if (
-      !mainSearchParams.route.front.from ||
-      !mainSearchParams.route.front.to ||
-      !mainSearchParams.date.front.from
-    ) {
-      setFormError(true);
-      setTimeout(() => setFormError(false), 3000);
-      return;
+    setFormError(false)
+  }
+
+  function chooseTwoWays() {
+    dispatch(setOneWay(false))
+    setHasCalendarOffset(true)
+    dispatch(setIsOpenCalendar(true))
+
+    if (mainSearchParams.date.api.from) return
+    const fromDate = DateTime.fromISO(mainSearchParams.date.api.from)
+
+    dispatch(setIsOneClick(false))
+    dispatch(setIsDateInterval(true))
+    dispatch(setDateIntervalFrom(fromDate.toISO().slice(0, 10)))
+
+    dispatch(
+      setChangedInputFrom(
+        `${fromDate.day} ${monthNamesDate[fromDate.month]}, ${firstToUpperCase(fromDate.weekdayShort)}`
+      )
+    )
+  }
+
+  function onDepartureDateFocus() {
+    setHasCalendarOffset(false)
+    dispatch(setIsOneClick(true))
+    dispatch(setIsDateInterval(false))
+    dispatch(setIsOpenCalendar(true))
+  }
+  function onReturnDateFocus() {
+    dispatch(setOneWay(false))
+    setHasCalendarOffset(true)
+    dispatch(setIsOpenCalendar(true))
+
+    const fromDate = DateTime.fromISO(mainSearchParams.date.api.from)
+
+    if (mainSearchParams.date.api.from && !mainSearchParams.date.api.to) {
+      dispatch(setIsOneClick(false))
+      dispatch(setIsDateInterval(true))
+      dispatch(setIsOpenCalendar(true))
+
+      dispatch(setDateIntervalFrom(fromDate.toISO().slice(0, 10)))
+      dispatch(
+        setChangedInputFrom(
+          `${fromDate.day} ${monthNamesDate[fromDate.month]}, ${firstToUpperCase(fromDate.weekdayShort)}`
+        )
+      )
+    }
+  }
+
+  function onPassengersFocus() {
+    setIsPassengersOpen(true)
+    dispatch(setIsOpenCalendar(false))
+  }
+  function onPassengersTabPressed(event) {
+    if (event.key !== "Tab") return
+
+    setIsPassengersOpen(false)
+  }
+
+  function onSearchSubmit(event) {
+    event.preventDefault()
+
+    if (!mainSearchParams.route.api.from || !mainSearchParams.route.api.to || !mainSearchParams.date.front.from) {
+      setFormError(true)
+      return
     }
 
-    dispatch(setSearchData(''));
-
-    const people = mainSearchParams.passengers;
-    const passengers = `passengers_adults=${people.passengers_adults}${
-      people.passengers_children
-        ? `&passengers_children=${people.passengers_children}`
-        : ''
-    }${
-      people.passengers_infants
-        ? `&passengers_infants=${people.passengers_infants}`
-        : ''
-    }`;
-    const travelClass = `travel_class=${
-      mainSearchParams.airClasses.economy ? 'economy' : ''
-    }${mainSearchParams.airClasses.business ? 'business' : ''}`;
-
-    const params = {
+    const requestQuery = createQuery({
       origin: mainSearchParams.route.api.from,
       destination: mainSearchParams.route.api.to,
       depart_date: mainSearchParams.date.api.from,
       return_date: mainSearchParams.date.api.to,
       transport: mainSearchParams.transport,
       one_way: mainSearchParams.one_way,
-      passengers,
-      travelClass
-    };
+
+      ...mainSearchParams.passengers,
+      travel_class: mainSearchParams.airClasses.economy ? "economy" : "business"
+    })
 
     history.push({
       pathname: '/search-result',
-      search: `?origin=${params.origin}&destination=${params.destination}&depart_date=${params.depart_date}${(params.return_date) ? '&return_date=' + params.return_date : ''}&transport=${params.transport}&one_way=${params.one_way}&${params.passengers}&${travelClass}`
-    });
-  };
+      search: requestQuery
+    })
+  }
 
-  const pickOneWay = (evt) => {
-    evt.preventDefault();
-    dispatch(setOneWay(true));
-    dispatch(setDateTo());
-    dispatch(setChangedInputTo(''));
-    dispatch(setCalendarToInitial());
-  };
+  // Close CalendarDropDown
+  useClickAway(calendarDropDownRef, event => {
+    if (!dropDownCalendar.isOpenCalendar) return
 
-  const pickTwoWays = (evt) => {
-    evt.preventDefault();
-    const fromDate = DateTime.fromISO(mainSearchParams.date.api.from);
+    if (event.path.includes(departureDateInputRef.current?.parentElement)) return
+    if (event.path.includes(returnDateInputRef.current?.parentElement)) return
 
-    dispatch(setOneWay(false));
+    dispatch(setIsOpenCalendar(false))
+  })
+  // Close PassengersDropDown
+  useClickAway(passengersDropDownRef, event => {
+    if (!isPassengersOpen) return
 
-    setIsOffsetCal(true);
+    if (event.path.includes(passengersInputRef.current)) return
 
-    if (mainSearchParams.date.api.from) {
-      dispatch(setIsOneClick(false));
-      dispatch(setIsDateInterval(true));
-      dispatch(setIsOpenCalendar(true));
-
-      dispatch(
-        setChangedInputFrom(
-          `${fromDate.day} ${
-            monthNamesDate[fromDate.month]
-          }, ${firstToUpperCase(fromDate.weekdayShort)}`
-        )
-      );
-      dispatch(setDateIntervalFrom(fromDate.toISO().slice(0, 10)));
-    }
-  };
-
-  const inputFromHandler = () => {
-    setIsOffsetCal(false);
-    dispatch(setIsOneClick(true));
-    dispatch(setIsDateInterval(false));
-    toggleCal();
-  };
-
-  const inputToHandler = () => {
-    dispatch(setOneWay(false));
-    setIsOffsetCal(true);
-    toggleCal();
-
-    const fromDate = DateTime.fromISO(mainSearchParams.date.api.from);
-
-    if (mainSearchParams.date.api.from && !mainSearchParams.date.api.to) {
-      dispatch(setIsOneClick(false));
-      dispatch(setIsDateInterval(true));
-      dispatch(setIsOpenCalendar(true));
-
-      dispatch(
-        setChangedInputFrom(
-          `${fromDate.day} ${
-            monthNamesDate[fromDate.month]
-          }, ${firstToUpperCase(fromDate.weekdayShort)}`
-        )
-      );
-      dispatch(setDateIntervalFrom(fromDate.toISO().slice(0, 10)));
-    }
-  };
-
-  const dropDownOnBlur = () => {
-    const city = currentCitiesData.from
-      ? currentCitiesData.from?.citiesInfo[0]
-      : currentCitiesData.to?.citiesInfo[0];
-
-    if (currentCitiesData?.from)
-      dispatch(setRouteFrom({ apiRoute: city?.code, frontRoute: city?.name }));
-    if (currentCitiesData?.to)
-      dispatch(setRouteTo({ apiRoute: city?.code, frontRoute: city?.name }));
-
-    setInputValue('');
-    setCurrentCitiesData('');
-  };
-
-  useClickAway(nodeDropDown, dropDownOnBlur);
-  useClickAway(nodeDropDown2, dropDownOnBlur);
-
-  const handleOnBlurTab = (e) => {
-    if (e.key !== 'Tab') return;
-
-    dropDownOnBlur();
-  };
-
-  const handleKeyDown = (e, isDirectionFrom) => {
-    if (e.key !== 'Tab') return;
-
-    e.preventDefault();
-    setIsOffsetCal(isDirectionFrom);
-    dispatch(setIsOpenCalendar(true));
-  };
+    setIsPassengersOpen(false)
+  })
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={onSearchSubmit}>
       <div className="form__nav">
         <div
-          onClick={pickTwoWays}
-          className={`form__nav-btn ${
-            !mainSearchParams.one_way ? 'form__nav-btn--active' : ''
-          }`}
+          onClick={chooseTwoWays}
+          className={`form__nav-btn ${!mainSearchParams.one_way ? 'form__nav-btn--active' : ''
+            }`}
         >
           Туда - обратно
         </div>
         <div
-          onClick={pickOneWay}
-          className={`form__nav-btn ${
-            mainSearchParams.one_way ? 'form__nav-btn--active' : ''
-          }`}
+          onClick={chooseOneWay}
+          className={`form__nav-btn ${mainSearchParams.one_way ? 'form__nav-btn--active' : ''
+            }`}
         >
           В одну сторону
         </div>
@@ -396,48 +320,44 @@ function SearchForm({ searchResult }) {
       <div className={`form__inner ${formError ? 'form__inner--error' : ''}`}>
         <div className="form__group form__group--departure">
           <input
-            onChange={getValue}
+            onInput={event => onCitiesChange(event, "from")}
             value={mainSearchParams.route.front.from || ''}
             className="form__input"
             type="text"
             id="main-departure"
             placeholder="Откуда"
             autoComplete="off"
-            data-direction="from"
             tabIndex="1"
-            onKeyDown={handleOnBlurTab}
           />
           <label className="form__label" htmlFor="main-departure">
             откуда
           </label>
-          <button onClick={changeRoutes} type="button" className="form__switch">
+          <button onClick={switchRoutes} type="button" className="form__switch">
             Поменять местами
           </button>
-          {currentCitiesData.from?.citiesInfo && (
+          {currentCitiesData.from.length > 0 && (
             <DropDown
-              nodeDropDown={nodeDropDown}
-              currentCities={currentCitiesData.from?.citiesInfo}
+              nodeDropDown={fromCitiesDropDownRef}
+              currentCities={currentCitiesData.from}
               setCurrentCitiesData={setCurrentCitiesData}
-              setInputValue={setInputValue}
-              inputEl={inputEl}
-              inputDirection={inputDirection}
-              dateFromInput={dateFromInput}
+              setInputValue={setCitiesInput}
+              inputEl={citiesInfoInputRef}
+              inputDirection={currentDirection}
+              dateFromInput={departureDateInputRef}
             />
           )}
         </div>
         <div className="form__group form__group--arrival">
           <input
-            onChange={getValue}
+            onInput={event => onCitiesChange(event, "to")}
             value={mainSearchParams.route.front.to || ''}
             className="form__input form__input--arrival"
             type="text"
             id="main-arrival"
             placeholder="Куда"
             autoComplete="off"
-            ref={inputEl}
-            data-direction="to"
+            ref={citiesInfoInputRef}
             tabIndex="2"
-            onKeyDown={handleOnBlurTab}
             onFocus={() => dispatch(setIsOpenCalendar(false))}
           />
           <label
@@ -446,23 +366,22 @@ function SearchForm({ searchResult }) {
           >
             куда
           </label>
-          {currentCitiesData.to?.citiesInfo && (
+          {currentCitiesData.to.length > 0 && (
             <DropDown
-              nodeDropDown={nodeDropDown2}
-              currentCities={currentCitiesData.to?.citiesInfo}
+              nodeDropDown={toCitiesDropDownRef}
+              currentCities={currentCitiesData.to}
               setCurrentCitiesData={setCurrentCitiesData}
-              setInputValue={setInputValue}
-              inputEl={inputEl}
-              inputDirection={inputDirection}
-              dateFromInput={dateFromInput}
+              setInputValue={setCitiesInput}
+              inputEl={citiesInfoInputRef}
+              inputDirection={currentDirection}
+              dateFromInput={departureDateInputRef}
             />
           )}
         </div>
         <div className="form__group form__group--date-dep">
           <input
-            onClick={inputFromHandler}
-            className="form__input"
             id="date-departure"
+            className="form__input"
             placeholder="Туда"
             value={
               mainSearchParams.date.front.from
@@ -471,28 +390,25 @@ function SearchForm({ searchResult }) {
             }
             readOnly
             tabIndex="3"
-            ref={dateFromInput}
-            onKeyUp={(e) => handleKeyDown(e, false)}
+            ref={departureDateInputRef}
+            onFocus={onDepartureDateFocus}
           />
           <label className="form__label" htmlFor="date-departure">
             туда
           </label>
-          {dropDownCal.isOpenCalendar && (
-            <DropDownCalendar
-              isOffsetCal={isOffsetCal}
-              closeToggle={toggleCal}
-              dateToInput={dateToInput}
-              node={node}
-            />
-          )}
+          <DropDownCalendar
+            parentRef={calendarDropDownRef}
+            dateInputRef={returnDateInputRef}
+            hasOffset={hasCalendarOffset}
+            hidden={!dropDownCalendar.isOpenCalendar}
+          />
         </div>
         <div className="form__group form__group--date-arr">
           <input
-            onClick={inputToHandler}
-            className="form__input"
             id="date-arrival"
+            className="form__input"
             placeholder="Дата обратно"
-            ref={dateToInput}
+            ref={returnDateInputRef}
             value={
               mainSearchParams.date.front.to
                 ? mainSearchParams.date.front.to
@@ -500,7 +416,7 @@ function SearchForm({ searchResult }) {
             }
             readOnly
             tabIndex="4"
-            onKeyUp={(e) => handleKeyDown(e, true)}
+            onFocus={onReturnDateFocus}
           />
           <label className="form__label" htmlFor="date-arrival">
             обратно
@@ -508,30 +424,27 @@ function SearchForm({ searchResult }) {
         </div>
         <div className="form__group form__group--passengers">
           <input
-            onClick={openPassengers}
             className="form__input form__input--passenger"
             id="main-passenger"
             placeholder="Пассажиры и класс"
             value={mainSearchParams.passengersInfo}
             readOnly
             tabIndex="5"
-            onFocus={() => dispatch(setIsOpenCalendar(false))}
+            ref={passengersInputRef}
+            onFocus={onPassengersFocus}
+            onKeyDown={onPassengersTabPressed}
+          // onBlur={onPassengersBlur}
           />
           <label className="form__label" htmlFor="main-passenger">
             Пассажиры и класс
           </label>
-          <DropDownPassengers isPassengersOpen={isPassengersOpen} />
+          <DropDownPassengers parentRef={passengersDropDownRef} isPassengersOpen={isPassengersOpen} />
         </div>
-        <input
-          onClick={search}
-          className="form__btn"
-          type="submit"
-          value="Найти"
-        />
+        <input className="form__btn" type="submit" value="Найти" tabIndex="6" />
       </div>
       {!searchResult && <OpenBooking />}
     </form>
-  );
+  )
 }
 
-export default SearchForm;
+export default SearchForm
