@@ -227,6 +227,54 @@ const separateThousand = (value) => {
 
 }
 
+/**
+ * Creates class with modifiers
+ * 
+ * Join modifiers with className and returns one
+ * @param { string } className - origin class
+ * @param { Array<string | number | false | null | undefined> | undefined } modifiers - class modifiers
+ */
+export function classWithModifiers(className, ...modifiers) {
+  if (!modifiers || !modifiers.length) {
+    return className
+  }
+
+  modifiers = modifiers.filter(modifier => modifier) // Map modified classes
+
+  if (!modifiers.length) {
+    return className
+  }
+
+  const space = " "
+  const separator = "--"
+
+  modifiers = modifiers.map(modifier => className + separator + modifier) // Map modified classes
+
+  return className + space + modifiers.join(space) // Join all together
+}
+
+/**
+ * 
+ * @param { Record<string, string | number> } QueryObject 
+ * @returns string
+ */
+export function createQuery(QueryObject) {
+  if (!QueryObject) {
+    throw new Error("QueryObject is empty")
+  }
+
+  const QueryKeys = Object.keys(QueryObject)
+  const QueryArray = QueryKeys.map(function (key) {
+    const value = QueryObject[key]
+    if (value) {
+      return encodeURIComponent(key) + "=" + encodeURIComponent(value)
+    }
+    return ""
+  })
+
+  return QueryArray.filter(query => query).join("&")
+}
+
 export {
   getRandomInteger,
   getRandomElement,
