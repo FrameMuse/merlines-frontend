@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .ticket-list {
   padding-bottom: 40px;
   background-color: var(--color-simple-white);
@@ -113,10 +112,12 @@
   background-color: var(--color-white);
   border-radius: 4px;
   box-shadow: $shadow;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover,
-  &:focus { @include hoverBlock; }
+  &:focus {
+    @include hoverBlock;
+  }
 }
 
 .ticket-list__error {
@@ -210,9 +211,9 @@
   font-weight: 700;
   padding: 10px 23px 13px;
   background-color: var(--color-blue);
-  box-shadow: 0 0 15px rgba(24, 50, 115, .2);
+  box-shadow: 0 0 15px rgba(24, 50, 115, 0.2);
   border-radius: 40px;
-  transition: .2s;
+  transition: 0.2s;
   position: fixed;
   left: 50%;
   bottom: 30px;
@@ -248,10 +249,14 @@
     color: var(--color-blue);
 
     &::before,
-    &::after { background-color: var(--color-blue); }
+    &::after {
+      background-color: var(--color-blue);
+    }
 
     &:hover,
-    &:focus { text-decoration: none; }
+    &:focus {
+      text-decoration: none;
+    }
   }
 
   .ticket-list__left {
@@ -262,7 +267,7 @@
   }
 
   @media #{$media-md} {
-    background: rgba(35, 94, 245, .95);
+    background: rgba(35, 94, 245, 0.95);
 
     .overlay__container {
       padding-top: 100px;
@@ -273,7 +278,9 @@
       color: var(--color-white);
 
       &::before,
-      &::after { background-color: var(--color-white); }
+      &::after {
+        background-color: var(--color-white);
+      }
     }
 
     .ticket-list__left {

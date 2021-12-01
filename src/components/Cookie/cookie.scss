@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .cookie {
   background-color: var(--color-white);
   box-shadow: $shadow-3;
@@ -11,7 +10,9 @@
   bottom: 0;
   z-index: 20;
 
-  &--closed { display: none; }
+  &--closed {
+    display: none;
+  }
 }
 
 .cookie__container {
@@ -41,8 +42,12 @@
   }
 }
 
-.cookie__text { margin-bottom: 0; }
-.cookie__text-underline { text-decoration: underline; }
+.cookie__text {
+  margin-bottom: 0;
+}
+.cookie__text-underline {
+  text-decoration: underline;
+}
 
 .cookie__button {
   @include resetBtn;

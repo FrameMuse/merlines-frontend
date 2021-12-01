@@ -1,3 +1,3 @@
-import SearchResultTicketOffer from './SearchResultTicketOffer'
+import SearchResultTicketOffer from "./SearchResultTicketOffer"
 
 export default SearchResultTicketOffer

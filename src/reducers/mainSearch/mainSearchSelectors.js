@@ -1,2 +1,1 @@
-
-export const selectMainSearchParams = state => state.mainSearchParams;
+export const selectMainSearchParams = (state) => state.mainSearchParams

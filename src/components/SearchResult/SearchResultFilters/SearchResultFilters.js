@@ -1,15 +1,13 @@
-import SearchResultPopularFilter from './SearchResultPopularFilter';
-import SearchResultCustomFilter from './SearchResultCustomFilter';
+import SearchResultPopularFilter from "./SearchResultPopularFilter"
+import SearchResultCustomFilter from "./SearchResultCustomFilter"
 
-function SearchResultFilters({
-  checkboxes,
-}) {
+function SearchResultFilters({ checkboxes }) {
   return (
     <form className="filters">
       <SearchResultPopularFilter />
       <SearchResultCustomFilter checkboxes={checkboxes} />
     </form>
   )
-};
+}
 
-export default SearchResultFilters;
+export default SearchResultFilters

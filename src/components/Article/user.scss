@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .user {
   display: flex;
   align-items: center;
@@ -82,7 +81,7 @@
 
   display: block;
   color: var(--base-color);
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover,
   &:focus {

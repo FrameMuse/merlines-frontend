@@ -12,7 +12,9 @@
   box-shadow: $shadow;
   border-color: transparent;
 
-  &::placeholder { opacity: 0; }
+  &::placeholder {
+    opacity: 0;
+  }
 
   &:placeholder-shown {
     border: 1px solid var(--color-grey);

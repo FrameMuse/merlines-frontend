@@ -1,3 +1,3 @@
-import SearchResultTrainTicketHeader from './SearchResultTrainTicketHeader'
+import SearchResultTrainTicketHeader from "./SearchResultTrainTicketHeader"
 
 export default SearchResultTrainTicketHeader

@@ -1,12 +1,6 @@
-import React from 'react';
+import React from "react"
 
-const Checkbox = ({
-  checked,
-  label,
-  id,
-  number,
-  onChange,
-}) => (
+const Checkbox = ({ checked, label, id, number, onChange }) => (
   <div className="filters__group">
     <input
       className="filters__checkbox"
@@ -16,10 +10,11 @@ const Checkbox = ({
       onChange={onChange}
     />
 
-    <label className="filters__label" htmlFor={id}>{`${label} (${number})`}</label>
+    <label
+      className="filters__label"
+      htmlFor={id}
+    >{`${label} (${number})`}</label>
   </div>
-);
+)
 
-
-
-export default Checkbox;
+export default Checkbox

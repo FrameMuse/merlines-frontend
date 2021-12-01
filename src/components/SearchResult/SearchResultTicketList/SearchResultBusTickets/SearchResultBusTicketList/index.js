@@ -1,3 +1,3 @@
-import SearchResultBusTicketList from "./SearchResultBusTicketList";
+import SearchResultBusTicketList from "./SearchResultBusTicketList"
 
 export default SearchResultBusTicketList

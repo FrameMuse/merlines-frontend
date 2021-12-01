@@ -1,8 +1,8 @@
-import ArticleContent from './ArticleContent';
-import ArticleRecomendation from './ArticleRecomendation';
-import './article.scss'
-import './article-card.scss'
-import './article-page.scss'
+import ArticleContent from "./ArticleContent"
+import ArticleRecomendation from "./ArticleRecomendation"
+import "./article.scss"
+import "./article-card.scss"
+import "./article-page.scss"
 
 function Article({ articleData }) {
   return (
@@ -11,6 +11,6 @@ function Article({ articleData }) {
       <ArticleRecomendation />
     </div>
   )
-};
+}
 
-export default Article;
+export default Article

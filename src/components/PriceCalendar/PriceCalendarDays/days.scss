@@ -12,8 +12,12 @@
     margin-right: auto;
     overflow: visible;
   }
-  @media #{$media-lg} { width: 770px; }
-  @media #{$media-xl} { width: 730px; }
+  @media #{$media-lg} {
+    width: 770px;
+  }
+  @media #{$media-xl} {
+    width: 730px;
+  }
 }
 
 .days__header {
@@ -54,7 +58,7 @@
   color: var(--color-grey);
   cursor: pointer;
   margin-top: 1px;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover {
     color: var(--color-blue);
@@ -69,7 +73,7 @@
   }
 
   &--disabled {
-    opacity: .4;
+    opacity: 0.4;
     pointer-events: none;
   }
 }
@@ -77,7 +81,9 @@
 .days__month-name {
   text-transform: capitalize;
 
-  @media #{$media-md} { margin-left: 2px; }
+  @media #{$media-md} {
+    margin-left: 2px;
+  }
 }
 
 .days__inner {
@@ -112,8 +118,12 @@
     grid-template-columns: repeat(7, 1fr);
     width: auto;
   }
-  @media #{$media-lg} { gap: 17px; }
-  @media #{$media-xl} { gap: 11px; }
+  @media #{$media-lg} {
+    gap: 17px;
+  }
+  @media #{$media-xl} {
+    gap: 11px;
+  }
 }
 
 .days__week-item {
@@ -143,8 +153,12 @@
     gap: 11px;
     margin-bottom: 11px;
   }
-  @media #{$media-lg} { gap: 11px 17px; }
-  @media #{$media-xl} { gap: 11px; }
+  @media #{$media-lg} {
+    gap: 11px 17px;
+  }
+  @media #{$media-xl} {
+    gap: 11px;
+  }
 }
 
 .days__card {
@@ -159,7 +173,7 @@
   border: 1px solid var(--color-border-third);
   border-radius: 4px;
   box-sizing: border-box;
-  transition: .2s;
+  transition: 0.2s;
   cursor: pointer;
 
   &:hover,
@@ -201,10 +215,12 @@
 
   &--not-current {
     background-color: var(--color-grey);
-    opacity: .5;
+    opacity: 0.5;
   }
 
-  @media #{$media-md} { width: auto; }
+  @media #{$media-md} {
+    width: auto;
+  }
 }
 
 .days__card-day {

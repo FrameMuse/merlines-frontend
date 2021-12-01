@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react"
 
-import LkSwitcher from '../LkSwitcher';
-import LkContentClearAll from '../LkContent/LkContentClearAll';
-import LkContentRoute from '../LkContent/LkContentRoute';
+import LkSwitcher from "../LkSwitcher"
+import LkContentClearAll from "../LkContent/LkContentClearAll"
+import LkContentRoute from "../LkContent/LkContentRoute"
 
 function LkSubscription() {
-  const [isActiveRoutes, setIsActiveRoutes] = useState();
-  const [isActiveTickets, setIsActiveTickets] = useState();
+  const [isActiveRoutes, setIsActiveRoutes] = useState()
+  const [isActiveTickets, setIsActiveTickets] = useState()
 
   return (
     <>
@@ -15,27 +15,20 @@ function LkSubscription() {
         <LkSwitcher
           setIsActiveRoutes={setIsActiveRoutes}
           setIsActiveTickets={setIsActiveTickets}
-          subscribes={true} />
+          subscribes={true}
+        />
         <LkContentClearAll subscribe={true} />
       </div>
-      {
-        isActiveRoutes
-        &&
+      {isActiveRoutes && (
         <ul className="cabinet__col-list">
           <LkContentRoute />
           <LkContentRoute />
           <LkContentRoute />
         </ul>
-      }
-      {
-        isActiveTickets
-        &&
-        <ul className="cabinet__col-list">
-          Билеты
-        </ul>
-      }
+      )}
+      {isActiveTickets && <ul className="cabinet__col-list">Билеты</ul>}
     </>
   )
-};
+}
 
-export default LkSubscription;
+export default LkSubscription

@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react"
 
 const DotButton = ({ index, isActive, dispatch }) => {
-  const onClick = () => dispatch({ index });
+  const onClick = () => dispatch({ index })
   return (
     <button
       onClick={onClick}
       className={`advantages__slider-btn ${
-        isActive ? 'advantages__slider-btn--active' : ''
+        isActive ? "advantages__slider-btn--active" : ""
       }`}
       type="button"
     ></button>
-  );
-};
+  )
+}
 
 export const DotButtons = ({ activeIndex, dispatch }) => {
-  const buttons = [];
+  const buttons = []
   for (let i = 0; i < 3; i++) {
     buttons.push(
       <DotButton
@@ -23,9 +23,9 @@ export const DotButtons = ({ activeIndex, dispatch }) => {
         index={i}
         key={i}
       />
-    );
+    )
   }
-  return buttons;
-};
+  return buttons
+}
 
-export default DotButton;
+export default DotButton

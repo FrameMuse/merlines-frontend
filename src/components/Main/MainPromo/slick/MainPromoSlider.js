@@ -1,20 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import MainPromoCard from '../MainPromoCard';
-import MockSlides from './MockSlides';
-import { DotButtons } from './DotButton';
+import React, { useEffect, useRef, useState } from "react"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import MainPromoCard from "../MainPromoCard"
+import MockSlides from "./MockSlides"
+import { DotButtons } from "./DotButton"
 
 const initialActiveCard = {
   index: 0
-};
+}
 
 const MainPromoSlider = () => {
   // const [loading, setLoading] = useState(false);
-  const [activeCard, setActiveCard] = useState(initialActiveCard);
-  const slider = useRef(null);
-  const [slides, setSlides] = useState([]);
+  const [activeCard, setActiveCard] = useState(initialActiveCard)
+  const slider = useRef(null)
+  const [slides, setSlides] = useState([])
 
   const settings = {
     initialSlide: 0,
@@ -25,7 +25,7 @@ const MainPromoSlider = () => {
     slidesToScroll: 1,
     arrows: false,
     variableWidth: true,
-    className: 'advantages__list',
+    className: "advantages__list",
     responsive: [
       {
         breakpoint: 768,
@@ -47,8 +47,8 @@ const MainPromoSlider = () => {
           // fade: false,
           beforeChange: (current, next) => {
             // next = next < 0 ? 0 : next;
-            console.log('MainPromoSlider.beforeChange', next);
-            setActiveCard({ index: next < 0 ? 0 : next });
+            console.log("MainPromoSlider.beforeChange", next)
+            setActiveCard({ index: next < 0 ? 0 : next })
           },
           afterChange: (next) => {
             // next = next < 0 ? 0 : next;
@@ -65,39 +65,39 @@ const MainPromoSlider = () => {
         }
       }
     ]
-  };
+  }
 
   const handleClick = (evt) => {
-    console.log(evt.target.classList);
-  };
+    console.log(evt.target.classList)
+  }
 
   useEffect(() => {
-    let didCancel = false;
+    let didCancel = false
     const getSlides = () => {
       // setLoading(true);
-      let res = [];
+      let res = []
       try {
         if (!didCancel) {
-          res = MockSlides();
+          res = MockSlides()
           // console.log('MainPromoCard.getSlides', res);
-          setSlides(res);
+          setSlides(res)
         }
       } catch (e) {
-        console.log('MainPromoSlides.getSlides', e);
+        console.log("MainPromoSlides.getSlides", e)
       } finally {
         // console.log('MainPromoCard.getSlides.finally');
         // slider.current.slickGoTo(0);
         // setLoading(false);
       }
-    };
+    }
 
-    getSlides();
-    return () => (didCancel = true);
-  }, []);
+    getSlides()
+    return () => (didCancel = true)
+  }, [])
 
   useEffect(() => {
-    slider.current?.slickGoTo(activeCard.index);
-  }, [activeCard.index]);
+    slider.current?.slickGoTo(activeCard.index)
+  }, [activeCard.index])
 
   return (
     <>
@@ -122,7 +122,7 @@ const MainPromoSlider = () => {
         <DotButtons dispatch={setActiveCard} activeIndex={activeCard.index} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default MainPromoSlider;
+export default MainPromoSlider

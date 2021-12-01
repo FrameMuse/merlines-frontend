@@ -1,3 +1,3 @@
-import SearchResultTicketHeader from './SearchResultTicketHeader'
+import SearchResultTicketHeader from "./SearchResultTicketHeader"
 
 export default SearchResultTicketHeader

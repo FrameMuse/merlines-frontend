@@ -1,15 +1,13 @@
-import Svg from '../common/Svg';
+import Svg from "../common/Svg"
 
 function DropDownItemPoint({ cityOrAirport, getCity, active }) {
-  const name = cityOrAirport.name
-    ? cityOrAirport.name
-    : cityOrAirport.city.name;
+  const name = cityOrAirport.name ? cityOrAirport.name : cityOrAirport.city.name
 
   return (
     <li
       onClick={() => getCity(cityOrAirport)}
       className={`drop-down__inner-item ${
-        active ? 'drop-down__inner-item--active' : ''
+        active ? "drop-down__inner-item--active" : ""
       }`}
     >
       <Svg
@@ -21,7 +19,7 @@ function DropDownItemPoint({ cityOrAirport, getCity, active }) {
       <span className="drop-down__item-title">{name}</span>
       <span className="drop-down__item-tag">{cityOrAirport.code}</span>
     </li>
-  );
+  )
 }
 
-export default DropDownItemPoint;
+export default DropDownItemPoint

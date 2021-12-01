@@ -1,48 +1,62 @@
-import DropDown from "../../../DropDown/DropDown";
-import React, {useEffect, useState} from "react";
-import {selectMainSearchParams, setRouteTo} from "../../../../reducers/mainSearchSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {getValueFromSessionStorageByKey} from "../../../../services/handlersForSearchParameters/getParametersFromSessionStorage";
+import DropDown from "../../../DropDown/DropDown"
+import React, { useEffect, useState } from "react"
+import {
+  selectMainSearchParams,
+  setRouteTo
+} from "../../../../reducers/mainSearchSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { getValueFromSessionStorageByKey } from "../../../../services/handlersForSearchParameters/getParametersFromSessionStorage"
 
+const InputArrivedCity = ({
+  getCitiesData,
+  setSelectedCityInSessionStorage,
+  dateFromInputRef,
+  routToInputRef
+}) => {
+  const dispatch = useDispatch()
 
-const InputArrivedCity = ({getCitiesData, setSelectedCityInSessionStorage, dateFromInputRef, routToInputRef}) => {
-  const dispatch = useDispatch();
+  const { route } = useSelector(selectMainSearchParams)
 
-  const {route} = useSelector(selectMainSearchParams)
-
-  const [currentArrivedCity, setCurrentArrivedCity] = useState('');
-  const [currentCitiesData, setCurrentCitiesData] = useState('');
-  const [inputDirection, setInputDirection] = useState('');
+  const [currentArrivedCity, setCurrentArrivedCity] = useState("")
+  const [currentCitiesData, setCurrentCitiesData] = useState("")
+  const [inputDirection, setInputDirection] = useState("")
 
   useEffect(() => {
-    const {front: {to}} = route
+    const {
+      front: { to }
+    } = route
     const cityNameFromRedux = to
-    const cityNameFromSessionStorage = getValueFromSessionStorageByKey('cityFrontTo')
-    const cityCodeFromSessionStorage = getValueFromSessionStorageByKey('cityApiTo')
-    if(!!cityNameFromRedux) {
+    const cityNameFromSessionStorage =
+      getValueFromSessionStorageByKey("cityFrontTo")
+    const cityCodeFromSessionStorage =
+      getValueFromSessionStorageByKey("cityApiTo")
+    if (!!cityNameFromRedux) {
       setCurrentArrivedCity(cityNameFromRedux)
-    } else if(!!cityNameFromSessionStorage) {
-      dispatch(setRouteTo({apiRoute: cityCodeFromSessionStorage, frontRoute: cityNameFromSessionStorage}));
+    } else if (!!cityNameFromSessionStorage) {
+      dispatch(
+        setRouteTo({
+          apiRoute: cityCodeFromSessionStorage,
+          frontRoute: cityNameFromSessionStorage
+        })
+      )
       setCurrentArrivedCity(cityNameFromSessionStorage)
     }
-  }, [route.front.to]);
+  }, [route.front.to])
 
-  const onChangeWriteValue = async evt => {
+  const onChangeWriteValue = async (evt) => {
     const targetDirection = evt.target.dataset.direction
     const targetValue = evt.target.value
-    setInputDirection(targetDirection);
+    setInputDirection(targetDirection)
     setCurrentArrivedCity(targetValue)
-    await setCitiesHint(currentArrivedCity, 'to')
-  };
+    await setCitiesHint(currentArrivedCity, "to")
+  }
 
   const setCitiesHint = async (cityName, direction) => {
     const cities = await getCitiesData(cityName)
-    setCurrentCitiesData(
-      {
-        keyWord: cityName,
-        citiesInfo: cities.data
-      }
-    );
+    setCurrentCitiesData({
+      keyWord: cityName,
+      citiesInfo: cities.data
+    })
   }
 
   const inputFromOnBlur = () => {
@@ -50,34 +64,31 @@ const InputArrivedCity = ({getCitiesData, setSelectedCityInSessionStorage, dateF
       if (currentCitiesData) {
         let currentCity = null
         let currentCityCode = null
-        currentCitiesData.citiesInfo.forEach(elem => {
-          if(currentArrivedCity === elem.name){
+        currentCitiesData.citiesInfo.forEach((elem) => {
+          if (currentArrivedCity === elem.name) {
             currentCity = elem.name
             currentCityCode = elem.code
           }
         })
-        if(currentCity) {
+        if (currentCity) {
           const city = {
             name: currentCity,
             code: currentCityCode
           }
           setCurrentArrivedCity(currentCity)
           setSelectedCityInSessionStorage(inputDirection, city)
-          setCurrentCitiesData('')
+          setCurrentCitiesData("")
         }
-        dateFromInputRef.current.focus();
+        dateFromInputRef.current.focus()
       }
     }, 500)
-  };
+  }
 
-
-  const selectCityAndSetIntoStorage = city => {
-    setCurrentCitiesData('')
-    setCurrentArrivedCity(city.name);
+  const selectCityAndSetIntoStorage = (city) => {
+    setCurrentCitiesData("")
+    setCurrentArrivedCity(city.name)
     setSelectedCityInSessionStorage(inputDirection, city)
-  };
-
-
+  }
 
   return (
     <div className="form__group form__group--arrival">
@@ -94,7 +105,12 @@ const InputArrivedCity = ({getCitiesData, setSelectedCityInSessionStorage, dateF
         tabIndex="2"
         onBlur={inputFromOnBlur}
       />
-      <label className="form__label form__label--arrival" htmlFor="main-arrival">куда</label>
+      <label
+        className="form__label form__label--arrival"
+        htmlFor="main-arrival"
+      >
+        куда
+      </label>
       <DropDown
         currentCities={currentCitiesData?.citiesInfo}
         dateFromInput={dateFromInputRef}

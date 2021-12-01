@@ -1,3 +1,3 @@
-import SearchResultBusTicketFooter from "./SearchResultBusTicketFooter";
+import SearchResultBusTicketFooter from "./SearchResultBusTicketFooter"
 
 export default SearchResultBusTicketFooter

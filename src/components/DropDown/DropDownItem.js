@@ -1,11 +1,10 @@
-
 function DropDownItem({ active, cityOrAirport, getCity }) {
   return (
-    <li className={'drop-down__item'}>
+    <li className={"drop-down__item"}>
       <div
         onClick={() => getCity(cityOrAirport)}
         className={`drop-down__item-box ${
-          active ? 'drop-down__item-box--active' : ''
+          active ? "drop-down__item-box--active" : ""
         }`}
       >
         <span className="drop-down__item-title">
@@ -14,7 +13,7 @@ function DropDownItem({ active, cityOrAirport, getCity }) {
         <span className="drop-down__item-tag">{cityOrAirport.code}</span>
       </div>
     </li>
-  );
+  )
 }
 
-export default DropDownItem;
+export default DropDownItem

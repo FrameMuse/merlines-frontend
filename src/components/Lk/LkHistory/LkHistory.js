@@ -1,5 +1,5 @@
-import LkContentClearAll from '../LkContent/LkContentClearAll';
-import LkContentRoute from '../LkContent/LkContentRoute';
+import LkContentClearAll from "../LkContent/LkContentClearAll"
+import LkContentRoute from "../LkContent/LkContentRoute"
 
 function LkHistory() {
   return (
@@ -15,6 +15,6 @@ function LkHistory() {
       </ul>
     </>
   )
-};
+}
 
-export default LkHistory;
+export default LkHistory

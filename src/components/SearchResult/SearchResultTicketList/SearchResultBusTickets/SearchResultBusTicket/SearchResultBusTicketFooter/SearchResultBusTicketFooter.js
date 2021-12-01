@@ -1,26 +1,23 @@
-import React from "react";
+import React from "react"
 // import {toTranslateBaggageCode} from "../../../../../utils";
-import Svg from "../../../../../common/Svg";
-import SearchResultTicketOffer from "../../../SearchResultTicketOffer";
-import SearchResultTicketMini from "../../../SearchResultTicketMini";
-import {separateThousand} from "../../../../../../utils";
+import Svg from "../../../../../common/Svg"
+import SearchResultTicketOffer from "../../../SearchResultTicketOffer"
+import SearchResultTicketMini from "../../../SearchResultTicketMini"
+import { separateThousand } from "../../../../../../utils"
 
-
-const SearchResultBusTicketFooter = (
-  {
-    url,
-    price,
-    carrier,
-    maxDuration,
-    transfers,
-    setIsOpenMoreInfo,
-    isOpenMoreInfo,
-    arrivalDateTime,
-    arrivalPointName,
-    departureDatetime,
-    departurePointName
-  }) => {
-
+const SearchResultBusTicketFooter = ({
+  url,
+  price,
+  carrier,
+  maxDuration,
+  transfers,
+  setIsOpenMoreInfo,
+  isOpenMoreInfo,
+  arrivalDateTime,
+  arrivalPointName,
+  departureDatetime,
+  departurePointName
+}) => {
   // const sellersSorted = (sellers.length > 1) ? [...sellers].sort((a, b) => a.price - b.price) : [...sellers]
   const openMoreInfo = () => setIsOpenMoreInfo(!isOpenMoreInfo)
 
@@ -28,13 +25,21 @@ const SearchResultBusTicketFooter = (
     <>
       <div className="ticket__footer ticket__footer--bus">
         <div className="ticket__price">{separateThousand(price)} ₽</div>
-        <button className="btn btn--info ticket__btn-info" type="button" onClick={openMoreInfo}>
-          Подробнее <Svg svgClass="btn__arrow-icon" svgName="arrow-open" svgWidth="8" svgHeight="8" />
+        <button
+          className="btn btn--info ticket__btn-info"
+          type="button"
+          onClick={openMoreInfo}
+        >
+          Подробнее{" "}
+          <Svg
+            svgClass="btn__arrow-icon"
+            svgName="arrow-open"
+            svgWidth="8"
+            svgHeight="8"
+          />
         </button>
       </div>
-      {
-        isOpenMoreInfo
-        &&
+      {isOpenMoreInfo && (
         <div className="ticket__content">
           <SearchResultTicketOffer
             price={price}
@@ -76,15 +81,16 @@ const SearchResultBusTicketFooter = (
                 carrier={carrier}
                 maxDuration={maxDuration}
                 arrivalDateTime={arrivalDateTime}
-              arrivalPointName={arrivalPointName}
-              departureDatetime={departureDatetime}
-              departurePointName={departurePointName}/>
+                arrivalPointName={arrivalPointName}
+                departureDatetime={departureDatetime}
+                departurePointName={departurePointName}
+              />
               {/*{transfers && transfers.length !== index ? <SearchResultTicketTransfer transfers={transfers[index]}/> : null}*/}
             </>
           </div>
         </div>
-      }
-      </>
+      )}
+    </>
   )
 }
 

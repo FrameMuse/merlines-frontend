@@ -1,7 +1,6 @@
 @import "../../../styles/vars.scss";
 @import "../../../styles/mixin.scss";
 
-
 .drop-down__inner-item {
   background: #fff;
   color: black;
@@ -10,7 +9,6 @@
 .drop-down__item--active, /* TODO: вряд ли нужно, перепроверить */
 .drop-down__item-box--active,
 .drop-down__inner-item--active {
-
   background: #235ef5;
 }
 
@@ -140,7 +138,7 @@ article-card-index {
   right: 2vw;
   position: absolute;
   z-index: 100;
-  color:$color-blue;
+  color: $color-blue;
   transform: rotate(180deg);
 }
 
@@ -371,10 +369,10 @@ article-card-index {
 }
 
 @media #{$media-sm} {
-  .arrow--left{
+  .arrow--left {
     display: block;
   }
-  .arrow--right{
+  .arrow--right {
     display: none;
   }
 }

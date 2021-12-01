@@ -1,10 +1,10 @@
-import React from 'react';
-import MainCollectionTitle from '../MainCollection/MainCollectionTitle';
-import MainCollectionSubtitle from '../MainCollection/MainCollectionSubtitle';
-import MainCollectionSlider from './slick/MainCollectionSlider';
-import './mainCollectionSliderStyle.scss'
+import React from "react"
+import MainCollectionTitle from "../MainCollection/MainCollectionTitle"
+import MainCollectionSubtitle from "../MainCollection/MainCollectionSubtitle"
+import MainCollectionSlider from "./slick/MainCollectionSlider"
+import "./mainCollectionSliderStyle.scss"
 
-const  MainCollection = () =>  {
+const MainCollection = () => {
   return (
     <section className="section section--index">
       <div className="section__container swiper-container">
@@ -13,7 +13,7 @@ const  MainCollection = () =>  {
         <MainCollectionSlider />
       </div>
     </section>
-  );
+  )
 }
 
-export default MainCollection;
+export default MainCollection

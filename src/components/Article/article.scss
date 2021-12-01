@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .article {
   @media #{$media-md} {
     position: relative;
@@ -13,7 +12,8 @@
 
   margin-top: 20px;
 
-  @media #{$media-md} {}
+  @media #{$media-md} {
+  }
   @media #{$media-lg} {
     margin-top: 30px;
   }

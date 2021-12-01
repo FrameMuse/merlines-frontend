@@ -1,7 +1,6 @@
 @import "vars";
 @import "mixin";
 
-
 .btn {
   @include button;
 
@@ -203,7 +202,7 @@
   width: 100%;
   padding-top: 6px;
   padding-bottom: 6px;
-  transition: .2s;
+  transition: 0.2s;
   position: relative;
 
   &:hover,
@@ -215,4 +214,3 @@
 .button-text__arrow {
   margin-left: 5px;
 }
-

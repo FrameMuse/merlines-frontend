@@ -1,5 +1,5 @@
-import controllerParams from './controllersParams';
-import api from '../api/api';
+import controllerParams from "./controllersParams"
+import api from "../api/api"
 
 // path = location.pathname
 // searchParams = location.search
@@ -10,95 +10,140 @@ import api from '../api/api';
 // dispatchReducerTo = setRouteTo()
 
 const getParams = (path) => {
-  return controllerParams.find(item => item.name === path);
-};
+  return controllerParams.find((item) => item.name === path)
+}
 
 const parseSearchParams = (params, queryHook) => {
   let newParams = {
     name: params.name,
     routeParams: {}
-  };
+  }
 
-  params.mainParams.forEach(param => {
-    newParams.routeParams[param] = queryHook.get(param);
-  });
+  params.mainParams.forEach((param) => {
+    newParams.routeParams[param] = queryHook.get(param)
+  })
 
   if (params.optionalParams.length > 0) {
-    params.optionalParams.forEach(optionalParam => {
-      newParams.routeParams[optionalParam] = queryHook.get(optionalParam);
-    });
-  };
+    params.optionalParams.forEach((optionalParam) => {
+      newParams.routeParams[optionalParam] = queryHook.get(optionalParam)
+    })
+  }
 
-  return newParams;
-};
+  return newParams
+}
 
-const getCityNameFrom = async (queryHook, dispatchHook, dispatchReducerFrom) => {
-  const codeFrom = queryHook.get('origin');
+const getCityNameFrom = async (
+  queryHook,
+  dispatchHook,
+  dispatchReducerFrom
+) => {
+  const codeFrom = queryHook.get("origin")
 
   if (codeFrom) {
     try {
-      const cityFrom = await api.getCityNameFromCode(codeFrom);
+      const cityFrom = await api.getCityNameFromCode(codeFrom)
       if (cityFrom) {
-        dispatchHook(dispatchReducerFrom({ apiRoute: codeFrom, frontRoute: cityFrom.data[0].cases.su }));
-        sessionStorage.setItem('cityFrontFrom', cityFrom.data[0].cases.su);
-        sessionStorage.setItem('cityApiFrom', codeFrom);
+        dispatchHook(
+          dispatchReducerFrom({
+            apiRoute: codeFrom,
+            frontRoute: cityFrom.data[0].cases.su
+          })
+        )
+        sessionStorage.setItem("cityFrontFrom", cityFrom.data[0].cases.su)
+        sessionStorage.setItem("cityApiFrom", codeFrom)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
-};
+}
 
 const getCityNameTo = async (queryHook, dispatchHook, dispatchReducerTo) => {
-  const codeTo = queryHook.get('destination');
+  const codeTo = queryHook.get("destination")
 
   if (codeTo) {
     try {
-      const cityTo = await api.getCityNameFromCode(codeTo);
+      const cityTo = await api.getCityNameFromCode(codeTo)
       if (cityTo) {
-        dispatchHook(dispatchReducerTo({ apiRoute: codeTo, frontRoute: cityTo.data[0].cases.su }));
-        sessionStorage.setItem('cityFrontTo', cityTo.data[0].cases.su);
-        sessionStorage.setItem('cityApiTo', codeTo);
+        dispatchHook(
+          dispatchReducerTo({
+            apiRoute: codeTo,
+            frontRoute: cityTo.data[0].cases.su
+          })
+        )
+        sessionStorage.setItem("cityFrontTo", cityTo.data[0].cases.su)
+        sessionStorage.setItem("cityApiTo", codeTo)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
-};
+}
 
-const parseParamsFromRoute = (path, searchParams, queryHook, dispatchHook, dispatchReducerFrom, dispatchReducerTo) => {
-  const paramsForCurrentRoute = getParams(path);
-  const testParamsParse = searchParams && parseSearchParams(paramsForCurrentRoute, queryHook);
+const parseParamsFromRoute = (
+  path,
+  searchParams,
+  queryHook,
+  dispatchHook,
+  dispatchReducerFrom,
+  dispatchReducerTo
+) => {
+  const paramsForCurrentRoute = getParams(path)
+  const testParamsParse =
+    searchParams && parseSearchParams(paramsForCurrentRoute, queryHook)
 
   if (searchParams.length > 0) {
-    const isCityNamesInSession = (sessionStorage.getItem('cityFrontFrom') && sessionStorage.getItem('cityFrontTo'))
-      && (sessionStorage.getItem('cityApiFrom') && sessionStorage.getItem('cityApiTo'));
-    const isCurrentRouteSameAsInSession = (sessionStorage.getItem('cityApiFrom') === queryHook.get('origin'))
-      && (sessionStorage.getItem('cityApiTo') === queryHook.get('destination'));
+    const isCityNamesInSession =
+      sessionStorage.getItem("cityFrontFrom") &&
+      sessionStorage.getItem("cityFrontTo") &&
+      sessionStorage.getItem("cityApiFrom") &&
+      sessionStorage.getItem("cityApiTo")
+    const isCurrentRouteSameAsInSession =
+      sessionStorage.getItem("cityApiFrom") === queryHook.get("origin") &&
+      sessionStorage.getItem("cityApiTo") === queryHook.get("destination")
 
     if (isCityNamesInSession) {
       if (isCurrentRouteSameAsInSession) {
-        sessionStorage.setItem('currentController', testParamsParse.name);
-        sessionStorage.setItem('mainParams', JSON.stringify(testParamsParse.routeParams));
-        dispatchHook(dispatchReducerFrom({ apiRoute: testParamsParse.routeParams.origin, frontRoute: sessionStorage.getItem('cityFrontFrom') }));
-        dispatchHook(dispatchReducerTo({ apiRoute: testParamsParse.routeParams.destination, frontRoute: sessionStorage.getItem('cityFrontTo') }));
+        sessionStorage.setItem("currentController", testParamsParse.name)
+        sessionStorage.setItem(
+          "mainParams",
+          JSON.stringify(testParamsParse.routeParams)
+        )
+        dispatchHook(
+          dispatchReducerFrom({
+            apiRoute: testParamsParse.routeParams.origin,
+            frontRoute: sessionStorage.getItem("cityFrontFrom")
+          })
+        )
+        dispatchHook(
+          dispatchReducerTo({
+            apiRoute: testParamsParse.routeParams.destination,
+            frontRoute: sessionStorage.getItem("cityFrontTo")
+          })
+        )
       } else {
-        console.log('else??????');
-        sessionStorage.setItem('currentController', testParamsParse.name);
-        sessionStorage.setItem('mainParams', JSON.stringify(testParamsParse.routeParams));
-        getCityNameFrom(queryHook, dispatchHook, dispatchReducerFrom);
-        getCityNameTo(queryHook, dispatchHook, dispatchReducerTo);
-      };
+        console.log("else??????")
+        sessionStorage.setItem("currentController", testParamsParse.name)
+        sessionStorage.setItem(
+          "mainParams",
+          JSON.stringify(testParamsParse.routeParams)
+        )
+        getCityNameFrom(queryHook, dispatchHook, dispatchReducerFrom)
+        getCityNameTo(queryHook, dispatchHook, dispatchReducerTo)
+      }
     } else {
-      console.log('second else???');
-      sessionStorage.setItem('currentController', testParamsParse.name);
-      sessionStorage.setItem('mainParams', JSON.stringify(testParamsParse.routeParams));
-      getCityNameFrom(queryHook, dispatchHook, dispatchReducerFrom);
-      getCityNameTo(queryHook, dispatchHook, dispatchReducerTo);
-    };
+      console.log("second else???")
+      sessionStorage.setItem("currentController", testParamsParse.name)
+      sessionStorage.setItem(
+        "mainParams",
+        JSON.stringify(testParamsParse.routeParams)
+      )
+      getCityNameFrom(queryHook, dispatchHook, dispatchReducerFrom)
+      getCityNameTo(queryHook, dispatchHook, dispatchReducerTo)
+    }
   }
 
-  return testParamsParse;
-};
+  return testParamsParse
+}
 
-export default parseParamsFromRoute;
+export default parseParamsFromRoute

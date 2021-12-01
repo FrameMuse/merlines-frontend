@@ -1,3 +1,3 @@
-import SearchResultTrainTicketMini from './SearchResultTrainTicketMini'
+import SearchResultTrainTicketMini from "./SearchResultTrainTicketMini"
 
 export default SearchResultTrainTicketMini

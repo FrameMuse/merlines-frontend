@@ -1,28 +1,28 @@
-import {useCallback, useState} from "react";
+import { useCallback, useState } from "react"
 
-let idle = Object.freeze({ type: 'Idle' });
-let pending = Object.freeze({ type: 'Pending' });
+let idle = Object.freeze({ type: "Idle" })
+let pending = Object.freeze({ type: "Pending" })
 
-const useAction = (fn) =>  {
-  let [response, setResponse] = useState(idle);
+const useAction = (fn) => {
+  let [response, setResponse] = useState(idle)
 
   let action = useCallback(
     (...args) => {
-      setResponse(pending);
+      setResponse(pending)
       return Promise.resolve(fn(...args))
-        .then(result => {
-          setResponse({ type: 'Success', result })
-          return result;
+        .then((result) => {
+          setResponse({ type: "Success", result })
+          return result
         })
-        .catch(error => {
-          setResponse({ type: 'Failure', error })
-          throw error;
-        });
+        .catch((error) => {
+          setResponse({ type: "Failure", error })
+          throw error
+        })
     },
-    [fn],
-  );
+    [fn]
+  )
 
-  return [response, action];
+  return [response, action]
 }
 
 export default useAction

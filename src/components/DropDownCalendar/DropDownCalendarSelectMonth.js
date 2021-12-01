@@ -1,18 +1,18 @@
-import { useCallback } from 'react';
-import { DateTime } from 'luxon';
+import { useCallback } from "react"
+import { DateTime } from "luxon"
 
 const DropDownCalendarSelectMonth = ({ dispatch }) => {
   const getMonthData = useCallback(() => {
-    const currMonth = DateTime.now().month;
+    const currMonth = DateTime.now().month
     return Array.from({ length: 12 }, (e, i) => {
       return {
-        text: new Date(null, currMonth + i, null).toLocaleDateString('ru', {
-          month: 'long'
+        text: new Date(null, currMonth + i, null).toLocaleDateString("ru", {
+          month: "long"
         }),
         date: DateTime.now().plus({ months: i }).toISODate()
-      };
-    });
-  }, []);
+      }
+    })
+  }, [])
 
   return (
     <select onChange={dispatch} className="drop-down-calendar-select">
@@ -22,7 +22,7 @@ const DropDownCalendarSelectMonth = ({ dispatch }) => {
         </option>
       ))}
     </select>
-  );
-};
+  )
+}
 
-export default DropDownCalendarSelectMonth;
+export default DropDownCalendarSelectMonth

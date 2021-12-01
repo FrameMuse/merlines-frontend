@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .price-dynamics__container {
   @include container;
 
@@ -47,10 +46,14 @@
   font-size: 12px;
   padding: 11px 7px;
   background-color: var(--color-white);
-  transition: .2s;
+  transition: 0.2s;
 
-  &:first-child { border-radius: 4px 0 0 4px; }
-  &:last-child { border-radius: 0 4px 4px 0; }
+  &:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  &:last-child {
+    border-radius: 0 4px 4px 0;
+  }
 
   & + & {
     border-left: 1px solid var(--color-border-third);
@@ -214,100 +217,148 @@
 
   @media #{$media-lg} {
     &--Jan {
-      .price-dynamics__schedule-thumb { width: 57px; }
+      .price-dynamics__schedule-thumb {
+        width: 57px;
+      }
     }
 
     &--Feb {
-      .price-dynamics__schedule-thumb { width: 58px; }
+      .price-dynamics__schedule-thumb {
+        width: 58px;
+      }
     }
 
     &--Mar {
-      .price-dynamics__schedule-thumb { width: 58px; }
+      .price-dynamics__schedule-thumb {
+        width: 58px;
+      }
     }
 
     &--Apr {
-      .price-dynamics__schedule-thumb { width: 57px; }
+      .price-dynamics__schedule-thumb {
+        width: 57px;
+      }
     }
 
     &--May {
-      .price-dynamics__schedule-thumb { width: 57px; }
+      .price-dynamics__schedule-thumb {
+        width: 57px;
+      }
     }
 
     &--Jun {
-      .price-dynamics__schedule-thumb { width: 58px; }
+      .price-dynamics__schedule-thumb {
+        width: 58px;
+      }
     }
 
     &--Jul {
-      .price-dynamics__schedule-thumb { width: 58px; }
+      .price-dynamics__schedule-thumb {
+        width: 58px;
+      }
     }
 
     &--Aug {
-      .price-dynamics__schedule-thumb { width: 57px; }
+      .price-dynamics__schedule-thumb {
+        width: 57px;
+      }
     }
 
     &--Sep {
-      .price-dynamics__schedule-thumb { width: 59px; }
+      .price-dynamics__schedule-thumb {
+        width: 59px;
+      }
     }
 
     &--Oct {
-      .price-dynamics__schedule-thumb { width: 57px; }
+      .price-dynamics__schedule-thumb {
+        width: 57px;
+      }
     }
 
     &--Nov {
-      .price-dynamics__schedule-thumb { width: 57px; }
+      .price-dynamics__schedule-thumb {
+        width: 57px;
+      }
     }
 
     &--Dec {
-      .price-dynamics__schedule-thumb { width: 59px; }
+      .price-dynamics__schedule-thumb {
+        width: 59px;
+      }
     }
   }
   @media #{$media-xl} {
     &--Jan {
-      .price-dynamics__schedule-thumb { width: 54px; }
+      .price-dynamics__schedule-thumb {
+        width: 54px;
+      }
     }
 
     &--Feb {
-      .price-dynamics__schedule-thumb { width: 55px; }
+      .price-dynamics__schedule-thumb {
+        width: 55px;
+      }
     }
 
     &--Mar {
-      .price-dynamics__schedule-thumb { width: 54px; }
+      .price-dynamics__schedule-thumb {
+        width: 54px;
+      }
     }
 
     &--Apr {
-      .price-dynamics__schedule-thumb { width: 54px; }
+      .price-dynamics__schedule-thumb {
+        width: 54px;
+      }
     }
 
     &--May {
-      .price-dynamics__schedule-thumb { width: 54px; }
+      .price-dynamics__schedule-thumb {
+        width: 54px;
+      }
     }
 
     &--Jun {
-      .price-dynamics__schedule-thumb { width: 54px; }
+      .price-dynamics__schedule-thumb {
+        width: 54px;
+      }
     }
 
     &--Jul {
-      .price-dynamics__schedule-thumb { width: 55px; }
+      .price-dynamics__schedule-thumb {
+        width: 55px;
+      }
     }
 
     &--Aug {
-      .price-dynamics__schedule-thumb { width: 54px; }
+      .price-dynamics__schedule-thumb {
+        width: 54px;
+      }
     }
 
     &--Sep {
-      .price-dynamics__schedule-thumb { width: 55px; }
+      .price-dynamics__schedule-thumb {
+        width: 55px;
+      }
     }
 
     &--Oct {
-      .price-dynamics__schedule-thumb { width: 55px; }
+      .price-dynamics__schedule-thumb {
+        width: 55px;
+      }
     }
 
     &--Nov {
-      .price-dynamics__schedule-thumb { width: 54px; }
+      .price-dynamics__schedule-thumb {
+        width: 54px;
+      }
     }
 
     &--Dec {
-      .price-dynamics__schedule-thumb { width: 55px; }
+      .price-dynamics__schedule-thumb {
+        width: 55px;
+      }
     }
   }
 }
@@ -337,4 +388,3 @@
 .price-dynamics__scroll {
   margin-top: 20px;
 }
-

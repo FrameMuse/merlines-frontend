@@ -1,7 +1,9 @@
 @import "vars";
 @import "mixin";
 
-body { margin: 0; }
+body {
+  margin: 0;
+}
 
 h1,
 h2,
@@ -9,7 +11,9 @@ h3,
 h4,
 h5,
 h6,
-p { margin-top: 0; }
+p {
+  margin-top: 0;
+}
 
 ol,
 ul,
@@ -21,7 +25,9 @@ dl {
 ol ol,
 ul ul,
 ol ul,
-ul ol { margin-bottom: 0; }
+ul ol {
+  margin-bottom: 0;
+}
 
 img {
   vertical-align: middle;
@@ -33,9 +39,13 @@ svg {
   vertical-align: middle;
 }
 
-label { display: inline-block; }
+label {
+  display: inline-block;
+}
 
-button { border-radius: 0; }
+button {
+  border-radius: 0;
+}
 
 input,
 button,
@@ -48,17 +58,25 @@ textarea {
 }
 
 button,
-input { overflow: visible; }
+input {
+  overflow: visible;
+}
 
 button,
-select { text-transform: none; }
+select {
+  text-transform: none;
+}
 
-select { word-wrap: normal; }
+select {
+  word-wrap: normal;
+}
 
 button,
 [type="button"],
 [type="reset"],
-[type="submit"] { appearance: button; }
+[type="submit"] {
+  appearance: button;
+}
 
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
@@ -80,15 +98,23 @@ textarea {
 }
 
 [type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button { height: auto; }
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
 
 [type="search"] {
   outline-offset: -2px;
   appearance: none;
 }
 
-[type="search"]::-webkit-search-decoration { appearance: none; }
+[type="search"]::-webkit-search-decoration {
+  appearance: none;
+}
 
-template { display: none; }
+template {
+  display: none;
+}
 
-[hidden] { display: none !important; }
+[hidden] {
+  display: none !important;
+}

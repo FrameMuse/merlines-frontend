@@ -1,52 +1,52 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Slider from 'react-slick';
-import MainCollectionCard from '../MainCollectionCard';
-import { MainCollectionNextArrow, MainCollectionPrevArrow } from './Arrows';
-import MockSlides from './MockSlides';
+import React, { useEffect, useRef, useState } from "react"
+import Slider from "react-slick"
+import MainCollectionCard from "../MainCollectionCard"
+import { MainCollectionNextArrow, MainCollectionPrevArrow } from "./Arrows"
+import MockSlides from "./MockSlides"
 
 const getNumberOfActiveSlides = () => {
   const $list = document.querySelectorAll(
-    '.section__container .slick-slide.slick-active'
-  );
-  return $list.length;
-};
+    ".section__container .slick-slide.slick-active"
+  )
+  return $list.length
+}
 
 const calcNextSlideNumber = (current, dir, slides, numberOfActiveSlides) => {
-  let slideNumber = current;
+  let slideNumber = current
   switch (dir) {
     case DIRS.left:
-      if (slideNumber > 0) slideNumber--;
-      break;
+      if (slideNumber > 0) slideNumber--
+      break
     case DIRS.right:
-      if (slideNumber < slides - numberOfActiveSlides) slideNumber++;
-      break;
+      if (slideNumber < slides - numberOfActiveSlides) slideNumber++
+      break
     default:
   }
-  return slideNumber;
-};
+  return slideNumber
+}
 
-const DIRS = { right: 'right', left: 'left' };
+const DIRS = { right: "right", left: "left" }
 
 const MainCollectionSlider = () => {
-  const [slideNumber, setSlideNumber] = useState(0);
+  const [slideNumber, setSlideNumber] = useState(0)
 
-  const [slides, setSlides] = useState([]);
+  const [slides, setSlides] = useState([])
 
   const getSlides = async () => {
-    let res = [];
+    let res = []
     try {
-      res = await MockSlides;
-      setSlides(res);
+      res = await MockSlides
+      setSlides(res)
     } catch (e) {
-      console.log('MainCollectionSlides.getSlides', e);
+      console.log("MainCollectionSlides.getSlides", e)
     }
-  };
+  }
 
-  const slider = useRef(null);
-  let blockSlickToGo = false;
+  const slider = useRef(null)
+  let blockSlickToGo = false
   const [numberOfActiveSlides, setNumberOfActiveSlides] = useState(
     slides.length
-  );
+  )
 
   const settings = {
     dots: false,
@@ -59,13 +59,13 @@ const MainCollectionSlider = () => {
     autoplaySpeed: 10000,
     arrows: false,
     swipeToSlide: true,
-    className: 'section__list',
+    className: "section__list",
     beforeChange: () => {
-      blockSlickToGo = true;
+      blockSlickToGo = true
     },
     afterChange: (current) => {
-      setSlideNumber(current);
-      blockSlickToGo = false;
+      setSlideNumber(current)
+      blockSlickToGo = false
     },
     responsive: [
       {
@@ -92,20 +92,20 @@ const MainCollectionSlider = () => {
         }
       }
     ]
-  };
+  }
 
-  useEffect(() => getSlides());
-
-  useEffect(() => {
-    window.addEventListener('resize', () => {
-      setNumberOfActiveSlides(getNumberOfActiveSlides());
-    });
-  });
+  useEffect(() => getSlides())
 
   useEffect(() => {
-    if (!blockSlickToGo) slider.current.slickGoTo(slideNumber ?? 0);
-    setNumberOfActiveSlides(getNumberOfActiveSlides());
-  }, [blockSlickToGo, slideNumber, numberOfActiveSlides]);
+    window.addEventListener("resize", () => {
+      setNumberOfActiveSlides(getNumberOfActiveSlides())
+    })
+  })
+
+  useEffect(() => {
+    if (!blockSlickToGo) slider.current.slickGoTo(slideNumber ?? 0)
+    setNumberOfActiveSlides(getNumberOfActiveSlides())
+  }, [blockSlickToGo, slideNumber, numberOfActiveSlides])
 
   return (
     <div>
@@ -118,7 +118,7 @@ const MainCollectionSlider = () => {
               slides.length,
               numberOfActiveSlides
             )
-          );
+          )
         }}
         disabled={slideNumber === 0}
       />
@@ -145,7 +145,7 @@ const MainCollectionSlider = () => {
               slides.length,
               numberOfActiveSlides
             )
-          );
+          )
         }}
         disabled={
           slides.length === numberOfActiveSlides ||
@@ -153,7 +153,7 @@ const MainCollectionSlider = () => {
         }
       />
     </div>
-  );
-};
+  )
+}
 
-export default MainCollectionSlider;
+export default MainCollectionSlider

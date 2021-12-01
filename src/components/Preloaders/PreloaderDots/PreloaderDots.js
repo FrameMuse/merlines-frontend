@@ -1,8 +1,7 @@
-import React from "react";
-import  './loaderStyle.css'
+import React from "react"
+import "./loaderStyle.css"
 
 const PreloaderDots = () => {
-
   return (
     <div className="preloader-container">
       <div className="preloader-dots">

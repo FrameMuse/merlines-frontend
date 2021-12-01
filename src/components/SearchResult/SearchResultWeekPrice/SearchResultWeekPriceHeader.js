@@ -5,6 +5,6 @@ function SearchResultWeekPriceHeader() {
       <span className="price-week__info">самолёты</span>
     </div>
   )
-};
+}
 
-export default SearchResultWeekPriceHeader;
+export default SearchResultWeekPriceHeader

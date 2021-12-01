@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import Svg from './Svg';
+import { useState } from "react"
+import Svg from "./Svg"
 
 function OpenBooking() {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false)
 
   return (
     <div className="checkbox form__checkbox">
@@ -15,11 +15,16 @@ function OpenBooking() {
         disabled={true}
       />
       <label className="checkbox-label" htmlFor="check">
-        <Svg svgClass="checkbox-icon" svgName="checkbox" svgWidth="15" svgHeight="15" />
+        <Svg
+          svgClass="checkbox-icon"
+          svgName="checkbox"
+          svgWidth="15"
+          svgHeight="15"
+        />
         Открыть Booking.com
       </label>
     </div>
   )
-};
+}
 
-export default OpenBooking;
+export default OpenBooking

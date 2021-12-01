@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import Slider from '../Slider/Slider';
+import { useState } from "react"
+import Slider from "../Slider/Slider"
 
 function PriceCalendarVacationSlider() {
-  const [fromInterval, setFromInterval] = useState({});
-  const [toInterval, setToInterval] = useState([]);
+  const [fromInterval, setFromInterval] = useState({})
+  const [toInterval, setToInterval] = useState([])
 
   return (
     <div className="range calendar__range">
@@ -17,16 +17,16 @@ function PriceCalendarVacationSlider() {
         thumbClassName="horizontal-slider__thumb"
         trackClassName="horizontal-slider__track"
         defaultValue={[7, 14]}
-        ariaLabel={['Lower thumb', 'Upper thumb']}
+        ariaLabel={["Lower thumb", "Upper thumb"]}
         pearling
         minDistance={1}
-        interval={state => {
-          setFromInterval(state[0]);
-          setToInterval(state[1]);
+        interval={(state) => {
+          setFromInterval(state[0])
+          setToInterval(state[1])
         }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default PriceCalendarVacationSlider;
+export default PriceCalendarVacationSlider

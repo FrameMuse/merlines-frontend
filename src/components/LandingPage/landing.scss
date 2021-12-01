@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .landing__container {
   @include container;
 
@@ -223,7 +222,7 @@
   }
   @media #{$media-xl} {
     grid-column: 2/-1;
-    grid-row: 2/span 6;
+    grid-row: 2 / span 6;
     padding-top: 5px;
     padding-bottom: 0;
 

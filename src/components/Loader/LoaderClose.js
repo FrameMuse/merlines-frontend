@@ -8,6 +8,6 @@ function LoaderClose(props) {
       <div className="download__plane download__plane--closed-form"></div>
     </section>
   )
-};
+}
 
-export default LoaderClose;
+export default LoaderClose

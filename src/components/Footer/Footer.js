@@ -1,8 +1,8 @@
-import FooterInfo from './FooterInfo';
-import './footer.scss'
+import FooterInfo from "./FooterInfo"
+import "./footer.scss"
 
 function Footer() {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer className="footer">
@@ -11,11 +11,14 @@ function Footer() {
           <FooterInfo />
         </div>
         <div className="footer__copyright">
-          <p className="footer__copyright-text">© 2018-{currentYear}, ООО «Транспортно-туристическая компания МерЛайнс»</p>
+          <p className="footer__copyright-text">
+            © 2018-{currentYear}, ООО «Транспортно-туристическая компания
+            МерЛайнс»
+          </p>
         </div>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

@@ -1,37 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit"
 
 export const routesDataSlice = createSlice({
-  name: 'routesDataSlice',
+  name: "routesDataSlice",
   initialState: {
-    historyRoute: '',
+    historyRoute: "",
     priceCalendarSearchRoutes: {
-      air: '',
-      train: '',
-      bus: ''
+      air: "",
+      train: "",
+      bus: ""
     }
   },
   reducers: {
     setHistoryRoute: (state, action) => {
-      state.historyRoute = action.payload;
+      state.historyRoute = action.payload
     },
     setPriceCalendarSearchRouteAir: (state, action) => {
-      state.priceCalendarSearchRoutes.air = action.payload;
+      state.priceCalendarSearchRoutes.air = action.payload
     },
     setPriceCalendarSearchRouteTrain: (state, action) => {
-      state.priceCalendarSearchRoutes.train = action.payload;
+      state.priceCalendarSearchRoutes.train = action.payload
     },
     setPriceCalendarSearchRouteBus: (state, action) => {
-      state.priceCalendarSearchRoutes.bus = action.payload;
-    },
+      state.priceCalendarSearchRoutes.bus = action.payload
+    }
   }
-});
+})
 
 export const {
   setHistoryRoute,
   setPriceCalendarSearchRouteAir,
   setPriceCalendarSearchRouteTrain,
   setPriceCalendarSearchRouteBus
-} = routesDataSlice.actions;
+} = routesDataSlice.actions
 
-export const selectRoutesData = state => state.routesData;
-export default routesDataSlice.reducer;
+export const selectRoutesData = (state) => state.routesData
+export default routesDataSlice.reducer

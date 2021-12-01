@@ -1,27 +1,32 @@
-import React from "react";
+import React from "react"
 
-import { useDispatch } from 'react-redux';
-import { setIsOpenClearHistory, setIsHistoryRoute } from '../../../reducers/lkDataSlice';
-
+import { useDispatch } from "react-redux"
+import {
+  setIsOpenClearHistory,
+  setIsHistoryRoute
+} from "../../../reducers/lkDataSlice"
 
 function LkContentClearAll({ subscribe }) {
-  const mainClass = `button-text button-text--cabinet ${subscribe ? "button-text--right" : ""}`;
-  const dispatch = useDispatch();
+  const mainClass = `button-text button-text--cabinet ${
+    subscribe ? "button-text--right" : ""
+  }`
+  const dispatch = useDispatch()
   const onClickClearAllHistory = () => {
-    dispatch(setIsHistoryRoute(false));
-    dispatch(setIsOpenClearHistory(true));
-  };
+    dispatch(setIsHistoryRoute(false))
+    dispatch(setIsOpenClearHistory(true))
+  }
 
   return (
     <div className={mainClass}>
       <button
         onClick={onClickClearAllHistory}
         className="button-text__btn"
-        type="button">
+        type="button"
+      >
         очистить всю историю
-        </button>
+      </button>
     </div>
   )
-};
+}
 
-export default LkContentClearAll;
+export default LkContentClearAll

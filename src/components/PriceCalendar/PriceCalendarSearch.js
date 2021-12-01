@@ -1,48 +1,48 @@
-import { useState, useRef, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { DateTime } from 'luxon';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useRef, useEffect } from "react"
+import { useHistory, useLocation } from "react-router-dom"
+import { DateTime } from "luxon"
+import { useSelector, useDispatch } from "react-redux"
 import {
   selectPriceCalendar,
   clearPickedMonthData,
   setPickedMonthData
-} from '../../reducers/priceCalendarSlice';
+} from "../../reducers/priceCalendarSlice"
 import {
   selectMainSearchParams,
   setRouteFrom,
   setRouteTo,
   setOneWay
-} from '../../reducers/mainSearchSlice';
+} from "../../reducers/mainSearchSlice"
 import {
   setPriceCalendarSearchRouteAir,
   setPriceCalendarSearchRouteBus
-} from '../../reducers/routesDataSlice';
-import { selectAccessData } from '../../reducers/accessDataSlice';
-import api from '../../api/api';
-import DropDown from '../DropDown/DropDown';
-import useDebounce from '../../hooks/useDebounce';
-import { dateToMonthName, firstToUpperCase } from '../../utils';
+} from "../../reducers/routesDataSlice"
+import { selectAccessData } from "../../reducers/accessDataSlice"
+import api from "../../api/api"
+import DropDown from "../DropDown/DropDown"
+import useDebounce from "../../hooks/useDebounce"
+import { dateToMonthName, firstToUpperCase } from "../../utils"
 // import useFullRoute from '../../hooks/useFullRoute';
 // import useQuery from '../../hooks/useQuery';
 
 function PriceCalendarSearch({ transport, setPickedMonthName }) {
-  const [inputValue, setInputValue] = useState('');
-  const [currentCitiesData, setCurrentCitiesData] = useState('');
-  console.log('currentCitiesData: 11 ', currentCitiesData);
+  const [inputValue, setInputValue] = useState("")
+  const [currentCitiesData, setCurrentCitiesData] = useState("")
+  console.log("currentCitiesData: 11 ", currentCitiesData)
   const [historyCitiesData, setHistoryCitiesData] = useState({
     from: [],
     to: []
-  });
-  const [inputDirection, setInputDirection] = useState('');
-  const inputEl = useRef(null);
-  const debouncedSearchInput = useDebounce(inputValue, 500);
-  const dispatch = useDispatch();
-  const mainSearchParams = useSelector(selectMainSearchParams);
-  const accessData = useSelector(selectAccessData);
-  const priceCalendarData = useSelector(selectPriceCalendar);
+  })
+  const [inputDirection, setInputDirection] = useState("")
+  const inputEl = useRef(null)
+  const debouncedSearchInput = useDebounce(inputValue, 500)
+  const dispatch = useDispatch()
+  const mainSearchParams = useSelector(selectMainSearchParams)
+  const accessData = useSelector(selectAccessData)
+  const priceCalendarData = useSelector(selectPriceCalendar)
   // const routesData = useSelector(selectRoutesData);
-  const history = useHistory();
-  const location = useLocation();
+  const history = useHistory()
+  const location = useLocation()
   // const fullRoute = useFullRoute();
   // const query = useQuery();
 
@@ -56,20 +56,20 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
         DateTime.now().month,
         1
       ).toISODate()}`
-    };
+    }
 
-    return `air?date_group_by=month&origin=${params.origin}&destination=${params.destination}&start_date=${params.start_date}&end_date=${params.end_date}`;
-  };
+    return `air?date_group_by=month&origin=${params.origin}&destination=${params.destination}&start_date=${params.start_date}&end_date=${params.end_date}`
+  }
 
   const getBusSearchParams = () => {
     const busSearchParams = {
       origin: 21,
-      start_date: '2021-01-01',
-      end_date: '2021-12-01'
-    };
+      start_date: "2021-01-01",
+      end_date: "2021-12-01"
+    }
 
-    return `bus?date_group_by=month&origin=${busSearchParams.origin}&start_date=${busSearchParams.start_date}&end_date=${busSearchParams.end_date}`;
-  };
+    return `bus?date_group_by=month&origin=${busSearchParams.origin}&start_date=${busSearchParams.start_date}&end_date=${busSearchParams.end_date}`
+  }
 
   const getMonthData = async () => {
     // const monthDataParams = {
@@ -105,32 +105,32 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
     //   console.error(error);
     // }
 
-    const airParams = getAirSearchParams();
-    dispatch(setPriceCalendarSearchRouteAir(airParams));
-    console.log('airParams', airParams);
+    const airParams = getAirSearchParams()
+    dispatch(setPriceCalendarSearchRouteAir(airParams))
+    console.log("airParams", airParams)
 
-    const busParams = getBusSearchParams();
-    dispatch(setPriceCalendarSearchRouteBus(busParams));
-    console.log('busParams', busParams.slice(3));
+    const busParams = getBusSearchParams()
+    dispatch(setPriceCalendarSearchRouteBus(busParams))
+    console.log("busParams", busParams.slice(3))
 
-    if (location.pathname.includes('air')) {
+    if (location.pathname.includes("air")) {
       history.push({
         pathname: location.pathname,
         search: airParams.slice(3)
-      });
+      })
     }
 
-    if (location.pathname.includes('bus')) {
+    if (location.pathname.includes("bus")) {
       history.push({
         pathname: location.pathname,
         search: busParams.slice(3)
-      });
+      })
     }
-  };
+  }
 
   const getCitiesData = async (word, direction) => {
     try {
-      const cities = await api.getCities(word);
+      const cities = await api.getCities(word)
 
       setHistoryCitiesData({
         ...historyCitiesData,
@@ -141,49 +141,49 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
             citiesInfo: cities.data
           }
         ]
-      });
+      })
       setCurrentCitiesData({
         [direction]: {
           keyWord: word,
           citiesInfo: cities.data
         }
-      });
+      })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const getValue = (evt) => {
-    setInputDirection(evt.target.dataset.direction);
+    setInputDirection(evt.target.dataset.direction)
     setInputValue({
       ...inputValue,
       [evt.target.dataset.direction]: evt.target.value
-    });
+    })
 
-    if (evt.target.dataset.direction === 'from') {
-      dispatch(setRouteFrom({ apiRoute: '', frontRoute: evt.target.value }));
+    if (evt.target.dataset.direction === "from") {
+      dispatch(setRouteFrom({ apiRoute: "", frontRoute: evt.target.value }))
     } else {
-      dispatch(setRouteTo({ apiRoute: '', frontRoute: evt.target.value }));
+      dispatch(setRouteTo({ apiRoute: "", frontRoute: evt.target.value }))
     }
-  };
+  }
 
   const getMonth = async () => {
-    dispatch(clearPickedMonthData());
+    dispatch(clearPickedMonthData())
     setPickedMonthName(
       firstToUpperCase(dateToMonthName(priceCalendarData.monthDate))
-    );
+    )
 
     try {
       const days = await api.getDays(
         // transport,
-        'air',
+        "air",
         {
           origin: mainSearchParams.route.api.from,
           destination: mainSearchParams.route.api.to,
           ...priceCalendarData.daysInterval // идет запрос без даты, проверить что с датами
         },
         accessData.loginToken
-      );
+      )
 
       dispatch(
         setPickedMonthData({
@@ -199,17 +199,17 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
             dateToMonthName(priceCalendarData.monthDate)
           )
         })
-      );
+      )
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const search = (evt) => {
-    evt.preventDefault();
-    getMonthData();
-    priceCalendarData.pickedMonthData.currentMonth && getMonth(); // логика поиска при открытых днях
-  };
+    evt.preventDefault()
+    getMonthData()
+    priceCalendarData.pickedMonthData.currentMonth && getMonth() // логика поиска при открытых днях
+  }
 
   const changeRoutes = () => {
     dispatch(
@@ -217,14 +217,14 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
         apiRoute: mainSearchParams.route.api.to,
         frontRoute: mainSearchParams.route.front.to
       })
-    );
+    )
     dispatch(
       setRouteTo({
         apiRoute: mainSearchParams.route.api.from,
         frontRoute: mainSearchParams.route.front.from
       })
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     if (debouncedSearchInput) {
@@ -235,7 +235,7 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
             !inputValue[inputDirection]
         )
       ) {
-        getCitiesData(inputValue[inputDirection].toLowerCase(), inputDirection);
+        getCitiesData(inputValue[inputDirection].toLowerCase(), inputDirection)
       } else {
         inputValue[inputDirection]
           ? setCurrentCitiesData({
@@ -244,11 +244,11 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
                   item.keyWord === inputValue[inputDirection].toLowerCase()
               )
             })
-          : setCurrentCitiesData([]);
+          : setCurrentCitiesData([])
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchInput]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchInput])
 
   return (
     <form className="calendar-form" onSubmit={search}>
@@ -256,7 +256,7 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
         <button
           onClick={() => dispatch(setOneWay(false))}
           className={`calendar-form__btn ${
-            !mainSearchParams.one_way ? 'calendar-form__btn--active' : ''
+            !mainSearchParams.one_way ? "calendar-form__btn--active" : ""
           }`}
           type="button"
         >
@@ -265,7 +265,7 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
         <button
           onClick={() => dispatch(setOneWay(true))}
           className={`calendar-form__btn ${
-            mainSearchParams.one_way ? 'calendar-form__btn--active' : ''
+            mainSearchParams.one_way ? "calendar-form__btn--active" : ""
           }`}
           type="button"
         >
@@ -277,7 +277,7 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
           <input
             onChange={getValue}
             // value={sessionStorage.getItem('cityFrontFrom')}
-            value={mainSearchParams.route.front.from || ''}
+            value={mainSearchParams.route.front.from || ""}
             className="calendar-form__input"
             type="text"
             id="main-departure"
@@ -308,7 +308,7 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
         <div className="calendar-form__group">
           <input
             onChange={getValue}
-            value={mainSearchParams.route.front.to || ''}
+            value={mainSearchParams.route.front.to || ""}
             className="calendar-form__input calendar-form__input--arrival"
             type="text"
             id="main-arrival"
@@ -337,7 +337,7 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
         <input className="calendar-form__submit" type="submit" value="Найти" />
       </div>
     </form>
-  );
+  )
 }
 
-export default PriceCalendarSearch;
+export default PriceCalendarSearch

@@ -121,8 +121,8 @@
 
   &--mask {
     color: var(--color-white);
-    background: linear-gradient(rgba(35, 94, 245, .8), rgba(35, 94, 245, .8));
-    background-image:  url("./../../images/mask-mobile.jpg");
+    background: linear-gradient(rgba(35, 94, 245, 0.8), rgba(35, 94, 245, 0.8));
+    background-image: url("./../../images/mask-mobile.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

@@ -5,6 +5,6 @@ function DropDownCalendarWeekDay({ day }) {
       <span className="visually-hidden">Понедельник</span>
     </div>
   )
-};
+}
 
-export default DropDownCalendarWeekDay;
+export default DropDownCalendarWeekDay

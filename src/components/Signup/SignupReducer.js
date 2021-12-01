@@ -2,51 +2,51 @@ import {
   CREATE_USER_ERROR,
   CREATE_USER_SUBMITTED,
   CREATE_USER_SUCCESS
-} from './SignupTypes';
+} from "./SignupTypes"
 
 // define the initial state of the signup store
 const initialState = {
-  usernameError: '',
-  emailError: '',
-  passwordError: '',
+  usernameError: "",
+  emailError: "",
+  passwordError: "",
   isSubimtted: false
-};
+}
 
 // define how action will change the state of the store
 export const signupReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_USER_SUBMITTED:
       return {
-        usernameError: '',
-        emailError: '',
-        passwordError: '',
+        usernameError: "",
+        emailError: "",
+        passwordError: "",
         isSubimtted: true
-      };
+      }
     case CREATE_USER_ERROR:
       const errorState = {
-        usernameError: '',
-        emailError: '',
-        passwordError: '',
+        usernameError: "",
+        emailError: "",
+        passwordError: "",
         isSubimtted: false
-      };
-      if (action.errorData.hasOwnProperty('username')) {
-        errorState.usernameError = action.errorData['username'];
       }
-      if (action.errorData.hasOwnProperty('email')) {
-        errorState.emailError = action.errorData['email'];
+      if (action.errorData.hasOwnProperty("username")) {
+        errorState.usernameError = action.errorData["username"]
       }
-      if (action.errorData.hasOwnProperty('password')) {
-        errorState.passwordError = action.errorData['password'];
+      if (action.errorData.hasOwnProperty("email")) {
+        errorState.emailError = action.errorData["email"]
       }
-      return errorState;
+      if (action.errorData.hasOwnProperty("password")) {
+        errorState.passwordError = action.errorData["password"]
+      }
+      return errorState
     case CREATE_USER_SUCCESS:
       return {
-        usernameError: '',
-        emailError: '',
-        passwordError: '',
+        usernameError: "",
+        emailError: "",
+        passwordError: "",
         isSubimtted: false
-      };
+      }
     default:
-      return state;
+      return state
   }
 }

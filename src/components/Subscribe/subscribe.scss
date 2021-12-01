@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .subscribe {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -16,8 +15,12 @@
 .subscribe__container {
   @include container;
 
-  @media #{$media-lg} { max-width: 930px; }
-  @media #{$media-xl} { max-width: 920px; }
+  @media #{$media-lg} {
+    max-width: 930px;
+  }
+  @media #{$media-xl} {
+    max-width: 920px;
+  }
 }
 
 .subscribe__title {
@@ -67,7 +70,9 @@
     margin-top: 52px;
     margin-bottom: 9px;
   }
-  @media #{$media-xl} { max-width: 730px; }
+  @media #{$media-xl} {
+    max-width: 730px;
+  }
 }
 
 .subscribe__form-group {
@@ -131,5 +136,7 @@
     width: auto;
     border-radius: 0 4px 4px 0;
   }
-  @media #{$media-xl} { padding: 20px 34px 19px; }
+  @media #{$media-xl} {
+    padding: 20px 34px 19px;
+  }
 }

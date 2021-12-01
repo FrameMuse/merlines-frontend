@@ -1,7 +1,6 @@
 @import "vars";
 @import "mixin";
 
-
 .subnav {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -31,7 +30,7 @@
   background-color: var(--color-white);
   border-right: 1px solid var(--color-white);
   box-sizing: border-box;
-  transition: .2s;
+  transition: 0.2s;
   cursor: pointer;
 
   &:last-child {

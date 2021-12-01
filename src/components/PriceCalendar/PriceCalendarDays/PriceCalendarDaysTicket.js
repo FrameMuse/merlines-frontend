@@ -1,5 +1,5 @@
-import Svg from '../../common/Svg';
-import {separateThousand} from "../../../utils";
+import Svg from "../../common/Svg"
+import { separateThousand } from "../../../utils"
 
 function PriceCalendarDaysTicket() {
   return (
@@ -41,14 +41,20 @@ function PriceCalendarDaysTicket() {
           </div>
         </div>
         <div className="ticket__footer">
-          <div className="ticket__price">`${separateThousand('130000')}  ₽`</div>
+          <div className="ticket__price">`${separateThousand("130000")} ₽`</div>
           <button className="btn btn--info ticket__btn-info">
-            Найти <Svg svgClass="btn__arrow-icon" svgName="arrow-open" svgWidth="8" svgHeight="8" />
+            Найти{" "}
+            <Svg
+              svgClass="btn__arrow-icon"
+              svgName="arrow-open"
+              svgWidth="8"
+              svgHeight="8"
+            />
           </button>
         </div>
       </div>
     </div>
   )
-};
+}
 
-export default PriceCalendarDaysTicket;
+export default PriceCalendarDaysTicket

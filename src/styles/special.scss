@@ -1,7 +1,6 @@
 @import "vars";
 @import "mixin";
 
-
 .special {
   padding-top: 30px;
   padding-bottom: 15px;
@@ -10,10 +9,14 @@
     padding-top: 52px;
     padding-bottom: 50px;
   }
-  @media #{$media-xl} { padding-bottom: 70px; }
+  @media #{$media-xl} {
+    padding-bottom: 70px;
+  }
 }
 
-.special__container { @include container; }
+.special__container {
+  @include container;
+}
 
 .special__inner {
   @media #{$media-md} {
@@ -25,8 +28,12 @@
     flex-wrap: wrap;
     max-width: 690px;
   }
-  @media #{$media-lg} { max-width: 930px; }
-  @media #{$media-xl} { max-width: 920px; }
+  @media #{$media-lg} {
+    max-width: 930px;
+  }
+  @media #{$media-xl} {
+    max-width: 920px;
+  }
 }
 
 .special__item-box {
@@ -36,7 +43,7 @@
   background-color: var(--color-blue);
   border-radius: 4px;
   z-index: -1;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover,
   &:focus {
@@ -47,7 +54,7 @@
 }
 
 .special__item-img {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .special__title {
@@ -127,7 +134,7 @@
   box-shadow: $shadow-special;
   border-radius: 4px;
   box-sizing: border-box;
-  transition: .2s;
+  transition: 0.2s;
   cursor: pointer;
   position: relative;
 
@@ -226,7 +233,7 @@
 .special__item-city {
   font-size: 12px;
   margin-right: 8px;
-  transition: .2s;
+  transition: 0.2s;
 
   &:last-child {
     margin-right: 0;
@@ -244,14 +251,14 @@
 .special__icon-arrow {
   transform: rotate(180deg);
   margin-right: 5px;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .special__item-title {
   font-family: $title-font;
   font-size: 14px;
   margin-bottom: 5px;
-  transition: .2s;
+  transition: 0.2s;
 
   @media #{$media-xl} {
     margin-bottom: 3px;
@@ -262,7 +269,7 @@
 .special__item-text {
   color: var(--color-blue);
   font-weight: 500;
-  transition: .2s;
+  transition: 0.2s;
 
   @media #{$media-xl} {
     font-size: 16px;
@@ -281,7 +288,7 @@
   margin-right: 11px;
   color: var(--color-grey);
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
 
   &:last-child {
     margin-right: 0;
@@ -294,6 +301,6 @@
 
   &--active {
     color: var(--color-base);
-    box-shadow: 0 0 10px rgba(255, 255, 255, .25);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
   }
 }

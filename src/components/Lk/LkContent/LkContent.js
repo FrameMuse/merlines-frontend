@@ -1,13 +1,13 @@
-import { useLocation } from 'react-router-dom';
-import routes from '../../../routes';
-import LkFavourites from '../LkFavourites/LkFavourites';
-import LkHistory from '../LkHistory/LkHistory';
-import LkSubscription from '../LkSubscription/LkSubscription';
-import LkFeedback from '../LkFeedback/LkFeedback';
-import LkProfileEdit from '../LkProfileEdit/LkProfileEdit';
+import { useLocation } from "react-router-dom"
+import routes from "../../../routes"
+import LkFavourites from "../LkFavourites/LkFavourites"
+import LkHistory from "../LkHistory/LkHistory"
+import LkSubscription from "../LkSubscription/LkSubscription"
+import LkFeedback from "../LkFeedback/LkFeedback"
+import LkProfileEdit from "../LkProfileEdit/LkProfileEdit"
 
 function LkContent() {
-  const path = useLocation().pathname;
+  const path = useLocation().pathname
 
   return (
     <div className="cabinet__col cabinet__col--content">
@@ -18,6 +18,6 @@ function LkContent() {
       {path === routes.lk.edit && <LkProfileEdit />}
     </div>
   )
-};
+}
 
-export default LkContent;
+export default LkContent

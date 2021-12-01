@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .answers {
   padding-bottom: 50px;
 
@@ -48,7 +47,7 @@
 .answers__text-link {
   color: inherit;
   text-decoration: underline;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover,
   &:focus {
@@ -116,7 +115,7 @@
   background-color: var(--color-btn);
   border: 1px solid transparent;
   border-radius: 0 0 4px 4px;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover,
   &:focus {

@@ -1,9 +1,8 @@
-import React from "react";
-import ArticleCommentsHeader from './ArticleCommentsHeader';
-import ArticleCommentsList from './ArticleCommentsList';
-import ArticleCommentsForm from './ArticleCommentsForm';
-import './comments.scss'
-
+import React from "react"
+import ArticleCommentsHeader from "./ArticleCommentsHeader"
+import ArticleCommentsList from "./ArticleCommentsList"
+import ArticleCommentsForm from "./ArticleCommentsForm"
+import "./comments.scss"
 
 function ArticleComments({ comments }) {
   return (
@@ -13,6 +12,6 @@ function ArticleComments({ comments }) {
       <ArticleCommentsForm />
     </section>
   )
-};
+}
 
-export default ArticleComments;
+export default ArticleComments

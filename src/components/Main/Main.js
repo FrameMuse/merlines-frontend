@@ -1,7 +1,7 @@
-import MainHeader from './MainHeader/MainHeader';
-import MainCollection from './MainCollection/MainCollection';
-import MainPromo from './MainPromo/MainPromo';
-import MainSpecial from './MainSpecial/MainSpecial';
+import MainHeader from "./MainHeader/MainHeader"
+import MainCollection from "./MainCollection/MainCollection"
+import MainPromo from "./MainPromo/MainPromo"
+import MainSpecial from "./MainSpecial/MainSpecial"
 
 function Main() {
   return (
@@ -11,7 +11,7 @@ function Main() {
       <MainPromo />
       <MainSpecial />
     </>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

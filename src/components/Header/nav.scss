@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .nav {
   position: relative;
   z-index: 8;
@@ -109,11 +108,15 @@
     left: 0;
     display: block;
     content: "";
-    transition: .2s;
+    transition: 0.2s;
   }
 
-  &::before { transform: translateY(-6px); }
-  &::after { transform: translateY(6px); }
+  &::before {
+    transform: translateY(-6px);
+  }
+  &::after {
+    transform: translateY(6px);
+  }
 }
 
 .nav__list {
@@ -171,7 +174,7 @@
   display: block;
   color: var(--color-base);
   margin-bottom: 15px;
-  transition: .2s;
+  transition: 0.2s;
   position: relative;
 
   &:last-child {
@@ -267,13 +270,21 @@
       position: static;
       transform: none;
 
-      .nav__user-on { display: none; }
-      .nav__user-off { display: block; }
+      .nav__user-on {
+        display: none;
+      }
+      .nav__user-off {
+        display: block;
+      }
     }
 
     &--on {
-      .nav__user-off { display: none; }
-      .nav__user-on { display: block; }
+      .nav__user-off {
+        display: none;
+      }
+      .nav__user-on {
+        display: block;
+      }
     }
   }
 }

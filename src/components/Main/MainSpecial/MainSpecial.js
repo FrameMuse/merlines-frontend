@@ -1,7 +1,7 @@
-import MainSpecialTitle from './MainSpecialTitle';
-import MainSpecialSubtitle from './MainSpecialSubtitle';
-import MainSpecialSwitcher from './MainSpecialSwitcher';
-import MainSpecialList from './MainSpecialList';
+import MainSpecialTitle from "./MainSpecialTitle"
+import MainSpecialSubtitle from "./MainSpecialSubtitle"
+import MainSpecialSwitcher from "./MainSpecialSwitcher"
+import MainSpecialList from "./MainSpecialList"
 
 function MainSpecial() {
   return (
@@ -18,6 +18,6 @@ function MainSpecial() {
       </div>
     </section>
   )
-};
+}
 
-export default MainSpecial;
+export default MainSpecial

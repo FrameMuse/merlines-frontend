@@ -1,3 +1,3 @@
-import SearchResultTicketFlightBaggage from  './SearchResultTicketFlightBaggage'
+import SearchResultTicketFlightBaggage from "./SearchResultTicketFlightBaggage"
 
-export  default SearchResultTicketFlightBaggage
+export default SearchResultTicketFlightBaggage

@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .form {
   @include container;
 
@@ -79,32 +78,41 @@
   color: var(--color-light-blue);
   font-size: 14px;
   text-align: left;
-  transition: .2s;
+  transition: 0.2s;
   flex-basis: 25%;
 
   &:hover,
-  &:focus { color: var(--color-white); }
+  &:focus {
+    color: var(--color-white);
+  }
 
   &--active {
     color: var(--color-white);
     font-weight: 700;
   }
 
-  @media #{$media-md} { flex-basis: 22%; }
-  @media #{$media-lg} { flex-basis: 16%; }
-  @media #{$media-xl} { flex-basis: 13.5%; }
+  @media #{$media-md} {
+    flex-basis: 22%;
+  }
+  @media #{$media-lg} {
+    flex-basis: 16%;
+  }
+  @media #{$media-xl} {
+    flex-basis: 13.5%;
+  }
 }
 
 .form__inner {
   padding-top: 1px;
   border-radius: 4px;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
 
   @media #{$media-md} {
     padding-top: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-areas: "departure departure arrival arrival"
+    grid-template-areas:
+      "departure departure arrival arrival"
       "date-dep date-arr passengers passengers"
       "submit submit submit submit";
   }
@@ -112,55 +120,81 @@
     grid-template-columns: 25fr 25fr 21fr 21fr 33fr 21fr;
     grid-template-areas: "departure arrival date-dep date-arr passengers submit";
   }
-  @media #{$media-xl} { grid-template-columns: 25fr 25fr 21fr 21fr 29fr 21fr; }
+  @media #{$media-xl} {
+    grid-template-columns: 25fr 25fr 21fr 21fr 29fr 21fr;
+  }
 }
 
 .form__group {
   position: relative;
   border-top: 1px solid var(--color-blue);
 
-  &:first-child { border-top: none; }
+  &:first-child {
+    border-top: none;
+  }
 
   &--active {
-    .block-hidden { display: block; }
+    .block-hidden {
+      display: block;
+    }
   }
 
   &--departure {
-    .form__input { border-radius: 4px 4px 0 0; }
+    .form__input {
+      border-radius: 4px 4px 0 0;
+    }
   }
 
   @media #{$media-md} {
     &--departure {
-      .form__input { border-radius: 4px 0 0 0; }
+      .form__input {
+        border-radius: 4px 0 0 0;
+      }
     }
 
     &--arrival {
-      .form__input { border-radius: 0 4px 0 0; }
+      .form__input {
+        border-radius: 0 4px 0 0;
+      }
     }
 
     &--departure,
     &--date-arr,
-    &--date-dep { border-right: 1px solid var(--color-blue); }
-    &--departure { grid-area: departure; }
+    &--date-dep {
+      border-right: 1px solid var(--color-blue);
+    }
+    &--departure {
+      grid-area: departure;
+    }
 
     &--arrival {
       grid-area: arrival;
       border-top: none;
     }
-    &--date-arr { grid-area: date-arr; }
-    &--date-dep { grid-area: date-dep; }
-    &--passengers { grid-area: passengers; }
+    &--date-arr {
+      grid-area: date-arr;
+    }
+    &--date-dep {
+      grid-area: date-dep;
+    }
+    &--passengers {
+      grid-area: passengers;
+    }
   }
   @media #{$media-lg} {
     border-top: none;
 
     &--arrival {
       border-right: 1px solid var(--color-blue);
-      .form__input { border-radius: 0; }
+      .form__input {
+        border-radius: 0;
+      }
     }
 
     &--departure {
-      .form__input { border-radius: 4px 0 0 4px; }
+      .form__input {
+        border-radius: 4px 0 0 4px;
+      }
     }
   }
 }
@@ -177,7 +211,9 @@
   box-sizing: border-box;
   outline: none;
 
-  &:focus { box-shadow: none; }
+  &:focus {
+    box-shadow: none;
+  }
 
   @include floatingLabel(form__label, 10px, 7px, 17px);
 
@@ -269,7 +305,7 @@
   text-indent: 100%;
   overflow: hidden;
   white-space: nowrap;
-  background-image: url("./../../img/icons/switch.svg") ;
+  background-image: url("./../../img/icons/switch.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   border-radius: 50%;
@@ -370,9 +406,15 @@
   text-align: center;
   margin-top: 5px;
 
-  @media #{$media-md} { margin-top: 2px; }
-  @media #{$media-lg} { margin-top: 1px; }
-  @media #{$media-xl} { display: none; }
+  @media #{$media-md} {
+    margin-top: 2px;
+  }
+  @media #{$media-lg} {
+    margin-top: 1px;
+  }
+  @media #{$media-xl} {
+    display: none;
+  }
 }
 
 .form-close__btn {
@@ -381,5 +423,7 @@
   padding: 10px;
   color: var(--color-white);
 
-  @media #{$media-md} { padding-bottom: 12px; }
+  @media #{$media-md} {
+    padding-bottom: 12px;
+  }
 }

@@ -1,31 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit"
 
 export const searchResultBusTicketsSlice = createSlice({
-  name: 'searchResultBusTicketsSlice',
+  name: "searchResultBusTicketsSlice",
   initialState: {
-    searchData: '',
+    searchData: "",
     isOpenRedirect: false,
-    ticketDilerName: ''
+    ticketDilerName: ""
   },
   reducers: {
     setSearchData: (state, action) => {
       console.log(action.payload)
-      state.searchData = action.payload;
+      state.searchData = action.payload
     },
     setIsOpenRedirect: (state, action) => {
-      state.isOpenRedirect = action.payload;
+      state.isOpenRedirect = action.payload
     },
     setTicketDilerName: (state, action) => {
-      state.ticketDilerName = action.payload;
-    },
+      state.ticketDilerName = action.payload
+    }
   }
-});
+})
 
-export const {
-  setSearchData,
-  setIsOpenRedirect,
-  setTicketDilerName
-} = searchResultBusTicketsSlice.actions;
+export const { setSearchData, setIsOpenRedirect, setTicketDilerName } =
+  searchResultBusTicketsSlice.actions
 
-export const selectSearchBusTicketResult = state => state.searchResultBusTicketsSlice;
-export default searchResultBusTicketsSlice.reducer;
+export const selectSearchBusTicketResult = (state) =>
+  state.searchResultBusTicketsSlice
+export default searchResultBusTicketsSlice.reducer

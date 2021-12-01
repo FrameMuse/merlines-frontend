@@ -1,31 +1,31 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Svg from '../common/Svg';
+import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import Svg from "../common/Svg"
 import {
   specialData,
   aboutText,
   collectionData,
   specialTickets,
   popularDirections
-} from './landingMock';
-import MainHeader from '../Main/MainHeader/MainHeader';
-import PriceCalendar from '../PriceCalendar/PriceCalendar';
-import MainSpecialCard from '../Main/MainSpecial/MainSpecialCard';
-import LandingCollectionItem from './LandingCollectionItem';
-import LandingSpecialTicket from './LandingSpecialTicket';
-import LandingPopularDirectionItem from './LandingPopularDirectionItem';
-import LandingTransportSwitcher from './LandingTransportSwitcher';
-import LandingPriceDynamic from './LandingPriceDynamic/LandingPriceDynamic';
-import LandingAnswerItem from './LandingAnswerItem';
-import { selectMainSearchParams } from '../../reducers/mainSearchSlice';
-import './airlines-ticket.scss'
-import './answers.scss'
-import './landing.scss'
-import './price-dynamics.scss'
+} from "./landingMock"
+import MainHeader from "../Main/MainHeader/MainHeader"
+import PriceCalendar from "../PriceCalendar/PriceCalendar"
+import MainSpecialCard from "../Main/MainSpecial/MainSpecialCard"
+import LandingCollectionItem from "./LandingCollectionItem"
+import LandingSpecialTicket from "./LandingSpecialTicket"
+import LandingPopularDirectionItem from "./LandingPopularDirectionItem"
+import LandingTransportSwitcher from "./LandingTransportSwitcher"
+import LandingPriceDynamic from "./LandingPriceDynamic/LandingPriceDynamic"
+import LandingAnswerItem from "./LandingAnswerItem"
+import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
+import "./airlines-ticket.scss"
+import "./answers.scss"
+import "./landing.scss"
+import "./price-dynamics.scss"
 
 function LandingPage() {
-  const mainSearchParams = useSelector(selectMainSearchParams);
-  const currentRoute = `${mainSearchParams.route.front.from} - ${mainSearchParams.route.front.to}`;
+  const mainSearchParams = useSelector(selectMainSearchParams)
+  const currentRoute = `${mainSearchParams.route.front.from} - ${mainSearchParams.route.front.to}`
 
   return (
     <section className="landing">
@@ -41,14 +41,15 @@ function LandingPage() {
           </div>
           <div className="special__wrap">
             <ul className="special__list">
-              {specialData.map((special, index) =>
+              {specialData.map((special, index) => (
                 <MainSpecialCard
                   key={index}
                   cardFrom={special.cardFrom}
                   cardTo={special.cardTo}
                   cardToCity={special.cardToCity}
-                  cardPrice={special.cardPrice} />
-              )}
+                  cardPrice={special.cardPrice}
+                />
+              ))}
             </ul>
           </div>
         </section>
@@ -60,7 +61,12 @@ function LandingPage() {
             <div className="button-text landing__button-text">
               <button className="button-text__btn" type="button">
                 загрузить еще
-              <Svg svgClass="button-text__arrow" svgName="arrow-open" svgWidth="8" svgHeight="8" />
+                <Svg
+                  svgClass="button-text__arrow"
+                  svgName="arrow-open"
+                  svgWidth="8"
+                  svgHeight="8"
+                />
               </button>
             </div>
           </div>
@@ -74,29 +80,33 @@ function LandingPage() {
               Интересно, а порой и полезно, почитать перед путешествием!
             </p>
             <ul className="section__list">
-              {collectionData.map((item, index) =>
+              {collectionData.map((item, index) => (
                 <LandingCollectionItem
                   key={index}
                   imgSrc={item.imgSrc}
                   title={item.title}
                   tag={item.tag}
-                  ISODate={item.ISODate} />
-              )}
+                  ISODate={item.ISODate}
+                />
+              ))}
             </ul>
           </div>
         </section>
         <section className="landing__special">
           <div className="landing__container">
-            <h2 className="landing__special-title">Спецпредложения авиакомпаний</h2>
+            <h2 className="landing__special-title">
+              Спецпредложения авиакомпаний
+            </h2>
             <p className="landing__text-info">{`Направление: ${currentRoute}`}</p>
             <div className="landing__special-inner">
-              {specialTickets.map((ticket, index) =>
+              {specialTickets.map((ticket, index) => (
                 <LandingSpecialTicket
                   key={index}
                   imgSrc={ticket.imgSrc}
                   companyName={ticket.companyName}
-                  price={ticket.price} />
-              )}
+                  price={ticket.price}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -104,13 +114,14 @@ function LandingPage() {
           <div className="landing__container">
             <h2 className="landing__popular-title">Популярные направления</h2>
             <div className="landing__popular-inner">
-              {popularDirections.map((direction, index) =>
+              {popularDirections.map((direction, index) => (
                 <LandingPopularDirectionItem
                   key={index}
                   from={mainSearchParams.route.front.from}
                   to={mainSearchParams.route.front.to}
-                  price={direction.price} />
-              )}
+                  price={direction.price}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -122,9 +133,18 @@ function LandingPage() {
             </div>
             <p className="landing__text-info">{`Направление: ${currentRoute}`}</p>
             <div className="price-dynamics__nav">
-              <Link className="price-dynamics__nav-link price-dynamics__nav-link--active" to="#">Самый дешёвый</Link>
-              <Link className="price-dynamics__nav-link" to="#">Самый быстрый</Link>
-              <Link className="price-dynamics__nav-link" to="#">Оптимальный</Link>
+              <Link
+                className="price-dynamics__nav-link price-dynamics__nav-link--active"
+                to="#"
+              >
+                Самый дешёвый
+              </Link>
+              <Link className="price-dynamics__nav-link" to="#">
+                Самый быстрый
+              </Link>
+              <Link className="price-dynamics__nav-link" to="#">
+                Оптимальный
+              </Link>
             </div>
           </div>
           <LandingPriceDynamic />
@@ -133,8 +153,11 @@ function LandingPage() {
           <div className="answers__container">
             <h2 className="answers__title">Часто задаваемые вопросы</h2>
             <p className="answers__text-info">
-              Остались ещё вопросы? Вы можете их задать <Link className="answers__text-link" to="#">по ссылке</Link>
-            , а мы ответим как можно скорее!
+              Остались ещё вопросы? Вы можете их задать{" "}
+              <Link className="answers__text-link" to="#">
+                по ссылке
+              </Link>
+              , а мы ответим как можно скорее!
             </p>
             <div className="answers__inner">
               <LandingAnswerItem currentRoute={currentRoute} />
@@ -147,6 +170,6 @@ function LandingPage() {
       </div>
     </section>
   )
-};
+}
 
-export default LandingPage;
+export default LandingPage

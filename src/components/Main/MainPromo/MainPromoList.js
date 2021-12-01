@@ -1,89 +1,89 @@
-import { useKeenSlider } from 'keen-slider/react';
-import 'keen-slider/keen-slider.min.css';
-import { useReducer, useState } from 'react';
-import MainPromoCard from './MainPromoCard';
+import { useKeenSlider } from "keen-slider/react"
+import "keen-slider/keen-slider.min.css"
+import { useReducer, useState } from "react"
+import MainPromoCard from "./MainPromoCard"
 
 function MainPromoList() {
   const initialIsActiveCard = {
     save: true,
     seo: false,
     business: false
-  };
+  }
 
   function reducer(state, action) {
     switch (action.type) {
-      case 'save':
+      case "save":
         return {
           save: true,
           seo: false,
           business: false
-        };
-      case 'seo':
+        }
+      case "seo":
         return {
           save: false,
           seo: true,
           business: false
-        };
-      case 'business':
+        }
+      case "business":
         return {
           save: false,
           seo: false,
           business: true
-        };
+        }
       default:
-        throw new Error();
+        throw new Error()
     }
   }
 
-  const [isActiveCard, dispatch] = useReducer(reducer, initialIsActiveCard);
+  const [isActiveCard, dispatch] = useReducer(reducer, initialIsActiveCard)
 
   const mockDataPromoCards = [
     {
-      title: 'Лучшие цены',
+      title: "Лучшие цены",
       isActive: isActiveCard.save,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
-      img: 'images/advanteges/save-money-bw.png',
-      modifier: 'save',
-      ksClass: 'keen-slider__slide number-slide1'
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      img: "images/advanteges/save-money-bw.png",
+      modifier: "save",
+      ksClass: "keen-slider__slide number-slide1"
     },
     {
-      title: 'Поиск по всему миру',
+      title: "Поиск по всему миру",
       isActive: isActiveCard.seo,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
-      img: 'images/advanteges/seo-bw.png',
-      modifier: 'seo',
-      ksClass: 'keen-slider__slide number-slide2'
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      img: "images/advanteges/seo-bw.png",
+      modifier: "seo",
+      ksClass: "keen-slider__slide number-slide2"
     },
     {
-      title: 'Проверенные поставщики',
+      title: "Проверенные поставщики",
       isActive: isActiveCard.business,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
-      img: 'images/advanteges/business-meeting-bw.png',
-      modifier: 'business',
-      ksClass: 'keen-slider__slide number-slide3'
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      img: "images/advanteges/business-meeting-bw.png",
+      modifier: "business",
+      ksClass: "keen-slider__slide number-slide3"
     }
-  ];
+  ]
 
   // eslint-disable-next-line no-unused-vars
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   // eslint-disable-next-line no-unused-vars
   const [sliderRef, slider] = useKeenSlider({
     slidesPerView: 3,
     breakpoints: {
-      '(min-width: 0px) and (max-width: 767px)': {
+      "(min-width: 0px) and (max-width: 767px)": {
         slidesPerView: 1
       }
     },
     initial: 0,
     slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide);
+      setCurrentSlide(s.details().relativeSlide)
     }
-  });
+  })
 
   const handleClick = (evt) => {
-    console.log(evt.target.classList);
-  };
+    console.log(evt.target.classList)
+  }
 
   return (
     <div className="advantages__slider">
@@ -103,29 +103,29 @@ function MainPromoList() {
       </ul>
       <div className="advantages__slider-control">
         <button
-          onClick={() => dispatch({ type: 'save' })}
+          onClick={() => dispatch({ type: "save" })}
           className={`advantages__slider-btn ${
-            isActiveCard.save ? 'advantages__slider-btn--active' : ''
+            isActiveCard.save ? "advantages__slider-btn--active" : ""
           }`}
           type="button"
         ></button>
         <button
-          onClick={() => dispatch({ type: 'seo' })}
+          onClick={() => dispatch({ type: "seo" })}
           className={`advantages__slider-btn ${
-            isActiveCard.seo ? 'advantages__slider-btn--active' : ''
+            isActiveCard.seo ? "advantages__slider-btn--active" : ""
           }`}
           type="button"
         ></button>
         <button
-          onClick={() => dispatch({ type: 'business' })}
+          onClick={() => dispatch({ type: "business" })}
           className={`advantages__slider-btn ${
-            isActiveCard.business ? 'advantages__slider-btn--active' : ''
+            isActiveCard.business ? "advantages__slider-btn--active" : ""
           }`}
           type="button"
         ></button>
       </div>
     </div>
-  );
+  )
 }
 
-export default MainPromoList;
+export default MainPromoList

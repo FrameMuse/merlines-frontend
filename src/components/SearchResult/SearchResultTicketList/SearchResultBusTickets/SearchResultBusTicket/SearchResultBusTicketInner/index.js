@@ -1,3 +1,3 @@
-import SearchResultBusTicketInner from "./SearchResultBusTicketInner";
+import SearchResultBusTicketInner from "./SearchResultBusTicketInner"
 
 export default SearchResultBusTicketInner

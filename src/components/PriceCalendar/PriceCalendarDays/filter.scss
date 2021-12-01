@@ -31,7 +31,7 @@
 
   @media #{$media-md} {
     padding-left: 18px;
-    box-shadow: -15px 0 15px rgba(24, 50, 115, .1);
+    box-shadow: -15px 0 15px rgba(24, 50, 115, 0.1);
   }
   @media #{$media-lg} {
     padding-left: 19px;

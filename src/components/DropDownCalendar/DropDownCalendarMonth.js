@@ -1,7 +1,7 @@
-import Svg from '../common/Svg';
-import { firstToUpperCase } from '../../utils';
-import DropDownCalendarWeek from './DropDownCalendarWeek';
-import DropDownCalendarMonthDays from './DropDownCalendarMonthDays';
+import Svg from "../common/Svg"
+import { firstToUpperCase } from "../../utils"
+import DropDownCalendarWeek from "./DropDownCalendarWeek"
+import DropDownCalendarMonthDays from "./DropDownCalendarMonthDays"
 
 function DropDownCalendarMonth({
   monthName,
@@ -48,7 +48,7 @@ function DropDownCalendarMonth({
         />
       </div>
     </div>
-  );
+  )
 }
 
-export default DropDownCalendarMonth;
+export default DropDownCalendarMonth

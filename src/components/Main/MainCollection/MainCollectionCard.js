@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react"
+import { Link } from "react-router-dom"
 
-const  MainCollectionCard = ({
+const MainCollectionCard = ({
   cardMain,
   cardImg,
   cardTag,
@@ -13,8 +13,8 @@ const  MainCollectionCard = ({
   return (
     <div
       className={`article-card article-card--index ${
-        cardMain ? 'article-card--indexLg' : ''
-      } ${ksClass ?? ''}`}
+        cardMain ? "article-card--indexLg" : ""
+      } ${ksClass ?? ""}`}
     >
       <img className="article-card__img" src={cardImg} alt={cardTitle} />
       <Link className="article-card__tag" to="#">
@@ -27,7 +27,7 @@ const  MainCollectionCard = ({
         {cardDate}
       </time>
     </div>
-  );
+  )
 }
 
-export default MainCollectionCard;
+export default MainCollectionCard

@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react"
 
-const  MainCollectionSubtitle = () =>  {
+const MainCollectionSubtitle = () => {
   return (
-    <p className="section__text">Если вы не знаете где провести выходные или отпуск, то вы по адресу!</p>
+    <p className="section__text">
+      Если вы не знаете где провести выходные или отпуск, то вы по адресу!
+    </p>
   )
-};
+}
 
-export default MainCollectionSubtitle;
+export default MainCollectionSubtitle

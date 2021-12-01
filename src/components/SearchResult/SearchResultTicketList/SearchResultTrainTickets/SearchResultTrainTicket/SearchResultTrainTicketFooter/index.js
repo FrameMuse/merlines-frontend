@@ -1,3 +1,3 @@
-import SearchResultTrainTicketFooter from "./SearchResultTrainTicketFooter";
+import SearchResultTrainTicketFooter from "./SearchResultTrainTicketFooter"
 
 export default SearchResultTrainTicketFooter

@@ -1,28 +1,38 @@
 // SCSS
-import './form.scss'
+import "./form.scss"
 // ...
-import { DateTime } from 'luxon'
-import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { useClickAway } from 'react-use'
-import api from '../../api/api'
-import { monthNamesDate } from '../../constants'
-import useDebounce from '../../hooks/useDebounce'
+import { DateTime } from "luxon"
+import { useEffect, useRef, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
+import { useClickAway } from "react-use"
+import api from "../../api/api"
+import { monthNamesDate } from "../../constants"
+import useDebounce from "../../hooks/useDebounce"
 import {
-  setCalendarToInitial, setDateIntervalFrom, setIsDateInterval, setIsOneClick, setIsOpenCalendar
-} from '../../reducers/dropDownCalendarSlice'
+  setCalendarToInitial,
+  setDateIntervalFrom,
+  setIsDateInterval,
+  setIsOneClick,
+  setIsOpenCalendar
+} from "../../reducers/dropDownCalendarSlice"
 import {
-  detectCityByGeoIp, setChangedInputFrom, setChangedInputTo, setDateFrom, setDateTo, setOneWay, setPassengersInfo,
+  detectCityByGeoIp,
+  setChangedInputFrom,
+  setChangedInputTo,
+  setDateFrom,
+  setDateTo,
+  setOneWay,
+  setPassengersInfo,
   setPassengersInfoMini,
   setRouteFrom,
   setRouteTo
-} from '../../reducers/mainSearchSlice'
-import { createQuery, firstToUpperCase, pluralize } from '../../utils'
-import OpenBooking from '../common/OpenBooking'
-import DropDown from '../DropDown/DropDown'
-import DropDownCalendar from '../DropDownCalendar/DropDownCalendar'
-import DropDownPassengers from '../DropDownPassengers/DropDownPassengers'
+} from "../../reducers/mainSearchSlice"
+import { createQuery, firstToUpperCase, pluralize } from "../../utils"
+import OpenBooking from "../common/OpenBooking"
+import DropDown from "../DropDown/DropDown"
+import DropDownCalendar from "../DropDownCalendar/DropDownCalendar"
+import DropDownPassengers from "../DropDownPassengers/DropDownPassengers"
 
 function SearchForm({ searchResult }) {
   const history = useHistory()
@@ -42,10 +52,9 @@ function SearchForm({ searchResult }) {
   const passengersInputRef = useRef(null)
   const passengersDropDownRef = useRef(null)
 
-
-  const accessData = useSelector(state => state.accessData)
-  const mainSearchParams = useSelector(state => state.mainSearchParams)
-  const dropDownCalendar = useSelector(state => state.dropDownCalendar)
+  const accessData = useSelector((state) => state.accessData)
+  const mainSearchParams = useSelector((state) => state.mainSearchParams)
+  const dropDownCalendar = useSelector((state) => state.dropDownCalendar)
 
   const [formError, setFormError] = useState(false)
 
@@ -53,24 +62,32 @@ function SearchForm({ searchResult }) {
   const citiesInputDebounced = useDebounce(citiesInput, 250)
 
   const [currentDirection, setCurrentDirection] = useState("from")
-  const [currentCitiesData, setCurrentCitiesData] = useState({ from: [], to: [] })
-  const [cachedCitiesData, setCachedCitiesData] = useState({ from: {}, to: {} })
+  const [currentCitiesData, setCurrentCitiesData] = useState({
+    from: [],
+    to: []
+  })
+  const [cachedCitiesData, setCachedCitiesData] = useState({
+    from: {},
+    to: {}
+  })
 
   const [passengersAmount, setPassengersAmount] = useState(1)
   const [isPassengersOpen, setIsPassengersOpen] = useState(false)
 
   useEffect(() => {
-    const dateFrom = sessionStorage.getItem('dateFrom')
-    const cityApiFrom = sessionStorage.getItem('cityApiFrom')
-    const cityFrontFrom = sessionStorage.getItem('cityFrontFrom')
-    const isCityGeoIpError = sessionStorage.getItem('isCityGeoIpError')
+    const dateFrom = sessionStorage.getItem("dateFrom")
+    const cityApiFrom = sessionStorage.getItem("cityApiFrom")
+    const cityFrontFrom = sessionStorage.getItem("cityFrontFrom")
+    const isCityGeoIpError = sessionStorage.getItem("isCityGeoIpError")
 
     if (dateFrom) {
       dispatch(setDateFrom(DateTime.fromISO(dateFrom).toISODate()))
     }
 
     if (cityApiFrom && cityFrontFrom) {
-      dispatch(setRouteFrom({ apiRoute: cityApiFrom, frontRoute: cityFrontFrom }))
+      dispatch(
+        setRouteFrom({ apiRoute: cityApiFrom, frontRoute: cityFrontFrom })
+      )
     }
 
     if (!cityApiFrom && !cityFrontFrom && !isCityGeoIpError) {
@@ -82,8 +99,8 @@ function SearchForm({ searchResult }) {
     const amount = mainSearchParams.passengers
     setPassengersAmount(
       amount.passengers_adults +
-      amount.passengers_children +
-      amount.passengers_infants
+        amount.passengers_children +
+        amount.passengers_infants
     )
   }, [mainSearchParams.passengers])
 
@@ -91,19 +108,19 @@ function SearchForm({ searchResult }) {
     dispatch(
       setPassengersInfo(
         `${passengersAmount} ${pluralize(passengersAmount, [
-          'пассажир',
-          'пассажира',
-          'пассажиров'
-        ])}, ${mainSearchParams.airClasses.economy ? 'эконом' : 'бизнес'}`
+          "пассажир",
+          "пассажира",
+          "пассажиров"
+        ])}, ${mainSearchParams.airClasses.economy ? "эконом" : "бизнес"}`
       )
     )
     dispatch(
       setPassengersInfoMini(
         `${passengersAmount} ${pluralize(passengersAmount, [
-          'пассажир',
-          'пассажира',
-          'пассажиров'
-        ])} / ${mainSearchParams.airClasses.economy ? 'эконом' : 'бизнес'}`
+          "пассажир",
+          "пассажира",
+          "пассажиров"
+        ])} / ${mainSearchParams.airClasses.economy ? "эконом" : "бизнес"}`
       )
     )
   }, [passengersAmount, mainSearchParams.airClasses, dispatch])
@@ -133,28 +150,27 @@ function SearchForm({ searchResult }) {
   }, [citiesInputDebounced])
 
   /**
-   * 
-   * @param {string} keyWord 
-   * @param {"from" | "to"} direction 
+   *
+   * @param {string} keyWord
+   * @param {"from" | "to"} direction
    */
   function getCitiesData(keyWord, direction) {
-    return api.getCities(keyWord, accessData.loginToken)
-      .then(({ data }) => {
-        setCurrentCitiesData({ ...currentCitiesData, [direction]: data })
-        setCachedCitiesData({
-          ...cachedCitiesData,
-          [direction]: {
-            ...cachedCitiesData[direction],
-            [keyWord]: data
-          }
-        })
+    return api.getCities(keyWord, accessData.loginToken).then(({ data }) => {
+      setCurrentCitiesData({ ...currentCitiesData, [direction]: data })
+      setCachedCitiesData({
+        ...cachedCitiesData,
+        [direction]: {
+          ...cachedCitiesData[direction],
+          [keyWord]: data
+        }
       })
+    })
   }
 
   /**
-   * 
-   * @param {*} event 
-   * @param {"from" | "to"} direction 
+   *
+   * @param {*} event
+   * @param {"from" | "to"} direction
    */
   function onCitiesChange(event, direction) {
     const value = event.currentTarget.value
@@ -162,10 +178,10 @@ function SearchForm({ searchResult }) {
     setCurrentDirection(direction)
     setCitiesInput({ ...citiesInput, [direction]: value })
 
-    if (direction === 'from') {
-      dispatch(setRouteFrom({ apiRoute: '', frontRoute: value }))
+    if (direction === "from") {
+      dispatch(setRouteFrom({ apiRoute: "", frontRoute: value }))
     } else {
-      dispatch(setRouteTo({ apiRoute: '', frontRoute: value }))
+      dispatch(setRouteTo({ apiRoute: "", frontRoute: value }))
     }
   }
 
@@ -187,7 +203,7 @@ function SearchForm({ searchResult }) {
   function chooseOneWay() {
     dispatch(setOneWay(true))
     dispatch(setDateTo())
-    dispatch(setChangedInputTo(''))
+    dispatch(setChangedInputTo(""))
     dispatch(setCalendarToInitial())
 
     setFormError(false)
@@ -207,7 +223,9 @@ function SearchForm({ searchResult }) {
 
     dispatch(
       setChangedInputFrom(
-        `${fromDate.day} ${monthNamesDate[fromDate.month]}, ${firstToUpperCase(fromDate.weekdayShort)}`
+        `${fromDate.day} ${monthNamesDate[fromDate.month]}, ${firstToUpperCase(
+          fromDate.weekdayShort
+        )}`
       )
     )
   }
@@ -233,7 +251,9 @@ function SearchForm({ searchResult }) {
       dispatch(setDateIntervalFrom(fromDate.toISO().slice(0, 10)))
       dispatch(
         setChangedInputFrom(
-          `${fromDate.day} ${monthNamesDate[fromDate.month]}, ${firstToUpperCase(fromDate.weekdayShort)}`
+          `${fromDate.day} ${
+            monthNamesDate[fromDate.month]
+          }, ${firstToUpperCase(fromDate.weekdayShort)}`
         )
       )
     }
@@ -252,7 +272,11 @@ function SearchForm({ searchResult }) {
   function onSearchSubmit(event) {
     event.preventDefault()
 
-    if (!mainSearchParams.route.api.from || !mainSearchParams.route.api.to || !mainSearchParams.date.front.from) {
+    if (
+      !mainSearchParams.route.api.from ||
+      !mainSearchParams.route.api.to ||
+      !mainSearchParams.date.front.from
+    ) {
       setFormError(true)
       return
     }
@@ -270,22 +294,23 @@ function SearchForm({ searchResult }) {
     })
 
     history.push({
-      pathname: '/search-result',
+      pathname: "/search-result",
       search: requestQuery
     })
   }
 
   // Close CalendarDropDown
-  useClickAway(calendarDropDownRef, event => {
+  useClickAway(calendarDropDownRef, (event) => {
     if (!dropDownCalendar.isOpenCalendar) return
 
-    if (event.path.includes(departureDateInputRef.current?.parentElement)) return
+    if (event.path.includes(departureDateInputRef.current?.parentElement))
+      return
     if (event.path.includes(returnDateInputRef.current?.parentElement)) return
 
     dispatch(setIsOpenCalendar(false))
   })
   // Close PassengersDropDown
-  useClickAway(passengersDropDownRef, event => {
+  useClickAway(passengersDropDownRef, (event) => {
     if (!isPassengersOpen) return
 
     if (event.path.includes(passengersInputRef.current)) return
@@ -298,15 +323,17 @@ function SearchForm({ searchResult }) {
       <div className="form__nav">
         <div
           onClick={chooseTwoWays}
-          className={`form__nav-btn ${!mainSearchParams.one_way ? 'form__nav-btn--active' : ''
-            }`}
+          className={`form__nav-btn ${
+            !mainSearchParams.one_way ? "form__nav-btn--active" : ""
+          }`}
         >
           Туда - обратно
         </div>
         <div
           onClick={chooseOneWay}
-          className={`form__nav-btn ${mainSearchParams.one_way ? 'form__nav-btn--active' : ''
-            }`}
+          className={`form__nav-btn ${
+            mainSearchParams.one_way ? "form__nav-btn--active" : ""
+          }`}
         >
           В одну сторону
         </div>
@@ -317,11 +344,11 @@ function SearchForm({ searchResult }) {
           Сложный маршрут
         </button>
       </div>
-      <div className={`form__inner ${formError ? 'form__inner--error' : ''}`}>
+      <div className={`form__inner ${formError ? "form__inner--error" : ""}`}>
         <div className="form__group form__group--departure">
           <input
-            onInput={event => onCitiesChange(event, "from")}
-            value={mainSearchParams.route.front.from || ''}
+            onInput={(event) => onCitiesChange(event, "from")}
+            value={mainSearchParams.route.front.from || ""}
             className="form__input"
             type="text"
             id="main-departure"
@@ -349,8 +376,8 @@ function SearchForm({ searchResult }) {
         </div>
         <div className="form__group form__group--arrival">
           <input
-            onInput={event => onCitiesChange(event, "to")}
-            value={mainSearchParams.route.front.to || ''}
+            onInput={(event) => onCitiesChange(event, "to")}
+            value={mainSearchParams.route.front.to || ""}
             className="form__input form__input--arrival"
             type="text"
             id="main-arrival"
@@ -433,12 +460,15 @@ function SearchForm({ searchResult }) {
             ref={passengersInputRef}
             onFocus={onPassengersFocus}
             onKeyDown={onPassengersTabPressed}
-          // onBlur={onPassengersBlur}
+            // onBlur={onPassengersBlur}
           />
           <label className="form__label" htmlFor="main-passenger">
             Пассажиры и класс
           </label>
-          <DropDownPassengers parentRef={passengersDropDownRef} isPassengersOpen={isPassengersOpen} />
+          <DropDownPassengers
+            parentRef={passengersDropDownRef}
+            isPassengersOpen={isPassengersOpen}
+          />
         </div>
         <input className="form__btn" type="submit" value="Найти" tabIndex="6" />
       </div>

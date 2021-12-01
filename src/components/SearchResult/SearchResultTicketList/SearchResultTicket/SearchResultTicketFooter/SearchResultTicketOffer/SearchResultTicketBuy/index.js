@@ -1,3 +1,3 @@
-import SearchResultTicketBuy from "./SearchResultTicketBuy";
+import SearchResultTicketBuy from "./SearchResultTicketBuy"
 
 export default SearchResultTicketBuy

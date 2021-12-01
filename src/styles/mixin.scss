@@ -113,25 +113,31 @@
     position: absolute;
     top: 50%;
     right: 0;
-    transition: .2s;
+    transition: 0.2s;
   }
 
-  &::before { transform: rotate(45deg); }
-  &::after { transform: rotate(-45deg); }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
 }
 @mixin button {
   font-family: $main-font;
   font-size: 14px;
   font-weight: 500;
   border: none;
-  transition: .2s;
+  transition: 0.2s;
   color: white;
   background-color: var(--color-btn);
   outline: none;
   cursor: pointer;
 
   &:hover,
-  &:focus { background-color: var(--color-blue); }
+  &:focus {
+    background-color: var(--color-blue);
+  }
 }
 @mixin buttonSubmit {
   @include button;
@@ -151,7 +157,7 @@
 @mixin formLabel {
   color: var(--color-grey);
   font-size: 16px;
-  transition: .2s;
+  transition: 0.2s;
   position: absolute;
   top: 20px;
   left: 20px;
@@ -161,7 +167,9 @@
   }
 }
 @mixin floatingLabel($className, $fontSize, $top, $left) {
-  &::placeholder { opacity: 0; }
+  &::placeholder {
+    opacity: 0;
+  }
 
   &:not(:placeholder-shown) + .#{$className},
   &:focus + .#{$className} {
@@ -218,7 +226,7 @@
     width: 7px;
     height: 7px;
     background-color: var(--color-blue);
-    transition: .2s;
+    transition: 0.2s;
     opacity: 0;
     left: 4px;
   }

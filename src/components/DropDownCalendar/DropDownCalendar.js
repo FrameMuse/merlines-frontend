@@ -1,9 +1,9 @@
 // SCSS
-import './drop-down-calendar.scss'
+import "./drop-down-calendar.scss"
 // ...
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { DateTime } from 'luxon'
+import { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { DateTime } from "luxon"
 
 import {
   setIsOpenCalendar,
@@ -11,30 +11,32 @@ import {
   setTwoMonthsMinus,
   setTwoMonthsIntervals,
   setTwoMonthsCurrent,
-  setTwoMonthsNext,
-} from '../../reducers/dropDownCalendarSlice'
+  setTwoMonthsNext
+} from "../../reducers/dropDownCalendarSlice"
 
-import DropDownCalendarSlider from './DropDownCalendarSlider'
-import DropDownCalendarMonth from './DropDownCalendarMonth'
-import DropDownCalendarSelectMonth from './DropDownCalendarSelectMonth'
-import { classWithModifiers } from '../../utils'
+import DropDownCalendarSlider from "./DropDownCalendarSlider"
+import DropDownCalendarMonth from "./DropDownCalendarMonth"
+import DropDownCalendarSelectMonth from "./DropDownCalendarSelectMonth"
+import { classWithModifiers } from "../../utils"
 
 /**
- * 
+ *
  * @param {{
  *  parentRef: React.MutableRefObject<HTMLElement>
  *  dateInputRef: React.MutableRefObject<HTMLInputElement>
  *  hasOffset?: boolean
  *  hidden?: boolean
- * }} props 
- * @returns 
+ * }} props
+ * @returns
  */
 function DropDownCalendar(props) {
   const dispatch = useDispatch()
   const [isCurrent, setIsCurrent] = useState(true)
 
   // const mainSearchParams = useSelector(state => state.mainSearchParams)
-  const { twoMonthsDates, twoMonthsIntervals } = useSelector(state => state.dropDownCalendar)
+  const { twoMonthsDates, twoMonthsIntervals } = useSelector(
+    (state) => state.dropDownCalendar
+  )
 
   useEffect(() => {
     dispatch(setTwoMonthsIntervals())
@@ -115,7 +117,7 @@ function DropDownCalendar(props) {
         <DropDownCalendarMonth
           dateToInput={props.dateInputRef}
           monthName={
-            twoMonthsDates.current.reconfigure({ locale: 'ru' }).monthLong
+            twoMonthsDates.current.reconfigure({ locale: "ru" }).monthLong
           }
           year={twoMonthsDates.current.year}
           days={twoMonthsIntervals.current}
@@ -128,7 +130,7 @@ function DropDownCalendar(props) {
         <DropDownCalendarMonth
           dateToInput={props.dateInputRef}
           monthName={
-            twoMonthsDates.next.reconfigure({ locale: 'ru' }).monthLong
+            twoMonthsDates.next.reconfigure({ locale: "ru" }).monthLong
           }
           year={twoMonthsDates.next.year}
           days={twoMonthsIntervals.next}

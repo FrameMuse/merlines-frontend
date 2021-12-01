@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .calendar-form__header {
   margin-left: 15px;
   margin-bottom: 16px;
@@ -22,7 +21,7 @@
   font-size: 14px;
   text-align: left;
   margin-right: 38px;
-  transition: .2s;
+  transition: 0.2s;
 
   &:last-child {
     margin-right: 0;
@@ -64,11 +63,15 @@
   }
 
   &--active {
-    .block-hidden { display: block; }
+    .block-hidden {
+      display: block;
+    }
   }
 
   &--departure {
-    .calendar-form__input { border-radius: 4px 4px 0 0; }
+    .calendar-form__input {
+      border-radius: 4px 4px 0 0;
+    }
   }
 
   @media #{$media-md} {
@@ -80,7 +83,9 @@
     }
 
     &--departure {
-      .calendar-form__input { border-radius: 4px 0 0 4px; }
+      .calendar-form__input {
+        border-radius: 4px 0 0 4px;
+      }
     }
   }
 }
@@ -162,5 +167,7 @@
   padding: 15px 15px 16px;
   border-radius: 0 0 4px 4px;
 
-  @media #{$media-md} { border-radius: 0 4px 4px 0; }
+  @media #{$media-md} {
+    border-radius: 0 4px 4px 0;
+  }
 }

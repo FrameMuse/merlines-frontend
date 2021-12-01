@@ -1,7 +1,6 @@
 @import "../../../styles/vars";
 @import "../../../styles/mixin";
 
-
 .advantages {
   color: var(--color-white);
   padding-top: 31px;
@@ -13,7 +12,9 @@
     padding-top: 50px;
     padding-bottom: 45px;
   }
-  @media #{$media-lg} { padding-bottom: 56px; }
+  @media #{$media-lg} {
+    padding-bottom: 56px;
+  }
   @media #{$media-xl} {
     padding-top: 62px;
     padding-bottom: 64px;
@@ -75,17 +76,23 @@
     text-align: left;
     max-width: 215px;
   }
-  @media #{$media-md} { max-width: 265px; }
+  @media #{$media-md} {
+    max-width: 265px;
+  }
   @media #{$media-xl} {
     &:last-child {
       margin-left: -17px;
     }
   }
 
-  &--active { display: block; }
+  &--active {
+    display: block;
+  }
 }
 
-.advantages__slider-text { line-height: 1.25; }
+.advantages__slider-text {
+  line-height: 1.25;
+}
 
 .advantages__img-box {
   display: flex;
@@ -165,7 +172,9 @@
 
   @media #{$media-md} {
     line-height: 1.25;
-    &--sm { max-width: 170px; }
+    &--sm {
+      max-width: 170px;
+    }
   }
 }
 

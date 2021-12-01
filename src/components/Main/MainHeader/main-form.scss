@@ -1,7 +1,6 @@
 @import "../../../styles/vars";
 @import "../../../styles/mixin";
 
-
 .main-form {
   padding-top: 14px;
   padding-bottom: 40px; /* TODO: tmp, refactor to 100vh ? */
@@ -27,9 +26,15 @@
 .main-form__header {
   margin-bottom: 25px;
 
-  @media #{$media-md} { margin-bottom: 52px; }
-  @media #{$media-lg} { margin-bottom: 60px; }
-  @media #{$media-xl} { padding-left: 95px; }
+  @media #{$media-md} {
+    margin-bottom: 52px;
+  }
+  @media #{$media-lg} {
+    margin-bottom: 60px;
+  }
+  @media #{$media-xl} {
+    padding-left: 95px;
+  }
 }
 
 .main-form__title {
@@ -42,7 +47,9 @@
     max-width: 420px;
     margin-bottom: 20px;
   }
-  @media #{$media-xl} { margin-bottom: 15px; }
+  @media #{$media-xl} {
+    margin-bottom: 15px;
+  }
 }
 
 .main-form__nav {
@@ -56,7 +63,7 @@
   color: var(--color-icon);
   align-items: center;
   margin-right: 18px;
-  transition: .2s;
+  transition: 0.2s;
   cursor: pointer;
 
   &:last-child {

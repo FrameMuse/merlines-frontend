@@ -1,7 +1,7 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom"
 
 function useFullRoute() {
-  return `${useLocation().pathname}${useLocation().search}`;
-};
+  return `${useLocation().pathname}${useLocation().search}`
+}
 
-export default useFullRoute;
+export default useFullRoute

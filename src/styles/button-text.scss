@@ -1,7 +1,6 @@
 @import "vars";
 @import "mixin";
 
-
 .button-text {
   text-align: center;
   margin-top: 10px;
@@ -93,7 +92,7 @@
   width: 100%;
   padding-top: 6px;
   padding-bottom: 6px;
-  transition: .2s;
+  transition: 0.2s;
   position: relative;
 
   &:hover,

@@ -55,8 +55,12 @@
 }
 
 @keyframes fly {
-  from { width: 0; }
-  to { width: 95%; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 95%;
+  }
 }
 
 .download__plane {
@@ -123,12 +127,12 @@
   padding: 8px 45px 8px 15px;
   border-radius: 4px;
   background-color: var(--color-white);
-  box-shadow: 0 4px 5px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   position: relative;
 
   &--cabinet {
-    box-shadow: 0 0 15px rgba(24, 50, 115, .1);
+    box-shadow: 0 0 15px rgba(24, 50, 115, 0.1);
   }
 
   &--one,
@@ -262,7 +266,7 @@
   width: 45px;
   height: 100%;
   margin-left: auto;
-  transition: .2s;
+  transition: 0.2s;
   position: absolute;
   top: 0;
   right: 0;

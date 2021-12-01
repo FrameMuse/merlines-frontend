@@ -7,7 +7,7 @@ function UpdAccessPopupField(props) {
     fieldClass,
     inputValue,
     takeUserData
-  } = props;
+  } = props
 
   return (
     <div className={`modal__form-group ${fieldClass}`}>
@@ -16,11 +16,14 @@ function UpdAccessPopupField(props) {
         id={fieldId}
         type={fieldType}
         name={inputName}
-        value={inputValue || ''}
-        onChange={takeUserData} />
-      <label className="modal__form-label" htmlFor={fieldId}>{fieldName}</label>
+        value={inputValue || ""}
+        onChange={takeUserData}
+      />
+      <label className="modal__form-label" htmlFor={fieldId}>
+        {fieldName}
+      </label>
     </div>
   )
-};
+}
 
-export default UpdAccessPopupField;
+export default UpdAccessPopupField

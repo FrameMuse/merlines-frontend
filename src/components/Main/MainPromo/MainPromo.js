@@ -1,7 +1,7 @@
-import MainPromoTitle from './MainPromoTitle';
-import MainPromoSubtitle from './MainPromoSubtitle';
-import './advantages.scss'
-import MainPromoSlider from './slick/MainPromoSlider';
+import MainPromoTitle from "./MainPromoTitle"
+import MainPromoSubtitle from "./MainPromoSubtitle"
+import "./advantages.scss"
+import MainPromoSlider from "./slick/MainPromoSlider"
 
 function MainPromo() {
   return (
@@ -13,7 +13,7 @@ function MainPromo() {
         {/* <MainPromoList /> */}
       </div>
     </section>
-  );
+  )
 }
 
-export default MainPromo;
+export default MainPromo

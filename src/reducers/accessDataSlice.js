@@ -1,42 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit"
 
 export const accessDataSlice = createSlice({
-  name: 'accessDataSlice',
+  name: "accessDataSlice",
   initialState: {
-    userData: '',
+    userData: "",
     isOpen: false,
     isLogged: false,
-    loginToken: sessionStorage.token ? sessionStorage.token : localStorage.token,
+    loginToken: sessionStorage.token
+      ? sessionStorage.token
+      : localStorage.token,
     isRememberMe: false,
     isChangedEmail: false,
-    newEmail: '',
-    errorMessage: ''
+    newEmail: "",
+    errorMessage: ""
   },
   reducers: {
     setUserInfo: (state, action) => {
-      console.log('setUserData', action.payload);
-      state.userData = action.payload;
+      console.log("setUserData", action.payload)
+      state.userData = action.payload
     },
     setIsOpen: (state, action) => {
-      state.isOpen = action.payload;
+      state.isOpen = action.payload
     },
     setLoginToken: (state, action) => {
-      state.loginToken = action.payload;
+      state.loginToken = action.payload
     },
     setIsRememberMe: (state, action) => {
-      state.isRememberMe = !state.isRememberMe;
+      state.isRememberMe = !state.isRememberMe
     },
     setIsChangedEmail: (state, action) => {
-      state.isChangedEmail = action.payload;
+      state.isChangedEmail = action.payload
     },
     setNewEmail: (state, action) => {
-      state.newEmail = action.payload;
+      state.newEmail = action.payload
     },
     setErrorMessage: (state, action) => {
-      state.errorMessage = action.payload;
-    },
+      state.errorMessage = action.payload
+    }
   }
-});
+})
 
 export const {
   setUserInfo,
@@ -46,7 +48,7 @@ export const {
   setIsChangedEmail,
   setNewEmail,
   setErrorMessage
-} = accessDataSlice.actions;
+} = accessDataSlice.actions
 
-export const selectAccessData = state => state.accessData;
-export default accessDataSlice.reducer;
+export const selectAccessData = (state) => state.accessData
+export default accessDataSlice.reducer

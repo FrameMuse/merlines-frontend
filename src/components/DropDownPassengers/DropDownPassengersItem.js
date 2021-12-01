@@ -1,18 +1,21 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux"
 import {
   selectMainSearchParams,
   incrementPassengers,
   decrementPassengers
-} from '../../reducers/mainSearchSlice';
+} from "../../reducers/mainSearchSlice"
 
 function DropDownPassengersItem({ name, age, apiParam }) {
-  const dispatch = useDispatch();
-  const mainSearchParams = useSelector(selectMainSearchParams);
+  const dispatch = useDispatch()
+  const mainSearchParams = useSelector(selectMainSearchParams)
 
-  const increment = () => dispatch(incrementPassengers({ type: apiParam }));
-  const decrement = () => dispatch(decrementPassengers({ type: apiParam }));
+  const increment = () => dispatch(incrementPassengers({ type: apiParam }))
+  const decrement = () => dispatch(decrementPassengers({ type: apiParam }))
 
-  const isMinimumAmount = (apiParam === 'passengers_adults') ? (mainSearchParams.passengers[apiParam] < 2) : (mainSearchParams.passengers[apiParam] < 1);
+  const isMinimumAmount =
+    apiParam === "passengers_adults"
+      ? mainSearchParams.passengers[apiParam] < 2
+      : mainSearchParams.passengers[apiParam] < 1
 
   return (
     <div className="passengers-list__row">
@@ -21,15 +24,32 @@ function DropDownPassengersItem({ name, age, apiParam }) {
         <span className="passengers-list__item-info">{age}</span>
       </div>
       <div className="passengers-list__counter">
-        <button className={`passengers-list__counter-btn ${!isMinimumAmount ? "passengers-list__counter-btn--active" : ""}`} type="button"
-          onClick={decrement} disabled={isMinimumAmount}>-</button>
-        <input className="passengers-list__counter-num" type="number" value={mainSearchParams.passengers[apiParam]}
-          readOnly />
-        <button className="passengers-list__counter-btn passengers-list__counter-btn--active" type="button"
-          onClick={increment}>+</button>
+        <button
+          className={`passengers-list__counter-btn ${
+            !isMinimumAmount ? "passengers-list__counter-btn--active" : ""
+          }`}
+          type="button"
+          onClick={decrement}
+          disabled={isMinimumAmount}
+        >
+          -
+        </button>
+        <input
+          className="passengers-list__counter-num"
+          type="number"
+          value={mainSearchParams.passengers[apiParam]}
+          readOnly
+        />
+        <button
+          className="passengers-list__counter-btn passengers-list__counter-btn--active"
+          type="button"
+          onClick={increment}
+        >
+          +
+        </button>
       </div>
     </div>
   )
-};
+}
 
-export default DropDownPassengersItem;
+export default DropDownPassengersItem

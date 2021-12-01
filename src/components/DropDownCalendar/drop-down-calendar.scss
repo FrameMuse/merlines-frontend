@@ -1,5 +1,5 @@
-@import '../../styles/vars';
-@import '../../styles/mixin';
+@import "../../styles/vars";
+@import "../../styles/mixin";
 
 .drop-down-calendar {
   height: 100vh;
@@ -136,7 +136,7 @@
 
 .drop-down-calendar__month {
   &::after {
-    content: ',';
+    content: ",";
   }
 }
 
@@ -267,7 +267,7 @@
     background-color: var(--color-light-blue-2);
 
     & + &::before {
-      content: '';
+      content: "";
       height: inherit;
       background-color: var(--color-light-blue-2);
       position: absolute;

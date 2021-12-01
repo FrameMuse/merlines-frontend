@@ -1,3 +1,3 @@
-import SearchResultTicketInner from "./SearchResultTicketInner";
+import SearchResultTicketInner from "./SearchResultTicketInner"
 
 export default SearchResultTicketInner

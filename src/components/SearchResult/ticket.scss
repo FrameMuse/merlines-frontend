@@ -1,7 +1,6 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-
 .ticket {
   font-family: $title-font;
   font-weight: 500;
@@ -14,7 +13,7 @@
   box-shadow: $shadow;
   overflow: hidden;
   position: relative;
-  transition: .8s;
+  transition: 0.8s;
 
   &--calendar {
     grid-column: 1 / -1;
@@ -179,7 +178,7 @@
   width: 15px;
   height: 15px;
   margin-right: 10px;
-  transition: .2s;
+  transition: 0.2s;
   position: relative;
 
   &:last-child {
@@ -233,7 +232,9 @@
     right: -8px;
   }
 
-  &--multiline { min-width: 190px; }
+  &--multiline {
+    min-width: 190px;
+  }
 }
 
 .ticket__row-middle {
@@ -294,10 +295,14 @@
     display: inline;
 
     &:last-child {
-      &::after { content: ""; }
+      &::after {
+        content: "";
+      }
     }
 
-    &::after { content: ","; }
+    &::after {
+      content: ",";
+    }
   }
 }
 
@@ -356,7 +361,7 @@
   background-color: inherit;
   border-radius: 10px;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
   pointer-events: none;
   position: relative;
 
@@ -489,7 +494,7 @@
   font-weight: 500;
   background-color: var(--color-border-third);
   border-right: 1px solid var(--color-border-third);
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover,
   &:focus {
@@ -512,7 +517,9 @@
 .ticket__btn-icon {
   margin-bottom: 1px;
 
-  @media #{$media-md} { margin-bottom: 2px; }
+  @media #{$media-md} {
+    margin-bottom: 2px;
+  }
 }
 
 .ticket__price {
@@ -837,7 +844,7 @@
   width: 100%;
   min-height: 50px;
   border-right: 1px solid var(--color-border-third);
-  transition: .2s;
+  transition: 0.2s;
 
   &:last-child {
     border-right: none;

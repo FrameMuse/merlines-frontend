@@ -1,7 +1,6 @@
 @import "../../../styles/vars";
 @import "../../../styles/mixin";
 
-
 .filters__container {
   margin-left: 0;
   margin-right: 0;
@@ -31,7 +30,7 @@
   padding: 21px 15px 22px;
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-border-third);
-  transition: .2s;
+  transition: 0.2s;
 
   &:first-child {
     border-radius: 4px 4px 0 0;
@@ -247,5 +246,7 @@
   background-color: var(--color-blue);
 
   &:hover,
-  &:focus { background-color: var(--color-btn); }
+  &:focus {
+    background-color: var(--color-btn);
+  }
 }

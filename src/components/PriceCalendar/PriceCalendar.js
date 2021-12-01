@@ -1,40 +1,48 @@
-import React,{ useState, useEffect } from 'react';
-import { Switch, Route, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from "react"
+import { Switch, Route, useLocation } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 
-import routes from '../../routes';
-import useQuery from '../../hooks/useQuery';
-import { selectPriceCalendar, setData } from '../../reducers/priceCalendarSlice';
-import { selectMainSearchParams, setRouteFrom, setRouteTo } from '../../reducers/mainSearchSlice';
-import PriceCalendarSearch from './PriceCalendarSearch';
-import TransportSwitcher from '../common/TransportSwitcher';
-import PriceCalendarDays from './PriceCalendarDays/PriceCalendarDays';
-import PriceCalendarVacationSlider from './PriceCalendarVacationSlider';
-import PriceCalendarMonth from './PriceCalendarMonth';
-import useFullRoute from '../../hooks/useFullRoute';
-import api from '../../api/api';
+import routes from "../../routes"
+import useQuery from "../../hooks/useQuery"
+import { selectPriceCalendar, setData } from "../../reducers/priceCalendarSlice"
 import {
-  setPriceCalendarSearchRouteAir,
-} from '../../reducers/routesDataSlice';
-import parseParamsFromRoute from '../../services/parseParamsFromRoute';
-import './calendar.scss'
-import './calendar-form.scss'
+  selectMainSearchParams,
+  setRouteFrom,
+  setRouteTo
+} from "../../reducers/mainSearchSlice"
+import PriceCalendarSearch from "./PriceCalendarSearch"
+import TransportSwitcher from "../common/TransportSwitcher"
+import PriceCalendarDays from "./PriceCalendarDays/PriceCalendarDays"
+import PriceCalendarVacationSlider from "./PriceCalendarVacationSlider"
+import PriceCalendarMonth from "./PriceCalendarMonth"
+import useFullRoute from "../../hooks/useFullRoute"
+import api from "../../api/api"
+import { setPriceCalendarSearchRouteAir } from "../../reducers/routesDataSlice"
+import parseParamsFromRoute from "../../services/parseParamsFromRoute"
+import "./calendar.scss"
+import "./calendar-form.scss"
 
 function PriceCalendar({ isLanding }) {
-  const location = useLocation();
-  const query = useQuery();
-  const priceCalendarData = useSelector(selectPriceCalendar);
-  const mainSearchParams = useSelector(selectMainSearchParams);
-  const [pickedMonthName, setPickedMonthName] = useState('');
+  const location = useLocation()
+  const query = useQuery()
+  const priceCalendarData = useSelector(selectPriceCalendar)
+  const mainSearchParams = useSelector(selectMainSearchParams)
+  const [pickedMonthName, setPickedMonthName] = useState("")
   const priceCalendarLocation = {
-    air: (location.pathname === routes.priceCalendar.air) || (location.pathname === routes.landing.air)
-      || (query.get('next') === routes.priceCalendar.air),
-    train: (location.pathname === routes.priceCalendar.train) || (query.get('next') === routes.priceCalendar.train),
-    bus: (location.pathname === routes.priceCalendar.bus) || (query.get('next') === routes.priceCalendar.bus)
-  };
+    air:
+      location.pathname === routes.priceCalendar.air ||
+      location.pathname === routes.landing.air ||
+      query.get("next") === routes.priceCalendar.air,
+    train:
+      location.pathname === routes.priceCalendar.train ||
+      query.get("next") === routes.priceCalendar.train,
+    bus:
+      location.pathname === routes.priceCalendar.bus ||
+      query.get("next") === routes.priceCalendar.bus
+  }
 
-  const fullRoute = useFullRoute();
-  const dispatch = useDispatch();
+  const fullRoute = useFullRoute()
+  const dispatch = useDispatch()
 
   // const getBusSearchParams = () => {
   //   const busSearchParams = {
@@ -42,24 +50,31 @@ function PriceCalendar({ isLanding }) {
   //     start_date: '2021-01-01',
   //     end_date: '2021-12-01',
   //   };
-//
+  //
   //   return `?date_group_by=month&origin=${busSearchParams.origin}&start_date=${busSearchParams.start_date}&end_date=${busSearchParams.end_date}`;
   // };
 
   useEffect(() => {
-    const testParams = parseParamsFromRoute(location.pathname, location.search, query, dispatch, setRouteFrom, setRouteTo);
+    const testParams = parseParamsFromRoute(
+      location.pathname,
+      location.search,
+      query,
+      dispatch,
+      setRouteFrom,
+      setRouteTo
+    )
 
     if (!location.search) {
-      dispatch(setRouteFrom({ apiRoute: '', frontRoute: '' }));
-      dispatch(setRouteTo({ apiRoute: '', frontRoute: '' }));
+      dispatch(setRouteFrom({ apiRoute: "", frontRoute: "" }))
+      dispatch(setRouteTo({ apiRoute: "", frontRoute: "" }))
     }
 
     async function testGetMonth() {
       try {
-        if (location.pathname.includes('air')) {
-          const air = await api.getMonths('air', testParams.routeParams);
-          dispatch(setData({ transport: 'air', months: air.data.result }));
-          dispatch(setPriceCalendarSearchRouteAir(fullRoute.slice(16)));
+        if (location.pathname.includes("air")) {
+          const air = await api.getMonths("air", testParams.routeParams)
+          dispatch(setData({ transport: "air", months: air.data.result }))
+          dispatch(setPriceCalendarSearchRouteAir(fullRoute.slice(16)))
 
           // const busParams = getBusSearchParams();
           // const bus = await api.getMonthsTest('bus', busParams);
@@ -72,10 +87,9 @@ function PriceCalendar({ isLanding }) {
         //   dispatch(setData({ transport: 'bus', months: bus.data.result }));
         // };
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
-    };
-
+    }
 
     // async function getYearMonthsData(airRouteFromDays) {
     //   const startApiRoute = fullRoute.indexOf('?');
@@ -133,122 +147,138 @@ function PriceCalendar({ isLanding }) {
     //   }
     // };
 
-    if (location.search && !location.pathname.includes('days')) {
-      testGetMonth();
+    if (location.search && !location.pathname.includes("days")) {
+      testGetMonth()
     }
 
     // getCityNameFrom();
     // getCityNameTo();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.search]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search])
 
   return (
-    <section className={`calendar ${isLanding ? "landing__calendar" : "calendar--days"}`}>
+    <section
+      className={`calendar ${
+        isLanding ? "landing__calendar" : "calendar--days"
+      }`}
+    >
       <div className="calendar-container">
-        <h2 className={`calendar__title ${isLanding ? "landing__calendar-title" : ""}`}>Календарь низких цен</h2>
-        {
-          isLanding
-            ?
-            <p className="landing__text-info">{`Направление: ${mainSearchParams.route.front.from} - ${mainSearchParams.route.front.to}`}</p>
-            :
-            <>
-              <PriceCalendarSearch
-                transport={priceCalendarData.air.transport}
-                setPickedMonthName={setPickedMonthName} />
-              {!mainSearchParams.one_way && <PriceCalendarVacationSlider />}
-            </>
-        }
+        <h2
+          className={`calendar__title ${
+            isLanding ? "landing__calendar-title" : ""
+          }`}
+        >
+          Календарь низких цен
+        </h2>
+        {isLanding ? (
+          <p className="landing__text-info">{`Направление: ${mainSearchParams.route.front.from} - ${mainSearchParams.route.front.to}`}</p>
+        ) : (
+          <>
+            <PriceCalendarSearch
+              transport={priceCalendarData.air.transport}
+              setPickedMonthName={setPickedMonthName}
+            />
+            {!mainSearchParams.one_way && <PriceCalendarVacationSlider />}
+          </>
+        )}
         <TransportSwitcher isCalendar={true} />
-        {
-          priceCalendarLocation.air
-          &&
+        {priceCalendarLocation.air && (
           <ul className="calendar__list">
-            {
-              (location.search)
-                ?
-                <>
-                  {
-                    priceCalendarData.air.months.length
-                      ?
-                      priceCalendarData.air.months.map((month, index) =>
-                        <PriceCalendarMonth
-                          key={index}
-                          transport={priceCalendarData.air.transport}
-                          monthDate={month.date}
-                          price={month.price}
-                          betterPrice={priceCalendarData.air.betterPrice}
-                          setPickedMonthName={setPickedMonthName} />)
-                      :
-                      <div>is loading .............</div>
-                  }
-                </>
-                :
-                <div>Выберите направление и начните поиск</div>
-            }
+            {location.search ? (
+              <>
+                {priceCalendarData.air.months.length ? (
+                  priceCalendarData.air.months.map((month, index) => (
+                    <PriceCalendarMonth
+                      key={index}
+                      transport={priceCalendarData.air.transport}
+                      monthDate={month.date}
+                      price={month.price}
+                      betterPrice={priceCalendarData.air.betterPrice}
+                      setPickedMonthName={setPickedMonthName}
+                    />
+                  ))
+                ) : (
+                  <div>is loading .............</div>
+                )}
+              </>
+            ) : (
+              <div>Выберите направление и начните поиск</div>
+            )}
           </ul>
-        }
+        )}
 
-        {
-          priceCalendarLocation.train
-          &&
+        {priceCalendarLocation.train && (
           <ul className="calendar__list">
-            {priceCalendarData.train.months.length
-              ?
-              priceCalendarData.train.months.map((month, index) =>
+            {priceCalendarData.train.months.length ? (
+              priceCalendarData.train.months.map((month, index) => (
                 <PriceCalendarMonth
                   key={index}
                   transport={priceCalendarData.train.transport}
                   monthDate={month.date}
                   price={month.price}
-                  betterPrice={priceCalendarData.train.betterPrice} />)
-              :
-              <div>is loading .............</div>}
+                  betterPrice={priceCalendarData.train.betterPrice}
+                />
+              ))
+            ) : (
+              <div>is loading .............</div>
+            )}
           </ul>
-        }
+        )}
 
-        {
-          priceCalendarLocation.bus
-          &&
+        {priceCalendarLocation.bus && (
           <ul className="calendar__list">
-            {priceCalendarData.bus.months.length
-              ?
-              priceCalendarData.bus.months.map((month, index) =>
+            {priceCalendarData.bus.months.length ? (
+              priceCalendarData.bus.months.map((month, index) => (
                 <PriceCalendarMonth
                   key={index}
                   transport={priceCalendarData.bus.transport}
                   monthDate={month.date}
                   price={month.price / 100}
                   betterPrice={priceCalendarData.bus.betterPrice}
-                  setPickedMonthName={setPickedMonthName} />)
-              :
-              <div>is loading .............</div>}
+                  setPickedMonthName={setPickedMonthName}
+                />
+              ))
+            ) : (
+              <div>is loading .............</div>
+            )}
           </ul>
-        }
+        )}
       </div>
 
       <Switch>
         <Route path="/price-calendar/air/days">
-          {
-            query.get('next') === routes.priceCalendar.airDays
-              ?
-              <PriceCalendarDays pickedMonthName={pickedMonthName} setPickedMonthName={setPickedMonthName} />
-              :
-              <PriceCalendarDays pickedMonthName={pickedMonthName} setPickedMonthName={setPickedMonthName} />
-          }
+          {query.get("next") === routes.priceCalendar.airDays ? (
+            <PriceCalendarDays
+              pickedMonthName={pickedMonthName}
+              setPickedMonthName={setPickedMonthName}
+            />
+          ) : (
+            <PriceCalendarDays
+              pickedMonthName={pickedMonthName}
+              setPickedMonthName={setPickedMonthName}
+            />
+          )}
         </Route>
         <Route path="/tickets/air/days">
-          <PriceCalendarDays pickedMonthName={pickedMonthName} setPickedMonthName={setPickedMonthName} />
+          <PriceCalendarDays
+            pickedMonthName={pickedMonthName}
+            setPickedMonthName={setPickedMonthName}
+          />
         </Route>
         <Route path="/price-calendar/train/days">
           <div>train</div>
           {/* <PriceCalendarDays transport="train" /> */}
         </Route>
         <Route path="/price-calendar/bus/days">
-          <PriceCalendarDays pickedMonthName={pickedMonthName} setPickedMonthName={setPickedMonthName} transport="bus" />
+          <PriceCalendarDays
+            pickedMonthName={pickedMonthName}
+            setPickedMonthName={setPickedMonthName}
+            transport="bus"
+          />
         </Route>
       </Switch>
     </section>
   )
-};
+}
 
-export default PriceCalendar;
+export default PriceCalendar

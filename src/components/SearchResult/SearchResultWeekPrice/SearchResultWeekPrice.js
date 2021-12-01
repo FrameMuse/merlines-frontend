@@ -1,7 +1,7 @@
-import React from 'react'
-import SearchResultWeekPriceHeader from './SearchResultWeekPriceHeader';
-import SearchResultWeekPriceList from './SearchResultWeekPriceList';
-import './price-week.scss'
+import React from "react"
+import SearchResultWeekPriceHeader from "./SearchResultWeekPriceHeader"
+import SearchResultWeekPriceList from "./SearchResultWeekPriceList"
+import "./price-week.scss"
 
 function SearchResultWeekPrice() {
   return (
@@ -12,6 +12,6 @@ function SearchResultWeekPrice() {
       </div>
     </aside>
   )
-};
+}
 
-export default SearchResultWeekPrice;
+export default SearchResultWeekPrice

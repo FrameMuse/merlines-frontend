@@ -1,6 +1,7 @@
 //Шрифты
 $main-font: "Inter", "Arial", "Helvetica Neue", "Helvetica", sans-serif;
-$title-font: "Montserrat", "Verdana", "Geneva", "Helvetica Neue", "Helvetica", sans-serif;
+$title-font: "Montserrat", "Verdana", "Geneva", "Helvetica Neue", "Helvetica",
+  sans-serif;
 
 $font-size: 14px;
 $font-weight: 500;
@@ -31,11 +32,11 @@ $color-red: #ff4b55;
 $color-simple-white: #fbfbfb;
 
 // Тени
-$shadow: 0 0 15px rgba(24, 50, 115, .1);
-$shadow-2: 0 4px 5px rgba(0, 0, 0, .1);
-$shadow-3: 0 -15px 15px rgba(24, 50, 115, .1);
-$shadow-special: 2px 6px 16px rgba(24, 50, 115, .06);
-$shadow-special-2: 2px 6px 16px rgba(24, 50, 115, .2);
+$shadow: 0 0 15px rgba(24, 50, 115, 0.1);
+$shadow-2: 0 4px 5px rgba(0, 0, 0, 0.1);
+$shadow-3: 0 -15px 15px rgba(24, 50, 115, 0.1);
+$shadow-special: 2px 6px 16px rgba(24, 50, 115, 0.06);
+$shadow-special-2: 2px 6px 16px rgba(24, 50, 115, 0.2);
 
 //Размеры
 $width-xs: 320px;
