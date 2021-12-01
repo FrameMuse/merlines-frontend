@@ -1,6 +1,5 @@
-@import "../../styles/vars";
-@import "../../styles/mixin";
-
+@import '../../styles/vars';
+@import '../../styles/mixin';
 
 .passengers-list {
   @include ul;
@@ -16,7 +15,16 @@
   transform: translateX(-50%);
   z-index: 2;
 
-  &::before { @include rectangle; }
+  &::before {
+    @include rectangle;
+  }
+
+  &--hidden {
+    top: 5em;
+    opacity: 0;
+  }
+
+  transition: 250ms ease top, 200ms ease opacity;
 }
 
 .passengers-list__item {
@@ -35,7 +43,9 @@
   align-items: center;
   margin-bottom: 15px;
 
-  &:last-child { margin-bottom: 0; }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .passengers-list__left {
@@ -66,10 +76,14 @@
   height: 30px;
   border: 1px solid var(--color-blue);
   box-sizing: border-box;
-  transition: .2s;
+  transition: 0.2s;
 
-  &:first-child { border-radius: 4px 0 0 4px; }
-  &:last-child { border-radius: 0 4px 4px 0; }
+  &:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  &:last-child {
+    border-radius: 0 4px 4px 0;
+  }
 
   &:hover,
   &:focus {
@@ -112,7 +126,9 @@
 .passengers-list__checkbox {
   margin-bottom: 15px;
 
-  &:last-child { margin-bottom: 0; }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .passengers-list__checkbox-input {
