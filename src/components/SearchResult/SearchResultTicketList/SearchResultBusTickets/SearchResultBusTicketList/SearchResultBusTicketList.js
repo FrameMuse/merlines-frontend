@@ -44,10 +44,10 @@ const SearchResultBusTicketList = ({
       ))}
       {searchResultBusListPagination &&
         dataToScroll?.length > searchResultBusListPagination?.length && (
-          <button onClick={openMoreResult} className="btn btn-secondary">
+        <button onClick={openMoreResult} className="btn btn-secondary">
             Загрузить еще 10 билетов
-          </button>
-        )}
+        </button>
+      )}
     </>
   )
 }

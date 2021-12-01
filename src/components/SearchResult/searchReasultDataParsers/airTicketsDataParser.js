@@ -64,7 +64,7 @@ const airTicketsDataParser = (data) => {
           const voyages = proposal.segment[0].flight.map((voyage) => {
             let flightCode = `${voyage.trip_class}${voyage.operated_by}${voyage.number}`
             let flightInfoByFlightCode
-            if (chunk?.flight_info.hasOwnProperty(flightCode)) {
+            if ("flightCode" in chunk?.flight_info) {
               flightInfoByFlightCode = chunk.flight_info[flightCode]
             }
 
@@ -77,15 +77,11 @@ const airTicketsDataParser = (data) => {
               departure_time: voyage.departure_time,
               arrival_date: voyage.arrival_date,
               arrival_time: voyage.arrival_time,
-              departure_point_name: `${airports[voyage.departure].city}, ${
-                airports[voyage.departure].name
-              }`,
+              departure_point_name: `${airports[voyage.departure].city}, ${airports[voyage.departure].name}`,
               departure_point_name_airport: airports[voyage.departure].name,
               departure_point_name_cases: airports[voyage.departure].cases,
               departure_point_id: voyage.departure,
-              arrival_point_name: `${airports[voyage.arrival].city}, ${
-                airports[voyage.arrival].name
-              }`,
+              arrival_point_name: `${airports[voyage.arrival].city}, ${airports[voyage.arrival].name}`,
               arrival_point_name_airport: airports[voyage.arrival].name,
               arrival_point_name_cases: airports[voyage.arrival].cases,
               arrival_point_id: voyage.arrival,
@@ -106,9 +102,7 @@ const airTicketsDataParser = (data) => {
             }
           })
 
-          const routeIndexByHash = routes.tickets.findIndex(
-            (route) => route.hasOwnProperty("hash") && route.hash === hash
-          )
+          const routeIndexByHash = routes.tickets.findIndex(route => route.hash === hash)
           if (routeIndexByHash === -1) {
             routes.tickets.push({
               hash: hash,

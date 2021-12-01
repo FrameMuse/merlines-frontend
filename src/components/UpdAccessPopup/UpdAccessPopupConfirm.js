@@ -60,11 +60,12 @@ function UpdAccessPopupConfirm() {
                 ? error.response.statusText
                 : errorMessages.error500
             )
-          default:
+          default: {
             const errorsData = takeErrors(error.response.data)
             errorsData.map((errorText) => toast.error(errorText))
             console.log(error.response.data)
             console.log(error)
+          }
         }
       }
     }
@@ -92,9 +93,7 @@ function UpdAccessPopupConfirm() {
             : "Подтверждение E-Mail"}
         </h2>
         <p className="modal__text">
-          {`Для завершения ${
-            accessData.isChangedEmail ? "обновления email" : "регистрации"
-          }, пожалуйста, проверьте свою электронную почту и перейдите по ссылке в письме, которое мы вам отправили. Или, введите код из письма в поле ниже.`}
+          {`Для завершения ${accessData.isChangedEmail ? "обновления email" : "регистрации"}, пожалуйста, проверьте свою электронную почту и перейдите по ссылке в письме, которое мы вам отправили. Или, введите код из письма в поле ниже.`}
         </p>
         <form className="modal__form">
           <div className="input-group modal__form-group modal__form-group--margin">

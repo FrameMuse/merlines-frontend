@@ -179,10 +179,59 @@ function SearchResult({ setIsOpenFilter }) {
       <ScrollOnTopTest />
       {airTicketsResult.type === "Success" ||
       (bussTicketsResult.type === "Success" && transport === "bus") ? (
-        <section className="ticket-list">
-          <div className="ticket-list-form__container">
+          <section className="ticket-list">
+            <div className="ticket-list-form__container">
+              {isSearchFormOpen ? (
+                <>
+                  <SearchForm searchResult={true} />
+                  <div className="form-close">
+                    <button
+                      onClick={() => setIsSearchFormOpen(!isSearchFormOpen)}
+                      className="form-close__btn"
+                      type="button"
+                    >
+                      <Svg
+                        svgClass="form-close__icon"
+                        svgName="arrow-angle"
+                        svgWidth="20"
+                        svgHeight="20"
+                      />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <SearchFormMini
+                  openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
+                />
+              )}
+            </div>
+            <div className="ticket-list__container">
+              {/*<SearchResultWeekPrice />*/}
+              {/*<aside className="ticket-list__left">*/}
+              {/*  <SearchResultSubscribePrice />*/}
+              {/*  {tickets && <SearchResultFilters checkboxes={returnInputs(tickets, transfers)} />}*/}
+              {/*</aside>*/}
+              <SearchResultTicketList
+                tickets={tickets}
+                transfers={transfers}
+                searchData={tickets}
+                filterData={searchData}
+                loadedState={airTicketsResult.type}
+                bussTicketsResult={bussTicketsResult}
+              // trainTicketsResult={trainTicketsResult}
+              />
+            </div>
+            <div
+              onClick={() => setIsOpenFilter(true)}
+              className="ticket-list__open-filter"
+            >
+            фильтры
+            </div>
+          </section>
+        ) : (
+          <>
             {isSearchFormOpen ? (
-              <>
+              <Loader loadedState={airTicketsResult.type}>
                 <SearchForm searchResult={true} />
                 <div className="form-close">
                   <button
@@ -198,65 +247,16 @@ function SearchResult({ setIsOpenFilter }) {
                     />
                   </button>
                 </div>
-              </>
+              </Loader>
             ) : (
-              <SearchFormMini
-                openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
-              />
+              <LoaderClose>
+                <SearchFormMini
+                  openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
+                />
+              </LoaderClose>
             )}
-          </div>
-          <div className="ticket-list__container">
-            {/*<SearchResultWeekPrice />*/}
-            {/*<aside className="ticket-list__left">*/}
-            {/*  <SearchResultSubscribePrice />*/}
-            {/*  {tickets && <SearchResultFilters checkboxes={returnInputs(tickets, transfers)} />}*/}
-            {/*</aside>*/}
-            <SearchResultTicketList
-              tickets={tickets}
-              transfers={transfers}
-              searchData={tickets}
-              filterData={searchData}
-              loadedState={airTicketsResult.type}
-              bussTicketsResult={bussTicketsResult}
-              // trainTicketsResult={trainTicketsResult}
-            />
-          </div>
-          <div
-            onClick={() => setIsOpenFilter(true)}
-            className="ticket-list__open-filter"
-          >
-            фильтры
-          </div>
-        </section>
-      ) : (
-        <>
-          {isSearchFormOpen ? (
-            <Loader loadedState={airTicketsResult.type}>
-              <SearchForm searchResult={true} />
-              <div className="form-close">
-                <button
-                  onClick={() => setIsSearchFormOpen(!isSearchFormOpen)}
-                  className="form-close__btn"
-                  type="button"
-                >
-                  <Svg
-                    svgClass="form-close__icon"
-                    svgName="arrow-angle"
-                    svgWidth="20"
-                    svgHeight="20"
-                  />
-                </button>
-              </div>
-            </Loader>
-          ) : (
-            <LoaderClose>
-              <SearchFormMini
-                openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
-              />
-            </LoaderClose>
-          )}
-        </>
-      )}
+          </>
+        )}
     </>
   )
 }

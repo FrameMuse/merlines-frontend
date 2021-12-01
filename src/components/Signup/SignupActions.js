@@ -25,8 +25,7 @@ export const signupNewUser = (userData) => (dispatch) => {
       )
       dispatch({ type: CREATE_USER_SUCCESS })
       toast.success(
-        `Спасибо за регистрацию ${response.data.first_name}${
-          response.data.last_name && ` ${response.data.last_name}`
+        `Спасибо за регистрацию ${response.data.first_name}${response.data.last_name && ` ${response.data.last_name}`
         }.`
       )
       dispatch(push("/activate/_/_"))
@@ -48,7 +47,7 @@ export const signupNewUser = (userData) => (dispatch) => {
                 ? error.response.statusText
                 : errorMessages.error500
             )
-          default:
+          default: {
             const errorsData = takeErrors(error.response.data)
             errorsData.map((errorText) => toast.error(errorText))
             console.error(JSON.stringify(error.response.data))
@@ -57,6 +56,7 @@ export const signupNewUser = (userData) => (dispatch) => {
               type: CREATE_USER_ERROR,
               errorData: error.response.data
             })
+          }
         }
       } else if (error.message) {
         // the error message is available,

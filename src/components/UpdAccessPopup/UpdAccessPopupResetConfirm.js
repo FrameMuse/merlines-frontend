@@ -52,11 +52,12 @@ function UpdAccessPopupResetConfirm() {
                 ? error.response.statusText
                 : errorMessages.error500
             )
-          default:
+          default: {
             const errorsData = takeErrors(error.response.data)
             errorsData.map((errorText) => toast.error(errorText))
             console.log(error.response.data)
             console.log(error)
+          }
         }
       }
     }
@@ -101,9 +102,7 @@ function UpdAccessPopupResetConfirm() {
               </label>
             )}
             <button
-              className={`show-password ${
-                isPasswordHide ? "show-password--active" : ""
-              }`}
+              className={`show-password ${isPasswordHide ? "show-password--active" : ""}`}
               onClick={() => setIsPasswordHide(!isPasswordHide)}
               type="button"
               aria-label="Показать пароль"

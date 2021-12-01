@@ -37,7 +37,7 @@ export const returnInputs = (data, { all, no, one, two, threeAndMore }) => {
   })
 
   const noFiltersData = getNoTransfers(data)
-  if (!!noFiltersData.length) {
+  if (noFiltersData.length) {
     checkboxes.push({
       id: "transfersNo",
       label: "Без пересадки",
@@ -47,7 +47,7 @@ export const returnInputs = (data, { all, no, one, two, threeAndMore }) => {
   }
 
   const oneFilter = getOneTransfers(data)
-  if (!!oneFilter.length) {
+  if (oneFilter.length) {
     checkboxes.push({
       id: "transfersOne",
       label: "1 пересадка",
@@ -57,7 +57,7 @@ export const returnInputs = (data, { all, no, one, two, threeAndMore }) => {
   }
 
   const twoFilter = getTwoTransfers(data)
-  if (!!twoFilter.length) {
+  if (twoFilter.length) {
     checkboxes.push({
       id: "transfersTwo",
       label: "2 пересадки",
@@ -67,7 +67,7 @@ export const returnInputs = (data, { all, no, one, two, threeAndMore }) => {
   }
 
   const threeFilter = getThreeAndMoreTransfers(data)
-  if (!!threeFilter.length) {
+  if (threeFilter.length) {
     checkboxes.push({
       id: "transfersThreeAndMore",
       label: "3 и более пересадок",

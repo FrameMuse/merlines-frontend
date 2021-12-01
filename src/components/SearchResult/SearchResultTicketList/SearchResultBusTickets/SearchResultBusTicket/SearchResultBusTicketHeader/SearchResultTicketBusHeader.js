@@ -15,8 +15,7 @@ const SearchResultTicketBusHeader = ({ carrier }) => {
   return (
     <div className="ticket__header">
       <span
-        className={`ticket__logo${
-          carrierLogoOne ? "" : " ticket__logo--rounded"
+        className={`ticket__logo${carrierLogoOne ? "" : " ticket__logo--rounded"
         }`}
       >
         <Svg
@@ -30,8 +29,7 @@ const SearchResultTicketBusHeader = ({ carrier }) => {
       </span>
       <div className="ticket__nav">
         <Link
-          className={`ticket__item ${
-            isNoticeActive ? "ticket__item--active" : ""
+          className={`ticket__item ${isNoticeActive ? "ticket__item--active" : ""
           }`}
           onClick={() => setIsNoticeActive(!isNoticeActive)}
           to="#"
@@ -44,17 +42,15 @@ const SearchResultTicketBusHeader = ({ carrier }) => {
           />
           <div className="ticket__pop-up ticket__pop-up--multiline">
             {`
-                  ${
-                    !isNoticeActive
-                      ? "Подписаться на уведомления об изменении цены на этот билет"
-                      : "Вы подписались на уведомления об изменении цены на этот билет"
-                  }
+                  ${!isNoticeActive
+      ? "Подписаться на уведомления об изменении цены на этот билет"
+      : "Вы подписались на уведомления об изменении цены на этот билет"
+    }
                 `}
           </div>
         </Link>
         <Link
-          className={`ticket__item ${
-            isFavouritesActive ? "ticket__item--active" : ""
+          className={`ticket__item ${isFavouritesActive ? "ticket__item--active" : ""
           }`}
           onClick={() => setIsFavouritesActive(!isFavouritesActive)}
           to="#"
@@ -67,17 +63,15 @@ const SearchResultTicketBusHeader = ({ carrier }) => {
           />
           <div className="ticket__pop-up">
             {`
-                  ${
-                    !isFavouritesActive
-                      ? "Добавить в избранное"
-                      : "Вы добавили в избранное этот билет"
-                  }
+                  ${!isFavouritesActive
+      ? "Добавить в избранное"
+      : "Вы добавили в избранное этот билет"
+    }
                 `}
           </div>
         </Link>
         <Link
-          className={`ticket__item ${
-            isShareActive ? "ticket__item--active" : ""
+          className={`ticket__item ${isShareActive ? "ticket__item--active" : ""
           }`}
           onClick={() => setIsShareActive(!isShareActive)}
           to="#"

@@ -30,9 +30,9 @@ const InputArrivedCity = ({
       getValueFromSessionStorageByKey("cityFrontTo")
     const cityCodeFromSessionStorage =
       getValueFromSessionStorageByKey("cityApiTo")
-    if (!!cityNameFromRedux) {
+    if (cityNameFromRedux) {
       setCurrentArrivedCity(cityNameFromRedux)
-    } else if (!!cityNameFromSessionStorage) {
+    } else if (cityNameFromSessionStorage) {
       dispatch(
         setRouteTo({
           apiRoute: cityCodeFromSessionStorage,

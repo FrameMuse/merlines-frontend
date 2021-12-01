@@ -46,16 +46,16 @@ const getDaysInterval = (date, calendar) => {
         .toISODate(),
       end_date: isSameMonth
         ? DateTime.local(currentMonth.year, currentMonth.month)
-            .endOf("month")
-            .toISODate()
+          .endOf("month")
+          .toISODate()
         : DateTime.local(
-            currentMonth.month === 12
-              ? currentMonth.year + 1
-              : currentMonth.year,
-            currentMonth.month === 12 ? 1 : currentMonth.month + 1
-          )
-            .endOf("week")
-            .toISODate()
+          currentMonth.month === 12
+            ? currentMonth.year + 1
+            : currentMonth.year,
+          currentMonth.month === 12 ? 1 : currentMonth.month + 1
+        )
+          .endOf("week")
+          .toISODate()
     }
   } else {
     return {
@@ -65,11 +65,11 @@ const getDaysInterval = (date, calendar) => {
       end_date: isSameMonth
         ? DateTime.local(currentMonth.year, currentMonth.month).endOf("month")
         : DateTime.local(
-            currentMonth.month === 12
-              ? currentMonth.year + 1
-              : currentMonth.year,
-            currentMonth.month === 12 ? 1 : currentMonth.month + 1
-          ).endOf("week")
+          currentMonth.month === 12
+            ? currentMonth.year + 1
+            : currentMonth.year,
+          currentMonth.month === 12 ? 1 : currentMonth.month + 1
+        ).endOf("week")
     }
   }
 }
@@ -209,9 +209,7 @@ const translateTripClassFromCodeToName = (code) => {
 
 const dateMountWeekday = (isoDate) => {
   const date = DateTime.fromISO(isoDate)
-  return `${date.day} ${monthNamesDate[date.month]}, ${
-    weekDays[date.weekday - 1]
-  }`
+  return `${date.day} ${monthNamesDate[date.month]}, ${weekDays[date.weekday - 1]}`
 }
 
 const getSimpleTimeFromISO = (isoDate) => {

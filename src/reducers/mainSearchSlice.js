@@ -10,7 +10,7 @@ export const detectCityByGeoIp = createAsyncThunk(
     try {
       const resp = await api.getCurrentCity()
 
-      if (!resp.data.hasOwnProperty("error")) {
+      if (!("error" in resp.data)) {
         sessionStorage.setItem("cityApiFrom", resp.data.data.air_code)
         sessionStorage.setItem("cityFrontFrom", resp.data.data.air_name)
         sessionStorage.setItem("cityBusId", resp.data.data.bus_city_id)

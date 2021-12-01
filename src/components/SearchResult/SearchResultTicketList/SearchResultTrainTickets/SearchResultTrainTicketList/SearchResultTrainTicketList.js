@@ -37,10 +37,10 @@ const SearchResultTrainTicketList = ({ tickets }) => {
       ))}
       {searchResultPagination &&
         dataToScroll?.length > searchResultPagination?.length && (
-          <button onClick={openMoreResult} className="btn btn-secondary">
+        <button onClick={openMoreResult} className="btn btn-secondary">
             Загрузить еще 10 билетов
-          </button>
-        )}
+        </button>
+      )}
     </>
   )
 }

@@ -239,11 +239,11 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
       } else {
         inputValue[inputDirection]
           ? setCurrentCitiesData({
-              [inputDirection]: historyCitiesData[inputDirection].find(
-                (item) =>
-                  item.keyWord === inputValue[inputDirection].toLowerCase()
-              )
-            })
+            [inputDirection]: historyCitiesData[inputDirection].find(
+              (item) =>
+                item.keyWord === inputValue[inputDirection].toLowerCase()
+            )
+          })
           : setCurrentCitiesData([])
       }
     }

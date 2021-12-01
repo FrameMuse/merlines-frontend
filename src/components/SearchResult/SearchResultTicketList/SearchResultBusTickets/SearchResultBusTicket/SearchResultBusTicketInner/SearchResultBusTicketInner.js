@@ -29,16 +29,16 @@ const SearchResultBusTicketInner = ({
     durations.push(
       {
         type: "item",
-        name: `Выезд из ${voyages[i].departurePointName}`,
-        add: `в ${getSimpleTimeFromISO(departureDatetime)}`,
-        add2: `${formatDuration(maxDuration)} в пути`,
+        name: `Выезд из ${voyages[i].departurePointName}`,
+        add: `в ${getSimpleTimeFromISO(departureDatetime)}`,
+        add2: `${formatDuration(maxDuration)} в пути`,
         duration: 0,
         fromDate: Date.parse(`${Date.parse(`${departureDatetime}`)}`),
         toDate: Date.parse(`${Date.parse(`${arrivalDateTime}`)}`)
       },
       {
         type: "stop",
-        name: `Пересадка в ${arrivalPointName}`,
+        name: `Пересадка в ${arrivalPointName}`,
         add: `${formatDuration(
           Date.parse(`${departureDatetime}`) - Date.parse(`${arrivalDateTime}`)
         )} ожидания`,
@@ -65,8 +65,7 @@ const SearchResultBusTicketInner = ({
               <>
                 <div className={`ticket__union-item`} style={{ width: `100%` }}>
                   <div className="ticket__union-popup">
-                    {`Отправление ${
-                      departurePointName || "нет данных"
+                    {`Отправление ${departurePointName || "нет данных"
                     }, прибытие ${arrivalPointName || "нет данных"}`}
                   </div>
                 </div>

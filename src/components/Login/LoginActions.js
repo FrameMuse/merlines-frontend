@@ -45,11 +45,12 @@ const login = (userData, redirectTo, isRememberMe) => (dispatch) => {
                 ? error.response.statusText
                 : errorMessages.error500
             )
-          default:
+          default: {
             const errorsData = takeErrors(error.response.data)
             errorsData.map((errorText) => toast.error(errorText))
             dispatch(unsetCurrentUser())
             simpleOnError(error)
+          }
         }
       }
     })

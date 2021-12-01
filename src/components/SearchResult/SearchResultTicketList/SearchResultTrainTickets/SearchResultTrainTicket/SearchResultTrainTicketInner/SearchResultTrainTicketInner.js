@@ -22,32 +22,30 @@ const SearchResultTrainTicketInner = ({ flight, voyages, maxDuration }) => {
       durations.push(
         {
           type: "item",
-          name: `Вылет из ${voyages[i].departure_point_name_cases.po}, ${voyages[i].departure_point_name_airport}`,
-          add: `в ${voyages[i].departure_date} ${voyages[i].departure_time}`,
-          add2: `${formatDuration(voyages[i].duration)} в пути`,
+          name: `Вылет из ${voyages[i].departure_point_name_cases.po}, ${voyages[i].departure_point_name_airport}`,
+          add: `в ${voyages[i].departure_date} ${voyages[i].departure_time}`,
+          add2: `${formatDuration(voyages[i].duration)} в пути`,
           duration: voyages[i].duration
           //       fromDate: Date.parse(`${voyages[i].departure_date} ${voyages[i].departure_time}`),
           //       toDate: Date.parse(`${voyages[i].arrival_date} ${voyages[i].arrival_time}`)
         },
         {
           type: "stop",
-          name: `Пересадка в ${voyages[i].arrival_point_name_cases.pr}, ${voyages[i].arrival_point_name_airport}`,
+          name: `Пересадка в ${voyages[i].arrival_point_name_cases.pr}, ${voyages[i].arrival_point_name_airport}`,
           add: `${formatDuration(
             (Date.parse(
-              `${voyages[i + 1].departure_date}T${
-                voyages[i + 1].departure_time
+              `${voyages[i + 1].departure_date}T${voyages[i + 1].departure_time
               }`
             ) -
               Date.parse(
                 `${voyages[i].arrival_date}T${voyages[i].arrival_time}`
               )) /
-              1000 /
-              60
+            1000 /
+            60
           )} ожидания`,
           duration:
             (Date.parse(
-              `${voyages[i + 1].departure_date}T${
-                voyages[i + 1].departure_time
+              `${voyages[i + 1].departure_date}T${voyages[i + 1].departure_time
               }`
             ) -
               Date.parse(
@@ -60,9 +58,9 @@ const SearchResultTrainTicketInner = ({ flight, voyages, maxDuration }) => {
     } else {
       durations.push({
         type: "item",
-        name: `Вылет из ${voyages[i].departure_point_name_cases.po}, ${voyages[i].departure_point_name_airport}`,
-        add: `в ${voyages[i].departure_date} ${voyages[i].departure_time}`,
-        add2: `${formatDuration(voyages[i].duration)} в пути`,
+        name: `Вылет из ${voyages[i].departure_point_name_cases.po}, ${voyages[i].departure_point_name_airport}`,
+        add: `в ${voyages[i].departure_date} ${voyages[i].departure_time}`,
+        add2: `${formatDuration(voyages[i].duration)} в пути`,
         duration: voyages[i].duration
         //       fromDate: Date.parse(`${voyages[i].departure_date} ${voyages[i].departure_time}`),
         //       toDate: Date.parse(`${voyages[i].arrival_date} ${voyages[i].arrival_time}`)

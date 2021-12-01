@@ -37,9 +37,9 @@ const InputDepartureCity = ({
       getValueFromSessionStorageByKey("cityFrontFrom")
     const cityCodeFromSessionStorage =
       getValueFromSessionStorageByKey("cityApiFrom")
-    if (!!cityNameFromRedux) {
+    if (cityNameFromRedux) {
       setCurrentDepartureCity(cityNameFromRedux)
-    } else if (!!cityNameFromSessionStorage) {
+    } else if (cityNameFromSessionStorage) {
       dispatch(
         setRouteFrom({
           apiRoute: cityCodeFromSessionStorage,

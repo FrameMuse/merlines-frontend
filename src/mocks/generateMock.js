@@ -87,8 +87,8 @@ const pickedMonthInfo = (month, anotherMonth) => {
       ? 7
       : new Date(anotherMonth.year, anotherMonth.monthNumber - 1, 1).getDay()
     : new Date(currentYear, monthNumber - 1, 1).getDay() === 0
-    ? 7
-    : new Date(currentYear, monthNumber - 1, 1).getDay()
+      ? 7
+      : new Date(currentYear, monthNumber - 1, 1).getDay()
 
   return {
     year: anotherMonth ? anotherMonth.year : currentYear,
@@ -124,13 +124,13 @@ const lastMonthInfo = (pickedMonth) => {
 
   const FROM = lastMonthStart
     ? new Date(lastMonthYear, lastMonthNumber, lastMonthStart + 1)
-        .toISOString()
-        .slice(0, 10)
+      .toISOString()
+      .slice(0, 10)
     : 0
   const TO = lastMonthStart
     ? new Date(lastMonthYear, lastMonthNumber, lastMonthDays + 1)
-        .toISOString()
-        .slice(0, 10)
+      .toISOString()
+      .slice(0, 10)
     : 0
 
   // console.log(`from ${lastMonthStart} to ${lastMonthStart ? lastMonthDays : 0}`);

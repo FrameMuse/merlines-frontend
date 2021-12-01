@@ -185,17 +185,17 @@ function DropDownCalendarItem({ date, dateToInput }) {
         drop-down-calendar__day
         ${!date || notCurrent ? "drop-down-calendar__day--disabled" : ""}
         ${
-          isPicked
-            ? "drop-down-calendar__day--group drop-down-calendar__day--active"
-            : ""
-        }
+    isPicked
+      ? "drop-down-calendar__day--group drop-down-calendar__day--active"
+      : ""
+    }
         ${
-          dropDownCalendarParams.dateIntervalArr.find(
-            (item) => item === date.toISO().slice(0, 10)
-          )
-            ? "drop-down-calendar__day--group"
-            : ""
-        }
+    dropDownCalendarParams.dateIntervalArr.find(
+      (item) => item === date.toISO().slice(0, 10)
+    )
+      ? "drop-down-calendar__day--group"
+      : ""
+    }
         `}
     >
       <span className="drop-down-calendar__day-nam">{date.day}</span>

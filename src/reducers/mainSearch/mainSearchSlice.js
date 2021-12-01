@@ -61,8 +61,8 @@ export const mainSearchParamsSlice = createSlice({
       state.date.api.from = action.payload ? apiFrom : ""
       state.date.front.from = action.payload
         ? `${frontFrom.day} ${
-            monthNamesDate[frontFrom.month]
-          }, ${firstToUpperCase(frontFrom.weekdayShort)}`
+          monthNamesDate[frontFrom.month]
+        }, ${firstToUpperCase(frontFrom.weekdayShort)}`
         : ""
       state.date.mini.from = action.payload
         ? `${frontFrom.day} ${monthNamesDate[frontFrom.month]}`
@@ -78,8 +78,8 @@ export const mainSearchParamsSlice = createSlice({
       state.date.api.to = action.payload ? apiTo : ""
       state.date.front.to = action.payload
         ? `${frontTo.day} ${monthNamesDate[frontTo.month]}, ${firstToUpperCase(
-            frontTo.weekdayShort
-          )}`
+          frontTo.weekdayShort
+        )}`
         : ""
       state.date.mini.to = action.payload
         ? `${frontTo.day} ${monthNamesDate[frontTo.month]}`

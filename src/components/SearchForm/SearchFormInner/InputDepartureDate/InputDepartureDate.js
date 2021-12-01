@@ -17,7 +17,7 @@ const InputDepartureDate = ({ dateFromInputRef, dateToInputRef }) => {
       const eventTargetClosest = !!evt.target.closest(
         ".form__group.form__group--date-dep"
       )
-      const isCalendarDisplayed = !!!document.querySelector(
+      const isCalendarDisplayed = !document.querySelector(
         ".drop-down-calendar.block-hidden"
       )
       if (!eventTargetClosest && isCalendarDisplayed) {

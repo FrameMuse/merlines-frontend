@@ -34,11 +34,12 @@ function UpdAccessPopupReset() {
                 ? error.response.statusText
                 : errorMessages.error500
             )
-          default:
+          default: {
             const errorsData = takeErrors(error.response.data)
             errorsData.map((errorText) => toast.error(errorText))
             console.log(error.response.data)
             console.log(error)
+          }
         }
       }
     }

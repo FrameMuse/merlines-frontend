@@ -53,32 +53,30 @@ function SearchResultTicket(props) {
       durations.push(
         {
           type: "item",
-          name: `Вылет из ${voyages[i].departure_point_name_cases.po}, ${voyages[i].departure_point_name_airport}`,
-          add: `в ${voyages[i].departure_date} ${voyages[i].departure_time}`,
-          add2: `${formatDuration(voyages[i].duration)} в пути`,
+          name: `Вылет из ${voyages[i].departure_point_name_cases.po}, ${voyages[i].departure_point_name_airport}`,
+          add: `в ${voyages[i].departure_date} ${voyages[i].departure_time}`,
+          add2: `${formatDuration(voyages[i].duration)} в пути`,
           duration: voyages[i].duration
           //       fromDate: Date.parse(`${voyages[i].departure_date} ${voyages[i].departure_time}`),
           //       toDate: Date.parse(`${voyages[i].arrival_date} ${voyages[i].arrival_time}`)
         },
         {
           type: "stop",
-          name: `Пересадка в ${voyages[i].arrival_point_name_cases.pr}, ${voyages[i].arrival_point_name_airport}`,
+          name: `Пересадка в ${voyages[i].arrival_point_name_cases.pr}, ${voyages[i].arrival_point_name_airport}`,
           add: `${formatDuration(
             (Date.parse(
-              `${voyages[i + 1].departure_date}T${
-                voyages[i + 1].departure_time
+              `${voyages[i + 1].departure_date}T${voyages[i + 1].departure_time
               }`
             ) -
               Date.parse(
                 `${voyages[i].arrival_date}T${voyages[i].arrival_time}`
               )) /
-              1000 /
-              60
+            1000 /
+            60
           )} ожидания`,
           duration:
             (Date.parse(
-              `${voyages[i + 1].departure_date}T${
-                voyages[i + 1].departure_time
+              `${voyages[i + 1].departure_date}T${voyages[i + 1].departure_time
               }`
             ) -
               Date.parse(
@@ -91,9 +89,9 @@ function SearchResultTicket(props) {
     } else {
       durations.push({
         type: "item",
-        name: `Вылет из ${voyages[i].departure_point_name_cases.po}, ${voyages[i].departure_point_name_airport}`,
-        add: `в ${voyages[i].departure_date} ${voyages[i].departure_time}`,
-        add2: `${formatDuration(voyages[i].duration)} в пути`,
+        name: `Вылет из ${voyages[i].departure_point_name_cases.po}, ${voyages[i].departure_point_name_airport}`,
+        add: `в ${voyages[i].departure_date} ${voyages[i].departure_time}`,
+        add2: `${formatDuration(voyages[i].duration)} в пути`,
         duration: voyages[i].duration
         //       fromDate: Date.parse(`${voyages[i].departure_date} ${voyages[i].departure_time}`),
         //       toDate: Date.parse(`${voyages[i].arrival_date} ${voyages[i].arrival_time}`)
@@ -111,8 +109,7 @@ function SearchResultTicket(props) {
             carriers.map((carrier, index) => (
               <span
                 key={index}
-                className={`ticket__logo${
-                  carrierLogoOne ? "" : " ticket__logo--rounded"
+                className={`ticket__logo${carrierLogoOne ? "" : " ticket__logo--rounded"
                 }`}
               >
                 <img
@@ -126,8 +123,7 @@ function SearchResultTicket(props) {
             ))}
           <div className="ticket__nav">
             <Link
-              className={`ticket__item ${
-                isNoticeActive ? "ticket__item--active" : ""
+              className={`ticket__item ${isNoticeActive ? "ticket__item--active" : ""
               }`}
               onClick={() => setIsNoticeActive(!isNoticeActive)}
               to="#"
@@ -140,17 +136,15 @@ function SearchResultTicket(props) {
               />
               <div className="ticket__pop-up ticket__pop-up--multiline">
                 {`
-                  ${
-                    !isNoticeActive
-                      ? "Подписаться на уведомления об изменении цены на этот билет"
-                      : "Вы подписались на уведомления об изменении цены на этот билет"
-                  }
+                  ${!isNoticeActive
+      ? "Подписаться на уведомления об изменении цены на этот билет"
+      : "Вы подписались на уведомления об изменении цены на этот билет"
+    }
                 `}
               </div>
             </Link>
             <Link
-              className={`ticket__item ${
-                isFavouritesActive ? "ticket__item--active" : ""
+              className={`ticket__item ${isFavouritesActive ? "ticket__item--active" : ""
               }`}
               onClick={() => setIsFavouritesActive(!isFavouritesActive)}
               to="#"
@@ -163,17 +157,15 @@ function SearchResultTicket(props) {
               />
               <div className="ticket__pop-up">
                 {`
-                  ${
-                    !isFavouritesActive
-                      ? "Добавить в избранное"
-                      : "Вы добавили в избранное этот билет"
-                  }
+                  ${!isFavouritesActive
+      ? "Добавить в избранное"
+      : "Вы добавили в избранное этот билет"
+    }
                 `}
               </div>
             </Link>
             <Link
-              className={`ticket__item ${
-                isShareActive ? "ticket__item--active" : ""
+              className={`ticket__item ${isShareActive ? "ticket__item--active" : ""
               }`}
               onClick={() => setIsShareActive(!isShareActive)}
               to="#"
@@ -282,7 +274,7 @@ function SearchResultTicket(props) {
               <button
                 className={
                   voyages[0]?.flight_baggage &&
-                  voyages[0]?.flight_baggage !== ""
+                    voyages[0]?.flight_baggage !== ""
                     ? "ticket__btn ticket__btn--active"
                     : "ticket__btn"
                 }
@@ -327,7 +319,7 @@ function SearchResultTicket(props) {
             description="цена за 1 взрослого"
             ticketDealerName={sellersSorted[0].name}
             link={sellersSorted[0].link}
-            // ticketDealerLogo="images/partners/mego.png"
+          // ticketDealerLogo="images/partners/mego.png"
           />
           {sellersSorted.length - 1 > 0 && (
             <div className="ticket__more">
@@ -354,7 +346,7 @@ function SearchResultTicket(props) {
                 description="цена за 1 взрослого"
                 ticketDealerName={seller.name}
                 link={seller.link}
-                // ticketDealerLogo="images/partners/mego.png"
+              // ticketDealerLogo="images/partners/mego.png"
               />
             ))}
           <div className="ticket__content-inner">
@@ -366,7 +358,7 @@ function SearchResultTicket(props) {
               voyages.map((item, index) => {
                 const isAirportChange = voyages?.[index + 1]
                   ? voyages?.[index + 1]?.departure_point_id !==
-                    item?.arrival_point_id
+                  item?.arrival_point_id
                   : false
                 return (
                   <>
