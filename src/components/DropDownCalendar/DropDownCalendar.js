@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { DateTime } from 'luxon';
+// SCSS
 import './drop-down-calendar.scss'
+// ...
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { DateTime } from 'luxon'
 
 import {
   setIsOpenCalendar,
@@ -10,55 +12,71 @@ import {
   setTwoMonthsIntervals,
   setTwoMonthsCurrent,
   setTwoMonthsNext,
-  selectDropDownCalendar
-} from '../../reducers/dropDownCalendarSlice';
-import { selectMainSearchParams } from '../../reducers/mainSearchSlice';
-import DropDownCalendarSlider from './DropDownCalendarSlider';
-import DropDownCalendarMonth from './DropDownCalendarMonth';
-import DropDownCalendarSelectMonth from './DropDownCalendarSelectMonth';
+} from '../../reducers/dropDownCalendarSlice'
 
-function DropDownCalendar({ dateToInput, closeToggle, isOffsetCal, node }) {
-  const [isCurrent, setIsCurrent] = useState(true);
-  const dispatchCal = useDispatch();
-  const mainSearchParams = useSelector(selectMainSearchParams);
-  const { twoMonthsDates, twoMonthsIntervals } = useSelector(
-    selectDropDownCalendar
-  );
+import DropDownCalendarSlider from './DropDownCalendarSlider'
+import DropDownCalendarMonth from './DropDownCalendarMonth'
+import DropDownCalendarSelectMonth from './DropDownCalendarSelectMonth'
+import { classWithModifiers } from '../../utils'
+
+/**
+ * 
+ * @param {{
+ *  parentRef: React.MutableRefObject<HTMLElement>
+ *  dateInputRef: React.MutableRefObject<HTMLInputElement>
+ *  hasOffset?: boolean
+ *  hidden?: boolean
+ * }} props 
+ * @returns 
+ */
+function DropDownCalendar(props) {
+  const dispatch = useDispatch()
+  const [isCurrent, setIsCurrent] = useState(true)
+
+  // const mainSearchParams = useSelector(state => state.mainSearchParams)
+  const { twoMonthsDates, twoMonthsIntervals } = useSelector(state => state.dropDownCalendar)
 
   useEffect(() => {
-    document.addEventListener('mousedown', closeToggle);
+    dispatch(setTwoMonthsIntervals())
+    setIsCurrent(DateTime.now().month === twoMonthsDates.current.month)
+  }, [dispatch, twoMonthsDates])
 
-    return () => {
-      document.removeEventListener('mousedown', closeToggle);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  // Close Calendar on 'Escape' key
   useEffect(() => {
-    dispatchCal(setTwoMonthsIntervals());
-    setIsCurrent(DateTime.now().month === twoMonthsDates.current.month);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [twoMonthsDates]);
+    function escapeCloseEvent(event) {
+      if (event.key === "Escape") {
+        dispatch(setIsOpenCalendar(false))
+      }
+    }
+
+    window.addEventListener("keydown", escapeCloseEvent)
+    return () => window.removeEventListener("keydown", escapeCloseEvent)
+  }, [dispatch])
+
+  const modifiers = []
+
+  if (props.hasOffset) modifiers.push("offset")
+  if (props.hidden) modifiers.push("hidden")
 
   return (
     <div
-      ref={node}
-      className={isOffsetCal ? 'drop-down-calendar drop-down-calendar--offset' :  'drop-down-calendar'}
+      ref={props.parentRef}
+      className={classWithModifiers("drop-down-calendar", ...modifiers)}
     >
       <DropDownCalendarSlider
-        clickPrev={() => dispatchCal(setTwoMonthsMinus())}
-        clickNext={() => dispatchCal(setTwoMonthsPlus())}
+        clickPrev={() => dispatch(setTwoMonthsMinus())}
+        clickNext={() => dispatch(setTwoMonthsPlus())}
         isCurrent={isCurrent}
       />
       <div className="drop-down-calendar__container">
         <button
-          onClick={() => dispatchCal(setIsOpenCalendar())}
+          onClick={() => dispatch(setIsOpenCalendar())}
           className="drop-down-calendar__close-btn"
           type="button"
         >
           закрыть
         </button>
-        <div className="drop-down-calendar__form">
+        {/* <div className="drop-down-calendar__form">
           <div className="form__group form__group--date-dep">
             <input
               className="form__input"
@@ -93,9 +111,9 @@ function DropDownCalendar({ dateToInput, closeToggle, isOffsetCal, node }) {
               обратно
             </label>
           </div>
-        </div>
+        </div> */}
         <DropDownCalendarMonth
-          dateToInput={dateToInput}
+          dateToInput={props.dateInputRef}
           monthName={
             twoMonthsDates.current.reconfigure({ locale: 'ru' }).monthLong
           }
@@ -104,11 +122,11 @@ function DropDownCalendar({ dateToInput, closeToggle, isOffsetCal, node }) {
           currentMonth={twoMonthsDates.current}
         >
           <DropDownCalendarSelectMonth
-            dispatch={(e) => dispatchCal(setTwoMonthsCurrent(e.target.value))}
+            dispatch={(e) => dispatch(setTwoMonthsCurrent(e.target.value))}
           />
         </DropDownCalendarMonth>
         <DropDownCalendarMonth
-          dateToInput={dateToInput}
+          dateToInput={props.dateInputRef}
           monthName={
             twoMonthsDates.next.reconfigure({ locale: 'ru' }).monthLong
           }
@@ -117,12 +135,12 @@ function DropDownCalendar({ dateToInput, closeToggle, isOffsetCal, node }) {
           currentMonth={twoMonthsDates.next}
         >
           <DropDownCalendarSelectMonth
-            dispatch={(e) => dispatchCal(setTwoMonthsNext(e.target.value))}
+            dispatch={(e) => dispatch(setTwoMonthsNext(e.target.value))}
           />
         </DropDownCalendarMonth>
       </div>
     </div>
-  );
+  )
 }
 
-export default DropDownCalendar;
+export default DropDownCalendar

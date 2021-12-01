@@ -1,6 +1,5 @@
-@import "../../styles/vars";
-@import "../../styles/mixin";
-
+@import '../../styles/vars';
+@import '../../styles/mixin';
 
 .drop-down-calendar {
   height: 100vh;
@@ -35,6 +34,7 @@
       transform: none;
     }
   }
+
   @media #{$media-lg} {
     left: 50%;
     transform: translateX(-50%);
@@ -49,14 +49,26 @@
     @media #{$media-md} {
       left: 40%;
 
-      &::before { left: 30%; }
+      &::before {
+        left: 30%;
+      }
     }
+
     @media #{$media-lg} {
       left: 150%;
 
-      &::before { left: 50%; }
+      &::before {
+        left: 50%;
+      }
     }
   }
+
+  &--hidden {
+    opacity: 0;
+    // top: 5em;
+  }
+
+  transition: 250ms ease top, 250ms ease left, 200ms ease opacity;
 }
 
 .drop-down-calendar__container {
@@ -110,7 +122,9 @@
   position: relative;
 
   &--active {
-    .drop-down-calendar__list { visibility: visible; }
+    .drop-down-calendar__list {
+      visibility: visible;
+    }
   }
 }
 
@@ -121,7 +135,9 @@
 }
 
 .drop-down-calendar__month {
-  &::after { content: ","; }
+  &::after {
+    content: ',';
+  }
 }
 
 .drop-down-calendar__month-control {
@@ -175,13 +191,17 @@
 .drop-down-calendar__item {
   @media #{$media-md} {
     margin-bottom: 3px;
-    transition: .2s;
+    transition: 0.2s;
     cursor: pointer;
 
     &:hover,
-    &:focus { color: var(--color-blue); }
+    &:focus {
+      color: var(--color-blue);
+    }
 
-    &--current { color: var(--color-btn); }
+    &--current {
+      color: var(--color-btn);
+    }
 
     &--year {
       color: var(--color-grey);
@@ -247,7 +267,7 @@
     background-color: var(--color-light-blue-2);
 
     & + &::before {
-      content: "";
+      content: '';
       height: inherit;
       background-color: var(--color-light-blue-2);
       position: absolute;
@@ -291,12 +311,17 @@
     box-shadow: $shadow-2;
     box-sizing: border-box;
 
-    &--prev { transform: translateX(-50%) rotate(90deg); }
-    &--next { transform: translateX(50%) rotate(-90deg); }
+    &--prev {
+      transform: translateX(-50%) rotate(90deg);
+    }
+
+    &--next {
+      transform: translateX(50%) rotate(-90deg);
+    }
 
     &--disabled {
-      color: transparentize($color-blue, .6);
-      border-color: transparentize($color-blue, .6);
+      color: transparentize($color-blue, 0.6);
+      border-color: transparentize($color-blue, 0.6);
       cursor: default;
     }
   }
