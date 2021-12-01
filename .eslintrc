@@ -24,19 +24,24 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    // "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
       "modules": true
     },
     "ecmaVersion": "latest",
+    "requireConfigFile": false,
     "sourceType": "module"
   },
-  "parser": "@typescript-eslint/parser",
   "plugins": [
-    "react"
+    // "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "unused-imports"
   ],
   "rules": {
     "indent": [
@@ -64,10 +69,13 @@
     "no-multi-spaces": [
       "error"
     ],
+    // "@typescript-eslint/no-non-null-assertion": "off",
+    // "@typescript-eslint/no-explicit-any": "off",
     "react/react-in-jsx-scope": "off",
-    "react/no-children-prop": "warn",
-    "no-empty": "warn",
-    "react/prop-types": "warn",
-    "react/display-name": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/ban-types": "off",
+    "react/no-unescaped-entities": "off",
+    // "react-hooks/exhaustive-deps": "off"
   }
 }
