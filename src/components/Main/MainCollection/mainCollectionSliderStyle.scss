@@ -18,6 +18,7 @@
 }
 
 .form__inner {
+  position: relative;
   border: 2px solid transparent;
 }
 
@@ -40,7 +41,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 120px;
+  // width: 120px;
   margin-left: auto;
   margin-right: auto;
 }

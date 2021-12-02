@@ -9,8 +9,8 @@ function DropDownCalendarSelectMonth({ onMonthIndexChange }) {
   }, [onMonthIndexChange])
   return (
     <select onChange={event => onMonthIndexChange(event.currentTarget.value)} className="drop-down-calendar-select">
-      {getMonthList().map(month => (
-        <option key={"month_" + month.index} value={month.index}>{month.name}</option>
+      {getMonthList().map((month, index) => (
+        <option key={"month_" + index} value={month.index}>{month.name}</option>
       ))}
     </select>
   )
