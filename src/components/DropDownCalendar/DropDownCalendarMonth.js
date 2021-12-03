@@ -57,7 +57,7 @@ function DropDownCalendarMonth({ secondary }) {
       </div>
       <div className="drop-down-calendar__dates">
         <DropDownCalendarWeek />
-        <DropDownCalendarMonthDays />
+        <DropDownCalendarMonthDays currentDate={cursorDate} />
       </div>
     </div>
   )

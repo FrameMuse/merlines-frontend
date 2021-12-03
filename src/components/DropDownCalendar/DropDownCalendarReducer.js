@@ -12,7 +12,11 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
 
     case "SEARCH_CALENDAR_UPDATE":
-      return { ...state, ...payload }
+      return {
+        ...state,
+        ...payload,
+        dates: { ...state.dates, ...payload.dates }
+      }
 
     default:
       return state
