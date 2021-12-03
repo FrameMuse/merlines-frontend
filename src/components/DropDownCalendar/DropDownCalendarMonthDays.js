@@ -24,14 +24,14 @@ function DropDownCalendarMonthDays({ currentDate }) {
     return date
   }
 
-  function shouldBeGrouped() {
+  function shouldDayBeGrouped() {
     if (searchCalendar.mode === "single") return false
     if (searchCalendar.dates.first == null) return false
 
     return true
   }
-  function isItemActive(index) {
-    const thisDate = getCurrentDateWithDay(index)
+  function isDayActive(dayIndex) {
+    const thisDate = getCurrentDateWithDay(dayIndex)
     // Comparing by getTime because the rest of the data is the same
     if (Object.values(searchCalendar.dates).some(date => date?.getTime() === thisDate.getTime())) {
       return true
@@ -39,12 +39,12 @@ function DropDownCalendarMonthDays({ currentDate }) {
 
     return false
   }
-  function isItemGrouped(index) {
-    if (!shouldBeGrouped()) return false
+  function isDayGrouped(dayIndex) {
+    if (!shouldDayBeGrouped()) return false
 
-    if (enteredIndex === index) return true
+    if (enteredIndex === dayIndex) return true
 
-    const thisDate = getCurrentDateWithDay(index)
+    const thisDate = getCurrentDateWithDay(dayIndex)
     const firstDate = searchCalendar.dates.first
     const secondDate = searchCalendar.dates.second
 
@@ -72,15 +72,15 @@ function DropDownCalendarMonthDays({ currentDate }) {
   }
   return (
     <div className="drop-down-calendar__days-list">
-      {[...Array(getAmountOfDays(currentDate))].map((_, index) => (
+      {[...Array(getAmountOfDays(currentDate))].map((_, dayIndex) => (
         <DropDownCalendarItem
-          day={index + 1}
-          active={isItemActive(index)}
-          grouped={isItemGrouped(index)}
-          onClick={() => onDayClick(index)}
-          onPointerEnter={() => setEnteredIndex(index)}
+          day={dayIndex + 1}
+          active={isDayActive(dayIndex)}
+          grouped={isDayGrouped(dayIndex)}
+          onClick={() => onDayClick(dayIndex)}
+          onPointerEnter={() => setEnteredIndex(dayIndex)}
           onPointerLeave={() => setEnteredIndex(-1)}
-          key={"item_" + index}
+          key={"item_" + dayIndex}
         />
       ))}
     </div>
