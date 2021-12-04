@@ -17,14 +17,8 @@ function DropDownCalendarMonth({ secondary }) {
   const fullYear = cursorDate.getFullYear()
 
   function monthUpdate(monthIndex) {
-    const newDate = new Date(searchCalendar.cursorDate)
+    const newDate = new Date(cursorDate)
     newDate.setMonth(secondary ? (monthIndex - 1) : monthIndex)
-
-    const isPastDate = newDate.getTime() < Date.now()
-    if (isPastDate) {
-      dispatch(updateSearchCalendarCursorDate(new Date))
-      return
-    }
 
     dispatch(updateSearchCalendarCursorDate(newDate))
   }
@@ -52,7 +46,7 @@ function DropDownCalendarMonth({ secondary }) {
               svgHeight="7"
             />
           </div>
-          <DropDownCalendarSelectMonth onMonthIndexChange={monthUpdate} />
+          <DropDownCalendarSelectMonth currentDate={cursorDate} onMonthIndexChange={monthUpdate} />
         </div>
       </div>
       <div className="drop-down-calendar__dates">

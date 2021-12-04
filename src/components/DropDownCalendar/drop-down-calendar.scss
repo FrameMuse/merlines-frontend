@@ -289,8 +289,8 @@
   }
 
   &--active {
+    color: var(--color-white);
     background-color: var(--color-blue);
-    // z-index: 1;
   }
 }
 

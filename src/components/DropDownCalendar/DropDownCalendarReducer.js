@@ -6,7 +6,7 @@ const initialState = {
     second: null
   },
   cursorDate: new Date,
-  hoveredDate: new Date
+  hoveredDate: null
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -14,6 +14,17 @@ export default (state = initialState, { type, payload }) => {
 
     case "SEARCH_CALENDAR_UPDATE":
       return { ...state, ...payload }
+
+    case "SEARCH_CALENDAR_MODE_UPDATE":
+      return {
+        ...state,
+        ...payload,
+        // If mode gonna be changed to single, delete second date
+        dates: {
+          ...state.dates,
+          second: payload.mode === "single" ? null : state.dates.second
+        }
+      }
 
     case "SEARCH_CALENDAR_DATES_UPDATE": {
       const dates = { ...state.dates, ...payload.dates }
@@ -40,7 +51,7 @@ export default (state = initialState, { type, payload }) => {
 }
 
 export const updateSearchCalendarMode = mode => ({
-  type: "SEARCH_CALENDAR_UPDATE",
+  type: "SEARCH_CALENDAR_MODE_UPDATE",
   payload: { mode }
 })
 
@@ -57,4 +68,9 @@ export const updateSearchCalendarDates = dates => ({
 export const updateSearchCalendarCursorDate = cursorDate => ({
   type: "SEARCH_CALENDAR_UPDATE",
   payload: { cursorDate }
+})
+
+export const updateSearchCalendarHoveredDate = hoveredDate => ({
+  type: "SEARCH_CALENDAR_UPDATE",
+  payload: { hoveredDate }
 })
