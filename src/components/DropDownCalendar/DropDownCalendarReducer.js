@@ -5,7 +5,8 @@ const initialState = {
     first: null,
     second: null
   },
-  cursorDate: new Date
+  cursorDate: new Date,
+  hoveredDate: new Date
 }
 
 export default (state = initialState, { type, payload }) => {

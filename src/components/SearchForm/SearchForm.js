@@ -14,7 +14,7 @@ import {
   setDateIntervalFrom,
   setIsDateInterval,
   setIsOneClick,
-} from "../../reducers/dropDownCalendarSlice"
+} from "reducers/dropDownCalendarSlice"
 import {
   detectCityByGeoIp,
   setChangedInputFrom,
@@ -26,13 +26,13 @@ import {
   setPassengersInfoMini,
   setRouteFrom,
   setRouteTo
-} from "../../reducers/mainSearchSlice"
-import { createQuery, firstToUpperCase, pluralize } from "../../utils"
+} from "reducers/mainSearchSlice"
+import { createQuery, firstToUpperCase, pluralize } from "utils"
 import OpenBooking from "../common/OpenBooking"
 import DropDown from "../DropDown/DropDown"
 import DropDownCalendar from "../DropDownCalendar/DropDownCalendar"
 import DropDownPassengers from "../DropDownPassengers/DropDownPassengers"
-import { updateSearchCalendarIsOpen } from "components/DropDownCalendar/DropDownCalendarReducer"
+import { updateSearchCalendarMode, updateSearchCalendarIsOpen } from "components/DropDownCalendar/DropDownCalendarReducer"
 
 function SearchForm({ searchResult }) {
   const history = useHistory()
@@ -201,7 +201,7 @@ function SearchForm({ searchResult }) {
   }
 
   function chooseOneWay() {
-    dispatch(setOneWay(true))
+    dispatch(updateSearchCalendarMode("single"))
     dispatch(setDateTo())
     dispatch(setChangedInputTo(""))
     dispatch(setCalendarToInitial())
@@ -210,7 +210,7 @@ function SearchForm({ searchResult }) {
   }
 
   function chooseTwoWays() {
-    dispatch(setOneWay(false))
+    dispatch(updateSearchCalendarMode("double"))
     setHasCalendarOffset(true)
     dispatch(updateSearchCalendarIsOpen(true))
 
@@ -324,7 +324,7 @@ function SearchForm({ searchResult }) {
         <div
           onClick={chooseTwoWays}
           className={`form__nav-btn ${
-            !mainSearchParams.one_way ? "form__nav-btn--active" : ""
+            searchCalendar.mode === "double" ? "form__nav-btn--active" : ""
           }`}
         >
           Туда - обратно
@@ -332,7 +332,7 @@ function SearchForm({ searchResult }) {
         <div
           onClick={chooseOneWay}
           className={`form__nav-btn ${
-            mainSearchParams.one_way ? "form__nav-btn--active" : ""
+            searchCalendar.mode === "single" ? "form__nav-btn--active" : ""
           }`}
         >
           В одну сторону

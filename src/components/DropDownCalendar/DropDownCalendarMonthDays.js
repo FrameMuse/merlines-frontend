@@ -16,7 +16,6 @@ function getAmountOfDays(date) {
 function DropDownCalendarMonthDays({ currentDate }) {
   const dispatch = useDispatch()
   const searchCalendar = useSelector(state => state.searchCalendar)
-  const [enteredIndex, setEnteredIndex] = useState(-1)
   function getCurrentDateWithDay(dayIndex) {
     const date = new Date(currentDate)
     date.setDate(dayIndex)
@@ -42,15 +41,21 @@ function DropDownCalendarMonthDays({ currentDate }) {
   function isDayGrouped(dayIndex) {
     if (!shouldDayBeGrouped()) return false
 
-    if (enteredIndex === dayIndex) return true
-
     const thisDate = getCurrentDateWithDay(dayIndex)
     const firstDate = searchCalendar.dates.first
     const secondDate = searchCalendar.dates.second
 
-    if (thisDate.getTime() >= firstDate?.getTime() && thisDate.getTime() <= secondDate?.getTime()) {
+    if ((thisDate.getTime() >= firstDate?.getTime()) && (thisDate.getTime() <= secondDate?.getTime())) {
       return true
     }
+
+
+    // if (firstDate && secondDate) return false
+
+    // if (enteredIndex < 0) return false
+    // if (thisDate.getTime() > enteredDate.getTime()) {
+    //   return true
+    // }
 
     return false
   }
@@ -75,8 +80,6 @@ function DropDownCalendarMonthDays({ currentDate }) {
           active={isDayActive(dayIndex)}
           grouped={isDayGrouped(dayIndex)}
           onClick={() => onDayClick(dayIndex)}
-          onPointerEnter={() => setEnteredIndex(dayIndex)}
-          onPointerLeave={() => setEnteredIndex(-1)}
           key={"item_" + dayIndex}
         />
       ))}
