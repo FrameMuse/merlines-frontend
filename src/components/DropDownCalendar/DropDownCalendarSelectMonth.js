@@ -1,16 +1,24 @@
 import { useCallback } from "react"
 
-function DropDownCalendarSelectMonth({ onMonthIndexChange }) {
+function DropDownCalendarSelectMonth({ currentDate, onMonthIndexChange }) {
   const getMonthList = useCallback(() => {
     return [...Array(12)].map((_, index) => {
-      const name = new Date(null, index).toLocaleDateString("ru", { month: "long" })
-      return { index, name } // monthIndex, monthName
+      const date = new Date(currentDate)
+      date.setMonth(index)
+      const name = date.toLocaleDateString("ru", { month: "long" })
+      return { index, name, date } // monthIndex, monthName
     })
-  }, [onMonthIndexChange])
+  }, [currentDate, onMonthIndexChange])
   return (
-    <select onChange={event => onMonthIndexChange(event.currentTarget.value)} className="drop-down-calendar-select">
+    <select className="drop-down-calendar-select" onChange={event => onMonthIndexChange(event.currentTarget.value)}>
       {getMonthList().map((month, index) => (
-        <option key={"month_" + index} value={month.index}>{month.name}</option>
+        <option
+          value={month.index}
+          children={month.name}
+          selected={month.date.getTime() === currentDate.getTime()}
+          disabled={month.date.getTime() < Date.now()}
+          key={"month_" + index}
+        />
       ))}
     </select>
   )
