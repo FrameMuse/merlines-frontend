@@ -58,17 +58,12 @@ function DropDownCalendarMonthDays({ currentDate }) {
   function onDayClick(dayIndex) {
     const newDate = getCurrentDateWithDay(dayIndex)
 
-    if (searchCalendar.dates.first == null) {
-      dispatch(updateSearchCalendarDates({ first: newDate, second: null }))
-      return
-    }
-
     if (searchCalendar.dates.second == null) {
       dispatch(updateSearchCalendarDates({ second: newDate }))
       return
     }
 
-    dispatch(updateSearchCalendarDates({ first: null }))
+    dispatch(updateSearchCalendarDates({ first: newDate, second: null }))
   }
   return (
     <div className="drop-down-calendar__days-list">
