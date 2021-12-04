@@ -1,25 +1,40 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { classWithModifiers } from "utils"
 import Svg from "../common/Svg"
+import { updateSearchCalendarCursorDate } from "./DropDownCalendarReducer"
 
-function DropDownCalendarSlider({ clickPrev, clickNext, isCurrent }) {
-  const left = (evt) => {
-    evt.preventDefault()
-    !isCurrent && clickPrev()
+function DropDownCalendarSlider() {
+  const dispatch = useDispatch()
+  const searchCalendar = useSelector(state => state.searchCalendar)
+  const isCursorDatePast = searchCalendar.cursorDate.getTime() < Date.now()
+
+  const modifiers = ["prev"]
+  if (isCursorDatePast) modifiers.push("disabled")
+
+  function prev() {
+    if (isCursorDatePast) return
+
+    const newDate = new Date(searchCalendar.cursorDate)
+    newDate.setMonth(newDate.getMonth() - 1)
+
+    dispatch(updateSearchCalendarCursorDate(newDate))
   }
 
-  const right = (evt) => {
-    evt.preventDefault()
-    clickNext()
+  function next() {
+    const newDate = new Date(searchCalendar.cursorDate)
+    newDate.setMonth(newDate.getMonth() + 1)
+
+    dispatch(updateSearchCalendarCursorDate(newDate))
   }
+
+  useEffect(() => {
+    searchCalendar
+  }, [searchCalendar])
 
   return (
     <div className="drop-down-calendar__control">
-      {/* drop-down-calendar__control-btn--disabled */}
-      <button
-        onClick={left}
-        className={`drop-down-calendar__control-btn drop-down-calendar__control-btn--prev ${
-          isCurrent && "drop-down-calendar__control-btn--disabled"
-        }`}
-      >
+      <button onClick={prev} className={classWithModifiers("drop-down-calendar__control-btn", ...modifiers)}>
         <Svg
           svgClass="drop-down-calendar__control-icon"
           svgName="arrow-filter"
@@ -27,10 +42,7 @@ function DropDownCalendarSlider({ clickPrev, clickNext, isCurrent }) {
           svgHeight="10"
         />
       </button>
-      <button
-        onClick={right}
-        className="drop-down-calendar__control-btn drop-down-calendar__control-btn--next"
-      >
+      <button onClick={next} className="drop-down-calendar__control-btn drop-down-calendar__control-btn--next">
         <Svg
           svgClass="drop-down-calendar__control-icon"
           svgName="arrow-filter"

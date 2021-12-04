@@ -40,7 +40,7 @@ function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
     } else return monthArr[index]
   }
 
-  const isCurrentMonth =
+  const isCurrentDate =
     DateTime.now().toISO().slice(0, 7) ===
     priceCalendarData.pickedMonthData.currentMonthDate
 
@@ -141,7 +141,7 @@ function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
       </Link>
       <div className="days__center">
         <Svg
-          handleClick={!isCurrentMonth ? pickMonth : undefined}
+          handleClick={!isCurrentDate ? pickMonth : undefined}
           svgClass="days__arrow-center days__arrow-center--left"
           svgName="arrow-open"
           svgWidth="10"

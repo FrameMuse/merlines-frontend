@@ -14,8 +14,7 @@ import {
   setDateIntervalFrom,
   setIsDateInterval,
   setIsOneClick,
-  setIsOpenCalendar
-} from "../../reducers/dropDownCalendarSlice"
+} from "reducers/dropDownCalendarSlice"
 import {
   detectCityByGeoIp,
   setChangedInputFrom,
@@ -27,12 +26,13 @@ import {
   setPassengersInfoMini,
   setRouteFrom,
   setRouteTo
-} from "../../reducers/mainSearchSlice"
-import { createQuery, firstToUpperCase, pluralize } from "../../utils"
+} from "reducers/mainSearchSlice"
+import { createQuery, firstToUpperCase, pluralize } from "utils"
 import OpenBooking from "../common/OpenBooking"
 import DropDown from "../DropDown/DropDown"
 import DropDownCalendar from "../DropDownCalendar/DropDownCalendar"
 import DropDownPassengers from "../DropDownPassengers/DropDownPassengers"
+import { updateSearchCalendarMode, updateSearchCalendarIsOpen } from "components/DropDownCalendar/DropDownCalendarReducer"
 
 function SearchForm({ searchResult }) {
   const history = useHistory()
@@ -54,7 +54,7 @@ function SearchForm({ searchResult }) {
 
   const accessData = useSelector((state) => state.accessData)
   const mainSearchParams = useSelector((state) => state.mainSearchParams)
-  const dropDownCalendar = useSelector((state) => state.dropDownCalendar)
+  const searchCalendar = useSelector((state) => state.searchCalendar)
 
   const [formError, setFormError] = useState(false)
 
@@ -201,7 +201,7 @@ function SearchForm({ searchResult }) {
   }
 
   function chooseOneWay() {
-    dispatch(setOneWay(true))
+    dispatch(updateSearchCalendarMode("single"))
     dispatch(setDateTo())
     dispatch(setChangedInputTo(""))
     dispatch(setCalendarToInitial())
@@ -210,9 +210,9 @@ function SearchForm({ searchResult }) {
   }
 
   function chooseTwoWays() {
-    dispatch(setOneWay(false))
+    dispatch(updateSearchCalendarMode("double"))
     setHasCalendarOffset(true)
-    dispatch(setIsOpenCalendar(true))
+    dispatch(updateSearchCalendarIsOpen(true))
 
     if (mainSearchParams.date.api.from) return
     const fromDate = DateTime.fromISO(mainSearchParams.date.api.from)
@@ -234,19 +234,19 @@ function SearchForm({ searchResult }) {
     setHasCalendarOffset(false)
     dispatch(setIsOneClick(true))
     dispatch(setIsDateInterval(false))
-    dispatch(setIsOpenCalendar(true))
+    dispatch(updateSearchCalendarIsOpen(true))
   }
   function onReturnDateFocus() {
     dispatch(setOneWay(false))
     setHasCalendarOffset(true)
-    dispatch(setIsOpenCalendar(true))
+    dispatch(updateSearchCalendarIsOpen(true))
 
     const fromDate = DateTime.fromISO(mainSearchParams.date.api.from)
 
     if (mainSearchParams.date.api.from && !mainSearchParams.date.api.to) {
       dispatch(setIsOneClick(false))
       dispatch(setIsDateInterval(true))
-      dispatch(setIsOpenCalendar(true))
+      dispatch(updateSearchCalendarIsOpen(true))
 
       dispatch(setDateIntervalFrom(fromDate.toISO().slice(0, 10)))
       dispatch(
@@ -261,7 +261,7 @@ function SearchForm({ searchResult }) {
 
   function onPassengersFocus() {
     setIsPassengersOpen(true)
-    dispatch(setIsOpenCalendar(false))
+    dispatch(updateSearchCalendarIsOpen(false))
   }
   function onPassengersTabPressed(event) {
     if (event.key !== "Tab") return
@@ -301,13 +301,13 @@ function SearchForm({ searchResult }) {
 
   // Close CalendarDropDown
   useClickAway(calendarDropDownRef, (event) => {
-    if (!dropDownCalendar.isOpenCalendar) return
+    if (!searchCalendar.isOpen) return
 
     if (event.path.includes(departureDateInputRef.current?.parentElement))
       return
     if (event.path.includes(returnDateInputRef.current?.parentElement)) return
 
-    dispatch(setIsOpenCalendar(false))
+    dispatch(updateSearchCalendarIsOpen(false))
   })
   // Close PassengersDropDown
   useClickAway(passengersDropDownRef, (event) => {
@@ -324,7 +324,7 @@ function SearchForm({ searchResult }) {
         <div
           onClick={chooseTwoWays}
           className={`form__nav-btn ${
-            !mainSearchParams.one_way ? "form__nav-btn--active" : ""
+            searchCalendar.mode === "double" ? "form__nav-btn--active" : ""
           }`}
         >
           Туда - обратно
@@ -332,7 +332,7 @@ function SearchForm({ searchResult }) {
         <div
           onClick={chooseOneWay}
           className={`form__nav-btn ${
-            mainSearchParams.one_way ? "form__nav-btn--active" : ""
+            searchCalendar.mode === "single" ? "form__nav-btn--active" : ""
           }`}
         >
           В одну сторону
@@ -385,7 +385,7 @@ function SearchForm({ searchResult }) {
             autoComplete="off"
             ref={citiesInfoInputRef}
             tabIndex="2"
-            onFocus={() => dispatch(setIsOpenCalendar(false))}
+            onFocus={() => dispatch(updateSearchCalendarIsOpen(false))}
           />
           <label
             className="form__label form__label--arrival"
@@ -423,12 +423,6 @@ function SearchForm({ searchResult }) {
           <label className="form__label" htmlFor="date-departure">
             туда
           </label>
-          <DropDownCalendar
-            parentRef={calendarDropDownRef}
-            dateInputRef={returnDateInputRef}
-            hasOffset={hasCalendarOffset}
-            hidden={!dropDownCalendar.isOpenCalendar}
-          />
         </div>
         <div className="form__group form__group--date-arr">
           <input
@@ -471,6 +465,7 @@ function SearchForm({ searchResult }) {
           />
         </div>
         <input className="form__btn" type="submit" value="Найти" tabIndex="6" />
+        <DropDownCalendar parentRef={calendarDropDownRef} hasOffset={hasCalendarOffset}/>
       </div>
       {!searchResult && <OpenBooking />}
     </form>

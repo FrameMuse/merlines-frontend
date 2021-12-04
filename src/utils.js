@@ -73,7 +73,7 @@ const getDaysInterval = (date, calendar) => {
     }
   }
 }
-
+// TODO: rename to capitalize
 const firstToUpperCase = (str) => {
   if (!str) return str
   return str[0].toUpperCase() + str.slice(1)

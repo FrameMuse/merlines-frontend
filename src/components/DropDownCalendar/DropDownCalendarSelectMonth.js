@@ -1,25 +1,16 @@
 import { useCallback } from "react"
-import { DateTime } from "luxon"
 
-const DropDownCalendarSelectMonth = ({ dispatch }) => {
-  const getMonthData = useCallback(() => {
-    const currMonth = DateTime.now().month
-    return Array.from({ length: 12 }, (e, i) => {
-      return {
-        text: new Date(null, currMonth + i, null).toLocaleDateString("ru", {
-          month: "long"
-        }),
-        date: DateTime.now().plus({ months: i }).toISODate()
-      }
+function DropDownCalendarSelectMonth({ onMonthIndexChange }) {
+  const getMonthList = useCallback(() => {
+    return [...Array(12)].map((_, index) => {
+      const name = new Date(null, index).toLocaleDateString("ru", { month: "long" })
+      return { index, name } // monthIndex, monthName
     })
-  }, [])
-
+  }, [onMonthIndexChange])
   return (
-    <select onChange={dispatch} className="drop-down-calendar-select">
-      {getMonthData().map((month, index) => (
-        <option key={index} value={month.date}>
-          {month.text}
-        </option>
+    <select onChange={event => onMonthIndexChange(event.currentTarget.value)} className="drop-down-calendar-select">
+      {getMonthList().map((month, index) => (
+        <option key={"month_" + index} value={month.index}>{month.name}</option>
       ))}
     </select>
   )
