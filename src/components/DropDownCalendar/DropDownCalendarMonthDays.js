@@ -58,9 +58,11 @@ function DropDownCalendarMonthDays({ currentDate }) {
   function onDayClick(dayIndex) {
     const newDate = getCurrentDateWithDay(dayIndex)
 
-    if (searchCalendar.dates.second == null) {
-      dispatch(updateSearchCalendarDates({ second: newDate }))
-      return
+    if (searchCalendar.mode === "double") {
+      if (searchCalendar.dates.second == null) {
+        dispatch(updateSearchCalendarDates({ second: newDate }))
+        return
+      }
     }
 
     dispatch(updateSearchCalendarDates({ first: newDate, second: null }))
