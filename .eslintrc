@@ -41,7 +41,8 @@
     // "react",
     "react-hooks",
     "@typescript-eslint",
-    "unused-imports"
+    "unused-imports",
+    "simple-import-sort"
   ],
   "rules": {
     "default-case": "warn",
@@ -77,6 +78,7 @@
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/ban-types": "off",
     "react/no-unescaped-entities": "off",
+    "simple-import-sort/imports": "error"
     // "react-hooks/exhaustive-deps": "off"
   }
 }
