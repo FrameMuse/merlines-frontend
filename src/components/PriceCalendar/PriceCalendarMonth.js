@@ -1,18 +1,18 @@
-import { Link, useLocation, useHistory } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
+import { Link, useHistory,useLocation } from "react-router-dom"
+
 import api from "../../api/api"
-import routes from "../../routes"
-import { dateToMonthName, getDaysInterval, firstToUpperCase } from "../../utils"
+import useFullRoute from "../../hooks/useFullRoute"
+import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
 import {
-  setPickedMonthData,
   clearPickedMonthData,
+  setCurrentMonthDate,
   setDaysInterval,
   setMonthDate,
-  setCurrentMonthDate
-} from "../../reducers/priceCalendarSlice"
-import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
+  setPickedMonthData} from "../../reducers/priceCalendarSlice"
 import { setHistoryRoute } from "../../reducers/routesDataSlice"
-import useFullRoute from "../../hooks/useFullRoute"
+import routes from "../../routes"
+import { dateToMonthName, firstToUpperCase,getDaysInterval } from "../../utils"
 
 function PriceCalendarMonth(props) {
   const { transport, monthDate, price, betterPrice, setPickedMonthName } = props

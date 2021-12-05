@@ -1,6 +1,7 @@
 import { Duration } from "luxon"
-import Svg from "../../common/Svg"
 import React from "react"
+
+import Svg from "../../common/Svg"
 
 function SearchResultTicketTransfer({
   transfers,

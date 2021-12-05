@@ -1,13 +1,15 @@
+import "./logout.scss"
+
 import React from "react"
+import { useDispatch,useSelector } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
 import { toast } from "react-toastify"
-import Svg from "./Svg"
+
 import api from "../../api/api"
-import routes from "../../routes"
 import { errorMessages } from "../../constants"
 import { selectAccessData, setLoginToken } from "../../reducers/accessDataSlice"
-import "./logout.scss"
+import routes from "../../routes"
+import Svg from "./Svg"
 
 function Logout() {
   const history = useHistory()

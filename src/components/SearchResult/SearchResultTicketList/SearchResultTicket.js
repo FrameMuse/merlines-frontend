@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
 import "../ticket.scss"
 
-import Svg from "../../common/Svg"
+import React, { useEffect,useState } from "react"
+import { Link } from "react-router-dom"
+
 import { separateThousand, toTranslateBaggageCode } from "../../../utils"
+import Svg from "../../common/Svg"
 import { formatDuration, shortenDate } from "../utils"
-import SearchResultTicketOffer from "./SearchResultTicketOffer"
 import SearchResultTicketMini from "./SearchResultTicketMini"
+import SearchResultTicketOffer from "./SearchResultTicketOffer"
 import SearchResultTicketTransfer from "./SearchResultTicketTransfer"
 
 function SearchResultTicket(props) {

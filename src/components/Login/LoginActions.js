@@ -1,17 +1,17 @@
 import axios from "axios"
 import { push } from "connected-react-router"
-import { BASE_URL, errorMessages } from "../../constants"
-import { SET_TOKEN, SET_CURRENT_USER, UNSET_CURRENT_USER } from "./LoginTypes"
-import { setAxiosAuthToken, simpleOnError, takeErrors } from "../../utils"
-import routes from "../../routes"
-import { setLoginToken } from "../../reducers/accessDataSlice"
 import { toast } from "react-toastify"
-import {
-  setLkFirstName,
-  setLkLastName,
-  setLkEmail
-} from "../../reducers/lkDataSlice"
+
 import api from "../../api/api"
+import { BASE_URL, errorMessages } from "../../constants"
+import { setLoginToken } from "../../reducers/accessDataSlice"
+import {
+  setLkEmail,
+  setLkFirstName,
+  setLkLastName} from "../../reducers/lkDataSlice"
+import routes from "../../routes"
+import { setAxiosAuthToken, simpleOnError, takeErrors } from "../../utils"
+import { SET_CURRENT_USER, SET_TOKEN, UNSET_CURRENT_USER } from "./LoginTypes"
 
 axios.defaults.baseURL = BASE_URL
 

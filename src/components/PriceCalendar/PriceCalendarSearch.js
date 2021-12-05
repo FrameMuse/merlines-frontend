@@ -1,27 +1,27 @@
-import { useState, useRef, useEffect } from "react"
-import { useHistory, useLocation } from "react-router-dom"
 import { DateTime } from "luxon"
-import { useSelector, useDispatch } from "react-redux"
-import {
-  selectPriceCalendar,
-  clearPickedMonthData,
-  setPickedMonthData
-} from "../../reducers/priceCalendarSlice"
+import { useEffect,useRef, useState } from "react"
+import { useDispatch,useSelector } from "react-redux"
+import { useHistory, useLocation } from "react-router-dom"
+
+import api from "../../api/api"
+import useDebounce from "../../hooks/useDebounce"
+import { selectAccessData } from "../../reducers/accessDataSlice"
 import {
   selectMainSearchParams,
+  setOneWay,
   setRouteFrom,
-  setRouteTo,
-  setOneWay
-} from "../../reducers/mainSearchSlice"
+  setRouteTo} from "../../reducers/mainSearchSlice"
+import {
+  clearPickedMonthData,
+  selectPriceCalendar,
+  setPickedMonthData
+} from "../../reducers/priceCalendarSlice"
 import {
   setPriceCalendarSearchRouteAir,
   setPriceCalendarSearchRouteBus
 } from "../../reducers/routesDataSlice"
-import { selectAccessData } from "../../reducers/accessDataSlice"
-import api from "../../api/api"
-import DropDown from "../DropDown/DropDown"
-import useDebounce from "../../hooks/useDebounce"
 import { dateToMonthName, firstToUpperCase } from "../../utils"
+import DropDown from "../DropDown/DropDown"
 // import useFullRoute from '../../hooks/useFullRoute';
 // import useQuery from '../../hooks/useQuery';
 

@@ -1,14 +1,13 @@
-import React, { Component } from "react"
-import { withRouter } from "react-router-dom"
-import { connect } from "react-redux"
 import PropTypes from "prop-types"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
 
-import { signupNewUser } from "./SignupActions"
-import routes from "../../routes"
 import { validationMessages } from "../../constants"
-
+import routes from "../../routes"
 import Svg from "../common/Svg"
+import { signupNewUser } from "./SignupActions"
 class Signup extends Component {
   constructor(props) {
     super(props)

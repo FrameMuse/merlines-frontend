@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { DateTime } from "luxon"
+
 import { monthNamesDate } from "../constants"
 import { firstToUpperCase } from "../utils"
 

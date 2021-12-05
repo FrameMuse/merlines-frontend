@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect,useState } from "react"
+
 import TransportSwitcher from "../../common/TransportSwitcher"
-import SearchResultTicket from "./SearchResultTicket/SearchResultTicket"
-import SearchResultTicketNotFound from "../../TechnicalPages/SearchResultTicketNotFound"
-import SearchResultBusTickets from "./SearchResultBusTickets/"
-import SearchResultWeekPrice from "../SearchResultWeekPrice/SearchResultWeekPrice"
-import SearchResultSubscribePrice from "../SearchResultSubscribePrice/SearchResultSubscribePrice"
-import SearchResultFilters from "../SearchResultFilters/SearchResultFilters"
-import { returnInputs } from "../utils"
-import SearchResultTrainTickets from "./SearchResultTrainTickets/SearchResultTrainTickets"
 import PreloaderDots from "../../Preloaders/PreloaderDots/PreloaderDots"
+import SearchResultTicketNotFound from "../../TechnicalPages/SearchResultTicketNotFound"
+import SearchResultFilters from "../SearchResultFilters/SearchResultFilters"
+import SearchResultSubscribePrice from "../SearchResultSubscribePrice/SearchResultSubscribePrice"
+import SearchResultWeekPrice from "../SearchResultWeekPrice/SearchResultWeekPrice"
+import { returnInputs } from "../utils"
+import SearchResultBusTickets from "./SearchResultBusTickets/"
+import SearchResultTicket from "./SearchResultTicket/SearchResultTicket"
+import SearchResultTrainTickets from "./SearchResultTrainTickets/SearchResultTrainTickets"
 
 function SearchResultTicketList({
   searchData,

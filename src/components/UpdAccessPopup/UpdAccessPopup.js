@@ -1,18 +1,19 @@
 import { useState } from "react"
-import { Link, useHistory, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { setHistoryRoute } from "../../reducers/routesDataSlice"
+import { Link, useHistory, useLocation } from "react-router-dom"
+
+import useFullRoute from "../../hooks/useFullRoute"
+import useQuery from "../../hooks/useQuery"
 import {
   selectAccessData,
   setIsRememberMe
 } from "../../reducers/accessDataSlice"
-import Svg from "../common/Svg"
-import UpdAccessPopupConfirm from "./UpdAccessPopupConfirm"
-import Signup from "../Signup/Signup"
-import Login from "../Login/Login"
+import { setHistoryRoute } from "../../reducers/routesDataSlice"
 import routes from "../../routes"
-import useQuery from "../../hooks/useQuery"
-import useFullRoute from "../../hooks/useFullRoute"
+import Svg from "../common/Svg"
+import Login from "../Login/Login"
+import Signup from "../Signup/Signup"
+import UpdAccessPopupConfirm from "./UpdAccessPopupConfirm"
 
 function UpdAccessPopup({ login, active }) {
   const history = useHistory()

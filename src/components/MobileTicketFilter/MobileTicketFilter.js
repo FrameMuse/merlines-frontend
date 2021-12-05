@@ -1,10 +1,11 @@
-import SearchResultSubscribePrice from "../SearchResult/SearchResultSubscribePrice/SearchResultSubscribePrice"
-import SearchResultPopularFilterItem from "../SearchResult/SearchResultFilters/SearchResultPopularFilter"
-import SearchResultCustomFilter from "../SearchResult/SearchResultFilters/SearchResultCustomFilter"
 import { useSelector } from "react-redux"
-import { returnInputs } from "../SearchResult/utils"
+
 import { selectFilter } from "../../reducers/filtersSlice"
 import { selectSearchResult } from "../../reducers/searchResultSlice"
+import SearchResultCustomFilter from "../SearchResult/SearchResultFilters/SearchResultCustomFilter"
+import SearchResultPopularFilterItem from "../SearchResult/SearchResultFilters/SearchResultPopularFilter"
+import SearchResultSubscribePrice from "../SearchResult/SearchResultSubscribePrice/SearchResultSubscribePrice"
+import { returnInputs } from "../SearchResult/utils"
 
 function MobileTicketFilter({ setIsOpenFilter }) {
   const { transfers } = useSelector(selectFilter)

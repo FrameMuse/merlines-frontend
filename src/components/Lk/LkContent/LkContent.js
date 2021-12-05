@@ -1,10 +1,11 @@
 import { useLocation } from "react-router-dom"
+
 import routes from "../../../routes"
 import LkFavourites from "../LkFavourites/LkFavourites"
-import LkHistory from "../LkHistory/LkHistory"
-import LkSubscription from "../LkSubscription/LkSubscription"
 import LkFeedback from "../LkFeedback/LkFeedback"
+import LkHistory from "../LkHistory/LkHistory"
 import LkProfileEdit from "../LkProfileEdit/LkProfileEdit"
+import LkSubscription from "../LkSubscription/LkSubscription"
 
 function LkContent() {
   const path = useLocation().pathname

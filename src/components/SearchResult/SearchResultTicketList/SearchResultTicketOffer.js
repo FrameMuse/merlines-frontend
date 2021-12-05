@@ -1,6 +1,7 @@
 import React from "react"
-import SearchResultTicketBuy from "./SearchResultTicketBuy"
+
 import { separateThousand } from "../../../utils"
+import SearchResultTicketBuy from "./SearchResultTicketBuy"
 
 function SearchResultTicketOffer({
   price,

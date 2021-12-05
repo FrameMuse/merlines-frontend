@@ -1,10 +1,12 @@
 // SCSS
 import "./passengers-list.scss"
-// ...
-import { passengerTypes, passengerClasses } from "../../constants"
-import DropDownPassengersItem from "./DropDownPassengersItem"
-import DropDownPassengersClass from "./DropDownPassengersClass"
+
 import React from "react"
+
+// ...
+import { passengerClasses,passengerTypes } from "../../constants"
+import DropDownPassengersClass from "./DropDownPassengersClass"
+import DropDownPassengersItem from "./DropDownPassengersItem"
 
 function DropDownPassengers({ parentRef, isPassengersOpen }) {
   return (

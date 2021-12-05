@@ -1,5 +1,6 @@
+import { useDispatch,useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+
 import { selectLkData, setIsOpenClearHistory } from "../../reducers/lkDataSlice"
 
 function LkClearHistory() {

@@ -1,16 +1,17 @@
-import { Link, useLocation } from "react-router-dom"
-import { useSelector } from "react-redux"
 import "./transports.scss"
 
-import routes from "../../routes"
-import { Transport } from "../../constants"
-import Svg from "./Svg"
-import { selectPriceCalendar } from "../../reducers/priceCalendarSlice"
-import { selectSearchResult } from "../../reducers/searchResultSlice"
-import { selectRoutesData } from "../../reducers/routesDataSlice"
-import useQuery from "../../hooks/useQuery"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { Link, useLocation } from "react-router-dom"
+
+import { Transport } from "../../constants"
+import useQuery from "../../hooks/useQuery"
+import { selectPriceCalendar } from "../../reducers/priceCalendarSlice"
+import { selectRoutesData } from "../../reducers/routesDataSlice"
 import { selectSearchBusTicketResult } from "../../reducers/searchResultBusTicketsSlice"
+import { selectSearchResult } from "../../reducers/searchResultSlice"
+import routes from "../../routes"
+import Svg from "./Svg"
 
 function TransportSwitcher({
   isCalendar,

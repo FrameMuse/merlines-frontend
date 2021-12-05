@@ -1,18 +1,20 @@
-import React, { useEffect } from "react"
-import { useLocation } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import "./days.scss"
+
 import { DateTime } from "luxon"
+import React, { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { useLocation } from "react-router-dom"
+
 import api from "../../../api/api"
 import { weekDays } from "../../../constants"
+// import useFullRoute from '../../../hooks/useFullRoute';
+import useQuery from "../../../hooks/useQuery"
+import { setRouteFrom, setRouteTo } from "../../../reducers/mainSearchSlice"
+import { setPickedMonthData } from "../../../reducers/priceCalendarSlice"
+import parseParamsFromRoute from "../../../services/parseParamsFromRoute"
 import { dateToMonthName, firstToUpperCase } from "../../../utils"
 import PriceCalendarDaysHeader from "./PriceCalendarDaysHeader"
 import PriceCalendarDaysList from "./PriceCalendarDaysList"
-// import useFullRoute from '../../../hooks/useFullRoute';
-import useQuery from "../../../hooks/useQuery"
-import { setPickedMonthData } from "../../../reducers/priceCalendarSlice"
-import { setRouteFrom, setRouteTo } from "../../../reducers/mainSearchSlice"
-import parseParamsFromRoute from "../../../services/parseParamsFromRoute"
-import "./days.scss"
 
 function PriceCalendarDays({ pickedMonthName, setPickedMonthName }) {
   const location = useLocation()

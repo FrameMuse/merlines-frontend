@@ -1,6 +1,7 @@
-import MainPromoTitle from "./MainPromoTitle"
-import MainPromoSubtitle from "./MainPromoSubtitle"
 import "./advantages.scss"
+
+import MainPromoSubtitle from "./MainPromoSubtitle"
+import MainPromoTitle from "./MainPromoTitle"
 import MainPromoSlider from "./slick/MainPromoSlider"
 
 function MainPromo() {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+
 import SearchResultBusTicket from "../SearchResultTrainTicket"
 
 const SearchResultTrainTicketList = ({ tickets }) => {

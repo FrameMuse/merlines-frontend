@@ -1,8 +1,9 @@
 import React from "react"
+import { Link } from "react-router-dom"
+
 import Subscribe from "../Subscribe/Subscribe"
 import AccordionFAQ from "./AccordionFAQ"
 import questionSet from "./FAQSet.json"
-import { Link } from "react-router-dom"
 
 const FAQ = () => {
   return (

@@ -1,10 +1,12 @@
+import "./textarea.scss"
+
 import React from "react"
-import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
+
+import useFullRoute from "../../../hooks/useFullRoute"
 import { setHistoryRoute } from "../../../reducers/routesDataSlice"
 import routes from "../../../routes"
-import useFullRoute from "../../../hooks/useFullRoute"
-import "./textarea.scss"
 
 function LkFeedback() {
   const fullRoute = useFullRoute()

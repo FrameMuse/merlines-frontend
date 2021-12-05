@@ -1,11 +1,12 @@
-import { Switch, Route } from "react-router-dom"
-import { useState, useEffect } from "react"
+import "./articles.scss"
+import "./search.scss"
+
+import { useEffect,useState } from "react"
+import { Route,Switch } from "react-router-dom"
 
 import articlesData from "./BlogLoadedData/articles.json"
 import BlogNavigation from "./BlogNavigation/BlogNavigation"
 import BlogSlider from "./BlogSlider"
-import "./articles.scss"
-import "./search.scss"
 
 function Blog() {
   const [navigation, setNavigation] = useState([])

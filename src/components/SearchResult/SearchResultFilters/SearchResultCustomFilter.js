@@ -1,9 +1,10 @@
+import "./filters.scss"
+
 import React from "react"
 
-import SearchResultCustomFilterTransfer from "./SearchResultCustomFilterTransfer"
 import SearchResultCustomFilterDeparture from "./SearchResultCustomFilterDeparture"
 import SearchResultCustomFilterDuration from "./SearchResultCustomFilterDuration"
-import "./filters.scss"
+import SearchResultCustomFilterTransfer from "./SearchResultCustomFilterTransfer"
 
 function SearchResultCustomFilter({ checkboxes }) {
   return (

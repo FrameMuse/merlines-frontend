@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router-dom"
 import { useDispatch } from "react-redux"
+import { Link, useLocation } from "react-router-dom"
+
 import { setAir, setBus, setTrain } from "../../../reducers/mainSearchSlice"
-import Svg from "../../common/Svg"
 import routes from "../../../routes"
+import Svg from "../../common/Svg"
 
 function MainSpecialSwitcher() {
   const path = useLocation().pathname

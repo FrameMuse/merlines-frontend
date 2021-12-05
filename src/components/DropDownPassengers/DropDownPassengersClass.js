@@ -1,9 +1,9 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
+
 import {
-  selectMainSearchParams,
-  pickAirClass
-} from "../../reducers/mainSearchSlice"
+  pickAirClass,
+  selectMainSearchParams} from "../../reducers/mainSearchSlice"
 
 function DropDownPassengersClass({ classId, classType }) {
   const dispatch = useDispatch()

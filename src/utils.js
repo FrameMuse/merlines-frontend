@@ -1,5 +1,6 @@
 import axios from "axios"
 import { DateTime, Interval } from "luxon"
+
 import { monthNamesDate, weekDays } from "./constants"
 
 const getRandomInteger = (min = 0, max = 1) => {

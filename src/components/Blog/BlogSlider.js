@@ -1,5 +1,5 @@
-import Svg from "../common/Svg"
 import ArticleCard from "../Article/ArticleCard"
+import Svg from "../common/Svg"
 
 function BlogSlider({ articles }) {
   return (

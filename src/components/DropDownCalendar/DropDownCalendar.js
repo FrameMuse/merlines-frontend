@@ -1,14 +1,14 @@
 // SCSS
 import "./drop-down-calendar.scss"
+
 // ...
 import { useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
 
-
-import DropDownCalendarSlider from "./DropDownCalendarSlider"
-import DropDownCalendarMonth from "./DropDownCalendarMonth"
 import { classWithModifiers } from "../../utils"
+import DropDownCalendarMonth from "./DropDownCalendarMonth"
 import { updateSearchCalendarIsOpen } from "./DropDownCalendarReducer"
+import DropDownCalendarSlider from "./DropDownCalendarSlider"
 
 function DropDownCalendar({ parentRef, hasOffset }) {
   const dispatch = useDispatch()

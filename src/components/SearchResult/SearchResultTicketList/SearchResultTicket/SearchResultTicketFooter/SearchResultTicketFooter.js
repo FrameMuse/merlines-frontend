@@ -1,10 +1,11 @@
 import React, { useState } from "react"
+
 import { separateThousand } from "../../../../../utils"
 import Svg from "../../../../common/Svg"
-import SearchResultTicketOffer from "./SearchResultTicketOffer"
-import SearchResultTicketMini from "./SearchResultTicketMini"
-import SearchResultTicketTransfer from "./SearchResultTicketTransfer"
 import SearchResultTicketFlightBaggage from "./SearchResultTicketFlightBaggage"
+import SearchResultTicketMini from "./SearchResultTicketMini"
+import SearchResultTicketOffer from "./SearchResultTicketOffer"
+import SearchResultTicketTransfer from "./SearchResultTicketTransfer"
 
 const SearchResultTicketFooter = ({
   voyages,

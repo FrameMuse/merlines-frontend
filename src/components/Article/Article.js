@@ -1,8 +1,9 @@
-import ArticleContent from "./ArticleContent"
-import ArticleRecomendation from "./ArticleRecomendation"
 import "./article.scss"
 import "./article-card.scss"
 import "./article-page.scss"
+
+import ArticleContent from "./ArticleContent"
+import ArticleRecomendation from "./ArticleRecomendation"
 
 function Article({ articleData }) {
   return (

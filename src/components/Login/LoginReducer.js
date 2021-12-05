@@ -1,4 +1,4 @@
-import { SET_TOKEN, SET_CURRENT_USER, UNSET_CURRENT_USER } from "./LoginTypes"
+import { SET_CURRENT_USER, SET_TOKEN, UNSET_CURRENT_USER } from "./LoginTypes"
 
 const initialState = {
   isAuthenticated: false,

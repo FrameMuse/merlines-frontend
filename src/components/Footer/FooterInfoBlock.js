@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import { setHistoryRoute } from "../../reducers/routesDataSlice"
-import Svg from "../common/Svg"
-import { firstToUpperCase } from "../../utils"
-import useFullRoute from "../../hooks/useFullRoute"
 import React from "react"
+import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
+
+import useFullRoute from "../../hooks/useFullRoute"
+import { setHistoryRoute } from "../../reducers/routesDataSlice"
+import { firstToUpperCase } from "../../utils"
+import Svg from "../common/Svg"
 
 function FooterInfoBlock(props) {
   const { title, links, modifier } = props

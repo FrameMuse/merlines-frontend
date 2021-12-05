@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from "react"
-import { Switch, Route, useLocation } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+import "./calendar.scss"
+import "./calendar-form.scss"
 
-import routes from "../../routes"
+import React, { useEffect,useState } from "react"
+import { useDispatch,useSelector } from "react-redux"
+import { Route, Switch, useLocation } from "react-router-dom"
+
+import api from "../../api/api"
+import useFullRoute from "../../hooks/useFullRoute"
 import useQuery from "../../hooks/useQuery"
-import { selectPriceCalendar, setData } from "../../reducers/priceCalendarSlice"
 import {
   selectMainSearchParams,
   setRouteFrom,
   setRouteTo
 } from "../../reducers/mainSearchSlice"
-import PriceCalendarSearch from "./PriceCalendarSearch"
+import { selectPriceCalendar, setData } from "../../reducers/priceCalendarSlice"
+import { setPriceCalendarSearchRouteAir } from "../../reducers/routesDataSlice"
+import routes from "../../routes"
+import parseParamsFromRoute from "../../services/parseParamsFromRoute"
 import TransportSwitcher from "../common/TransportSwitcher"
 import PriceCalendarDays from "./PriceCalendarDays/PriceCalendarDays"
-import PriceCalendarVacationSlider from "./PriceCalendarVacationSlider"
 import PriceCalendarMonth from "./PriceCalendarMonth"
-import useFullRoute from "../../hooks/useFullRoute"
-import api from "../../api/api"
-import { setPriceCalendarSearchRouteAir } from "../../reducers/routesDataSlice"
-import parseParamsFromRoute from "../../services/parseParamsFromRoute"
-import "./calendar.scss"
-import "./calendar-form.scss"
+import PriceCalendarSearch from "./PriceCalendarSearch"
+import PriceCalendarVacationSlider from "./PriceCalendarVacationSlider"
 
 function PriceCalendar({ isLanding }) {
   const location = useLocation()

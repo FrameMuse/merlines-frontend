@@ -1,10 +1,11 @@
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
+
+import api from "../../../../../../../api/api"
 import {
   selectSearchResult,
   setIsOpenRedirect,
   setTicketDilerName
 } from "../../../../../../../reducers/searchResultSlice"
-import api from "../../../../../../../api/api"
 
 function SearchResultTicketBuy({ link, ticketDealerName }) {
   const dataResult = useSelector(selectSearchResult)

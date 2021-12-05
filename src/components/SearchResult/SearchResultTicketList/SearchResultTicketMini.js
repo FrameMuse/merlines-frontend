@@ -1,8 +1,9 @@
-import React, { useState } from "react"
 import { Duration } from "luxon"
-import Svg from "../../common/Svg"
-import { dateMountWeekday, getSimpleTimeFromISO } from "../../../utils"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
+
+import { dateMountWeekday, getSimpleTimeFromISO } from "../../../utils"
+import Svg from "../../common/Svg"
 
 function SearchResultTicketMini({
   carrier,

@@ -1,5 +1,5 @@
-import controllerParams from "./controllersParams"
 import api from "../api/api"
+import controllerParams from "./controllersParams"
 
 // path = location.pathname
 // searchParams = location.search

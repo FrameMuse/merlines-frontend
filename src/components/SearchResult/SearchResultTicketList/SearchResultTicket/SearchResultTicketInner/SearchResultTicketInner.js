@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+
 import { formatDuration, shortenDate } from "../../../utils"
 
 const SearchResultTicketInner = ({ flight, voyages, maxDuration }) => {
