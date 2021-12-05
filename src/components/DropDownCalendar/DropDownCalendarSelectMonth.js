@@ -10,12 +10,11 @@ function DropDownCalendarSelectMonth({ currentDate, onMonthIndexChange }) {
     })
   }, [currentDate, onMonthIndexChange])
   return (
-    <select className="drop-down-calendar-select" onChange={event => onMonthIndexChange(event.currentTarget.value)}>
+    <select className="drop-down-calendar-select" value={currentDate.getMonth()} onChange={event => onMonthIndexChange(event.currentTarget.value)}>
       {getMonthList().map((month, index) => (
         <option
           value={month.index}
           children={month.name}
-          selected={month.date.getTime() === currentDate.getTime()}
           disabled={month.date.getTime() < Date.now()}
           key={"month_" + index}
         />
