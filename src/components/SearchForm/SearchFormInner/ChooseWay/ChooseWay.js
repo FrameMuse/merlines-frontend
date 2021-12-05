@@ -1,9 +1,10 @@
 import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+
 import {
   selectMainSearchParams,
   setOneWay
 } from "../../../../reducers/mainSearchSlice"
-import { useDispatch, useSelector } from "react-redux"
 
 const ChooseWay = () => {
   const dispatch = useDispatch()

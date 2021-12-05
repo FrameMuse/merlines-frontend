@@ -1,16 +1,17 @@
-import DropDown from "../../../DropDown/DropDown"
 import React, { useEffect, useRef, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+
+import api from "../../../../api/api"
+import useQuery from "../../../../hooks/useQuery"
+import { selectAccessData } from "../../../../reducers/accessDataSlice"
 import {
   selectMainSearchParams,
   setRouteFrom,
   setRouteTo
 } from "../../../../reducers/mainSearchSlice"
-import { useDispatch, useSelector } from "react-redux"
-import api from "../../../../api/api"
-import { selectAccessData } from "../../../../reducers/accessDataSlice"
-import { getValueFromSessionStorageByKey } from "../../../../services/handlersForSearchParameters/getParametersFromSessionStorage"
 import { getRoutParameterByName } from "../../../../services/handlersForSearchParameters/getParametersFromRout"
-import useQuery from "../../../../hooks/useQuery"
+import { getValueFromSessionStorageByKey } from "../../../../services/handlersForSearchParameters/getParametersFromSessionStorage"
+import DropDown from "../../../DropDown/DropDown"
 
 const InputDepartureCity = ({
   getCitiesData,

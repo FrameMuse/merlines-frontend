@@ -1,9 +1,11 @@
+import "./filter.scss"
+
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
+
+import api from "../../../api/api"
 import { selectMainSearchParams } from "../../../reducers/mainSearchSlice"
 import Svg from "../../common/Svg"
-import api from "../../../api/api"
-import "./filter.scss"
 
 function PriceCalendarDaysFilter() {
   const [filterActive, setFilterActive] = useState(false)

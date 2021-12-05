@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect,useState } from "react"
+
 import { formatDuration } from "../../../utils"
+import SearchResultTrainTicketFooter from "./SearchResultTrainTicketFooter"
 import SearchResultTrainTicketHeader from "./SearchResultTrainTicketHeader"
 import SearchResultTrainTicketInner from "./SearchResultTrainTicketInner"
-import SearchResultTrainTicketFooter from "./SearchResultTrainTicketFooter"
 
 function SearchResultBusTicket(props) {
   const { carriers, flight, maxDuration, sellers, voyages, transfers } = props

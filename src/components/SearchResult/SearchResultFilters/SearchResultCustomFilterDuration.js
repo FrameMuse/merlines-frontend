@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
+
 import {
   selectFilter,
-  setDurationMin,
-  setDurationMax
-} from "../../../reducers/filtersSlice"
+  setDurationMax,
+  setDurationMin} from "../../../reducers/filtersSlice"
 import { selectSearchResult } from "../../../reducers/searchResultSlice"
 import Slider from "../../Slider/Slider"
 

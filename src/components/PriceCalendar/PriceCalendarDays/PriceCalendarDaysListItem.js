@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+
 import { isPreviousDay } from "../../../utils"
 
 function PriceCalendarDaysListItem({ date, price, betterPrice, notCurrent }) {

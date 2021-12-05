@@ -1,13 +1,14 @@
 import React, { useRef } from "react"
-import InputDepartureCity from "./InputDepartureCity/InputDepartureCity"
-import InputArrivedCity from "./InputArrivedCity/InputArrivedCity"
 import { useDispatch, useSelector } from "react-redux"
-import { setRouteFrom, setRouteTo } from "../../../reducers/mainSearchSlice"
+
 import api from "../../../api/api"
 import { selectAccessData } from "../../../reducers/accessDataSlice"
+import { setRouteFrom, setRouteTo } from "../../../reducers/mainSearchSlice"
+import InputArrivedCity from "./InputArrivedCity/InputArrivedCity"
+import InputArrivedDate from "./InputArrivedDate/InputArrivedDate"
+import InputDepartureCity from "./InputDepartureCity/InputDepartureCity"
 import InputDepartureDate from "./InputDepartureDate/InputDepartureDate"
 import InputPassengersAndClass from "./InputPassengersAndClass/InputPassengersAndClass"
-import InputArrivedDate from "./InputArrivedDate/InputArrivedDate"
 
 const SearchFormInner = () => {
   const dispatch = useDispatch()

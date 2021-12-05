@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+
 import { fromISOtoString } from "../../utils"
 
 function LandingCollectionItem({ imgSrc, title, tag, ISODate }) {

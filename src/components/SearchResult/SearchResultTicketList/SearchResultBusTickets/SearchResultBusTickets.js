@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
-// import busTicketsDataParser from "../../searchReasultDataParsers/busTicketsDataParser";
-import SearchResultBusTicketList from "./SearchResultBusTicketList/SearchResultBusTicketList"
+import { useDispatch, useSelector } from "react-redux"
+
 import {
   selectSearchBusTicketResult,
   setSearchData
 } from "../../../../reducers/searchResultBusTicketsSlice"
-import { useDispatch, useSelector } from "react-redux"
+// import busTicketsDataParser from "../../searchReasultDataParsers/busTicketsDataParser";
+import SearchResultBusTicketList from "./SearchResultBusTicketList/SearchResultBusTicketList"
 
 const SearchResultBusTickets = ({
   bussTicketsResult,

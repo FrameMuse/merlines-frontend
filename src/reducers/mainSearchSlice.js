@@ -1,8 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { createAsyncThunk,createSlice } from "@reduxjs/toolkit"
 import { DateTime } from "luxon"
+
+import api from "../api/api"
 import { monthNamesDate } from "../constants"
 import { formatDateToDayWeek } from "../utils"
-import api from "../api/api"
 
 export const detectCityByGeoIp = createAsyncThunk(
   "users/fetchByIdStatus",

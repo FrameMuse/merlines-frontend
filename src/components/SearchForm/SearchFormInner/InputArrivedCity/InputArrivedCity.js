@@ -1,11 +1,12 @@
-import DropDown from "../../../DropDown/DropDown"
 import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+
 import {
   selectMainSearchParams,
   setRouteTo
 } from "../../../../reducers/mainSearchSlice"
-import { useDispatch, useSelector } from "react-redux"
 import { getValueFromSessionStorageByKey } from "../../../../services/handlersForSearchParameters/getParametersFromSessionStorage"
+import DropDown from "../../../DropDown/DropDown"
 
 const InputArrivedCity = ({
   getCitiesData,

@@ -1,10 +1,11 @@
-import { Link, useLocation } from "react-router-dom"
 import { useDispatch } from "react-redux"
+import { Link, useLocation } from "react-router-dom"
+
+import useFullRoute from "../../../hooks/useFullRoute"
 // import useQuery from '../../../hooks/useQuery';
 import { setAir, setBus, setTrain } from "../../../reducers/mainSearchSlice"
-import Svg from "../../common/Svg"
 import routes from "../../../routes"
-import useFullRoute from "../../../hooks/useFullRoute"
+import Svg from "../../common/Svg"
 
 function MainHeaderSwitcher() {
   const location = useLocation()

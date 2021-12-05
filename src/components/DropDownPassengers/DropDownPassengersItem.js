@@ -1,9 +1,9 @@
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
+
 import {
-  selectMainSearchParams,
+  decrementPassengers,
   incrementPassengers,
-  decrementPassengers
-} from "../../reducers/mainSearchSlice"
+  selectMainSearchParams} from "../../reducers/mainSearchSlice"
 
 function DropDownPassengersItem({ name, age, apiParam }) {
   const dispatch = useDispatch()

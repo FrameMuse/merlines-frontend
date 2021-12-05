@@ -1,5 +1,5 @@
-import Svg from "../../common/Svg"
 import { separateThousand } from "../../../utils"
+import Svg from "../../common/Svg"
 
 function PriceCalendarDaysTicket() {
   return (

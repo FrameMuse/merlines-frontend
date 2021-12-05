@@ -1,27 +1,28 @@
-import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
-import Svg from "../common/Svg"
-import {
-  specialData,
-  aboutText,
-  collectionData,
-  specialTickets,
-  popularDirections
-} from "./landingMock"
-import MainHeader from "../Main/MainHeader/MainHeader"
-import PriceCalendar from "../PriceCalendar/PriceCalendar"
-import MainSpecialCard from "../Main/MainSpecial/MainSpecialCard"
-import LandingCollectionItem from "./LandingCollectionItem"
-import LandingSpecialTicket from "./LandingSpecialTicket"
-import LandingPopularDirectionItem from "./LandingPopularDirectionItem"
-import LandingTransportSwitcher from "./LandingTransportSwitcher"
-import LandingPriceDynamic from "./LandingPriceDynamic/LandingPriceDynamic"
-import LandingAnswerItem from "./LandingAnswerItem"
-import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
 import "./airlines-ticket.scss"
 import "./answers.scss"
 import "./landing.scss"
 import "./price-dynamics.scss"
+
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+
+import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
+import Svg from "../common/Svg"
+import MainHeader from "../Main/MainHeader/MainHeader"
+import MainSpecialCard from "../Main/MainSpecial/MainSpecialCard"
+import PriceCalendar from "../PriceCalendar/PriceCalendar"
+import LandingAnswerItem from "./LandingAnswerItem"
+import LandingCollectionItem from "./LandingCollectionItem"
+import {
+  aboutText,
+  collectionData,
+  popularDirections,
+  specialData,
+  specialTickets} from "./landingMock"
+import LandingPopularDirectionItem from "./LandingPopularDirectionItem"
+import LandingPriceDynamic from "./LandingPriceDynamic/LandingPriceDynamic"
+import LandingSpecialTicket from "./LandingSpecialTicket"
+import LandingTransportSwitcher from "./LandingTransportSwitcher"
 
 function LandingPage() {
   const mainSearchParams = useSelector(selectMainSearchParams)

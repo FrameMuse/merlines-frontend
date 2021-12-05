@@ -1,8 +1,9 @@
-import DropDownCalendar from "../../../DropDownCalendar/DropDownCalendar"
 import React, { useEffect, useRef, useState } from "react"
-import { setIsOpenCalendar } from "../../../../reducers/dropDownCalendarSlice"
 import { useDispatch, useSelector } from "react-redux"
+
+import { setIsOpenCalendar } from "../../../../reducers/dropDownCalendarSlice"
 import { selectMainSearchParams } from "../../../../reducers/mainSearchSlice"
+import DropDownCalendar from "../../../DropDownCalendar/DropDownCalendar"
 
 const InputDepartureDate = ({ dateFromInputRef, dateToInputRef }) => {
   const dispatch = useDispatch()

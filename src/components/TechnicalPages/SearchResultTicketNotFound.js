@@ -1,5 +1,6 @@
-import React from "react"
 import "./error.scss"
+
+import React from "react"
 
 const SearchResultTicketNotFound = () => {
   return (

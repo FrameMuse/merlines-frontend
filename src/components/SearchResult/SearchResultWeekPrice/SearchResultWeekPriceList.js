@@ -1,5 +1,5 @@
-import SearchResultWeekPriceCard from "./SearchResultWeekPriceCard"
 import { makeWeek } from "../../../mocks/generateMock"
+import SearchResultWeekPriceCard from "./SearchResultWeekPriceCard"
 
 function SearchResultWeekPriceList() {
   const week = makeWeek()

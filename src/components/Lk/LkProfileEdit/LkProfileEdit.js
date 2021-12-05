@@ -1,20 +1,21 @@
 import { useState } from "react"
+import { useDispatch,useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
-import { errorMessages } from "../../../constants"
+
 import api from "../../../api/api"
-import { useSelector, useDispatch } from "react-redux"
-import {
-  selectLkData,
-  setLkFirstName,
-  setLkLastName
-} from "../../../reducers/lkDataSlice"
+import { errorMessages } from "../../../constants"
+import { validationMessages } from "../../../constants"
 import {
   selectAccessData,
   setIsChangedEmail,
   setNewEmail
 } from "../../../reducers/accessDataSlice"
-import { validationMessages } from "../../../constants"
+import {
+  selectLkData,
+  setLkFirstName,
+  setLkLastName
+} from "../../../reducers/lkDataSlice"
 
 function LkProfileEdit() {
   const history = useHistory()

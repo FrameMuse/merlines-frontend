@@ -1,8 +1,10 @@
+import "./comments.scss"
+
 import React from "react"
+
+import ArticleCommentsForm from "./ArticleCommentsForm"
 import ArticleCommentsHeader from "./ArticleCommentsHeader"
 import ArticleCommentsList from "./ArticleCommentsList"
-import ArticleCommentsForm from "./ArticleCommentsForm"
-import "./comments.scss"
 
 function ArticleComments({ comments }) {
   return (

@@ -1,13 +1,14 @@
+import { useDispatch,useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
-import controllerParams from "./controllersParams"
-import useQuery from "../hooks/useQuery"
+
 import api from "../api/api"
+import useQuery from "../hooks/useQuery"
 import {
   selectMainSearchParams,
   setRouteFrom,
   setRouteTo
 } from "../reducers/mainSearchSlice"
+import controllerParams from "./controllersParams"
 
 function useParamsFromRoute() {
   const location = useLocation()

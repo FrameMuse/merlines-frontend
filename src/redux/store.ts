@@ -1,6 +1,7 @@
+import { applyMiddleware, compose,createStore } from "redux"
 import thunk from "redux-thunk"
+
 import combinedReducers from "./combinedReducers"
-import { createStore, applyMiddleware, compose } from "redux"
 
 const store = createStore(combinedReducers, compose(applyMiddleware(thunk)))
 export default store

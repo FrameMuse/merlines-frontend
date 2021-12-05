@@ -1,5 +1,5 @@
-import SearchResultPopularFilter from "./SearchResultPopularFilter"
 import SearchResultCustomFilter from "./SearchResultCustomFilter"
+import SearchResultPopularFilter from "./SearchResultPopularFilter"
 
 function SearchResultFilters({ checkboxes }) {
   return (

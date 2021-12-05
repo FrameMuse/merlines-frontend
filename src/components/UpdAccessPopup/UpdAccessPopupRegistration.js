@@ -1,9 +1,10 @@
+import { useDispatch,useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+
+import api from "../../api/api"
+import { accessPopupFieldsData } from "../../constants"
 import { selectAccessData, setUserInfo } from "../../reducers/accessDataSlice"
 import Svg from "../common/Svg"
-import { accessPopupFieldsData } from "../../constants"
-import api from "../../api/api"
 import UpdAccessPopupField from "./UpdAccessPopupField"
 
 function UpdAccessPopupRegistration({

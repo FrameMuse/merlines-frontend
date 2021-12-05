@@ -1,8 +1,10 @@
-import React from "react"
-import MainHeaderTitle from "./MainHeaderTitle"
-import MainHeaderSwitcher from "./MainHeaderSwitcher"
-import SearchForm from "../../SearchForm/SearchForm"
 import "./main-form.scss"
+
+import React from "react"
+
+import SearchForm from "../../SearchForm/SearchForm"
+import MainHeaderSwitcher from "./MainHeaderSwitcher"
+import MainHeaderTitle from "./MainHeaderTitle"
 
 function MainHeader() {
   return (

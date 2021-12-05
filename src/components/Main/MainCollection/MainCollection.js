@@ -1,8 +1,10 @@
-import React from "react"
-import MainCollectionTitle from "../MainCollection/MainCollectionTitle"
-import MainCollectionSubtitle from "../MainCollection/MainCollectionSubtitle"
-import MainCollectionSlider from "./slick/MainCollectionSlider"
 import "./mainCollectionSliderStyle.scss"
+
+import React from "react"
+
+import MainCollectionSubtitle from "../MainCollection/MainCollectionSubtitle"
+import MainCollectionTitle from "../MainCollection/MainCollectionTitle"
+import MainCollectionSlider from "./slick/MainCollectionSlider"
 
 const MainCollection = () => {
   return (

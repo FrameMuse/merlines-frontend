@@ -1,5 +1,6 @@
-import FooterInfo from "./FooterInfo"
 import "./footer.scss"
+
+import FooterInfo from "./FooterInfo"
 
 function Footer() {
   const currentYear = new Date().getFullYear()

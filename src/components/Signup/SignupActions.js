@@ -1,15 +1,16 @@
 import axios from "axios"
+import { push } from "connected-react-router"
+import { toast } from "react-toastify"
+
+import api from "../../api/api"
 import { BASE_URL, errorMessages } from "../../constants"
+import { setErrorMessage } from "../../reducers/accessDataSlice"
+import { takeErrors } from "../../utils"
 import {
   CREATE_USER_ERROR,
   CREATE_USER_SUBMITTED,
   CREATE_USER_SUCCESS
 } from "./SignupTypes"
-import { push } from "connected-react-router"
-import { setErrorMessage } from "../../reducers/accessDataSlice"
-import { toast } from "react-toastify"
-import { takeErrors } from "../../utils"
-import api from "../../api/api"
 
 axios.defaults.baseURL = BASE_URL
 

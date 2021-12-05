@@ -1,10 +1,12 @@
-import React from "react"
-import { lkNavConfig } from "../../constants"
-import LkNavigationItem from "./LkNavigation/LkNavigationItem"
-import LkHeader from "./LkHeader/LkHeader"
-import LkContent from "./LkContent/LkContent"
-import LkClearHistory from "./LkClearHistory"
 import "./cabinet.scss"
+
+import React from "react"
+
+import { lkNavConfig } from "../../constants"
+import LkClearHistory from "./LkClearHistory"
+import LkContent from "./LkContent/LkContent"
+import LkHeader from "./LkHeader/LkHeader"
+import LkNavigationItem from "./LkNavigation/LkNavigationItem"
 
 function Lk() {
   return (

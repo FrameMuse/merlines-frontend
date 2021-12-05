@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
-import Svg from "../../common/Svg"
 import "./trasfer.scss"
+
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+
 import { selectSearchResult } from "../../../reducers/searchResultSlice"
+import Svg from "../../common/Svg"
 
 function TicketRedirect() {
   const searchResultData = useSelector(selectSearchResult)

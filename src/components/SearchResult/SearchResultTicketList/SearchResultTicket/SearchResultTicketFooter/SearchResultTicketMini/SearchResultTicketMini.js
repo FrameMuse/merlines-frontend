@@ -1,12 +1,13 @@
-import React, { useState } from "react"
 import { Duration } from "luxon"
-import Svg from "../../../../../common/Svg"
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+
 import {
   dateMountWeekday,
   translateTripClassFromCodeToName
 } from "../../../../../../utils"
 import { toTranslateBaggageCode } from "../../../../../../utils"
-import { Link } from "react-router-dom"
+import Svg from "../../../../../common/Svg"
 
 const SearchResultTicketMini = ({ voyage }) => {
   const { flight_info } = voyage

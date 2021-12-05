@@ -1,5 +1,6 @@
-import React from "react"
 import "./loaderStyle.css"
+
+import React from "react"
 
 const PreloaderDots = () => {
   return (

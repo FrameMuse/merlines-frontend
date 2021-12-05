@@ -1,9 +1,11 @@
-import { Link, useLocation } from "react-router-dom"
-import Svg from "../common/Svg"
-import HeaderNavigation from "./HeaderNavigation"
-import routes from "../../routes"
 import "./header.scss"
 import "./nav.scss"
+
+import { Link, useLocation } from "react-router-dom"
+
+import routes from "../../routes"
+import Svg from "../common/Svg"
+import HeaderNavigation from "./HeaderNavigation"
 
 function Header() {
   const location = useLocation()

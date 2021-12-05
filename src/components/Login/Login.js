@@ -1,14 +1,13 @@
-import React, { Component } from "react"
-import { withRouter } from "react-router-dom"
-import { connect } from "react-redux"
 import PropTypes from "prop-types"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
 
-import { login } from "./LoginActions.js"
 import { validationMessages } from "../../constants"
-
-import Svg from "../common/Svg"
 import routes from "../../routes"
+import Svg from "../common/Svg"
+import { login } from "./LoginActions.js"
 
 class Login extends Component {
   constructor(props) {

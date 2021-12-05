@@ -1,5 +1,6 @@
-import Svg from "../../../../../../common/Svg"
 import React from "react"
+
+import Svg from "../../../../../../common/Svg"
 
 const SearchResultTicketFlightBaggage = ({ flightBaggage, flightHandbags }) => {
   return (

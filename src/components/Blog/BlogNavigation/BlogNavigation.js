@@ -1,6 +1,6 @@
 import routes from "../../../routes"
-import BlogNavigationItem from "./BlogNavigationItem"
 import BlogSearch from "../BlogSearch"
+import BlogNavigationItem from "./BlogNavigationItem"
 
 function BlogNavigation({ navigation }) {
   return (

@@ -1,14 +1,13 @@
 // SCSS
 import "./form.scss"
+
+import { updateSearchCalendarIsOpen,updateSearchCalendarMode } from "components/DropDownCalendar/DropDownCalendarReducer"
 // ...
 import { DateTime } from "luxon"
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useClickAway } from "react-use"
-import api from "../../api/api"
-import { monthNamesDate } from "../../constants"
-import useDebounce from "../../hooks/useDebounce"
 import {
   setCalendarToInitial,
   setDateIntervalFrom,
@@ -28,11 +27,14 @@ import {
   setRouteTo
 } from "reducers/mainSearchSlice"
 import { createQuery, firstToUpperCase, pluralize } from "utils"
+
+import api from "../../api/api"
+import { monthNamesDate } from "../../constants"
+import useDebounce from "../../hooks/useDebounce"
 import OpenBooking from "../common/OpenBooking"
 import DropDown from "../DropDown/DropDown"
 import DropDownCalendar from "../DropDownCalendar/DropDownCalendar"
 import DropDownPassengers from "../DropDownPassengers/DropDownPassengers"
-import { updateSearchCalendarMode, updateSearchCalendarIsOpen } from "components/DropDownCalendar/DropDownCalendarReducer"
 
 function SearchForm({ searchResult }) {
   const history = useHistory()
