@@ -1,4 +1,4 @@
-import { applyMiddleware, compose,createStore } from "redux"
+import { applyMiddleware, compose, createStore } from "redux"
 import thunk from "redux-thunk"
 
 import combinedReducers from "./combinedReducers"
@@ -11,5 +11,5 @@ declare module "redux" {
 }
 declare module "react-redux" {
   interface DefaultRootState extends ReturnType<typeof store.getState> { }
-  function useDispatch<TDispatch = typeof store.dispatch>(): TDispatch;
+  // function useDispatch<TDispatch = typeof store.dispatch>(): TDispatch;
 }

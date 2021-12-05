@@ -1,8 +1,12 @@
 // Redux
+import searchCalendar from "components/DropDownCalendar/DropDownCalendarReducer"
 import { combineReducers } from "redux"
 
-const reducers = {
+import search from "./reducers/search"
 
+const reducers = {
+  search,
+  searchCalendar
 }
 
 const combinedReducers = combineReducers(reducers)
