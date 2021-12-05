@@ -1,7 +1,7 @@
 // SCSS
 import "./form.scss"
 
-import { updateSearchCalendarIsOpen,updateSearchCalendarMode } from "components/DropDownCalendar/DropDownCalendarReducer"
+import { updateSearchCalendarIsOpen, updateSearchCalendarMode } from "components/DropDownCalendar/DropDownCalendarReducer"
 // ...
 import { DateTime } from "luxon"
 import { useEffect, useRef, useState } from "react"
@@ -26,7 +26,7 @@ import {
   setRouteFrom,
   setRouteTo
 } from "reducers/mainSearchSlice"
-import { createQuery, firstToUpperCase, pluralize } from "utils"
+import { capitalize, createQuery, pluralize } from "utils"
 
 import api from "../../api/api"
 import { monthNamesDate } from "../../constants"
@@ -101,8 +101,8 @@ function SearchForm({ searchResult }) {
     const amount = mainSearchParams.passengers
     setPassengersAmount(
       amount.passengers_adults +
-        amount.passengers_children +
-        amount.passengers_infants
+      amount.passengers_children +
+      amount.passengers_infants
     )
   }, [mainSearchParams.passengers])
 
@@ -225,7 +225,7 @@ function SearchForm({ searchResult }) {
 
     dispatch(
       setChangedInputFrom(
-        `${fromDate.day} ${monthNamesDate[fromDate.month]}, ${firstToUpperCase(
+        `${fromDate.day} ${monthNamesDate[fromDate.month]}, ${capitalize(
           fromDate.weekdayShort
         )}`
       )
@@ -253,9 +253,8 @@ function SearchForm({ searchResult }) {
       dispatch(setDateIntervalFrom(fromDate.toISO().slice(0, 10)))
       dispatch(
         setChangedInputFrom(
-          `${fromDate.day} ${
-            monthNamesDate[fromDate.month]
-          }, ${firstToUpperCase(fromDate.weekdayShort)}`
+          `${fromDate.day} ${monthNamesDate[fromDate.month]
+          }, ${capitalize(fromDate.weekdayShort)}`
         )
       )
     }
@@ -325,17 +324,15 @@ function SearchForm({ searchResult }) {
       <div className="form__nav">
         <div
           onClick={chooseTwoWays}
-          className={`form__nav-btn ${
-            searchCalendar.mode === "double" ? "form__nav-btn--active" : ""
-          }`}
+          className={`form__nav-btn ${searchCalendar.mode === "double" ? "form__nav-btn--active" : ""
+            }`}
         >
           Туда - обратно
         </div>
         <div
           onClick={chooseOneWay}
-          className={`form__nav-btn ${
-            searchCalendar.mode === "single" ? "form__nav-btn--active" : ""
-          }`}
+          className={`form__nav-btn ${searchCalendar.mode === "single" ? "form__nav-btn--active" : ""
+            }`}
         >
           В одну сторону
         </div>
@@ -456,7 +453,7 @@ function SearchForm({ searchResult }) {
             ref={passengersInputRef}
             onFocus={onPassengersFocus}
             onKeyDown={onPassengersTabPressed}
-            // onBlur={onPassengersBlur}
+          // onBlur={onPassengersBlur}
           />
           <label className="form__label" htmlFor="main-passenger">
             Пассажиры и класс
@@ -467,7 +464,7 @@ function SearchForm({ searchResult }) {
           />
         </div>
         <input className="form__btn" type="submit" value="Найти" tabIndex="6" />
-        <DropDownCalendar parentRef={calendarDropDownRef} hasOffset={hasCalendarOffset}/>
+        <DropDownCalendar parentRef={calendarDropDownRef} hasOffset={hasCalendarOffset} />
       </div>
       {!searchResult && <OpenBooking />}
     </form>

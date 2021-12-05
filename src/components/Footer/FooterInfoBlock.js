@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 import useFullRoute from "../../hooks/useFullRoute"
 import { setHistoryRoute } from "../../reducers/routesDataSlice"
-import { firstToUpperCase } from "../../utils"
+import { capitalize } from "../../utils"
 import Svg from "../common/Svg"
 
 function FooterInfoBlock(props) {
@@ -26,9 +26,8 @@ function FooterInfoBlock(props) {
             <li key={index} className="footer__item">
               <Link
                 onClick={getFullRoute}
-                className={`footer__link ${
-                  item.linkClass ? item.linkClass : ""
-                }`}
+                className={`footer__link ${item.linkClass ? item.linkClass : ""
+                  }`}
                 to={item.link}
               >
                 {item.svg ? (
@@ -39,7 +38,7 @@ function FooterInfoBlock(props) {
                       svgWidth="15"
                       svgHeight="15"
                     />
-                    {firstToUpperCase(item.svg)}
+                    {capitalize(item.svg)}
                   </>
                 ) : (
                   item.name

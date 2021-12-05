@@ -12,7 +12,7 @@ import useQuery from "../../../hooks/useQuery"
 import { setRouteFrom, setRouteTo } from "../../../reducers/mainSearchSlice"
 import { setPickedMonthData } from "../../../reducers/priceCalendarSlice"
 import parseParamsFromRoute from "../../../services/parseParamsFromRoute"
-import { dateToMonthName, firstToUpperCase } from "../../../utils"
+import { capitalize, dateToMonthName } from "../../../utils"
 import PriceCalendarDaysHeader from "./PriceCalendarDaysHeader"
 import PriceCalendarDaysList from "./PriceCalendarDaysList"
 
@@ -61,7 +61,7 @@ function PriceCalendarDays({ pickedMonthName, setPickedMonthName }) {
                 transport: "air",
                 previousMonthDate: prevMonth,
                 nextMonthDate: nextMonth,
-                pickedMonthName: firstToUpperCase(dateToMonthName(currentDate))
+                pickedMonthName: capitalize(dateToMonthName(currentDate))
               })
             )
           }

@@ -1,6 +1,6 @@
 import { DateTime } from "luxon"
-import { useDispatch,useSelector } from "react-redux"
-import { Link, useHistory,useLocation } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useHistory, useLocation } from "react-router-dom"
 
 import api from "../../../api/api"
 import { monthNames } from "../../../constants"
@@ -9,13 +9,15 @@ import { selectMainSearchParams } from "../../../reducers/mainSearchSlice"
 import {
   clearPickedMonthData,
   selectPriceCalendar,
-  setPickedMonthData} from "../../../reducers/priceCalendarSlice"
+  setPickedMonthData
+} from "../../../reducers/priceCalendarSlice"
 import { selectRoutesData } from "../../../reducers/routesDataSlice"
 import routes from "../../../routes"
 import {
+  capitalize,
   dateToMonthName,
-  firstToUpperCase,
-  getDaysInterval} from "../../../utils"
+  getDaysInterval
+} from "../../../utils"
 import Svg from "../../common/Svg"
 import PriceCalendarDaysFilter from "./PriceCalendarDaysFilter"
 
@@ -95,7 +97,7 @@ function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
             transport: priceCalendarData.pickedMonthData.transport,
             previousMonthDate: daysInterval.start_date.slice(0, 7),
             nextMonthDate: daysInterval.end_date.slice(0, 7),
-            pickedMonthName: firstToUpperCase(dateToMonthName(currentMonthDate))
+            pickedMonthName: capitalize(dateToMonthName(currentMonthDate))
           })
         )
       } catch (error) {
@@ -119,7 +121,7 @@ function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
             transport: priceCalendarData.pickedMonthData.transport,
             previousMonthDate: daysInterval.start_date.slice(0, 7),
             nextMonthDate: daysInterval.end_date.slice(0, 7),
-            pickedMonthName: firstToUpperCase(dateToMonthName(currentMonthDate))
+            pickedMonthName: capitalize(dateToMonthName(currentMonthDate))
           })
         )
       } catch (error) {
