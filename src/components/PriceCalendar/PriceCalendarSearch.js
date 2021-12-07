@@ -256,16 +256,14 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
       <div className="calendar-form__header">
         <button
           onClick={() => dispatch(setOneWay(false))}
-          className={`calendar-form__btn ${!mainSearchParams.one_way ? "calendar-form__btn--active" : ""
-            }`}
+          className={`calendar-form__btn ${!mainSearchParams.one_way ? "calendar-form__btn--active" : ""}`}
           type="button"
         >
           Туда - обратно
         </button>
         <button
           onClick={() => dispatch(setOneWay(true))}
-          className={`calendar-form__btn ${mainSearchParams.one_way ? "calendar-form__btn--active" : ""
-            }`}
+          className={`calendar-form__btn ${mainSearchParams.one_way ? "calendar-form__btn--active" : ""}`}
           type="button"
         >
           В одну сторону

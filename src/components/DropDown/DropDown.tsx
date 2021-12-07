@@ -7,15 +7,16 @@ import DropDownItem, { DropDownElementProps } from "./DropDownItem"
 
 interface DropDownProps {
   list: DropDownElementProps[]
+  isOpen: boolean
+  setIsOpen: React.Dispatch<boolean>
   onSelect?(element: DropDownElementProps, index: number): void
 }
 
 function DropDown(props: DropDownProps) {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [isHidden, setIsHidden] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   function onKeyDown(event: KeyboardEvent) {
-    if (isHidden) return
+    if (!props.isOpen || !["Enter", "ArrowUp", "ArrowDown"].includes(event.key)) return
 
     event.preventDefault()
 
@@ -25,11 +26,12 @@ function DropDown(props: DropDownProps) {
     if (event.key === "ArrowDown" && activeIndex < props.list.length - 1) setActiveIndex(activeIndex + 1)
   }
   function select(index: number) {
-    if (isHidden) return
+    if (!props.isOpen) return
 
-    setIsHidden(true)
-    setActiveIndex(index)
+    props.setIsOpen(false)
     props.onSelect?.(props.list[index], index)
+
+    setActiveIndex(index)
   }
   useEffect(() => {
     document.addEventListener("keydown", onKeyDown)
@@ -37,7 +39,7 @@ function DropDown(props: DropDownProps) {
   }, [onKeyDown])
   useClickAway(ref, () => select(activeIndex))
   return (
-    <div className={classWithModifiers("drop-down", isHidden && "hidden")} ref={ref}>
+    <div className={classWithModifiers("drop-down", !props.isOpen && "hidden")} ref={ref}>
       {props.list.map((element, index) => (
         <DropDownItem
           {...element}

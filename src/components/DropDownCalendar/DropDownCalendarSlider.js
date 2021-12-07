@@ -35,7 +35,7 @@ function DropDownCalendarSlider() {
 
   return (
     <div className="drop-down-calendar__control">
-      <button onClick={prev} className={classWithModifiers("drop-down-calendar__control-btn", ...modifiers)}>
+      <button onClick={prev} tabIndex="-1" className={classWithModifiers("drop-down-calendar__control-btn", ...modifiers)}>
         <Svg
           svgClass="drop-down-calendar__control-icon"
           svgName="arrow-filter"
@@ -43,7 +43,7 @@ function DropDownCalendarSlider() {
           svgHeight="10"
         />
       </button>
-      <button onClick={next} className="drop-down-calendar__control-btn drop-down-calendar__control-btn--next">
+      <button onClick={next} tabIndex="-1" className="drop-down-calendar__control-btn drop-down-calendar__control-btn--next">
         <Svg
           svgClass="drop-down-calendar__control-icon"
           svgName="arrow-filter"

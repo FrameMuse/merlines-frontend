@@ -42,7 +42,7 @@ export default (state = initialState, action: Action): typeof initialState => {
       return { ...state, routes: [...state.routes, ...action.payload.routes] }
 
     case "SEARCH_ROUTES_UPDATE":
-      state.routes.splice(action.payload.index, 0, action.payload.route)
+      state.routes.splice(action.payload.index, 1, action.payload.route)
       return { ...state, routes: state.routes }
 
     case "SEARCH_PASSENGERS_UPDATE":

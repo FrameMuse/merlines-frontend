@@ -23,22 +23,21 @@ function DropDownPassengersItem(props: DropDownPassengersItemProps) {
   }
   const ll = localization[props.name]
   const dispatch = useDispatch()
-  const search = useSelector(state => state.search)
-  const passengers = search.passengers[props.name]
-  const haveAtLeastOneAdult = (props.name === "adults" && passengers < 2)
+  const passengers = useSelector(state => state.search.passengers)
+  const passengersAll = Object.values(passengers).reduce((a, b) => a + b, 0)
+  const passengersGroup = passengers[props.name]
   function updatePassengers(value: number) {
-    if (props.name === "adults" && value < 1) {
-      dispatch(updateSearchPassengers({ adults: 1 }))
+    if (value < 0) {
+      dispatch(updateSearchPassengers({ [props.name]: 0 }))
       return
     }
-
     dispatch(updateSearchPassengers({ [props.name]: value }))
   }
   function increment() {
-    updatePassengers(passengers + 1)
+    updatePassengers(passengersGroup + 1)
   }
   function decrement() {
-    updatePassengers(passengers - 1)
+    updatePassengers(passengersGroup - 1)
   }
   return (
     <div className="passengers-list__row">
@@ -47,9 +46,9 @@ function DropDownPassengersItem(props: DropDownPassengersItemProps) {
         <span className="passengers-list__item-info">{ll.desc}</span>
       </div>
       <div className="passengers-list__counter">
-        <button className="passengers-list__counter-btn" onClick={decrement} disabled={haveAtLeastOneAdult || (passengers < 1)}>-</button>
-        <input className="passengers-list__counter-num" type="number" disabled={haveAtLeastOneAdult} value={passengers} onChange={event => updatePassengers(Number(event.currentTarget.value))} />
-        <button className="passengers-list__counter-btn" onClick={increment}>+</button>
+        <button className="passengers-list__counter-btn" onClick={decrement} disabled={props.name === "adults" ? passengersGroup < 2 : passengersGroup < 1}>-</button>
+        <input className="passengers-list__counter-num" type="number" value={passengersGroup} readOnly />
+        <button className="passengers-list__counter-btn" onClick={increment} disabled={passengersAll >= 9}>+</button>
       </div>
     </div>
   )

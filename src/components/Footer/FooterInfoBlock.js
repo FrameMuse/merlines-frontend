@@ -26,8 +26,7 @@ function FooterInfoBlock(props) {
             <li key={index} className="footer__item">
               <Link
                 onClick={getFullRoute}
-                className={`footer__link ${item.linkClass ? item.linkClass : ""
-                  }`}
+                className={`footer__link ${item.linkClass ? item.linkClass : ""}`}
                 to={item.link}
               >
                 {item.svg ? (

@@ -1,44 +1,22 @@
 // SCSS
 import "./passengers-list.scss"
 
-import { useEffect, useRef, useState } from "react"
-import { useClickAway } from "react-use"
+// import { useEffect, useRef, useState } from "react"
+// import { useClickAway } from "react-use"
 import { classWithModifiers } from "utils"
 
 import DropDownPassengersItem from "./DropDownPassengersItem"
 import DropDownPassengersTravelClass from "./DropDownPassengersTravelClass"
 
 
-// interface DropDownPassengersProps {
-//   hidden?: boolean
-//   parentRef: React.MutableRefObject<HTMLDivElement | null>
-// }
+interface DropDownPassengersProps {
+  hidden?: boolean
+  parentRef?: React.MutableRefObject<HTMLDivElement | null>
+}
 
-function DropDownPassengers() {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const [isHidden, setIsHidden] = useState(true)
-  useEffect(() => {
-    const parent = ref.current?.parentElement
-    if (!parent) return
-
-    function focusEvent(event: Event) {
-      event.preventDefault()
-      setIsHidden(event.type === "focus" ? false : true)
-    }
-
-    parent?.addEventListener("focus", focusEvent)
-    return () => parent?.removeEventListener("focu", focusEvent)
-  }, [])
-  useClickAway(ref, event => {
-    const parent = ref.current?.parentElement
-    if (!parent) return
-
-    if (event.composedPath().includes(parent)) return
-
-    setIsHidden(true)
-  })
+function DropDownPassengers(props: DropDownPassengersProps) {
   return (
-    <div className={classWithModifiers("passengers-list", isHidden && "hidden")} ref={ref}>
+    <div className={classWithModifiers("passengers-list", props.hidden && "hidden")} ref={props.parentRef}>
       <div className="passengers-list__item">
         <DropDownPassengersItem name="adults" />
         <DropDownPassengersItem name="children" />
