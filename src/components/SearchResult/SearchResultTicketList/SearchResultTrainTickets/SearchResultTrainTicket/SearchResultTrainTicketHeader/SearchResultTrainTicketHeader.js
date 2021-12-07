@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom"
-import Svg from "../../../../../common/Svg"
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
+
+import Svg from "../../../../../common/Svg"
 
 const SearchResultTrainTicketHeader = ({ carriers }) => {
   const [isNoticeActive, setIsNoticeActive] = useState(false)

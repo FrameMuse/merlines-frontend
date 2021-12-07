@@ -2,7 +2,7 @@ const initialState = {
   mode: "single" || "double",
   isOpen: false,
   dates: {
-    first: null,
+    first: new Date,
     second: null
   },
   cursorDate: new Date,

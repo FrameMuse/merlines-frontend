@@ -1,18 +1,19 @@
-import { Link, useLocation, useHistory } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useHistory, useLocation } from "react-router-dom"
+
 import api from "../../api/api"
-import routes from "../../routes"
-import { dateToMonthName, getDaysInterval, firstToUpperCase } from "../../utils"
+import useFullRoute from "../../hooks/useFullRoute"
+import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
 import {
-  setPickedMonthData,
   clearPickedMonthData,
+  setCurrentMonthDate,
   setDaysInterval,
   setMonthDate,
-  setCurrentMonthDate
+  setPickedMonthData
 } from "../../reducers/priceCalendarSlice"
-import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
 import { setHistoryRoute } from "../../reducers/routesDataSlice"
-import useFullRoute from "../../hooks/useFullRoute"
+import routes from "../../routes"
+import { capitalize, dateToMonthName, getDaysInterval } from "../../utils"
 
 function PriceCalendarMonth(props) {
   const { transport, monthDate, price, betterPrice, setPickedMonthName } = props
@@ -34,7 +35,7 @@ function PriceCalendarMonth(props) {
     dispatch(setCurrentMonthDate(currentMonthDate))
     const daysInterval = getDaysInterval(currentMonthDate)
     // console.log('daysInterval', daysInterval);
-    setPickedMonthName(firstToUpperCase(dateToMonthName(monthDate)))
+    setPickedMonthName(capitalize(dateToMonthName(monthDate)))
     dispatch(setDaysInterval(daysInterval))
 
     const params = {
@@ -92,7 +93,7 @@ function PriceCalendarMonth(props) {
       evt.currentTarget.querySelector(".calendar__month").dataset.date
     dispatch(setCurrentMonthDate(currentMonthDate))
     const daysInterval = getDaysInterval(currentMonthDate)
-    setPickedMonthName(firstToUpperCase(dateToMonthName(monthDate)))
+    setPickedMonthName(capitalize(dateToMonthName(monthDate)))
     dispatch(setDaysInterval(daysInterval))
 
     try {
@@ -109,7 +110,7 @@ function PriceCalendarMonth(props) {
             transport: transport,
             previousMonthDate: daysInterval.start_date.slice(0, 7),
             nextMonthDate: daysInterval.end_date.slice(0, 7),
-            pickedMonthName: firstToUpperCase(dateToMonthName(monthDate))
+            pickedMonthName: capitalize(dateToMonthName(monthDate))
           })
         )
       }

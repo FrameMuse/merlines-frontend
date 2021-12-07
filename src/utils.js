@@ -1,5 +1,6 @@
 import axios from "axios"
 import { DateTime, Interval } from "luxon"
+
 import { monthNamesDate, weekDays } from "./constants"
 
 const getRandomInteger = (min = 0, max = 1) => {
@@ -73,8 +74,8 @@ const getDaysInterval = (date, calendar) => {
     }
   }
 }
-// TODO: rename to capitalize
-const firstToUpperCase = (str) => {
+
+export const capitalize = (str) => {
   if (!str) return str
   return str[0].toUpperCase() + str.slice(1)
 }
@@ -92,7 +93,7 @@ const isPreviousDay = (date) => {
 }
 
 const formatDateToDayWeek = (date = DateTime.now()) => {
-  return `${date.day} ${monthNamesDate[date.month]}, ${firstToUpperCase(
+  return `${date.day} ${monthNamesDate[date.month]}, ${capitalize(
     date.reconfigure({ locale: "ru-RU" }).weekdayShort
   )}`
 }
@@ -280,7 +281,6 @@ export {
   convertIdToRoute,
   dateToMonthName,
   getDaysInterval,
-  firstToUpperCase,
   isPreviousDay,
   addNoPriceMonths,
   isEmpty,

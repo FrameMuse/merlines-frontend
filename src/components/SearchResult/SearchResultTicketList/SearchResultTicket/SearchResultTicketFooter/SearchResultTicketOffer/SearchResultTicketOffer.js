@@ -1,8 +1,8 @@
 // import { useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
 // import { setTicketDilerName } from '../../../reducers/searchResultSlice';
-import SearchResultTicketBuy from "./SearchResultTicketBuy"
 import { separateThousand } from "../../../../../../utils"
+import SearchResultTicketBuy from "./SearchResultTicketBuy"
 
 function SearchResultTicketOffer({
   price,

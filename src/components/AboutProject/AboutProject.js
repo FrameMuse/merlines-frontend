@@ -1,6 +1,7 @@
 import React from "react"
-import Subscribe from "../Subscribe/Subscribe"
 import { Link } from "react-router-dom"
+
+import Subscribe from "../Subscribe/Subscribe"
 
 const AboutProject = () => {
   return (

@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-import LkSwitcher from "../LkSwitcher"
 import LkContentClearAll from "../LkContent/LkContentClearAll"
 import LkContentRoute from "../LkContent/LkContentRoute"
+import LkSwitcher from "../LkSwitcher"
 
 function LkSubscription() {
   const [isActiveRoutes, setIsActiveRoutes] = useState()

@@ -1,18 +1,20 @@
-import React, { useEffect } from "react"
-import { useLocation } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import "./days.scss"
+
 import { DateTime } from "luxon"
+import React, { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { useLocation } from "react-router-dom"
+
 import api from "../../../api/api"
 import { weekDays } from "../../../constants"
-import { dateToMonthName, firstToUpperCase } from "../../../utils"
-import PriceCalendarDaysHeader from "./PriceCalendarDaysHeader"
-import PriceCalendarDaysList from "./PriceCalendarDaysList"
 // import useFullRoute from '../../../hooks/useFullRoute';
 import useQuery from "../../../hooks/useQuery"
-import { setPickedMonthData } from "../../../reducers/priceCalendarSlice"
 import { setRouteFrom, setRouteTo } from "../../../reducers/mainSearchSlice"
+import { setPickedMonthData } from "../../../reducers/priceCalendarSlice"
 import parseParamsFromRoute from "../../../services/parseParamsFromRoute"
-import "./days.scss"
+import { capitalize, dateToMonthName } from "../../../utils"
+import PriceCalendarDaysHeader from "./PriceCalendarDaysHeader"
+import PriceCalendarDaysList from "./PriceCalendarDaysList"
 
 function PriceCalendarDays({ pickedMonthName, setPickedMonthName }) {
   const location = useLocation()
@@ -59,7 +61,7 @@ function PriceCalendarDays({ pickedMonthName, setPickedMonthName }) {
                 transport: "air",
                 previousMonthDate: prevMonth,
                 nextMonthDate: nextMonth,
-                pickedMonthName: firstToUpperCase(dateToMonthName(currentDate))
+                pickedMonthName: capitalize(dateToMonthName(currentDate))
               })
             )
           }

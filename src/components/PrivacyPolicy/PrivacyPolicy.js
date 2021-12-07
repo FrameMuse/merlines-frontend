@@ -1,4 +1,5 @@
 import React from "react"
+
 import Subscribe from "../Subscribe/Subscribe"
 
 const PrivacyPolicy = () => {

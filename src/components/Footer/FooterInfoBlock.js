@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import { setHistoryRoute } from "../../reducers/routesDataSlice"
-import Svg from "../common/Svg"
-import { firstToUpperCase } from "../../utils"
-import useFullRoute from "../../hooks/useFullRoute"
 import React from "react"
+import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
+
+import useFullRoute from "../../hooks/useFullRoute"
+import { setHistoryRoute } from "../../reducers/routesDataSlice"
+import { capitalize } from "../../utils"
+import Svg from "../common/Svg"
 
 function FooterInfoBlock(props) {
   const { title, links, modifier } = props
@@ -25,9 +26,7 @@ function FooterInfoBlock(props) {
             <li key={index} className="footer__item">
               <Link
                 onClick={getFullRoute}
-                className={`footer__link ${
-                  item.linkClass ? item.linkClass : ""
-                }`}
+                className={`footer__link ${item.linkClass ? item.linkClass : ""}`}
                 to={item.link}
               >
                 {item.svg ? (
@@ -38,7 +37,7 @@ function FooterInfoBlock(props) {
                       svgWidth="15"
                       svgHeight="15"
                     />
-                    {firstToUpperCase(item.svg)}
+                    {capitalize(item.svg)}
                   </>
                 ) : (
                   item.name

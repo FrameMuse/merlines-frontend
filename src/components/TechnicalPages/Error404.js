@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
-import { selectRoutesData } from "../../reducers/routesDataSlice"
 import "./error.scss"
+
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+
+import { selectRoutesData } from "../../reducers/routesDataSlice"
 
 function Error404() {
   const routesData = useSelector(selectRoutesData)

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { firstToUpperCase } from "utils"
+import { capitalize } from "utils"
+
 import Svg from "../common/Svg"
 import DropDownCalendarMonthDays from "./DropDownCalendarMonthDays"
 import { updateSearchCalendarCursorDate } from "./DropDownCalendarReducer"
@@ -28,7 +29,7 @@ function DropDownCalendarMonth({ secondary }) {
       <div className="drop-down-calendar__month-wrap">
         <div className="drop-down-calendar__header">
           <div className="drop-down-calendar__title">
-            <span className="drop-down-calendar__month">{firstToUpperCase(monthName)}</span>
+            <span className="drop-down-calendar__month">{capitalize(monthName)}</span>
             <span className="drop-down-calendar__year"> {fullYear}</span>
           </div>
 

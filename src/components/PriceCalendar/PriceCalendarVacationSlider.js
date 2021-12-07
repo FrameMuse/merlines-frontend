@@ -1,4 +1,5 @@
 import { useState } from "react"
+
 import Slider from "../Slider/Slider"
 
 function PriceCalendarVacationSlider() {

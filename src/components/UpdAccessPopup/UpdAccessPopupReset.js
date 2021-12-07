@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
-import Svg from "../common/Svg"
+
 import api from "../../api/api"
-import { takeErrors } from "../../utils"
 import { errorMessages } from "../../constants"
+import { takeErrors } from "../../utils"
+import Svg from "../common/Svg"
 
 function UpdAccessPopupReset() {
   const [isOpen, setIsOpen] = useState(true)

@@ -2,7 +2,6 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 
 import { filtersSlice } from "../../../reducers/filtersSlice"
-
 import Checkbox from "./Checkbox"
 
 function SearchResultCustomFilterTransfer({ checkboxes }) {

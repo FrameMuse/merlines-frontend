@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import Slider from "react-slick"
+
 import MainCollectionCard from "../MainCollectionCard"
 import { MainCollectionNextArrow, MainCollectionPrevArrow } from "./Arrows"
 import MockSlides from "./MockSlides"

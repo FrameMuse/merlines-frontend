@@ -12,11 +12,6 @@
   background: #235ef5;
 }
 
-.drop-down__item--active svg, /* TODO: вряд ли нужно, перепроверить */
-.drop-down__inner-item--active svg {
-  color: white;
-}
-
 .form__inner {
   position: relative;
   border: 2px solid transparent;

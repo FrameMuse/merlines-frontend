@@ -1,9 +1,10 @@
 import React from "react"
+
+import { separateThousand } from "../../../../../../utils"
 // import {toTranslateBaggageCode} from "../../../../../utils";
 import Svg from "../../../../../common/Svg"
-import SearchResultTicketOffer from "../../../SearchResultTicketOffer"
 import SearchResultTicketMini from "../../../SearchResultTicketMini"
-import { separateThousand } from "../../../../../../utils"
+import SearchResultTicketOffer from "../../../SearchResultTicketOffer"
 
 const SearchResultBusTicketFooter = ({
   url,

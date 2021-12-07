@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { formatDuration, shortenDate } from "../../../../utils"
+
 import { getSimpleTimeFromISO } from "../../../../../../utils"
+import { formatDuration, shortenDate } from "../../../../utils"
 
 const SearchResultBusTicketInner = ({
   flight,

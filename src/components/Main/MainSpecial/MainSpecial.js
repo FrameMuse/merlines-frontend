@@ -1,7 +1,7 @@
-import MainSpecialTitle from "./MainSpecialTitle"
+import MainSpecialList from "./MainSpecialList"
 import MainSpecialSubtitle from "./MainSpecialSubtitle"
 import MainSpecialSwitcher from "./MainSpecialSwitcher"
-import MainSpecialList from "./MainSpecialList"
+import MainSpecialTitle from "./MainSpecialTitle"
 
 function MainSpecial() {
   return (

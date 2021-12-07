@@ -125,6 +125,11 @@
   }
 }
 
+// .form__route {
+//   display: flex;
+//   flex: 1;
+// }
+
 .form__group {
   position: relative;
   border-top: 1px solid var(--color-blue);
@@ -267,6 +272,7 @@
   top: 15px;
   left: 17px;
   cursor: text;
+  pointer-events: none;
 
   @media #{$media-md} {
     top: 20px;

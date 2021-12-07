@@ -1,7 +1,9 @@
-import React from "react"
-import SubscribeForm from "./SubscribeForm"
 import "./subscribe.scss"
+
+import React from "react"
 import { Link } from "react-router-dom"
+
+import SubscribeForm from "./SubscribeForm"
 
 function Subscribe() {
   return (

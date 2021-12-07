@@ -1,6 +1,8 @@
-import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
+
+import { useKeenSlider } from "keen-slider/react"
 import { useReducer, useState } from "react"
+
 import MainPromoCard from "./MainPromoCard"
 
 function MainPromoList() {

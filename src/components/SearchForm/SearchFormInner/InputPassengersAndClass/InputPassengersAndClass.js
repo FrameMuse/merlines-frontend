@@ -1,12 +1,13 @@
-import DropDownPassengers from "../../../DropDownPassengers/DropDownPassengers"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+
 import {
   selectMainSearchParams,
   setPassengersInfo,
   setPassengersInfoMini
 } from "../../../../reducers/mainSearchSlice"
 import { pluralize } from "../../../../utils"
+import DropDownPassengers from "../../../DropDownPassengers/DropDownPassengers"
 // import React from "react";
 
 const InputPassengersAndClass = () => {

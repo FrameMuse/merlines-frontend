@@ -22,13 +22,15 @@
   &--hidden {
     top: 5em;
     opacity: 0;
-    z-index: -1;
+    pointer-events: none;
   }
 
   transition: 250ms ease top, 200ms ease opacity;
 }
 
 .passengers-list__item {
+  display: grid;
+
   padding: 20px 20px 25px;
   border-bottom: 1px solid var(--color-blue);
 
@@ -71,11 +73,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-grey);
+
   font-size: 14px;
+
   width: 30px;
   height: 30px;
+
+  color: var(--color-white);
+  background-color: var(--color-btn);
   border: 1px solid var(--color-blue);
+
   box-sizing: border-box;
   transition: 0.2s;
 
@@ -86,23 +93,10 @@
     border-radius: 0 4px 4px 0;
   }
 
-  &:hover,
-  &:focus {
-    color: var(--color-white);
-    background-color: var(--color-blue);
-  }
-
-  &--active {
-    color: var(--color-white);
-    background-color: var(--color-btn);
-  }
-
-  &--disabled {
-    &:hover,
-    &:focus {
-      color: var(--color-grey);
-      background-color: transparent;
-    }
+  &:disabled {
+    color: var(--color-grey);
+    background-color: transparent;
+    cursor: default;
   }
 }
 

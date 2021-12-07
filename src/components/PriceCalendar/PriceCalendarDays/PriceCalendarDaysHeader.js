@@ -1,24 +1,25 @@
-import { Link, useLocation, useHistory } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
 import { DateTime } from "luxon"
-import Svg from "../../common/Svg"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useHistory, useLocation } from "react-router-dom"
+
 import api from "../../../api/api"
-import routes from "../../../routes"
 import { monthNames } from "../../../constants"
-import {
-  dateToMonthName,
-  getDaysInterval,
-  firstToUpperCase
-} from "../../../utils"
-import {
-  selectPriceCalendar,
-  setPickedMonthData,
-  clearPickedMonthData
-} from "../../../reducers/priceCalendarSlice"
-import { selectMainSearchParams } from "../../../reducers/mainSearchSlice"
 import { selectAccessData } from "../../../reducers/accessDataSlice"
-import PriceCalendarDaysFilter from "./PriceCalendarDaysFilter"
+import { selectMainSearchParams } from "../../../reducers/mainSearchSlice"
+import {
+  clearPickedMonthData,
+  selectPriceCalendar,
+  setPickedMonthData
+} from "../../../reducers/priceCalendarSlice"
 import { selectRoutesData } from "../../../reducers/routesDataSlice"
+import routes from "../../../routes"
+import {
+  capitalize,
+  dateToMonthName,
+  getDaysInterval
+} from "../../../utils"
+import Svg from "../../common/Svg"
+import PriceCalendarDaysFilter from "./PriceCalendarDaysFilter"
 
 function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
   const dispatch = useDispatch()
@@ -96,7 +97,7 @@ function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
             transport: priceCalendarData.pickedMonthData.transport,
             previousMonthDate: daysInterval.start_date.slice(0, 7),
             nextMonthDate: daysInterval.end_date.slice(0, 7),
-            pickedMonthName: firstToUpperCase(dateToMonthName(currentMonthDate))
+            pickedMonthName: capitalize(dateToMonthName(currentMonthDate))
           })
         )
       } catch (error) {
@@ -120,7 +121,7 @@ function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
             transport: priceCalendarData.pickedMonthData.transport,
             previousMonthDate: daysInterval.start_date.slice(0, 7),
             nextMonthDate: daysInterval.end_date.slice(0, 7),
-            pickedMonthName: firstToUpperCase(dateToMonthName(currentMonthDate))
+            pickedMonthName: capitalize(dateToMonthName(currentMonthDate))
           })
         )
       } catch (error) {

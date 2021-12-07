@@ -1,9 +1,10 @@
 import React, { useState } from "react"
+
+import { separateThousand } from "../../../../../../utils"
 import Svg from "../../../../../common/Svg"
 import SearchResultTicketOffer from "../../../SearchResultTicketOffer"
-import SearchResultTrainTicketMini from "./SearchResultTrainTicketMini"
 import SearchResultTicketTransfer from "../../../SearchResultTicketTransfer"
-import { separateThousand } from "../../../../../../utils"
+import SearchResultTrainTicketMini from "./SearchResultTrainTicketMini"
 
 const SearchResultTrainTicketFooter = ({
   voyages,

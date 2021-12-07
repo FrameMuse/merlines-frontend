@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react"
-import { useParams, useHistory } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
-import Svg from "../common/Svg"
-import api from "../../api/api"
-import routes from "../../routes"
+import { useDispatch,useSelector } from "react-redux"
+import { useHistory,useParams } from "react-router-dom"
 import { toast } from "react-toastify"
-import { takeErrors } from "../../utils"
+
+import api from "../../api/api"
 import { errorMessages } from "../../constants"
 import {
   selectAccessData,
   setIsChangedEmail
 } from "../../reducers/accessDataSlice"
 import { setLkEmail } from "../../reducers/lkDataSlice"
+import routes from "../../routes"
+import { takeErrors } from "../../utils"
+import Svg from "../common/Svg"
 
 function UpdAccessPopupConfirm() {
   const [isOpen, setIsOpen] = useState(true)

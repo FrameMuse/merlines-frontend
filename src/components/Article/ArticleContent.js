@@ -1,11 +1,12 @@
-import React from "react"
-import { Link } from "react-router-dom"
 import "./user.scss"
 
-import ArticleTag from "./ArticleTag"
+import React from "react"
+import { Link } from "react-router-dom"
+
+import ArticleComments from "./ArticleComments/ArticleComments"
 import ArticleFigure from "./ArticleFigure"
 import ArticleSocial from "./ArticleSocial/ArticleSocial"
-import ArticleComments from "./ArticleComments/ArticleComments"
+import ArticleTag from "./ArticleTag"
 
 const convertToHTML = (item, index) => {
   switch (item.type) {

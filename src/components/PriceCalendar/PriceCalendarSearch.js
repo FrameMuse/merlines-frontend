@@ -1,27 +1,28 @@
-import { useState, useRef, useEffect } from "react"
-import { useHistory, useLocation } from "react-router-dom"
 import { DateTime } from "luxon"
-import { useSelector, useDispatch } from "react-redux"
-import {
-  selectPriceCalendar,
-  clearPickedMonthData,
-  setPickedMonthData
-} from "../../reducers/priceCalendarSlice"
+import { useEffect, useRef, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory, useLocation } from "react-router-dom"
+
+import api from "../../api/api"
+import useDebounce from "../../hooks/useDebounce"
+import { selectAccessData } from "../../reducers/accessDataSlice"
 import {
   selectMainSearchParams,
+  setOneWay,
   setRouteFrom,
-  setRouteTo,
-  setOneWay
+  setRouteTo
 } from "../../reducers/mainSearchSlice"
+import {
+  clearPickedMonthData,
+  selectPriceCalendar,
+  setPickedMonthData
+} from "../../reducers/priceCalendarSlice"
 import {
   setPriceCalendarSearchRouteAir,
   setPriceCalendarSearchRouteBus
 } from "../../reducers/routesDataSlice"
-import { selectAccessData } from "../../reducers/accessDataSlice"
-import api from "../../api/api"
+import { capitalize, dateToMonthName } from "../../utils"
 import DropDown from "../DropDown/DropDown"
-import useDebounce from "../../hooks/useDebounce"
-import { dateToMonthName, firstToUpperCase } from "../../utils"
 // import useFullRoute from '../../hooks/useFullRoute';
 // import useQuery from '../../hooks/useQuery';
 
@@ -170,7 +171,7 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
   const getMonth = async () => {
     dispatch(clearPickedMonthData())
     setPickedMonthName(
-      firstToUpperCase(dateToMonthName(priceCalendarData.monthDate))
+      capitalize(dateToMonthName(priceCalendarData.monthDate))
     )
 
     try {
@@ -195,7 +196,7 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
             7
           ),
           nextMonthDate: priceCalendarData.daysInterval.end_date.slice(0, 7),
-          pickedMonthName: firstToUpperCase(
+          pickedMonthName: capitalize(
             dateToMonthName(priceCalendarData.monthDate)
           )
         })
@@ -255,18 +256,14 @@ function PriceCalendarSearch({ transport, setPickedMonthName }) {
       <div className="calendar-form__header">
         <button
           onClick={() => dispatch(setOneWay(false))}
-          className={`calendar-form__btn ${
-            !mainSearchParams.one_way ? "calendar-form__btn--active" : ""
-          }`}
+          className={`calendar-form__btn ${!mainSearchParams.one_way ? "calendar-form__btn--active" : ""}`}
           type="button"
         >
           Туда - обратно
         </button>
         <button
           onClick={() => dispatch(setOneWay(true))}
-          className={`calendar-form__btn ${
-            mainSearchParams.one_way ? "calendar-form__btn--active" : ""
-          }`}
+          className={`calendar-form__btn ${mainSearchParams.one_way ? "calendar-form__btn--active" : ""}`}
           type="button"
         >
           В одну сторону

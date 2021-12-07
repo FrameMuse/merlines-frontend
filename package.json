@@ -16,7 +16,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
-    "react-redux": "^7.2.2",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-slick": "^0.28.1",
@@ -24,6 +24,7 @@
     "react-use": "^17.2.4",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
     "sass": "^1.37.2",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^0.2.4"
@@ -33,7 +34,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass": "sass src:src --watch  --poll"
+    "sass": "sass src:src --watch  --poll",
+    "fix-all": "eslint src --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -57,7 +59,8 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.3.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.5.2"
   }
 }

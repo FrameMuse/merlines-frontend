@@ -1,32 +1,34 @@
-import { useSelector, useDispatch } from "react-redux"
-import React, { useState, useEffect } from "react"
 import "./ticket.scss"
 import "./ticket-list.scss"
 import "./ticket-mini.scss"
-import { useLocation } from "react-router-dom"
+
+import React, { useEffect,useState } from "react"
 import { Helmet } from "react-helmet"
+import { useDispatch,useSelector } from "react-redux"
+import { useLocation } from "react-router-dom"
+
 import api from "../../api/api"
-import Svg from "../common/Svg"
-import SearchForm from "../SearchForm/SearchForm"
-import SearchResultTicketList from "./SearchResultTicketList/SearchResultTicketList"
-import Loader from "../Loader/Loader"
-import LoaderClose from "../Loader/LoaderClose"
+import asyncAction from "../../hooks/asyncAction"
+import useQuery from "../../hooks/useQuery"
+// import { selectAccessData } from '../../reducers/accessDataSlice';
+import useWindowSize from "../../hooks/useWindowSize"
 import { selectFilter } from "../../reducers/filtersSlice"
-import { transfersFilter } from "./utils"
-import SearchFormMini from "../SearchForm/SearchFormMini"
+import { setRouteFrom, setRouteTo } from "../../reducers/mainSearchSlice"
 import {
   selectSearchResult,
   setSearchData
 } from "../../reducers/searchResultSlice"
-import { setRouteFrom, setRouteTo } from "../../reducers/mainSearchSlice"
-// import { selectAccessData } from '../../reducers/accessDataSlice';
-import useWindowSize from "../../hooks/useWindowSize"
-import ScrollOnTopTest from "../common/ScrollOnTopTest"
-import useQuery from "../../hooks/useQuery"
 import meta from "../../seo/meta"
 import parseParamsFromRoute from "../../services/parseParamsFromRoute"
-import asyncAction from "../../hooks/asyncAction"
+import ScrollOnTopTest from "../common/ScrollOnTopTest"
+import Svg from "../common/Svg"
+import Loader from "../Loader/Loader"
+import LoaderClose from "../Loader/LoaderClose"
+import SearchForm from "../SearchForm/SearchForm"
+import SearchFormMini from "../SearchForm/SearchFormMini"
 import airTicketsDataParser from "./searchReasultDataParsers/airTicketsDataParser"
+import SearchResultTicketList from "./SearchResultTicketList/SearchResultTicketList"
+import { transfersFilter } from "./utils"
 
 function SearchResult({ setIsOpenFilter }) {
   const location = useLocation()

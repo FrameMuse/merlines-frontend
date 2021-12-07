@@ -1,10 +1,9 @@
 import React from "react"
-
 import { useDispatch } from "react-redux"
+
 import {
-  setIsOpenClearHistory,
-  setIsHistoryRoute
-} from "../../../reducers/lkDataSlice"
+  setIsHistoryRoute,
+  setIsOpenClearHistory} from "../../../reducers/lkDataSlice"
 
 function LkContentClearAll({ subscribe }) {
   const mainClass = `button-text button-text--cabinet ${
