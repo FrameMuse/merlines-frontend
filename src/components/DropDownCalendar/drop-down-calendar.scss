@@ -11,7 +11,7 @@
   &--hidden {
     opacity: 0;
     // top: 5em;
-    z-index: -1;
+    pointer-events: none;
   }
 
   @media #{$media-md} {
@@ -240,7 +240,7 @@
   justify-items: center;
   overflow: hidden;
 
-  &>:first-child {
+  & > :first-child {
     grid-column: var(--first-week-day, 1);
   }
 }
@@ -274,7 +274,7 @@
     color: var(--color-white);
     background-color: var(--color-light-blue-2);
 
-    &+&::before {
+    & + &::before {
       content: "";
 
       position: absolute;
@@ -307,7 +307,8 @@
 }
 
 .drop-down-calendar__control-btn {
-  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  transition: color 150ms ease, background-color 150ms ease,
+    border-color 150ms ease;
 
   @media #{$media-md} {
     @include resetBtn;
