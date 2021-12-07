@@ -1,5 +1,6 @@
 import { connectRouter } from "connected-react-router"
 import { combineReducers } from "redux"
+import search from "redux/reducers/search"
 
 import searchCalendar from "./components/DropDownCalendar/DropDownCalendarReducer"
 import { loginReducer } from "./components/Login/LoginReducer"
@@ -19,6 +20,7 @@ const rootReducer = (history) =>
     router: connectRouter(history),
     priceCalendar: priceCalendarSlice,
     mainSearchParams: mainSearchParamsSlice,
+    search,
     searchCalendar,
     auth: loginReducer,
     createUser: signupReducer,

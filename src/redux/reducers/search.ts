@@ -1,11 +1,11 @@
 export type SearchTravelClass = "business" | "economy"
 
 export interface SearchRoute {
-  departurePoint: string | null
-  arrivalPoint: string | null
+  departurePoint: string
+  arrivalPoint: string
 
-  departureDate: Date | null
-  returnDate: Date | null
+  departureDate: Date
+  returnDate?: Date
 }
 
 export interface SearchDetails {
@@ -20,7 +20,7 @@ export interface SearchDetails {
 
 const initialState: SearchDetails = {
   travelClass: "economy",
-  routes: [],
+  routes: [{ arrivalPoint: "", departurePoint: "", departureDate: new Date }],
   passengers: {
     adults: 1,
     children: 0,
@@ -63,8 +63,8 @@ export const addSearchRoutes = (...routes: SearchRoute[]) => ({
   payload: { routes }
 })
 
-export const updateSearchRoute = (index: number, route: SearchRoute) => ({
-  type: "SEARCH_ROUTES_ADD",
+export const updateSearchRoute = (index: number, route: Partial<SearchRoute>) => ({
+  type: "SEARCH_ROUTES_UPDATE",
   payload: { index, route }
 })
 
