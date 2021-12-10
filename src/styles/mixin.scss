@@ -252,3 +252,28 @@
     line-height: 1;
   }
 }
+
+@mixin FadeOutDownOnHidden {
+  &--hidden {
+    top: 1em;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  transition: 250ms ease top, 200ms ease opacity;
+}
+
+@mixin FadeOutDownOnFocus($parent, $initTop: null) {
+  top: calc(1em + #{$initTop});
+  opacity: 0;
+  pointer-events: none;
+
+  &:hover,
+  #{$parent}:focus-within & {
+    top: $initTop;
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  transition: 250ms ease top, 200ms ease opacity;
+}

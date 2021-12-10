@@ -43,7 +43,7 @@ function MainPromoList() {
     {
       title: "Лучшие цены",
       isActive: isActiveCard.save,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      text: "Помогаем найти самые гибкие маршруты и выгодные цены для клиентов",
       img: "images/advanteges/save-money-bw.png",
       modifier: "save",
       ksClass: "keen-slider__slide number-slide1"
@@ -51,7 +51,7 @@ function MainPromoList() {
     {
       title: "Поиск по всему миру",
       isActive: isActiveCard.seo,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      text: "Постоянно отслеживаем акции, предложения перевозчиков и агентств",
       img: "images/advanteges/seo-bw.png",
       modifier: "seo",
       ksClass: "keen-slider__slide number-slide2"
@@ -59,7 +59,7 @@ function MainPromoList() {
     {
       title: "Проверенные поставщики",
       isActive: isActiveCard.business,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      text: "Сотрудничаем с перевозчиками и агентствами, зарекомендовавшими себя временем",
       img: "images/advanteges/business-meeting-bw.png",
       modifier: "business",
       ksClass: "keen-slider__slide number-slide3"
@@ -106,23 +106,17 @@ function MainPromoList() {
       <div className="advantages__slider-control">
         <button
           onClick={() => dispatch({ type: "save" })}
-          className={`advantages__slider-btn ${
-            isActiveCard.save ? "advantages__slider-btn--active" : ""
-          }`}
+          className={`advantages__slider-btn ${isActiveCard.save ? "advantages__slider-btn--active" : ""}`}
           type="button"
         ></button>
         <button
           onClick={() => dispatch({ type: "seo" })}
-          className={`advantages__slider-btn ${
-            isActiveCard.seo ? "advantages__slider-btn--active" : ""
-          }`}
+          className={`advantages__slider-btn ${isActiveCard.seo ? "advantages__slider-btn--active" : ""}`}
           type="button"
         ></button>
         <button
           onClick={() => dispatch({ type: "business" })}
-          className={`advantages__slider-btn ${
-            isActiveCard.business ? "advantages__slider-btn--active" : ""
-          }`}
+          className={`advantages__slider-btn ${isActiveCard.business ? "advantages__slider-btn--active" : ""}`}
           type="button"
         ></button>
       </div>

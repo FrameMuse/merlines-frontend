@@ -1,6 +1,19 @@
 @import "vars";
 @import "mixin";
 
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+input {
+  outline-color: #315c9d;
+}
+
+input[tabindex="-1"] {
+  outline: none;
+}
+
 :root {
   --color-white: #{$color-white};
   --color-black: #{$color-black};

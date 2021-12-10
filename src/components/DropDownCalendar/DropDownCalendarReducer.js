@@ -31,18 +31,12 @@ export default (state = initialState, { type, payload }) => {
 
       const firstTime = dates.first?.getTime()
       const secondTime = dates.second?.getTime()
-      // Change mode if two the same dates were chosen
-      const mode = firstTime === secondTime ? "single" : state.mode
-      // Delete second if two the same dates were chosen
-      if (firstTime === secondTime) {
-        dates.second = null
-      }
       // If second date is earlier, swap them
       if (secondTime < firstTime) {
         [dates.second, dates.first] = [dates.first, dates.second]
       }
 
-      return { ...state, mode, dates }
+      return { ...state, dates }
     }
 
     default:
