@@ -167,6 +167,16 @@ function SearchFormDates() {
     dispatch(updateSearchCalendarMode("double"))
   }
 
+  function texualizeDate(date?: Date | null) {
+    if (date == null) return ""
+
+    const day = date.getDate()
+    const month = date.toLocaleDateString("ru", { month: "long" })
+    const weekday = date.toLocaleDateString("ru", { weekday: "short" })
+
+    return `${day} ${capitalize(month)}, ${capitalize(weekday)}`
+  }
+
   useClickAway(calendarRef, () => dispatch(updateSearchCalendarIsOpen(false)))
 
   return (
