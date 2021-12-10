@@ -47,7 +47,7 @@ function DropDownPassengersItem(props: DropDownPassengersItemProps) {
       </div>
       <div className="passengers-list__counter">
         <button className="passengers-list__counter-btn" onClick={decrement} disabled={props.name === "adults" ? passengersGroup < 2 : passengersGroup < 1}>-</button>
-        <input className="passengers-list__counter-num" type="number" value={passengersGroup} readOnly />
+        <input className="passengers-list__counter-num" type="number" value={passengersGroup} readOnly tabIndex={-1} />
         <button className="passengers-list__counter-btn" onClick={increment} disabled={passengersAll >= 9}>+</button>
       </div>
     </div>

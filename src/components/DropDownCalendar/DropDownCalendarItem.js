@@ -12,6 +12,7 @@ function DropDownCalendarItem({ date }) {
   const dispatch = useDispatch()
   const searchCalendar = useSelector(state => state.searchCalendar)
 
+  const dateNow = new Date
   const dateTime = date.getTime()
   const firstDateTime = searchCalendar.dates.first?.getTime()
   const secondDateTime = searchCalendar.dates.second?.getTime()
@@ -59,6 +60,9 @@ function DropDownCalendarItem({ date }) {
     modifiers.push("active")
   }
   if (shouldBeGrouped()) modifiers.push("group")
+  if (dateNow.getTime() > date.getTime() && dateNow.getDate() > date.getDate()) {
+    modifiers.push("disabled")
+  }
 
   return (
     <div className={classWithModifiers("drop-down-calendar__day", ...modifiers)} onClick={onClick} onPointerEnter={onPointerEnter}>

@@ -9,6 +9,7 @@ export interface SearchRoute {
 }
 
 export interface SearchDetails {
+  oneWay: boolean
   travelClass: SearchTravelClass
   routes: SearchRoute[]
   passengers: {
@@ -19,6 +20,7 @@ export interface SearchDetails {
 }
 
 const initialState: SearchDetails = {
+  oneWay: true,
   travelClass: "economy",
   routes: [{ arrivalPoint: "", departurePoint: "", departureDate: new Date }],
   passengers: {

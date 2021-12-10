@@ -4,15 +4,12 @@
 .drop-down-calendar {
   position: fixed;
   inset: 0;
+  top: 0;
   background-color: var(--color-blue);
   overflow-y: auto;
   z-index: 11;
 
-  &--hidden {
-    opacity: 0;
-    // top: 5em;
-    pointer-events: none;
-  }
+  @include FadeOutDownOnHidden;
 
   @media #{$media-md} {
     bottom: unset;
@@ -235,6 +232,7 @@
   z-index: 0;
 
   display: grid;
+  grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(7, 1fr);
   gap: 0 5px;
   justify-items: center;
