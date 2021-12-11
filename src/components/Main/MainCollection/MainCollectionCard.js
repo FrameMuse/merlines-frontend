@@ -12,12 +12,10 @@ const MainCollectionCard = ({
 }) => {
   return (
     <div
-      className={`article-card article-card--index ${
-        cardMain ? "article-card--indexLg" : ""
-      } ${ksClass ?? ""}`}
+      className={`article-card article-card--index ${cardMain ? "article-card--indexLg" : ""} ${ksClass ?? ""}`}
     >
       <img className="article-card__img" src={cardImg} alt={cardTitle} />
-      <Link className="article-card__tag" to="#">
+      <Link className="article-card__tag" to={"/blog/tag/" + cardTag.replace("#", "")}>
         {cardTag}
       </Link>
       <Link className="article-card__title" to="#">

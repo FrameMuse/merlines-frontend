@@ -17,8 +17,8 @@ function ArticleCard({ title, imgSrc, tags, date, articleId }) {
         />
         <ul className="article-card__tags-list">
           {tags.map((tag, index) => (
-            <Link key={index} className="article-card__tags-item" to="#">
-              {tag}
+            <Link key={index} className="article-card__tags-item" to={"/blog/tag/" + tag}>
+              #{tag}
             </Link>
           ))}
         </ul>

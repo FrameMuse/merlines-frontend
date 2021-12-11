@@ -1,7 +1,22 @@
+import { useHistory } from "react-router-dom"
+
 import ArticleCard from "../Article/ArticleCard"
 import Svg from "../common/Svg"
 
 function BlogSlider({ articles }) {
+  const history = useHistory()
+  const hasTag = history.location.pathname.startsWith("/blog/tag/")
+  const searchedTag = history.location.pathname.replace("/blog/tag/", "").toLowerCase()
+  const filteredArticles = articles.items.filter(article => {
+    if (!hasTag) return true
+
+    if (article.tags.map(tag => tag.toLowerCase()).includes(searchedTag)) {
+      return true
+    }
+
+    return false
+  })
+  if (filteredArticles.length < 1) return null
   return (
     <section className="section">
       <header className="section__header">
@@ -24,7 +39,7 @@ function BlogSlider({ articles }) {
         )}
       </header>
       <ul className="section__list">
-        {articles.items.map((article) => (
+        {filteredArticles.map((article) => (
           <ArticleCard
             key={article.id}
             title={article.title}

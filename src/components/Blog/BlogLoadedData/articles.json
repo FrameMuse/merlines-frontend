@@ -21,7 +21,10 @@
           },
           "blogMainImg": "images/article/5.jpg",
           "date": "12 июня 2019",
-          "tags": ["#подборки", "#второйТег"],
+          "tags": [
+            "подборки",
+            "второйТег"
+          ],
           "headerImage": {
             "type": "image",
             "img": {
@@ -181,7 +184,10 @@
           },
           "blogMainImg": "images/article/5.jpg",
           "date": "12 июня 2019",
-          "tags": ["#подборки", "#второйТег"],
+          "tags": [
+            "подборки",
+            "второйТег"
+          ],
           "headerImage": {
             "type": "image",
             "img": {
@@ -346,7 +352,10 @@
           },
           "blogMainImg": "images/article/5.jpg",
           "date": "12 июня 2019",
-          "tags": ["#подборки", "#второйТег"],
+          "tags": [
+            "подборки",
+            "второйТег"
+          ],
           "headerImage": {
             "type": "image",
             "img": {
@@ -511,7 +520,10 @@
           },
           "blogMainImg": "images/article/5.jpg",
           "date": "12 июня 2019",
-          "tags": ["#подборки", "#второйТег"],
+          "tags": [
+            "подборки",
+            "второйТег"
+          ],
           "headerImage": {
             "type": "image",
             "img": {
@@ -671,7 +683,10 @@
           },
           "blogMainImg": "images/article/5.jpg",
           "date": "12 июня 2019",
-          "tags": ["#подборки", "#второйТег"],
+          "tags": [
+            "подборки",
+            "второйТег"
+          ],
           "headerImage": {
             "type": "image",
             "img": {
@@ -831,7 +846,10 @@
           },
           "blogMainImg": "images/article/5.jpg",
           "date": "12 июня 2019",
-          "tags": ["#подборки", "#второйТег"],
+          "tags": [
+            "подборки",
+            "второйТег"
+          ],
           "headerImage": {
             "type": "image",
             "img": {
@@ -991,7 +1009,10 @@
           },
           "blogMainImg": "images/article/5.jpg",
           "date": "12 июня 2019",
-          "tags": ["#подборки", "#второйТег"],
+          "tags": [
+            "подборки",
+            "второйТег"
+          ],
           "headerImage": {
             "type": "image",
             "img": {
@@ -1151,7 +1172,10 @@
           },
           "blogMainImg": "images/article/5.jpg",
           "date": "12 июня 2019",
-          "tags": ["#подборки", "#второйТег"],
+          "tags": [
+            "подборки",
+            "ГАЙДЫ"
+          ],
           "headerImage": {
             "type": "image",
             "img": {

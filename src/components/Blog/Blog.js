@@ -1,8 +1,8 @@
 import "./articles.scss"
 import "./search.scss"
 
-import { useEffect,useState } from "react"
-import { Route,Switch } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Route, Switch } from "react-router-dom"
 
 import articlesData from "./BlogLoadedData/articles.json"
 import BlogNavigation from "./BlogNavigation/BlogNavigation"
@@ -31,16 +31,11 @@ function Blog() {
       <div className="articles__container">
         <BlogNavigation navigation={navigation} />
         <Switch>
-          <Route exact path="/blog">
+          <Route path="/blog">
             {articlesData.articles.map((section, index) => (
               <BlogSlider key={index} articles={section} />
             ))}
           </Route>
-          {navigation.map((item, index) => (
-            <Route key={index} path={item.route}>
-              {item.tag}
-            </Route>
-          ))}
         </Switch>
       </div>
     </section>
