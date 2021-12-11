@@ -75,6 +75,13 @@ const getDaysInterval = (date, calendar) => {
   }
 }
 
+/**
+ * @returns { any }
+ */
+export function noop() {
+  /* Do nothing */
+}
+
 export const capitalize = (str) => {
   if (!str) return str
   return str[0].toUpperCase() + str.slice(1)
@@ -253,7 +260,7 @@ export function classWithModifiers(className, ...modifiers) {
 
 /**
  *
- * @param { Record<string, string | number> } QueryObject
+ * @param { Record<string, unknown> } QueryObject
  * @returns string
  */
 export function createQuery(QueryObject) {
