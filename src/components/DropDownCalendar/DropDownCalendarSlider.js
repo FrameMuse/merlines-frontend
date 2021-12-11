@@ -1,14 +1,13 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useContext, useEffect } from "react"
 import { classWithModifiers } from "utils"
 
 import Svg from "../common/Svg"
-import { updateSearchCalendarCursorDate } from "./DropDownCalendarReducer"
+import DateCalendarContext from "./DropDownCalendarContext"
+import { updateDateCalendarCursorDate } from "./DropDownCalendarReducer"
 
 function DropDownCalendarSlider() {
-  const dispatch = useDispatch()
-  const searchCalendar = useSelector(state => state.searchCalendar)
-  const isCursorDatePast = searchCalendar.cursorDate.getTime() < Date.now()
+  const [state, dispatch] = useContext(DateCalendarContext)
+  const isCursorDatePast = state.cursorDate.getTime() < Date.now()
 
   const modifiers = ["prev"]
   if (isCursorDatePast) modifiers.push("disabled")
@@ -16,26 +15,26 @@ function DropDownCalendarSlider() {
   function prev() {
     if (isCursorDatePast) return
 
-    const newDate = new Date(searchCalendar.cursorDate)
+    const newDate = new Date(state.cursorDate)
     newDate.setMonth(newDate.getMonth() - 1)
 
-    dispatch(updateSearchCalendarCursorDate(newDate))
+    dispatch(updateDateCalendarCursorDate(newDate))
   }
 
   function next() {
-    const newDate = new Date(searchCalendar.cursorDate)
+    const newDate = new Date(state.cursorDate)
     newDate.setMonth(newDate.getMonth() + 1)
 
-    dispatch(updateSearchCalendarCursorDate(newDate))
+    dispatch(updateDateCalendarCursorDate(newDate))
   }
 
   useEffect(() => {
-    searchCalendar
-  }, [searchCalendar])
+    state
+  }, [state])
 
   return (
     <div className="drop-down-calendar__control">
-      <button onClick={prev} tabIndex="-1" className={classWithModifiers("drop-down-calendar__control-btn", ...modifiers)}>
+      <button onClick={prev} type="button" tabIndex="-1" className={classWithModifiers("drop-down-calendar__control-btn", ...modifiers)}>
         <Svg
           svgClass="drop-down-calendar__control-icon"
           svgName="arrow-filter"
@@ -43,7 +42,7 @@ function DropDownCalendarSlider() {
           svgHeight="10"
         />
       </button>
-      <button onClick={next} tabIndex="-1" className="drop-down-calendar__control-btn drop-down-calendar__control-btn--next">
+      <button onClick={next} type="button" tabIndex="-1" className="drop-down-calendar__control-btn drop-down-calendar__control-btn--next">
         <Svg
           svgClass="drop-down-calendar__control-icon"
           svgName="arrow-filter"

@@ -19,13 +19,13 @@ export function SearchFormPassengers() {
   const travelClass = ll.travelClasses[search.travelClass]
 
   return (
-    <label className="form__group form__group--passengers">
+    <label className="search-form__group search-form__group--passengers">
       <input
-        className="form__input"
+        className="search-form__input search-form__input--passenger"
         value={`${passengersCount} ${pluralize(passengersCount, ll.passengers.plural)}, ${travelClass}`}
         readOnly
       />
-      <div className="form__label">пассажиры и класс</div>
+      <div className="search-form__placeholder">пассажиры и класс</div>
       <DropDownPassengers />
     </label>
   )

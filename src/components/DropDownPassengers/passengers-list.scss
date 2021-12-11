@@ -19,7 +19,7 @@
     @include rectangle;
   }
 
-  @include FadeOutDownOnFocus(".form__group--passengers", 100%);
+  @include FadeOutDownOnFocus(".search-form__group", 100%);
 }
 
 .passengers-list__item {

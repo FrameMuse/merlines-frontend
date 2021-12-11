@@ -21,21 +21,35 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
   }
 
   function onSelectDeparturePoint(element: DropDownElementProps) {
-    updateRouteData("departurePoint", element.title)
+    updateRouteData("departurePoint", {
+      code: element.tag,
+      name: element.title
+    })
   }
 
   function onSelectArrivalPoint(element: DropDownElementProps) {
-    updateRouteData("arrivalPoint", element.title)
+    updateRouteData("arrivalPoint", {
+      code: element.tag,
+      name: element.title
+    })
   }
 
   function onChangeDeparturePoint(event: FormEvent<HTMLInputElement>) {
     setDeparturePointOpen(true)
-    updateRouteData("departurePoint", event.currentTarget.value)
+
+    updateRouteData("departurePoint", {
+      code: "___",
+      name: event.currentTarget.value
+    })
   }
 
   function onChangeArrivalPoint(event: FormEvent<HTMLInputElement>) {
     setArrivalPointOpen(true)
-    updateRouteData("arrivalPoint", event.currentTarget.value)
+
+    updateRouteData("arrivalPoint", {
+      code: "___",
+      name: event.currentTarget.value
+    })
   }
 
 
@@ -43,27 +57,27 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
 
   return (
     <>
-      <label className="form__group form__group--departure">
+      <label className="search-form__group search-form__group--departure">
         <input
-          className="form__input"
+          className="search-form__input"
           autoComplete="off"
           placeholder="_"
 
-          value={props.departurePoint}
+          value={props.departurePoint?.name}
           onChange={onChangeDeparturePoint} />
-        <div className="form__label">{"откуда"}</div>
+        <div className="search-form__placeholder">{"откуда"}</div>
         <SearchFormRoutesSwitchButton />
         <DropDown list={list} isOpen={departurePointOpen} setIsOpen={setDeparturePointOpen} onSelect={onSelectDeparturePoint} />
       </label>
-      <label className="form__group form__group--arrival">
+      <label className="search-form__group search-form__group--arrival">
         <input
-          className="form__input"
+          className="search-form__input"
           autoComplete="off"
           placeholder="_"
 
-          value={props.arrivalPoint}
+          value={props.arrivalPoint?.name}
           onChange={onChangeArrivalPoint} />
-        <div className="form__label">{"куда"}</div>
+        <div className="search-form__placeholder">{"куда"}</div>
         <DropDown list={list} isOpen={arrivalPointOpen} setIsOpen={setArrivalPointOpen} onSelect={onSelectArrivalPoint} />
       </label>
     </>
@@ -84,5 +98,5 @@ function SearchFormRoutesSwitchButton() {
   }
 
   if (search.routes.length > 1) return null
-  return <button onClick={switchRoutes} type="button" className="form__switch">Поменять местами</button>
+  return <button onClick={switchRoutes} type="button" className="search-form__switch">Поменять местами</button>
 }

@@ -1,27 +1,32 @@
+import { useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { capitalize } from "utils"
 
 import Svg from "../common/Svg"
+import DateCalendarContext from "./DropDownCalendarContext"
 import DropDownCalendarMonthDays from "./DropDownCalendarMonthDays"
-import { updateSearchCalendarCursorDate } from "./DropDownCalendarReducer"
+import { updateDateCalendarCursorDate } from "./DropDownCalendarReducer"
 import DropDownCalendarSelectMonth from "./DropDownCalendarSelectMonth"
 import DropDownCalendarWeek from "./DropDownCalendarWeek"
 
-function DropDownCalendarMonth({ secondary }) {
-  const dispatch = useDispatch()
-  const searchCalendar = useSelector(state => state.searchCalendar)
-  const cursorDate = new Date(searchCalendar.cursorDate)
-  if (secondary) {
+interface DropDownCalendarMonthProps {
+  secondary?: boolean
+}
+
+function DropDownCalendarMonth(props: DropDownCalendarMonthProps) {
+  const [state, dispatch] = useContext(DateCalendarContext)
+  const cursorDate = new Date(state.cursorDate)
+  if (props.secondary) {
     cursorDate.setMonth(cursorDate.getMonth() + 1)
   }
   const monthName = cursorDate.toLocaleDateString("ru", { month: "long" })
   const fullYear = cursorDate.getFullYear()
 
-  function monthUpdate(monthIndex) {
+  function monthUpdate(monthIndex: number) {
     const newDate = new Date(cursorDate)
-    newDate.setMonth(secondary ? (monthIndex - 1) : monthIndex)
+    newDate.setMonth(props.secondary ? (monthIndex - 1) : monthIndex)
 
-    dispatch(updateSearchCalendarCursorDate(newDate))
+    dispatch(updateDateCalendarCursorDate(newDate))
   }
 
   return (

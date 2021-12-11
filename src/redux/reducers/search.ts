@@ -1,15 +1,21 @@
 export type SearchTravelClass = "business" | "economy"
 
-export interface SearchRoute {
-  departurePoint: string
-  arrivalPoint: string
+export interface SearchRoutePoint {
+  name: string
+  code: string
+  type?: "airplane" | "train" | "bus"
+}
 
-  departureDate: Date
-  returnDate?: Date
+export interface SearchRoute {
+  departurePoint: SearchRoutePoint | null
+  arrivalPoint: SearchRoutePoint | null
+
+  departureDate: Date | null
+  returnDate: Date | null
 }
 
 export interface SearchDetails {
-  oneWay: boolean
+  hasReturnDate: boolean
   travelClass: SearchTravelClass
   routes: SearchRoute[]
   passengers: {
@@ -20,9 +26,9 @@ export interface SearchDetails {
 }
 
 const initialState: SearchDetails = {
-  oneWay: true,
+  hasReturnDate: false,
   travelClass: "economy",
-  routes: [{ arrivalPoint: "", departurePoint: "", departureDate: new Date }],
+  routes: [{ arrivalPoint: null, departurePoint: null, departureDate: new Date, returnDate: null }],
   passengers: {
     adults: 1,
     children: 0,
@@ -44,7 +50,11 @@ export default (state = initialState, action: Action): typeof initialState => {
       return { ...state, routes: [...state.routes, ...action.payload.routes] }
 
     case "SEARCH_ROUTES_UPDATE":
-      state.routes.splice(action.payload.index, 1, action.payload.route)
+      state.routes[action.payload.index] = {
+        ...state.routes[action.payload.index],
+        ...action.payload.route
+      }
+
       return { ...state, routes: state.routes }
 
     case "SEARCH_PASSENGERS_UPDATE":
@@ -54,6 +64,12 @@ export default (state = initialState, action: Action): typeof initialState => {
       return state
   }
 }
+
+
+export const updateSearchHasReturnDate = (hasReturnDate: SearchDetails["hasReturnDate"]) => ({
+  type: "SEARCH_UPDATE",
+  payload: { hasReturnDate }
+})
 
 export const updateSearchTravelClass = (travelClass: SearchTravelClass) => ({
   type: "SEARCH_UPDATE",
