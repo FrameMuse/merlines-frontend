@@ -1,22 +1,11 @@
-name: tests
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+name: CI
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-    
     steps:
     - uses: actions/checkout@v2
-
-    - name: Test Reporter
-      uses: dorny/test-reporter@v1.5.0
-
+    - name: Install modules
+      run: npm i
+    - name: Run ESLint
+      run: eslint . --ext .js,.jsx,.ts,.tsx
