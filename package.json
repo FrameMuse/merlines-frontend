@@ -37,6 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass src:src --watch  --poll",
+    "eslint": "eslint src",
     "fix-all": "eslint src --fix"
   },
   "eslintConfig": {
