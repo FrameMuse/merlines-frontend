@@ -17,5 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Is Website vulnerable
-      uses: lirantal/is-website-vulnerable@1.15.10
+    - name: Test Reporter
+      uses: dorny/test-reporter@v1.5.0
+
