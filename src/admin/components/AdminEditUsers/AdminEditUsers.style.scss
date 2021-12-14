@@ -1,0 +1,42 @@
+.edit-users {
+  display: grid;
+  gap: 1em;
+}
+
+.edit-user {
+  display: grid;
+}
+
+.edit-user__header {
+  display: flex;
+  align-items: center;
+
+  padding: 0.5em 0.75em;
+  border: 2px solid var(--color-border-third);
+  border-radius: 0.5em;
+}
+
+.edit-user__avatar {
+  width: 2.5em;
+  height: 2.5em;
+
+  margin-right: 1em;
+
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.edit-user__name {
+  font-weight: 600;
+}
+
+.edit-user__id {
+  margin-left: 0.25em;
+
+  font-weight: 600;
+  color: #caced3;
+}
+
+.edit-user__toggle {
+  margin-left: auto;
+}
