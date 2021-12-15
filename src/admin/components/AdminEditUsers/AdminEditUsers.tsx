@@ -2,8 +2,11 @@
 import "./AdminEditUsers.style.scss"
 
 import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
-import Svg from "components/common/Svg"
+import Icon from "components/common/Icon"
+import { useState } from "react"
+import { classWithModifiers } from "utils"
 
+import AdminButton from "../AdminButton/AdminButton"
 // Mock Avatar
 import MeliodasPNG from "./meliodas.jpg"
 
@@ -40,14 +43,25 @@ function AdminEditUsers() {
 interface AdminEditUsersUserProps extends User { }
 
 function AdminEditUsersUser(props: AdminEditUsersUserProps) {
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <div className="edit-user">
-      <div className="edit-user__header">
+      <div className={classWithModifiers("edit-user__header", isOpen && "active")} onClick={() => setIsOpen(!isOpen)}>
         <img src={props.avatar} alt="avatar" className="edit-user__avatar" />
         <div className="edit-user__name">{props.firstname} {props.surname}</div>
         <div className="edit-user__id">#{props.id}</div>
         <div className="edit-user__toggle">
-          <Svg svgName="arrow-angle" />
+          <Icon name="arrow-angle" className={classWithModifiers("edit-user__icon", isOpen && "up")} />
+        </div>
+      </div>
+      <div className={classWithModifiers("edit-user__content", isOpen && "open")}>
+        <div className="edit-user-area">
+          <div className="edit-user-area__title">Personal</div>
+          <AdminButton className="edit-user-area__button">Показать личные данные</AdminButton>
+        </div>
+        <div className="edit-user-area edit-user-area--danger">
+          <div className="edit-user-area__title">Danger Zone</div>
+          <AdminButton className="edit-user-area__button" color="red">Показать действия</AdminButton>
         </div>
       </div>
     </div>

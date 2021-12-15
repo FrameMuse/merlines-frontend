@@ -4,4 +4,21 @@
   border-radius: 0.35em;
 
   color: white;
+
+  &--red {
+    background: rgba($color: red, $alpha: 0.75);
+  }
+
+  &--gray {
+    background: white;
+    // background: var(--color-grey-3);
+    border: 2px solid #dadee3;
+    border-radius: 0.35em;
+
+    color: #333;
+
+    &:hover {
+      background: #eef0f3;
+    }
+  }
 }
