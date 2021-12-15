@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
 import { dateMountWeekday, getSimpleTimeFromISO } from "../../../utils"
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function SearchResultTicketMini({
   carrier,
@@ -69,32 +69,32 @@ function SearchResultTicketMini({
           {handbags ? (
             handbags === "" ? (
               <>
-                <Svg
-                  svgClass="ticket-mini__bottom-icon"
-                  svgName="baggage"
-                  svgWidth="30"
-                  svgHeight="15"
+                <Icon
+                  className="ticket-mini__bottom-icon"
+                  name="baggage"
+                  width="30"
+                  height="15"
                 />{" "}
                 'Нет информации'
               </>
             ) : (
               <>
-                <Svg
-                  svgClass="ticket-mini__bottom-icon"
-                  svgName="baggage"
-                  svgWidth="30"
-                  svgHeight="15"
+                <Icon
+                  className="ticket-mini__bottom-icon"
+                  name="baggage"
+                  width="30"
+                  height="15"
                 />
                 - ручная кладь включена{" "}
               </>
             )
           ) : (
             <>
-              <Svg
-                svgClass="ticket-mini__bottom-icon"
-                svgName="baggage"
-                svgWidth="30"
-                svgHeight="15"
+              <Icon
+                className="ticket-mini__bottom-icon"
+                name="baggage"
+                width="30"
+                height="15"
               />
               - ручная кладь не включена
             </>
@@ -104,32 +104,32 @@ function SearchResultTicketMini({
           {baggage ? (
             baggage === "" ? (
               <>
-                <Svg
-                  svgClass="ticket-mini__bottom-icon"
-                  svgName="baggageLg"
-                  svgWidth="30"
-                  svgHeight="15"
+                <Icon
+                  className="ticket-mini__bottom-icon"
+                  name="baggageLg"
+                  width="30"
+                  height="15"
                 />{" "}
                 'Нет информации'
               </>
             ) : (
               <>
-                <Svg
-                  svgClass="ticket-mini__bottom-icon"
-                  svgName="baggageLg"
-                  svgWidth="30"
-                  svgHeight="15"
+                <Icon
+                  className="ticket-mini__bottom-icon"
+                  name="baggageLg"
+                  width="30"
+                  height="15"
                 />{" "}
                 - багаж включён{" "}
               </>
             )
           ) : (
             <>
-              <Svg
-                svgClass="ticket-mini__bottom-icon"
-                svgName="baggageLg"
-                svgWidth="30"
-                svgHeight="15"
+              <Icon
+                className="ticket-mini__bottom-icon"
+                name="baggageLg"
+                width="30"
+                height="15"
               />{" "}
               - багаж не включён
             </>
@@ -137,11 +137,11 @@ function SearchResultTicketMini({
         </div>
         <button className="btn ticket-mini__btn-info" onClick={openAboutInfo}>
           о рейсе{" "}
-          <Svg
-            svgClass="btn__arrow-icon"
-            svgName="arrow-open"
-            svgWidth="8"
-            svgHeight="8"
+          <Icon
+            className="btn__arrow-icon"
+            name="arrow-open"
+            width="8"
+            height="8"
           />
         </button>
       </div>

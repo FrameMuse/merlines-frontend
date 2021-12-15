@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 
 import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 
 function SearchFormMini({ openForm }) {
   const mainSearchParams = useSelector(selectMainSearchParams)
@@ -31,11 +31,11 @@ function SearchFormMini({ openForm }) {
             className="download__edit"
             type="button"
           >
-            <Svg
-              svgClass="download__edit-icon"
-              svgName="edit"
-              svgWidth="16"
-              svgHeight="16"
+            <Icon
+              className="download__edit-icon"
+              name="edit"
+              width="16"
+              height="16"
             />
           </button>
         </div>

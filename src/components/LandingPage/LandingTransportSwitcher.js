@@ -1,32 +1,32 @@
 import { Link } from "react-router-dom"
 
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 
 function LandingTransportSwitcher() {
   return (
     <div className="special-nav landing__special-nav">
       <Link className="special-nav__item special-nav__item--active" to="#">
-        <Svg
-          svgClass="special-nav__icon"
-          svgName="plane"
-          svgWidth="25"
-          svgHeight="26"
+        <Icon
+          className="special-nav__icon"
+          name="plane"
+          width="25"
+          height="26"
         />
       </Link>
       <Link className="special-nav__item" to="#">
-        <Svg
-          svgClass="special-nav__icon"
-          svgName="train"
-          svgWidth="22"
-          svgHeight="26"
+        <Icon
+          className="special-nav__icon"
+          name="train"
+          width="22"
+          height="26"
         />
       </Link>
       <Link className="special-nav__item" to="#">
-        <Svg
-          svgClass="special-nav__icon"
-          svgName="bus"
-          svgWidth="22"
-          svgHeight="26"
+        <Icon
+          className="special-nav__icon"
+          name="bus"
+          width="22"
+          height="26"
         />
       </Link>
     </div>

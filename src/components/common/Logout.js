@@ -1,7 +1,7 @@
 import "./logout.scss"
 
 import React from "react"
-import { useDispatch,useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 
@@ -9,7 +9,7 @@ import api from "../../api/api"
 import { errorMessages } from "../../constants"
 import { selectAccessData, setLoginToken } from "../../reducers/accessDataSlice"
 import routes from "../../routes"
-import Svg from "./Svg"
+import Icon from "./Icon"
 
 function Logout() {
   const history = useHistory()
@@ -60,11 +60,11 @@ function Logout() {
   return (
     <Link className="cabinet__logout" onClick={onLogout} to="#">
       Выйти{" "}
-      <Svg
-        svgClass="cabinet__logout-icon"
-        svgName="logout"
-        svgWidth="15"
-        svgHeight="15"
+      <Icon
+        className="cabinet__logout-icon"
+        name="logout"
+        width="15"
+        height="15"
       />
     </Link>
   )

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import MainHeader from "../Main/MainHeader/MainHeader"
 import MainSpecialCard from "../Main/MainSpecial/MainSpecialCard"
 import PriceCalendar from "../PriceCalendar/PriceCalendar"
@@ -18,7 +18,8 @@ import {
   collectionData,
   popularDirections,
   specialData,
-  specialTickets} from "./landingMock"
+  specialTickets
+} from "./landingMock"
 import LandingPopularDirectionItem from "./LandingPopularDirectionItem"
 import LandingPriceDynamic from "./LandingPriceDynamic/LandingPriceDynamic"
 import LandingSpecialTicket from "./LandingSpecialTicket"
@@ -62,11 +63,11 @@ function LandingPage() {
             <div className="button-text landing__button-text">
               <button className="button-text__btn" type="button">
                 загрузить еще
-                <Svg
-                  svgClass="button-text__arrow"
-                  svgName="arrow-open"
-                  svgWidth="8"
-                  svgHeight="8"
+                <Icon
+                  className="button-text__arrow"
+                  name="arrow-open"
+                  width="8"
+                  height="8"
                 />
               </button>
             </div>

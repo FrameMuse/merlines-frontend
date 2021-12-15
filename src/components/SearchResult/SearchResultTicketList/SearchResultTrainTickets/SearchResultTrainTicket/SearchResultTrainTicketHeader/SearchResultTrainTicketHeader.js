@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
-import Svg from "../../../../../common/Svg"
+import Icon from "../../../../../common/Icon"
 
 const SearchResultTrainTicketHeader = ({ carriers }) => {
   const [isNoticeActive, setIsNoticeActive] = useState(false)
@@ -38,11 +38,11 @@ const SearchResultTrainTicketHeader = ({ carriers }) => {
           onClick={() => setIsNoticeActive(!isNoticeActive)}
           to="#"
         >
-          <Svg
-            svgClass="ticket__notice-icon"
-            svgName="notice"
-            svgWidth="15"
-            svgHeight="15"
+          <Icon
+            className="ticket__notice-icon"
+            name="notice"
+            width="15"
+            height="15"
           />
           <div className="ticket__pop-up ticket__pop-up--multiline">
             {`
@@ -59,11 +59,11 @@ const SearchResultTrainTicketHeader = ({ carriers }) => {
           onClick={() => setIsFavouritesActive(!isFavouritesActive)}
           to="#"
         >
-          <Svg
-            svgClass="ticket__star-icon"
-            svgName="star"
-            svgWidth="15"
-            svgHeight="15"
+          <Icon
+            className="ticket__star-icon"
+            name="star"
+            width="15"
+            height="15"
           />
           <div className="ticket__pop-up">
             {`
@@ -80,11 +80,11 @@ const SearchResultTrainTicketHeader = ({ carriers }) => {
           onClick={() => setIsShareActive(!isShareActive)}
           to="#"
         >
-          <Svg
-            svgClass="ticket__share-icon"
-            svgName="share"
-            svgWidth="15"
-            svgHeight="15"
+          <Icon
+            className="ticket__share-icon"
+            name="share"
+            width="15"
+            height="15"
           />
           <div className="ticket__pop-up">Поделиться</div>
         </Link>

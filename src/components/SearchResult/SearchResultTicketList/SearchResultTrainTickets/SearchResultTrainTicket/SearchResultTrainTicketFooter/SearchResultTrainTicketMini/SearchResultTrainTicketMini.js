@@ -7,7 +7,7 @@ import {
   translateTripClassFromCodeToName
 } from "../../../../../../../utils"
 import { toTranslateBaggageCode } from "../../../../../../../utils"
-import Svg from "../../../../../../common/Svg"
+import Icon from "../../../../../../common/Icon"
 
 const SearchResultTrainTicketMini = ({ voyage }) => {
   const { flight_info } = voyage
@@ -70,32 +70,32 @@ const SearchResultTrainTicketMini = ({ voyage }) => {
           {handbags ? (
             handbags === "" ? (
               <>
-                <Svg
-                  svgClass="ticket-mini__bottom-icon"
-                  svgName="baggage"
-                  svgWidth="30"
-                  svgHeight="15"
+                <Icon
+                  className="ticket-mini__bottom-icon"
+                  name="baggage"
+                  width="30"
+                  height="15"
                 />{" "}
                 'Нет информации'
               </>
             ) : (
               <>
-                <Svg
-                  svgClass="ticket-mini__bottom-icon"
-                  svgName="baggage"
-                  svgWidth="30"
-                  svgHeight="15"
+                <Icon
+                  className="ticket-mini__bottom-icon"
+                  name="baggage"
+                  width="30"
+                  height="15"
                 />
                 - ручная кладь включена <span>({handbags.weight || 5}кг)</span>
               </>
             )
           ) : (
             <>
-              <Svg
-                svgClass="ticket-mini__bottom-icon"
-                svgName="baggage"
-                svgWidth="30"
-                svgHeight="15"
+              <Icon
+                className="ticket-mini__bottom-icon"
+                name="baggage"
+                width="30"
+                height="15"
               />
               - ручная кладь не включена
             </>
@@ -105,32 +105,32 @@ const SearchResultTrainTicketMini = ({ voyage }) => {
           {baggage ? (
             baggage === "" ? (
               <>
-                <Svg
-                  svgClass="ticket-mini__bottom-icon"
-                  svgName="baggageLg"
-                  svgWidth="30"
-                  svgHeight="15"
+                <Icon
+                  className="ticket-mini__bottom-icon"
+                  name="baggageLg"
+                  width="30"
+                  height="15"
                 />{" "}
                 'Нет информации'
               </>
             ) : (
               <>
-                <Svg
-                  svgClass="ticket-mini__bottom-icon"
-                  svgName="baggageLg"
-                  svgWidth="30"
-                  svgHeight="15"
+                <Icon
+                  className="ticket-mini__bottom-icon"
+                  name="baggageLg"
+                  width="30"
+                  height="15"
                 />{" "}
                 - багаж включён <span>({baggage.weight}кг)</span>
               </>
             )
           ) : (
             <>
-              <Svg
-                svgClass="ticket-mini__bottom-icon"
-                svgName="baggageLg"
-                svgWidth="30"
-                svgHeight="15"
+              <Icon
+                className="ticket-mini__bottom-icon"
+                name="baggageLg"
+                width="30"
+                height="15"
               />{" "}
               - багаж не включён
             </>
@@ -138,11 +138,11 @@ const SearchResultTrainTicketMini = ({ voyage }) => {
         </div>
         <button className="btn ticket-mini__btn-info" onClick={openAboutInfo}>
           о рейсе{" "}
-          <Svg
-            svgClass="btn__arrow-icon"
-            svgName="arrow-open"
-            svgWidth="8"
-            svgHeight="8"
+          <Icon
+            className="btn__arrow-icon"
+            name="arrow-open"
+            width="8"
+            height="8"
           />
         </button>
       </div>
@@ -166,40 +166,36 @@ const SearchResultTrainTicketMini = ({ voyage }) => {
           <div className="ticket-mini__info-col">
             <span className="ticket-mini__info-item">
               Еда:{" "}
-              <b>{`${
-                flight_info?.amenities.food.exists
-                  ? flight_info.amenities.food.paid
-                    ? "Платный"
-                    : "Бесплатный"
-                  : "Нет"
+              <b>{`${flight_info?.amenities.food.exists
+                ? flight_info.amenities.food.paid
+                  ? "Платный"
+                  : "Бесплатный"
+                : "Нет"
               }`}</b>
             </span>
             <span className="ticket-mini__info-item">
               Развлечения:{" "}
-              <b>{`${
-                flight_info?.amenities.entertainment.exists ? "Есть" : "Нет"
+              <b>{`${flight_info?.amenities.entertainment.exists ? "Есть" : "Нет"
               }`}</b>
             </span>
             <span className="ticket-mini__info-item">
               Алкоголь:{" "}
-              <b>{`${
-                flight_info?.amenities.beverage.exists
-                  ? flight_info.amenities.beverage.nonalcoholic_paid
-                    ? "Платный"
-                    : "Бесплатный"
-                  : "Нет"
+              <b>{`${flight_info?.amenities.beverage.exists
+                ? flight_info.amenities.beverage.nonalcoholic_paid
+                  ? "Платный"
+                  : "Бесплатный"
+                : "Нет"
               }`}</b>
             </span>
           </div>
           <div className="ticket-mini__info-col">
             <span className="ticket-mini__info-item">
               Напитки:{" "}
-              <b>{`${
-                flight_info?.amenities.beverage.exists
-                  ? flight_info.amenities.beverage.nonalcoholic_paid
-                    ? "Платный"
-                    : "Бесплатный"
-                  : "Нет"
+              <b>{`${flight_info?.amenities.beverage.exists
+                ? flight_info.amenities.beverage.nonalcoholic_paid
+                  ? "Платный"
+                  : "Бесплатный"
+                : "Нет"
               }`}</b>
             </span>
             <span className="ticket-mini__info-item">
