@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react"
 import { classWithModifiers } from "utils"
 
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import DateCalendarContext from "./DropDownCalendarContext"
 import { updateDateCalendarCursorDate } from "./DropDownCalendarReducer"
 
@@ -35,19 +35,19 @@ function DropDownCalendarSlider() {
   return (
     <div className="drop-down-calendar__control">
       <button onClick={prev} type="button" tabIndex="-1" className={classWithModifiers("drop-down-calendar__control-btn", ...modifiers)}>
-        <Svg
-          svgClass="drop-down-calendar__control-icon"
-          svgName="arrow-filter"
-          svgWidth="10"
-          svgHeight="10"
+        <Icon
+          className="drop-down-calendar__control-icon"
+          name="arrow-filter"
+          width="10"
+          height="10"
         />
       </button>
       <button onClick={next} type="button" tabIndex="-1" className="drop-down-calendar__control-btn drop-down-calendar__control-btn--next">
-        <Svg
-          svgClass="drop-down-calendar__control-icon"
-          svgName="arrow-filter"
-          svgWidth="10"
-          svgHeight="10"
+        <Icon
+          className="drop-down-calendar__control-icon"
+          name="arrow-filter"
+          width="10"
+          height="10"
         />
       </button>
     </div>

@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 import api from "../../api/api"
 import { errorMessages } from "../../constants"
 import { takeErrors } from "../../utils"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 
 function UpdAccessPopupReset() {
   const [isOpen, setIsOpen] = useState(true)
@@ -50,11 +50,11 @@ function UpdAccessPopupReset() {
     <section className={`modal ${isOpen ? "modal--opened" : ""}`}>
       <button onClick={() => setIsOpen(false)} className="modal__close">
         <span className="modal__close-text">закрыть</span>
-        <Svg
-          svgClass="modal__close-icon"
-          svgName="close"
-          svgWidth="15"
-          svgHeight="15"
+        <Icon
+          className="modal__close-icon"
+          name="close"
+          width="15"
+          height="15"
         />
       </button>
       <div className="modal__container">

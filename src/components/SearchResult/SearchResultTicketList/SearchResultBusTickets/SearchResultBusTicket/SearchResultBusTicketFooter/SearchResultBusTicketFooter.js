@@ -2,7 +2,7 @@ import React from "react"
 
 import { separateThousand } from "../../../../../../utils"
 // import {toTranslateBaggageCode} from "../../../../../utils";
-import Svg from "../../../../../common/Svg"
+import Icon from "../../../../../common/Icon"
 import SearchResultTicketMini from "../../../SearchResultTicketMini"
 import SearchResultTicketOffer from "../../../SearchResultTicketOffer"
 
@@ -32,11 +32,11 @@ const SearchResultBusTicketFooter = ({
           onClick={openMoreInfo}
         >
           Подробнее{" "}
-          <Svg
-            svgClass="btn__arrow-icon"
-            svgName="arrow-open"
-            svgWidth="8"
-            svgHeight="8"
+          <Icon
+            className="btn__arrow-icon"
+            name="arrow-open"
+            width="8"
+            height="8"
           />
         </button>
       </div>
@@ -47,7 +47,7 @@ const SearchResultBusTicketFooter = ({
             description="цена за 1 взрослого"
             ticketDealerName={carrier}
             link={url}
-            // ticketDealerLogo="images/partners/mego.png"
+          // ticketDealerLogo="images/partners/mego.png"
           />
           {/*{*/}
           {/*  (sellersSorted.length - 1) > 0*/}

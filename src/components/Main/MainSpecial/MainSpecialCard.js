@@ -1,4 +1,4 @@
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function MainSpecialCard({
   bestCard,
@@ -21,11 +21,11 @@ function MainSpecialCard({
       )}
       <div className="special__item-head">
         <span className="special__item-city">{cardFrom}</span>
-        <Svg
-          svgClass="special__icon-arrow"
-          svgName="arrow"
-          svgWidth="10"
-          svgHeight="7"
+        <Icon
+          className="special__icon-arrow"
+          name="arrow"
+          width="10"
+          height="7"
         />
         <span className="special__item-city">{cardTo}</span>
       </div>

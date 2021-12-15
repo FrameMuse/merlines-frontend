@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom"
 
 import { selectLkData } from "../../../reducers/lkDataSlice"
 import routes from "../../../routes"
+import Icon from "../../common/Icon"
 import Logout from "../../common/Logout"
-import Svg from "../../common/Svg"
 
 function LkHeader() {
   const history = useHistory()
@@ -23,12 +23,12 @@ function LkHeader() {
           <div className="cabinet__user-text">Здравствуйте,</div>
           <div className="cabinet__user-name">
             {lkData.firstName} {lkData.lastName && lkData.lastName}{" "}
-            <Svg
+            <Icon
               handleClick={onClickEditProfile}
-              svgClass="cabinet__edit-icon"
-              svgName="edit"
-              svgWidth="15"
-              svgHeight="15"
+              className="cabinet__edit-icon"
+              name="edit"
+              width="15"
+              height="15"
             />
             {lkData.email}
           </div>

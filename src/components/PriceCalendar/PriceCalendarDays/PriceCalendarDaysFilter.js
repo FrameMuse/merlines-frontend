@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 
 import api from "../../../api/api"
 import { selectMainSearchParams } from "../../../reducers/mainSearchSlice"
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function PriceCalendarDaysFilter() {
   const [filterActive, setFilterActive] = useState(false)
@@ -31,12 +31,12 @@ function PriceCalendarDaysFilter() {
 
   return (
     <div className={`filter filter--${filterActive ? "opened" : "closed"}`}>
-      <Svg
+      <Icon
         handleClick={openFilter}
-        svgClass="days__filter"
-        svgName="filter"
-        svgWidth="15"
-        svgHeight="15"
+        className="days__filter"
+        name="filter"
+        width="15"
+        height="15"
       />
       <div className="filter__inner">
         <div className="filter__top">

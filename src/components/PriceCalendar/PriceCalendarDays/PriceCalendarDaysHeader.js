@@ -18,7 +18,7 @@ import {
   dateToMonthName,
   getDaysInterval
 } from "../../../utils"
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 import PriceCalendarDaysFilter from "./PriceCalendarDaysFilter"
 
 function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
@@ -133,28 +133,28 @@ function PriceCalendarDaysHeader({ pickedMonthName, setPickedMonthName }) {
   return (
     <div className="days__header">
       <Link to={routesData.historyRoute}>
-        <Svg
-          svgClass="days__arrow"
-          svgName="arrow-slider"
-          svgWidth="16"
-          svgHeight="16"
+        <Icon
+          className="days__arrow"
+          name="arrow-slider"
+          width="16"
+          height="16"
         />
       </Link>
       <div className="days__center">
-        <Svg
+        <Icon
           handleClick={!isCurrentDate ? pickMonth : undefined}
-          svgClass="days__arrow-center days__arrow-center--left"
-          svgName="arrow-open"
-          svgWidth="10"
-          svgHeight="10"
+          className="days__arrow-center days__arrow-center--left"
+          name="arrow-open"
+          width="10"
+          height="10"
         />
         <span>{priceCalendarData.pickedMonthData.pickedMonthName}</span>
-        <Svg
+        <Icon
           handleClick={pickMonth}
-          svgClass="days__arrow-center days__arrow-center--right"
-          svgName="arrow-open"
-          svgWidth="10"
-          svgHeight="10"
+          className="days__arrow-center days__arrow-center--right"
+          name="arrow-open"
+          width="10"
+          height="10"
         />
       </div>
       <PriceCalendarDaysFilter />

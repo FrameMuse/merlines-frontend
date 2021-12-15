@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 import { selectSearchResult } from "../../../reducers/searchResultSlice"
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function TicketRedirect() {
   const searchResultData = useSelector(selectSearchResult)
@@ -13,11 +13,11 @@ function TicketRedirect() {
     <section className="transfer overlay">
       <div className="transfer__container">
         <div className="transfer__content">
-          <Svg
-            svgClass="transfer__loading"
-            svgName="loading"
-            svgWidth="32"
-            svgHeight="32"
+          <Icon
+            className="transfer__loading"
+            name="loading"
+            width="32"
+            height="32"
           />
           <p className="transfer__text">
             Немного терпения, переходим на сайт{" "}

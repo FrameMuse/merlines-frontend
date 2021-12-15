@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { capitalize } from "utils"
 
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import DateCalendarContext from "./DropDownCalendarContext"
 import DropDownCalendarMonthDays from "./DropDownCalendarMonthDays"
 import { updateDateCalendarCursorDate } from "./DropDownCalendarReducer"
@@ -39,17 +39,17 @@ function DropDownCalendarMonth(props: DropDownCalendarMonthProps) {
           </div>
 
           <div className="drop-down-calendar__month-control">
-            <Svg
-              svgClass="drop-down-calendar-arrow drop-down-calendar-arrow--top"
-              svgName="arrow-filter"
-              svgWidth="8"
-              svgHeight="7"
+            <Icon
+              className="drop-down-calendar-arrow drop-down-calendar-arrow--top"
+              name="arrow-filter"
+              width="8"
+              height="7"
             />
-            <Svg
-              svgClass="drop-down-calendar-arrow drop-down-calendar-arrow--bottom"
-              svgName="arrow-filter"
-              svgWidth="8"
-              svgHeight="7"
+            <Icon
+              className="drop-down-calendar-arrow drop-down-calendar-arrow--bottom"
+              name="arrow-filter"
+              width="8"
+              height="7"
             />
           </div>
           <DropDownCalendarSelectMonth currentDate={cursorDate} onMonthIndexChange={monthUpdate} />

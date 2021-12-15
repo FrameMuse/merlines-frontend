@@ -2,7 +2,7 @@ import { useState } from "react"
 import { atom, useSetRecoilState } from "recoil"
 import { classWithModifiers } from "utils"
 
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 
 
 export const blogSearchState = atom({
@@ -17,11 +17,11 @@ function BlogSearch() {
     <div className={classWithModifiers("search", isSearchHidden && "hidden")}>
       <input className="search__input" type="text" onChange={event => setBlogSearchState(event.currentTarget.value)} />
       <button className="search__button" onClick={() => setIsSearchHidden(!isSearchHidden)}>
-        <Svg
-          svgClass="search__icon"
-          svgName="search"
-          svgWidth="15"
-          svgHeight="15"
+        <Icon
+          className="search__icon"
+          name="search"
+          width="15"
+          height="15"
         />
       </button>
     </div>

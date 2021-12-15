@@ -1,14 +1,14 @@
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function SearchResultSubscribePrice() {
   return (
     <button className="ticket-list__notice" type="button">
       <span className="ticket-list__notice-text">Отслеживать цену</span>
-      <Svg
-        svgClass="ticket-list__notice-icon"
-        svgName="notice"
-        svgWidth="15"
-        svgHeight="15"
+      <Icon
+        className="ticket-list__notice-icon"
+        name="notice"
+        width="15"
+        height="15"
       />
     </button>
   )

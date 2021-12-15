@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom"
 import { useRecoilState } from "recoil"
 
 import ArticleCard from "../Article/ArticleCard"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import { blogSearchState } from "./BlogSearch"
 
 
@@ -32,17 +32,17 @@ function BlogSlider({ articles }) {
         <h2 className="section__title">{articles.name}</h2>
         {articles.name !== "Все" && (
           <div className="section__control">
-            <Svg
-              svgClass="section__arrow section__arrow--left"
-              svgName="arrow-slider"
-              svgWidth="20"
-              svgHeight="20"
+            <Icon
+              className="section__arrow section__arrow--left"
+              name="arrow-slider"
+              width="20"
+              height="20"
             />
-            <Svg
-              svgClass="section__arrow section__arrow--right"
-              svgName="arrow-slider"
-              svgWidth="20"
-              svgHeight="20"
+            <Icon
+              className="section__arrow section__arrow--right"
+              name="arrow-slider"
+              width="20"
+              height="20"
             />
           </div>
         )}
