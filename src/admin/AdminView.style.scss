@@ -96,3 +96,24 @@ button {
 .admin-section-layout__container {
   padding: 1.25em;
 }
+
+/* Box Layout */
+
+.admin-box-layout {
+  display: grid;
+
+  border: 2px solid var(--color-border-third);
+  border-radius: 0.5em;
+}
+
+.admin-box-layout__header {
+  padding: 0.75em;
+  margin: unset;
+  border-bottom: 2px solid var(--color-border-third);
+
+  font-size: 1rem;
+}
+
+.admin-box-layout__container {
+  padding: 1.25em;
+}

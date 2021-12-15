@@ -1,0 +1,11 @@
+.admin-stats {
+  display: grid;
+  gap: 1em;
+}
+
+.admin-stats__title {}
+
+.admin-stats__container {
+  display: flex;
+  justify-content: space-between;
+}

@@ -16,6 +16,8 @@ interface User {
   firstname: string
   surname: string
   email: string
+  street: string
+  status: "admin" | "editor" | "default"
 }
 
 const mockUserData: User = {
@@ -23,7 +25,9 @@ const mockUserData: User = {
   avatar: MeliodasPNG,
   firstname: "Meliodas",
   surname: "七つの大罪",
-  email: "meliodas@deadlysins.net"
+  email: "meliodas@deadlysins.net",
+  street: "Britania 4",
+  status: "admin"
 }
 
 function AdminEditUsers() {
@@ -57,11 +61,34 @@ function AdminEditUsersUser(props: AdminEditUsersUserProps) {
       <div className={classWithModifiers("edit-user__content", isOpen && "open")}>
         <div className="edit-user-area">
           <div className="edit-user-area__title">Personal</div>
-          <AdminButton className="edit-user-area__button">Показать личные данные</AdminButton>
+          <div className="edit-user-area__entries">
+            <div className="edit-user-area__entry">
+              <span>Email: </span>
+              <span>{props.email}</span>
+            </div>
+            <div className="edit-user-area__entry">
+              <span>Street: </span>
+              <span>{props.street}</span>
+            </div>
+            <div className="edit-user-area__entry">
+              <span>Status: </span>
+              <span>{props.status}</span>
+            </div>
+          </div>
         </div>
         <div className="edit-user-area edit-user-area--danger">
           <div className="edit-user-area__title">Danger Zone</div>
-          <AdminButton className="edit-user-area__button" color="red">Показать действия</AdminButton>
+          <div className="edit-user-area__actions">
+            <div className="edit-user-area__action">
+              <select className="edit-user-area__input">
+                <option>admin</option>
+                <option>editor</option>
+                <option>default</option>
+              </select>
+              <AdminButton color="red">Изменить роль</AdminButton>
+              <AdminButton color="red">Забанить</AdminButton>
+            </div>
+          </div>
         </div>
       </div>
     </div>

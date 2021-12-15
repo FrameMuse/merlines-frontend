@@ -4,6 +4,7 @@ import "./AdminView.style.scss"
 import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom"
 
 import AdminBlogView from "./views/AdminBlogView"
+import AdminHomeView from "./views/AdminHomeView"
 import AdminUsersView from "./views/AdminUsersView"
 
 function AdminView() {
@@ -21,6 +22,9 @@ function AdminView() {
       </header>
       <main>
         <Switch>
+          <Route path="/" exact>
+            <AdminHomeView />
+          </Route>
           <Route path="/blog" exact>
             <AdminBlogView />
           </Route>
