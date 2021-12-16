@@ -43,10 +43,7 @@ const routes = {
   },
   resetPassword: "/reset",
   resetPasswordConfirm: "/reset_password",
-  landing: {
-    air: "/tickets/air",
-    airDays: "/tickets/air/days"
-  }
+  landing: "/tickets/air"
 }
 
 export default routes

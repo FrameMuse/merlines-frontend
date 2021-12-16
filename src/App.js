@@ -2,7 +2,7 @@ import "react-toastify/dist/ReactToastify.css"
 
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { Redirect,Route, Switch } from "react-router-dom"
+import { Redirect, Route, Switch } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 
 import About from "./components/About/About"
@@ -47,7 +47,7 @@ function App() {
   } = useSelector(selectSearchResult)
   const searchData = useSelector(selectSearchResult)
   const [isOpenFilter, setIsOpenFilter] = useState(false)
-
+  console.log(articles)
   return (
     <>
       {/* <ScrollToTop> */}
@@ -58,6 +58,15 @@ function App() {
         {tickets && isOpenFilter && (
           <MobileTicketFilter setIsOpenFilter={setIsOpenFilter} />
         )}
+        <Route path={`${routes.activate}/:uid/:token`}>
+          <UpdAccessPopupConfirm />
+        </Route>
+        <Route exact path={routes.resetPassword}>
+          <UpdAccessPopupReset />
+        </Route>
+        <Route path={`${routes.resetPasswordConfirm}/:uid/:token`}>
+          <UpdAccessPopupResetConfirm />
+        </Route>
         <Switch>
           <Route exact path={routes.signup}>
             {query.get("next") === routes.priceCalendar.air && (
@@ -84,7 +93,6 @@ function App() {
             {query.get("next") === routes.bus && <Main />}
             {query.get("next") === routes.searchResult && <SearchResult />}
             <UpdAccessPopup active={true} />
-            <Subscribe />
           </Route>
           <Route exact path={routes.login}>
             {query.get("next") === routes.priceCalendar.air && (
@@ -113,28 +121,8 @@ function App() {
             <UpdAccessPopup login={true} active={true} />
             <Subscribe />
           </Route>
-          <Route path={`${routes.activate}/:uid/:token`}>
+          <Route exact path={[routes.main, routes.bus, routes.train]}>
             <Main />
-            <UpdAccessPopupConfirm />
-            <Subscribe />
-          </Route>
-          <Route exact path={routes.resetPassword}>
-            <UpdAccessPopupReset />
-          </Route>
-          <Route path={`${routes.resetPasswordConfirm}/:uid/:token`}>
-            <UpdAccessPopupResetConfirm />
-          </Route>
-          <Route exact path={routes.main}>
-            <Main />
-            <Subscribe />
-          </Route>
-          <Route exact path={routes.bus}>
-            <Main />
-            <Subscribe />
-          </Route>
-          <Route exact path={routes.train}>
-            <Main />
-            <Subscribe />
           </Route>
           <Route exact path={routes.priceCalendar.base}>
             <Redirect to={routes.priceCalendar.air} />
@@ -195,14 +183,7 @@ function App() {
             )}
             <Subscribe />
           </Route>
-          {articles.articles.map((section) =>
-            section.items.map((item) => (
-              <Route path={convertIdToRoute(item.id)}>
-                <Article articleData={item} />
-                <Subscribe />
-              </Route>
-            ))
-          )}
+
           <Route path={routes.blog}>
             <Blog />
             <Subscribe />
@@ -249,11 +230,7 @@ function App() {
           <Route path={routes.footer.facebook}>
             <Error404 />
           </Route>
-          <Route exact path={routes.landing.air}>
-            <LandingPage />
-            <Subscribe />
-          </Route>
-          <Route exact path={routes.landing.airDays}>
+          <Route path={routes.landing}>
             <LandingPage />
             <Subscribe />
           </Route>

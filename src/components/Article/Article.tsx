@@ -2,13 +2,17 @@ import "./article.scss"
 import "./article-card.scss"
 import "./article-page.scss"
 
+import { ArticleType } from "../../Interfaces/Blog"
 import ArticleContent from "./ArticleContent"
 import ArticleRecomendation from "./ArticleRecomendation"
 
-function Article({ articleData }) {
+
+interface ArticleProps extends ArticleType { }
+
+function Article(props: ArticleProps) {
   return (
     <div className="wrap">
-      <ArticleContent articleData={articleData} />
+      <ArticleContent {...props} />
       <ArticleRecomendation />
     </div>
   )
