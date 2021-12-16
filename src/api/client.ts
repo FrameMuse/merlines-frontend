@@ -21,6 +21,7 @@ function requestInterceptor() {
   return async (action: Action) => {
     return {
       ...action,
+      endpoint: process.env.REACT_APP_BASE_URL + action.endpoint,
       headers: {
         "content-type": "application/json",
         Authorization: !action.config?.skipAuth && localStorage.getItem("token") || ""

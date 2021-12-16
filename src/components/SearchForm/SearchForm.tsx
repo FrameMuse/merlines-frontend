@@ -1,9 +1,11 @@
 // SCSS
 import "./search-form.scss"
 
+import { getGeoIp } from "api/actions/geo"
 import DropDownCalendar from "components/DropDownCalendar/DropDownCalendar"
 import { DateCalendarState } from "components/DropDownCalendar/DropDownCalendarReducer"
-import { FormEvent, KeyboardEvent, useRef, useState } from "react"
+import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react"
+import { useQuery } from "react-fetching-library"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useClickAway } from "react-use"
@@ -11,6 +13,7 @@ import { updateSearchHasReturnDate } from "redux/reducers/search"
 import { updateSearchRoute } from "redux/reducers/search"
 import { capitalize, classWithModifiers, createQuery } from "utils"
 
+import ClientAPI from "../../api/client"
 import { SearchFormPassengers } from "./SearchFormPassengers"
 import { SearchFormRoute } from "./SearchFormRoute"
 
@@ -55,6 +58,21 @@ function SearchForm() {
 
     console.log(searchQuery)
   }
+
+  useEffect(() => {
+    ClientAPI.query(getGeoIp).then(({ payload }) => {
+      if (!payload) return
+      dispatch(updateSearchRoute(0, {
+        departurePoint: {
+          code: payload.region,
+          name: payload.city
+        }
+      }));
+      (document.querySelector(".search-form__group--arrival .search-form__input") as any)?.focus()
+    })
+
+
+  }, [dispatch])
 
   return (
     <form className="search-form" onSubmit={onSearchSubmit} autoComplete="off">
