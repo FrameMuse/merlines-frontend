@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 
 function LandingAnswerItem({ currentRoute }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -8,8 +8,7 @@ function LandingAnswerItem({ currentRoute }) {
   return (
     <div className="answers__item">
       <div
-        className={`answers__item-wrap ${
-          isOpen ? "answers__item-wrap--active" : ""
+        className={`answers__item-wrap ${isOpen ? "answers__item-wrap--active" : ""
         }`}
       >
         <div className="answers__question">
@@ -17,16 +16,15 @@ function LandingAnswerItem({ currentRoute }) {
         </div>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`answers__button ${
-            isOpen ? "answers__button--active" : ""
+          className={`answers__button ${isOpen ? "answers__button--active" : ""
           }`}
         >
           Ответ{" "}
-          <Svg
-            svgClass="answers__button-arrow"
-            svgName="arrow-open"
-            svgWidth="8"
-            svgHeight="8"
+          <Icon
+            className="answers__button-arrow"
+            name="arrow-open"
+            width="8"
+            height="8"
           />
         </button>
       </div>

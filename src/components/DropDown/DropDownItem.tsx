@@ -1,4 +1,4 @@
-import Svg from "components/common/Svg"
+import Icon from "components/common/Icon"
 import { MouseEventHandler } from "react"
 import { classWithModifiers } from "utils"
 
@@ -19,7 +19,7 @@ function DropDownItem(props: DropDownItemProps) {
     <div className={classWithModifiers("drop-down__item", props.active && "active")} onClick={props.onClick}>
       <div className="drop-down__item-box">
         {props.iconName && (
-          <Svg svgClass="drop-down__item-icon" svgName={props.iconName} />
+          <Icon className="drop-down__item-icon" name={props.iconName} />
         )}
         <span className="drop-down__item-title">{props.title}</span>
         <span className="drop-down__item-tag">{props.tag}</span>

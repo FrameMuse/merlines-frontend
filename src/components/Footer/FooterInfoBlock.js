@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import useFullRoute from "../../hooks/useFullRoute"
 import { setHistoryRoute } from "../../reducers/routesDataSlice"
 import { capitalize } from "../../utils"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 
 function FooterInfoBlock(props) {
   const { title, links, modifier } = props
@@ -31,11 +31,11 @@ function FooterInfoBlock(props) {
               >
                 {item.svg ? (
                   <>
-                    <Svg
-                      svgClass="footer__link-icon"
-                      svgName={item.svg}
-                      svgWidth="15"
-                      svgHeight="15"
+                    <Icon
+                      className="footer__link-icon"
+                      name={item.svg}
+                      width="15"
+                      height="15"
                     />
                     {capitalize(item.svg)}
                   </>

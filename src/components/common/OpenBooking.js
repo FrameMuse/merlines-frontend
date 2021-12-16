@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import Svg from "./Svg"
+import Icon from "./Icon"
 
 function OpenBooking() {
   const [isChecked, setIsChecked] = useState(false)
@@ -16,11 +16,11 @@ function OpenBooking() {
         disabled={true}
       />
       <label className="checkbox-label" htmlFor="check">
-        <Svg
-          svgClass="checkbox-icon"
-          svgName="checkbox"
-          svgWidth="15"
-          svgHeight="15"
+        <Icon
+          className="checkbox-icon"
+          name="checkbox"
+          width="15"
+          height="15"
         />
         Открыть Booking.com
       </label>

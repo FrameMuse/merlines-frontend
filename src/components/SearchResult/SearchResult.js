@@ -2,9 +2,9 @@ import "./ticket.scss"
 import "./ticket-list.scss"
 import "./ticket-mini.scss"
 
-import React, { useEffect,useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
-import { useDispatch,useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 
 import api from "../../api/api"
@@ -20,8 +20,8 @@ import {
 } from "../../reducers/searchResultSlice"
 import meta from "../../seo/meta"
 import parseParamsFromRoute from "../../services/parseParamsFromRoute"
+import Icon from "../common/Icon"
 import ScrollOnTopTest from "../common/ScrollOnTopTest"
-import Svg from "../common/Svg"
 import Loader from "../Loader/Loader"
 import LoaderClose from "../Loader/LoaderClose"
 import SearchForm from "../SearchForm/SearchForm"
@@ -180,7 +180,7 @@ function SearchResult({ setIsOpenFilter }) {
       </Helmet>
       <ScrollOnTopTest />
       {airTicketsResult.type === "Success" ||
-      (bussTicketsResult.type === "Success" && transport === "bus") ? (
+        (bussTicketsResult.type === "Success" && transport === "bus") ? (
           <section className="ticket-list">
             <div className="ticket-list-form__container">
               {isSearchFormOpen ? (
@@ -192,11 +192,11 @@ function SearchResult({ setIsOpenFilter }) {
                       className="form-close__btn"
                       type="button"
                     >
-                      <Svg
-                        svgClass="form-close__icon"
-                        svgName="arrow-angle"
-                        svgWidth="20"
-                        svgHeight="20"
+                      <Icon
+                        className="form-close__icon"
+                        name="arrow-angle"
+                        width="20"
+                        height="20"
                       />
                     </button>
                   </div>
@@ -220,7 +220,7 @@ function SearchResult({ setIsOpenFilter }) {
                 filterData={searchData}
                 loadedState={airTicketsResult.type}
                 bussTicketsResult={bussTicketsResult}
-              // trainTicketsResult={trainTicketsResult}
+                // trainTicketsResult={trainTicketsResult}
               />
             </div>
             <div
@@ -241,11 +241,11 @@ function SearchResult({ setIsOpenFilter }) {
                     className="form-close__btn"
                     type="button"
                   >
-                    <Svg
-                      svgClass="form-close__icon"
-                      svgName="arrow-angle"
-                      svgWidth="20"
-                      svgHeight="20"
+                    <Icon
+                      className="form-close__icon"
+                      name="arrow-angle"
+                      width="20"
+                      height="20"
                     />
                   </button>
                 </div>

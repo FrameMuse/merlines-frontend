@@ -1,15 +1,15 @@
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 
 function LandingPopularDirectionItem({ from, to, price }) {
   return (
     <div className="airlines-ticket airlines-ticket--secondary">
       <span className="airlines-ticket-head">
         {from}
-        <Svg
-          svgClass="airlines-ticket__arrow"
-          svgName="arrow"
-          svgWidth="10"
-          svgHeight="7"
+        <Icon
+          className="airlines-ticket__arrow"
+          name="arrow"
+          width="10"
+          height="7"
         />
         {to}
       </span>

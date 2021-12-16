@@ -1,4 +1,4 @@
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function ArticleCommentsHeader() {
   return (
@@ -8,11 +8,11 @@ function ArticleCommentsHeader() {
       </h2>
       <div className="comments__like">
         <span className="comments__like-counter">24</span>
-        <Svg
-          svgClass="comments__like-icon"
-          svgName="like"
-          svgWidth="20"
-          svgHeight="20"
+        <Icon
+          className="comments__like-icon"
+          name="like"
+          width="20"
+          height="20"
         />
       </div>
     </header>

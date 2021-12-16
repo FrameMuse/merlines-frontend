@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function ArticleSocialItem({ socialItem }) {
   return (
@@ -9,11 +9,11 @@ function ArticleSocialItem({ socialItem }) {
         className={`article__social-link article__social-link--${socialItem.name}`}
         to={socialItem.link}
       >
-        <Svg
-          svgClass="article__social-icon"
-          svgName={socialItem.svg}
-          svgWidth="30"
-          svgHeight="30"
+        <Icon
+          className="article__social-icon"
+          name={socialItem.svg}
+          width="30"
+          height="30"
         />
       </Link>
     </li>

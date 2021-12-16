@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 
 import { validationMessages } from "../../constants"
 import routes from "../../routes"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import { login } from "./LoginActions.js"
 
 class Login extends Component {
@@ -97,8 +97,7 @@ class Login extends Component {
               </label>
             )}
             <button
-              className={`show-password ${
-                this.state.isPasswordHide ? "show-password--active" : ""
+              className={`show-password ${this.state.isPasswordHide ? "show-password--active" : ""
               }`}
               onClick={this.onClickToggleVisibilityOfPassword}
               type="button"
@@ -126,12 +125,12 @@ class Login extends Component {
                 id="check"
               />
               <label className="checkbox-label" htmlFor="check">
-                <Svg
+                <Icon
                   handleClick={() => this.props.setIsRememberMe()}
-                  svgClass="checkbox-icon"
-                  svgName="checkbox"
-                  svgWidth="13"
-                  svgHeight="13"
+                  className="checkbox-icon"
+                  name="checkbox"
+                  width="13"
+                  height="13"
                 />
                 Запомнить меня
               </label>
@@ -151,11 +150,11 @@ class Login extends Component {
               className="modal__link"
               to={routes.footer.instagram}
             >
-              <Svg
-                svgClass="modal__link-icon"
-                svgName="instagram"
-                svgWidth="15"
-                svgHeight="15"
+              <Icon
+                className="modal__link-icon"
+                name="instagram"
+                width="15"
+                height="15"
               />
               Instagram
             </Link>
@@ -166,11 +165,11 @@ class Login extends Component {
               className="modal__link"
               to={routes.footer.facebook}
             >
-              <Svg
-                svgClass="modal__link-icon"
-                svgName="facebook"
-                svgWidth="15"
-                svgHeight="15"
+              <Icon
+                className="modal__link-icon"
+                name="facebook"
+                width="15"
+                height="15"
               />
               Facebook
             </Link>
