@@ -1,7 +1,8 @@
 // SCSS
 import "./comments.scss"
 
-import { ArticleCommentType } from "../../../Interfaces/Blog"
+import { ArticleCommentType } from "interfaces/Blog"
+
 import ArticleCommentsForm from "./ArticleCommentsForm"
 import ArticleCommentsHeader from "./ArticleCommentsHeader"
 import ArticleCommentsList from "./ArticleCommentsList"

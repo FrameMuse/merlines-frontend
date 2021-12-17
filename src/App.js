@@ -10,7 +10,6 @@ import AboutProject from "./components/AboutProject/AboutProject"
 import Advertising from "./components/Advertising/Advertising"
 import Article from "./components/Article/Article"
 import Blog from "./components/Blog/Blog"
-import articles from "./components/Blog/BlogLoadedData/articles.json"
 import { CookiePolicy } from "./components/CookiePolicy/CookiePolicy"
 import FAQ from "./components/FAQ/FAQ"
 import Footer from "./components/Footer/Footer"
@@ -36,7 +35,6 @@ import useQuery from "./hooks/useQuery"
 import { selectAccessData } from "./reducers/accessDataSlice"
 import { selectSearchResult } from "./reducers/searchResultSlice"
 import routes from "./routes"
-import { convertIdToRoute } from "./utils"
 
 function App() {
   const accessData = useSelector(selectAccessData)
@@ -47,7 +45,6 @@ function App() {
   } = useSelector(selectSearchResult)
   const searchData = useSelector(selectSearchResult)
   const [isOpenFilter, setIsOpenFilter] = useState(false)
-  console.log(articles)
   return (
     <>
       {/* <ScrollToTop> */}
@@ -68,6 +65,7 @@ function App() {
           <UpdAccessPopupResetConfirm />
         </Route>
         <Switch>
+          <Route path="/blog/article/:articleId" render={props => <Article articleId={props.match.params.articleId} />} />
           <Route exact path={routes.signup}>
             {query.get("next") === routes.priceCalendar.air && (
               <PriceCalendar />
@@ -183,8 +181,7 @@ function App() {
             )}
             <Subscribe />
           </Route>
-
-          <Route path={routes.blog}>
+          <Route exact path={routes.blog}>
             <Blog />
             <Subscribe />
           </Route>

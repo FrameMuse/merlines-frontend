@@ -1,6 +1,6 @@
+import { ArticleCommentType } from "interfaces/Blog"
 import { useState } from "react"
 
-import { ArticleCommentType } from "../../../Interfaces/Blog"
 import ArticleCommentsItem from "./ArticleCommentsItem"
 
 function ArticleCommentsList(props: { list: ArticleCommentType[] }) {

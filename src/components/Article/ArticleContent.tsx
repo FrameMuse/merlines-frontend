@@ -1,11 +1,12 @@
 // SCSS
 import "./user.scss"
 
+import ReactMarkdown from "react-markdown"
 import { Link } from "react-router-dom"
 
-import { ArticleType } from "../../Interfaces/Blog"
+import { ArticleType } from "../../interfaces/Blog"
 import ArticleComments from "./ArticleComments/ArticleComments"
-import ArticleFigure from "./ArticleFigure"
+import ArticlePicture from "./ArticleFigure"
 import ArticleSocial from "./ArticleSocial/ArticleSocial"
 import ArticleTag from "./ArticleTag"
 
@@ -67,9 +68,8 @@ function ArticleContent(props: ArticleContentProps) {
             <time className="article-card__date" dateTime="2019-06-12">
               {props.date}
             </time>
-            <ArticleFigure item={props.headerImage} title={true} />
           </div>
-          {props.content.map((element, index) => element.toString())}
+          <ReactMarkdown components={{ img: props => <ArticlePicture src={props.src} caption={props.alt} /> }}>{props.content}</ReactMarkdown>
           <div className="user user--article">
             <img
               className="user__avatar"

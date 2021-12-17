@@ -1,6 +1,5 @@
+import { ArticleCommentType } from "interfaces/Blog"
 import { Link } from "react-router-dom"
-
-import { ArticleCommentType } from "../../../Interfaces/Blog"
 
 
 interface ArticleCommentsItemProps extends ArticleCommentType { }
@@ -20,7 +19,7 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
         <button className="comments__item-btn">Ответить</button>
       </div>
       <div className="comments__comments">
-        {props.comments.map(comment => (
+        {props.comments?.map(comment => (
           <ArticleCommentsItem {...comment} key={comment.id} />
         ))}
       </div>
