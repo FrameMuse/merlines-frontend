@@ -2,17 +2,17 @@
 import "./AdminEditTags.style.scss"
 
 import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
-import { FocusEvent, useEffect, useState } from "react"
-import { classWithModifiers } from "utils"
+import { useState } from "react"
 
 import AdminButton from "../AdminButton/AdminButton"
+import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
 function AdminEditTags() {
   const [tags, setTags] = useState<string[]>(["ПОДБОРКИ", "ГАЙДЫ", "СОВЕТЫ", "ГИД", "ВДОХНОВЕНИЯ", "СОБЫТИЯ", "FAQ"])
   function addTag() {
     setTags([...tags, "Новый Тэг"])
   }
-  function removeTag(index: number) {
+  function onInput(value: string | null, index: number) {
     console.log(index)
   }
   return (
@@ -21,45 +21,12 @@ function AdminEditTags() {
         <AdminButton className="edit-tags__button" onClick={addTag}>Добавить</AdminButton>
         <div className="edit-tags__inner">
           {tags.map((tag, index) => (
-            <AdminEditTagsTag tag={tag} onRemove={() => removeTag(index)} key={index} />
+            <AdminEditableTag onInput={value => onInput(value, index)} key={index}>{tag}</AdminEditableTag>
           ))}
         </div>
       </div>
 
     </AdminSectionLayout>
-  )
-}
-
-
-interface AdminEditTagsTagProps {
-  tag: string
-
-  onRemove(): void
-}
-
-function AdminEditTagsTag(props: AdminEditTagsTagProps) {
-  const [tag, setTag] = useState(props.tag)
-  const [status, setStatus] = useState<"pending" | "saved" | "error" | null>(null)
-  function onBlur(event: FocusEvent<HTMLSpanElement>) {
-    const textContent = event.currentTarget.textContent || ""
-    if (textContent === tag) return
-    if (!textContent.length) {
-      props.onRemove()
-    }
-
-    setStatus("pending")
-    setTimeout(() => setStatus("saved"), 750)
-
-    console.log(textContent)
-    setTag(textContent)
-  }
-  useEffect(() => {
-    const timeoutId = setTimeout(() => setStatus(null), 2500)
-    return () => clearTimeout(timeoutId)
-  }, [status])
-  if (!tag?.length) return null
-  return (
-    <span className={classWithModifiers("edit-tags__tag", status)} contentEditable onBlur={onBlur}>{tag}</span>
   )
 }
 
