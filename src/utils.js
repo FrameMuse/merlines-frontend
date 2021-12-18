@@ -289,6 +289,19 @@ export function createQuery(QueryObject) {
   return QueryArray.filter((query) => query).join("&")
 }
 
+/**
+ *
+ * @param {File} file
+ * @returns {ArrayBuffer}
+ */
+export const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader()
+
+  reader.readAsDataURL(file)
+  reader.onload = () => resolve(reader.result)
+  reader.onerror = reject
+})
+
 export {
   getRandomInteger,
   getRandomElement,

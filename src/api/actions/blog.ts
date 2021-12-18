@@ -12,7 +12,7 @@ export const getBlogArticle = (id: string): Action<ArticleType> => ({
   endpoint: "/blog/article/" + id
 })
 
-export const postBlogArticle = (data: ArticleContentType): Action<{ id: number }> => ({
+export const postBlogArticle = (data: ArticleContentType<ArrayBuffer | string>): Action<{ id: number }> => ({
   method: "POST",
   endpoint: "/blog/articles",
   body: data

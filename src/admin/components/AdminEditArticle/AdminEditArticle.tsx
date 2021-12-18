@@ -1,24 +1,20 @@
 import "./AdminEditArticle.style.scss"
 
+import { ArticleContentType } from "interfaces/Blog"
 import { Dispatch, FormEvent, useEffect, useState } from "react"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
-interface EditArticleType {
-  tags: string[]
-  title: string
-  content: string
-}
-
-interface AdminEditArticleProps extends Partial<EditArticleType> {
-  onChange: Dispatch<EditArticleType>
+interface AdminEditArticleProps extends ArticleContentType<File | string> {
+  onChange: Dispatch<Partial<ArticleContentType<File | string>>>
 }
 
 function AdminArticleEditor(props: AdminEditArticleProps) {
-  const [tags, setTags] = useState(props.tags || [])
-  const [title, setTitle] = useState(props.title || "Название")
-  const [content, setContent] = useState(props.content || "")
+  const [tags, setTags] = useState(props.tags)
+  const [title, setTitle] = useState(props.title)
+  const [content, setContent] = useState(props.content)
+  const [preview, setPreview] = useState(props.preview)
 
   const updateTitle = (event: FormEvent<HTMLInputElement>) => setTitle(event.currentTarget.value)
   const updateContent = (event: FormEvent<HTMLTextAreaElement>) => setContent(event.currentTarget.value)
@@ -34,12 +30,19 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
     setTags([...tags])
   }
 
+  function updatePreview(event: FormEvent<HTMLInputElement>) {
+    const file = event.currentTarget.files?.[0]
+    if (file == null) return
+
+    setPreview(file)
+  }
+
   useEffect(() => {
-    props.onChange({ tags, title, content })
-  }, [tags, title, content])
+    props.onChange({ tags, title, content, preview })
+  }, [tags, title, content, preview])
 
   return (
-    <div className="edit-article">
+    <form className="edit-article" onSubmit={event => event.preventDefault()}>
       <div className="edit-article-tags">
         <h3 className="edit-article-tags__title">Тэги</h3>
         <AdminButton className="edit-article-tags__button" onClick={addTag}>Добавить</AdminButton>
@@ -51,17 +54,21 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
       </div>
       <div className="edit-article-title">
         <h3 className="edit-article-title__title">Заголовок</h3>
-        <input type="text" className="edit-article-title__input" defaultValue={title} onInput={updateTitle} />
+        <input type="text" className="edit-article-title__input" required defaultValue={title} onInput={updateTitle} />
+      </div>
+      <div className="edit-article-preview">
+        <h3 className="edit-article-preview__title">Обложка</h3>
+        <input type="file" className="edit-article-title__input" required onChange={updatePreview} />
       </div>
       <div className="edit-article-content">
         <h3 className="edit-article-content__title">Editor</h3>
-        <textarea className="edit-article-content__textarea" onInput={updateContent}>{content}</textarea>
+        <textarea className="edit-article-content__textarea" required onInput={updateContent}>{content}</textarea>
         <a className="edit-article-content__notice" href="https://commonmark.org/help/">
           <span>Learn markdown</span>
           <img src="https://commonmark.org/help/images/favicon.png" width="20" alt="Markdown" />
         </a>
       </div>
-    </div>
+    </form>
   )
 }
 
