@@ -1,7 +1,7 @@
 import "./articles.scss"
 import "./search.scss"
 
-import { getArticles } from "api/actions/blog"
+import { getBlogArticles } from "api/actions/blog"
 import ArticleCard from "components/Article/ArticleCard"
 import Icon from "components/common/Icon"
 import { useEffect, useState } from "react"
@@ -13,7 +13,7 @@ import BlogNavigation from "./BlogNavigation/BlogNavigation"
 import BlogSlider from "./BlogSlider"
 
 function Blog() {
-  const { payload } = useQuery(getArticles)
+  const { payload } = useQuery(getBlogArticles)
   const [navigation, setNavigation] = useState([])
 
   const convertTagToRoute = (tag) => `/blog/tag/${tag.slice(1).toLowerCase()}`

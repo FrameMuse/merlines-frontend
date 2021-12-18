@@ -1,12 +1,12 @@
 // SCSS
 import "./AdminEditTag.style.scss"
 
-import { Dispatch, FocusEvent, useEffect, useState } from "react"
+import { Dispatch, FocusEvent, useState } from "react"
 import { classWithModifiers } from "utils"
 
 interface AdminEditableTagProps {
   children: string
-  onInput: Dispatch<string | null>
+  onInput: Dispatch<string>
 }
 
 function AdminEditableTag(props: AdminEditableTagProps) {
@@ -16,12 +16,8 @@ function AdminEditableTag(props: AdminEditableTagProps) {
     if (textContent === tag) return
 
     setTag(textContent)
-    props.onInput(textContent)
+    props.onInput(textContent ?? null)
   }
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => setStatus(null), 2500)
-  //   return () => clearTimeout(timeoutId)
-  // }, [status])
   return (
     <span className={classWithModifiers("editable-tag")} contentEditable onBlur={onBlur}>{tag}</span>
   )

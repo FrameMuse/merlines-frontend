@@ -1,13 +1,19 @@
 import { Action } from "api/client"
-import { ArticleType } from "interfaces/Blog"
+import { ArticleContentType, ArticleType } from "interfaces/Blog"
 import { PaginationType } from "interfaces/Django"
 
-export const getArticles: Action<PaginationType<ArticleType>> = {
+export const getBlogArticles: Action<PaginationType<ArticleType>> = {
   method: "GET",
   endpoint: "/blog/articles"
 }
 
-export const getArticle = (id: string): Action<ArticleType> => ({
+export const getBlogArticle = (id: string): Action<ArticleType> => ({
   method: "GET",
   endpoint: "/blog/article/" + id
+})
+
+export const postBlogArticle = (data: ArticleContentType): Action<{ id: number }> => ({
+  method: "POST",
+  endpoint: "/blog/articles",
+  body: data
 })

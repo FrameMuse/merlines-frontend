@@ -1,6 +1,6 @@
 import "./AdminEditArticle.style.scss"
 
-import { Dispatch, FormEvent, useState } from "react"
+import { Dispatch, FormEvent, useEffect, useState } from "react"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
@@ -20,9 +20,23 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const [title, setTitle] = useState(props.title || "Название")
   const [content, setContent] = useState(props.content || "")
 
-  const addTag = () => setTags([...tags || [], "Новый тэг"])
   const updateTitle = (event: FormEvent<HTMLInputElement>) => setTitle(event.currentTarget.value)
   const updateContent = (event: FormEvent<HTMLTextAreaElement>) => setContent(event.currentTarget.value)
+
+  const addTag = () => setTags([...tags, "Новый тэг"])
+  function updateTag(value: string, index: number) {
+    if (value.length === 0) {
+      tags.splice(index, 1)
+    } else {
+      tags[index] = value
+    }
+
+    setTags([...tags])
+  }
+
+  useEffect(() => {
+    props.onChange({ tags, title, content })
+  }, [tags, title, content])
 
   return (
     <div className="edit-article">
@@ -31,7 +45,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
         <AdminButton className="edit-article-tags__button" onClick={addTag}>Добавить</AdminButton>
         <div className="edit-article-tags__inner">
           {tags.map((tag, index) => (
-            <AdminEditableTag onInput={() => { 1 }} key={index}>{tag}</AdminEditableTag>
+            <AdminEditableTag onInput={value => updateTag(value, index)} key={tag}>{tag}</AdminEditableTag>
           ))}
         </div>
       </div>

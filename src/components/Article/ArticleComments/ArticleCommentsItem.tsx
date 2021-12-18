@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 interface ArticleCommentsItemProps extends ArticleReplyType { }
 
 function ArticleCommentsItem(props: ArticleCommentsItemProps) {
+  const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "long" })
   return (
     <li className="comments__item">
       <div className="user user--comments">
@@ -17,7 +18,7 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
       </div>
       <p className="comments__text">{props.text}</p>
       <div className="comments__item-inner">
-        <time className="comments__item-date">{props.date}</time>
+        <time className="comments__item-date" dateTime={props.created_at}>{date}</time>
         <button className="comments__item-btn">Ответить</button>
       </div>
       <div className="comments__comments">

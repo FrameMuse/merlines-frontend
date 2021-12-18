@@ -1,18 +1,21 @@
-export interface ArticleType {
-  title: string
+export interface ArticleType extends ArticleContentType {
+  id: number
   created_at: string
+  comments: ArticleReplyType[]
+  author: ArticleAuthorType
+}
+
+export interface ArticleContentType {
+  title: string
   preview: string
   content: string
-  comments: ArticleReplyType[]
   tags: string[]
-
-  author: ArticleAuthorType
 }
 
 export interface ArticleReplyType {
   id: number
   text: string
-  date: string
+  created_at: string
   author: ArticleAuthorType
   replies: ArticleReplyType[]
 }

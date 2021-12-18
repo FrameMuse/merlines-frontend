@@ -1,64 +1,27 @@
 // SCSS
 import "./user.scss"
 
+import { ArticleType } from "interfaces/Blog"
 import ReactMarkdown from "react-markdown"
 import { Link } from "react-router-dom"
 
-import { ArticleType } from "../../interfaces/Blog"
 import ArticleComments from "./ArticleComments/ArticleComments"
 import ArticlePicture from "./ArticleFigure"
 import ArticleSocial from "./ArticleSocial/ArticleSocial"
 import ArticleTag from "./ArticleTag"
 
-// const convertToHTML = (item, index) => {
-//   switch (item.type) {
-//     case "header": {
-//       return (
-//         <h3 key={index} className="article__subtitle">
-//           {item.text}
-//         </h3>
-//       )
-//     }
-//     case "paragraph": {
-//       return (
-//         <p key={index} className="article__text">
-//           {item.text}
-//         </p>
-//       )
-//     }
-//     case "image": {
-//       return <ArticleFigure key={index} item={item} />
-//     }
-//     case "list": {
-//       return (
-//         <div key={index}>
-//           <p key={index} className="article__text article__text--before-list">
-//             {item.text}
-//           </p>
-//           <ul className="article__list">
-//             {item.list.map((element, indexLi) => (
-//               <li key={indexLi} className="article__item">
-//                 {element.item}
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       )
-//     }
-//     default:
-//       return <div key={index}>Some item</div>
-//   }
-// }
 
-
-interface ArticleContentProps extends ArticleType { }
+interface ArticleContentProps extends ArticleType {
+  noComments?: boolean
+}
 
 function ArticleContent(props: ArticleContentProps) {
-  const date = new Date(props.created_at).toLocaleDateString("ru", { dateStyle: "long" })
+  const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "long" })
   return (
     <section className="article-page">
       <div className="article-page__container">
         <article className="article">
+          <ArticleSocial />
           <div className="article-card article-card--header">
             <ul className="article-card__tags-list">
               {props.tags.map((tag, index) => (
@@ -67,8 +30,8 @@ function ArticleContent(props: ArticleContentProps) {
             </ul>
             <h2 className="article-card__title">{props.title}</h2>
             <time className="article-card__date" dateTime={props.created_at}>{date}</time>
+            <ArticlePicture src={props.preview} />
           </div>
-          <ArticlePicture src={props.preview} caption="article preview" />
           <ReactMarkdown components={{ img: props => <ArticlePicture src={props.src} caption={props.alt} /> }}>{props.content}</ReactMarkdown>
           <div className="user user--article">
             <img className="user__avatar" src={props.author.avatar} alt="avatar" />
@@ -79,9 +42,10 @@ function ArticleContent(props: ArticleContentProps) {
               </Link>
             </div>
           </div>
-          <ArticleSocial />
         </article>
-        <ArticleComments list={props.comments} />
+        {!props.noComments && (
+          <ArticleComments list={props.comments} />
+        )}
       </div>
     </section>
   )
