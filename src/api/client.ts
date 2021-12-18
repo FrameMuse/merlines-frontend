@@ -31,8 +31,10 @@ function requestInterceptor() {
 }
 function responseInterceptor() {
   return async (_action: BaseAction, response: QueryResponse) => {
+    if (response.payload?.error) {
+      toast.error(response.payload.error)
+    }
     if (process.env.NODE_ENV === "development") {
-      // if ( response.payload?.error)
       if (response.errorObject instanceof Error) {
         toast.error(response.errorObject.message)
       }

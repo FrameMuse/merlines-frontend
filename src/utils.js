@@ -233,6 +233,15 @@ const separateThousand = (value) => {
 }
 
 /**
+ * @param { Array<string | null | undefined> } classNames
+ * @returns `class1 class2`
+ */
+export function classMerge(...classNames) {
+  const space = " "
+  return classNames.filter(Boolean).join(space)
+}
+
+/**
  * Creates class with modifiers
  *
  * Join modifiers with className and returns one

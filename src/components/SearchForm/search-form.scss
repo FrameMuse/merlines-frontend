@@ -69,6 +69,7 @@
     margin-left: 16px;
     justify-content: flex-start;
   }
+
   @media #{$media-xl} {
     margin-left: 20px;
     margin-bottom: 14px;
@@ -97,9 +98,11 @@
   @media #{$media-md} {
     flex-basis: 22%;
   }
+
   @media #{$media-lg} {
     flex-basis: 16%;
   }
+
   @media #{$media-xl} {
     flex-basis: 13.5%;
   }
@@ -120,10 +123,12 @@
       "date-dep date-arr passengers passengers"
       "submit submit submit submit";
   }
+
   @media #{$media-lg} {
     grid-template-columns: 25fr 25fr 21fr 21fr 33fr 21fr;
     grid-template-areas: "departure arrival date-dep date-arr passengers submit";
   }
+
   @media #{$media-xl} {
     grid-template-columns: 25fr 25fr 21fr 21fr 29fr 21fr;
   }
@@ -176,6 +181,7 @@
     &--date-dep {
       border-right: 2px solid var(--color-blue);
     }
+
     &--departure {
       grid-area: departure;
     }
@@ -184,21 +190,26 @@
       grid-area: arrival;
       border-top: none;
     }
+
     &--date-arr {
       grid-area: date-arr;
     }
+
     &--date-dep {
       grid-area: date-dep;
     }
+
     &--passengers {
       grid-area: passengers;
     }
   }
+
   @media #{$media-lg} {
     border-top: none;
 
     &--arrival {
       border-right: 2px solid var(--color-blue);
+
       .search-form__input {
         border-radius: 0;
       }
@@ -244,6 +255,7 @@
       @include floatingLabel(search-form__placeholder, 10px, 12px, 22px);
     }
   }
+
   @media #{$media-lg} {
     font-size: 14px;
 
@@ -259,6 +271,7 @@
       @include floatingLabel(search-form__placeholder, 10px, 12px, 16px);
     }
   }
+
   @media #{$media-xl} {
     font-size: 16px;
     padding-left: 20px;
@@ -290,6 +303,7 @@
       left: 22px;
     }
   }
+
   @media #{$media-lg} {
     font-size: 14px;
 
@@ -297,6 +311,7 @@
       left: 28px;
     }
   }
+
   @media #{$media-xl} {
     font-size: 16px;
     left: 20px;
@@ -318,6 +333,7 @@
   text-indent: 100%;
   overflow: hidden;
   white-space: nowrap;
+  background-color: white;
   background-image: url("./../../img/icons/switch.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -347,11 +363,13 @@
     grid-area: submit;
     border-top: none;
   }
+
   @media #{$media-lg} {
     padding: 20px 28px 21px;
     border: 1px solid white;
     border-radius: 0 4px 4px 0;
   }
+
   @media #{$media-xl} {
     padding-left: 43px;
     padding-right: 43px;
@@ -364,6 +382,7 @@
   @media #{$media-md} {
     margin-top: 20px;
   }
+
   @media #{$media-lg} {
     margin-top: 14px;
     margin-left: 1px;
@@ -422,9 +441,11 @@
   @media #{$media-md} {
     margin-top: 2px;
   }
+
   @media #{$media-lg} {
     margin-top: 1px;
   }
+
   @media #{$media-xl} {
     display: none;
   }

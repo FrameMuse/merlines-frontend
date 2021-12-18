@@ -1,0 +1,122 @@
+@mixin Indent($padding-top-bottom: 0, $margin-top-bottom: 0) {
+  $side-indent: 2.5vw;
+
+  max-width: calc(1100px - #{$side-indent});
+  padding: $padding-top-bottom 2.5vw;
+  margin: $margin-top-bottom auto;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+button {
+  all: unset;
+
+  cursor: pointer;
+}
+
+.admin-header {
+  background: var(--color-blue);
+}
+
+.topbar {
+  @include Indent(1.5em);
+
+  overflow: auto;
+}
+
+.topbar-menu {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1em;
+}
+
+.topbar-menu__link {
+  flex-shrink: 0;
+
+  padding: 0.5em 1.25em;
+  background: rgba($color: white, $alpha: 0.1);
+  border: 2px solid transparent;
+  border-radius: 0.35em;
+
+  color: rgba($color: white, $alpha: 0.5);
+
+  transition: 250ms ease color, 250ms ease border-color, 250ms ease background-color;
+
+  &:hover:not(&--active) {
+    border-color: rgba($color: white, $alpha: 0.25);
+    color: rgba($color: white, $alpha: 1);
+  }
+
+  &--active {
+    background: rgba($color: white, $alpha: 0.25);
+    color: rgba($color: white, $alpha: 1);
+  }
+}
+
+/* View Layout */
+
+.admin-view-layout {
+  display: grid;
+  gap: 3.5em;
+
+  @include Indent(0, 5em);
+}
+
+.admin-view-layout__title {
+  padding-bottom: 0.25em;
+  margin: unset;
+
+  border-bottom: 3px solid var(--color-blue);
+
+  font-size: 2.5rem;
+}
+
+.admin-view-layout__container {
+  display: grid;
+  gap: 2.5em;
+}
+
+/* Section Layout */
+
+.admin-section-layout {
+  display: grid;
+
+  border: 2px solid var(--color-border-third);
+  border-radius: 0.5em;
+}
+
+.admin-section-layout__header {
+  padding: 0.75em;
+  margin: unset;
+  border-bottom: 2px solid var(--color-border-third);
+
+  font-size: 1rem;
+}
+
+.admin-section-layout__container {
+  padding: 1.25em;
+}
+
+/* Box Layout */
+
+.admin-box-layout {
+  display: grid;
+
+  border: 2px solid var(--color-border-third);
+  border-radius: 0.5em;
+}
+
+.admin-box-layout__header {
+  padding: 0.75em;
+  margin: unset;
+  border-bottom: 2px solid var(--color-border-third);
+
+  font-size: 1rem;
+}
+
+.admin-box-layout__container {
+  padding: 1.25em;
+}

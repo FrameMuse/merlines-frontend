@@ -1,0 +1,26 @@
+.admin-button {
+  padding: 0.75em 1em;
+  background: var(--color-blue);
+  border: 2px solid transparent;
+  border-radius: 0.35em;
+
+  color: white;
+  transition: 250ms ease color, 250ms ease border-color, 250ms ease background-color;
+
+  &--red {
+    background: rgba($color: red, $alpha: 0.75);
+  }
+
+  &--gray {
+    background: white;
+    // background: var(--color-grey-3);
+    border-color: #dadee3;
+    border-radius: 0.35em;
+
+    color: #333;
+
+    &:hover {
+      background: #eef0f3;
+    }
+  }
+}
