@@ -1,6 +1,6 @@
 import "./AdminAddArticle.style.scss"
 
-import { postBlogArticle } from "api/actions/blog"
+import { postAdminArticle } from "api/actions/admin"
 import ClientAPI from "api/client"
 import ArticlePicture from "components/Article/ArticleFigure"
 import ArticleSocial from "components/Article/ArticleSocial/ArticleSocial"
@@ -13,7 +13,7 @@ import { classWithModifiers, toBase64 } from "utils"
 import AdminButton from "../AdminButton/AdminButton"
 import AdminArticleEditor from "../AdminEditArticle/AdminEditArticle"
 
-const ar: ArticleContentType = {
+const sampleArticleData: ArticleContentType = {
   title: "10 мест Парижа для хорошего отдыха на выходных",
   preview: "/images/article/5.jpg",
   tags: [
@@ -31,13 +31,13 @@ const ar: ArticleContentType = {
 const date = (new Date).toISOString()
 
 function AdminAddArticle() {
-  const [articleData, setArticleData] = useState<ArticleContentType<File | string>>(ar)
+  const [articleData, setArticleData] = useState<ArticleContentType<File | string>>(sampleArticleData)
   const [showPreview, setShowPreview] = useState(false)
 
   async function addArticle() {
     const preview = typeof articleData.preview === "string" ? articleData.preview : await toBase64(articleData.preview)
 
-    const { error, payload } = await ClientAPI.query(postBlogArticle({ ...articleData, preview }))
+    const { error, payload } = await ClientAPI.query(postAdminArticle({ ...articleData, preview }))
     if (error || !payload || payload.error) return
     alert("done")
   }
@@ -77,7 +77,9 @@ function AdminAddArticle() {
           </div>
         </section>
       )}
-      <AdminButton onClick={addArticle}>Опубликовать новую статью</AdminButton>
+      <div>
+        <AdminButton onClick={addArticle}>Опубликовать новую статью</AdminButton>
+      </div>
     </div>
   )
 }
