@@ -7,6 +7,7 @@ import { useState } from "react"
 import { classWithModifiers } from "utils"
 
 import AdminButton from "../AdminButton/AdminButton"
+import AdminSearchFilters from "../AdminSearchFilters/AdminSearchFilters"
 // Mock Avatar
 import MeliodasPNG from "./meliodas.jpg"
 
@@ -17,7 +18,7 @@ interface User {
   surname: string
   email: string
   street: string
-  status: "admin" | "editor" | "default"
+  role: "admin" | "editor" | "default"
 }
 
 const mockUserData: User = {
@@ -27,13 +28,19 @@ const mockUserData: User = {
   surname: "七つの大罪",
   email: "meliodas@deadlysins.net",
   street: "Britania 4",
-  status: "admin"
+  role: "admin"
 }
 
 function AdminEditUsers() {
   const users = Array(135).fill(mockUserData)
   return (
     <AdminSectionLayout header={users.length + " пользователей"}>
+      <AdminSearchFilters>
+        <input type="text" placeholder="id" />
+        <input type="text" placeholder="name" />
+        <input type="text" placeholder="role" />
+      </AdminSearchFilters>
+      <br />
       <div className="edit-users">
         {users.map(user => (
           <AdminEditUsersUser {...user} key={user.id} />
@@ -72,7 +79,7 @@ function AdminEditUsersUser(props: AdminEditUsersUserProps) {
             </div>
             <div className="edit-user-area__entry">
               <span>Status: </span>
-              <span>{props.status}</span>
+              <span>{props.role}</span>
             </div>
           </div>
         </div>
