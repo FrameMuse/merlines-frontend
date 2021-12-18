@@ -54,6 +54,7 @@ import ArticleTag from "./ArticleTag"
 interface ArticleContentProps extends ArticleType { }
 
 function ArticleContent(props: ArticleContentProps) {
+  const date = new Date(props.created_at).toLocaleDateString("ru", { dateStyle: "long" })
   return (
     <section className="article-page">
       <div className="article-page__container">
@@ -65,21 +66,16 @@ function ArticleContent(props: ArticleContentProps) {
               ))}
             </ul>
             <h2 className="article-card__title">{props.title}</h2>
-            <time className="article-card__date" dateTime="2019-06-12">
-              {props.date}
-            </time>
+            <time className="article-card__date" dateTime={props.created_at}>{date}</time>
           </div>
+          <ArticlePicture src={props.preview} caption="article preview" />
           <ReactMarkdown components={{ img: props => <ArticlePicture src={props.src} caption={props.alt} /> }}>{props.content}</ReactMarkdown>
           <div className="user user--article">
-            <img
-              className="user__avatar"
-              src={props.author.avatar}
-              alt={props.author.name}
-            />
+            <img className="user__avatar" src={props.author.avatar} alt="avatar" />
             <div className="user__inner">
               <div className="user__tag">Автор</div>
-              <Link className="user__name" to="#">
-                {props.author.name}
+              <Link className="user__name" to={"/user/" + props.author.id}>
+                {props.author.first_name} {props.author.last_name}
               </Link>
             </div>
           </div>

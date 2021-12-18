@@ -1,27 +1,25 @@
 export interface ArticleType {
   title: string
-  date: string
-  picture: {
-    src: string
-    caption: string
-  }
-  content: any
-  comments: ArticleCommentType[]
+  created_at: string
+  preview: string
+  content: string
+  comments: ArticleReplyType[]
   tags: string[]
 
   author: ArticleAuthorType
 }
 
-export interface ArticleCommentType {
+export interface ArticleReplyType {
   id: number
   text: string
   date: string
   author: ArticleAuthorType
-  comments: ArticleCommentType[]
+  replies: ArticleReplyType[]
 }
 
 export interface ArticleAuthorType {
   id: number
   avatar: string
-  name: string
+  first_name: string
+  last_name: string
 }

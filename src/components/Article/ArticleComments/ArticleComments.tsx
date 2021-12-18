@@ -1,13 +1,13 @@
 // SCSS
 import "./comments.scss"
 
-import { ArticleCommentType } from "interfaces/Blog"
+import { ArticleReplyType } from "interfaces/Blog"
 
 import ArticleCommentsForm from "./ArticleCommentsForm"
 import ArticleCommentsHeader from "./ArticleCommentsHeader"
 import ArticleCommentsList from "./ArticleCommentsList"
 
-function ArticleComments(props: { list: ArticleCommentType[] }) {
+function ArticleComments(props: { list: ArticleReplyType[] }) {
   return (
     <section className="comments comments--active">
       <ArticleCommentsHeader />

@@ -1,6 +1,6 @@
 interface ArticleFigureProps {
-  src: string | undefined
-  caption: string | undefined
+  src?: string
+  caption?: string
 }
 
 function ArticlePicture(props: ArticleFigureProps) {
@@ -9,7 +9,9 @@ function ArticlePicture(props: ArticleFigureProps) {
       <picture>
         <img className="article-picture__image" src={props.src} alt="article picture" />
       </picture>
-      <figcaption className="article-picture__caption">{props.caption}</figcaption>
+      {props.caption && (
+        <figcaption className="article-picture__caption">{props.caption}</figcaption>
+      )}
     </figure>
   )
 }

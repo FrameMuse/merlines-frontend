@@ -1,9 +1,9 @@
-import { ArticleCommentType } from "interfaces/Blog"
+import { ArticleReplyType } from "interfaces/Blog"
 import { useState } from "react"
 
 import ArticleCommentsItem from "./ArticleCommentsItem"
 
-function ArticleCommentsList(props: { list: ArticleCommentType[] }) {
+function ArticleCommentsList(props: { list: ArticleReplyType[] }) {
   const [list, setList] = useState(props.list)
   return (
     <div className="comments__inner">

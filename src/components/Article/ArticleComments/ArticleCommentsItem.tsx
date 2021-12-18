@@ -1,8 +1,8 @@
-import { ArticleCommentType } from "interfaces/Blog"
+import { ArticleReplyType } from "interfaces/Blog"
 import { Link } from "react-router-dom"
 
 
-interface ArticleCommentsItemProps extends ArticleCommentType { }
+interface ArticleCommentsItemProps extends ArticleReplyType { }
 
 function ArticleCommentsItem(props: ArticleCommentsItemProps) {
   return (
@@ -10,7 +10,9 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
       <div className="user user--comments">
         <img className="user__avatar" src={props.author.avatar} alt="avatar" />
         <div className="comments__user-inner">
-          <Link className="comments__user-name" to={"/user/" + props.author.id}>{props.author.name}</Link>
+          <Link className="comments__user-name" to={"/user/" + props.author.id}>
+            {props.author.first_name} {props.author.last_name}
+          </Link>
         </div>
       </div>
       <p className="comments__text">{props.text}</p>
@@ -19,7 +21,7 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
         <button className="comments__item-btn">Ответить</button>
       </div>
       <div className="comments__comments">
-        {props.comments?.map(comment => (
+        {props.replies?.map(comment => (
           <ArticleCommentsItem {...comment} key={comment.id} />
         ))}
       </div>
