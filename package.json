@@ -29,17 +29,19 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "sass": "^1.37.2",
+    "serve": "^13.0.2",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run serve",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass src:src --watch  --poll",
     "eslint": "eslint src",
-    "fix-all": "eslint src --fix"
+    "fix-all": "eslint src --fix",
+    "serve": "serve build"
   },
   "eslintConfig": {
     "extends": [
