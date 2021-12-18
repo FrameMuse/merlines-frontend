@@ -75,6 +75,13 @@ const getDaysInterval = (date, calendar) => {
   }
 }
 
+/**
+ * @returns { any }
+ */
+export function noop() {
+  /* Do nothing */
+}
+
 export const capitalize = (str) => {
   if (!str) return str
   return str[0].toUpperCase() + str.slice(1)
@@ -226,6 +233,15 @@ const separateThousand = (value) => {
 }
 
 /**
+ * @param { Array<string | null | undefined> } classNames
+ * @returns `class1 class2`
+ */
+export function classMerge(...classNames) {
+  const space = " "
+  return classNames.filter(Boolean).join(space)
+}
+
+/**
  * Creates class with modifiers
  *
  * Join modifiers with className and returns one
@@ -253,7 +269,7 @@ export function classWithModifiers(className, ...modifiers) {
 
 /**
  *
- * @param { Record<string, string | number> } QueryObject
+ * @param { Record<string, unknown> } QueryObject
  * @returns string
  */
 export function createQuery(QueryObject) {
@@ -272,6 +288,19 @@ export function createQuery(QueryObject) {
 
   return QueryArray.filter((query) => query).join("&")
 }
+
+/**
+ *
+ * @param {File} file
+ * @returns {ArrayBuffer}
+ */
+export const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader()
+
+  reader.readAsDataURL(file)
+  reader.onload = () => resolve(reader.result)
+  reader.onerror = reject
+})
 
 export {
   getRandomInteger,

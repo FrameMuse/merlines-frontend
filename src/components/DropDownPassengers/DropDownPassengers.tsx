@@ -8,15 +8,9 @@ import { classWithModifiers } from "utils"
 import DropDownPassengersItem from "./DropDownPassengersItem"
 import DropDownPassengersTravelClass from "./DropDownPassengersTravelClass"
 
-
-interface DropDownPassengersProps {
-  hidden?: boolean
-  parentRef?: React.MutableRefObject<HTMLDivElement | null>
-}
-
-function DropDownPassengers(props: DropDownPassengersProps) {
+function DropDownPassengers() {
   return (
-    <div className={classWithModifiers("passengers-list", props.hidden && "hidden")} ref={props.parentRef}>
+    <div className="passengers-list">
       <div className="passengers-list__item">
         <DropDownPassengersItem name="adults" />
         <DropDownPassengersItem name="children" />

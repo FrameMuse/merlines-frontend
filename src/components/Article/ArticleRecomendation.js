@@ -1,4 +1,4 @@
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import ArticleCard from "./ArticleCard"
 
 function ArticleRecomendation() {
@@ -39,17 +39,17 @@ function ArticleRecomendation() {
         <header className="section__header">
           <h2 className="section__title">Рекомендации</h2>
           <div className="section__control">
-            <Svg
-              svgClass="section__arrow section__arrow--left"
-              svgName="arrow-slider"
-              svgWidth="20"
-              svgHeight="20"
+            <Icon
+              className="section__arrow section__arrow--left"
+              name="arrow-slider"
+              width="20"
+              height="20"
             />
-            <Svg
-              svgClass="section__arrow section__arrow--right"
-              svgName="arrow-slider"
-              svgWidth="20"
-              svgHeight="20"
+            <Icon
+              className="section__arrow section__arrow--right"
+              name="arrow-slider"
+              width="20"
+              height="20"
             />
           </div>
         </header>

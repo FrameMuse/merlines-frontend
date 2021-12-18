@@ -1,308 +1,200 @@
 // SCSS
-import "./form.scss"
+import "./search-form.scss"
 
+import { getGeoIp } from "api/actions/geo"
 import DropDownCalendar from "components/DropDownCalendar/DropDownCalendar"
-import { updateSearchCalendarIsOpen, updateSearchCalendarMode } from "components/DropDownCalendar/DropDownCalendarReducer"
-import DropDownPassengers from "components/DropDownPassengers/DropDownPassengers"
-import { FocusEvent, FormEvent, KeyboardEvent, useRef, useState } from "react"
+import { DateCalendarState } from "components/DropDownCalendar/DropDownCalendarReducer"
+import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react"
+import { useQuery } from "react-fetching-library"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
 import { useClickAway } from "react-use"
+import { updateSearchHasReturnDate } from "redux/reducers/search"
 import { updateSearchRoute } from "redux/reducers/search"
-import { classWithModifiers, pluralize } from "utils"
+import { capitalize, classWithModifiers, createQuery } from "utils"
 
-import { SearchRoute } from "../../redux/reducers/search"
-import DropDown from "../DropDown/DropDown"
-import { DropDownElementProps } from "../DropDown/DropDownItem"
-import { texualizeDate } from "./SearchFormServices"
+import ClientAPI from "../../api/client"
+import { SearchFormPassengers } from "./SearchFormPassengers"
+import { SearchFormRoute } from "./SearchFormRoute"
 
-// TODO: Apply code splitting to functions
 function SearchForm() {
   const dispatch = useDispatch()
+  const history = useHistory()
   const search = useSelector(state => state.search)
-  const searchCalendar = useSelector(state => state.searchCalendar)
-  // If calendar has offset, it will be placed under the second input (returnDateInput)
-  const [hasCalendarOffset, setHasCalendarOffset] = useState(false)
-
-  const calendarDropDownRef = useRef(null)
-
-  const passengersRef = useRef<HTMLLabelElement | null>(null)
-  const passengersDropDownRef = useRef<HTMLDivElement | null>(null)
 
   const [formError, setFormError] = useState(false)
 
-  const [citiesInput, setCitiesInput] = useState({ from: "", to: "" })
-
   // TODO: Find location by GeoIP
 
-  function getCitiesData(keyWord: string, direction: "from" | "to") {
-    // ISSUE: #16 Refactor api actions
-  }
-
-  function onCitiesChange(event: FormEvent<HTMLInputElement>, direction: "from" | "to") {
-    const value = event.currentTarget.value
-
-    setCitiesInput({ ...citiesInput, [direction]: value })
-
-    // TODO: Dispatch form data
-  }
-
-  function chooseOneWay() {
-    dispatch(updateSearchCalendarMode("single"))
-  }
-
-  function chooseTwoWays() {
-    setHasCalendarOffset(true)
-    dispatch(updateSearchCalendarMode("double"))
-    dispatch(updateSearchCalendarIsOpen(true))
-  }
-
-  function onDepartureDateFocus() {
-    setHasCalendarOffset(false)
-  }
-  function onReturnDateFocus() {
-    setHasCalendarOffset(true)
-    dispatch(updateSearchCalendarIsOpen(true))
-  }
-
-  function onPassengersFocus() {
-    // TODO: show passengers settings
-    dispatch(updateSearchCalendarIsOpen(false))
-  }
-  function onPassengersTabPressed(event: KeyboardEvent<HTMLElement>) {
-    if (event.key !== "Tab") return
-
-    // TODO: hide passengers settings
+  function removeReturnDate() {
+    dispatch(updateSearchRoute(0, { returnDate: null }))
+    dispatch(updateSearchHasReturnDate(false))
   }
 
   function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    // TODO: If form fields are empty, set form error
-    // TODO: Send request using history search
+
+    const route = search.routes[0]
+
+    const searchQuery = createQuery({
+      origin: route.departurePoint?.code,
+      destination: route.arrivalPoint?.code,
+      depart_date: route.departureDate?.toISOString().slice(0, 10),
+      return_date: route.departureDate?.toISOString().slice(0, 10),
+      transport: "air",
+      one_way: search.hasReturnDate,
+
+      passengers_adults: search.passengers.adults,
+      passengers_children: search.passengers.children,
+      passengers_infants: search.passengers.babies,
+      travel_class: search.travelClass
+    })
+
+    history.push({
+      pathname: "/search-result",
+      search: "?" + searchQuery,
+    })
+
+    console.log(searchQuery)
   }
 
-  // Hide CalendarDropDown
-  // useClickAway(calendarDropDownRef, (event) => {
-  //   if (!searchCalendar.isOpen) return
+  useEffect(() => {
+    ClientAPI.query(getGeoIp).then(({ payload }) => {
+      if (!payload) return
+      dispatch(updateSearchRoute(0, {
+        departurePoint: {
+          code: payload.region,
+          name: payload.city
+        }
+      }));
+      (document.querySelector(".search-form__group--arrival .search-form__input") as any)?.focus()
+    })
 
-  //   if (event.path.includes(departureDateInputRef.current?.parentElement))
-  //     return
-  //   if (event.path.includes(returnDateInputRef.current?.parentElement)) return
 
-  //   dispatch(updateSearchCalendarIsOpen(false))
-  // })
-  // Hide PassengersDropDown
-  useClickAway(passengersDropDownRef, (event) => {
-    if (!passengersRef.current) return
-
-    if (event.composedPath().includes(passengersRef.current)) return
-
-    // TODO: hide passengers settings
-  })
+  }, [dispatch])
 
   return (
-    <form className="form" onSubmit={onSearchSubmit} autoComplete="off">
-      <div className="form__nav">
-        <div className={classWithModifiers("form__nav-btn", searchCalendar.mode === "double" && "active")} onClick={chooseTwoWays}>
+    <form className="search-form" onSubmit={onSearchSubmit} autoComplete="off">
+      <div className="search-form__nav">
+        <div className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} onClick={() => dispatch(updateSearchHasReturnDate(true))}>
           Туда - обратно
         </div>
-        <div className={classWithModifiers("form__nav-btn", searchCalendar.mode === "single" && "active")} onClick={chooseOneWay}>
+        <div className={classWithModifiers("search-form__nav-btn", !search.hasReturnDate && "active")} onClick={removeReturnDate}>
           В одну сторону
         </div>
-        <button className="form__nav-btn" onClick={(evt) => evt.preventDefault()}>Сложный маршрут</button>
+        <button className="search-form__nav-btn">Сложный маршрут</button>
       </div>
-      <div className={classWithModifiers("form__inner", formError && "error")}>
-
+      <div className={classWithModifiers("search-form__inner", formError && "error")}>
         {search.routes.map((route, index) => (
-          <SearchFormRoute {...route} index={index} key={index} />
+          <>
+            <SearchFormRoute {...route} index={index} key={index} />
+            <SearchFormDate routeIndex={index} withReturnDate={search.routes.length < 2} />
+          </>
         ))}
         <SearchFormPassengers />
-        <input className="form__btn" type="submit" value="Найти" />
+        <button className="search-form__btn">Найти</button>
       </div>
       {/* {!searchResult && <OpenBooking />} */}
     </form>
   )
 }
 
-function SearchFormRoutesSwitchButton() {
-  const dispatch = useDispatch()
-  const search = useSelector(state => state.search)
-  function switchRoutes() {
-    dispatch(updateSearchRoute(0, {
-      arrivalPoint: search.routes[0].departurePoint,
-      departurePoint: search.routes[0].arrivalPoint,
-    }))
-  }
-  if (search.routes.length > 1) return null
-  return <button onClick={switchRoutes} type="button" className="form__switch">Поменять местами</button>
+
+interface SearchFormDatingProps {
+  routeIndex: number
+  withReturnDate?: boolean
 }
 
-function SearchFormDates() {
+function SearchFormDate(props: SearchFormDatingProps) {
   const dispatch = useDispatch()
-
   const search = useSelector(state => state.search)
-  const searchCalendar = useSelector(state => state.searchCalendar)
+  const searchRoute = useSelector(state => state.search.routes[props.routeIndex])
 
-  const calendarRef = useRef<HTMLElement | null>(null)
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const [hasCalendarOffset, setHasCalendarOffset] = useState(false)
 
-  const [hasOffset, setHasOffset] = useState(false)
+  const calendarRef = useRef<HTMLDivElement | null>(null)
 
-  function openCalendar() {
-    dispatch(updateSearchCalendarIsOpen(true))
+  function onFocus() {
+    setIsCalendarOpen(true)
+    setHasCalendarOffset(false)
   }
 
-  function onDateKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+  function onReturnDateFocus() {
+    setIsCalendarOpen(true)
+    setHasCalendarOffset(true)
+
+    dispatch(updateSearchHasReturnDate(true))
+  }
+
+  function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key !== "Tab") return
-    dispatch(updateSearchCalendarIsOpen(false))
+
+    setIsCalendarOpen(false)
   }
 
-  function onDepartureDateClick() {
-    openCalendar()
-    setHasOffset(false)
+  function onCalendarStateChange(state: DateCalendarState) {
+    dispatch(updateSearchRoute(props.routeIndex, {
+      departureDate: state.dates.first,
+      returnDate: state.dates.second
+    }))
   }
 
-  function onArrivalDateClick() {
-    openCalendar()
-    setHasOffset(false)
-    dispatch(updateSearchCalendarMode("double"))
+  function texualizeDate(date?: Date | null) {
+    if (date == null) return ""
+
+    const day = date.getDate()
+    const month = date.toLocaleDateString("ru", { month: "long" })
+    const weekday = date.toLocaleDateString("ru", { weekday: "short" })
+
+    return `${day} ${capitalize(month)}, ${capitalize(weekday)}`
   }
 
-  useClickAway(calendarRef, () => dispatch(updateSearchCalendarIsOpen(false)))
+  useClickAway(calendarRef, () => setIsCalendarOpen(false))
 
   return (
     <>
-      <label className="form__group form__group--date-dep">
+      {/* Departure Date */}
+      <label className="search-form__group search-form__group--date-dep">
         <input
-          className="form__input form__input--departure-date"
+          className="search-form__input"
           autoComplete="off"
           placeholder="_"
           readOnly
-          value={texualizeDate(searchCalendar.dates.first)}
+          value={texualizeDate(searchRoute.departureDate)}
 
-          onFocus={onDepartureDateClick}
-          onKeyDown={onDateKeyDown}
+          onFocus={onFocus}
+          onKeyDown={onKeyDown}
         />
-        <div className="form__label">{"туда"}</div>
-        <DropDownCalendar hasOffset={hasOffset} parentRef={calendarRef} />
+        <div className="search-form__placeholder">{"когда"}</div>
       </label>
-      {search.routes.length < 2 && (
-        <label className="form__group form__group--date-arr">
-          <input
-            className="form__input form__input--arrival-date"
-            autoComplete="off"
-            placeholder="_"
-            readOnly
-            value={texualizeDate(searchCalendar.dates.second)}
-
-            onFocus={onArrivalDateClick}
-            onKeyDown={onDateKeyDown}
-          />
-          <div className="form__label">{"обратно"}</div>
-        </label>
-      )}
-    </>
-  )
-}
-
-interface SearchFormRouteProps extends SearchRoute {
-  index: number
-}
-
-function SearchFormRoute(props: SearchFormRouteProps) {
-  const dispatch = useDispatch()
-
-  const [departurePointOpen, setDeparturePointOpen] = useState(false)
-  const [arrivalPointOpen, setArrivalPointOpen] = useState(false)
-
-  function updateRouteData<K extends keyof SearchRoute = keyof SearchRoute>(key: K, value: SearchRoute[K]) {
-    dispatch(updateSearchRoute(props.index, { [key]: value }))
-  }
-
-  function onSelectDeparturePoint(element: DropDownElementProps) {
-    updateRouteData("departurePoint", element.title)
-  }
-
-  function onSelectArrivalPoint(element: DropDownElementProps) {
-    updateRouteData("arrivalPoint", element.title)
-  }
-
-  function onChangeDeparturePoint(event: FormEvent<HTMLInputElement>) {
-    setDeparturePointOpen(true)
-    updateRouteData("departurePoint", event.currentTarget.value)
-  }
-
-  function onChangeArrivalPoint(event: FormEvent<HTMLInputElement>) {
-    setArrivalPointOpen(true)
-    updateRouteData("arrivalPoint", event.currentTarget.value)
-  }
-
-
-  const list = [{ tag: "WOW", title: "Boobs", iconName: "departures" }, { tag: "MEOW", title: "Cat", iconName: "destinations" }]
-
-  return (
-    <>
-      <label className="form__group form__group--departure">
+      {/* Return Date */}
+      <label className="search-form__group search-form__group--date-arr">
         <input
-          className="form__input"
+          className="search-form__input search-form__input--arrival-date"
           autoComplete="off"
           placeholder="_"
+          readOnly
+          value={texualizeDate(searchRoute.returnDate)}
 
-          value={props.departurePoint}
-          onChange={onChangeDeparturePoint}
+          onFocus={onReturnDateFocus}
+          onKeyDown={onKeyDown}
         />
-        <div className="form__label">{"откуда"}</div>
-        <SearchFormRoutesSwitchButton />
-        <DropDown list={list} isOpen={departurePointOpen} setIsOpen={setDeparturePointOpen} onSelect={onSelectDeparturePoint} />
+        <div className="search-form__placeholder">{"обратно"}</div>
       </label>
-      <label className="form__group form__group--arrival">
-        <input
-          className="form__input"
-          autoComplete="off"
-          placeholder="_"
 
-          value={props.arrivalPoint}
-          onChange={onChangeArrivalPoint}
-        />
-        <div className="form__label">{"куда"}</div>
-        <DropDown list={list} isOpen={arrivalPointOpen} setIsOpen={setArrivalPointOpen} onSelect={onSelectArrivalPoint} />
-      </label>
-      <SearchFormDates />
-    </>
-  )
-}
+      <DropDownCalendar
+        hasGrouping={search.hasReturnDate}
+        hasOffset={hasCalendarOffset}
+        parentRef={calendarRef}
 
+        isHidden={!isCalendarOpen}
+        setIsHidden={setIsCalendarOpen}
 
-function SearchFormPassengers() {
-  const localization: any = {
-    passengers: {
-      plural: ["пассажир", "пассажира", "пассажиров"]
-    },
-    travelClasses: {
-      economy: "эконом",
-      business: "бизнес",
-    }
-  }
-  const ll = localization
-
-  const search = useSelector(state => state.search)
-  const passengersCount = Object.values(search.passengers).reduce((result, next) => result + next, 0)
-  const travelClass = ll.travelClasses[search.travelClass]
-
-  const ref = useRef<HTMLDivElement | null>(null)
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <label className="form__group form__group--passengers">
-      <input
-        className="form__input form__input--passenger"
-        value={`${passengersCount} ${pluralize(passengersCount, ll.passengers.plural)}, ${travelClass}`}
-        readOnly
-        onFocus={() => setIsOpen(true)}
-        onBlur={() => setIsOpen(false)}
+        onChange={onCalendarStateChange}
       />
-      <div className="form__label">пассажиры и класс</div>
-      <DropDownPassengers hidden={!isOpen} parentRef={ref} />
-    </label>
+    </>
   )
 }
 

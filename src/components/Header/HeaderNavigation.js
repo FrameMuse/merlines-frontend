@@ -112,6 +112,12 @@ function HeaderNavigation() {
               />
             )}
             <HeaderLink
+              href={routes.blog}
+              svgClass=""
+              svgName="edit"
+              title="Блог"
+            />
+            <HeaderLink
               href={() => calendarRoute(path)}
               svgClass=""
               svgName="calendar"

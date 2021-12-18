@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
-import Svg from "../../../../common/Svg"
+import Icon from "../../../../common/Icon"
 
 const SearchResultTicketHeader = ({ carriers }) => {
   const [isNoticeActive, setIsNoticeActive] = useState(false)
@@ -19,8 +19,7 @@ const SearchResultTicketHeader = ({ carriers }) => {
         carriers.map((carrier, index) => (
           <span
             key={index}
-            className={`ticket__logo${carrierLogoOne ? "" : " ticket__logo--rounded"
-            }`}
+            className={`ticket__logo${carrierLogoOne ? "" : " ticket__logo--rounded"}`}
           >
             <img
               src={`https://static.merlines.ru/img/air-logos/${carrierLogoSize}/${carrier.id}.png`}
@@ -33,16 +32,15 @@ const SearchResultTicketHeader = ({ carriers }) => {
         ))}
       <div className="ticket__nav">
         <Link
-          className={`ticket__item ${isNoticeActive ? "ticket__item--active" : ""
-          }`}
+          className={`ticket__item ${isNoticeActive ? "ticket__item--active" : ""}`}
           onClick={() => setIsNoticeActive(!isNoticeActive)}
           to="#"
         >
-          <Svg
-            svgClass="ticket__notice-icon"
-            svgName="notice"
-            svgWidth="15"
-            svgHeight="15"
+          <Icon
+            className="ticket__notice-icon"
+            name="notice"
+            width="15"
+            height="15"
           />
           <div className="ticket__pop-up ticket__pop-up--multiline">
             {`
@@ -54,16 +52,15 @@ const SearchResultTicketHeader = ({ carriers }) => {
           </div>
         </Link>
         <Link
-          className={`ticket__item ${isFavouritesActive ? "ticket__item--active" : ""
-          }`}
+          className={`ticket__item ${isFavouritesActive ? "ticket__item--active" : ""}`}
           onClick={() => setIsFavouritesActive(!isFavouritesActive)}
           to="#"
         >
-          <Svg
-            svgClass="ticket__star-icon"
-            svgName="star"
-            svgWidth="15"
-            svgHeight="15"
+          <Icon
+            className="ticket__star-icon"
+            name="star"
+            width="15"
+            height="15"
           />
           <div className="ticket__pop-up">
             {`
@@ -80,11 +77,11 @@ const SearchResultTicketHeader = ({ carriers }) => {
           onClick={() => setIsShareActive(!isShareActive)}
           to="#"
         >
-          <Svg
-            svgClass="ticket__share-icon"
-            svgName="share"
-            svgWidth="15"
-            svgHeight="15"
+          <Icon
+            className="ticket__share-icon"
+            name="share"
+            width="15"
+            height="15"
           />
           <div className="ticket__pop-up">Поделиться</div>
         </Link>

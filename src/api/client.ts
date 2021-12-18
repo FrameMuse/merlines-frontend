@@ -21,8 +21,9 @@ function requestInterceptor() {
   return async (action: Action) => {
     return {
       ...action,
+      endpoint: process.env.REACT_APP_BASE_URL + action.endpoint + "/",
       headers: {
-        "content-type": "application/json",
+        // "content-type": "application/json",
         Authorization: !action.config?.skipAuth && localStorage.getItem("token") || ""
       }
     }
@@ -30,8 +31,10 @@ function requestInterceptor() {
 }
 function responseInterceptor() {
   return async (_action: BaseAction, response: QueryResponse) => {
+    if (response.payload?.error) {
+      toast.error(response.payload.error)
+    }
     if (process.env.NODE_ENV === "development") {
-      // if ( response.payload?.error)
       if (response.errorObject instanceof Error) {
         toast.error(response.errorObject.message)
       }

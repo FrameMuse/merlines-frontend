@@ -1,7 +1,7 @@
 import { Duration } from "luxon"
 import React from "react"
 
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function SearchResultTicketTransfer({
   transfers,
@@ -20,11 +20,11 @@ function SearchResultTicketTransfer({
   return (
     <div className="ticket__transfer">
       <span className="ticket__transfer-text">
-        <Svg
-          svgClass="ticket__transfer-icon"
-          svgName="transfer"
-          svgWidth="15"
-          svgHeight="15"
+        <Icon
+          className="ticket__transfer-icon"
+          name="transfer"
+          width="15"
+          height="15"
         />
         {`Пересадка в ${transfers} `}
       </span>

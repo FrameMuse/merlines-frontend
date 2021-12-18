@@ -1,10 +1,10 @@
-import { useDispatch,useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 import api from "../../api/api"
 import { accessPopupFieldsData } from "../../constants"
 import { setLoginToken } from "../../reducers/accessDataSlice"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import UpdAccessPopupField from "./UpdAccessPopupField"
 
 function UpdAccessPopupLogin({ userData, takeUserData, setPopupName }) {
@@ -43,11 +43,11 @@ function UpdAccessPopupLogin({ userData, takeUserData, setPopupName }) {
           <div className="checkbox checkbox--modal">
             <input className="checkbox-input" type="checkbox" id="check" />
             <label className="checkbox-label" htmlFor="check">
-              <Svg
-                svgClass="checkbox-icon"
-                svgName="checkbox"
-                svgWidth="13"
-                svgHeight="13"
+              <Icon
+                className="checkbox-icon"
+                name="checkbox"
+                width="13"
+                height="13"
               />
               Запомнить меня
             </label>
@@ -65,22 +65,22 @@ function UpdAccessPopupLogin({ userData, takeUserData, setPopupName }) {
       <ul className="modal__social">
         <li className="modal__item">
           <Link className="modal__link" to="#">
-            <Svg
-              svgClass="modal__link-icon"
-              svgName="instagram"
-              svgWidth="15"
-              svgHeight="15"
+            <Icon
+              className="modal__link-icon"
+              name="instagram"
+              width="15"
+              height="15"
             />
             Instagram
           </Link>
         </li>
         <li className="modal__item">
           <Link className="modal__link" to="#">
-            <Svg
-              svgClass="modal__link-icon"
-              svgName="facebook"
-              svgWidth="15"
-              svgHeight="15"
+            <Icon
+              className="modal__link-icon"
+              name="facebook"
+              width="15"
+              height="15"
             />
             Facebook
           </Link>

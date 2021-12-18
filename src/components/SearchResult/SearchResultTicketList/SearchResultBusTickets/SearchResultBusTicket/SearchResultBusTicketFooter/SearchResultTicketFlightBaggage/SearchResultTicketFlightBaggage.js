@@ -1,6 +1,6 @@
 import React from "react"
 
-import Svg from "../../../../../../common/Svg"
+import Icon from "../../../../../../common/Icon"
 
 const SearchResultTicketFlightBaggage = ({ flightBaggage, flightHandbags }) => {
   return (
@@ -8,11 +8,11 @@ const SearchResultTicketFlightBaggage = ({ flightBaggage, flightHandbags }) => {
       {flightBaggage || flightHandbags ? (
         <>
           <button className="ticket__btn ticket__btn--active" type="button">
-            <Svg
-              svgClass="ticket__btn-icon"
-              svgName="baggage"
-              svgWidth="20"
-              svgHeight="20"
+            <Icon
+              className="ticket__btn-icon"
+              name="baggage"
+              width="20"
+              height="20"
             />
             бесплатно
           </button>
@@ -24,11 +24,11 @@ const SearchResultTicketFlightBaggage = ({ flightBaggage, flightHandbags }) => {
             }
             type="button"
           >
-            <Svg
-              svgClass="ticket__btn-icon"
-              svgName="baggageLg"
-              svgWidth="40"
-              svgHeight="20"
+            <Icon
+              className="ticket__btn-icon"
+              name="baggageLg"
+              width="40"
+              height="20"
             />
             {flightBaggage
               ? flightBaggage === ""

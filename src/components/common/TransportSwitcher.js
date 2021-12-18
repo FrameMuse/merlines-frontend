@@ -11,7 +11,7 @@ import { selectRoutesData } from "../../reducers/routesDataSlice"
 import { selectSearchBusTicketResult } from "../../reducers/searchResultBusTicketsSlice"
 import { selectSearchResult } from "../../reducers/searchResultSlice"
 import routes from "../../routes"
-import Svg from "./Svg"
+import Icon from "./Icon"
 
 function TransportSwitcher({
   isCalendar,
@@ -85,25 +85,21 @@ function TransportSwitcher({
     <>
       {isCalendar ? (
         <nav
-          className={`transports ${
-            isCalendar ? "calendar" : "ticket-list"
-          }__transports`}
+          className={`transports ${isCalendar ? "calendar" : "ticket-list"}__transports`}
         >
           <Link
-            className={`transports-link transports-link--plane ${
-              priceCalendarLocation.air ? "transports-link--active" : ""
-            }`}
+            className={`transports-link transports-link--plane ${priceCalendarLocation.air ? "transports-link--active" : ""}`}
             to={
               location.search
                 ? routesData.priceCalendarSearchRoutes.air
                 : routes.priceCalendar.air
             }
           >
-            <Svg
-              svgClass="transports-link__icon"
-              svgName="plane"
-              svgWidth="25"
-              svgHeight="25"
+            <Icon
+              className="transports-link__icon"
+              name="plane"
+              width="25"
+              height="25"
             />
             <header className="transports-link__header">
               <span className="transports-link__title">
@@ -115,16 +111,14 @@ function TransportSwitcher({
             </header>
           </Link>
           <Link
-            className={`transports-link ${
-              priceCalendarLocation.train ? "transports-link--active" : ""
-            }`}
+            className={`transports-link ${priceCalendarLocation.train ? "transports-link--active" : ""}`}
             to={routes.priceCalendar.train}
           >
-            <Svg
-              svgClass="transports-link__icon"
-              svgName="train"
-              svgWidth="25"
-              svgHeight="25"
+            <Icon
+              className="transports-link__icon"
+              name="train"
+              width="25"
+              height="25"
             />
             <header className="transports-link__header">
               <span className="transports-link__title">
@@ -136,20 +130,18 @@ function TransportSwitcher({
             </header>
           </Link>
           <Link
-            className={`transports-link ${
-              priceCalendarLocation.bus ? "transports-link--active" : ""
-            }`}
+            className={`transports-link ${priceCalendarLocation.bus ? "transports-link--active" : ""}`}
             to={
               location.search
                 ? routesData.priceCalendarSearchRoutes.bus
                 : routes.priceCalendar.bus
             }
           >
-            <Svg
-              svgClass="transports-link__icon"
-              svgName="bus"
-              svgWidth="25"
-              svgHeight="25"
+            <Icon
+              className="transports-link__icon"
+              name="bus"
+              width="25"
+              height="25"
             />
             <header className="transports-link__header">
               <span className="transports-link__title">
@@ -167,15 +159,13 @@ function TransportSwitcher({
             name={"air"}
             style={{ border: "none" }}
             onClick={toSwitchTransport}
-            className={`transports-link transports-link--plane ${
-              searchTransportIs === "air" ? "transports-link--active" : ""
-            }`}
+            className={`transports-link transports-link--plane ${searchTransportIs === "air" ? "transports-link--active" : ""}`}
           >
-            <Svg
-              svgClass="transports-link__icon"
-              svgName="plane"
-              svgWidth="25"
-              svgHeight="25"
+            <Icon
+              className="transports-link__icon"
+              name="plane"
+              width="25"
+              height="25"
             />
             <header className="transports-link__header">
               <span className="transports-link__title">
@@ -190,16 +180,14 @@ function TransportSwitcher({
             name={"train"}
             style={{ border: "none" }}
             onClick={toSwitchTransport}
-            className={`transports-link ${
-              searchTransportIs === "train" ? "transports-link--active" : ""
-            }`}
+            className={`transports-link ${searchTransportIs === "train" ? "transports-link--active" : ""}`}
             to="#"
           >
-            <Svg
-              svgClass="transports-link__icon"
-              svgName="train"
-              svgWidth="25"
-              svgHeight="25"
+            <Icon
+              className="transports-link__icon"
+              name="train"
+              width="25"
+              height="25"
             />
             <header className="transports-link__header">
               <span className="transports-link__title">
@@ -214,15 +202,13 @@ function TransportSwitcher({
             name={"bus"}
             style={{ border: "none" }}
             onClick={toSwitchTransport}
-            className={`transports-link ${
-              searchTransportIs === "bus" ? "transports-link--active" : ""
-            }`}
+            className={`transports-link ${searchTransportIs === "bus" ? "transports-link--active" : ""}`}
           >
-            <Svg
-              svgClass="transports-link__icon"
-              svgName="bus"
-              svgWidth="25"
-              svgHeight="25"
+            <Icon
+              className="transports-link__icon"
+              name="bus"
+              width="25"
+              height="25"
             />
             <header className="transports-link__header">
               <span className="transports-link__title">

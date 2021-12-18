@@ -2,25 +2,42 @@
 @import "../../styles/mixin";
 
 .search {
+  position: absolute;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-white);
-  min-width: 50px;
-  min-height: 50px;
-  background-color: var(--color-blue);
-  border-radius: 4px;
+  width: 100%;
+
+  &--hidden {
+    pointer-events: none;
+    .search__input {
+      opacity: 0;
+      width: 0%;
+    }
+  }
+}
+
+.search__input {
+  width: 94%;
+
+  padding: 0.75em 1.25em;
+  background: #f3f3f3;
+  border: unset;
+  border-radius: 0.35em;
+
+  font-size: 1em;
+  font-weight: 600;
+
+  transition: 350ms ease width, 350ms ease opacity;
+}
+
+.search__button {
+  padding: 1.25em;
+  background: var(--color-blue);
+  border: unset;
+  border-radius: 0.35em;
+
+  color: white;
+  margin-left: auto;
+
+  pointer-events: all;
   cursor: pointer;
-  transition: 0.2s;
-  z-index: 2;
-
-  &:hover,
-  &:focus {
-    background-color: var(--color-hover-blue);
-  }
-
-  @media #{$media-md} {
-    min-width: 60px;
-    min-height: 60px;
-  }
 }

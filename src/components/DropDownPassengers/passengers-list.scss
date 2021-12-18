@@ -19,13 +19,7 @@
     @include rectangle;
   }
 
-  &--hidden {
-    top: 5em;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  transition: 250ms ease top, 200ms ease opacity;
+  @include FadeOutDownOnFocus(".search-form__group", 100%);
 }
 
 .passengers-list__item {

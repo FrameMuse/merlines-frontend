@@ -22,7 +22,3 @@ export function TextulizedPassengers() {
     <input className="form__input form__input--passenger" value={text} readOnly />
   )
 }
-
-export function texualizeDate(date?: Date | null) {
-  return date?.toLocaleDateString("ru", { day: "numeric", weekday: "short", month: "long" }) || ""
-}

@@ -4,7 +4,7 @@ const mockDataPromoCards = () => {
     {
       title: "Лучшие цены",
       // isActive: isActiveCard.save,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      text: "Помогаем найти самые гибкие маршруты и выгодные цены для клиентов",
       img: "images/advanteges/save-money-bw.png",
       modifier: "save",
       ksClass: "number-slide1"
@@ -12,7 +12,7 @@ const mockDataPromoCards = () => {
     {
       title: "Поиск по всему миру",
       // isActive: isActiveCard.seo,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      text: "Постоянно отслеживаем акции, предложения перевозчиков и агентств",
       img: "images/advanteges/seo-bw.png",
       modifier: "seo",
       ksClass: "number-slide2"
@@ -20,7 +20,7 @@ const mockDataPromoCards = () => {
     {
       title: "Проверенные поставщики",
       // isActive: isActiveCard.business,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+      text: "Сотрудничаем с перевозчиками и агентствами, зарекомендовавшими себя временем",
       img: "images/advanteges/business-meeting-bw.png",
       modifier: "business",
       ksClass: "number-slide3"

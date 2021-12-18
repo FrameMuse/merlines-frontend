@@ -1,4 +1,6 @@
-import routes from "../../../routes"
+import { atom, useSetRecoilState } from "recoil"
+import routes from "routes"
+
 import BlogSearch from "../BlogSearch"
 import BlogNavigationItem from "./BlogNavigationItem"
 

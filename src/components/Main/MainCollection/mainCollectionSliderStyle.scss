@@ -6,7 +6,8 @@
   color: black;
 }
 
-.drop-down__item--active, /* TODO: вряд ли нужно, перепроверить */
+.drop-down__item--active,
+/* TODO: вряд ли нужно, перепроверить */
 .drop-down__item-box--active,
 .drop-down__inner-item--active {
   background: #235ef5;
@@ -52,13 +53,10 @@
 /*************** section__container ********************/
 /*******************************************************/
 
-.article-card {
-  max-width: 350px;
-}
-
 .article-card--indexLg {
   width: 210px;
 }
+
 article-card-index {
   width: 210px;
 }
@@ -74,6 +72,7 @@ article-card-index {
 .article-card .article-card__img {
   width: inherit;
 }
+
 /* .article-card-index .article-card__img {
   width: 290px;
 } */
@@ -181,6 +180,7 @@ article-card-index {
 .section__container .slick-slide {
   margin-right: 30px;
 }
+
 .section__container .slick-slide.slick-active {
   width: fit-content;
 }
@@ -195,6 +195,7 @@ article-card-index {
   .article-card--indexLg {
     width: 350px;
   }
+
   article-card-index {
     width: 255px;
   }
@@ -204,10 +205,12 @@ article-card-index {
     margin-left: auto;
     margin-right: auto;
   }
+
   .section__container .arrow--right,
   .section__container .arrow--left {
     display: block;
   }
+
   .section__container .slick-list {
     width: 920px;
     overflow: hidden;
@@ -266,6 +269,7 @@ article-card-index {
     padding-left: 39px;
     padding-right: 39px;
   }
+
   .advantages__container .slick-track {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -275,6 +279,7 @@ article-card-index {
     max-width: 100vw;
     margin-left: 0;
   }
+
   .advantages__container .slick-slide {
     width: 214px;
   }
@@ -286,6 +291,7 @@ article-card-index {
     margin-left: auto;
     margin-right: auto;
   }
+
   .advantages__list {
     width: 920px;
     margin-left: auto;
@@ -295,11 +301,13 @@ article-card-index {
     z-index: 2;
     overflow: visible;
   }
+
   .advantages__list {
     /* width: 1000px; */
     padding-left: 0;
     margin-left: 0;
   }
+
   .advantages__container .slick-track {
     grid-template-columns: 281px 310px 290px;
     /* grid-template-columns: auto auto auto; */
@@ -333,9 +341,11 @@ article-card-index {
     padding-left: 15px;
     padding-right: 15px;
   }
+
   .advantages__title {
     width: inherit;
   }
+
   .advantages__container .slick-track {
     display: flex;
     /* grid-template-columns: auto; */
@@ -346,10 +356,12 @@ article-card-index {
     margin-left: 0;
     margin-right: 0;
   }
+
   .advantages__slider-item {
     text-align: center;
     display: inherit;
   }
+
   .advantages__slider-control {
     /* position: absolute; */
     width: inherit;
@@ -368,6 +380,7 @@ article-card-index {
   .arrow--left {
     display: block;
   }
+
   .arrow--right {
     display: none;
   }

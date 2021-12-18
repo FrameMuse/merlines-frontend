@@ -10,7 +10,7 @@ import {
 } from "../../reducers/accessDataSlice"
 import { setHistoryRoute } from "../../reducers/routesDataSlice"
 import routes from "../../routes"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import Login from "../Login/Login"
 import Signup from "../Signup/Signup"
 import UpdAccessPopupConfirm from "./UpdAccessPopupConfirm"
@@ -43,11 +43,11 @@ function UpdAccessPopup({ login, active }) {
     <section className={`modal ${active ? "modal--opened" : ""}`}>
       <button className="modal__close" onClick={closeAccessPopup}>
         <span className="modal__close-text">закрыть</span>
-        <Svg
-          svgClass="modal__close-icon"
-          svgName="close"
-          svgWidth="15"
-          svgHeight="15"
+        <Icon
+          className="modal__close-icon"
+          name="close"
+          width="15"
+          height="15"
         />
       </button>
       <div className="modal__container">
@@ -55,18 +55,14 @@ function UpdAccessPopup({ login, active }) {
           <div className="subnav subnav--modal modal__subnav">
             <Link
               onClick={takePopupName}
-              className={`subnav-link ${
-                popupName === "Вход" ? "subnav-link--active" : ""
-              }`}
+              className={`subnav-link ${popupName === "Вход" ? "subnav-link--active" : ""}`}
               to={`${routes.login}?next=${query.get("next")}`}
             >
               Вход
             </Link>
             <Link
               onClick={takePopupName}
-              className={`subnav-link ${
-                popupName === "Регистрация" ? "subnav-link--active" : ""
-              }`}
+              className={`subnav-link ${popupName === "Регистрация" ? "subnav-link--active" : ""}`}
               to={`${routes.signup}?next=${query.get("next")}`}
             >
               Регистрация

@@ -17,6 +17,8 @@
     "react-dom": "^17.0.1",
     "react-fetching-library": "^1.7.6",
     "react-helmet": "^6.1.0",
+    "react-markdown": "^7.1.1",
+    "react-recoil": "^0.7.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
@@ -36,6 +38,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass src:src --watch  --poll",
+    "eslint": "eslint src",
     "fix-all": "eslint src --fix"
   },
   "eslintConfig": {
@@ -57,11 +60,14 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.3.2",
+    "@types/recoil": "0.0.9",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.3.0",
+    "recoil": "^0.5.2",
     "typescript": "^4.5.2"
   }
 }
