@@ -11,6 +11,6 @@ export const cacheProvider = createCache<QueryResponse<Action>>(
     return action.method === "GET"
   },
   response => {
-    return Date.now() - response.timestamp < cacheTime
+    return false
   }
 )
