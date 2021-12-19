@@ -1,7 +1,7 @@
 import "./AdminEditArticle.style.scss"
 
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
-import { classWithModifiers, isImageFile } from "utils"
+import { classWithModifiers, isImageFile, toBase64 } from "utils"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
@@ -33,9 +33,18 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const addTag = () => setTags([...tags, "Новый тэг"])
   const updateTag = (value: string, index: number) => (tags[index] = value, setTags([...tags]))
 
-  function fileToMarkdown(file: File) {
+  function addFiles(filesToAdd: File[]) {
+    // Filter by unique file name
+    const filteredFiles = filesToAdd.filter(fileToAdd => {
+      return !files.some(file => getFileId(file) === getFileId(fileToAdd))
+    })
+
+    setFiles([...files, ...filteredFiles])
+  }
+
+  function fileToMarkdown(file: File): string {
     if (isImageFile(file)) {
-      return `![${"Краткое описание картинки"}](${file.name} "Подпись под картинкой")`
+      return `![${"Краткое описание картинки"}](${getFileId(file)} "Подпись под картинкой")`
     }
 
     return `_${file.name}_`
@@ -75,8 +84,9 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
     }
     setContent(target.value)
 
-    const filesToAdd = pastedFiles.filter(pastedFile => !files.some(file => file.name === pastedFile.name))
-    setFiles([...files, ...filesToAdd])
+    console.log(pastedFiles)
+
+    addFiles(pastedFiles)
   }
 
   useEffect(() => {
@@ -84,7 +94,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   }, [tags, title, content, preview, files])
 
   return (
-    <form className={classWithModifiers("edit-article", props.hidden && "hidden")} onSubmit={event => event.preventDefault()}>
+    <div className={classWithModifiers("edit-article", props.hidden && "hidden")}>
       <div className="edit-article-tags">
         <h3 className="edit-article-tags__title">Тэги</h3>
         <AdminButton className="edit-article-tags__button" onClick={addTag}>Добавить</AdminButton>
@@ -126,6 +136,8 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
             Можно вставлять картинки через <kbd>ctrl</kbd> + <kbd>v</kbd> или перетащив в это поле
             <br />
             Лучше всего начить статью с картинки в качестве превью
+            <br />
+            "Подпись под картинкой" не обязательна
           </p>
         </div>
         <textarea className="edit-article-content__textarea" required onInput={updateContent} onPaste={onPaste} onDrop={onDrop}>{content}</textarea>
@@ -134,9 +146,21 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
           <img src="https://commonmark.org/help/images/favicon.png" width="20" alt="Markdown" />
         </a>
       </div>
-    </form>
+    </div>
   )
 }
 
+
+/**
+ * Generates unique file name
+ * @returns last 20 (or given) amount of chars from base64 code
+ */
+export function getFileId(file?: File | null) {
+  if (file == null) return "no file"
+
+  return `${file.lastModified}-${file.size}-${file.name}`
+
+  // return file.name
+}
 
 export default AdminArticleEditor

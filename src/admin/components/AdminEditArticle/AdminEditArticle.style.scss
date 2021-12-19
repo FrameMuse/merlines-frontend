@@ -27,8 +27,6 @@ h3 {
   }
 }
 
-.edit-article__topbar {}
-
 
 /* Tags */
 
@@ -150,6 +148,10 @@ h3 {
 
 .edit-article-content__title {
   font-style: italic;
+}
+
+.edit-article-content__desc {
+  line-height: 1.75;
 }
 
 .edit-article-content__textarea {

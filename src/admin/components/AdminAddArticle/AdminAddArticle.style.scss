@@ -22,3 +22,13 @@ h3 {
     border-color: var(--color-blue);
   }
 }
+
+.add-article__topbar {
+  position: sticky;
+  top: 0;
+
+  padding: 0.75em 0;
+  background: white;
+
+  z-index: 1;
+}
