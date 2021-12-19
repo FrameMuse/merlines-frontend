@@ -47,8 +47,12 @@ function AdminAddArticle() {
       return
     }
 
+
     for (const file of articleData.files) {
-      files[file.name] = await toBase64(file)
+      // Ignore all unmentioned images
+      if (articleData.content.search(getFileId(file)) >= 0) {
+        files[getFileId(file)] = await toBase64(file)
+      }
     }
 
     const { error, payload } = await ClientAPI.query(postAdminArticle({ ...articleData, files, preview }))
