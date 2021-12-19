@@ -65,9 +65,7 @@ function AdminAddArticle() {
           children={showPreview ? "Disable preview mode" : "Enable preview modei"}
         />
       </div>
-      {!showPreview && (
-        <AdminArticleEditor {...sampleArticleData} onChange={data => setArticleData({ ...articleData, ...data })} />
-      )}
+      <AdminArticleEditor {...sampleArticleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />
       {/* TODO: Replace with existed component */}
       {showPreview && (
         <section className="article-page">
