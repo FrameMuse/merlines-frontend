@@ -5,9 +5,9 @@ export interface ArticleType extends ArticleContentType {
   author: ArticleAuthorType
 }
 
-export interface ArticleContentType<Preview = string> {
+export interface ArticleContentType {
   title: string
-  preview: Preview
+  preview: string
   content: string
   tags: string[]
 }

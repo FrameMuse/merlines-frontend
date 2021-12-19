@@ -1,4 +1,4 @@
-import { ConnectedRouter,routerMiddleware } from "connected-react-router"
+import { ConnectedRouter, routerMiddleware } from "connected-react-router"
 import { createBrowserHistory } from "history"
 import React from "react"
 import { Provider } from "react-redux"
@@ -19,14 +19,6 @@ const Root = ({ children, initialState = {} }) => {
     initialState,
     composeWithDevTools(applyMiddleware(...middleware))
   )
-
-  if (!isEmpty(localStorage.getItem("token"))) {
-    store.dispatch(setToken(localStorage.getItem("token")))
-  }
-  if (!isEmpty(localStorage.getItem("user"))) {
-    const user = JSON.parse(localStorage.getItem("user"))
-    store.dispatch(setCurrentUser(user, ""))
-  }
 
   return (
     <Provider store={store}>
