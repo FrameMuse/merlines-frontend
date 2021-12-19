@@ -302,6 +302,23 @@ export const toBase64 = file => new Promise((resolve, reject) => {
   reader.onerror = reject
 })
 
+
+// /**
+//  *
+//  * @param {File} file
+//  */
+// export function fileToMarkdown(file) {
+
+// }
+
+
+/**
+ *
+ * @param {File} file
+ * @returns
+ */
+export const isImageFile = (file) => file.type.includes("image")
+
 export {
   getRandomInteger,
   getRandomElement,

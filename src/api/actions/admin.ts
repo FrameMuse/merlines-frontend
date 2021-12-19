@@ -1,7 +1,7 @@
+import { EditArticleType } from "admin/components/AdminEditArticle/AdminEditArticle"
 import { Action } from "api/client"
-import { ArticleContentType } from "interfaces/Blog"
 
-export const postAdminArticle = (data: ArticleContentType<ArrayBuffer | string>): Action<{ id: number }> => ({
+export const postAdminArticle = (data: EditArticleType<string, Record<string, ArrayBuffer>>): Action<{ id: number }> => ({
   method: "POST",
   endpoint: "/admin/articles",
   body: data
