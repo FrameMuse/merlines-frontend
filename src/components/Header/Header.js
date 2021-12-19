@@ -4,7 +4,7 @@ import "./nav.scss"
 import { Link, useLocation } from "react-router-dom"
 
 import routes from "../../routes"
-import Svg from "../common/Svg"
+import Icon from "../common/Icon"
 import HeaderNavigation from "./HeaderNavigation"
 
 function Header() {
@@ -27,11 +27,11 @@ function Header() {
     <header className="header">
       <div className="header__container">
         <Link className="logo" to={() => mainRoute(location.pathname)}>
-          <Svg
-            svgClass="logo__icon"
-            svgName="merlines"
-            svgWidth="98"
-            svgHeight="22"
+          <Icon
+            className="logo__icon"
+            name="merlines"
+            width="98"
+            height="22"
           />
         </Link>
         <HeaderNavigation />

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 import { separateThousand } from "../../../../../utils"
-import Svg from "../../../../common/Svg"
+import Icon from "../../../../common/Icon"
 import SearchResultTicketFlightBaggage from "./SearchResultTicketFlightBaggage"
 import SearchResultTicketMini from "./SearchResultTicketMini"
 import SearchResultTicketOffer from "./SearchResultTicketOffer"
@@ -41,11 +41,11 @@ const SearchResultTicketFooter = ({
           onClick={openMoreInfo}
         >
           Подробнее{" "}
-          <Svg
-            svgClass="btn__arrow-icon"
-            svgName="arrow-open"
-            svgWidth="8"
-            svgHeight="8"
+          <Icon
+            className="btn__arrow-icon"
+            name="arrow-open"
+            width="8"
+            height="8"
           />
         </button>
       </div>
@@ -56,7 +56,7 @@ const SearchResultTicketFooter = ({
             description="цена за 1 взрослого"
             ticketDealerName={sellersSorted[0].name}
             link={sellersSorted[0].link}
-            // ticketDealerLogo="images/partners/mego.png"
+          // ticketDealerLogo="images/partners/mego.png"
           />
           {sellersSorted.length - 1 > 0 && (
             <div className="ticket__more">
@@ -65,11 +65,11 @@ const SearchResultTicketFooter = ({
                 className="ticket__more-btn"
               >
                 {`еще ${sellersSorted.length - 1} предложений`}{" "}
-                <Svg
-                  svgClass="btn__arrow-icon"
-                  svgName="arrow-open"
-                  svgWidth="8"
-                  svgHeight="8"
+                <Icon
+                  className="btn__arrow-icon"
+                  name="arrow-open"
+                  width="8"
+                  height="8"
                 />
               </button>
               <div className="ticket__more-inner"></div>
@@ -83,7 +83,7 @@ const SearchResultTicketFooter = ({
                 description="цена за 1 взрослого"
                 ticketDealerName={seller.name}
                 link={seller.link}
-                // ticketDealerLogo="images/partners/mego.png"
+              // ticketDealerLogo="images/partners/mego.png"
               />
             ))}
           <div className="ticket__content-inner">
@@ -95,7 +95,7 @@ const SearchResultTicketFooter = ({
               voyages.map((item, index) => {
                 const isAirportChange = voyages?.[index + 1]
                   ? voyages?.[index + 1]?.departure_point_id !==
-                    item?.arrival_point_id
+                  item?.arrival_point_id
                   : false
                 return (
                   <>

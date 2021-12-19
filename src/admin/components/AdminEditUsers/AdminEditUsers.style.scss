@@ -1,0 +1,180 @@
+.edit-users {
+  display: grid;
+  gap: 1em;
+}
+
+.edit-user {
+  display: grid;
+
+  border: 2px solid var(--color-border-third);
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+
+.edit-user__header {
+  display: flex;
+  align-items: center;
+
+  padding: 0.75em;
+  padding-right: 1.25em;
+
+  cursor: pointer;
+  transition: 150ms ease background-color;
+
+  &:hover:not(&--active) {
+    background: var(--color-border-third);
+  }
+
+  &--active {
+    border-bottom: 2px solid var(--color-border-third);
+
+    .edit-user__avatar {
+      width: 5em;
+      height: 5em;
+
+      border-radius: 0.35em;
+    }
+
+    .edit-user__name {
+      font-size: 1.25em;
+    }
+  }
+}
+
+.edit-user__avatar {
+  width: 2.5em;
+  height: 2.5em;
+
+  margin-right: 1em;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  transition: 150ms ease width, 150ms ease height, 150ms ease border-radius;
+}
+
+.edit-user__name {
+  font-weight: 600;
+}
+
+.edit-user__id {
+  margin-left: 0.25em;
+
+  font-weight: 600;
+  color: #caced3;
+}
+
+.edit-user__toggle {
+  margin-left: auto;
+}
+
+.edit-user__icon {
+  width: 1em;
+  height: 1em;
+
+  transform: rotateX(180deg);
+  transition: 500ms ease transform;
+
+
+  &--up {
+    color: var(--color-blue);
+    transform: rotateX(0deg);
+  }
+}
+
+.edit-user__content {
+  display: none;
+  align-items: baseline;
+  gap: 1.5em;
+  padding: 0.75em;
+
+  &--open {
+    display: flex;
+  }
+}
+
+
+/* User Area */
+
+.edit-user-area {
+  display: grid;
+  gap: 1em;
+  // align-content: baseline;
+  // justify-items: baseline;
+
+  padding: 0.5em;
+  border: 2px solid #dadee3;
+  border-radius: 0.5em;
+
+  flex: 1;
+
+  &--danger {
+    border: 2px solid rgba($color: red, $alpha: 0.75);
+    animation: 2s linear DangerZoneSafety;
+
+    .edit-user-area__title {
+      color: rgba($color: red, $alpha: 0.75);
+    }
+
+
+    @keyframes DangerZoneSafety {
+      0% {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      75% {
+        opacity: 0;
+      }
+
+      99% {
+        opacity: 1;
+      }
+
+      100% {
+        pointer-events: initial;
+      }
+    }
+  }
+}
+
+.edit-user-area__title {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.edit-user-area__button {
+  align-self: flex-end;
+  justify-self: flex-start;
+}
+
+.edit-user-area__entries {
+  display: grid;
+  gap: 0.25em;
+}
+
+.edit-user-area__entry {
+  user-select: all;
+
+  &>:first-child {
+    user-select: none;
+  }
+}
+
+.edit-user-area__actions {
+  display: grid;
+  gap: 0.5em;
+}
+
+.edit-user-area__action {
+  display: flex;
+  gap: 1em;
+}
+
+.edit-user-area__input {
+  padding: 0.75em 1em;
+  border: 2px solid #dadee3;
+  border-radius: 0.35em;
+
+  font-weight: 600;
+}

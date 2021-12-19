@@ -7,6 +7,7 @@
   @media #{$media-md} {
     padding-top: 49px;
   }
+
   @media #{$media-lg} {
     padding-top: 43px;
   }
@@ -18,9 +19,11 @@
   @media #{$media-md} {
     max-width: 690px;
   }
+
   @media #{$media-lg} {
     max-width: 930px;
   }
+
   @media #{$media-xl} {
     max-width: 1110px;
   }
@@ -37,6 +40,7 @@
   @media #{$media-md} {
     margin-bottom: 42px;
   }
+
   @media #{$media-lg} {
     margin-bottom: 48px;
   }
@@ -182,11 +186,13 @@
       grid-template-columns: repeat(3, 210px);
     }
   }
+
   @media #{$media-lg} {
     .section__list {
       grid-template-columns: repeat(4, 210px);
     }
   }
+
   @media #{$media-xl} {
     .section__list {
       grid-template-columns: repeat(4, 255px);

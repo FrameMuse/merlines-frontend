@@ -1,40 +1,41 @@
 import axios from "axios"
-import { DateTime, Interval } from "luxon"
+import { DataURL, DataURLBase64 } from "interfaces/common"
+import { DateTime } from "luxon"
 
 import { monthNamesDate, weekDays } from "./constants"
 
 const getRandomInteger = (min = 0, max = 1) => {
-  let rand = min - 0.5 + Math.random() * (max - min + 1)
+  const rand = min - 0.5 + Math.random() * (max - min + 1)
   return Math.round(rand)
 }
 
-const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)]
+const getRandomElement = (arr: string | any[]) => arr[Math.floor(Math.random() * arr.length)]
 
-const getTwoRandomElements = (arr) => {
+const getTwoRandomElements = (arr: any[]) => {
   if (arr.length > 1) {
     const firstEl = getRandomElement(arr)
-    const secondEl = getRandomElement(arr.filter((item) => item !== firstEl))
+    const secondEl = getRandomElement(arr.filter((item: any) => item !== firstEl))
     return [firstEl, secondEl]
   }
   return arr
 }
 
-const getBetterPrice = (data, transport) => {
-  let numArr = []
+const getBetterPrice = (data: any[], transport: string) => {
+  const numArr: number[] = []
   if (transport === "bus") {
-    data.forEach((item) => item.price && numArr.push(item.price / 100))
+    data.forEach((item: { price: number }) => item.price && numArr.push(item.price / 100))
   } else {
-    data.forEach((item) => item.price && numArr.push(item.price))
+    data.forEach((item: { price: any }) => item.price && numArr.push(item.price))
   }
   return Math.min(...numArr)
 }
 
-const convertIdToRoute = (id) => `/blog/article/${id}`
+const convertIdToRoute = (id: any) => `/blog/article/${id}`
 
-const dateToMonthName = (date) =>
+const dateToMonthName = (date: string | number | Date) =>
   new Date(date).toLocaleString("ru", { month: "long" })
 
-const getDaysInterval = (date, calendar) => {
+const getDaysInterval = (date: any, calendar: string | undefined) => {
   const currentMonth = DateTime.isDateTime(date) ? date : DateTime.fromISO(date)
   const isSameMonth =
     DateTime.local(currentMonth.year, currentMonth.month + 1).endOf("week")
@@ -82,12 +83,12 @@ export function noop() {
   /* Do nothing */
 }
 
-export const capitalize = (str) => {
+export const capitalize = (str: string | any[]) => {
   if (!str) return str
   return str[0].toUpperCase() + str.slice(1)
 }
 
-const isPreviousDay = (date) => {
+const isPreviousDay = (date: { toISO: () => string | any[]; month: number; day: number; year: number }) => {
   if (date) {
     const isCurrentDay =
       date.toISO().slice(0, 10) === DateTime.now().toISO().slice(0, 10) ||
@@ -105,10 +106,10 @@ const formatDateToDayWeek = (date = DateTime.now()) => {
   )}`
 }
 
-const addNoPriceMonths = (arr) => {
-  let newArr = [...arr]
+const addNoPriceMonths = (arr: string | any[]) => {
+  const newArr = [...arr]
   for (let i = arr.length - 1; i < 11; i++) {
-    let lastElementDate = DateTime.fromISO(newArr[i].date)
+    const lastElementDate = DateTime.fromISO(newArr[i].date)
     newArr.push({
       date: lastElementDate.plus({ months: 1 }).toISO().slice(0, 7),
       price: null,
@@ -118,13 +119,13 @@ const addNoPriceMonths = (arr) => {
   return newArr
 }
 
-const isEmpty = (value) =>
+const isEmpty = (value: { trim?: any } | null | undefined) =>
   value === undefined ||
   value === null ||
   (typeof value === "object" && Object.keys(value).length === 0) ||
   (typeof value === "string" && value.trim().length === 0)
 
-const setAxiosAuthToken = (token) => {
+const setAxiosAuthToken = (token: string) => {
   if (typeof token !== "undefined" && token) {
     // Apply for every request
     axios.defaults.headers.common["Authorization"] = "Token " + token
@@ -134,7 +135,7 @@ const setAxiosAuthToken = (token) => {
   }
 }
 
-const simpleOnError = (error) => {
+const simpleOnError = (error: { response: { data: any }; message: any }) => {
   if (error.response) {
     console.error(JSON.stringify(error.response.data))
   } else if (error.message) {
@@ -150,7 +151,7 @@ const simpleOnError = (error) => {
  * @param {array} words — массив с вариантами слов в зависимости от числа
  * @return {string} — выбранное слово в зависимости от числа
  */
-const pluralize = (number, words) => {
+const pluralize = (number: number, words: string[]) => {
   number = Math.abs(number) % 100
   const number2 = number % 10
   if (number > 10 && number < 20) return words[2]
@@ -159,28 +160,28 @@ const pluralize = (number, words) => {
   return words[2]
 }
 
-const takeErrors = (errors) => {
-  let errorsArr = []
-  for (let key in errors) {
+const takeErrors = (errors: { [x: string]: any[] }) => {
+  const errorsArr: string[] = []
+  for (const key in errors) {
     if (key !== "username") {
       if (key === "non_field_errors") {
-        errors[key].map((value) => errorsArr.push(`${value}`))
+        errors[key].map((value: any) => errorsArr.push(`${value}`))
       } else {
-        errors[key].map((value) => errorsArr.push(`${key}: ${value}`))
+        errors[key].map((value: any) => errorsArr.push(`${key}: ${value}`))
       }
     }
   }
   return errorsArr
 }
 
-const fromISOtoString = (isoDate) => {
+const fromISOtoString = (isoDate: any) => {
   const date = DateTime.fromISO(isoDate)
   return `${date.day} ${monthNamesDate[date.month]} ${date.year}`
 }
 
-const toTranslateBaggageCode = (code) => {
-  const getCountPlaces = (valueStr) => valueStr.slice(0, 1).match(/\d+/)
-  const getCountWeight = (valueStr) => valueStr.slice(-2).match(/\d+/)
+const toTranslateBaggageCode = (code: string) => {
+  const getCountPlaces = (valueStr: string) => valueStr.slice(0, 1).match(/\d+/)
+  const getCountWeight = (valueStr: string) => valueStr.slice(-2).match(/\d+/)
   if (code) {
     return {
       place: getCountPlaces(code),
@@ -195,16 +196,7 @@ const toTranslateBaggageCode = (code) => {
   }
 }
 
-const daysFromInterval = (date) => {
-  const days = getDaysInterval(date, "calendar")
-  const daysInterval = Interval.fromDateTimes(
-    days.start_date.startOf("day"),
-    days.end_date.endOf("day")
-  )
-  return daysInterval.splitBy({ days: 1 }).map((day) => day.start.toISODate())
-}
-
-const translateTripClassFromCodeToName = (code) => {
+const translateTripClassFromCodeToName = (code: any) => {
   switch (code) {
     case "Y":
       return "Эконом"
@@ -215,21 +207,30 @@ const translateTripClassFromCodeToName = (code) => {
   }
 }
 
-const dateMountWeekday = (isoDate) => {
+const dateMountWeekday = (isoDate: any) => {
   const date = DateTime.fromISO(isoDate)
   return `${date.day} ${monthNamesDate[date.month]}, ${weekDays[date.weekday - 1]}`
 }
 
-const getSimpleTimeFromISO = (isoDate) => {
+const getSimpleTimeFromISO = (isoDate: any) => {
   const date = DateTime.fromISO(isoDate)
   return `${date.toLocaleString(DateTime.TIME_SIMPLE)}`
 }
 
-const separateThousand = (value) => {
+const separateThousand = (value: string | number | any[]) => {
   value = value.toString()
   const before = value.slice(-3, value.length)
   const after = value.slice(0, -3)
   return `${after} ${before}`
+}
+
+/**
+ * @param { Array<string | null | undefined> } classNames
+ * @returns `class1 class2`
+ */
+export function classMerge(...classNames: (string | undefined)[]) {
+  const space = " "
+  return classNames.filter(Boolean).join(space)
 }
 
 /**
@@ -239,7 +240,7 @@ const separateThousand = (value) => {
  * @param { string } className - origin class
  * @param { Array<string | number | false | null | undefined> | undefined } modifiers - class modifiers
  */
-export function classWithModifiers(className, ...modifiers) {
+export function classWithModifiers(className: string, ...modifiers: (string | boolean | undefined)[]) {
   if (!modifiers || !modifiers.length) {
     return className
   }
@@ -263,7 +264,7 @@ export function classWithModifiers(className, ...modifiers) {
  * @param { Record<string, unknown> } QueryObject
  * @returns string
  */
-export function createQuery(QueryObject) {
+export function createQuery(QueryObject: { [x: string]: any }) {
   if (!QueryObject) {
     throw new Error("QueryObject is empty")
   }
@@ -279,6 +280,33 @@ export function createQuery(QueryObject) {
 
   return QueryArray.filter((query) => query).join("&")
 }
+
+export function toBase64(file: File): Promise<DataURLBase64> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result as DataURLBase64)
+    reader.onerror = reject
+  })
+}
+
+
+// /**
+//  *
+//  * @param {File} file
+//  */
+// export function fileToMarkdown(file) {
+
+// }
+
+
+/**
+ *
+ * @param {File} file
+ * @returns
+ */
+export const isImageFile = (file: File) => file.type.includes("image")
 
 export {
   getRandomInteger,
@@ -299,7 +327,6 @@ export {
   toTranslateBaggageCode,
   translateTripClassFromCodeToName,
   dateMountWeekday,
-  daysFromInterval,
   formatDateToDayWeek,
   getSimpleTimeFromISO,
   separateThousand

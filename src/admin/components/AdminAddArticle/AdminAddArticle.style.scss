@@ -1,0 +1,34 @@
+h3 {
+  margin: unset;
+}
+
+.add-article {
+  display: grid;
+  gap: 1em;
+
+  padding: 1em;
+  border: 2px solid transparent;
+  border-radius: 0.35em;
+
+  transition: 150ms ease border-color;
+
+  &>*:not(:last-child) {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px dotted rgba($color: #000000, $alpha: 0.25);
+  }
+
+  &--preview {
+    border-color: var(--color-blue);
+  }
+}
+
+.add-article__topbar {
+  position: sticky;
+  top: 0;
+
+  padding: 0.75em 0;
+  background: white;
+
+  z-index: 1;
+}

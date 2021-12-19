@@ -1,10 +1,10 @@
 import "../ticket.scss"
 
-import React, { useEffect,useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 import { separateThousand, toTranslateBaggageCode } from "../../../utils"
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 import { formatDuration, shortenDate } from "../utils"
 import SearchResultTicketMini from "./SearchResultTicketMini"
 import SearchResultTicketOffer from "./SearchResultTicketOffer"
@@ -129,11 +129,11 @@ function SearchResultTicket(props) {
               onClick={() => setIsNoticeActive(!isNoticeActive)}
               to="#"
             >
-              <Svg
-                svgClass="ticket__notice-icon"
-                svgName="notice"
-                svgWidth="15"
-                svgHeight="15"
+              <Icon
+                className="ticket__notice-icon"
+                name="notice"
+                width="15"
+                height="15"
               />
               <div className="ticket__pop-up ticket__pop-up--multiline">
                 {`
@@ -150,11 +150,11 @@ function SearchResultTicket(props) {
               onClick={() => setIsFavouritesActive(!isFavouritesActive)}
               to="#"
             >
-              <Svg
-                svgClass="ticket__star-icon"
-                svgName="star"
-                svgWidth="15"
-                svgHeight="15"
+              <Icon
+                className="ticket__star-icon"
+                name="star"
+                width="15"
+                height="15"
               />
               <div className="ticket__pop-up">
                 {`
@@ -171,11 +171,11 @@ function SearchResultTicket(props) {
               onClick={() => setIsShareActive(!isShareActive)}
               to="#"
             >
-              <Svg
-                svgClass="ticket__share-icon"
-                svgName="share"
-                svgWidth="15"
-                svgHeight="15"
+              <Icon
+                className="ticket__share-icon"
+                name="share"
+                width="15"
+                height="15"
               />
               <div className="ticket__pop-up">Поделиться</div>
             </Link>
@@ -264,11 +264,11 @@ function SearchResultTicket(props) {
                   " места"
                 }
               >
-                <Svg
-                  svgClass="ticket__btn-icon"
-                  svgName="baggage"
-                  svgWidth="20"
-                  svgHeight="20"
+                <Icon
+                  className="ticket__btn-icon"
+                  name="baggage"
+                  width="20"
+                  height="20"
                 />
                 бесплатно
               </button>
@@ -281,11 +281,11 @@ function SearchResultTicket(props) {
                 }
                 type="button"
               >
-                <Svg
-                  svgClass="ticket__btn-icon"
-                  svgName="baggageLg"
-                  svgWidth="40"
-                  svgHeight="20"
+                <Icon
+                  className="ticket__btn-icon"
+                  name="baggageLg"
+                  width="40"
+                  height="20"
                 />
                 {voyages[0]?.flight_baggage
                   ? voyages[0]?.flight_baggage === ""
@@ -305,11 +305,11 @@ function SearchResultTicket(props) {
           onClick={openMoreInfo}
         >
           Подробнее{" "}
-          <Svg
-            svgClass="btn__arrow-icon"
-            svgName="arrow-open"
-            svgWidth="8"
-            svgHeight="8"
+          <Icon
+            className="btn__arrow-icon"
+            name="arrow-open"
+            width="8"
+            height="8"
           />
         </button>
       </div>
@@ -329,11 +329,11 @@ function SearchResultTicket(props) {
                 className="ticket__more-btn"
               >
                 {`еще ${sellersSorted.length - 1} предложений`}{" "}
-                <Svg
-                  svgClass="btn__arrow-icon"
-                  svgName="arrow-open"
-                  svgWidth="8"
-                  svgHeight="8"
+                <Icon
+                  className="btn__arrow-icon"
+                  name="arrow-open"
+                  width="8"
+                  height="8"
                 />
               </button>
               <div className="ticket__more-inner"></div>

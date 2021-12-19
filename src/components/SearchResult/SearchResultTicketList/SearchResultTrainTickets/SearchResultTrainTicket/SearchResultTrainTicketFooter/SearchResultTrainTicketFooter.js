@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 import { separateThousand } from "../../../../../../utils"
-import Svg from "../../../../../common/Svg"
+import Icon from "../../../../../common/Icon"
 import SearchResultTicketOffer from "../../../SearchResultTicketOffer"
 import SearchResultTicketTransfer from "../../../SearchResultTicketTransfer"
 import SearchResultTrainTicketMini from "./SearchResultTrainTicketMini"
@@ -31,11 +31,11 @@ const SearchResultTrainTicketFooter = ({
             type="button"
           >
             Плацкарт
-            <Svg
-              svgClass="btn__arrow-icon"
-              svgName="arrow-open"
-              svgWidth="8"
-              svgHeight="8"
+            <Icon
+              className="btn__arrow-icon"
+              name="arrow-open"
+              width="8"
+              height="8"
             />
           </button>
         </div>
@@ -48,11 +48,11 @@ const SearchResultTrainTicketFooter = ({
           onClick={openMoreInfo}
         >
           Подробнее{" "}
-          <Svg
-            svgClass="btn__arrow-icon"
-            svgName="arrow-open"
-            svgWidth="8"
-            svgHeight="8"
+          <Icon
+            className="btn__arrow-icon"
+            name="arrow-open"
+            width="8"
+            height="8"
           />
         </button>
       </div>
@@ -63,7 +63,7 @@ const SearchResultTrainTicketFooter = ({
             description="цена за 1 взрослого"
             ticketDealerName={sellersSorted[0].name}
             link={sellersSorted[0].link}
-            // ticketDealerLogo="images/partners/mego.png"
+          // ticketDealerLogo="images/partners/mego.png"
           />
           {sellersSorted.length - 1 > 0 && (
             <div className="ticket__more">
@@ -72,11 +72,11 @@ const SearchResultTrainTicketFooter = ({
                 className="ticket__more-btn"
               >
                 {`еще ${sellersSorted.length - 1} предложений`}{" "}
-                <Svg
-                  svgClass="btn__arrow-icon"
-                  svgName="arrow-open"
-                  svgWidth="8"
-                  svgHeight="8"
+                <Icon
+                  className="btn__arrow-icon"
+                  name="arrow-open"
+                  width="8"
+                  height="8"
                 />
               </button>
               <div className="ticket__more-inner"></div>
@@ -90,7 +90,7 @@ const SearchResultTrainTicketFooter = ({
                 description="цена за 1 взрослого"
                 ticketDealerName={seller.name}
                 link={seller.link}
-                // ticketDealerLogo="images/partners/mego.png"
+              // ticketDealerLogo="images/partners/mego.png"
               />
             ))}
           <div className="ticket__content-inner">

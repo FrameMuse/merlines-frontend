@@ -1,0 +1,49 @@
+.edit-tags {
+  display: grid;
+  gap: 1em;
+}
+
+.edit-tags__inner {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 0.5em;
+}
+
+.edit-tags__tag {
+  outline: none;
+
+  padding: 0.5em 1em;
+  border: 2px solid var(--color-border-third);
+  border-radius: 0.35em;
+
+  font-weight: 600;
+  text-transform: uppercase;
+
+  transition: 500ms ease-out border-color;
+
+  &:hover,
+  &:focus {
+    background: var(--color-simple-white);
+  }
+
+  &::before {
+    content: "#";
+  }
+
+  &--pending {
+    border-color: rgba($color: orange, $alpha: 0.35);
+  }
+
+  &--saved {
+    border-color: rgba($color: green, $alpha: 0.35);
+  }
+
+  &--error {
+    border-color: rgba($color: red, $alpha: 0.35);
+  }
+}
+
+.edit-tags__button {
+  justify-self: start;
+}

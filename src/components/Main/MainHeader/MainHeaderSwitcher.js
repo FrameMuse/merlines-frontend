@@ -5,7 +5,7 @@ import useFullRoute from "../../../hooks/useFullRoute"
 // import useQuery from '../../../hooks/useQuery';
 import { setAir, setBus, setTrain } from "../../../reducers/mainSearchSlice"
 import routes from "../../../routes"
-import Svg from "../../common/Svg"
+import Icon from "../../common/Icon"
 
 function MainHeaderSwitcher() {
   const location = useLocation()
@@ -23,47 +23,44 @@ function MainHeaderSwitcher() {
   return (
     <div className="main-form__nav">
       <Link
-        className={`main-form__item ${
-          mainLocation.air ? "main-form__item--active" : ""
+        className={`main-form__item ${mainLocation.air ? "main-form__item--active" : ""
         }`}
         to={routes.main}
         onClick={() => dispatch(setAir())}
       >
-        <Svg
-          svgClass="main-form__icon"
-          svgName="plane"
-          svgWidth="38"
-          svgHeight="40"
+        <Icon
+          className="main-form__icon"
+          name="plane"
+          width="38"
+          height="40"
         />
         <span className="main-form__item-text">самолёт</span>
       </Link>
       <Link
-        className={`main-form__item ${
-          mainLocation.train ? "main-form__item--active" : ""
+        className={`main-form__item ${mainLocation.train ? "main-form__item--active" : ""
         }`}
         to={routes.train}
         onClick={() => dispatch(setTrain())}
       >
-        <Svg
-          svgClass="main-form__icon"
-          svgName="train"
-          svgWidth="38"
-          svgHeight="40"
+        <Icon
+          className="main-form__icon"
+          name="train"
+          width="38"
+          height="40"
         />
         <span className="main-form__item-text">поезд</span>
       </Link>
       <Link
-        className={`main-form__item ${
-          mainLocation.bus ? "main-form__item--active" : ""
+        className={`main-form__item ${mainLocation.bus ? "main-form__item--active" : ""
         }`}
         to={routes.bus}
         onClick={() => dispatch(setBus())}
       >
-        <Svg
-          svgClass="main-form__icon"
-          svgName="bus"
-          svgWidth="38"
-          svgHeight="40"
+        <Icon
+          className="main-form__icon"
+          name="bus"
+          width="38"
+          height="40"
         />
         <span className="main-form__item-text">автобус</span>
       </Link>
