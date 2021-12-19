@@ -81,7 +81,7 @@ function AdminAddArticle() {
                 <h2 className="article-card__title">{articleData.title}</h2>
                 <time className="article-card__date" dateTime={date}>{date}</time>
               </div>
-              <ReactMarkdown components={{ img: props => <ArticlePicture src={props.src} caption={props.alt} /> }}>
+              <ReactMarkdown components={{ img: props => <ArticlePicture {...props} /> }}>
                 {articleData.files.filter(isImageFile).reduce((result, nextFile) => result.replace(nextFile.name, URL.createObjectURL(nextFile)), articleData.content)}
               </ReactMarkdown>
             </article>

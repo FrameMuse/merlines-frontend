@@ -35,38 +35,37 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
 
   function fileToMarkdown(file: File) {
     if (isImageFile(file)) {
-      return `![${"Подпись"}](${file.name})`
+      return `![${"Краткое описание картинки"}](${file.name} "Подпись под картинкой")`
     }
 
     return `_${file.name}_`
   }
 
   function onPaste(event: ClipboardEvent<HTMLTextAreaElement>) {
-    event.preventDefault()
-
     const target = event.currentTarget
-    const dataTransfer = event.clipboardData
+    const pastedFiles = [...event.clipboardData.files]
 
+    if (pastedFiles.length === 0) return
     if (target !== document.activeElement) return
 
-    addFilesToTextarea(target, dataTransfer)
+    event.preventDefault()
+
+    addFilesToTextarea(target, pastedFiles)
   }
 
   function onDrop(event: DragEvent<HTMLTextAreaElement>) {
-    event.preventDefault()
-
     const target = event.currentTarget
-    const dataTransfer = event.dataTransfer
+    const pastedFiles = [...event.dataTransfer.files]
 
+    if (pastedFiles.length === 0) return
     if (target !== document.activeElement) return
 
-    addFilesToTextarea(target, dataTransfer)
+    event.preventDefault()
+
+    addFilesToTextarea(target, pastedFiles)
   }
 
-  function addFilesToTextarea(target: HTMLTextAreaElement, dataTransfer: DataTransfer) {
-    const pastedFiles = [...dataTransfer.files]
-    if (pastedFiles.length === 0) return
-
+  function addFilesToTextarea(target: HTMLTextAreaElement, pastedFiles: File[]) {
     const { selectionStart, selectionEnd } = target
     const markdownFiles = pastedFiles.map(fileToMarkdown).join("\n")
 
