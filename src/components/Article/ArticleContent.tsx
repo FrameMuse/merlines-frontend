@@ -30,9 +30,8 @@ function ArticleContent(props: ArticleContentProps) {
             </ul>
             <h2 className="article-card__title">{props.title}</h2>
             <time className="article-card__date" dateTime={props.created_at}>{date}</time>
-            <ArticlePicture src={props.preview} />
           </div>
-          <ReactMarkdown components={{ img: props => <ArticlePicture src={props.src} title={props.alt} /> }}>{props.content}</ReactMarkdown>
+          <ReactMarkdown components={{ img: props => <ArticlePicture {...props} /> }}>{props.content}</ReactMarkdown>
           <div className="user user--article">
             <img className="user__avatar" src={props.author.avatar} alt="avatar" />
             <div className="user__inner">

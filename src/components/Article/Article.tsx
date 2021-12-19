@@ -8,7 +8,7 @@ import { FormEvent } from "react"
 import { useQuery } from "react-fetching-library"
 
 import ClientAPI from "../../api/client"
-import ArticlePage from "./ArticleContent"
+import ArticleContent from "./ArticleContent"
 
 
 interface ArticleProps {
@@ -26,7 +26,7 @@ function Article(props: ArticleProps) {
   return (
     <div className="wrap">
       {payload && (
-        <ArticlePage {...payload} />
+        <ArticleContent {...payload} />
       )}
       {/* <ArticleRecomendation /> */}
 
