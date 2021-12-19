@@ -83,10 +83,8 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
     props.onChange({ tags: tags.filter(Boolean), title, content, preview, files })
   }, [tags, title, content, preview, files])
 
-  if (props.hidden) return null
-
   return (
-    <form className="edit-article" onSubmit={event => event.preventDefault()}>
+    <form className={classWithModifiers("edit-article", props.hidden && "hidden")} onSubmit={event => event.preventDefault()}>
       <div className="edit-article-tags">
         <h3 className="edit-article-tags__title">Тэги</h3>
         <AdminButton className="edit-article-tags__button" onClick={addTag}>Добавить</AdminButton>

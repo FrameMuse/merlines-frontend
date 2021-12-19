@@ -21,6 +21,10 @@ h3 {
   &--preview {
     border-color: var(--color-blue);
   }
+
+  &--hidden {
+    display: none;
+  }
 }
 
 .edit-article__topbar {}
