@@ -1,7 +1,15 @@
 import { Action as BaseAction, createClient, QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
+import { createQuery } from "utils"
 
 import { cacheProvider } from "./cache"
+
+declare module "react-fetching-library" {
+  // https://marcin-piela.github.io/react-fetching-library/#/?id=config-object
+  export interface Action<R = any, Ext = any> {
+    params?: Record<string, unknown>
+  }
+}
 
 interface APIResponseError {
   error: {
@@ -20,9 +28,12 @@ export type Action<P = unknown> = BaseAction<P & APIResponseError, Partial<Actio
 
 function requestInterceptor() {
   return async (action: Action) => {
+    const endpoint = process.env.REACT_APP_BASE_URL + action.endpoint + "/"
+    const query = createQuery(action.params)
+
     return {
       ...action,
-      endpoint: process.env.REACT_APP_BASE_URL + action.endpoint + "/",
+      endpoint: endpoint + (query && "?" + query),
       headers: {
         // "content-type": "application/json",
         Authorization: !action.config?.skipAuth && localStorage.getItem("token") || ""
