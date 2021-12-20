@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from "react"
+import { getBlogArticles } from "api/actions/blog"
+import ArticleCard from "components/Article/ArticleCard"
+import { useEffect, useRef, useState } from "react"
+import { useQuery } from "react-fetching-library"
 import Slider from "react-slick"
 
-import MainCollectionCard from "../MainCollectionCard"
 import { MainCollectionNextArrow, MainCollectionPrevArrow } from "./Arrows"
 import MockSlides from "./MockSlides"
 
@@ -95,18 +97,20 @@ const MainCollectionSlider = () => {
     ]
   }
 
-  useEffect(() => getSlides())
+  useEffect(() => getSlides(), [])
 
   useEffect(() => {
     window.addEventListener("resize", () => {
       setNumberOfActiveSlides(getNumberOfActiveSlides())
     })
-  })
+  }, [])
 
   useEffect(() => {
     if (!blockSlickToGo) slider.current.slickGoTo(slideNumber ?? 0)
     setNumberOfActiveSlides(getNumberOfActiveSlides())
   }, [blockSlickToGo, slideNumber, numberOfActiveSlides])
+
+  const { payload } = useQuery(getBlogArticles(1, 8, "подборки"))
 
   return (
     <div>
@@ -125,16 +129,8 @@ const MainCollectionSlider = () => {
       />
 
       <Slider ref={slider} {...settings}>
-        {slides?.map((slide, index) => (
-          <MainCollectionCard
-            key={index}
-            cardMain={slide.main ?? false}
-            cardImg={slide.img}
-            cardTag={slide.tag}
-            cardTitle={slide.title}
-            cardDate={slide.date}
-            cardDateNum={slide.dateNum}
-          />
+        {payload?.results?.map(article => (
+          <ArticleCard {...article} key={article.id} />
         ))}
       </Slider>
       <MainCollectionNextArrow
