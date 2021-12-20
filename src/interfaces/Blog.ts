@@ -1,8 +1,14 @@
-export interface ArticleType extends ArticleContentType {
-  id: number
-  created_at: string
+export interface ArticleType extends ArticlePreviewType, ArticleContentType {
   comments: ArticleReplyType[]
   author: ArticleAuthorType
+}
+
+export interface ArticlePreviewType {
+  id: number
+  title: string
+  created_at: string
+  preview: string
+  tags: string[]
 }
 
 export interface ArticleContentType {

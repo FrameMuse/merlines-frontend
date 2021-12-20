@@ -264,10 +264,8 @@ export function classWithModifiers(className: string, ...modifiers: (string | bo
  * @param { Record<string, unknown> } QueryObject
  * @returns string
  */
-export function createQuery(QueryObject: { [x: string]: any }) {
-  if (!QueryObject) {
-    throw new Error("QueryObject is empty")
-  }
+export function createQuery(QueryObject?: Record<string, any> | null) {
+  if (QueryObject == null) return ""
 
   const QueryKeys = Object.keys(QueryObject)
   const QueryArray = QueryKeys.map(function (key) {

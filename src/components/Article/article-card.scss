@@ -2,13 +2,14 @@
 @import "../../styles/mixin";
 
 .article-card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  align-content: flex-start;
+  gap: 1em;
   cursor: pointer;
 
   &:hover {
     .article-card__img {
-      transform: scale(1.25);
+      transform: scale(1.1);
     }
 
     .article-card__title {
@@ -22,8 +23,6 @@
     .article-card__img {
       height: 210px;
       width: 210px;
-      margin-left: 0;
-      margin-right: 30px;
     }
 
     .article-card__date {
@@ -84,10 +83,6 @@
         margin-top: 40px;
         margin-bottom: 20px;
       }
-
-      .article-card__img {
-        margin-bottom: 15px;
-      }
     }
 
     &--slider {
@@ -137,7 +132,6 @@
       .article-card__img {
         width: 255px;
         height: 255px;
-        margin-bottom: 15px;
       }
     }
 
@@ -159,7 +153,6 @@
     &--slider {
       .article-card__img {
         height: 255px;
-        margin-bottom: 16px;
       }
 
       .article-card__title {
@@ -176,24 +169,12 @@
 .article-card__image {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 10px;
 
-  width: 290px;
-  height: 180px;
-
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: 4px;
 
   overflow: hidden;
-
-  @media #{$media-md} {
-    width: 210px;
-    height: 210px;
-  }
-
-  @media #{$media-xl} {
-    width: 255px;
-    height: 255px;
-  }
 }
 
 .article-card__img {
@@ -207,33 +188,20 @@
 }
 
 .article-card__tags-list {
-  @include ul;
-
   display: flex;
   flex-wrap: wrap;
+  gap: 0.5em;
 }
 
 .article-card__tags-item {
   color: var(--color-blue);
   font-weight: 500;
-  margin-right: 15px;
-  margin-bottom: 10px;
-
-  &:last-child {
-    margin-bottom: 0;
-    margin-right: 0;
-  }
-
-  @media #{$media-md} {
-    margin-bottom: 15px;
-  }
 }
 
 .article-card__tag {
   text-transform: uppercase;
   color: var(--color-blue);
   font-weight: 500;
-  margin-bottom: 10px;
 }
 
 .article-card__title {
@@ -241,7 +209,6 @@
   font-family: $title-font;
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 10px;
 
   transition: 200ms ease color;
 
@@ -250,7 +217,6 @@
   }
 
   @media #{$media-xl} {
-    margin-bottom: 8px;
     line-height: 1.25;
   }
 }

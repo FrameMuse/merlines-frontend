@@ -12,19 +12,14 @@ function ArticleCommentsForm() {
           </Link>
         </span>
         <div className="comments__form-info">
-          (<span className="comments__symbol-counter">0</span>/500 символов)
+          <span className="comments__symbol-counter">0</span>
+          /
+          <span>500 символов</span>
         </div>
       </header>
-      <textarea
-        className="comments__message"
-        placeholder="Введите текст комментария..."
-      ></textarea>
+      <textarea className="comments__message" placeholder="Введите текст комментария..." />
       <div className="comments__btn-container">
-        <input
-          className="btn comments__btn"
-          type="submit"
-          value="Оставить комментарий"
-        />
+        <input className="btn comments__btn" type="submit" value="Оставить комментарий" />
         <input className="comments__btn-reset" type="reset" value="Отменить" />
       </div>
     </form>

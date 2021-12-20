@@ -64,6 +64,12 @@ function App() {
           <UpdAccessPopupResetConfirm />
         </Route>
         <Switch>
+          <Route exact path={["/blog", "/blog/tag/:tag"]} render={props => (
+            <>
+              <Blog tag={props.match.params.tag} />
+              <Subscribe />
+            </>
+          )} />
           <Route path="/blog/article/:articleId" render={props => <Article articleId={props.match.params.articleId} />} />
           <Route exact path={routes.signup}>
             {query.get("next") === routes.priceCalendar.air && (
@@ -178,10 +184,6 @@ function App() {
             ) : (
               <UpdAccessPopup login={true} active={true} />
             )}
-            <Subscribe />
-          </Route>
-          <Route exact path={routes.blog}>
-            <Blog />
             <Subscribe />
           </Route>
           <Route path={routes.footer.aboutUs}>

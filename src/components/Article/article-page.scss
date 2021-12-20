@@ -3,20 +3,17 @@
 
 .article-page {
   padding-top: 25px;
-  max-width: 570px;
+  max-width: 49em;
   margin-left: auto;
   margin-right: auto;
 
   @media #{$media-md} {
     padding-top: 52px;
   }
-  @media #{$media-lg} {
-    max-width: 610px;
-  }
+
   @media #{$media-xl} {
     padding-left: 92px;
     padding-top: 55px;
-    max-width: 636px;
   }
 }
 

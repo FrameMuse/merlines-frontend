@@ -78,11 +78,11 @@ function AdminAddArticle() {
             <article className="article">
               <ArticleSocial />
               <div className="article-card article-card--header">
-                <ul className="article-card__tags-list">
+                <div className="article-card__tags-list">
                   {articleData.tags.map((tag, index) => (
                     <ArticleTag key={index} tag={tag} />
                   ))}
-                </ul>
+                </div>
                 <h2 className="article-card__title">{articleData.title}</h2>
                 <time className="article-card__date" dateTime={date}>{date}</time>
               </div>

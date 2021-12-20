@@ -16,18 +16,18 @@ interface ArticleContentProps extends ArticleType {
 }
 
 function ArticleContent(props: ArticleContentProps) {
-  const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "long" })
+  const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "medium" })
   return (
     <section className="article-page">
       <div className="article-page__container">
         <article className="article">
           <ArticleSocial />
           <div className="article-card article-card--header">
-            <ul className="article-card__tags-list">
+            <div className="article-card__tags-list">
               {props.tags.map((tag, index) => (
                 <ArticleTag key={index} tag={tag} />
               ))}
-            </ul>
+            </div>
             <h2 className="article-card__title">{props.title}</h2>
             <time className="article-card__date" dateTime={props.created_at}>{date}</time>
           </div>
