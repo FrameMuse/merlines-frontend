@@ -6,6 +6,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { ClientContextProvider } from "react-fetching-library"
 import { Route, Switch } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
 import { RecoilRoot } from "recoil"
 
 import App from "./App"
@@ -13,6 +14,7 @@ import Root from "./Root"
 
 ReactDOM.render(
   <React.StrictMode>
+    <ToastContainer />
     <Root>
       <RecoilRoot>
         <ClientContextProvider client={ClientAPI}>

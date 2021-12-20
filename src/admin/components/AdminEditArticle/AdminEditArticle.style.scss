@@ -21,9 +21,11 @@ h3 {
   &--preview {
     border-color: var(--color-blue);
   }
-}
 
-.edit-article__topbar {}
+  &--hidden {
+    display: none;
+  }
+}
 
 
 /* Tags */
@@ -146,6 +148,10 @@ h3 {
 
 .edit-article-content__title {
   font-style: italic;
+}
+
+.edit-article-content__desc {
+  line-height: 1.75;
 }
 
 .edit-article-content__textarea {

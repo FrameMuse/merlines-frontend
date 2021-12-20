@@ -1,7 +1,7 @@
 import "./AdminEditArticle.style.scss"
 
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
-import { classWithModifiers, isImageFile } from "utils"
+import { classWithModifiers, isImageFile, toBase64 } from "utils"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
@@ -33,40 +33,48 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const addTag = () => setTags([...tags, "Новый тэг"])
   const updateTag = (value: string, index: number) => (tags[index] = value, setTags([...tags]))
 
-  function fileToMarkdown(file: File) {
+  function addFiles(filesToAdd: File[]) {
+    // Filter by unique file name
+    const filteredFiles = filesToAdd.filter(fileToAdd => {
+      return !files.some(file => getFileId(file) === getFileId(fileToAdd))
+    })
+
+    setFiles([...files, ...filteredFiles])
+  }
+
+  function fileToMarkdown(file: File): string {
     if (isImageFile(file)) {
-      return `![${"Подпись"}](${file.name})`
+      return `![${"Краткое описание картинки"}](${getFileId(file)} "Подпись под картинкой")`
     }
 
     return `_${file.name}_`
   }
 
   function onPaste(event: ClipboardEvent<HTMLTextAreaElement>) {
-    event.preventDefault()
-
     const target = event.currentTarget
-    const dataTransfer = event.clipboardData
+    const pastedFiles = [...event.clipboardData.files]
 
+    if (pastedFiles.length === 0) return
     if (target !== document.activeElement) return
 
-    addFilesToTextarea(target, dataTransfer)
+    event.preventDefault()
+
+    addFilesToTextarea(target, pastedFiles)
   }
 
   function onDrop(event: DragEvent<HTMLTextAreaElement>) {
-    event.preventDefault()
-
     const target = event.currentTarget
-    const dataTransfer = event.dataTransfer
+    const pastedFiles = [...event.dataTransfer.files]
 
+    if (pastedFiles.length === 0) return
     if (target !== document.activeElement) return
 
-    addFilesToTextarea(target, dataTransfer)
+    event.preventDefault()
+
+    addFilesToTextarea(target, pastedFiles)
   }
 
-  function addFilesToTextarea(target: HTMLTextAreaElement, dataTransfer: DataTransfer) {
-    const pastedFiles = [...dataTransfer.files]
-    if (pastedFiles.length === 0) return
-
+  function addFilesToTextarea(target: HTMLTextAreaElement, pastedFiles: File[]) {
     const { selectionStart, selectionEnd } = target
     const markdownFiles = pastedFiles.map(fileToMarkdown).join("\n")
 
@@ -76,18 +84,15 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
     }
     setContent(target.value)
 
-    const filesToAdd = pastedFiles.filter(pastedFile => !files.some(file => file.name === pastedFile.name))
-    setFiles([...files, ...filesToAdd])
+    addFiles(pastedFiles)
   }
 
   useEffect(() => {
     props.onChange({ tags: tags.filter(Boolean), title, content, preview, files })
   }, [tags, title, content, preview, files])
 
-  if (props.hidden) return null
-
   return (
-    <form className="edit-article" onSubmit={event => event.preventDefault()}>
+    <div className={classWithModifiers("edit-article", props.hidden && "hidden")}>
       <div className="edit-article-tags">
         <h3 className="edit-article-tags__title">Тэги</h3>
         <AdminButton className="edit-article-tags__button" onClick={addTag}>Добавить</AdminButton>
@@ -129,6 +134,8 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
             Можно вставлять картинки через <kbd>ctrl</kbd> + <kbd>v</kbd> или перетащив в это поле
             <br />
             Лучше всего начить статью с картинки в качестве превью
+            <br />
+            "Подпись под картинкой" не обязательна
           </p>
         </div>
         <textarea className="edit-article-content__textarea" required onInput={updateContent} onPaste={onPaste} onDrop={onDrop}>{content}</textarea>
@@ -137,9 +144,21 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
           <img src="https://commonmark.org/help/images/favicon.png" width="20" alt="Markdown" />
         </a>
       </div>
-    </form>
+    </div>
   )
 }
 
+
+/**
+ * Generates unique file name
+ * @returns last 20 (or given) amount of chars from base64 code
+ */
+export function getFileId(file?: File | null) {
+  if (file == null) return "no file"
+
+  return `${file.lastModified}-${file.size}-${file.name}`
+
+  // return file.name
+}
 
 export default AdminArticleEditor

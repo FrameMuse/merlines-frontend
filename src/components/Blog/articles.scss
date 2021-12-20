@@ -11,6 +11,10 @@
   @media #{$media-lg} {
     padding-top: 43px;
   }
+
+  .section__list {
+    padding: unset;
+  }
 }
 
 .articles__container {
@@ -172,7 +176,7 @@
   .section__list {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 3em 2em;
   }
 
   .section__item {
@@ -183,19 +187,19 @@
     width: auto;
 
     .section__list {
-      grid-template-columns: repeat(3, 210px);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media #{$media-lg} {
     .section__list {
-      grid-template-columns: repeat(4, 210px);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
   @media #{$media-xl} {
     .section__list {
-      grid-template-columns: repeat(4, 255px);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 }

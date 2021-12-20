@@ -14,6 +14,7 @@ function AdminView() {
       <header className="admin-header">
         <div className="topbar">
           <div className="topbar-menu">
+            <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" exact to="/">Вернуться</NavLink>
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" exact to="/admin/">Главная</NavLink>
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/blog">Блог</NavLink>
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/users">Пользователи</NavLink>

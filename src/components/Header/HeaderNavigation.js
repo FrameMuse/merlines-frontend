@@ -112,6 +112,12 @@ function HeaderNavigation() {
               />
             )}
             <HeaderLink
+              href={"/admin"}
+              svgClass=""
+              svgName="arrow"
+              title="Админка"
+            />
+            <HeaderLink
               href={routes.blog}
               svgClass=""
               svgName="edit"

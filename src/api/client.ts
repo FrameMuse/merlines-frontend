@@ -1,12 +1,21 @@
 import { Action as BaseAction, createClient, QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
+import { createQuery } from "utils"
 
 import { cacheProvider } from "./cache"
+
+declare module "react-fetching-library" {
+  // https://marcin-piela.github.io/react-fetching-library/#/?id=config-object
+  export interface Action<R = any, Ext = any> {
+    params?: Record<string, unknown>
+  }
+}
 
 interface APIResponseError {
   error: {
     type: "error" | "warning"
     code: string | number
+    detail: any // For development
   }
 }
 
@@ -19,9 +28,12 @@ export type Action<P = unknown> = BaseAction<P & APIResponseError, Partial<Actio
 
 function requestInterceptor() {
   return async (action: Action) => {
+    const endpoint = process.env.REACT_APP_BASE_URL + action.endpoint + "/"
+    const query = createQuery(action.params)
+
     return {
       ...action,
-      endpoint: process.env.REACT_APP_BASE_URL + action.endpoint + "/",
+      endpoint: endpoint + (query && "?" + query),
       headers: {
         // "content-type": "application/json",
         Authorization: !action.config?.skipAuth && localStorage.getItem("token") || ""
@@ -30,15 +42,29 @@ function requestInterceptor() {
   }
 }
 function responseInterceptor() {
-  return async (_action: BaseAction, response: QueryResponse) => {
+  return async (_action: Action, response: QueryResponse<APIResponseError>) => {
     if (response.payload?.error) {
       toast.error(response.payload.error)
     }
-    if (process.env.NODE_ENV === "development") {
-      if (response.errorObject instanceof Error) {
-        toast.error(response.errorObject.message)
+
+    try {
+      if (process.env.NODE_ENV === "development") {
+        if (response.errorObject instanceof Error) {
+          toast.error(response.errorObject.message)
+        }
+
+        toast.error(JSON.stringify(response.payload?.error.detail))
+
+        for (const field of Object.values(response.payload?.error.detail) as any) {
+          for (const fieldError of Object.values(field) as any) {
+            toast.error(fieldError.message)
+          }
+        }
       }
+    } catch (error) {
+      console.log(error)
     }
+
     return response
   }
 }
