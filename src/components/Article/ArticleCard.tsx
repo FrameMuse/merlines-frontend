@@ -7,7 +7,7 @@ function ArticleCard(props: ArticleCardProps) {
   const date = new Date(props.created_at).toLocaleDateString("ru", { dateStyle: "long" })
   return (
     // <li className="section__item">
-    <div className="article-card article-card--slider">
+    <div className="article-card">
       <div className="article-card__image">
         <img className="article-card__img" src={props.preview} alt={props.title} />
       </div>

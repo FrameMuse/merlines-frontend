@@ -130,7 +130,9 @@ const MainCollectionSlider = () => {
 
       <Slider ref={slider} {...settings}>
         {payload?.results?.map(article => (
-          <ArticleCard {...article} key={article.id} />
+          <div className="slick-slide-item">
+            <ArticleCard {...article} key={article.id} />
+          </div>
         ))}
       </Slider>
       <MainCollectionNextArrow
