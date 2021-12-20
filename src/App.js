@@ -49,7 +49,6 @@ function App() {
     <>
       {/* <ScrollToTop> */}
       <Header />
-      <ToastContainer />
       <main className="main">
         {searchData.isOpenRedirect && <TicketRedirect />}
         {tickets && isOpenFilter && (

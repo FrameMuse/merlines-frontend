@@ -84,8 +84,6 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
     }
     setContent(target.value)
 
-    console.log(pastedFiles)
-
     addFiles(pastedFiles)
   }
 

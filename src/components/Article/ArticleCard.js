@@ -5,13 +5,9 @@ function ArticleCard({ title, preview, tags, date, id }) {
   return (
     <li className="section__item">
       <div className="article-card article-card--slider">
-        <img
-          className="article-card__img"
-          src={preview}
-          alt={title}
-          width="290"
-          height="180"
-        />
+        <div className="article-card__image">
+          <img className="article-card__img" src={preview} alt={title} />
+        </div>
         <ul className="article-card__tags-list">
           {tags.map((tag, index) => (
             <Link key={index} className="article-card__tags-item" to={"/blog/tag/" + tag}>
