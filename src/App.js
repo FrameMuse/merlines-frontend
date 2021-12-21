@@ -72,29 +72,6 @@ function App() {
           )} />
           <Route path="/blog/article/:articleId" render={props => <Article articleId={props.match.params.articleId} />} />
           <Route exact path={routes.signup}>
-            {query.get("next") === routes.priceCalendar.air && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.train && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.bus && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.airDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.priceCalendar.trainDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.priceCalendar.busDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.main && <Main />}
-            {query.get("next") === routes.air && <Main />}
-            {query.get("next") === routes.train && <Main />}
-            {query.get("next") === routes.bus && <Main />}
-            {query.get("next") === routes.searchResult && <SearchResult />}
             <UpdAccessPopup active={true} />
           </Route>
           <Route exact path={routes.login}>
