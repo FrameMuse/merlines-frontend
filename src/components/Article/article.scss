@@ -13,6 +13,10 @@
   }
 }
 
+.article__content {
+  margin-top: 2.5em;
+}
+
 .article__subtitle {
   @include h3;
 

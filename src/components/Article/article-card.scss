@@ -70,13 +70,9 @@
     }
 
     &--header {
-      .article-card__tag {
-        margin-bottom: 15px;
-      }
 
       .article-card__title {
         font-size: 30px;
-        margin-bottom: 15px;
       }
 
       .article-card__figure {
@@ -205,6 +201,8 @@
 }
 
 .article-card__title {
+  margin: unset;
+
   color: var(--color-base);
   font-family: $title-font;
   font-size: 20px;
