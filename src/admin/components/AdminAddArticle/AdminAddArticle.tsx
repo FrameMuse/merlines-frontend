@@ -12,8 +12,8 @@ import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 import { classWithModifiers, isImageFile, toBase64 } from "utils"
 
+import AdminArticleEditor, { EditArticleType, getFileId } from "../AdminArticleEditor/AdminArticleEditor"
 import AdminButton from "../AdminButton/AdminButton"
-import AdminArticleEditor, { EditArticleType, getFileId } from "../AdminEditArticle/AdminEditArticle"
 
 const sampleArticleData: EditArticleType = {
   title: "5 чего-то Название",
@@ -61,6 +61,7 @@ function AdminAddArticle() {
   }
 
   async function addArticle() {
+    const tags = articleData.tags.filter(Boolean)
     const files: Record<string, DataURLBase64> = {}
     const preview = getFileId(articleData.preview)
 
@@ -73,7 +74,7 @@ function AdminAddArticle() {
       }
     }
 
-    const { error, payload } = await ClientAPI.query(postAdminArticle({ ...articleData, files, preview }))
+    const { error, payload } = await ClientAPI.query(postAdminArticle({ ...articleData, files, preview, tags }))
     if (error || !payload || payload.error) return
 
     history.push("/blog/article/" + payload.id)

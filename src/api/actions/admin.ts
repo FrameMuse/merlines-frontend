@@ -1,6 +1,6 @@
-import { EditArticleType } from "admin/components/AdminEditArticle/AdminEditArticle"
+import { EditArticleType } from "admin/components/AdminArticleEditor/AdminArticleEditor"
 import { Action } from "api/client"
-import { DataURL, DataURLBase64 } from "interfaces/common"
+import { DataURLBase64 } from "interfaces/common"
 
 export const postAdminArticle = (data: EditArticleType<string, Record<string, DataURLBase64>>): Action<{ id: number }> => ({
   method: "POST",

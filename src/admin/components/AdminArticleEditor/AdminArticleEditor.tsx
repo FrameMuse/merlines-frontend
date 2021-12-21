@@ -1,7 +1,7 @@
-import "./AdminEditArticle.style.scss"
+import "./AdminArticleEditor.style.scss"
 
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
-import { classWithModifiers, isImageFile, toBase64 } from "utils"
+import { classWithModifiers, isImageFile } from "utils"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
@@ -88,9 +88,11 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   }
 
   useEffect(() => {
-    props.onChange({ tags: tags.filter(Boolean), title, content, preview, files })
+    props.onChange({ tags, title, content, preview, files })
   }, [tags, title, content, preview, files])
 
+
+  const imageFiles = files.filter(isImageFile)
   return (
     <div className={classWithModifiers("edit-article", props.hidden && "hidden")}>
       <div className="edit-article-tags">
@@ -110,18 +112,18 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
         <h3 className="edit-article-preview__title">Картинки</h3>
         Выберите превью, оно будет отображать в поиске по статьям
         <div className="edit-article-preview__images">
-          {files.filter(isImageFile).length === 0 && (
+          {imageFiles.length === 0 && (
             <p>Вставленные картинки будет появлятся здесь</p>
           )}
-          {files.map((file, index) => (
-            <div className={classWithModifiers("edit-article-preview-image", file === preview && "chosen")}>
-              <img className="edit-article-preview-image__image" src={URL.createObjectURL(file)} alt="" key={index} />
-              <span className="edit-article-preview-image__copy" onClick={() => setPreview(file)}>
+          {imageFiles.map((imageFile, index) => (
+            <div className={classWithModifiers("edit-article-preview-image", imageFile === preview && "chosen")}>
+              <img className="edit-article-preview-image__image" src={URL.createObjectURL(imageFile)} alt="" key={index} />
+              <span className="edit-article-preview-image__copy" onClick={() => setPreview(imageFile)}>
                 <div className="edit-article-preview-image__text">
-                  {file === preview && "PREVIEW"}
-                  {file !== preview && "Choose as preview"}
+                  {imageFile === preview && "PREVIEW"}
+                  {imageFile !== preview && "Choose as preview"}
                 </div>
-                <div className="edit-article-preview-image__name">{file.name}</div>
+                <div className="edit-article-preview-image__name">{imageFile.name}</div>
               </span>
             </div>
           ))}
