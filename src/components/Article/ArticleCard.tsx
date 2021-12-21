@@ -10,6 +10,7 @@ function ArticleCard(props: ArticleCardProps) {
     <div className="article-card">
       <div className="article-card__image">
         <img className="article-card__img" src={props.preview} alt={props.title} />
+        <Link className="ghost" to={"/blog/article/" + props.id} />
       </div>
       <div className="article-card__tags-list">
         {props.tags.map(tag => (
