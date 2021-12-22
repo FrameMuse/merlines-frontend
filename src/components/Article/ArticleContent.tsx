@@ -1,8 +1,10 @@
 // SCSS
 import "./user.scss"
 
+import AdminButton from "admin/components/AdminButton/AdminButton"
 import { ArticleType } from "interfaces/Blog"
 import ReactMarkdown from "react-markdown"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 import ArticleComments from "./ArticleComments/ArticleComments"
@@ -16,9 +18,13 @@ interface ArticleContentProps extends ArticleType {
 }
 
 function ArticleContent(props: ArticleContentProps) {
+  const user = useSelector(state => state.user)
   const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "medium" })
   return (
     <section className="article-page">
+      {user.authed && ["admin", "editor", undefined].includes(user.role) && (
+        <EditArticleButton articleId={props.id} />
+      )}
       <div className="article-page__container">
         <article className="article">
           <ArticleSocial />
@@ -44,11 +50,20 @@ function ArticleContent(props: ArticleContentProps) {
             </div>
           </div>
         </article>
-        {!props.noComments && (
-          <ArticleComments list={props.comments} />
-        )}
+        <ArticleComments list={props.comments} />
       </div>
     </section>
+  )
+}
+
+function EditArticleButton(props: { articleId: number }) {
+  return (
+    <>
+      <Link to={"/admin/edit-article/" + props.articleId} className="admin-button admin-button--gray">Редактировать статью</Link>
+      <br />
+      <br />
+      <br />
+    </>
   )
 }
 
