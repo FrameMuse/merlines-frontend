@@ -1,10 +1,10 @@
-import AdminAddArticle from "admin/components/AdminAddArticle/AdminAddArticle"
+import AdminArticleEdit from "admin/components/AdminArticleEdit/AdminArticleEdit"
 import AdminViewLayout from "admin/layouts/AdminViewLayout"
 
 function AdminAddArticleView() {
   return (
     <AdminViewLayout title="Добавить статью">
-      <AdminAddArticle />
+      <AdminArticleEdit />
     </AdminViewLayout>
   )
 }

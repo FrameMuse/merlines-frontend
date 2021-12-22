@@ -94,45 +94,45 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
 
   const imageFiles = files.filter(isImageFile)
   return (
-    <div className={classWithModifiers("edit-article", props.hidden && "hidden")}>
-      <div className="edit-article-tags">
-        <h3 className="edit-article-tags__title">Тэги</h3>
-        <AdminButton className="edit-article-tags__button" onClick={addTag}>Добавить</AdminButton>
-        <div className="edit-article-tags__inner">
+    <div className={classWithModifiers("article-editor", props.hidden && "hidden")}>
+      <div className="article-editor-tags">
+        <h3 className="article-editor-tags__title">Тэги</h3>
+        <AdminButton className="article-editor-tags__button" onClick={addTag}>Добавить</AdminButton>
+        <div className="article-editor-tags__inner">
           {tags.map((tag, index) => tag.length > 0 && (
             <AdminEditableTag onInput={value => updateTag(value, index)} key={index}>{tag}</AdminEditableTag>
           ))}
         </div>
       </div>
-      <div className="edit-article-title">
-        <h3 className="edit-article-title__title">Заголовок</h3>
-        <input type="text" className="edit-article-title__input" required defaultValue={title} onInput={updateTitle} />
+      <div className="article-editor-title">
+        <h3 className="article-editor-title__title">Заголовок</h3>
+        <input type="text" className="article-editor-title__input" required defaultValue={title} onInput={updateTitle} />
       </div>
-      <div className="edit-article-preview">
-        <h3 className="edit-article-preview__title">Картинки</h3>
+      <div className="article-editor-preview">
+        <h3 className="article-editor-preview__title">Картинки</h3>
         Выберите превью, оно будет отображать в поиске по статьям
-        <div className="edit-article-preview__images">
+        <div className="article-editor-preview__images">
           {imageFiles.length === 0 && (
             <p>Вставленные картинки будет появлятся здесь</p>
           )}
           {imageFiles.map((imageFile, index) => (
-            <div className={classWithModifiers("edit-article-preview-image", imageFile === preview && "chosen")}>
-              <img className="edit-article-preview-image__image" src={URL.createObjectURL(imageFile)} alt="" key={index} />
-              <span className="edit-article-preview-image__copy" onClick={() => setPreview(imageFile)}>
-                <div className="edit-article-preview-image__text">
+            <div className={classWithModifiers("article-editor-preview-image", imageFile === preview && "chosen")}>
+              <img className="article-editor-preview-image__image" src={URL.createObjectURL(imageFile)} alt="" key={index} />
+              <span className="article-editor-preview-image__copy" onClick={() => setPreview(imageFile)}>
+                <div className="article-editor-preview-image__text">
                   {imageFile === preview && "PREVIEW"}
                   {imageFile !== preview && "Choose as preview"}
                 </div>
-                <div className="edit-article-preview-image__name">{imageFile.name}</div>
+                <div className="article-editor-preview-image__name">{imageFile.name}</div>
               </span>
             </div>
           ))}
         </div>
       </div>
-      <div className="edit-article-content">
-        <div className="edit-article-content__header">
-          <h3 className="edit-article-content__title">Редактор</h3>
-          <p className="edit-article-content__desc">
+      <div className="article-editor-content">
+        <div className="article-editor-content__header">
+          <h3 className="article-editor-content__title">Редактор</h3>
+          <p className="article-editor-content__desc">
             Можно вставлять картинки через <kbd>ctrl</kbd> + <kbd>v</kbd> или перетащив в это поле
             <br />
             Лучше всего начить статью с картинки в качестве превью
@@ -140,8 +140,8 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
             "Подпись под картинкой" не обязательна
           </p>
         </div>
-        <textarea className="edit-article-content__textarea" required onInput={updateContent} onPaste={onPaste} onDrop={onDrop}>{content}</textarea>
-        <a className="edit-article-content__notice" href="https://commonmark.org/help/">
+        <textarea className="article-editor-content__textarea" required onInput={updateContent} onPaste={onPaste} onDrop={onDrop}>{content}</textarea>
+        <a className="article-editor-content__notice" href="https://commonmark.org/help/">
           <span>Learn markdown</span>
           <img src="https://commonmark.org/help/images/favicon.png" width="20" alt="Markdown" />
         </a>

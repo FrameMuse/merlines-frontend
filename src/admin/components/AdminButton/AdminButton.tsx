@@ -8,6 +8,7 @@ interface AdminButtonProps {
   color?: "red" | "gray"
   className?: string
   children: any
+  disabled?: boolean
 
   onClick?: (event: MouseEvent<HTMLButtonElement>) => Promise<unknown> | void
 }
@@ -20,7 +21,7 @@ function AdminButton(props: AdminButtonProps) {
     setPending(false)
   }
   return (
-    <button className={classMerge(classWithModifiers("admin-button", props.color, pending && "pending"), props.className)} type="button" onClick={onClick} disabled={pending}>
+    <button className={classMerge(classWithModifiers("admin-button", props.color, pending && "pending"), props.className)} type="button" onClick={onClick} disabled={pending || props.disabled}>
       {pending ? "Pending..." : props.children}
     </button>
   )

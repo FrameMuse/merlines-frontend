@@ -2,7 +2,7 @@ h3 {
   margin: unset;
 }
 
-.edit-article {
+.article-editor {
   display: grid;
   gap: 1em;
 
@@ -30,16 +30,16 @@ h3 {
 
 /* Tags */
 
-.edit-article-tags {
+.article-editor-tags {
   display: grid;
   gap: 1em;
 }
 
-.edit-article-tags__button {
+.article-editor-tags__button {
   justify-self: start;
 }
 
-.edit-article-tags__inner {
+.article-editor-tags__inner {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
@@ -47,12 +47,12 @@ h3 {
 
 /* Title */
 
-.edit-article-title {
+.article-editor-title {
   display: grid;
   gap: 1em;
 }
 
-.edit-article-title__input {
+.article-editor-title__input {
   padding: 0.25em 0.5em;
   border: 2px solid var(--color-border-third);
   border-radius: 0.25em;
@@ -71,14 +71,14 @@ h3 {
 
 /* Preview */
 
-.edit-article-preview {
+.article-editor-preview {
   display: grid;
   gap: 1em;
 }
 
-.edit-article-preview__title {}
+.article-editor-preview__title {}
 
-.edit-article-preview__images {
+.article-editor-preview__images {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
@@ -86,7 +86,7 @@ h3 {
   min-height: 12.5em;
 }
 
-.edit-article-preview-image {
+.article-editor-preview-image {
   position: relative;
 
   height: 12.5em;
@@ -98,17 +98,17 @@ h3 {
   &--chosen {
     border-color: var(--color-blue);
 
-    .edit-article-preview-image__copy {
+    .article-editor-preview-image__copy {
       background: rgba($color: black, $alpha: 0.25);
     }
   }
 }
 
-.edit-article-preview-image__image {
+.article-editor-preview-image__image {
   height: 100%;
 }
 
-.edit-article-preview-image__copy {
+.article-editor-preview-image__copy {
   position: absolute;
   inset: 0;
 
@@ -134,27 +134,27 @@ h3 {
   }
 }
 
-.edit-article-preview-image__text {
+.article-editor-preview-image__text {
   font-size: 1.5em;
   font-weight: 600;
 }
 
 /* Content */
 
-.edit-article-content {
+.article-editor-content {
   display: grid;
   gap: 1em;
 }
 
-.edit-article-content__title {
+.article-editor-content__title {
   font-style: italic;
 }
 
-.edit-article-content__desc {
+.article-editor-content__desc {
   line-height: 1.75;
 }
 
-.edit-article-content__textarea {
+.article-editor-content__textarea {
   width: 100%;
   min-height: 50em;
 
@@ -165,7 +165,7 @@ h3 {
   line-height: 1.25;
 }
 
-.edit-article-content__notice {
+.article-editor-content__notice {
   display: flex;
   align-items: center;
   gap: 0.5em;

@@ -50,7 +50,9 @@ function ArticleContent(props: ArticleContentProps) {
             </div>
           </div>
         </article>
-        <ArticleComments list={props.comments} />
+        {!props.noComments && (
+          <ArticleComments list={props.comments} />
+        )}
       </div>
     </section>
   )
