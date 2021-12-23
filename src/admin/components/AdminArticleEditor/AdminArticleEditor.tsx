@@ -88,7 +88,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   }
 
   useEffect(() => {
-    props.onChange({ tags, title, content, preview, files })
+    props.onChange({ tags: tags.filter(Boolean), title, content, preview, files })
   }, [tags, title, content, preview, files])
 
 

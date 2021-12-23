@@ -5,7 +5,6 @@ import DEPRECATED__App__ from "App.deprecated"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Route, Switch } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
 import { loginUser } from "redux/reducers/user"
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
   }, [dispatch])
   return (
     <>
-      <ToastContainer />
       <Switch>
         <Route path="/admin">
           <AdminView />

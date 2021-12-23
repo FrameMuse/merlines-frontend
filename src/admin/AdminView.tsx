@@ -5,6 +5,7 @@ import { NavLink, Route, Switch } from "react-router-dom"
 
 import AdminAddArticleView from "./views/AdminAddArticleView"
 import AdminBlogView from "./views/AdminBlogView"
+import AdminEditArticleView from "./views/AdminEditArticleView"
 import AdminHomeView from "./views/AdminHomeView"
 import AdminUsersView from "./views/AdminUsersView"
 
@@ -28,6 +29,7 @@ function AdminView() {
           <Route path="/admin/blog" exact><AdminBlogView /></Route>
           <Route path="/admin/users" exact><AdminUsersView /></Route>
           <Route path="/admin/add-article" exact><AdminAddArticleView /></Route>
+          <Route path="/admin/edit-article/:articleId" exact render={props => <AdminEditArticleView articleId={props.match.params.articleId} />} />
         </Switch>
       </main>
     </>

@@ -27,23 +27,33 @@ const llErrors = {
 
 const sampleDate = (new Date).toISOString()
 const sampleArticleData: EditArticleType = {
-  title: "5 чего-то Название",
-  tags: ["Тэг"],
-  content: "![Эйфелева башня](1.jpg)\n\n## Музей Лувр\n\nСмотрели фильм «Бельфегор – призрак Лувра?». Хотите побывать там, где проводились его съемки со знаменитыми, может даже вашими любимыми актерами? Где летали призраки и передвигались мумии? Тогда вам прямая дорога в Лувр – один из самых древних музеев мира. Каждый год его посещают от 7 до 10 миллионов человек.",
+  title: "",
+  tags: [],
+  content: "",
   files: [],
   preview: null
 }
 
+interface AdminArticleAddProps {
+  new: true
+  edit?: undefined
+}
 interface AdminArticleEditProps {
-  new?: boolean
+  new?: false
+  edit: EditArticleType
 }
 
-function AdminArticleEdit(props: AdminArticleEditProps) {
+/**
+ *
+ * @param new means new article to be created
+ * @param edit means an article to be edited and is initial data to preview
+ */
+function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
   const history = useHistory()
 
   const [error, setError] = useState(false)
 
-  const [articleData, setArticleData] = useState<EditArticleType>(sampleArticleData)
+  const [articleData, setArticleData] = useState<EditArticleType>(props.edit || sampleArticleData)
   const [showPreview, setShowPreview] = useState(false)
 
   function validateArticleData() {
@@ -121,10 +131,10 @@ function AdminArticleEdit(props: AdminArticleEditProps) {
           children={showPreview ? "Disable preview mode" : "Enable preview modei"}
         />
       </div>
-      <AdminArticleEditor {...sampleArticleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />
+      <AdminArticleEditor {...articleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />
       <AdminArticlePreview {...articleData} hidden={!showPreview} />
       <div>
-        <AdminButton onClick={onSubmit} disabled={error}>Опубликовать новую статью</AdminButton>
+        <AdminButton onClick={onSubmit} disabled={error}>Опубликовать статью</AdminButton>
       </div>
     </div>
   )
@@ -164,7 +174,7 @@ function AdminArticlePreview(props: AdminArticlePreviewProps) {
             content={props.files.filter(isImageFile).reduce((result, file) => result.replace(new RegExp(getFileId(file), "g"), URL.createObjectURL(file)), props.content)}
             author={user}
             comments={[]}
-            noComments
+            previewMode
           />
         </div>
       </div>

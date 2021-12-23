@@ -1,7 +1,6 @@
 // SCSS
 import "./user.scss"
 
-import AdminButton from "admin/components/AdminButton/AdminButton"
 import { ArticleType } from "interfaces/Blog"
 import ReactMarkdown from "react-markdown"
 import { useSelector } from "react-redux"
@@ -14,7 +13,7 @@ import ArticleTag from "./ArticleTag"
 
 
 interface ArticleContentProps extends ArticleType {
-  noComments?: boolean
+  previewMode?: boolean
 }
 
 function ArticleContent(props: ArticleContentProps) {
@@ -22,7 +21,7 @@ function ArticleContent(props: ArticleContentProps) {
   const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "medium" })
   return (
     <section className="article-page">
-      {user.authed && ["admin", "editor", undefined].includes(user.role) && (
+      {!props.previewMode && user.authed && ["admin", "editor", undefined].includes(user.role) && (
         <EditArticleButton articleId={props.id} />
       )}
       <div className="article-page__container">
@@ -50,7 +49,7 @@ function ArticleContent(props: ArticleContentProps) {
             </div>
           </div>
         </article>
-        {!props.noComments && (
+        {!props.previewMode && (
           <ArticleComments list={props.comments} />
         )}
       </div>
