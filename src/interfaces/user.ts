@@ -7,7 +7,7 @@ export interface AuthedUser {
   last_name: string
   email: string
   avatar: string
-  role: "admin" | "editor" | "default"
+  type: "ADMIN" | "EDITOR" | "DEFAULT"
 }
 export interface UnauthedUser {
   authed: false

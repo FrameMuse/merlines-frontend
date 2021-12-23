@@ -21,7 +21,7 @@ function ArticleContent(props: ArticleContentProps) {
   const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "medium" })
   return (
     <section className="article-page">
-      {!props.previewMode && user.authed && ["admin", "editor", undefined].includes(user.role) && (
+      {!props.previewMode && user.authed && ["admin", "editor"].includes(user.type) && (
         <EditArticleButton articleId={props.id} />
       )}
       <div className="article-page__container">

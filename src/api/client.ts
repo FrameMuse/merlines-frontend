@@ -1,4 +1,4 @@
-import { Action as BaseAction, createClient, QueryResponse } from "react-fetching-library"
+import { Action as BaseAction, createClient, QueryResponse, UseQueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
 import { createQuery } from "utils"
 
@@ -68,6 +68,10 @@ function responseInterceptor() {
     return response
   }
 }
+
+// export function isPayloadReady({ loading, error, payload }: UseQueryResponse<APIResponseError>) {
+//   return Boolean(!loading && !error && payload && !payload.error)
+// }
 
 export const ClientAPI = createClient({
   requestInterceptors: [requestInterceptor],
