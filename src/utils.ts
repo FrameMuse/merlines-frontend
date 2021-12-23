@@ -290,11 +290,13 @@ export function toBase64(file: File): Promise<DataURLBase64> {
 }
 
 
-export async function getFileFromURL(url: string, fileName = "image") {
+export async function getFileFromURL(url: string) {
+  const fileName = url.slice(url.lastIndexOf("/") + 1)
+
   const response = await fetch(url)
   const Uint8Array = (await response.body?.getReader()?.read())?.value
 
-  return Uint8Array && new File([Uint8Array], fileName, { type: response.headers.get("content-type") || "image" })
+  return new File(Uint8Array ? [Uint8Array] : [], fileName, { type: response.headers.get("content-type") || "image" })
 }
 
 

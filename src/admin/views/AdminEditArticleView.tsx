@@ -1,6 +1,6 @@
 import AdminArticleEdit from "admin/components/AdminArticleEdit/AdminArticleEdit"
 import AdminViewLayout from "admin/layouts/AdminViewLayout"
-import { getBlogArticle } from "api/actions/blog"
+import { getAdminArticle } from "api/actions/admin"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { ToastContainer } from "react-toastify"
@@ -19,20 +19,16 @@ function AdminEditArticleView(props: { articleId: string }) {
 
 function AdminArticleEditWithPreloadedData(props: { articleId: string }) {
   const [editData, setEditData] = useState<EditArticleType | null>(null)
-  const { payload } = useQuery(getBlogArticle(props.articleId))
+  const { payload } = useQuery(getAdminArticle(props.articleId))
 
   useEffect(() => {
     if (!payload) return
 
     (async () => {
+      const files = await Promise.all(payload.files.map(getFileFromURL))
       const preview = await getFileFromURL(payload.preview)
-      if (!preview) return
 
-      setEditData({
-        ...payload,
-        files: [preview],
-        preview
-      })
+      setEditData({ ...payload, files, preview })
     })()
 
   }, [payload])
