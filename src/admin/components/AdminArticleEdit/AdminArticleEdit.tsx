@@ -40,7 +40,7 @@ interface AdminArticleAddProps {
 }
 interface AdminArticleEditProps {
   new?: false
-  id: number
+  id: string
   edit: ArticleContentType
 }
 
@@ -90,7 +90,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
     return payload.id
   }
   async function patchArticle() {
-    const id = props.edit ? props.id : 0
+    const id = props.edit ? props.id : ""
 
     const { error, payload } = await ClientAPI.query(patchAdminArticle(id, articleData))
     if (error || !payload || payload.error) return

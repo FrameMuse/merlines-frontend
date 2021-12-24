@@ -18,7 +18,7 @@ function AdminArticleEditWithPreloadedData(props: { articleId: string }) {
   if (!payload) return <>no content</>
 
   return (
-    <AdminArticleEdit edit={payload} />
+    <AdminArticleEdit id={props.articleId} edit={payload} />
   )
 }
 
