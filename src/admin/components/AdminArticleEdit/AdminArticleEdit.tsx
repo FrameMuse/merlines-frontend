@@ -81,16 +81,10 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
     return errors
   }
 
-  function createRequestPayload() {
-    const tags = articleData.tags.filter(Boolean)
-    return { ...articleData, tags }
-  }
-
   async function onSubmit() {
     const action = props.new ? postAdminArticle : patchAdminArticle
-    const requestPayload = createRequestPayload()
 
-    const { error, payload } = await ClientAPI.query(action(requestPayload))
+    const { error, payload } = await ClientAPI.query(action(articleData))
     if (error || !payload || payload.error) return
 
     history.push("/blog/article/" + payload.id)

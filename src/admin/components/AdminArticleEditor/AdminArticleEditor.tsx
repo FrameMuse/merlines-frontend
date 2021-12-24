@@ -1,7 +1,6 @@
 import "./AdminArticleEditor.style.scss"
 
 import { ArticleFileType } from "interfaces/Blog"
-import { DataURLBase64, URLType } from "interfaces/common"
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
 import { classWithModifiers, isImageFile, toBase64 } from "utils"
 
@@ -97,7 +96,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   }
 
   useEffect(() => {
-    props.onChange({ tags, title, content, preview, files })
+    props.onChange({ tags: tags.filter(Boolean), title, content, preview, files })
   }, [tags, title, content, preview, files])
 
   return (
