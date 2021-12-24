@@ -16,25 +16,13 @@ interface ArticleProps {
 }
 
 function Article(props: ArticleProps) {
-  const { payload } = useQuery(getBlogArticle(props.articleId))
-  function sendImages(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
+  const { error, payload } = useQuery(getBlogArticle(props.articleId))
+  if (error || !payload || payload.error) return <>no content</>
 
-    ClientAPI.query(postMainEcho(formData))
-  }
   return (
     <div className="wrap">
-      {payload && (
-        <ArticleContent {...payload} />
-      )}
+      <ArticleContent {...payload} />
       {/* <ArticleRecomendation /> */}
-
-
-      <form method="post" onSubmit={sendImages}>
-        <input type="file" name="img[]" />
-        <button type="submit">Send images</button>
-      </form>
     </div>
   )
 }

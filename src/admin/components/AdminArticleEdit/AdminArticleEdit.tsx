@@ -4,15 +4,14 @@ import { patchAdminArticle, postAdminArticle } from "api/actions/admin"
 import ClientAPI from "api/client"
 import ArticleCard from "components/Article/ArticleCard"
 import ArticleContent from "components/Article/ArticleContent"
-import { DataURLBase64 } from "interfaces/common"
 import { AuthedUser } from "interfaces/user"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
-import { classWithModifiers, isImageFile, toBase64 } from "utils"
+import { classWithModifiers } from "utils"
 
-import AdminArticleEditor, { EditArticleType, getFileId } from "../AdminArticleEditor/AdminArticleEditor"
+import AdminArticleEditor, { ArticleEditorContentType } from "../AdminArticleEditor/AdminArticleEditor"
 import AdminButton from "../AdminButton/AdminButton"
 
 
@@ -26,7 +25,7 @@ const llErrors = {
 
 
 const sampleDate = (new Date).toISOString()
-const sampleArticleData: EditArticleType = {
+const sampleArticleData: ArticleEditorContentType = {
   title: "",
   tags: [],
   content: "",
@@ -40,7 +39,7 @@ interface AdminArticleAddProps {
 }
 interface AdminArticleEditProps {
   new?: false
-  edit: EditArticleType
+  edit: ArticleEditorContentType
 }
 
 /**
@@ -53,7 +52,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
 
   const [error, setError] = useState(false)
 
-  const [articleData, setArticleData] = useState<EditArticleType>(props.edit || sampleArticleData)
+  const [articleData, setArticleData] = useState<ArticleEditorContentType>(props.edit || sampleArticleData)
   const [showPreview, setShowPreview] = useState(false)
 
   function validateArticleData() {
@@ -82,25 +81,15 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
     return errors
   }
 
-  async function createRequestPayload() {
+  function createRequestPayload() {
     const tags = articleData.tags.filter(Boolean)
-    const files: Record<string, DataURLBase64> = {}
-    const preview = getFileId(articleData.preview)
-
-    for (const file of articleData.files) {
-      // Ignore all unmentioned images
-      if (articleData.content.search(getFileId(file)) >= 0) {
-        files[getFileId(file)] = await toBase64(file)
-      }
-    }
-
-    return { ...articleData, tags, files, preview }
+    return { ...articleData, tags }
   }
 
   async function onSubmit() {
     const action = props.new ? postAdminArticle : patchAdminArticle
+    const requestPayload = createRequestPayload()
 
-    const requestPayload = await createRequestPayload()
     const { error, payload } = await ClientAPI.query(action(requestPayload))
     if (error || !payload || payload.error) return
 
@@ -141,7 +130,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
 }
 
 
-interface AdminArticlePreviewProps extends EditArticleType {
+interface AdminArticlePreviewProps extends ArticleEditorContentType {
   hidden?: boolean
 }
 
@@ -151,7 +140,7 @@ function AdminArticlePreview(props: AdminArticlePreviewProps) {
     ...props,
     id: 1,
     created_at: sampleDate,
-    preview: props.preview && URL.createObjectURL(props.preview) || ""
+    preview: props.files.find(file => file.name === props.preview)?.data || ""
   }
   return (
     <div className={classWithModifiers("article-preview", props.hidden && "hidden")}>
@@ -170,8 +159,6 @@ function AdminArticlePreview(props: AdminArticlePreviewProps) {
         <div className="article-preview__article">
           <ArticleContent
             {...previewProps}
-            // Preview content
-            content={props.files.filter(isImageFile).reduce((result, file) => result.replace(new RegExp(getFileId(file), "g"), URL.createObjectURL(file)), props.content)}
             author={user}
             comments={[]}
             previewMode

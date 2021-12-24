@@ -21,7 +21,7 @@ function ArticleContent(props: ArticleContentProps) {
   const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "medium" })
   return (
     <section className="article-page">
-      {!props.previewMode && user.authed && ["admin", "editor"].includes(user.type) && (
+      {!props.previewMode && user.authed && ["ADMIN", "EDITOR"].includes(user.type) && (
         <EditArticleButton articleId={props.id} />
       )}
       <div className="article-page__container">
@@ -37,7 +37,9 @@ function ArticleContent(props: ArticleContentProps) {
             <time className="article-card__date" dateTime={props.created_at}>{date}</time>
           </div>
           <div className="article__content">
-            <ReactMarkdown components={{ img: props => <ArticlePicture {...props} /> }}>{props.content}</ReactMarkdown>
+            <ReactMarkdown components={{ img: props => <ArticlePicture {...props} /> }}>
+              {props.files.reduce((result, file) => result.replace(new RegExp(file.name, "g"), file.data), props.content)}
+            </ReactMarkdown>
           </div>
           <div className="user user--article">
             <img className="user__avatar" src={props.author.avatar} alt="avatar" />

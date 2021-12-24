@@ -1,24 +1,24 @@
-import { EditArticleType } from "admin/components/AdminArticleEditor/AdminArticleEditor"
+import { ArticleEditorContentType } from "admin/components/AdminArticleEditor/AdminArticleEditor"
 import { Action } from "api/client"
-import { DataURLBase64 } from "interfaces/common"
+import { ArticleContentType } from "interfaces/Blog"
 import { PaginationType } from "interfaces/Django"
 import { AuthedUser } from "interfaces/user"
 
 
 /* Articles */
 
-export const getAdminArticle = (articleId: string): Action<EditArticleType<string, string[]>> => ({
+export const getAdminArticle = (articleId: string): Action<ArticleContentType> => ({
   method: "GET",
   endpoint: "/admin/articles/" + articleId,
 })
 
-export const postAdminArticle = (data: EditArticleType<string, Record<string, DataURLBase64>>): Action<{ id: number }> => ({
+export const postAdminArticle = (data: ArticleEditorContentType): Action<{ id: number }> => ({
   method: "POST",
   endpoint: "/admin/articles",
   body: data
 })
 
-export const patchAdminArticle = (data: EditArticleType<string, Record<string, DataURLBase64>>): Action<{ id: number }> => ({
+export const patchAdminArticle = (data: ArticleEditorContentType): Action<{ id: number }> => ({
   method: "PATCH",
   endpoint: "/admin/articles",
   body: data

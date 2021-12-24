@@ -1,3 +1,5 @@
+import { DataURLBase64, URLType } from "./common"
+
 export interface ArticleType extends ArticlePreviewType, ArticleContentType {
   comments: ArticleReplyType[]
   author: ArticleAuthorType
@@ -13,9 +15,14 @@ export interface ArticlePreviewType {
 
 export interface ArticleContentType {
   title: string
-  preview: string
   content: string
   tags: string[]
+  files: ArticleFileType[]
+}
+
+export interface ArticleFileType {
+  name: string
+  data: URLType | DataURLBase64
 }
 
 export interface ArticleReplyType {

@@ -1,23 +1,25 @@
 import "./AdminArticleEditor.style.scss"
 
+import { ArticleFileType } from "interfaces/Blog"
+import { DataURLBase64, URLType } from "interfaces/common"
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
-import { classWithModifiers, isImageFile } from "utils"
+import { classWithModifiers, isImageFile, toBase64 } from "utils"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
 
-export interface EditArticleType<Preview = File | null, Files = File[]> {
+export interface ArticleEditorContentType {
   tags: string[]
   title: string
   content: string
-  preview: Preview
-  files: Files
+  preview: string | null
+  files: ArticleFileType[]
 }
 
-interface AdminEditArticleProps extends EditArticleType {
+interface AdminEditArticleProps extends ArticleEditorContentType {
   hidden?: boolean
-  onChange: Dispatch<Partial<EditArticleType>>
+  onChange: Dispatch<Partial<ArticleEditorContentType>>
 }
 
 function AdminArticleEditor(props: AdminEditArticleProps) {
@@ -25,7 +27,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const [title, setTitle] = useState(props.title)
   const [content, setContent] = useState(props.content)
   const [preview, setPreview] = useState(props.preview)
-  const [files, setFiles] = useState<File[]>(props.files)
+  const [files, setFiles] = useState(props.files)
 
   const updateTitle = (event: FormEvent<HTMLInputElement>) => setTitle(event.currentTarget.value)
   const updateContent = (event: FormEvent<HTMLTextAreaElement>) => setContent(event.currentTarget.value)
@@ -33,13 +35,19 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const addTag = () => setTags([...tags, "Новый тэг"])
   const updateTag = (value: string, index: number) => (tags[index] = value, setTags([...tags]))
 
-  function addFiles(filesToAdd: File[]) {
+  async function addFiles(filesToAdd: File[]) {
     // Filter by unique file name
-    const filteredFiles = filesToAdd.filter(fileToAdd => {
-      return !files.some(file => getFileId(file) === getFileId(fileToAdd))
-    })
+    for (const fileToAdd of filesToAdd) {
+      const fileName = getFileId(fileToAdd)
+      if (files.some(file => file.name === fileName)) continue
 
-    setFiles([...files, ...filteredFiles])
+      files.push({
+        name: fileName,
+        data: await toBase64(fileToAdd)
+      })
+    }
+
+    setFiles([...files])
   }
 
   function fileToMarkdown(file: File): string {
@@ -84,15 +92,14 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
     }
     setContent(target.value)
 
-    addFiles(pastedFiles)
+    const images = pastedFiles.filter(pastedFile => pastedFile.type.startsWith("image"))
+    addFiles(images)
   }
 
   useEffect(() => {
-    props.onChange({ tags: tags.filter(Boolean), title, content, preview, files })
+    props.onChange({ tags, title, content, preview, files })
   }, [tags, title, content, preview, files])
 
-
-  const imageFiles = files.filter(isImageFile)
   return (
     <div className={classWithModifiers("article-editor", props.hidden && "hidden")}>
       <div className="article-editor-tags">
@@ -112,18 +119,18 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
         <h3 className="article-editor-preview__title">Картинки</h3>
         Выберите превью, оно будет отображать в поиске по статьям
         <div className="article-editor-preview__images">
-          {imageFiles.length === 0 && (
+          {files.length === 0 && (
             <p>Вставленные картинки будет появлятся здесь</p>
           )}
-          {imageFiles.map((imageFile, index) => (
-            <div className={classWithModifiers("article-editor-preview-image", imageFile === preview && "chosen")}>
-              <img className="article-editor-preview-image__image" src={URL.createObjectURL(imageFile)} alt="" key={index} />
-              <span className="article-editor-preview-image__copy" onClick={() => setPreview(imageFile)}>
+          {files.map(file => (
+            <div className={classWithModifiers("article-editor-preview-image", file.name === preview && "chosen")} key={file.name}>
+              <img className="article-editor-preview-image__image" src={file.data} alt="" />
+              <span className="article-editor-preview-image__copy" onClick={() => setPreview(file.name)}>
                 <div className="article-editor-preview-image__text">
-                  {imageFile === preview && "PREVIEW"}
-                  {imageFile !== preview && "Choose as preview"}
+                  {file.name === preview && "PREVIEW"}
+                  {file.name !== preview && "Choose as preview"}
                 </div>
-                <div className="article-editor-preview-image__name">{imageFile.name}</div>
+                <div className="article-editor-preview-image__name">{file.name}</div>
               </span>
             </div>
           ))}
