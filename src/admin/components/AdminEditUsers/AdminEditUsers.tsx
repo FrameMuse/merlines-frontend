@@ -55,10 +55,6 @@ interface AdminEditUsersUserProps extends AuthedUser { }
 
 function AdminEditUsersUser(props: AdminEditUsersUserProps) {
   const [isOpen, setIsOpen] = useState(false)
-
-  function changeType(id: number, type: AuthedUser["type"]) {
-    return ClientAPI.query(putAdminUser(id, type))
-  }
   return (
     <div className="edit-user">
       <div className={classWithModifiers("edit-user__header", isOpen && "active")} onClick={() => setIsOpen(!isOpen)}>
