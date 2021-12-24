@@ -1,8 +1,5 @@
 import { connectRouter } from "connected-react-router"
-import { combineReducers } from "redux"
-import search from "redux/reducers/search"
 
-import searchCalendar from "./components/DropDownCalendar/DropDownCalendarReducer"
 import { loginReducer } from "./components/Login/LoginReducer"
 import { signupReducer } from "./components/Signup/SignupReducer"
 import accessDataSlice from "./reducers/accessDataSlice"
@@ -15,22 +12,19 @@ import searchResultBusTicketsSlice from "./reducers/searchResultBusTicketsSlice"
 import searchResultSlice from "./reducers/searchResultSlice"
 import searchResultTrainTicketsSlice from "./reducers/searchResultTrainTicketsSlice"
 
-const rootReducer = (history) =>
-  combineReducers({
-    router: connectRouter(history),
-    priceCalendar: priceCalendarSlice,
-    mainSearchParams: mainSearchParamsSlice,
-    search,
-    searchCalendar,
-    auth: loginReducer,
-    createUser: signupReducer,
-    accessData: accessDataSlice,
-    searchResult: searchResultSlice,
-    filter: filterSlice,
-    routesData: routesDataSlice,
-    lkData: lkDataSlice,
-    searchResultBusTicketsSlice: searchResultBusTicketsSlice,
-    searchResultTrainTicketsSlice: searchResultTrainTicketsSlice
-  })
+const DEPRECATED__rootReducer__ = ({
+  router: connectRouter(history),
+  priceCalendar: priceCalendarSlice,
+  mainSearchParams: mainSearchParamsSlice,
+  auth: loginReducer,
+  createUser: signupReducer,
+  accessData: accessDataSlice,
+  searchResult: searchResultSlice,
+  filter: filterSlice,
+  routesData: routesDataSlice,
+  lkData: lkDataSlice,
+  searchResultBusTicketsSlice,
+  searchResultTrainTicketsSlice
+})
 
-export default rootReducer
+export default DEPRECATED__rootReducer__

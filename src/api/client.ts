@@ -1,4 +1,4 @@
-import { Action as BaseAction, createClient, QueryResponse } from "react-fetching-library"
+import { Action as BaseAction, createClient, QueryResponse, UseQueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
 import { createQuery } from "utils"
 
@@ -69,11 +69,28 @@ function responseInterceptor() {
   }
 }
 
+// export function isPayloadReady({ loading, error, payload }: UseQueryResponse<APIResponseError>) {
+//   return Boolean(!loading && !error && payload && !payload.error)
+// }
+
 export const ClientAPI = createClient({
   requestInterceptors: [requestInterceptor],
   responseInterceptors: [responseInterceptor],
   cacheProvider
 })
+
+if (process.env.NODE_ENV === "development") {
+  // https://webpack.js.org/guides/dependency-management/#context-module-api
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const importAll = r => r.keys().reduce((a, k) => ({ ...a, ...r(k) }), {})
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  window.ClientAPI = ClientAPI
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  window.ActionsAPI = importAll(require.context("./actions/", true, /\.ts$/, "sync"))
+}
 
 export default ClientAPI
 

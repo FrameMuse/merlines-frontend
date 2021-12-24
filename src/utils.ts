@@ -1,6 +1,7 @@
 import axios from "axios"
 import { DataURL, DataURLBase64 } from "interfaces/common"
 import { DateTime } from "luxon"
+import { Dispatch, SetStateAction, useState } from "react"
 
 import { monthNamesDate, weekDays } from "./constants"
 
@@ -290,13 +291,30 @@ export function toBase64(file: File): Promise<DataURLBase64> {
 }
 
 
-// /**
-//  *
-//  * @param {File} file
-//  */
-// export function fileToMarkdown(file) {
+export async function getFileFromURL(url: string) {
+  const fileName = url.slice(url.lastIndexOf("/") + 1)
 
-// }
+  const response = await fetch(url)
+  const Uint8Array = (await response.body?.getReader()?.read())?.value
+
+  return new File(Uint8Array ? [Uint8Array] : [], fileName, { type: response.headers.get("content-type") || "image" })
+}
+
+/**
+ *
+ * Awaits given function
+ * @returns [pending, callback, setPending]
+ */
+export function usePending<F extends (...args: any[]) => any>(fn: F | undefined | null): [boolean, F, Dispatch<SetStateAction<boolean>>] {
+  const [pending, setPending] = useState(false)
+  async function callback(...args: any) {
+    setPending(true)
+    const result = await fn?.(...args)
+    setPending(false)
+    return result
+  }
+  return [pending, callback as F, setPending]
+}
 
 
 /**

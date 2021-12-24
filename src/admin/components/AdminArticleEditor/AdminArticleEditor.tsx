@@ -1,5 +1,7 @@
-import "./AdminEditArticle.style.scss"
+import "./AdminArticleEditor.style.scss"
 
+import { ArticleFileType } from "interfaces/Blog"
+import { DataURLBase64, URLType } from "interfaces/common"
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
 import { classWithModifiers, isImageFile, toBase64 } from "utils"
 
@@ -7,17 +9,17 @@ import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
 
-export interface EditArticleType<Preview = File | null, Files = File[]> {
+export interface ArticleEditorContentType {
   tags: string[]
   title: string
   content: string
-  preview: Preview
-  files: Files
+  preview: string | null
+  files: ArticleFileType[]
 }
 
-interface AdminEditArticleProps extends EditArticleType {
+interface AdminEditArticleProps extends ArticleEditorContentType {
   hidden?: boolean
-  onChange: Dispatch<Partial<EditArticleType>>
+  onChange: Dispatch<Partial<ArticleEditorContentType>>
 }
 
 function AdminArticleEditor(props: AdminEditArticleProps) {
@@ -25,7 +27,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const [title, setTitle] = useState(props.title)
   const [content, setContent] = useState(props.content)
   const [preview, setPreview] = useState(props.preview)
-  const [files, setFiles] = useState<File[]>(props.files)
+  const [files, setFiles] = useState(props.files)
 
   const updateTitle = (event: FormEvent<HTMLInputElement>) => setTitle(event.currentTarget.value)
   const updateContent = (event: FormEvent<HTMLTextAreaElement>) => setContent(event.currentTarget.value)
@@ -33,13 +35,19 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const addTag = () => setTags([...tags, "Новый тэг"])
   const updateTag = (value: string, index: number) => (tags[index] = value, setTags([...tags]))
 
-  function addFiles(filesToAdd: File[]) {
+  async function addFiles(filesToAdd: File[]) {
     // Filter by unique file name
-    const filteredFiles = filesToAdd.filter(fileToAdd => {
-      return !files.some(file => getFileId(file) === getFileId(fileToAdd))
-    })
+    for (const fileToAdd of filesToAdd) {
+      const fileName = getFileId(fileToAdd)
+      if (files.some(file => file.name === fileName)) continue
 
-    setFiles([...files, ...filteredFiles])
+      files.push({
+        name: fileName,
+        data: await toBase64(fileToAdd)
+      })
+    }
+
+    setFiles([...files])
   }
 
   function fileToMarkdown(file: File): string {
@@ -84,53 +92,54 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
     }
     setContent(target.value)
 
-    addFiles(pastedFiles)
+    const images = pastedFiles.filter(pastedFile => pastedFile.type.startsWith("image"))
+    addFiles(images)
   }
 
   useEffect(() => {
-    props.onChange({ tags: tags.filter(Boolean), title, content, preview, files })
+    props.onChange({ tags, title, content, preview, files })
   }, [tags, title, content, preview, files])
 
   return (
-    <div className={classWithModifiers("edit-article", props.hidden && "hidden")}>
-      <div className="edit-article-tags">
-        <h3 className="edit-article-tags__title">Тэги</h3>
-        <AdminButton className="edit-article-tags__button" onClick={addTag}>Добавить</AdminButton>
-        <div className="edit-article-tags__inner">
+    <div className={classWithModifiers("article-editor", props.hidden && "hidden")}>
+      <div className="article-editor-tags">
+        <h3 className="article-editor-tags__title">Тэги</h3>
+        <AdminButton className="article-editor-tags__button" onClick={addTag}>Добавить</AdminButton>
+        <div className="article-editor-tags__inner">
           {tags.map((tag, index) => tag.length > 0 && (
             <AdminEditableTag onInput={value => updateTag(value, index)} key={index}>{tag}</AdminEditableTag>
           ))}
         </div>
       </div>
-      <div className="edit-article-title">
-        <h3 className="edit-article-title__title">Заголовок</h3>
-        <input type="text" className="edit-article-title__input" required defaultValue={title} onInput={updateTitle} />
+      <div className="article-editor-title">
+        <h3 className="article-editor-title__title">Заголовок</h3>
+        <input type="text" className="article-editor-title__input" required defaultValue={title} onInput={updateTitle} />
       </div>
-      <div className="edit-article-preview">
-        <h3 className="edit-article-preview__title">Картинки</h3>
+      <div className="article-editor-preview">
+        <h3 className="article-editor-preview__title">Картинки</h3>
         Выберите превью, оно будет отображать в поиске по статьям
-        <div className="edit-article-preview__images">
-          {files.filter(isImageFile).length === 0 && (
+        <div className="article-editor-preview__images">
+          {files.length === 0 && (
             <p>Вставленные картинки будет появлятся здесь</p>
           )}
-          {files.map((file, index) => (
-            <div className={classWithModifiers("edit-article-preview-image", file === preview && "chosen")}>
-              <img className="edit-article-preview-image__image" src={URL.createObjectURL(file)} alt="" key={index} />
-              <span className="edit-article-preview-image__copy" onClick={() => setPreview(file)}>
-                <div className="edit-article-preview-image__text">
-                  {file === preview && "PREVIEW"}
-                  {file !== preview && "Choose as preview"}
+          {files.map(file => (
+            <div className={classWithModifiers("article-editor-preview-image", file.name === preview && "chosen")} key={file.name}>
+              <img className="article-editor-preview-image__image" src={file.data} alt="" />
+              <span className="article-editor-preview-image__copy" onClick={() => setPreview(file.name)}>
+                <div className="article-editor-preview-image__text">
+                  {file.name === preview && "PREVIEW"}
+                  {file.name !== preview && "Choose as preview"}
                 </div>
-                <div className="edit-article-preview-image__name">{file.name}</div>
+                <div className="article-editor-preview-image__name">{file.name}</div>
               </span>
             </div>
           ))}
         </div>
       </div>
-      <div className="edit-article-content">
-        <div className="edit-article-content__header">
-          <h3 className="edit-article-content__title">Редактор</h3>
-          <p className="edit-article-content__desc">
+      <div className="article-editor-content">
+        <div className="article-editor-content__header">
+          <h3 className="article-editor-content__title">Редактор</h3>
+          <p className="article-editor-content__desc">
             Можно вставлять картинки через <kbd>ctrl</kbd> + <kbd>v</kbd> или перетащив в это поле
             <br />
             Лучше всего начить статью с картинки в качестве превью
@@ -138,8 +147,8 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
             "Подпись под картинкой" не обязательна
           </p>
         </div>
-        <textarea className="edit-article-content__textarea" required onInput={updateContent} onPaste={onPaste} onDrop={onDrop}>{content}</textarea>
-        <a className="edit-article-content__notice" href="https://commonmark.org/help/">
+        <textarea className="article-editor-content__textarea" required onInput={updateContent} onPaste={onPaste} onDrop={onDrop}>{content}</textarea>
+        <a className="article-editor-content__notice" href="https://commonmark.org/help/">
           <span>Learn markdown</span>
           <img src="https://commonmark.org/help/images/favicon.png" width="20" alt="Markdown" />
         </a>

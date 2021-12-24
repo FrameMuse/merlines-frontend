@@ -2,47 +2,47 @@
 import "./AdminEditUsers.style.scss"
 
 import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
+import { getAdminUsers, putAdminUser } from "api/actions/admin"
 import Icon from "components/common/Icon"
-import { useState } from "react"
+import { AuthedUser } from "interfaces/user"
+import { FormEvent, useState } from "react"
+import { useQuery } from "react-fetching-library"
 import { classWithModifiers } from "utils"
 
+import ClientAPI from "../../../api/client"
 import AdminButton from "../AdminButton/AdminButton"
 import AdminSearchFilters from "../AdminSearchFilters/AdminSearchFilters"
-// Mock Avatar
-import MeliodasPNG from "./meliodas.jpg"
 
-interface User {
-  id: number
-  avatar: string
-  firstname: string
-  surname: string
-  email: string
-  street: string
-  role: "admin" | "editor" | "default"
-}
-
-const mockUserData: User = {
-  id: 10,
-  avatar: MeliodasPNG,
-  firstname: "Meliodas",
-  surname: "七つの大罪",
-  email: "meliodas@deadlysins.net",
-  street: "Britania 4",
-  role: "admin"
-}
 
 function AdminEditUsers() {
-  const users = Array(135).fill(mockUserData)
+  const [filters, setFilters] = useState<Parameters<typeof getAdminUsers>[0]>({})
+  const { loading, payload } = useQuery(getAdminUsers(filters))
+
+  function onSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    console.log(1, event)
+    const elements = event.currentTarget.elements as unknown as Record<"id" | "name" | "type" | "amount", HTMLInputElement>
+
+    setFilters({
+      id: Number(elements.id.value),
+      first_name: elements.name.value,
+      // type: elements.type.value,
+      page_size: Number(elements.amount.value)
+    })
+  }
+
+  if (!payload || payload.error) return <>no content</>
   return (
-    <AdminSectionLayout header={users.length + " пользователей"}>
-      <AdminSearchFilters>
-        <input type="text" placeholder="id" />
-        <input type="text" placeholder="name" />
-        <input type="text" placeholder="role" />
+    <AdminSectionLayout header={payload.results.length + " пользователей"}>
+      <AdminSearchFilters onSubmit={onSearch} pending={loading}>
+        <input type="number" name="id" placeholder="id" />
+        <input type="text" name="name" placeholder="name" />
+        <input type="text" name="type" placeholder="type" />
+        <input type="text" name="amount" placeholder="amount" />
       </AdminSearchFilters>
       <br />
       <div className="edit-users">
-        {users.map(user => (
+        {payload.results.map(user => (
           <AdminEditUsersUser {...user} key={user.id} />
         ))}
       </div>
@@ -51,7 +51,7 @@ function AdminEditUsers() {
 }
 
 
-interface AdminEditUsersUserProps extends User { }
+interface AdminEditUsersUserProps extends AuthedUser { }
 
 function AdminEditUsersUser(props: AdminEditUsersUserProps) {
   const [isOpen, setIsOpen] = useState(false)
@@ -59,7 +59,7 @@ function AdminEditUsersUser(props: AdminEditUsersUserProps) {
     <div className="edit-user">
       <div className={classWithModifiers("edit-user__header", isOpen && "active")} onClick={() => setIsOpen(!isOpen)}>
         <img src={props.avatar} alt="avatar" className="edit-user__avatar" />
-        <div className="edit-user__name">{props.firstname} {props.surname}</div>
+        <div className="edit-user__name">{props.first_name} {props.last_name}</div>
         <div className="edit-user__id">#{props.id}</div>
         <div className="edit-user__toggle">
           <Icon name="arrow-angle" className={classWithModifiers("edit-user__icon", isOpen && "up")} />
@@ -74,28 +74,34 @@ function AdminEditUsersUser(props: AdminEditUsersUserProps) {
               <span>{props.email}</span>
             </div>
             <div className="edit-user-area__entry">
-              <span>Street: </span>
-              <span>{props.street}</span>
-            </div>
-            <div className="edit-user-area__entry">
-              <span>Status: </span>
-              <span>{props.role}</span>
+              <span>Type: </span>
+              <span>{props.type}</span>
             </div>
           </div>
         </div>
-        <div className="edit-user-area edit-user-area--danger">
-          <div className="edit-user-area__title">Danger Zone</div>
-          <div className="edit-user-area__actions">
-            <div className="edit-user-area__action">
-              <select className="edit-user-area__input">
-                <option>admin</option>
-                <option>editor</option>
-                <option>default</option>
-              </select>
-              <AdminButton color="red">Изменить роль</AdminButton>
-              <AdminButton color="red">Забанить</AdminButton>
-            </div>
-          </div>
+        <AdminEditUsersUserDangerZone {...props} />
+      </div>
+    </div>
+  )
+}
+
+function AdminEditUsersUserDangerZone(props: AdminEditUsersUserProps) {
+  const [type, setType] = useState(props.type)
+  function changeType() {
+    return ClientAPI.query(putAdminUser(props.id, type))
+  }
+  return (
+    <div className="edit-user-area edit-user-area--danger">
+      <div className="edit-user-area__title">Danger Zone</div>
+      <div className="edit-user-area__actions">
+        <div className="edit-user-area__action">
+          <select className="edit-user-area__input" value={type} onChange={event => setType(event.currentTarget.value as AuthedUser["type"])}>
+            <option value="admin">admin</option>
+            <option value="editor">editor</option>
+            <option value="default">default</option>
+          </select>
+          <AdminButton color="red" onClick={changeType}>Изменить роль</AdminButton>
+          <AdminButton color="red">Забанить</AdminButton>
         </div>
       </div>
     </div>

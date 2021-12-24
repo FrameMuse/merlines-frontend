@@ -1,9 +1,6 @@
-import "react-toastify/dist/ReactToastify.css"
-
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import { Redirect, Route, Switch } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
 
 import About from "./components/About/About"
 import AboutProject from "./components/AboutProject/AboutProject"
@@ -20,7 +17,6 @@ import Main from "./components/Main/Main"
 import MobileTicketFilter from "./components/MobileTicketFilter/MobileTicketFilter"
 import Partners from "./components/Partners/Partners"
 import PriceCalendar from "./components/PriceCalendar/PriceCalendar"
-import PriceCalendarDays from "./components/PriceCalendar/PriceCalendarDays/PriceCalendarDays"
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy"
 import SearchResult from "./components/SearchResult/SearchResult"
 import Subscribe from "./components/Subscribe/Subscribe"
@@ -31,15 +27,12 @@ import UpdAccessPopup from "./components/UpdAccessPopup/UpdAccessPopup"
 import UpdAccessPopupConfirm from "./components/UpdAccessPopup/UpdAccessPopupConfirm"
 import UpdAccessPopupReset from "./components/UpdAccessPopup/UpdAccessPopupReset"
 import UpdAccessPopupResetConfirm from "./components/UpdAccessPopup/UpdAccessPopupResetConfirm"
-import useQuery from "./hooks/useQuery"
 import { selectAccessData } from "./reducers/accessDataSlice"
 import { selectSearchResult } from "./reducers/searchResultSlice"
 import routes from "./routes"
 
-function App() {
+function DEPRECATED__App__() {
   const accessData = useSelector(selectAccessData)
-  // const lkData = useSelector(selectLkData);
-  const query = useQuery()
   const {
     searchData: { tickets }
   } = useSelector(selectSearchResult)
@@ -72,55 +65,9 @@ function App() {
           )} />
           <Route path="/blog/article/:articleId" render={props => <Article articleId={props.match.params.articleId} />} />
           <Route exact path={routes.signup}>
-            {query.get("next") === routes.priceCalendar.air && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.train && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.bus && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.airDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.priceCalendar.trainDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.priceCalendar.busDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.main && <Main />}
-            {query.get("next") === routes.air && <Main />}
-            {query.get("next") === routes.train && <Main />}
-            {query.get("next") === routes.bus && <Main />}
-            {query.get("next") === routes.searchResult && <SearchResult />}
             <UpdAccessPopup active={true} />
           </Route>
           <Route exact path={routes.login}>
-            {query.get("next") === routes.priceCalendar.air && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.train && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.bus && (
-              <PriceCalendar />
-            )}
-            {query.get("next") === routes.priceCalendar.airDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.priceCalendar.trainDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.priceCalendar.busDays && (
-              <PriceCalendarDays />
-            )}
-            {query.get("next") === routes.main && <Main />}
-            {query.get("next") === routes.air && <Main />}
-            {query.get("next") === routes.train && <Main />}
-            {query.get("next") === routes.bus && <Main />}
-            {query.get("next") === routes.searchResult && <SearchResult />}
             <UpdAccessPopup login={true} active={true} />
             <Subscribe />
           </Route>
@@ -240,4 +187,4 @@ function App() {
   )
 }
 
-export default App
+export default DEPRECATED__App__

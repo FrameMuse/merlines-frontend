@@ -84,6 +84,7 @@
       margin-right: auto;
     }
   }
+
   @media #{$media-lg} {
     &--profile {
       width: 290px;
@@ -98,6 +99,7 @@
       margin-right: auto;
     }
   }
+
   @media #{$media-xl} {
     min-width: 160px;
 
@@ -174,11 +176,13 @@
       margin-bottom: 40px;
     }
   }
+
   @media #{$media-lg} {
     &--cabinet {
       margin-right: -2px;
     }
   }
+
   @media #{$media-xl} {
     &--articles {
       margin-top: -4px;

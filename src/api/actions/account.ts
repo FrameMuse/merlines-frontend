@@ -1,4 +1,5 @@
 import { Action } from "api/client"
+import { AuthedUser } from "interfaces/user"
 
 export const getAccount: Action = {
   method: "GET",
@@ -23,7 +24,7 @@ export const postAccountPasswordReset: Action = {
   endpoint: "/account/password/reset"
 }
 
-export const getAccountMe: Action = {
+export const getAccountMe: Action<AuthedUser> = {
   method: "GET",
   endpoint: "/account/me"
 }

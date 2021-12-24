@@ -68,6 +68,11 @@ img {
   height: auto;
 }
 
+a.ghost {
+  position: absolute;
+  inset: 0;
+}
+
 // Общее стили для текстовых страниц
 .uppercase {
   text-transform: uppercase;

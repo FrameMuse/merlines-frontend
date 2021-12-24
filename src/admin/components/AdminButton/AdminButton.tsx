@@ -1,7 +1,7 @@
 import "./AdminButton.style.scss"
 
-import { MouseEvent, useState } from "react"
-import { classMerge, classWithModifiers } from "utils"
+import { MouseEvent, useEffect } from "react"
+import { classMerge, classWithModifiers, usePending } from "utils"
 
 
 interface AdminButtonProps {
@@ -9,18 +9,20 @@ interface AdminButtonProps {
   className?: string
   children: any
 
+  type?: "button" | "submit" | "reset"
+  pending?: boolean
+  disabled?: boolean
+
   onClick?: (event: MouseEvent<HTMLButtonElement>) => Promise<unknown> | void
 }
 
 function AdminButton(props: AdminButtonProps) {
-  const [pending, setPending] = useState(false)
-  async function onClick(event: MouseEvent<HTMLButtonElement>) {
-    setPending(true)
-    await props.onClick?.(event)
-    setPending(false)
-  }
+  const [pending, onClick, setPending] = usePending(props.onClick)
+  useEffect(() => {
+    if (props.pending != null) setPending(props.pending)
+  }, [props.pending])
   return (
-    <button className={classMerge(classWithModifiers("admin-button", props.color, pending && "pending"), props.className)} type="button" onClick={onClick} disabled={pending}>
+    <button className={classMerge(classWithModifiers("admin-button", props.color), props.className)} type={props.type || "button"} onClick={onClick} disabled={pending || props.disabled}>
       {pending ? "Pending..." : props.children}
     </button>
   )

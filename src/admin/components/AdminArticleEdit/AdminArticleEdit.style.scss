@@ -2,7 +2,7 @@ h3 {
   margin: unset;
 }
 
-.add-article {
+.article-edit {
   display: grid;
   gap: 1em;
 
@@ -23,7 +23,7 @@ h3 {
   }
 }
 
-.add-article__topbar {
+.article__topbar-edit {
   position: sticky;
   top: 0;
 
@@ -31,4 +31,27 @@ h3 {
   background: white;
 
   z-index: 1;
+}
+
+
+/// Article Preview
+
+
+.article-preview {
+  display: grid;
+  gap: 2.5em;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.article-preview__title {
+  color: #ccc;
+}
+
+.article-preview__cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
 }
