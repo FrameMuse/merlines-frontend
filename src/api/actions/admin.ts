@@ -18,9 +18,9 @@ export const postAdminArticle = (data: ArticleEditorContentType): Action<{ id: n
   body: data
 })
 
-export const patchAdminArticle = (data: ArticleEditorContentType): Action<{ id: number }> => ({
+export const patchAdminArticle = (id: number, data: ArticleEditorContentType): Action<{ id: number }> => ({
   method: "PATCH",
-  endpoint: "/admin/articles",
+  endpoint: "/admin/article/" + id,
   body: data
 })
 

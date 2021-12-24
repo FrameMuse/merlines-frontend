@@ -4,6 +4,7 @@ import { patchAdminArticle, postAdminArticle } from "api/actions/admin"
 import ClientAPI from "api/client"
 import ArticleCard from "components/Article/ArticleCard"
 import ArticleContent from "components/Article/ArticleContent"
+import { ArticleContentType } from "interfaces/Blog"
 import { AuthedUser } from "interfaces/user"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -11,7 +12,7 @@ import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 import { classWithModifiers } from "utils"
 
-import AdminArticleEditor, { ArticleEditorContentType } from "../AdminArticleEditor/AdminArticleEditor"
+import AdminArticleEditor from "../AdminArticleEditor/AdminArticleEditor"
 import AdminButton from "../AdminButton/AdminButton"
 
 
@@ -25,12 +26,12 @@ const llErrors = {
 
 
 const sampleDate = (new Date).toISOString()
-const sampleArticleData: ArticleEditorContentType = {
+const sampleArticleData: ArticleContentType = {
   title: "",
   tags: [],
   content: "",
   files: [],
-  preview: null
+  preview: ""
 }
 
 interface AdminArticleAddProps {
@@ -39,7 +40,8 @@ interface AdminArticleAddProps {
 }
 interface AdminArticleEditProps {
   new?: false
-  edit: ArticleEditorContentType
+  id: number
+  edit: ArticleContentType
 }
 
 /**
@@ -52,7 +54,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
 
   const [error, setError] = useState(false)
 
-  const [articleData, setArticleData] = useState<ArticleEditorContentType>(props.edit || sampleArticleData)
+  const [articleData, setArticleData] = useState<ArticleContentType>(props.edit || sampleArticleData)
   const [showPreview, setShowPreview] = useState(false)
 
   function validateArticleData() {
@@ -81,13 +83,25 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
     return errors
   }
 
-  async function onSubmit() {
-    const action = props.new ? postAdminArticle : patchAdminArticle
-
-    const { error, payload } = await ClientAPI.query(action(articleData))
+  async function postArticle() {
+    const { error, payload } = await ClientAPI.query(postAdminArticle(articleData))
     if (error || !payload || payload.error) return
 
-    history.push("/blog/article/" + payload.id)
+    return payload.id
+  }
+  async function patchArticle() {
+    const id = props.edit ? props.id : 0
+
+    const { error, payload } = await ClientAPI.query(patchAdminArticle(id, articleData))
+    if (error || !payload || payload.error) return
+
+    return payload.id
+  }
+
+  async function onSubmit() {
+    const id = props.new ? await postArticle() : await patchArticle()
+
+    history.push("/blog/article/" + id)
   }
 
   useEffect(() => {
@@ -124,7 +138,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
 }
 
 
-interface AdminArticlePreviewProps extends ArticleEditorContentType {
+interface AdminArticlePreviewProps extends ArticleContentType {
   hidden?: boolean
 }
 
@@ -136,6 +150,7 @@ function AdminArticlePreview(props: AdminArticlePreviewProps) {
     created_at: sampleDate,
     preview: props.files.find(file => file.name === props.preview)?.data || ""
   }
+  if (props.hidden) return null
   return (
     <div className={classWithModifiers("article-preview", props.hidden && "hidden")}>
       <div className="article-preview__entry">

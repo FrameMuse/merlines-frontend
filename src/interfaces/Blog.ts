@@ -16,6 +16,7 @@ export interface ArticlePreviewType {
 export interface ArticleContentType {
   title: string
   content: string
+  preview: string
   tags: string[]
   files: ArticleFileType[]
 }

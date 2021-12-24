@@ -1,6 +1,6 @@
 import "./AdminArticleEditor.style.scss"
 
-import { ArticleFileType } from "interfaces/Blog"
+import { ArticleContentType, ArticleFileType } from "interfaces/Blog"
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
 import { classWithModifiers, isImageFile, toBase64 } from "utils"
 
@@ -8,17 +8,9 @@ import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
 
-export interface ArticleEditorContentType {
-  tags: string[]
-  title: string
-  content: string
-  preview: string | null
-  files: ArticleFileType[]
-}
-
-interface AdminEditArticleProps extends ArticleEditorContentType {
+interface AdminEditArticleProps extends ArticleContentType {
   hidden?: boolean
-  onChange: Dispatch<Partial<ArticleEditorContentType>>
+  onChange: Dispatch<Partial<ArticleContentType>>
 }
 
 function AdminArticleEditor(props: AdminEditArticleProps) {
@@ -35,15 +27,15 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const updateTag = (value: string, index: number) => (tags[index] = value, setTags([...tags]))
 
   async function addFiles(filesToAdd: File[]) {
-    // Filter by unique file name
+    // Filter by file
     for (const fileToAdd of filesToAdd) {
-      const fileName = getFileId(fileToAdd)
-      if (files.some(file => file.name === fileName)) continue
+      const name = getFileId(fileToAdd)
+      if (files.some(file => file.name === name)) continue
 
-      files.push({
-        name: fileName,
-        data: await toBase64(fileToAdd)
-      })
+      const data = await toBase64(fileToAdd)
+      // if (files.some(file => file.data === data)) continue
+
+      files.push({ name, data })
     }
 
     setFiles([...files])
