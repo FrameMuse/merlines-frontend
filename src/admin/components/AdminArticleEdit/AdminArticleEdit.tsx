@@ -4,7 +4,7 @@ import { patchAdminArticle, postAdminArticle } from "api/actions/admin"
 import ClientAPI from "api/client"
 import ArticleCard from "components/Article/ArticleCard"
 import ArticleContent from "components/Article/ArticleContent"
-import { ArticleContentType } from "interfaces/Blog"
+import { ArticleAuthorType, ArticleContentType } from "interfaces/Blog"
 import { AuthedUser } from "interfaces/user"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -37,11 +37,13 @@ const sampleArticleData: ArticleContentType = {
 interface AdminArticleAddProps {
   new: true
   edit?: undefined
+  author?: undefined
 }
 interface AdminArticleEditProps {
   new?: false
   id: string
   edit: ArticleContentType
+  author: ArticleAuthorType
 }
 
 /**
@@ -136,7 +138,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
         />
       </div>
       <AdminArticleEditor {...articleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />
-      <AdminArticlePreview {...articleData} hidden={!showPreview} />
+      <AdminArticlePreview {...articleData} hidden={!showPreview} author={props.author} />
       <div>
         <AdminButton onClick={onSubmit} disabled={error}>Опубликовать статью</AdminButton>
       </div>
@@ -147,10 +149,11 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
 
 interface AdminArticlePreviewProps extends ArticleContentType {
   hidden?: boolean
+  author?: ArticleAuthorType
 }
 
 function AdminArticlePreview(props: AdminArticlePreviewProps) {
-  const user = useSelector(state => state.user) as AuthedUser
+  const user = useSelector(state => props.author || state.user) as AuthedUser
   const previewProps = {
     ...props,
     id: 1,
