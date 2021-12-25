@@ -6,14 +6,14 @@ import { ToastContainer } from "react-toastify"
 
 function AdminEditArticleView(props: { articleId: string }) {
   return (
-    <AdminViewLayout title="Добавить статью">
-      <AdminArticleEditWithPreloadedData {...props} />
+    <AdminViewLayout title="Редактировать статью">
+      <AdminArticleEditContainer {...props} />
       <ToastContainer />
     </AdminViewLayout>
   )
 }
 
-function AdminArticleEditWithPreloadedData(props: { articleId: string }) {
+function AdminArticleEditContainer(props: { articleId: string }) {
   const { payload } = useQuery(getBlogArticle(props.articleId))
   if (!payload) return <>no content</>
 

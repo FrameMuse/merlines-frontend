@@ -38,7 +38,7 @@ function ArticleContent(props: ArticleContentProps) {
           </div>
           <div className="article__content">
             <ReactMarkdown components={{ img: props => <ArticlePicture {...props} /> }}>
-              {props.files.reduce((result, file) => result.replace(new RegExp(file.name, "g"), file.data), props.content)}
+              {props.files.reduce((result, file) => result.replace(new RegExp(file.name, "g"), file.data || ""), props.content)}
             </ReactMarkdown>
           </div>
           <div className="user user--article">

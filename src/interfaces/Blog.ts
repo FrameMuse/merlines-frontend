@@ -23,7 +23,7 @@ export interface ArticleContentType {
 
 export interface ArticleFileType {
   name: string
-  data: URLType | DataURLBase64
+  data: URLType | DataURLBase64 | null
 }
 
 export interface ArticleReplyType {

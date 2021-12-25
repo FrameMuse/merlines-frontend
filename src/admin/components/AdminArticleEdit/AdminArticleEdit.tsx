@@ -68,7 +68,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
       errors.push(llErrors.noImages)
     }
 
-    if (articleData.preview == null) {
+    if (articleData.preview.length === 0) {
       errors.push(llErrors.noPreview)
     }
 
@@ -91,6 +91,13 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
   }
   async function patchArticle() {
     const id = props.edit ? props.id : ""
+    const files = articleData.files
+
+    for (const file of Object.values(files)) {
+      if (articleData.content.includes(file.name)) {
+        file.data = null
+      }
+    }
 
     const { error, payload } = await ClientAPI.query(patchAdminArticle(id, articleData))
     if (error || !payload || payload.error) return
@@ -117,11 +124,11 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
     })
 
     setError(!!errors.length)
-  }, [llErrors, articleData, validateArticleData])
+  }, [llErrors, validateArticleData])
 
   return (
     <div className={classWithModifiers("article-edit", showPreview && "preview")}>
-      <div className="article__topbar-edit__topbar">
+      <div className="article-edit__topbar">
         <AdminButton
           onClick={() => setShowPreview(!showPreview)}
           color={showPreview ? "gray" : undefined}
@@ -131,7 +138,10 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
       <AdminArticleEditor {...articleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />
       <AdminArticlePreview {...articleData} hidden={!showPreview} />
       <div>
-        <AdminButton onClick={onSubmit} disabled={error}>Опубликовать статью</AdminButton>
+        {!showPreview && "Опубликовать статью можно только из предпросмотра"}
+        {showPreview && (
+          <AdminButton onClick={onSubmit} disabled={error}>Опубликовать статью</AdminButton>
+        )}
       </div>
     </div>
   )

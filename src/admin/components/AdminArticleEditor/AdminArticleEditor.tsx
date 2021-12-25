@@ -1,6 +1,6 @@
 import "./AdminArticleEditor.style.scss"
 
-import { ArticleContentType, ArticleFileType } from "interfaces/Blog"
+import { ArticleContentType } from "interfaces/Blog"
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
 import { classWithModifiers, isImageFile, toBase64 } from "utils"
 
@@ -24,7 +24,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const updateContent = (event: FormEvent<HTMLTextAreaElement>) => setContent(event.currentTarget.value)
 
   const addTag = () => setTags([...tags, "Новый тэг"])
-  const updateTag = (value: string, index: number) => (tags[index] = value, setTags([...tags]))
+  const updateTag = (value: string, index: number) => (tags[index] = value, setTags([...tags.filter(Boolean)]))
 
   async function addFiles(filesToAdd: File[]) {
     // Filter by file
@@ -88,7 +88,16 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   }
 
   useEffect(() => {
-    props.onChange({ tags: tags.filter(Boolean), title, content, preview, files })
+    const filteredFiles = [...files.filter(file => content.includes(file.name))]
+    if (filteredFiles.every(file => file.name !== preview)) {
+      setPreview("")
+    }
+
+    setFiles(filteredFiles)
+  }, [content])
+
+  useEffect(() => {
+    props.onChange({ tags, title, content, preview, files })
   }, [tags, title, content, preview, files])
 
   return (
@@ -115,7 +124,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
           )}
           {files.map(file => (
             <div className={classWithModifiers("article-editor-preview-image", file.name === preview && "chosen")} key={file.name}>
-              <img className="article-editor-preview-image__image" src={file.data} alt="" />
+              <img className="article-editor-preview-image__image" src={file.data || ""} alt="" />
               <span className="article-editor-preview-image__copy" onClick={() => setPreview(file.name)}>
                 <div className="article-editor-preview-image__text">
                   {file.name === preview && "PREVIEW"}
@@ -138,7 +147,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
             "Подпись под картинкой" не обязательна
           </p>
         </div>
-        <textarea className="article-editor-content__textarea" required onInput={updateContent} onPaste={onPaste} onDrop={onDrop}>{content}</textarea>
+        <textarea className="article-editor-content__textarea" required onInput={updateContent} onPaste={onPaste} onDrop={onDrop} defaultValue={content} />
         <a className="article-editor-content__notice" href="https://commonmark.org/help/">
           <span>Learn markdown</span>
           <img src="https://commonmark.org/help/images/favicon.png" width="20" alt="Markdown" />

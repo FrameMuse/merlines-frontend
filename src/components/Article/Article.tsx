@@ -3,11 +3,8 @@ import "./article-card.scss"
 import "./article-page.scss"
 
 import { getBlogArticle } from "api/actions/blog"
-import { postMainEcho } from "api/actions/main"
-import { FormEvent } from "react"
 import { useQuery } from "react-fetching-library"
 
-import ClientAPI from "../../api/client"
 import ArticleContent from "./ArticleContent"
 
 
