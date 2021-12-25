@@ -16,13 +16,14 @@ export interface ArticlePreviewType {
 export interface ArticleContentType {
   title: string
   content: string
+  preview: string
   tags: string[]
   files: ArticleFileType[]
 }
 
 export interface ArticleFileType {
   name: string
-  data: URLType | DataURLBase64
+  data: URLType | DataURLBase64 | null
 }
 
 export interface ArticleReplyType {

@@ -1,4 +1,3 @@
-import { ArticleEditorContentType } from "admin/components/AdminArticleEditor/AdminArticleEditor"
 import { Action } from "api/client"
 import { ArticleContentType } from "interfaces/Blog"
 import { PaginationType } from "interfaces/Django"
@@ -12,15 +11,15 @@ export const getAdminArticle = (articleId: string): Action<ArticleContentType> =
   endpoint: "/admin/articles/" + articleId,
 })
 
-export const postAdminArticle = (data: ArticleEditorContentType): Action<{ id: number }> => ({
+export const postAdminArticle = (data: ArticleContentType): Action<{ id: number }> => ({
   method: "POST",
   endpoint: "/admin/articles",
   body: data
 })
 
-export const patchAdminArticle = (data: ArticleEditorContentType): Action<{ id: number }> => ({
+export const patchAdminArticle = (id: string, data: ArticleContentType): Action<{ id: number }> => ({
   method: "PATCH",
-  endpoint: "/admin/articles",
+  endpoint: "/admin/article/" + id,
   body: data
 })
 
