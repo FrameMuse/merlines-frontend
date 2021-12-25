@@ -6,7 +6,7 @@ import { classWithModifiers } from "utils"
 
 interface AdminEditableTagProps {
   children: string
-  onInput: Dispatch<string>
+  onChange: Dispatch<string>
 }
 
 function AdminEditableTag(props: AdminEditableTagProps) {
@@ -16,7 +16,7 @@ function AdminEditableTag(props: AdminEditableTagProps) {
     if (textContent === tag) return
 
     setTag(textContent)
-    props.onInput(textContent ?? null)
+    props.onChange(textContent)
   }
   return (
     <span className={classWithModifiers("editable-tag")} contentEditable onBlur={onBlur}>{tag}</span>

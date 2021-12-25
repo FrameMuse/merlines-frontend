@@ -109,7 +109,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
         <AdminButton className="article-editor-tags__button" onClick={addTag}>Добавить</AdminButton>
         <div className="article-editor-tags__inner">
           {tags.map((tag, index) => tag.length > 0 && (
-            <AdminEditableTag onInput={value => updateTag(value, index)} key={index}>{tag}</AdminEditableTag>
+            <AdminEditableTag onChange={value => updateTag(value, index)} key={index}>{tag}</AdminEditableTag>
           ))}
         </div>
       </div>
