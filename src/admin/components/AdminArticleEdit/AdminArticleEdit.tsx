@@ -109,6 +109,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
 
   async function onSubmit() {
     const id = props.new ? await postArticle() : await patchArticle()
+    if (!id) return
 
     history.push("/blog/article/" + id)
   }
