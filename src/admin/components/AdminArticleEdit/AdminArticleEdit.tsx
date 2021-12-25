@@ -96,7 +96,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
     const files = articleData.files
 
     for (const file of Object.values(files)) {
-      if (file.data && articleData.content.includes(file.data)) {
+      if (file.data?.startsWith("http")) {
         file.data = null
       }
     }

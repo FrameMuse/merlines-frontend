@@ -10,5 +10,8 @@ export const getBlogArticles = (page: number, page_size: number, tags__contains:
 
 export const getBlogArticle = (id: string): Action<ArticleType> => ({
   method: "GET",
-  endpoint: "/blog/article/" + id
+  endpoint: "/blog/article/" + id,
+  config: {
+    skipAuth: true
+  }
 })
