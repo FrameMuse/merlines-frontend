@@ -1,3 +1,4 @@
+import { MailingEntryType } from "admin/components/AdminBlogMailing/AdminBlogMailing"
 import { AdminTagType } from "admin/components/AdminEditTags/AdminEditTags"
 import { Action } from "api/client"
 import { ArticleContentType } from "interfaces/Blog"
@@ -72,4 +73,18 @@ export const putAdminTag = (id: number, title: string): Action<AdminTagType> => 
 export const deleteAdminTag = (id: number): Action => ({
   method: "DELETE",
   endpoint: "/admin/tag/" + id
+})
+
+/* Mailing */
+
+export const getAdminMailings = (page: number, page_size: number): Action<PaginationType<MailingEntryType>> => ({
+  method: "GET",
+  endpoint: "/admin/mailings",
+  params: { page, page_size }
+})
+
+export const postAdminMailings = (title: string, subject: string, content: string): Action => ({
+  method: "POST",
+  endpoint: "/admin/mailings",
+  body: { title, subject, content }
 })
