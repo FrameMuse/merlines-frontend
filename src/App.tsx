@@ -35,6 +35,15 @@ function App() {
   )
 }
 
+
+const DEFAULT_CONFIG = {
+  trackingId: 3118097372,
+  debug: true,
+  gaOptions: {
+    cookieDomain: "none"
+  }
+}
+
 function GoogleAnalytics() {
   const history = useHistory()
 
@@ -42,6 +51,10 @@ function GoogleAnalytics() {
     ReactGA.initialize("G-NC9LWLE6E1")
 
     history.listen(location => {
+      ReactGA.set({
+        ...DEFAULT_CONFIG,
+        page: location.pathname + location.search
+      })
       ReactGA.pageview(location.pathname + location.search)
     })
   }, [history])
