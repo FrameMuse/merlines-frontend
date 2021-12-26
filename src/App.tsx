@@ -3,8 +3,9 @@ import { getAccountMe } from "api/actions/account"
 import ClientAPI from "api/client"
 import DEPRECATED__App__ from "App.deprecated"
 import { useEffect } from "react"
+import ReactGA from "react-ga"
 import { useDispatch } from "react-redux"
-import { Route, Switch } from "react-router-dom"
+import { Route, Switch, useHistory } from "react-router-dom"
 import { loginUser } from "redux/reducers/user"
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         dispatch(loginUser(payload))
       })
   }, [dispatch])
+
   return (
     <>
       <Switch>
@@ -25,11 +27,26 @@ function App() {
           <AdminView />
         </Route>
         <Route>
+          <GoogleAnalytics />
           <DEPRECATED__App__ />
         </Route>
       </Switch>
     </>
   )
+}
+
+function GoogleAnalytics() {
+  const history = useHistory()
+
+  useEffect(() => {
+    ReactGA.initialize("G-NC9LWLE6E1")
+
+    history.listen(location => {
+      ReactGA.pageview(location.pathname + location.search)
+    })
+  }, [history])
+
+  return null
 }
 
 export default App
