@@ -6,6 +6,7 @@ import { routerMiddleware } from "connected-react-router"
 import { StrictMode } from "react"
 import ReactDOM from "react-dom"
 import { ClientContextProvider } from "react-fetching-library"
+import ReactGA from "react-ga"
 import { Provider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
 import { RecoilRoot } from "recoil"
@@ -15,6 +16,11 @@ import { composeWithDevTools } from "redux-devtools-extension"
 import thunk from "redux-thunk"
 
 import App from "./App"
+
+
+
+ReactGA.initialize("G-NC9LWLE6E1")
+ReactGA.pageview(window.location.pathname + window.location.search)
 
 
 const store = createStore(
