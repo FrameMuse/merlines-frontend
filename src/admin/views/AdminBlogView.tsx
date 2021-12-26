@@ -2,6 +2,7 @@ import AdminBlogPriorities from "admin/components/AdminBlog/AdminBlogPriorities"
 import AdminBlogMailing from "admin/components/AdminBlogMailing/AdminBlogMailing"
 import AdminEditTags from "admin/components/AdminEditTags/AdminEditTags"
 import AdminViewLayout from "admin/layouts/AdminViewLayout"
+import { ToastContainer } from "react-toastify"
 
 function AdminBlogView() {
   return (
@@ -9,6 +10,7 @@ function AdminBlogView() {
       <AdminEditTags />
       <AdminBlogMailing />
       <AdminBlogPriorities />
+      <ToastContainer />
     </AdminViewLayout>
   )
 }

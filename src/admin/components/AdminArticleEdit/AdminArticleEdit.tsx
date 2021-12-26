@@ -96,7 +96,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
     const files = articleData.files
 
     for (const file of Object.values(files)) {
-      if (articleData.content.includes(file.name)) {
+      if (file.data?.startsWith("http")) {
         file.data = null
       }
     }
@@ -109,6 +109,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
 
   async function onSubmit() {
     const id = props.new ? await postArticle() : await patchArticle()
+    if (!id) return
 
     history.push("/blog/article/" + id)
   }
@@ -179,7 +180,8 @@ function AdminArticlePreview(props: AdminArticlePreviewProps) {
           <ArticleContent
             {...previewProps}
             author={user}
-            comments={[]}
+            likes={27}
+            liked={true}
             previewMode
           />
         </div>

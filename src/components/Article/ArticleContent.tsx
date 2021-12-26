@@ -52,7 +52,7 @@ function ArticleContent(props: ArticleContentProps) {
           </div>
         </article>
         {!props.previewMode && (
-          <ArticleComments list={props.comments} />
+          <ArticleComments {...props} />
         )}
       </div>
     </section>

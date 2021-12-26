@@ -76,15 +76,17 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   function addFilesToTextarea(target: HTMLTextAreaElement, pastedFiles: File[]) {
     const { selectionStart, selectionEnd } = target
     const markdownFiles = pastedFiles.map(fileToMarkdown).join("\n")
-
-    // https://stackoverflow.com/a/55174561/288906
-    if (!document.execCommand("insertText", false, markdownFiles)) {
-      target.setRangeText(markdownFiles, selectionStart, selectionEnd, "end")
-    }
-    setContent(target.value)
-
     const images = pastedFiles.filter(pastedFile => pastedFile.type.startsWith("image"))
     addFiles(images)
+
+    // setContent should go after addFiles
+    setTimeout(() => {
+      // https://stackoverflow.com/a/55174561/288906
+      if (!document.execCommand("insertText", false, markdownFiles)) {
+        target.setRangeText(markdownFiles, selectionStart, selectionEnd, "end")
+      }
+      setContent(target.value)
+    })
   }
 
   useEffect(() => {
@@ -107,7 +109,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
         <AdminButton className="article-editor-tags__button" onClick={addTag}>Добавить</AdminButton>
         <div className="article-editor-tags__inner">
           {tags.map((tag, index) => tag.length > 0 && (
-            <AdminEditableTag onInput={value => updateTag(value, index)} key={index}>{tag}</AdminEditableTag>
+            <AdminEditableTag onChange={value => updateTag(value, index)} key={index}>{tag}</AdminEditableTag>
           ))}
         </div>
       </div>

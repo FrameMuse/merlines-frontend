@@ -1,3 +1,4 @@
+import { AdminTagType } from "admin/components/AdminEditTags/AdminEditTags"
 import { Action } from "api/client"
 import { ArticleContentType } from "interfaces/Blog"
 import { PaginationType } from "interfaces/Django"
@@ -37,8 +38,38 @@ export const putAdminUser = (id: number, type: AuthedUser["type"]): Action => ({
   body: { type }
 })
 
-export const getAdminUsers = (filters: Partial<{ id: number, first_name: string, page: number, page_size: number }>): Action<PaginationType<AuthedUser>> => ({
+export const deleteAdminUser = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: "/admin/user/" + id
+})
+
+export const getAdminUsers = (filters: Partial<{ id: number, type: string, first_name: string, page: number, page_size: number }>): Action<PaginationType<AuthedUser>> => ({
   method: "GET",
   endpoint: "/admin/users",
   params: filters
+})
+
+/* Tags */
+
+export const getAdminTags = (page: number, page_size: number): Action<PaginationType<AdminTagType>> => ({
+  method: "GET",
+  endpoint: "/admin/tags",
+  params: { page, page_size }
+})
+
+export const postAdminTag = (title: string): Action<AdminTagType> => ({
+  method: "POST",
+  endpoint: "/admin/tags",
+  body: { title }
+})
+
+export const putAdminTag = (id: number, title: string): Action<AdminTagType> => ({
+  method: "PUT",
+  endpoint: "/admin/tag/" + id,
+  body: { title }
+})
+
+export const deleteAdminTag = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: "/admin/tag/" + id
 })

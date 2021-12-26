@@ -2,14 +2,14 @@
 import "./AdminEditUsers.style.scss"
 
 import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
-import { getAdminUsers, putAdminUser } from "api/actions/admin"
+import { deleteAdminUser, getAdminUsers, putAdminUser } from "api/actions/admin"
+import ClientAPI from "api/client"
 import Icon from "components/common/Icon"
 import { AuthedUser } from "interfaces/user"
 import { FormEvent, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { classWithModifiers } from "utils"
 
-import ClientAPI from "../../../api/client"
 import AdminButton from "../AdminButton/AdminButton"
 import AdminSearchFilters from "../AdminSearchFilters/AdminSearchFilters"
 
@@ -20,20 +20,19 @@ function AdminEditUsers() {
 
   function onSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    console.log(1, event)
     const elements = event.currentTarget.elements as unknown as Record<"id" | "name" | "type" | "amount", HTMLInputElement>
 
     setFilters({
       id: Number(elements.id.value),
       first_name: elements.name.value,
-      // type: elements.type.value,
+      type: elements.type.value,
       page_size: Number(elements.amount.value)
     })
   }
 
   if (!payload || payload.error) return <>no content</>
   return (
-    <AdminSectionLayout header={payload.results.length + " пользователей"}>
+    <AdminSectionLayout header={payload.results.length + " пользователей найдено"}>
       <AdminSearchFilters onSubmit={onSearch} pending={loading}>
         <input type="number" name="id" placeholder="id" />
         <input type="text" name="name" placeholder="name" />
@@ -87,8 +86,17 @@ function AdminEditUsersUser(props: AdminEditUsersUserProps) {
 
 function AdminEditUsersUserDangerZone(props: AdminEditUsersUserProps) {
   const [type, setType] = useState(props.type)
-  function changeType() {
+  function onChangeType() {
+    if (!window.confirm("Вы уверены, что хотите изменить этого пользователя?")) return
+    if (!window.confirm("Вы ТОЧНО уверены, что хотите изменить этого пользователя?")) return
+
     return ClientAPI.query(putAdminUser(props.id, type))
+  }
+  function onBan() {
+    if (!window.confirm("Вы уверены, что хотите забанить этого пользователя?")) return
+    if (!window.confirm("Вы ТОЧНО уверены, что хотите забанить этого пользователя?")) return
+
+    return ClientAPI.query(deleteAdminUser(props.id))
   }
   return (
     <div className="edit-user-area edit-user-area--danger">
@@ -100,8 +108,8 @@ function AdminEditUsersUserDangerZone(props: AdminEditUsersUserProps) {
             <option value="editor">editor</option>
             <option value="default">default</option>
           </select>
-          <AdminButton color="red" onClick={changeType}>Изменить роль</AdminButton>
-          <AdminButton color="red">Забанить</AdminButton>
+          <AdminButton color="red" onClick={onChangeType}>Изменить роль</AdminButton>
+          <AdminButton color="red" onClick={onBan}>Забанить</AdminButton>
         </div>
       </div>
     </div>
