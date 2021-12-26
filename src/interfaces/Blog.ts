@@ -1,8 +1,9 @@
 import { DataURLBase64, URLType } from "./common"
 
 export interface ArticleType extends ArticlePreviewType, ArticleContentType {
-  comments: ArticleReplyType[]
   author: ArticleAuthorType
+  likes: number
+  liked: boolean
 }
 
 export interface ArticlePreviewType {

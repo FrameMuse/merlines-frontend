@@ -38,6 +38,11 @@ export const putAdminUser = (id: number, type: AuthedUser["type"]): Action => ({
   body: { type }
 })
 
+export const deleteAdminUser = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: "/admin/user/" + id
+})
+
 export const getAdminUsers = (filters: Partial<{ id: number, first_name: string, page: number, page_size: number }>): Action<PaginationType<AuthedUser>> => ({
   method: "GET",
   endpoint: "/admin/users",

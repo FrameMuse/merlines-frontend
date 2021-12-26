@@ -1,48 +1,73 @@
 // SCSS
 import "./comments.scss"
 
+import { getBlogArticleComments, postBlogArticleLike } from "api/actions/blog"
+import ClientAPI from "api/client"
 import Icon from "components/common/Icon"
-import { ArticleReplyType } from "interfaces/Blog"
-import { Link } from "react-router-dom"
+import { ArticleAuthorType, ArticleReplyType, ArticleType } from "interfaces/Blog"
+import { useEffect, useState } from "react"
+import { useQuery } from "react-fetching-library"
 import { classWithModifiers } from "utils"
 
-import ArticleCommentsList from "./ArticleCommentsList"
+import ArticleCommentsForm from "./ArticleCommentsForm"
+import ArticleCommentsItem from "./ArticleCommentsItem"
 
-function ArticleComments(props: { list: ArticleReplyType[] }) {
+
+interface ArticleCommentsProps extends ArticleType {
+  reply?: ArticleAuthorType
+}
+
+function ArticleComments(props: ArticleCommentsProps) {
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+  const [comments, setComments] = useState<ArticleReplyType[]>([])
+  const { error, payload } = useQuery(getBlogArticleComments(props.id, page, pageSize))
+  useEffect(() => {
+    if (!payload) return
+    setComments(payload.results)
+  }, [payload])
+  if (error || !payload || payload.error) return <>no content</>
   return (
     <section className="comments comments--active">
       <div className="comments__header">
         <h2 className="comments__header-title">
-          <span className="comments__header-counter">23</span>комментария
+          <span className="comments__header-counter">{payload.count}</span>комментария
         </h2>
-        <div className={classWithModifiers("comments__like")}>
-          <span className="comments__like-counter">24</span>
-          <Icon className="comments__like-icon" name="like" />
-        </div>
+        <ArticleLikes {...props} />
       </div>
-      <ArticleCommentsList list={props.list} />
-      <form className="comments__form">
-        <div className="comments__form-header">
-          <h3 className="comments__form-title">Ваш комментарий</h3>
-          <span className="comments__info comments__info--closed">
-            ответ для{" "}
-            <Link className="comments__info-link" to="#">
-              Григорий Пронин
-            </Link>
-          </span>
-          <div className="comments__form-info">
-            <span className="comments__symbol-counter">0</span>
-            /
-            <span>500 символов</span>
+      <div className="comments__inner">
+        <ul className="comments__list">
+          {comments.map(item => (
+            <ArticleCommentsItem {...item} key={item.id} />
+          ))}
+        </ul>
+        {(page * pageSize) < payload.count && (
+          <div className="button-text">
+            <button className="button-text__btn" onClick={() => setPage(page + 1)}>загрузить ещё 10 комментариев</button>
           </div>
-        </div>
-        <textarea className="comments__message" placeholder="Введите текст комментария..." />
-        <div className="comments__btn-container">
-          <input className="btn comments__btn" type="submit" value="Оставить комментарий" />
-          <input className="comments__btn-reset" type="reset" value="Отменить" />
-        </div>
-      </form>
+        )}
+      </div>
+      <ArticleCommentsForm {...props} />
     </section>
+  )
+}
+
+function ArticleLikes(props: ArticleCommentsProps) {
+  const [liked, setLiked] = useState(props.liked)
+  function onLike() {
+    ClientAPI
+      .query(postBlogArticleLike(props.id))
+      .then(({ error, payload, status }) => {
+        if (error || payload?.error || status !== 204) return
+
+        setLiked(!liked)
+      })
+  }
+  return (
+    <div className={classWithModifiers("comments__like", liked && "active")} onClick={onLike}>
+      <span className="comments__like-counter">{props.likes + Number(liked)}</span>
+      <Icon className="comments__like-icon" name="like" />
+    </div>
   )
 }
 

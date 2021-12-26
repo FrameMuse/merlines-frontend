@@ -180,7 +180,8 @@ function AdminArticlePreview(props: AdminArticlePreviewProps) {
           <ArticleContent
             {...previewProps}
             author={user}
-            comments={[]}
+            likes={27}
+            liked={true}
             previewMode
           />
         </div>
