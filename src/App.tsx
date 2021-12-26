@@ -27,7 +27,7 @@ function App() {
           <AdminView />
         </Route>
         <Route>
-          <GoogleAnalytics />
+          {/* <GoogleAnalytics /> */}
           <DEPRECATED__App__ />
         </Route>
       </Switch>
@@ -36,30 +36,30 @@ function App() {
 }
 
 
-const DEFAULT_CONFIG = {
-  trackingId: 3118097372,
-  debug: true,
-  gaOptions: {
-    cookieDomain: "none"
-  }
-}
+// const DEFAULT_CONFIG = {
+//   trackingId: 3118097372,
+//   debug: true,
+//   gaOptions: {
+//     cookieDomain: "none"
+//   }
+// }
 
-function GoogleAnalytics() {
-  const history = useHistory()
+// function GoogleAnalytics() {
+//   const history = useHistory()
 
-  useEffect(() => {
-    ReactGA.initialize("G-NC9LWLE6E1")
+//   useEffect(() => {
+//     ReactGA.initialize("G-NC9LWLE6E1")
 
-    history.listen(location => {
-      ReactGA.set({
-        ...DEFAULT_CONFIG,
-        page: location.pathname + location.search
-      })
-      ReactGA.pageview(location.pathname + location.search)
-    })
-  }, [history])
+//     history.listen(location => {
+//       ReactGA.set({
+//         ...DEFAULT_CONFIG,
+//         page: location.pathname + location.search
+//       })
+//       ReactGA.pageview(location.pathname + location.search)
+//     })
+//   }, [history])
 
-  return null
-}
+//   return null
+// }
 
 export default App
