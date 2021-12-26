@@ -44,7 +44,12 @@ function requestInterceptor() {
 function responseInterceptor() {
   return async (_action: Action, response: QueryResponse<APIResponseError>) => {
     if (response.payload?.error) {
-      toast.error(response.payload.error)
+      toast.error(response.payload.error.code)
+
+      return {
+        ...response,
+        error: true
+      }
     }
 
     try {
