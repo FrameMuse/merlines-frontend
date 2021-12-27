@@ -1,7 +1,11 @@
+import { deleteAdminComment } from "api/actions/admin"
 import { ArticleReplyType } from "interfaces/Blog"
 import { useState } from "react"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 
+import ClientAPI from "../../../api/client"
 import ArticleCommentsForm from "./ArticleCommentsForm"
 
 
@@ -10,8 +14,22 @@ interface ArticleCommentsItemProps extends ArticleReplyType {
 }
 
 function ArticleCommentsItem(props: ArticleCommentsItemProps) {
+  const user = useSelector(state => state.user)
+
+  const [text, setText] = useState(props.text)
   const [comments, setComments] = useState<ArticleReplyType[]>(props.replies)
   const [isReplying, setIsReplying] = useState(false)
+
+  function onDelete() {
+    ClientAPI
+      .query(deleteAdminComment(props.id))
+      .then(({ error }) => {
+        if (error) return
+
+        setText(null)
+        toast.info("Comment deleted")
+      })
+  }
 
   function onNewMessage(comment: ArticleReplyType) {
     setComments([...comments, comment])
@@ -29,10 +47,15 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
           </Link>
         </div>
       </div>
-      <p className="comments__text">{props.text}</p>
+      <p className="comments__text">{text || "Comment deleted"}</p>
       <div className="comments__item-inner">
         <time className="comments__item-date" dateTime={props.created_at}>{date}</time>
-        <button className="comments__item-btn" onClick={() => setIsReplying(!isReplying)}>Ответить</button>
+        <div className="comments__buttons">
+          {!!text && user.authed && ["ADMIN", "EDITOR"].includes(user.type) && (
+            <button className="comments__item-btn" onClick={onDelete}>Удалить</button>
+          )}
+          <button className="comments__item-btn" onClick={() => setIsReplying(!isReplying)}>Ответить</button>
+        </div>
       </div>
       {isReplying && (
         <ArticleCommentsForm articleId={props.articleId} reply={props.author} replyId={props.id} onNewMessage={onNewMessage} />

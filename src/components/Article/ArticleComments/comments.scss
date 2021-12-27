@@ -254,7 +254,6 @@
 
 .comments__item-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: 15px;
 
@@ -265,6 +264,13 @@
 
 .comments__item-date {
   @include date;
+}
+
+.comments__buttons {
+  display: flex;
+  gap: 1em;
+
+  margin-left: auto;
 }
 
 .comments__item-btn {

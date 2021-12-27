@@ -29,7 +29,7 @@ export interface ArticleFileType {
 
 export interface ArticleReplyType {
   id: number
-  text: string
+  text: string | null
   created_at: string
   author: ArticleAuthorType
   replies: ArticleReplyType[]
