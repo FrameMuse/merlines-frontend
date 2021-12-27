@@ -5,7 +5,6 @@ import { getGeoIp } from "api/actions/geo"
 import DropDownCalendar from "components/DropDownCalendar/DropDownCalendar"
 import { DateCalendarState } from "components/DropDownCalendar/DropDownCalendarReducer"
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react"
-import { useQuery } from "react-fetching-library"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useClickAway } from "react-use"
@@ -34,8 +33,11 @@ function SearchForm() {
   function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-
     const route = search.routes[0]
+    if (Object.values(route).some(value => !value)) {
+      setFormError(true)
+      return
+    }
 
     const searchQuery = createQuery({
       origin: route.departurePoint?.code,
@@ -58,6 +60,10 @@ function SearchForm() {
 
     console.log(searchQuery)
   }
+
+  useEffect(() => {
+    setFormError(false)
+  }, [search])
 
   useEffect(() => {
     ClientAPI.query(getGeoIp).then(({ payload }) => {

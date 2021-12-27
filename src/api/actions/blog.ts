@@ -15,7 +15,7 @@ export const getBlogArticle = (id: string): Action<ArticleType> => ({
   method: "GET",
   endpoint: "/blog/article/" + id,
   config: {
-    skipAuth: true
+    skipCache: true
   }
 })
 
@@ -28,7 +28,7 @@ export const getBlogArticleComments = (id: number, page: number, page_size: numb
   params: { page, page_size }
 })
 
-export const postBlogArticleComments = (id: number, text: string, reply?: number): Action<{}> => ({
+export const postBlogArticleComments = (id: number, text: string, reply?: number): Action<Pick<ArticleReplyType, "id" | "created_at" | "author">> => ({
   method: "POST",
   endpoint: "/blog/article/" + id + "/comments",
   body: { text, reply }

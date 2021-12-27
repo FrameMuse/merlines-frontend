@@ -114,6 +114,10 @@
   border-radius: 4px;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
 
+  &--error {
+    border: 2px solid rgb(198, 14, 14);
+  }
+
   @media #{$media-md} {
     padding-top: 0;
     display: grid;

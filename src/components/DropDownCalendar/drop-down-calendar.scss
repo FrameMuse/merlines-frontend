@@ -150,6 +150,9 @@
 }
 
 .drop-down-calendar-arrow {
+  width: 0.5em;
+  height: 0.5em;
+
   @media #{$media-md} {
     color: inherit;
     cursor: pointer;
@@ -238,7 +241,7 @@
   justify-items: center;
   overflow: hidden;
 
-  & > :first-child {
+  &> :first-child {
     grid-column: var(--first-week-day, 1);
   }
 }
@@ -272,7 +275,7 @@
     color: var(--color-white);
     background-color: var(--color-light-blue-2);
 
-    & + &::before {
+    &+&::before {
       content: "";
 
       position: absolute;

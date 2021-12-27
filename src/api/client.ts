@@ -35,7 +35,6 @@ function requestInterceptor() {
       ...action,
       endpoint: endpoint + (query && "?" + query),
       headers: {
-        // "content-type": "application/json",
         Authorization: !action.config?.skipAuth && localStorage.getItem("token") || ""
       }
     }
@@ -43,15 +42,6 @@ function requestInterceptor() {
 }
 function responseInterceptor() {
   return async (_action: Action, response: QueryResponse<APIResponseError>) => {
-    if (response.payload?.error) {
-      toast.error(response.payload.error.code)
-
-      return {
-        ...response,
-        error: true
-      }
-    }
-
     try {
       if (process.env.NODE_ENV === "development") {
         if (response.errorObject instanceof Error) {
@@ -68,6 +58,23 @@ function responseInterceptor() {
       }
     } catch (error) {
       console.log(error)
+    }
+
+
+    if (response.payload == null && response.status !== 204) {
+      return {
+        ...response,
+        error: true
+      }
+    }
+
+    if (response.payload?.error) {
+      toast.error(response.payload.error.code)
+
+      return {
+        ...response,
+        error: true
+      }
     }
 
     return response
