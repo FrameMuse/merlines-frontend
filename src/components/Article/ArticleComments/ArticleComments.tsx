@@ -22,6 +22,11 @@ function ArticleComments(props: ArticleCommentsProps) {
   const [pageSize, setPageSize] = useState(10)
   const [comments, setComments] = useState<ArticleReplyType[]>([])
   const { error, payload } = useQuery(getBlogArticleComments(props.id, page, pageSize))
+
+  function onNewMessage(comment: ArticleReplyType) {
+    setComments([...comments, comment])
+  }
+
   useEffect(() => {
     if (!payload) return
     setComments(payload.results)
@@ -38,7 +43,7 @@ function ArticleComments(props: ArticleCommentsProps) {
       <div className="comments__inner">
         <ul className="comments__list">
           {comments.map(item => (
-            <ArticleCommentsItem {...item} key={item.id} />
+            <ArticleCommentsItem articleId={props.id} {...item} key={item.id} />
           ))}
         </ul>
         {(page * pageSize) < payload.count && (
@@ -47,7 +52,7 @@ function ArticleComments(props: ArticleCommentsProps) {
           </div>
         )}
       </div>
-      <ArticleCommentsForm {...props} />
+      <ArticleCommentsForm articleId={props.id} {...props} onNewMessage={onNewMessage} />
     </section>
   )
 }
@@ -57,15 +62,15 @@ function ArticleLikes(props: ArticleCommentsProps) {
   function onLike() {
     ClientAPI
       .query(postBlogArticleLike(props.id))
-      .then(({ error, payload, status }) => {
-        if (error || payload?.error || status !== 204) return
+      .then(({ error }) => {
+        if (error) return
 
         setLiked(!liked)
       })
   }
   return (
     <div className={classWithModifiers("comments__like", liked && "active")} onClick={onLike}>
-      <span className="comments__like-counter">{props.likes + Number(liked)}</span>
+      <span className="comments__like-counter">{props.likes - Number(props.liked) + Number(liked)}</span>
       <Icon className="comments__like-icon" name="like" />
     </div>
   )

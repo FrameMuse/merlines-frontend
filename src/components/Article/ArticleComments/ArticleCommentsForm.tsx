@@ -1,21 +1,38 @@
 import { postBlogArticleComments } from "api/actions/blog"
 import ClientAPI from "api/client"
-import { ArticleAuthorType } from "interfaces/Blog"
-import { FormEvent, useState } from "react"
+import { ArticleAuthorType, ArticleReplyType } from "interfaces/Blog"
+import { Dispatch, FormEvent, useState } from "react"
 import { Link } from "react-router-dom"
 
 
 interface ArticleCommentsFormProps {
-  id: number
+  articleId: number
   reply?: ArticleAuthorType
+  replyId?: number
+
+  onNewMessage?: Dispatch<ArticleReplyType>
 }
 
 function ArticleCommentsForm(props: ArticleCommentsFormProps) {
   const [message, setMessage] = useState("")
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    const form = event.currentTarget
 
-    ClientAPI.query(postBlogArticleComments(props.id, message, props.reply?.id))
+    if (message.length === 0) return
+
+    ClientAPI
+      .query(postBlogArticleComments(props.articleId, message, props.replyId))
+      .then(({ error, payload }) => {
+        if (error || !payload) return
+
+        form.reset()
+        props.onNewMessage?.({
+          ...payload,
+          text: message,
+          replies: []
+        })
+      })
   }
   return (
     <form className="comments__form" onSubmit={onSubmit}>
@@ -23,7 +40,7 @@ function ArticleCommentsForm(props: ArticleCommentsFormProps) {
         <h3 className="comments__form-title">Ваш комментарий</h3>
         {props.reply && (
           <div className="comments__info">
-            <span>ответ для</span>
+            <span>ответ для </span>
             <Link className="comments__info-link" to={"/user/" + props.reply?.id}>
               {props.reply?.first_name} {props.reply?.last_name}
             </Link>

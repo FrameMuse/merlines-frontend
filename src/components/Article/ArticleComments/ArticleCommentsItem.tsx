@@ -1,11 +1,24 @@
 import { ArticleReplyType } from "interfaces/Blog"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
+import ArticleCommentsForm from "./ArticleCommentsForm"
 
-interface ArticleCommentsItemProps extends ArticleReplyType { }
+
+interface ArticleCommentsItemProps extends ArticleReplyType {
+  articleId: number
+}
 
 function ArticleCommentsItem(props: ArticleCommentsItemProps) {
-  const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "long" })
+  const [comments, setComments] = useState<ArticleReplyType[]>(props.replies)
+  const [isReplying, setIsReplying] = useState(false)
+
+  function onNewMessage(comment: ArticleReplyType) {
+    setComments([...comments, comment])
+    setIsReplying(false)
+  }
+
+  const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "short" })
   return (
     <li className="comments__item">
       <div className="user user--comments">
@@ -19,11 +32,14 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
       <p className="comments__text">{props.text}</p>
       <div className="comments__item-inner">
         <time className="comments__item-date" dateTime={props.created_at}>{date}</time>
-        <button className="comments__item-btn">Ответить</button>
+        <button className="comments__item-btn" onClick={() => setIsReplying(!isReplying)}>Ответить</button>
       </div>
+      {isReplying && (
+        <ArticleCommentsForm articleId={props.articleId} reply={props.author} replyId={props.id} onNewMessage={onNewMessage} />
+      )}
       <div className="comments__comments">
-        {props.replies?.map(comment => (
-          <ArticleCommentsItem {...comment} key={comment.id} />
+        {comments.map(comment => (
+          <ArticleCommentsItem articleId={props.articleId} {...comment} key={comment.id} />
         ))}
       </div>
     </li>
