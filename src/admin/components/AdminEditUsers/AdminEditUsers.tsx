@@ -103,7 +103,7 @@ function AdminEditUsersUserDangerZone(props: AdminEditUsersUserProps) {
       <div className="edit-user-area__title">Danger Zone</div>
       <div className="edit-user-area__actions">
         <div className="edit-user-area__action">
-          <select className="edit-user-area__input" value={type} onChange={event => setType(event.currentTarget.value as AuthedUser["type"])}>
+          <select className="edit-user-area__input" value={type} onChange={event => setType(Number(event.currentTarget.value))}>
             <option value="admin">admin</option>
             <option value="editor">editor</option>
             <option value="default">default</option>

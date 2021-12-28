@@ -2,6 +2,7 @@
 import "./user.scss"
 
 import { ArticleType } from "interfaces/Blog"
+import { UserType } from "interfaces/user"
 import ReactMarkdown from "react-markdown"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
@@ -21,7 +22,7 @@ function ArticleContent(props: ArticleContentProps) {
   const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "medium" })
   return (
     <section className="article-page">
-      {!props.previewMode && user.authed && ["ADMIN", "EDITOR"].includes(user.type) && (
+      {!props.previewMode && user.authed && [UserType.Admin, UserType.Editor].includes(user.type) && (
         <EditArticleButton articleId={props.id} />
       )}
       <div className="article-page__container">
