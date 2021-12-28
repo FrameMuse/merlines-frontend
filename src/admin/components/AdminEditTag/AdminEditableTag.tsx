@@ -19,7 +19,7 @@ function AdminEditableTag(props: AdminEditableTagProps) {
     props.onChange(textContent)
   }
   return (
-    <span className={classWithModifiers("editable-tag")} contentEditable onBlur={onBlur}>{tag}</span>
+    <span className={classWithModifiers("editable-tag", tag.toUpperCase() === "ПОДБОРКИ" && "important")} contentEditable onBlur={onBlur}>{tag}</span>
   )
 }
 
