@@ -25,6 +25,10 @@ export const patchAdminArticle = (id: string, data: ArticleContentType): Action<
   body: data
 })
 
+export const deleteAdminComment = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: "/admin/comment/" + id
+})
 
 /* Users */
 

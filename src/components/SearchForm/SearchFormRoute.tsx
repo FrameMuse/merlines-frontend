@@ -63,7 +63,7 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
           autoComplete="off"
           placeholder="_"
 
-          value={props.departurePoint?.name}
+          value={props.departurePoint?.name || ""}
           onChange={onChangeDeparturePoint} />
         <div className="search-form__placeholder">{"откуда"}</div>
         <SearchFormRoutesSwitchButton />
@@ -75,7 +75,7 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
           autoComplete="off"
           placeholder="_"
 
-          value={props.arrivalPoint?.name}
+          value={props.arrivalPoint?.name || ""}
           onChange={onChangeArrivalPoint} />
         <div className="search-form__placeholder">{"куда"}</div>
         <DropDown list={list} isOpen={arrivalPointOpen} setIsOpen={setArrivalPointOpen} onSelect={onSelectArrivalPoint} />

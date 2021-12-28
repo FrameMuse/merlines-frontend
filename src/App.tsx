@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import ReactGA from "react-ga"
 import { useDispatch } from "react-redux"
 import { Route, Switch, useHistory } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
 import { loginUser } from "redux/reducers/user"
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route>
           {/* <GoogleAnalytics /> */}
           <DEPRECATED__App__ />
+          <ToastContainer />
         </Route>
       </Switch>
     </>

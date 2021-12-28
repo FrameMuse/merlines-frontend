@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { capitalize } from "utils"
 
+import { classWithModifiers } from "../../utils"
 import Icon from "../common/Icon"
 import DateCalendarContext from "./DropDownCalendarContext"
 import DropDownCalendarMonthDays from "./DropDownCalendarMonthDays"
@@ -37,20 +38,9 @@ function DropDownCalendarMonth(props: DropDownCalendarMonthProps) {
             <span className="drop-down-calendar__month">{capitalize(monthName)}</span>
             <span className="drop-down-calendar__year"> {fullYear}</span>
           </div>
-
           <div className="drop-down-calendar__month-control">
-            <Icon
-              className="drop-down-calendar-arrow drop-down-calendar-arrow--top"
-              name="arrow-filter"
-              width="8"
-              height="7"
-            />
-            <Icon
-              className="drop-down-calendar-arrow drop-down-calendar-arrow--bottom"
-              name="arrow-filter"
-              width="8"
-              height="7"
-            />
+            <Icon name="arrow-filter" className={classWithModifiers("drop-down-calendar-arrow", "top")} />
+            <Icon name="arrow-filter" className={classWithModifiers("drop-down-calendar-arrow", "bottom")} />
           </div>
           <DropDownCalendarSelectMonth currentDate={cursorDate} onMonthIndexChange={monthUpdate} />
         </div>

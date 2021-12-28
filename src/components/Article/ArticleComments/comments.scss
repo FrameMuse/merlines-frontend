@@ -43,18 +43,18 @@
   position: relative;
   cursor: pointer;
 
-  &::after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    margin-top: -4px;
-    background-image: url("./../../../img/icons/arrow-open.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    top: 50%;
-    right: 0;
-  }
+  // &::after {
+  //   content: "";
+  //   width: 10px;
+  //   height: 10px;
+  //   margin-top: -4px;
+  //   background-image: url("./../../../img/icons/arrow-open.svg");
+  //   background-repeat: no-repeat;
+  //   background-position: center;
+  //   position: absolute;
+  //   top: 50%;
+  //   right: 0;
+  // }
 
   &--active {
     &::after {
@@ -254,7 +254,6 @@
 
 .comments__item-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: 15px;
 
@@ -265,6 +264,13 @@
 
 .comments__item-date {
   @include date;
+}
+
+.comments__buttons {
+  display: flex;
+  gap: 1em;
+
+  margin-left: auto;
 }
 
 .comments__item-btn {

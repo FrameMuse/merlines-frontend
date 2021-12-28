@@ -1,43 +1,120 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-.search {
-  position: absolute;
-  display: flex;
-  width: 100%;
+.search {}
 
-  &--hidden {
-    pointer-events: none;
-    .search__input {
-      opacity: 0;
-      width: 0%;
-    }
-  }
+.search-trigger {
+	padding: 1em 1.25em;
+	background: var(--color-blue);
+	border: unset;
+	border-radius: 0.25em;
+
+	color: white;
 }
 
-.search__input {
-  width: 94%;
-
-  padding: 0.75em 1.25em;
-  background: #f3f3f3;
-  border: unset;
-  border-radius: 0.35em;
-
-  font-size: 1em;
-  font-weight: 600;
-
-  transition: 350ms ease width, 350ms ease opacity;
+.search-trigger__icon {
+	width: 1em;
+	height: 1em;
 }
 
-.search__button {
-  padding: 1.25em;
-  background: var(--color-blue);
-  border: unset;
-  border-radius: 0.35em;
+/* Modal */
 
-  color: white;
-  margin-left: auto;
+.search-modal {
+	position: fixed;
+	inset: 0;
 
-  pointer-events: all;
-  cursor: pointer;
+	background: rgba($color: #235EF5, $alpha: 0.95);
+
+	opacity: 0;
+	transform: scale(0.95) translateY(-25%);
+	pointer-events: none;
+	transition: 350ms ease opacity, 250ms ease transform;
+
+	z-index: 1;
+
+	&--active {
+		opacity: 1;
+		transform: scale(1) translateY(0%);
+		pointer-events: initial;
+	}
+}
+
+
+.search-modal__container {
+	display: grid;
+	align-items: center;
+
+	width: 100%;
+	max-width: 1110px;
+	height: 100%;
+
+	padding: 0 30px;
+	margin: 0 auto;
+}
+
+.search-modal__close {
+	position: absolute;
+	right: 0;
+
+	align-self: flex-start;
+
+	padding: 2.5em;
+
+	color: white;
+	font-weight: 400;
+
+	z-index: 1;
+}
+
+.search-modal__icon {
+	width: 0.75em;
+	height: 0.75em;
+
+	margin-left: 0.75em;
+}
+
+.search-modal__wrapper {
+	display: grid;
+	gap: 10em;
+}
+
+.search-modal__header {
+	display: grid;
+	gap: 1em;
+
+	color: white;
+	line-height: 1;
+}
+
+.search-modal__title {
+	font-size: 2.5em;
+	font-weight: 700;
+}
+
+.search-modal__desc {
+	font-weight: 400;
+}
+
+.search-modal__search {
+	display: flex;
+	justify-content: space-between;
+
+	border: 1px solid white;
+	border-radius: 0.35em;
+
+	overflow: hidden;
+}
+
+.search-modal__input {
+	width: 100%;
+	padding: 1.5em 1em;
+	background: #f3f3f3;
+	border: unset;
+}
+
+.search-modal__submit {
+	padding: 0 3.5em;
+	background: #396EF6;
+
+	color: white;
 }
