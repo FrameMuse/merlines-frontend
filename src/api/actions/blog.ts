@@ -1,14 +1,15 @@
 import { Action } from "api/client"
+import { ArticleFiltersType } from "components/Blog/Blog"
 import { ArticlePreviewType, ArticleReplyType, ArticleType } from "interfaces/Blog"
 import { PaginationType } from "interfaces/Django"
 
 
 /* Content */
 
-export const getBlogArticles = (page: number, page_size: number, tags__contains: string): Action<PaginationType<ArticlePreviewType>> => ({
+export const getBlogArticles = (page: number, page_size: number, filters?: Partial<ArticleFiltersType>): Action<PaginationType<ArticlePreviewType>> => ({
   method: "GET",
   endpoint: "/blog/articles",
-  params: { page, page_size, tags__contains }
+  params: { page, page_size, ...filters }
 })
 
 export const getBlogArticle = (id: string): Action<ArticleType> => ({

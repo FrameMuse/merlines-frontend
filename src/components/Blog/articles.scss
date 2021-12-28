@@ -173,6 +173,15 @@
   margin-left: auto;
   margin-right: auto;
 
+  .section {
+    display: grid;
+    gap: 2em;
+  }
+
+  .section__header {
+    margin: unset;
+  }
+
   .section__list {
     display: grid;
     grid-template-columns: 1fr;
@@ -202,4 +211,25 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
+}
+
+
+
+/* ... */
+
+.section__more {
+  padding-top: 0.5em;
+  border-top: 2px solid;
+
+  color: #ccc;
+  text-align: center;
+}
+
+.section__more-icon {
+  width: 1em;
+  height: 1em;
+
+  margin-left: 0.5em;
+
+  transform: rotate(180deg);
 }
