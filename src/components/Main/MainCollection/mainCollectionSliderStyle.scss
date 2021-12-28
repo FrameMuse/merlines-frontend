@@ -71,6 +71,7 @@ article-card-index {
 
 .article-card .article-card__img {
   width: inherit;
+  height: 100%;
 }
 
 /* .article-card-index .article-card__img {
@@ -160,9 +161,9 @@ article-card-index {
 }
 
 .section__container .slick-track {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-auto-flow: column;
+
   width: inherit !important;
   /* overflow: visible; */
   /* justify-content: space-between; */
@@ -389,4 +390,8 @@ article-card-index {
 .swiper-container {
   padding-left: 15px;
   padding-right: 0;
+}
+
+.slick-slide-item {
+  max-width: 18em;
 }

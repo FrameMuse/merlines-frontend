@@ -19,15 +19,7 @@
     content: "#";
   }
 
-  &--pending {
-    border-color: rgba($color: orange, $alpha: 0.35);
-  }
-
-  &--saved {
-    border-color: rgba($color: green, $alpha: 0.35);
-  }
-
-  &--error {
+  &--important {
     border-color: rgba($color: red, $alpha: 0.35);
   }
 }

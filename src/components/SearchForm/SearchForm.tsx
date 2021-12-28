@@ -5,7 +5,6 @@ import { getGeoIp } from "api/actions/geo"
 import DropDownCalendar from "components/DropDownCalendar/DropDownCalendar"
 import { DateCalendarState } from "components/DropDownCalendar/DropDownCalendarReducer"
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react"
-import { useQuery } from "react-fetching-library"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useClickAway } from "react-use"
@@ -34,8 +33,11 @@ function SearchForm() {
   function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-
     const route = search.routes[0]
+    if (Object.values(route).some(value => !value)) {
+      setFormError(true)
+      return
+    }
 
     const searchQuery = createQuery({
       origin: route.departurePoint?.code,
@@ -60,6 +62,10 @@ function SearchForm() {
   }
 
   useEffect(() => {
+    setFormError(false)
+  }, [search])
+
+  useEffect(() => {
     ClientAPI.query(getGeoIp).then(({ payload }) => {
       if (!payload) return
       dispatch(updateSearchRoute(0, {
@@ -77,12 +83,12 @@ function SearchForm() {
   return (
     <form className="search-form" onSubmit={onSearchSubmit} autoComplete="off">
       <div className="search-form__nav">
-        <div className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} onClick={() => dispatch(updateSearchHasReturnDate(true))}>
+        <button type="button" className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} onClick={() => dispatch(updateSearchHasReturnDate(true))}>
           Туда - обратно
-        </div>
-        <div className={classWithModifiers("search-form__nav-btn", !search.hasReturnDate && "active")} onClick={removeReturnDate}>
+        </button>
+        <button type="button" className={classWithModifiers("search-form__nav-btn", !search.hasReturnDate && "active")} onClick={removeReturnDate}>
           В одну сторону
-        </div>
+        </button>
         <button className="search-form__nav-btn">Сложный маршрут</button>
       </div>
       <div className={classWithModifiers("search-form__inner", formError && "error")}>

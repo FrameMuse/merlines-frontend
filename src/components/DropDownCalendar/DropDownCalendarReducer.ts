@@ -43,13 +43,23 @@ export default (state = DateCalendarInitialState, { type, payload }: DateCalenda
       return { ...state, dates }
     }
 
+    case "CALENDAR_HAS_GROUPING_UPDATE":
+      return {
+        ...state,
+        ...payload,
+        dates: {
+          ...state.dates,
+          second: null
+        }
+      }
+
     default:
       return state
   }
 }
 
 export const updateDateCalendarHasGrouping = (hasGrouping: DateCalendarState["hasGrouping"]) => ({
-  type: "CALENDAR_UPDATE",
+  type: "CALENDAR_HAS_GROUPING_UPDATE",
   payload: { hasGrouping }
 })
 

@@ -16,6 +16,7 @@
     margin-top: 15px;
     margin-bottom: 39px;
   }
+
   @media #{$media-lg} {
     margin-bottom: 28px;
   }
@@ -42,18 +43,18 @@
   position: relative;
   cursor: pointer;
 
-  &::after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    margin-top: -4px;
-    background-image: url("./../../../img/icons/arrow-open.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    top: 50%;
-    right: 0;
-  }
+  // &::after {
+  //   content: "";
+  //   width: 10px;
+  //   height: 10px;
+  //   margin-top: -4px;
+  //   background-image: url("./../../../img/icons/arrow-open.svg");
+  //   background-repeat: no-repeat;
+  //   background-position: center;
+  //   position: absolute;
+  //   top: 50%;
+  //   right: 0;
+  // }
 
   &--active {
     &::after {
@@ -85,6 +86,15 @@
 
 .comments__like-icon {
   margin-left: 10px;
+
+  width: 1.25em;
+  height: 1.25em;
+
+  &:active {
+    transform: scale(1.25);
+  }
+
+  transition: 250ms ease transform;
 }
 
 .comments__inner {
@@ -99,6 +109,7 @@
   @media #{$media-md} {
     margin-bottom: 0;
   }
+
   @media #{$media-xl} {
     padding-top: 10px;
     border-top: 1px solid var(--color-border-secondary);
@@ -117,6 +128,7 @@
     margin-bottom: 18px;
     padding-left: 95px;
   }
+
   @media #{$media-xl} {
     &:first-child {
       border-top: none;
@@ -131,6 +143,7 @@
   margin-bottom: 15px;
 
   &--inner {
+
     .comments__user-name,
     .comments__user-info {
       max-width: 200px;
@@ -153,6 +166,7 @@
       }
     }
   }
+
   @media #{$media-lg} {
     &--inner {
       .comments__user-name {
@@ -240,7 +254,6 @@
 
 .comments__item-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: 15px;
 
@@ -251,6 +264,13 @@
 
 .comments__item-date {
   @include date;
+}
+
+.comments__buttons {
+  display: flex;
+  gap: 1em;
+
+  margin-left: auto;
 }
 
 .comments__item-btn {
@@ -327,7 +347,10 @@
 }
 
 .comments__form {
-  margin-top: 16px;
+  display: grid;
+  gap: 1em;
+
+  margin-top: 1em;
 }
 
 .comments__form-header {
@@ -363,32 +386,25 @@
 }
 
 .comments__message {
-  margin-top: 15px;
-  margin-bottom: 10px;
+  all: unset;
 
-  @media #{$media-md} {
-    margin-bottom: 15px;
-  }
+  padding: 1em 1.25em;
+  border: 1px solid;
+
+  color: #A1A1A1;
+  font-weight: 400;
 }
 
 .comments__btn-container {
-  text-align: center;
-
-  @media #{$media-md} {
-    display: flex;
-    justify-content: flex-end;
-  }
+  display: flex;
 }
 
 .comments__btn {
+  padding: 1em 2.5em;
+
   @media #{$media-md} {
     width: auto;
-    padding: 21px 24px 22px;
-    margin-left: 30px;
-    order: 2;
-  }
-  @media #{$media-xl} {
-    min-width: 255px;
+    margin-left: auto;
   }
 }
 

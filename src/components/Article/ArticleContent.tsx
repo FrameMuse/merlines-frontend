@@ -2,7 +2,9 @@
 import "./user.scss"
 
 import { ArticleType } from "interfaces/Blog"
+import { UserType } from "interfaces/user"
 import ReactMarkdown from "react-markdown"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 import ArticleComments from "./ArticleComments/ArticleComments"
@@ -12,27 +14,34 @@ import ArticleTag from "./ArticleTag"
 
 
 interface ArticleContentProps extends ArticleType {
-  noComments?: boolean
+  previewMode?: boolean
 }
 
 function ArticleContent(props: ArticleContentProps) {
-  const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "long" })
+  const user = useSelector(state => state.user)
+  const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "medium" })
   return (
     <section className="article-page">
+      {!props.previewMode && user.authed && [UserType.Admin, UserType.Editor].includes(user.type) && (
+        <EditArticleButton articleId={props.id} />
+      )}
       <div className="article-page__container">
         <article className="article">
           <ArticleSocial />
           <div className="article-card article-card--header">
-            <ul className="article-card__tags-list">
+            <div className="article-card__tags-list">
               {props.tags.map((tag, index) => (
                 <ArticleTag key={index} tag={tag} />
               ))}
-            </ul>
+            </div>
             <h2 className="article-card__title">{props.title}</h2>
             <time className="article-card__date" dateTime={props.created_at}>{date}</time>
-            <ArticlePicture src={props.preview} />
           </div>
-          <ReactMarkdown components={{ img: props => <ArticlePicture src={props.src} caption={props.alt} /> }}>{props.content}</ReactMarkdown>
+          <div className="article__content">
+            <ReactMarkdown components={{ img: props => <ArticlePicture {...props} /> }}>
+              {props.files.reduce((result, file) => result.replace(new RegExp(file.name, "g"), file.data || ""), props.content)}
+            </ReactMarkdown>
+          </div>
           <div className="user user--article">
             <img className="user__avatar" src={props.author.avatar} alt="avatar" />
             <div className="user__inner">
@@ -43,11 +52,22 @@ function ArticleContent(props: ArticleContentProps) {
             </div>
           </div>
         </article>
-        {!props.noComments && (
-          <ArticleComments list={props.comments} />
+        {!props.previewMode && (
+          <ArticleComments {...props} />
         )}
       </div>
     </section>
+  )
+}
+
+function EditArticleButton(props: { articleId: number }) {
+  return (
+    <>
+      <Link to={"/admin/edit-article/" + props.articleId} className="admin-button admin-button--gray">Редактировать статью</Link>
+      <br />
+      <br />
+      <br />
+    </>
   )
 }
 

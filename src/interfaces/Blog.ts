@@ -1,20 +1,35 @@
-export interface ArticleType extends ArticleContentType {
-  id: number
-  created_at: string
-  comments: ArticleReplyType[]
+import { DataURLBase64, URLType } from "./common"
+
+export interface ArticleType extends ArticlePreviewType, ArticleContentType {
   author: ArticleAuthorType
+  likes: number
+  liked: boolean
 }
 
-export interface ArticleContentType<Preview = string> {
+export interface ArticlePreviewType {
+  id: number
   title: string
-  preview: Preview
-  content: string
+  created_at: string
+  preview: string
   tags: string[]
+}
+
+export interface ArticleContentType {
+  title: string
+  content: string
+  preview: string
+  tags: string[]
+  files: ArticleFileType[]
+}
+
+export interface ArticleFileType {
+  name: string
+  data: URLType | DataURLBase64 | null
 }
 
 export interface ArticleReplyType {
   id: number
-  text: string
+  text: string | null
   created_at: string
   author: ArticleAuthorType
   replies: ArticleReplyType[]
