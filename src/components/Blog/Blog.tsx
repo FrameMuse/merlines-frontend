@@ -3,7 +3,7 @@ import "./articles.scss"
 import { getBlogArticles } from "api/actions/blog"
 import ArticleCard from "components/Article/ArticleCard"
 import Icon from "components/common/Icon"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useRecoilState } from "recoil"
 import { capitalize, classWithModifiers } from "utils"
@@ -19,7 +19,7 @@ export interface ArticleFiltersType {
 }
 
 function Blog(props: { tag?: string }) {
-  const [blogSearch] = useRecoilState(blogSearchState)
+  const [blogSearch, setBlogSearch] = useRecoilState(blogSearchState)
 
   function BlogSections() {
     if (blogSearch.length) {
@@ -42,6 +42,8 @@ function Blog(props: { tag?: string }) {
       </>
     )
   }
+
+  useEffect(() => setBlogSearch(""), [props.tag])
 
   return (
     <div className="articles">

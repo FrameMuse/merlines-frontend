@@ -7,8 +7,12 @@ export interface AuthedUser {
   last_name: string
   email: string
   avatar: string
-  type: "ADMIN" | "EDITOR" | "DEFAULT"
+  type: UserType
 }
 export interface UnauthedUser {
   authed: false
+}
+
+export enum UserType {
+  Default, Editor, Admin, Banned
 }
