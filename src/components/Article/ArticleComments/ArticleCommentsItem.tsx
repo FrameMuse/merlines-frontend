@@ -1,5 +1,6 @@
 import { deleteAdminComment } from "api/actions/admin"
 import { ArticleReplyType } from "interfaces/Blog"
+import { UserType } from "interfaces/user"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
@@ -51,7 +52,7 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
       <div className="comments__item-inner">
         <time className="comments__item-date" dateTime={props.created_at}>{date}</time>
         <div className="comments__buttons">
-          {!!text && user.authed && ["ADMIN", "EDITOR"].includes(user.type) && (
+          {!!text && user.authed && [UserType.Admin, UserType.Editor].includes(user.type) && (
             <button className="comments__item-btn" onClick={onDelete}>Удалить</button>
           )}
           <button className="comments__item-btn" onClick={() => setIsReplying(!isReplying)}>Ответить</button>
