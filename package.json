@@ -14,6 +14,7 @@
     "luxon": "^1.26.0",
     "nanoid": "^3.1.20",
     "react": "^17.0.1",
+    "react-analytics-charts": "^1.2.12",
     "react-dom": "^17.0.1",
     "react-fetching-library": "^1.7.6",
     "react-ga": "^3.3.0",

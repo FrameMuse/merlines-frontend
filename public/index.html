@@ -27,20 +27,20 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="icon" href="/img/favicon.ico" sizes="192x192" />
     <link rel="apple-touch-icon" href="/img/favicon.ico" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GA_TAG%"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', '%REACT_APP_GA_TAG%');
+    </script>
   </head>
 
   <body class="page__body">
     <noscript>Наш сайт не работает без JavaScript</noscript>
     <div class="body" id="root"></div>
   </body>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC9LWLE6E1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-NC9LWLE6E1');
-  </script>
 
 </html>
