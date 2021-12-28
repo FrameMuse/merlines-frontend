@@ -53,7 +53,7 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
   }
 
 
-  const list = [{ tag: "WOW", title: "Boobs", iconName: "departures" }, { tag: "MEOW", title: "Cat", iconName: "destinations" }]
+  const list = [{ tag: "MSK", title: "Москва", iconName: "departures" }, { tag: "SPB", title: "Санкт-Петербург", iconName: "destinations" }]
 
   return (
     <>
