@@ -42,7 +42,7 @@ function DEPRECATED__App__() {
     <>
       {/* <ScrollToTop> */}
       <Header />
-      <main className="main">
+      <main id="main-content" className="main">
         {searchData.isOpenRedirect && <TicketRedirect />}
         {tickets && isOpenFilter && (
           <MobileTicketFilter setIsOpenFilter={setIsOpenFilter} />

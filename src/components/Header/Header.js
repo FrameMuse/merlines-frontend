@@ -34,6 +34,7 @@ function Header() {
             height="22"
           />
         </Link>
+        <a className="skip-nav-link" href="#main-content">Skip Navigation</a>
         <HeaderNavigation />
       </div>
     </header>

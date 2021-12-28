@@ -36,3 +36,11 @@
     }
   }
 }
+
+.skip-nav-link {
+  // position: absolute;
+
+  &:not(:focus) {
+    content-visibility: hidden;
+  }
+}

@@ -83,12 +83,12 @@ function SearchForm() {
   return (
     <form className="search-form" onSubmit={onSearchSubmit} autoComplete="off">
       <div className="search-form__nav">
-        <div className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} onClick={() => dispatch(updateSearchHasReturnDate(true))}>
+        <button type="button" className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} onClick={() => dispatch(updateSearchHasReturnDate(true))}>
           Туда - обратно
-        </div>
-        <div className={classWithModifiers("search-form__nav-btn", !search.hasReturnDate && "active")} onClick={removeReturnDate}>
+        </button>
+        <button type="button" className={classWithModifiers("search-form__nav-btn", !search.hasReturnDate && "active")} onClick={removeReturnDate}>
           В одну сторону
-        </div>
+        </button>
         <button className="search-form__nav-btn">Сложный маршрут</button>
       </div>
       <div className={classWithModifiers("search-form__inner", formError && "error")}>

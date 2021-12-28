@@ -55,7 +55,7 @@ export default (state = initialState, action: Action): typeof initialState => {
         ...action.payload.route
       }
 
-      return { ...state, routes: state.routes }
+      return { ...state }
 
     case "SEARCH_PASSENGERS_UPDATE":
       return { ...state, passengers: { ...state.passengers, ...action.payload.passengers } }
