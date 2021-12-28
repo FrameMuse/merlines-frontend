@@ -1,5 +1,4 @@
 import "./articles.scss"
-import "./search.scss"
 
 import { getBlogArticles } from "api/actions/blog"
 import ArticleCard from "components/Article/ArticleCard"

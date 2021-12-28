@@ -2,45 +2,44 @@
 @import "../../styles/mixin";
 
 .header {
-  background-color: var(--color-blue);
+	background-color: var(--color-blue);
 }
 
 .header__container {
-  @include container;
+	@include container;
 
-  padding-top: 14px;
-  padding-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
+	padding-top: 14px;
+	padding-bottom: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
 
-  @media #{$media-md} {
-    padding-top: 18px;
-    padding-bottom: 24px;
-  }
+	@media #{$media-md} {
+		padding-top: 18px;
+		padding-bottom: 24px;
+	}
 }
 
 .logo {
-  color: var(--color-white);
-  position: relative;
-  z-index: 9;
+	color: var(--color-white);
+	position: relative;
 
-  &--color {
-    color: var(--color-blue);
-  }
+	&--color {
+		color: var(--color-blue);
+	}
 
-  @media #{$media-md} {
-    &--color {
-      color: var(--color-white);
-    }
-  }
+	@media #{$media-md} {
+		&--color {
+			color: var(--color-white);
+		}
+	}
 }
 
 .skip-nav-link {
-  // position: absolute;
+	// position: absolute;
 
-  &:not(:focus) {
-    content-visibility: hidden;
-  }
+	&:not(:focus) {
+		content-visibility: hidden;
+	}
 }
