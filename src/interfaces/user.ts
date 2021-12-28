@@ -14,5 +14,5 @@ export interface UnauthedUser {
 }
 
 export enum UserType {
-  Default, Editor, Admin, Banned
+  Default = 1, Editor, Admin, Banned
 }
