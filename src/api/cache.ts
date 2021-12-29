@@ -2,7 +2,7 @@ import { createCache, QueryResponse } from "react-fetching-library"
 
 import { Action } from "./client"
 
-const cacheTime = 2.5 * 60 * 1000
+const cacheTime = 1 * 10 * 1000
 
 export const cacheProvider = createCache<QueryResponse<Action>>(
   (action: Action) => {
