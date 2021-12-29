@@ -3,6 +3,7 @@ import "./articles.scss"
 import { getBlogArticles } from "api/actions/blog"
 import ArticleCard from "components/Article/ArticleCard"
 import Icon from "components/common/Icon"
+import { OrderingType } from "interfaces/Django"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useRecoilState } from "recoil"
@@ -15,7 +16,7 @@ import { blogSearchState } from "./BlogSearch"
 export interface ArticleFiltersType {
   tags__contains: string
   title__contains: string
-  ordering: "created_at" | "likers__count" | "-created_at" | "-likers__count"
+  ordering: OrderingType<"created_at" | "likers__count">
 }
 
 function Blog(props: { tag?: string }) {
