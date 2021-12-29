@@ -30,9 +30,10 @@ export interface ArticleFileType {
 export interface ArticleReplyType {
   id: number
   text: string | null
+  is_deleted: boolean
   created_at: string
   author: ArticleAuthorType
-  replies: ArticleReplyType[]
+  replies?: ArticleReplyType[]
 }
 
 export interface ArticleAuthorType {

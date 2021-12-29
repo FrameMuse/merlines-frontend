@@ -135,7 +135,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
         <AdminButton
           onClick={() => setShowPreview(!showPreview)}
           color={showPreview ? "gray" : undefined}
-          children={showPreview ? "Disable preview mode" : "Enable preview modei"}
+          children={showPreview ? "Disable preview mode" : "Enable preview mode"}
         />
       </div>
       <AdminArticleEditor {...articleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />

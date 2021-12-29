@@ -16,9 +16,10 @@ interface ArticleCommentsItemProps extends ArticleReplyType {
 
 function ArticleCommentsItem(props: ArticleCommentsItemProps) {
   const user = useSelector(state => state.user)
+  const userCanEdit = user.authed && [UserType.Admin, UserType.Editor].includes(user.type)
 
-  const [text, setText] = useState(props.text)
-  const [comments, setComments] = useState<ArticleReplyType[]>(props.replies)
+  const [isDeleted, setIsDeleted] = useState(props.is_deleted)
+  const [comments, setComments] = useState<ArticleReplyType[]>(props.replies || [])
   const [isReplying, setIsReplying] = useState(false)
 
   function onDelete() {
@@ -27,8 +28,8 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
       .then(({ error }) => {
         if (error) return
 
-        setText(null)
-        toast.info("Comment deleted")
+        setIsDeleted(!isDeleted)
+        toast.info("Comment whatever done")
       })
   }
 
@@ -48,12 +49,26 @@ function ArticleCommentsItem(props: ArticleCommentsItemProps) {
           </Link>
         </div>
       </div>
-      <p className="comments__text">{text || "Comment deleted"}</p>
+      <p className="comments__text">
+        {isDeleted && "Комментарий удалён\n"}
+        {!isDeleted && props.text}
+        {isDeleted && userCanEdit && (
+          <>
+            <br />
+            <br />
+            <em>{props.text}</em>
+          </>
+        )}
+      </p>
       <div className="comments__item-inner">
         <time className="comments__item-date" dateTime={props.created_at}>{date}</time>
         <div className="comments__buttons">
-          {!!text && user.authed && [UserType.Admin, UserType.Editor].includes(user.type) && (
-            <button className="comments__item-btn" onClick={onDelete}>Удалить</button>
+          {userCanEdit && (
+            isDeleted ? (
+              <button className="comments__item-btn" onClick={onDelete}>Восстановить</button>
+            ) : (
+              <button className="comments__item-btn" onClick={onDelete}>Удалить</button>
+            )
           )}
           <button className="comments__item-btn" onClick={() => setIsReplying(!isReplying)}>Ответить</button>
         </div>
