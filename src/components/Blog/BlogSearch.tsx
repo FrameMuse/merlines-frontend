@@ -1,22 +1,22 @@
 // SCSS
 import "./search.scss"
 
-import { ChangeEvent, FormEvent, useState } from "react"
-import { atom, useSetRecoilState } from "recoil"
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react"
+import { useHistory } from "react-router-dom"
 import { classWithModifiers } from "utils"
 
 import Icon from "../common/Icon"
 
 
-export const blogSearchState = atom({
-  key: "blogSearch",
-  default: ""
-})
 
 function BlogSearch() {
+  const history = useHistory()
+
   const [value, setValue] = useState("")
   const [isActive, setIsActive] = useState(false)
-  const setBlogSearchState = useSetRecoilState(blogSearchState)
+
+  const searchRef = useRef<HTMLInputElement | null>(null)
+
   function onToggle() {
     setIsActive(!isActive)
   }
@@ -25,10 +25,19 @@ function BlogSearch() {
   }
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-
     setIsActive(false)
-    setBlogSearchState(value)
+
+    const searchParams = new URLSearchParams(history.location.search)
+    searchParams.set("search", value)
+
+    history.push({ search: searchParams.toString() })
   }
+
+  useEffect(() => {
+    if (!searchRef.current || !isActive) return
+    searchRef.current.focus()
+  }, [isActive])
+
   return (
     <div className="search">
       <button className="search-trigger" onClick={onToggle}>
@@ -45,12 +54,10 @@ function BlogSearch() {
               <div className="search-modal__title">Поисковая строка</div>
               <div className="search-modal__desc">Введите запрос, который вас интересует</div>
             </div>
-
             <form className="search-modal__search" onSubmit={onSubmit}>
-              <input type="text" className="search-modal__input" onChange={onChange} />
+              <input type="text" className="search-modal__input" ref={searchRef} onChange={onChange} />
               <button className="search-modal__submit" type="submit">Искать</button>
             </form>
-
           </div>
         </div>
       </div>

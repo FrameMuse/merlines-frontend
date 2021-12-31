@@ -34,7 +34,7 @@ function Header() {
             height="22"
           />
         </Link>
-        <a className="skip-nav-link" href="#main-content">Skip Navigation</a>
+        <a tabIndex="-1" className="skip-nav-link" onClick={() => document.getElementById("main-content")?.focus()}>Skip Navigation</a>
         <HeaderNavigation />
       </div>
     </header>

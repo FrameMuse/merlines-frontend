@@ -4,53 +4,39 @@ import { getBlogArticles } from "api/actions/blog"
 import ArticleCard from "components/Article/ArticleCard"
 import Icon from "components/common/Icon"
 import { OrderingType } from "interfaces/Django"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useQuery } from "react-fetching-library"
-import { useRecoilState } from "recoil"
+import { useLocation } from "react-router-dom"
 import { capitalize, classWithModifiers } from "utils"
 
 import BlogNavigation from "./BlogNavigation"
-import { blogSearchState } from "./BlogSearch"
 
 
 export interface ArticleFiltersType {
-  tags__contains: string
-  title__contains: string
+  tags__contains: string | null
+  title__contains: string | null
   ordering: OrderingType<"created_at" | "likers__count">
 }
 
-function Blog(props: { tag?: string }) {
-  const [blogSearch, setBlogSearch] = useRecoilState(blogSearchState)
+function Blog() {
+  const location = useLocation()
+  const locationSearch = new URLSearchParams(location.search)
 
-  function BlogSections() {
-    if (blogSearch.length) {
-      return (
-        <BlogSection title="Поиск" pageSize={12} filters={{ title__contains: blogSearch }} />
-      )
-    }
-
-    if (props.tag?.length) {
-      return (
-        <BlogSection title={props.tag} pageSize={12} filters={{ tags__contains: props.tag }} />
-      )
-    }
-
-    return (
-      <>
-        <BlogSection title="Новое" pageSize={4} filters={{ ordering: "-created_at" }} />
-        <BlogSection title="Популярное" pageSize={4} filters={{ ordering: "likers__count" }} />
-        <BlogSection title="Все" pageSize={12} />
-      </>
-    )
-  }
-
-  useEffect(() => setBlogSearch(""), [props.tag])
-
+  const activeTag = locationSearch.get("tag")
+  const searchValue = locationSearch.get("search")
   return (
     <div className="articles">
       <div className="articles__container articles__all">
-        <BlogNavigation tags={["FAQ", "подборки"]} />
-        <BlogSections />
+        <BlogNavigation activeTag={activeTag} />
+        {(activeTag || searchValue) ? (
+          <BlogSection title={activeTag || searchValue || "Unknown"} pageSize={12} filters={{ tags__contains: activeTag, title__contains: searchValue }} />
+        ) : (
+          <>
+            <BlogSection title="Новое" pageSize={4} filters={{ ordering: "-created_at" }} />
+            <BlogSection title="Популярное" pageSize={4} filters={{ ordering: "-likers__count" }} />
+            <BlogSection title="Все" pageSize={12} />
+          </>
+        )}
       </div>
     </div>
   )
@@ -65,7 +51,7 @@ interface BlogSectionProps {
 
 function BlogSection(props: BlogSectionProps) {
   const [page, setPage] = useState(1)
-  const [pageSize, setPageSize] = useState(props.pageSize)
+  const [pageSize] = useState(props.pageSize)
 
   const { error, loading, payload } = useQuery(getBlogArticles(page, pageSize, props.filters))
   if (error || !payload) return <>no content</>
