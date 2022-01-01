@@ -277,3 +277,15 @@
 
   transition: 250ms ease top, 200ms ease opacity;
 }
+
+@mixin Mobile {
+	@media screen and (max-width: #{$width-sm}) {
+		@content;
+	}
+}
+
+@mixin Tablet {
+	@media screen and (max-width: #{$width-md}) {
+		@content
+	}
+}
