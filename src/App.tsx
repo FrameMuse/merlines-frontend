@@ -21,8 +21,8 @@ function App() {
     <Switch>
       <Route path="/admin"><AdminView /></Route>
       <Route>
+        <Header />
         <main id="main-content" className="main">
-          <Header />
           <AppRouter />
           <Subscribe />
         </main>
