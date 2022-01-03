@@ -117,18 +117,18 @@ function SearchFormDate(props: SearchFormDatingProps) {
   const search = useSelector(state => state.search)
   const searchRoute = useSelector(state => state.search.routes[props.routeIndex])
 
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const [isCalendarHidden, setIsCalendarHidden] = useState(true)
   const [hasCalendarOffset, setHasCalendarOffset] = useState(false)
 
   const calendarRef = useRef<HTMLDivElement | null>(null)
 
   function onFocus() {
-    setIsCalendarOpen(true)
-    setHasCalendarOffset(false)
+    setIsCalendarHidden(false)
+    setHasCalendarOffset(true)
   }
 
   function onReturnDateFocus() {
-    setIsCalendarOpen(true)
+    setIsCalendarHidden(false)
     setHasCalendarOffset(true)
 
     dispatch(updateSearchHasReturnDate(true))
@@ -137,7 +137,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
   function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key !== "Tab") return
 
-    setIsCalendarOpen(false)
+    setIsCalendarHidden(true)
   }
 
   function onCalendarStateChange(state: DateCalendarState) {
@@ -157,7 +157,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
     return `${day} ${capitalize(month)}, ${capitalize(weekday)}`
   }
 
-  useClickAway(calendarRef, () => setIsCalendarOpen(false))
+  useClickAway(calendarRef, () => setIsCalendarHidden(true))
 
   return (
     <>
@@ -195,8 +195,8 @@ function SearchFormDate(props: SearchFormDatingProps) {
         hasOffset={hasCalendarOffset}
         parentRef={calendarRef}
 
-        isHidden={!isCalendarOpen}
-        setIsHidden={setIsCalendarOpen}
+        isHidden={isCalendarHidden}
+        setIsHidden={setIsCalendarHidden}
 
         onChange={onCalendarStateChange}
       />

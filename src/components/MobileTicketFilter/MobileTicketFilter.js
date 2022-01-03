@@ -9,9 +9,7 @@ import { returnInputs } from "../SearchResult/utils"
 
 function MobileTicketFilter({ setIsOpenFilter }) {
   const { transfers } = useSelector(selectFilter)
-  const {
-    searchData: { tickets }
-  } = useSelector(selectSearchResult)
+  const { searchData: { tickets } } = useSelector(selectSearchResult)
 
   return (
     <section className="overlay ticket-list__overlay">

@@ -119,7 +119,6 @@ article-card-index {
 	top: 50%;
 	left: 2vw;
 	position: absolute;
-	z-index: 100;
 	color: $color-blue;
 }
 
@@ -133,7 +132,6 @@ article-card-index {
 	top: 50%;
 	right: 2vw;
 	position: absolute;
-	z-index: 100;
 	color: $color-blue;
 	transform: rotate(180deg);
 }
@@ -156,7 +154,6 @@ article-card-index {
 	padding-right: 0;
 	margin-left: 0;
 	margin-right: auto;
-	z-index: 2;
 	display: grid;
 }
 
@@ -299,7 +296,6 @@ article-card-index {
 		margin-right: auto;
 		position: relative;
 		padding: 0;
-		z-index: 2;
 		overflow: visible;
 	}
 
