@@ -13,7 +13,7 @@ interface MainSpecialCardProps {
 
 function MainSpecialCard(props: MainSpecialCardProps) {
   return (
-    <li className={classWithModifiers("special__item", props.bestCard && "big")}>
+    <div className={classWithModifiers("special__item", props.bestCard && "big")}>
       {props.bestCard && (
         <div className="special__item-box">
           <img className="special__item-img" src={props.bestCardImg} alt={props.cardToCity} />
@@ -26,7 +26,7 @@ function MainSpecialCard(props: MainSpecialCardProps) {
       </div>
       <h3 className="special__item-title">{props.cardToCity}</h3>
       <div className="special__item-text">{`от ${props.cardPrice} ₽`}</div>
-    </li>
+    </div>
   )
 }
 

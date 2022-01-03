@@ -55,7 +55,7 @@ const mockDataCards = [
 
 function MainSpecialList() {
   return (
-    <ul className="special__list">
+    <div className="special__list">
       <MainSpecialCard
         bestCard={true}
         bestCardImg="img/special/2.jpg"
@@ -73,7 +73,7 @@ function MainSpecialList() {
           cardPrice={card.price}
         />
       ))}
-    </ul>
+    </div>
   )
 }
 
