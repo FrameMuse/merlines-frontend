@@ -1,8 +1,16 @@
 import { Action } from "api/client"
 import { ArticleFiltersType } from "components/Blog/Blog"
-import { ArticlePreviewType, ArticleReplyType, ArticleType } from "interfaces/Blog"
+import { ArticlePreviewType, ArticleReplyType, ArticleType, BlogTagType } from "interfaces/Blog"
 import { PaginationType } from "interfaces/Django"
 
+
+/* Tags */
+
+export const getBlogTags = (page: number, page_size: number): Action<PaginationType<BlogTagType>> => ({
+  method: "GET",
+  endpoint: "/blog/tags",
+  params: { page, page_size }
+})
 
 /* Content */
 

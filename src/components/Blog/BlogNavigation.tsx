@@ -1,4 +1,4 @@
-import { getAdminTags } from "api/actions/admin"
+import { getBlogTags } from "api/actions/blog"
 import { useQuery } from "react-fetching-library"
 import { Link } from "react-router-dom"
 import { classWithModifiers } from "utils"
@@ -10,7 +10,7 @@ interface BlogNavigationProps {
 }
 
 function BlogNavigation(props: BlogNavigationProps) {
-  const { error, payload } = useQuery(getAdminTags(1, 10))
+  const { error, payload } = useQuery(getBlogTags(1, 10))
   if (error || !payload) return <>no content</>
   return (
     <nav className="articles__nav">

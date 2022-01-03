@@ -29,7 +29,7 @@ function Blog() {
       <div className="articles__container articles__all">
         <BlogNavigation activeTag={activeTag} />
         {(activeTag || searchValue) ? (
-          <BlogSection title={activeTag || searchValue || "Unknown"} pageSize={12} filters={{ tags__contains: activeTag, title__contains: searchValue }} />
+          <BlogSection title={(activeTag && searchValue) ? [capitalize(activeTag), " | ", <span className="weak">{searchValue}</span>] : (capitalize(activeTag) || searchValue || "Unknown")} pageSize={12} filters={{ tags__contains: activeTag, title__contains: searchValue }} />
         ) : (
           <>
             <BlogSection title="Новое" pageSize={4} filters={{ ordering: "-created_at" }} />
@@ -44,7 +44,7 @@ function Blog() {
 
 
 interface BlogSectionProps {
-  title: string
+  title: any
   pageSize: number
   filters?: Partial<ArticleFiltersType>
 }
@@ -60,9 +60,7 @@ function BlogSection(props: BlogSectionProps) {
   return (
     <section className={classWithModifiers("section", loading && "disabled")}>
       <div className="section__header">
-        <h2 className="section__title">
-          {capitalize(props.title)}
-        </h2>
+        <h2 className="section__title">{props.title}</h2>
         <div className="section__control">
           <Icon
             name="arrow-slider"

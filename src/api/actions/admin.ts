@@ -1,7 +1,6 @@
 import { MailingEntryType } from "admin/components/AdminBlogMailing/AdminBlogMailing"
-import { AdminTagType } from "admin/components/AdminEditTags/AdminEditTags"
 import { Action } from "api/client"
-import { ArticleContentType } from "interfaces/Blog"
+import { ArticleContentType, BlogTagType } from "interfaces/Blog"
 import { PaginationType } from "interfaces/Django"
 import { AuthedUser } from "interfaces/user"
 
@@ -56,19 +55,13 @@ export const getAdminUsers = (filters: Partial<{ id: number, type: string, first
 
 /* Tags */
 
-export const getAdminTags = (page: number, page_size: number): Action<PaginationType<AdminTagType>> => ({
-  method: "GET",
-  endpoint: "/admin/tags",
-  params: { page, page_size }
-})
-
-export const postAdminTag = (title: string): Action<AdminTagType> => ({
+export const postAdminTag = (title: string): Action<BlogTagType> => ({
   method: "POST",
   endpoint: "/admin/tags",
   body: { title }
 })
 
-export const putAdminTag = (id: number, title: string): Action<AdminTagType> => ({
+export const putAdminTag = (id: number, title: string): Action<BlogTagType> => ({
   method: "PUT",
   endpoint: "/admin/tag/" + id,
   body: { title }
