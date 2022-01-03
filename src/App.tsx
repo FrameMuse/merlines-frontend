@@ -46,6 +46,8 @@ function AppRouter() {
 function useUserConnection() {
   const dispatch = useDispatch()
   useEffect(() => {
+    if (!localStorage.getItem("token")) return
+
     ClientAPI
       .query(getAccountMe)
       .then(({ error, payload }) => {
