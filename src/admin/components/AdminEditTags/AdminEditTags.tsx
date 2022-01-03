@@ -2,25 +2,21 @@
 import "./AdminEditTags.style.scss"
 
 import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
-import { deleteAdminTag, getAdminTags, postAdminTag, putAdminTag } from "api/actions/admin"
+import { deleteAdminTag, postAdminTag, putAdminTag } from "api/actions/admin"
+import { getBlogTags } from "api/actions/blog"
+import ClientAPI from "api/client"
+import { BlogTagType } from "interfaces/Blog"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { toast } from "react-toastify"
 
-import ClientAPI from "../../../api/client"
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
 
-export interface AdminTagType {
-  id: number
-  title: string
-}
-
-const a = ["ПОДБОРКИ", "ГАЙДЫ", "СОВЕТЫ", "ГИД", "ВДОХНОВЕНИЯ", "СОБЫТИЯ", "FAQ"]
 function AdminEditTags() {
-  const [tags, setTags] = useState<AdminTagType[]>([])
-  const { error, payload } = useQuery(getAdminTags(1, 0))
+  const [tags, setTags] = useState<BlogTagType[]>([])
+  const { error, payload } = useQuery(getBlogTags(1, 0))
   function addTag() {
     setTags([...tags, { id: 0, title: "НОВЫЙ ТЭГ" }])
   }

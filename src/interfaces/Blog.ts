@@ -1,5 +1,15 @@
 import { DataURLBase64, URLType } from "./common"
 
+
+/* Blog */
+
+export interface BlogTagType {
+  id: number
+  title: string
+}
+
+/* Article */
+
 export interface ArticleType extends ArticlePreviewType, ArticleContentType {
   author: ArticleAuthorType
   likes: number

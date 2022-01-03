@@ -84,8 +84,8 @@ export function noop() {
   /* Do nothing */
 }
 
-export const capitalize = (str: string | any[]) => {
-  if (!str) return str
+export const capitalize = (str?: string | null): string => {
+  if (!str?.length) return ""
   return str[0].toUpperCase() + str.slice(1)
 }
 

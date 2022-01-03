@@ -2,12 +2,11 @@ import "./style.scss"
 import "react-toastify/dist/ReactToastify.css"
 
 import ClientAPI from "api/client"
-import { routerMiddleware } from "connected-react-router"
 import { StrictMode } from "react"
 import ReactDOM from "react-dom"
 import { ClientContextProvider } from "react-fetching-library"
 import { Provider } from "react-redux"
-import { BrowserRouter } from "react-router-dom"
+import { HashRouter } from "react-router-dom"
 import { RecoilRoot } from "recoil"
 import { applyMiddleware, createStore } from "redux"
 import combinedReducers from "redux/combinedReducers"
@@ -21,12 +20,12 @@ import App from "./App"
 
 const store = createStore(
   combinedReducers,
-  composeWithDevTools(applyMiddleware(...[thunk, routerMiddleware(history)]))
+  composeWithDevTools(applyMiddleware(thunk))
 )
 
 ReactDOM.render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter hashType="hashbang">
       <Provider store={store}>
         <RecoilRoot>
           <ClientContextProvider client={ClientAPI}>
@@ -34,7 +33,7 @@ ReactDOM.render(
           </ClientContextProvider>
         </RecoilRoot>
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
   document.getElementById("root")
 )
