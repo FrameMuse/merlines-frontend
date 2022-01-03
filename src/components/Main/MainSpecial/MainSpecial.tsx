@@ -1,15 +1,13 @@
 import MainSpecialList from "./MainSpecialList"
-import MainSpecialSubtitle from "./MainSpecialSubtitle"
 import MainSpecialSwitcher from "./MainSpecialSwitcher"
-import MainSpecialTitle from "./MainSpecialTitle"
 
 function MainSpecial() {
   return (
     <section className="special">
       <div className="special__container">
         <div className="special__inner">
-          <MainSpecialTitle />
-          <MainSpecialSubtitle />
+          <h2 className="special__title">Спецпредложения</h2>
+          <p className="special__text">Только здесь и сейчас!</p>
           <MainSpecialSwitcher />
         </div>
       </div>
