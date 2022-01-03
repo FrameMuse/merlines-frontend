@@ -6,6 +6,12 @@ const mockDataCards = [
     from: "Москва",
     to: "Германия",
     city: "Берлин",
+    price: 5000
+  },
+  {
+    from: "Москва",
+    to: "Германия",
+    city: "Берлин",
     price: 6000
   },
   {
@@ -56,22 +62,9 @@ const mockDataCards = [
 function MainSpecialList() {
   return (
     <div className="special__list">
-      <MainSpecialCard
-        bestCard={true}
-        bestCardImg="img/special/2.jpg"
-        cardFrom="Москва"
-        cardTo="Германия"
-        cardToCity="Берлин"
-        cardPrice="5000"
-      />
-      {mockDataCards.map((card, index) => (
-        <MainSpecialCard
-          key={index}
-          cardFrom={card.from}
-          cardTo={card.to}
-          cardToCity={card.city}
-          cardPrice={card.price}
-        />
+      <MainSpecialCard isBest image="img/special/2.jpg" {...mockDataCards[0]} />
+      {mockDataCards.slice(1).map((card, index) => (
+        <MainSpecialCard {...card} key={index} />
       ))}
     </div>
   )
