@@ -166,11 +166,7 @@ function HeaderNavigation() {
       <div className="nav__list nav__list--top">
         <HeaderLink
           modifier="cabinet"
-          href={
-            accessData.loginToken
-              ? routes.lk.base
-              : `${routes.login}?next=${path}`
-          }
+          href="/user"
           svgClass={accessData.loginToken ? "user-on" : "user-off"}
           svgName={accessData.loginToken ? "user-on" : "user-off"}
         />

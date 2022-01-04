@@ -5,6 +5,7 @@ import Footer from "components/Footer/Footer"
 import Header from "components/Header/Header"
 import Main from "components/Main/Main"
 import Subscribe from "components/Subscribe/Subscribe"
+import UserCabinet from "components/UserCabinet/UserCabinet"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Route, Switch } from "react-router-dom"
@@ -38,6 +39,8 @@ function AppRouter() {
     <Switch>
       <Route path="/article/:articleId" render={props => <Article {...props.match.params} />} />
       <Route path="/blog" render={props => <Blog />} />
+      <Route path="/user" render={props => <UserCabinet />} />
+
       <Route><Main /></Route>
     </Switch>
   )

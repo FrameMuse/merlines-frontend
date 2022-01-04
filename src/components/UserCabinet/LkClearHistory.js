@@ -1,17 +1,14 @@
-import { useDispatch,useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-
-import { selectLkData, setIsOpenClearHistory } from "../../reducers/lkDataSlice"
+import { selectLkData, setIsOpenClearHistory } from "reducers/lkDataSlice"
+import { classWithModifiers } from "utils"
 
 function LkClearHistory() {
   const dispatch = useDispatch()
   const lkData = useSelector(selectLkData)
-  const popupClass = `overlay overlay--history ${
-    lkData.isOpenClearHistory ? "overlay--opened" : "overlay--closed"
-  }`
 
   return (
-    <section className={popupClass}>
+    <section className={classWithModifiers("overlay", "history", lkData.isOpenClearHistory && "active")}>
       <div className="overlay__container">
         <div className="overlay__content">
           <button
@@ -27,9 +24,7 @@ function LkClearHistory() {
               : "Вы уверенны, что хотите удалить все результаты поиска из истории?"}
           </h2>
           <div className="overlay__buttons">
-            <Link className="overlay__button overlay__button--delete" to="#">
-              Удалить
-            </Link>
+            <Link className="overlay__button overlay__button--delete" to="#">Удалить</Link>
             <Link
               onClick={() => dispatch(setIsOpenClearHistory(false))}
               className="overlay__button overlay__button--cancel"
