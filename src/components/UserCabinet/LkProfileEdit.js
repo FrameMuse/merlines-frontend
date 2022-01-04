@@ -1,21 +1,20 @@
+import api from "api/api"
+import { errorMessages } from "constants"
+import { validationMessages } from "constants"
 import { useState } from "react"
-import { useDispatch,useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
-
-import api from "../../../api/api"
-import { errorMessages } from "../../../constants"
-import { validationMessages } from "../../../constants"
 import {
   selectAccessData,
   setIsChangedEmail,
   setNewEmail
-} from "../../../reducers/accessDataSlice"
+} from "reducers/accessDataSlice"
 import {
   selectLkData,
   setLkFirstName,
   setLkLastName
-} from "../../../reducers/lkDataSlice"
+} from "reducers/lkDataSlice"
 
 function LkProfileEdit() {
   const history = useHistory()
@@ -148,7 +147,7 @@ function LkProfileEdit() {
               case 400:
                 return toast.error(
                   error.response.data.current_password[0] &&
-                    "Вы ввели неправильный текущий пароль"
+                  "Вы ввели неправильный текущий пароль"
                 )
               case 404:
                 return toast.error(
@@ -261,9 +260,7 @@ function LkProfileEdit() {
                   </label>
                 )}
                 <button
-                  className={`show-password ${
-                    isCurrentPasswordHide ? "show-password--active" : ""
-                  }`}
+                  className={`show-password ${isCurrentPasswordHide ? "show-password--active" : ""}`}
                   onClick={() =>
                     setIsCurrentPasswordHide(!isCurrentPasswordHide)
                   }
@@ -313,9 +310,7 @@ function LkProfileEdit() {
                   </label>
                 )}
                 <button
-                  className={`show-password ${
-                    isNewPasswordHide ? "show-password--active" : ""
-                  }`}
+                  className={`show-password ${isNewPasswordHide ? "show-password--active" : ""}`}
                   onClick={() => setIsNewPasswordHide(!isNewPasswordHide)}
                   type="button"
                   aria-label="Показать пароль"

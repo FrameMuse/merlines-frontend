@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-import LkSwitcher from "../LkSwitcher"
+import LkSwitcher from "./LkSwitcher"
 
-function LkFavourites() {
+function UserCabinetFavourites() {
   const [isActiveRoutes, setIsActiveRoutes] = useState()
   const [isActiveTickets, setIsActiveTickets] = useState()
 
@@ -13,6 +13,7 @@ function LkFavourites() {
         <LkSwitcher
           setIsActiveRoutes={setIsActiveRoutes}
           setIsActiveTickets={setIsActiveTickets}
+          subscribes={undefined}
         />
       </div>
       <div className="cabinet__empty cabinet__empty--subscription">
@@ -27,4 +28,4 @@ function LkFavourites() {
   )
 }
 
-export default LkFavourites
+export default UserCabinetFavourites

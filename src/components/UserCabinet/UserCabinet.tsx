@@ -4,7 +4,7 @@ import Icon, { IconName } from "components/common/Icon"
 import { NavLink } from "react-router-dom"
 
 import LkClearHistory from "./LkClearHistory"
-import LkContent from "./LkContent/LkContent"
+import UserCabinetContent from "./LkContent/UserCabinetContent"
 import LkHeader from "./UserCabinetHeader"
 
 
@@ -23,7 +23,7 @@ function UserCabinet() {
                 <LkNavLink to="/user/question" iconName="question">Задать вопрос</LkNavLink>
               </nav>
             </div>
-            <LkContent />
+            <UserCabinetContent />
           </div>
         </div>
       </section>

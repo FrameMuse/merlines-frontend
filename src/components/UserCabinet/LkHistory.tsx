@@ -1,5 +1,5 @@
-import LkContentClearAll from "../LkContent/LkContentClearAll"
-import LkContentRoute from "../LkContent/LkContentRoute"
+import LkContentClearAll from "./LkContent/LkContentClearAll"
+import UserCabinetContentRoute from "./LkContent/UserCabinetContentRoute"
 
 function LkHistory() {
   return (
@@ -9,9 +9,9 @@ function LkHistory() {
         <LkContentClearAll />
       </div>
       <ul className="cabinet__col-list">
-        <LkContentRoute />
-        <LkContentRoute />
-        <LkContentRoute />
+        <UserCabinetContentRoute />
+        <UserCabinetContentRoute />
+        <UserCabinetContentRoute />
       </ul>
     </>
   )
