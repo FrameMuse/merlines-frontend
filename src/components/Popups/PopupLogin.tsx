@@ -1,3 +1,5 @@
+import { getAccountSocialFacebook, getAccountSocialInstagram } from "api/actions/account"
+import { APIOuterLink } from "api/helpers"
 import { Link } from "react-router-dom"
 
 import Icon from "../common/Icon"
@@ -35,16 +37,16 @@ function PopupLogin() {
       <h2 className="modal__title modal__title--social">Войти через...</h2>
       <div className="modal__social">
         <div className="modal__item">
-          <Link className="modal__link" to="#">
+          <APIOuterLink className="modal__link" action={getAccountSocialInstagram}>
             <Icon name="instagram" className="modal__link-icon" />
             Instagram
-          </Link>
+          </APIOuterLink>
         </div>
         <li className="modal__item">
-          <Link className="modal__link" to="#">
+          <APIOuterLink className="modal__link" action={getAccountSocialFacebook}>
             <Icon name="facebook" className="modal__link-icon" />
             Facebook
-          </Link>
+          </APIOuterLink>
         </li>
       </div>
     </>

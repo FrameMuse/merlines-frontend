@@ -58,3 +58,13 @@ export const postAccountTokenLogout: Action = {
   method: "GET",
   endpoint: "/account/token/logout"
 }
+
+export const getAccountSocialFacebook: Action = {
+  method: "GET",
+  endpoint: "/account/social/facebook"
+}
+
+export const getAccountSocialInstagram: Action = {
+  method: "GET",
+  endpoint: "/account/social/instagram"
+}
