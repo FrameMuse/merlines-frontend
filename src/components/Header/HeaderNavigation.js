@@ -132,6 +132,15 @@ function HeaderNavigation() {
           </>
         )}
       </div>
+      <HeaderSettings />
+    </nav>
+  )
+}
+
+function HeaderSettings() {
+  const user = useSelector(state => state.user)
+  return (
+    <>
       <div className="nav__list nav__list--setting">
         <div className="nav__item nav__item--language">
           <HeaderLink
@@ -166,12 +175,12 @@ function HeaderNavigation() {
       <div className="nav__list nav__list--top">
         <HeaderLink
           modifier="cabinet"
-          href="/user"
-          svgClass={accessData.loginToken ? "user-on" : "user-off"}
-          svgName={accessData.loginToken ? "user-on" : "user-off"}
+          href={user.authed ? "/user" : "/login"}
+          svgClass="user-off"
+          svgName="user-off"
         />
       </div>
-    </nav>
+    </>
   )
 }
 
