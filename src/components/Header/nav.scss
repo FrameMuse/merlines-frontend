@@ -38,7 +38,7 @@
 			}
 		}
 
-		.nav__list {
+		.nav__group {
 			display: flex;
 
 			&--top {
@@ -121,7 +121,7 @@
 	}
 }
 
-.nav__list {
+.nav__group {
 	display: none;
 	flex-direction: column;
 	padding-left: 45px;

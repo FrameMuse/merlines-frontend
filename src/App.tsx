@@ -7,6 +7,7 @@ import Main from "components/Main/Main"
 import Subscribe from "components/Subscribe/Subscribe"
 import ErrorView from "components/TechnicalPages/ErrorView"
 import UserCabinet from "components/UserCabinet/UserCabinet"
+import { PopupContainer } from "plugins/popup/src/container"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Route, Switch } from "react-router-dom"
@@ -28,6 +29,7 @@ function App() {
           <AppRouter />
         </main>
         <Footer />
+        <PopupContainer className="modal" />
         <ToastContainer />
       </Route>
     </Switch >

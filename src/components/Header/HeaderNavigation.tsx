@@ -1,4 +1,6 @@
 import Icon from "components/common/Icon"
+import PopupLogin from "components/Popups/PopupLogin"
+import { Popup } from "plugins/popup"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
@@ -42,12 +44,18 @@ function HeaderNavigation() {
 function HeaderUser() {
   const user = useSelector(state => state.user)
   return (
-    <div className="nav__group">
-      <NavLink className="nav__link" to="/profile">
-        <span className="nav__link-text">text</span>
-        <Icon name="user-off" className="nav__link-icon" />
-        <Icon name="user-on" className="nav__link-icon" />
-      </NavLink>
+    <div className="nav__group nav__group--top">
+      {user.authed ? (
+        <NavLink className="nav__link" to="/user">
+          <span className="nav__link-text">text</span>
+          <Icon name="user-on" className="nav__link-icon" />
+        </NavLink>
+      ) : (
+        <button className="nav__link" type="button" onClick={() => Popup.open(PopupLogin)}>
+          <span className="nav__link-text">text</span>
+          <Icon name="user-off" className="nav__link-icon" />
+        </button>
+      )}
     </div>
   )
 }
