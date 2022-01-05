@@ -14,7 +14,7 @@ import BlogNavigation from "./BlogNavigation"
 
 export interface ArticleFiltersType {
   tags__contains: string | null
-  title__contains: string | null
+  title__icontains: string | null
   ordering: OrderingType<"created_at" | "likers__count">
 }
 
@@ -29,7 +29,7 @@ function Blog() {
       <div className="articles__container articles__all">
         <BlogNavigation activeTag={activeTag} />
         {(activeTag || searchValue) ? (
-          <BlogSection title={(activeTag && searchValue) ? [capitalize(activeTag), " | ", <span className="weak">{searchValue}</span>] : (capitalize(activeTag) || searchValue || "Unknown")} pageSize={12} filters={{ tags__contains: activeTag, title__contains: searchValue }} />
+          <BlogSection title={searchValue ? [capitalize(activeTag || "все"), " | ", <span className="weak">{searchValue}</span>] : capitalize(activeTag)} pageSize={12} filters={{ tags__contains: activeTag, title__icontains: searchValue }} />
         ) : (
           <>
             <BlogSection title="Новое" pageSize={4} filters={{ ordering: "-created_at" }} />
