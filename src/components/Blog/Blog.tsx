@@ -7,7 +7,7 @@ import { OrderingType } from "interfaces/Django"
 import { useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useLocation } from "react-router-dom"
-import { capitalize, classWithModifiers } from "utils"
+import { classWithModifiers } from "utils"
 
 import BlogNavigation from "./BlogNavigation"
 
@@ -24,12 +24,14 @@ function Blog() {
 
   const activeTag = locationSearch.get("tag")
   const searchValue = locationSearch.get("search")
+
+  const searchSectionTitle = [activeTag || "все", !!searchValue && [" | ", <small>{searchValue}</small>]]
   return (
     <div className="articles">
       <div className="articles__container articles__all">
         <BlogNavigation activeTag={activeTag} />
         {(activeTag || searchValue) ? (
-          <BlogSection title={searchValue ? [capitalize(activeTag || "все"), " | ", <span className="weak">{searchValue}</span>] : capitalize(activeTag)} pageSize={12} filters={{ tags__contains: activeTag, title__icontains: searchValue }} />
+          <BlogSection title={searchSectionTitle} pageSize={12} filters={{ tags__contains: activeTag, title__icontains: searchValue }} />
         ) : (
           <>
             <BlogSection title="Новое" pageSize={4} filters={{ ordering: "-created_at" }} />
