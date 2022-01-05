@@ -8,7 +8,7 @@ import Subscribe from "components/Subscribe/Subscribe"
 import ErrorView from "components/TechnicalPages/ErrorView"
 import UserCabinet from "components/UserCabinet/UserCabinet"
 import { PopupContainer } from "plugins/popup/src/container"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Route, Switch, useHistory, useLocation } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
@@ -56,39 +56,45 @@ function AppRouter() {
 
 
 function useUserAuth() {
-  useSetTokenByParam()
-
+  const token = useUserToken()
   const dispatch = useDispatch()
-  useEffect(() => {
-    if (!localStorage.getItem("token")) return
 
+  // Token just for update
+  useEffect(() => {
+    if (!token?.length) return
+
+    localStorage.setItem("token", token)
     ClientAPI
-      .query(getAccountMe)
+      .query(getAccountMe) // Token is taken from localStorage in requestIntercepter
       .then(({ error, payload }) => {
         if (error || !payload || payload.error) return
 
         dispatch(loginUser(payload))
       })
-  }, [dispatch])
+  }, [token])
 }
 
-function useSetTokenByParam() {
+function useUserToken() {
   const history = useHistory()
   const location = useLocation()
 
+  const [token, setToken] = useState<string | null>(localStorage.getItem("token"))
+
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search)
-    const token = searchParams.get("token")
+    const searchToken = searchParams.get("token")
+    setToken(searchToken)
 
-    if (token === null) return
-    if (token.length === 0) {
-      history.push("/error/500")
+    if (searchToken === null) return
+    if (searchToken.length === 0) {
+      history.replace("/error/500")
       return
     }
 
-    history.push(location.pathname)
-    localStorage.setItem("token", token)
+    history.replace(location.pathname)
   }, [history, location])
+
+  return token
 }
 
 export default App

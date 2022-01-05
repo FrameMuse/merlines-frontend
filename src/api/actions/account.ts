@@ -49,14 +49,14 @@ export const postAccountPasswordResetConfirm: Action = {
   endpoint: "/account/password/reset/confirm"
 }
 
-export const postAccountTokenLogin: Action = {
+export const postAccountToken: Action<{ token: string }> = {
   method: "GET",
-  endpoint: "/account/token/login"
+  endpoint: "/account/token"
 }
 
-export const postAccountTokenLogout: Action = {
+export const deleteAccountToken: Action = {
   method: "GET",
-  endpoint: "/account/token/logout"
+  endpoint: "/account/token"
 }
 
 export const getAccountSocialFacebook: Action = {

@@ -1,7 +1,8 @@
 // SCSS
 import "./AdminView.style.scss"
 
-import { NavLink, Route, Switch } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { NavLink, Redirect, Route, Switch } from "react-router-dom"
 
 import AdminAddArticleView from "./views/AdminAddArticleView"
 import AdminBlogView from "./views/AdminBlogView"
@@ -10,8 +11,12 @@ import AdminHomeView from "./views/AdminHomeView"
 import AdminUsersView from "./views/AdminUsersView"
 
 function AdminView() {
+  const user = useSelector(state => state.user)
   return (
     <>
+      {!user.authed && (
+        <Redirect to="/" />
+      )}
       <header className="admin-header">
         <div className="topbar">
           <div className="topbar-menu">
