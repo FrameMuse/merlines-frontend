@@ -10,7 +10,7 @@ import UserCabinet from "components/UserCabinet/UserCabinet"
 import { PopupContainer } from "plugins/popup/src/container"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { Route, Switch } from "react-router-dom"
+import { Route, Switch, useHistory, useLocation } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import { loginUser } from "redux/reducers/user"
 
@@ -18,7 +18,7 @@ import Article from "./components/Article/Article"
 import Blog from "./components/Blog/Blog"
 
 function App() {
-  useUserConnection()
+  useUserAuth()
 
   return (
     <Switch>
@@ -55,7 +55,9 @@ function AppRouter() {
 }
 
 
-function useUserConnection() {
+function useUserAuth() {
+  useSetTokenByParam()
+
   const dispatch = useDispatch()
   useEffect(() => {
     if (!localStorage.getItem("token")) return
@@ -68,6 +70,25 @@ function useUserConnection() {
         dispatch(loginUser(payload))
       })
   }, [dispatch])
+}
+
+function useSetTokenByParam() {
+  const history = useHistory()
+  const location = useLocation()
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search)
+    const token = searchParams.get("token")
+
+    if (token === null) return
+    if (token.length === 0) {
+      history.push("/error/500")
+      return
+    }
+
+    history.push(location.pathname)
+    localStorage.setItem("token", token)
+  }, [history, location])
 }
 
 export default App
