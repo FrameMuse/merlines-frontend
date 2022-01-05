@@ -2,266 +2,269 @@
 @import "mixin";
 
 .modal {
-  width: 100%;
-  height: 100vh;
-  background-color: var(--color-white);
-  box-shadow: -15px 0 15px rgba(24, 50, 115, 0.1);
-  box-sizing: border-box;
-  overflow: auto;
-  transform: translateX(110%);
-  transition: transform 0.7s cubic-bezier(1, 0, 0, 1);
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 999;
+	width: 100%;
+	height: 100vh;
+	background-color: var(--color-white);
+	box-shadow: -15px 0 15px rgba(24, 50, 115, 0.1);
+	box-sizing: border-box;
+	overflow: auto;
+	transform: translateX(110%);
+	transition: transform 0.7s cubic-bezier(1, 0, 0, 1);
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 999;
 
-  &--opened {
-    transform: translateX(0);
-  }
+	&--opened {
+		transform: translateX(0);
+	}
 
-  @media #{$media-md} {
-    width: 490px;
-  }
+	@media #{$media-md} {
+		width: 490px;
+	}
 
-  @media #{$media-lg} {
-    width: 560px;
-  }
+	@media #{$media-lg} {
+		width: 560px;
+	}
 
-  @media #{$media-xl} {
-    width: 850px;
-  }
+	@media #{$media-xl} {
+		width: 850px;
+	}
 }
 
 .modal__container {
-  padding: 62px 15px 60px;
+	padding: 62px 15px 60px;
 
-  @media #{$media-md} {
-    padding-left: 60px;
-    padding-right: 39px;
-  }
+	@media #{$media-md} {
+		padding-left: 60px;
+		padding-right: 39px;
+	}
 
-  @media #{$media-lg} {
-    padding-left: 79px;
-    padding-right: 111px;
-  }
+	@media #{$media-lg} {
+		padding-left: 79px;
+		padding-right: 111px;
+	}
 
-  @media #{$media-xl} {
-    padding-left: 95px;
-    padding-right: 405px;
-  }
+	@media #{$media-xl} {
+		padding-left: 95px;
+		padding-right: 405px;
+	}
 }
 
 .modal__close {
-  @include resetBtn;
+	@include resetBtn;
 
-  color: var(--color-blue);
-  font-size: 14px;
-  padding-right: 22px;
-  transition: 0.2s;
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  z-index: 1;
+	color: var(--color-blue);
+	font-size: 14px;
+	padding-right: 22px;
+	transition: 0.2s;
+	position: absolute;
+	top: 20px;
+	right: 15px;
+	z-index: 1;
 
-  @include crossIcon;
+	@include crossIcon;
 
-  &::before,
-  &::after {
-    margin-top: 0;
-  }
+	&::before,
+	&::after {
+		margin-top: 0;
+	}
 
-  @media #{$media-md} {
-    color: var(--color-grey);
-    padding-right: 0;
-    top: 24px;
-    left: 21px;
-    right: auto;
+	@media #{$media-md} {
+		color: var(--color-grey);
+		padding-right: 0;
+		top: 24px;
+		left: 21px;
+		right: auto;
 
-    &::before,
-    &::after {
-      display: none;
-    }
+		&::before,
+		&::after {
+			display: none;
+		}
 
-    &:hover,
-    &:focus {
-      color: var(--color-blue);
-    }
-  }
+		&:hover,
+		&:focus {
+			color: var(--color-blue);
+		}
+	}
 
-  @media #{$media-xl} {
-    left: 26px;
-  }
+	@media #{$media-xl} {
+		left: 26px;
+	}
 }
 
 .modal__close-text {
-  @media #{$media-md} {
-    display: none;
-  }
+	@media #{$media-md} {
+		display: none;
+	}
 }
 
 .modal__close-icon {
-  display: none;
+	display: none;
 
-  @media #{$media-md} {
-    display: block;
-  }
+	@media #{$media-md} {
+		display: block;
+	}
 }
 
 .modal__subnav {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 
-  @media #{$media-md} {
-    margin-bottom: 50px;
-  }
+	@media #{$media-md} {
+		margin-bottom: 50px;
+	}
 }
 
 .modal__title {
-  @include h2;
+	@include h2;
 
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 
-  &--text {
-    margin-top: 9px;
-    margin-bottom: 15px;
-  }
+	&--text {
+		margin-top: 9px;
+		margin-bottom: 15px;
+	}
 
-  &--registration {
-    margin-bottom: 22px;
-  }
+	&--registration {
+		margin-bottom: 22px;
+	}
 
-  &--social {
-    margin-bottom: 22px;
-  }
+	&--social {
+		margin-bottom: 22px;
+	}
 
-  @media #{$media-md} {
-    font-size: 24px;
+	@media #{$media-md} {
+		font-size: 24px;
 
-    &--registration {
-      margin-bottom: 31px;
-    }
+		&--registration {
+			margin-bottom: 31px;
+		}
 
-    &--text {
-      margin-top: 101px;
-    }
-  }
+		&--text {
+			margin-top: 101px;
+		}
+	}
 }
 
 .modal__form {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 .modal__form-group {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 
-  &--margin {
-    margin-bottom: 16px;
-  }
+	&--margin {
+		margin-bottom: 16px;
+	}
 
-  &--last {
-    margin-bottom: 0;
-  }
+	&--last {
+		margin-bottom: 0;
+	}
 }
 
 .modal__bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  font-size: 12px;
-  margin-top: 10px;
-  margin-bottom: 22px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	font-size: 12px;
+	margin-top: 10px;
+	margin-bottom: 22px;
 
-  @media #{$media-md} {
-    margin-bottom: 21px;
-  }
+	@media #{$media-md} {
+		margin-bottom: 21px;
+	}
 }
 
 .modal__link-recovery {
-  color: var(--color-grey);
+	color: var(--color-grey);
 }
 
 .modal__submit {
-  @include buttonSubmit;
+	@include buttonSubmit;
 
-  width: 100%;
-  padding: 16px 20px 17px;
-  background-color: var(--color-blue);
-  border-radius: 4px;
+	width: 100%;
+	padding: 16px 20px 17px;
+	background-color: var(--color-blue);
+	border-radius: 4px;
 
-  &:hover,
-  &:focus {
-    background-color: var(--color-btn);
-  }
+	&:hover,
+	&:focus {
+		background-color: var(--color-btn);
+	}
 }
 
 .modal__middle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: $title-font;
-  color: var(--color-grey);
-  font-size: 12px;
-  font-weight: 700;
-  text-align: center;
-  text-transform: uppercase;
-  margin-top: 30px;
-  margin-bottom: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-family: $title-font;
+	color: var(--color-grey);
+	font-size: 12px;
+	font-weight: 700;
+	text-align: center;
+	text-transform: uppercase;
+	margin-top: 30px;
+	margin-bottom: 30px;
 
-  &::before,
-  &::after {
-    content: "";
-    width: 100%;
-    height: 1px;
-    background-color: var(--color-border-third);
-  }
+	&::before,
+	&::after {
+		content: "";
+		width: 100%;
+		height: 1px;
+		background-color: var(--color-border-third);
+	}
 
-  &::before {
-    margin-right: 20px;
-  }
+	&::before {
+		margin-right: 20px;
+	}
 
-  &::after {
-    margin-left: 20px;
-  }
+	&::after {
+		margin-left: 20px;
+	}
 }
 
 .modal__social {
-  @include ul;
+	@include ul;
 
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 .modal__item {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .modal__link {
-  display: flex;
-  align-items: center;
-  color: var(--color-base);
-  font-size: 12px;
-  transition: 0.2s;
+	display: flex;
+	align-items: center;
+	color: var(--color-base);
+	font-size: 12px;
+	transition: 0.2s;
 
-  &:hover,
-  &:focus {
-    color: var(--color-blue);
-  }
+	&:hover,
+	&:focus {
+		color: var(--color-blue);
+	}
 }
 
 .modal__link-icon {
-  margin-right: 10px;
+	width: 1em;
+	height: 1em;
+
+	margin-right: 10px;
 }
 
 .modal__info {
-  margin-top: 15px;
-  color: var(--color-grey);
+	margin-top: 15px;
+	color: var(--color-grey);
 
-  a {
-    color: inherit;
-    text-decoration: underline;
+	a {
+		color: inherit;
+		text-decoration: underline;
 
-    &:hover,
-    &:focus {
-      color: var(--color-blue);
-    }
-  }
+		&:hover,
+		&:focus {
+			color: var(--color-blue);
+		}
+	}
 }
