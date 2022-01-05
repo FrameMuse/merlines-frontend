@@ -17,7 +17,7 @@ import PriceCalendar from "./components/PriceCalendar/PriceCalendar"
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy"
 import SearchResult from "./components/SearchResult/SearchResult"
 import Subscribe from "./components/Subscribe/Subscribe"
-import Error404 from "./components/TechnicalPages/Error404"
+import ErrorView from "./components/TechnicalPages/ErrorView"
 // import { selectLkData } from './reducers/lkDataSlice';
 import TicketRedirect from "./components/TechnicalPages/TicketRedirect/TicketRedirect"
 import UpdAccessPopup from "./components/UpdAccessPopup/UpdAccessPopup"
@@ -86,7 +86,7 @@ function DEPRECATED__App__() {
             <AboutProject />
           </Route>
           <Route path={routes.footer.rules}>
-            <Error404 />
+            <ErrorView />
           </Route>
           <Route path={routes.footer.cookies}>
             <CookiePolicy />
@@ -103,23 +103,8 @@ function DEPRECATED__App__() {
           <Route path={routes.footer.forPartners}>
             <Partners />
           </Route>
-          <Route path={routes.footer.help}>
-            <Error404 />
-          </Route>
           <Route path={routes.footer.faq}>
             <FAQ />
-          </Route>
-          <Route path={routes.footer.askQuestion}>
-            <Error404 />
-          </Route>
-          <Route path={routes.footer.socialNetwork}>
-            <Error404 />
-          </Route>
-          <Route path={routes.footer.instagram}>
-            <Error404 />
-          </Route>
-          <Route path={routes.footer.facebook}>
-            <Error404 />
           </Route>
           <Route path={routes.landing}>
             <LandingPage />

@@ -1,6 +1,4 @@
 import api from "api/api"
-import { errorMessages } from "constants"
-import { validationMessages } from "constants"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
@@ -15,6 +13,8 @@ import {
   setLkFirstName,
   setLkLastName
 } from "reducers/lkDataSlice"
+
+import { errorMessages, validationMessages } from "../../constants"
 
 function LkProfileEdit() {
   const history = useHistory()

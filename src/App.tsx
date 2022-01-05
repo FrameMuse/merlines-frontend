@@ -5,6 +5,7 @@ import Footer from "components/Footer/Footer"
 import Header from "components/Header/Header"
 import Main from "components/Main/Main"
 import Subscribe from "components/Subscribe/Subscribe"
+import ErrorView from "components/TechnicalPages/ErrorView"
 import UserCabinet from "components/UserCabinet/UserCabinet"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
@@ -25,7 +26,6 @@ function App() {
         <Header />
         <main id="main-content" className="main">
           <AppRouter />
-          <Subscribe />
         </main>
         <Footer />
         <ToastContainer />
@@ -34,17 +34,24 @@ function App() {
   )
 }
 
+
 function AppRouter() {
   return (
     <Switch>
-      <Route path="/article/:articleId" render={props => <Article {...props.match.params} />} />
-      <Route path="/blog" render={props => <Blog />} />
-      <Route path="/user" render={props => <UserCabinet />} />
+      <Route path="/user"><UserCabinet /></Route>
 
-      <Route><Main /></Route>
+      <Route path="/blog/article/:articleId" render={props => [<Article {...props.match.params} />, <Subscribe />]} />
+      <Route path="/blog"><Blog /><Subscribe /></Route>
+      <Route path="/" exact><Main /><Subscribe /></Route>
+
+
+
+      <Route path="/error/:code" render={props => <ErrorView {...props.match.params} />} />
+      <Route><ErrorView code="404" /></Route>
     </Switch>
   )
 }
+
 
 function useUserConnection() {
   const dispatch = useDispatch()
