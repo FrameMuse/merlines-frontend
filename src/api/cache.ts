@@ -6,7 +6,6 @@ const cacheTime = 1 * 10 * 1000
 
 export const cacheProvider = createCache<QueryResponse<Action>>(
   (action: Action) => {
-    console.log(action)
     if (action.config?.skipCache) return false
     if (process.env.NODE_ENV === "development") return false
 

@@ -22,10 +22,6 @@ export function responseInterceptor() {
   return async (_action: Action, response: QueryResponse<APIResponseError>) => {
     try {
       if (process.env.NODE_ENV === "development") {
-        if (response.errorObject instanceof Error) {
-          toast.error(response.errorObject.message)
-        }
-
         toast.error(JSON.stringify(response.payload?.error.detail))
 
         for (const field of Object.values(response.payload?.error.detail) as any) {
@@ -35,7 +31,7 @@ export function responseInterceptor() {
         }
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
 
 

@@ -1,4 +1,5 @@
 import { Action as BaseAction, createClient } from "react-fetching-library"
+import { toast } from "react-toastify"
 
 import { cacheProvider } from "./cache"
 import { requestInterceptor, responseInterceptor } from "./interceptors"
@@ -28,7 +29,18 @@ export type Action<P = unknown> = BaseAction<P & APIResponseError, Partial<Actio
 export const ClientAPI = createClient({
   requestInterceptors: [requestInterceptor],
   responseInterceptors: [responseInterceptor],
-  cacheProvider
+  cacheProvider,
+  fetch: (input, init) => {
+    const response = fetch(input, init)
+    // Error displaying
+    if (process.env.NODE_ENV === "development") {
+      response.catch(error => {
+        throw error
+      })
+    }
+    // ...
+    return response
+  }
 })
 
 if (process.env.NODE_ENV === "development") {
