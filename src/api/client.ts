@@ -35,6 +35,7 @@ export const ClientAPI = createClient({
     // Error displaying
     if (process.env.NODE_ENV === "development") {
       response.catch(error => {
+        if (error.message.includes("The user aborted a request.")) return
         throw error
       })
     }

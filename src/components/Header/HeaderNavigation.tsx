@@ -1,19 +1,41 @@
 import Icon from "components/common/Icon"
 import PopupLogin from "components/Popups/PopupLogin"
+import { UserType } from "interfaces/user"
 import { Popup } from "plugins/popup"
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { NavLink } from "react-router-dom"
 import { classWithModifiers } from "utils"
+
+import HeaderLink from "./HeaderLink"
 
 
 function HeaderNavigation() {
+  const user = useSelector(state => state.user)
   const [isActive, setIsActive] = useState(false)
   return (
-    <nav className={classWithModifiers("nav", isActive && "open")}>
-      {/* <button className="nav__toggle" type="button" onClick={() => setIsActive(!isActive)}>
+    <nav className={classWithModifiers("nav", isActive && "active")}>
+      <button className="nav__toggle" type="button" onClick={() => setIsActive(!isActive)}>
         <span className="nav__toggle-item" aria-label="Открыть меню" />
-      </button> */}
+      </button>
+      <div className="nav__inner">
+        <div className="nav__group">
+          {user.authed && [UserType.Admin, UserType.Editor].includes(user.type) && (
+            <HeaderLink to="/admin" iconName="arrow">Админ панель</HeaderLink>
+          )}
+          <HeaderLink to="/blog" iconName="edit">Блог</HeaderLink>
+          <HeaderLink to="/price-calendar" iconName="calendar">Календарь цен</HeaderLink>
+        </div>
+        <div className="nav__group">
+          {user.authed ? (
+            <HeaderLink to="/user" iconName="user-on" label="text" />
+          ) : (
+            <button className="nav__link" type="button" onClick={() => Popup.open(PopupLogin)}>
+              <Icon name="user-off" className="nav__link-icon" />
+              <span className="nav__link-text">Войти</span>
+            </button>
+          )}
+        </div>
+      </div>
       {/* <div className="nav__group">
         <div className="nav__item">
           <div className="nav__sublist nav__sublist--active">
@@ -34,32 +56,8 @@ function HeaderNavigation() {
           </div>
         </div>
       </div> */}
-
-      <HeaderUser />
     </nav>
   )
 }
-
-
-function HeaderUser() {
-  const user = useSelector(state => state.user)
-  return (
-    <div className="nav__group nav__group--top">
-      {user.authed ? (
-        <NavLink className="nav__link" to="/user">
-          <span className="nav__link-text">text</span>
-          <Icon name="user-on" className="nav__link-icon" />
-        </NavLink>
-      ) : (
-        <button className="nav__link" type="button" onClick={() => Popup.open(PopupLogin)}>
-          <span className="nav__link-text">text</span>
-          <Icon name="user-off" className="nav__link-icon" />
-        </button>
-      )}
-    </div>
-  )
-}
-
-
 
 export default HeaderNavigation

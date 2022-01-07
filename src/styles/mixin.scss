@@ -285,7 +285,7 @@
 }
 
 @mixin Tablet {
-	@media screen and (max-width: #{$width-md}) {
+	@media screen and (max-width: #{$width-lg}) {
 		@content
 	}
 }
