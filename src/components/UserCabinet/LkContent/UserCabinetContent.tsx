@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom"
 
 import LkHistory from "../LkHistory"
-import LkProfileEdit from "../LkProfileEdit"
+import UserCabinetEdit from "../UserCabinetEdit"
 import UserCabinetFavourites from "../UserCabinetFavourites"
 import UserCabinetFeedback from "../UserCabinetFeedback"
 import UserCabinetSubscription from "../UserCabinetSubscription"
@@ -14,7 +14,7 @@ function UserCabinetContent() {
         <Route path="/user/history"><LkHistory /></Route>
         <Route path="/user/subscribes"><UserCabinetSubscription /></Route>
         <Route path="/user/question"><UserCabinetFeedback /></Route>
-        <Route path="/user/edit"><LkProfileEdit /></Route>
+        <Route path="/user/edit"><UserCabinetEdit /></Route>
       </Switch>
     </div>
   )
