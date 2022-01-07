@@ -9,16 +9,16 @@ interface InputPasswordProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLI
 
 function InputPassword(props: InputPasswordProps) {
   const [isShown, setIsShown] = useState(props.type === "text")
-  const [isValid, setIsValid] = useState(false)
+  const [isValid, setIsValid] = useState(true)
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     // TODO: Validation
     props.onChange?.(event)
   }
   return (
     <label className="input-group">
-      <input {...props} type={isShown ? "text" : "password"} className="input-group__input" onChange={onChange} />
+      <input {...props} children={undefined} type={isShown ? "text" : "password"} className="input-group__input" onChange={onChange} />
       <div className={classWithModifiers("input-group__label", !isValid && "error")}>
-        {isValid ? "новый пароль" : validationMessages.password}
+        {isValid ? props.children : validationMessages.password}
       </div>
 
       <button
@@ -27,7 +27,7 @@ function InputPassword(props: InputPasswordProps) {
         type="button"
         aria-label="Показать пароль"
       >
-        <Icon className="show-password__icon" name="visibility" />
+        <Icon className="show-password__icon" name={isShown ? "visibility-off" : "visibility"} />
         {/* <svg width="24" height="24">
           <use
             className="show-password__icon-on"

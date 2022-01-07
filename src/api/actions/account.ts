@@ -1,5 +1,5 @@
 import { Action } from "api/client"
-import { AuthedUser } from "interfaces/user"
+import { AuthedUser, User } from "interfaces/user"
 
 export const getAccount: Action = {
   method: "GET",
@@ -14,10 +14,14 @@ export const postAccount: Action = {
   endpoint: "/account"
 }
 
-export const postAccountMePassword: Action = {
-  method: "POST",
-  endpoint: "/account/me/password"
-}
+export const putAccountMePassword = (userData: {
+  old_password: string
+  new_password: string
+}): Action<{}> => ({
+  method: "PUT",
+  endpoint: "/account/me/password",
+  body: userData
+})
 
 export const postAccountPasswordReset: Action = {
   method: "POST",
@@ -34,10 +38,11 @@ export const putAccountMe: Action = {
   endpoint: "/account/me"
 }
 
-export const patchAccountMe: Action = {
+export const patchAccountMe = (userData: Partial<Pick<AuthedUser, "first_name" | "last_name">>): Action<AuthedUser> => ({
   method: "PATCH",
-  endpoint: "/account/me"
-}
+  endpoint: "/account/me",
+  body: userData
+})
 
 export const deleteAccountMe: Action = {
   method: "DELETE",

@@ -20,11 +20,11 @@ function Logout() {
       .then(({ error }) => {
         if (error) return
 
+        localStorage.removeItem("token")
+        dispatch(logoutUser)
+
         history.push("/")
         toast.success("Вы успешно вышли")
-        localStorage.removeItem("token")
-
-        dispatch(logoutUser)
       })
   }
 

@@ -1,10 +1,11 @@
 
 import { useSelector } from "react-redux"
+import { NavLink } from "react-router-dom"
 
 import Icon from "../common/Icon"
 import Logout from "../common/Logout"
 
-function LkHeader() {
+function UserCabinetHeader() {
   const user = useSelector(state => state.user)
   if (!user.authed) return <>No Auth</>
   return (
@@ -16,7 +17,9 @@ function LkHeader() {
           <div className="cabinet__user-name">
             {user.first_name} {user.last_name}
             {" "}
-            <Icon name="edit" className="cabinet__edit-icon" />
+            <NavLink to="/user/edit">
+              <Icon name="edit" className="cabinet__edit-icon" />
+            </NavLink>
           </div>
         </div>
       </div>
@@ -25,4 +28,4 @@ function LkHeader() {
   )
 }
 
-export default LkHeader
+export default UserCabinetHeader

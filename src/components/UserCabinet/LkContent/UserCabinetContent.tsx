@@ -10,7 +10,7 @@ function UserCabinetContent() {
   return (
     <div className="cabinet__col cabinet__col--content">
       <Switch>
-        <Route path="/user"><UserCabinetFavourites /></Route>
+        <Route path="/user" exact><UserCabinetFavourites /></Route>
         <Route path="/user/history"><LkHistory /></Route>
         <Route path="/user/subscribes"><UserCabinetSubscription /></Route>
         <Route path="/user/question"><UserCabinetFeedback /></Route>
