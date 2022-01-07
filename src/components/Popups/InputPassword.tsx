@@ -18,7 +18,7 @@ function InputPassword(props: InputPasswordProps) {
     <label className="input-group">
       <input {...props} children={undefined} type={isShown ? "text" : "password"} className="input-group__input" onChange={onChange} />
       <div className={classWithModifiers("input-group__label", !isValid && "error")}>
-        {isValid ? props.children : validationMessages.password}
+        {isValid ? props.placeholder : validationMessages.password}
       </div>
 
       <button

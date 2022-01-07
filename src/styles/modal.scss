@@ -155,19 +155,8 @@
 
 .modal__form {
 	display: grid;
+	row-gap: 1em;
 	margin-top: 20px;
-}
-
-.modal__form-group {
-	margin-bottom: 20px;
-
-	&--margin {
-		margin-bottom: 16px;
-	}
-
-	&--last {
-		margin-bottom: 0;
-	}
 }
 
 .modal__bottom {

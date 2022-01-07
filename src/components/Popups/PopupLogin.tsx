@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom"
 import { getFormElements } from "utils"
 
 import Icon from "../common/Icon"
-import PopupResetConfirm from "./PopupPasswordResetConfirm"
+import PopupPasswordReset from "./PopupPasswordReset"
 import PopupRegistration from "./PopupRegistration"
 
 
@@ -63,7 +63,7 @@ function PopupLogin() {
               Запомнить меня
             </label>
           </div>
-          <button className="modal__link-recovery" type="button" onClick={() => Popup.open(PopupResetConfirm)}>Забыли пароль?</button>
+          <button className="modal__link-recovery" type="button" onClick={() => Popup.open(PopupPasswordReset)}>Забыли пароль?</button>
         </div>
         <input className="modal__submit" type="submit" value="Войти" />
       </form>

@@ -4,9 +4,11 @@ import ClientAPI from "api/client"
 import Footer from "components/Footer/Footer"
 import Header from "components/Header/Header"
 import Main from "components/Main/Main"
+import PopupPasswordResetConfirm from "components/Popups/PopupPasswordResetConfirm"
 import Subscribe from "components/Subscribe/Subscribe"
 import ErrorView from "components/TechnicalPages/ErrorView"
 import UserCabinet from "components/UserCabinet/UserCabinet"
+import { Popup } from "plugins/popup"
 import { PopupContainer } from "plugins/popup/src/container"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
@@ -19,6 +21,7 @@ import Blog from "./components/Blog/Blog"
 
 function App() {
   useUserAuth()
+  useOpenPopup()
 
   return (
     <Switch>
@@ -95,6 +98,25 @@ function useUserToken() {
   }, [history, location])
 
   return token
+}
+
+function useOpenPopup() {
+  const history = useHistory()
+  const location = useLocation()
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search)
+    const session = searchParams.get("password_session")
+
+    if (session === null) return
+    if (session.length === 0) {
+      history.push("/error/500")
+      return
+    }
+
+    history.push("/")
+    Popup.open(PopupPasswordResetConfirm, { session })
+  }, [location.search])
 }
 
 export default App

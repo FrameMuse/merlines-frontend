@@ -1,5 +1,5 @@
 import { Action } from "api/client"
-import { AuthedUser, User } from "interfaces/user"
+import { AuthedUser } from "interfaces/user"
 
 export const getAccount: Action = {
   method: "GET",
@@ -13,6 +13,19 @@ export const postAccount: Action = {
   method: "POST",
   endpoint: "/account"
 }
+
+export const postAccountPassword = (email: string): Action => ({
+  method: "POST",
+  endpoint: "/account/password",
+  body: { email }
+})
+
+export const putAccountPassword = (password: string, session: string): Action<{ token: string }> => ({
+  method: "PUT",
+  endpoint: "/account/password",
+  body: { password, session }
+})
+
 
 export const putAccountMePassword = (userData: {
   old_password: string

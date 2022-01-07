@@ -7,9 +7,8 @@ import InputPassword from "components/Popups/InputPassword"
 import { FormEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
+import { loginUser } from "redux/reducers/user"
 import { getFormElements } from "utils"
-
-import { loginUser } from "../../redux/reducers/user"
 
 
 function UserCabinetEdit() {
@@ -130,7 +129,6 @@ function FormProfileEditPassword() {
           minLength={8}
           placeholder="Старый пароль"
           autoComplete="off"
-          children="Старый пароль"
         />
         <InputPassword
           className="input-group__input"
@@ -138,7 +136,6 @@ function FormProfileEditPassword() {
           minLength={8}
           placeholder="Новый пароль"
           autoComplete="off"
-          children="Новый пароль"
         />
       </div>
       <input className="btn btn--profile" type="submit" value="Изменить" />

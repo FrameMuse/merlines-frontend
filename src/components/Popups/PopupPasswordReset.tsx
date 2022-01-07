@@ -1,47 +1,31 @@
-import { useState } from "react"
+import { postAccountPassword } from "api/actions/account"
+import ClientAPI from "api/client"
+import { Popup, usePopupContext } from "plugins/popup"
+import { FormEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
-import api from "../../api/api"
-import { errorMessages } from "../../constants"
-import { takeErrors } from "../../utils"
+import PopupPasswordResetConfirm from "./PopupPasswordResetConfirm"
+
 
 function PopupPasswordReset() {
+  const { close: closeThisPopup } = usePopupContext()
+
   const [email, setEmail] = useState("")
 
-  const resetPassword = async (evt: any) => {
-    evt.preventDefault()
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
 
-    try {
-      const result = await api.resetPassword({ email })
-      if (result) {
+    ClientAPI
+      .query(postAccountPassword(email))
+      .then(({ error }) => {
+        if (error) return
+
+        closeThisPopup()
+        // Popup.open(PopupPasswordResetConfirm)
+
         toast.success("Ссылка на смену пароля отправлена на указанный email")
-        // history.push('/login');
-      }
-    } catch (error: any) {
-      if (error.response) {
-        switch (error.response.status) {
-          case 404:
-            return toast.error(
-              error.response.statusText
-                ? error.response.statusText
-                : errorMessages.error404
-            )
-          case 500:
-            return toast.error(
-              error.response.statusText
-                ? error.response.statusText
-                : errorMessages.error500
-            )
-          default: {
-            const errorsData = takeErrors(error.response.data)
-            errorsData.map((errorText) => toast.error(errorText))
-            console.log(error.response.data)
-            console.log(error)
-          }
-        }
-      }
-    }
+      })
   }
 
   return (
@@ -52,23 +36,19 @@ function PopupPasswordReset() {
         ссылкой на смену пароля. Пожалуйста, проверьте почту и перейдете по<br />
         ссылке из электронно письма, чтобы сменить пароль.
       </p>
-      <form className="modal__form">
+      <form className="modal__form" onSubmit={onSubmit}>
         <div className="input-group modal__form-group modal__form-group--margin">
           <input
-            className="input-group__input"
+            name="email"
             type="email"
-            id="email"
+            className="input-group__input"
             placeholder="email"
-            value={email}
-            onChange={(evt) => setEmail(evt.target.value)}
+            onChange={event => setEmail(event.target.value)}
             autoComplete="off"
           />
-          <label className="input-group__label" htmlFor="email">
-            E-mail
-          </label>
+          <div className="input-group__label">E-mail</div>
         </div>
         <input
-          onClick={resetPassword}
           className="modal__submit"
           type="submit"
           value="Отправить"

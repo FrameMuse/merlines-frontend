@@ -13,7 +13,7 @@ import LandingPage from "./components/LandingPage/LandingPage"
 import Main from "./components/Main/Main"
 import MobileTicketFilter from "./components/MobileTicketFilter/MobileTicketFilter"
 import Partners from "./components/Partners/Partners"
-import PopupResetConfirm from "./components/Popups/PopupPasswordResetConfirm"
+import PopupPasswordResetConfirm from "./components/Popups/PopupPasswordResetConfirm"
 import PriceCalendar from "./components/PriceCalendar/PriceCalendar"
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy"
 import SearchResult from "./components/SearchResult/SearchResult"
@@ -38,7 +38,7 @@ function DEPRECATED__App__() {
           <MobileTicketFilter setIsOpenFilter={setIsOpenFilter} />
         )}
         <Route path={`${routes.resetPasswordConfirm}/:uid/:token`}>
-          <PopupResetConfirm />
+          <PopupPasswordResetConfirm />
         </Route>
         <Switch>
           <Route exact path={[routes.main, routes.bus, routes.train]}>
