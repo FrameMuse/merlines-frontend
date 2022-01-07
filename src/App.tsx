@@ -4,10 +4,15 @@ import ClientAPI from "api/client"
 import Footer from "components/Footer/Footer"
 import Header from "components/Header/Header"
 import Main from "components/Main/Main"
+import PopupPasswordResetConfirm from "components/Popups/PopupPasswordResetConfirm"
 import Subscribe from "components/Subscribe/Subscribe"
-import { useEffect } from "react"
+import ErrorView from "components/TechnicalPages/ErrorView"
+import UserCabinet from "components/UserCabinet/UserCabinet"
+import { Popup } from "plugins/popup"
+import { PopupContainer } from "plugins/popup/src/container"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { Route, Switch } from "react-router-dom"
+import { Route, Switch, useHistory, useLocation } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import { loginUser } from "redux/reducers/user"
 
@@ -15,7 +20,8 @@ import Article from "./components/Article/Article"
 import Blog from "./components/Blog/Blog"
 
 function App() {
-  useUserConnection()
+  useUserAuth()
+  useOpenPopup()
 
   return (
     <Switch>
@@ -24,38 +30,93 @@ function App() {
         <Header />
         <main id="main-content" className="main">
           <AppRouter />
-          <Subscribe />
         </main>
         <Footer />
+        <PopupContainer className="modal" />
         <ToastContainer />
       </Route>
     </Switch >
   )
 }
 
+
 function AppRouter() {
   return (
     <Switch>
-      <Route path="/article/:articleId" render={props => <Article {...props.match.params} />} />
-      <Route path="/blog" render={props => <Blog />} />
-      <Route><Main /></Route>
+      <Route path="/user"><UserCabinet /></Route>
+
+      <Route path="/blog/article/:articleId" render={props => [<Article {...props.match.params} />, <Subscribe />]} />
+      <Route path="/blog"><Blog /><Subscribe /></Route>
+      <Route path="/" exact><Main /><Subscribe /></Route>
+
+
+
+      <Route path="/error/:code" render={props => <ErrorView {...props.match.params} />} />
+      <Route><ErrorView code="404" /></Route>
     </Switch>
   )
 }
 
-function useUserConnection() {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    if (!localStorage.getItem("token")) return
 
+function useUserAuth() {
+  const token = useUserToken()
+  const dispatch = useDispatch()
+
+  // Token just for update
+  useEffect(() => {
+    if (!token?.length) return
+
+    localStorage.setItem("token", token)
     ClientAPI
-      .query(getAccountMe)
+      .query(getAccountMe) // Token is taken from localStorage in requestIntercepter
       .then(({ error, payload }) => {
         if (error || !payload || payload.error) return
 
         dispatch(loginUser(payload))
       })
-  }, [dispatch])
+  }, [token])
+}
+
+function useUserToken() {
+  const history = useHistory()
+  const location = useLocation()
+
+  const [token, setToken] = useState<string | null>(localStorage.getItem("token"))
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search)
+    const searchToken = searchParams.get("token")
+    setToken(searchToken)
+
+    if (searchToken === null) return
+    if (searchToken.length === 0) {
+      history.replace("/error/500")
+      return
+    }
+
+    history.replace(location.pathname)
+  }, [history, location])
+
+  return token
+}
+
+function useOpenPopup() {
+  const history = useHistory()
+  const location = useLocation()
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search)
+    const session = searchParams.get("password_session")
+
+    if (session === null) return
+    if (session.length === 0) {
+      history.push("/error/500")
+      return
+    }
+
+    history.push("/")
+    Popup.open(PopupPasswordResetConfirm, { session })
+  }, [location.search])
 }
 
 export default App

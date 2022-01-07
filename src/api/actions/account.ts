@@ -14,13 +14,30 @@ export const postAccount: Action = {
   endpoint: "/account"
 }
 
-export const postAccountMePassword: Action = {
-  method: "GET",
-  endpoint: "/account/me/password"
-}
+export const postAccountPassword = (email: string): Action => ({
+  method: "POST",
+  endpoint: "/account/password",
+  body: { email }
+})
+
+export const putAccountPassword = (password: string, session: string): Action<{ token: string }> => ({
+  method: "PUT",
+  endpoint: "/account/password",
+  body: { password, session }
+})
+
+
+export const putAccountMePassword = (userData: {
+  old_password: string
+  new_password: string
+}): Action<{}> => ({
+  method: "PUT",
+  endpoint: "/account/me/password",
+  body: userData
+})
 
 export const postAccountPasswordReset: Action = {
-  method: "GET",
+  method: "POST",
   endpoint: "/account/password/reset"
 }
 
@@ -30,31 +47,57 @@ export const getAccountMe: Action<AuthedUser> = {
 }
 
 export const putAccountMe: Action = {
-  method: "GET",
+  method: "PUT",
   endpoint: "/account/me"
 }
 
-export const patchAccountMe: Action = {
-  method: "GET",
-  endpoint: "/account/me"
-}
+export const patchAccountMe = (userData: Partial<Pick<AuthedUser, "first_name" | "last_name">>): Action<AuthedUser> => ({
+  method: "PATCH",
+  endpoint: "/account/me",
+  body: userData
+})
 
 export const deleteAccountMe: Action = {
-  method: "GET",
+  method: "DELETE",
   endpoint: "/account/me"
 }
 
 export const postAccountPasswordResetConfirm: Action = {
-  method: "GET",
+  method: "POST",
   endpoint: "/account/password/reset/confirm"
 }
 
-export const postAccountTokenLogin: Action = {
-  method: "GET",
-  endpoint: "/account/token/login"
+export const postAccountRegister = (userData: {
+  email: string
+  password: string
+  first_name: string
+  last_name: string
+}): Action<{ id: number }> => ({
+  method: "POST",
+  endpoint: "/account/register",
+  body: { ...userData }
+})
+
+export const postAccountToken = (userData: {
+  email: string
+  password: string
+}): Action<{ token: string }> => ({
+  method: "POST",
+  endpoint: "/account/token",
+  body: { ...userData }
+})
+
+export const deleteAccountToken: Action = {
+  method: "DELETE",
+  endpoint: "/account/token"
 }
 
-export const postAccountTokenLogout: Action = {
+export const getAccountSocialFacebook: Action = {
   method: "GET",
-  endpoint: "/account/token/logout"
+  endpoint: "/account/social/facebook"
+}
+
+export const getAccountSocialInstagram: Action = {
+  method: "GET",
+  endpoint: "/account/social/instagram"
 }

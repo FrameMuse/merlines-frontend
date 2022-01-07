@@ -1,0 +1,20 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+.form-profile {
+	display: grid;
+	row-gap: 1em;
+}
+
+.form-profile__row {
+	display: flex;
+	gap: 1em;
+}
+
+.form-profile__group {
+	margin-bottom: 15px;
+
+	@media #{$media-md} {
+		margin-bottom: 0;
+	}
+}

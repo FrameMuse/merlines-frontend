@@ -2,7 +2,7 @@
 @import "mixin";
 
 body {
-  margin: 0;
+	margin: 0;
 }
 
 h1,
@@ -12,39 +12,39 @@ h4,
 h5,
 h6,
 p {
-  margin-top: 0;
+	margin-top: 0;
 }
 
 ol,
 ul,
 dl {
-  margin-top: 0;
-  margin-bottom: 1rem;
+	margin-top: 0;
+	margin-bottom: 1rem;
 }
 
 ol ol,
 ul ul,
 ol ul,
 ul ol {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 img {
-  vertical-align: middle;
-  border-style: none;
+	vertical-align: middle;
+	border-style: none;
 }
 
 svg {
-  overflow: hidden;
-  vertical-align: middle;
+	overflow: hidden;
+	vertical-align: middle;
 }
 
 label {
-  display: inline-block;
+	display: inline-block;
 }
 
 button {
-  border-radius: 0;
+	border-radius: 0;
 }
 
 input,
@@ -52,69 +52,69 @@ button,
 select,
 optgroup,
 textarea {
-  margin: 0;
-  font-family: inherit;
-  line-height: inherit;
+	margin: 0;
+	font-family: inherit;
+	line-height: inherit;
 }
 
 button,
 input {
-  overflow: visible;
+	overflow: visible;
 }
 
 button,
 select {
-  text-transform: none;
+	text-transform: none;
 }
 
 select {
-  word-wrap: normal;
+	word-wrap: normal;
 }
 
 button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  appearance: button;
+	appearance: button;
 }
 
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
 [type="submit"]::-moz-focus-inner {
-  padding: 0;
-  border-style: none;
+	padding: 0;
+	border-style: none;
 }
 
 input[type="radio"],
 input[type="checkbox"] {
-  box-sizing: border-box;
-  padding: 0;
+	box-sizing: border-box;
+	padding: 0;
 }
 
 textarea {
-  overflow: auto;
-  resize: vertical;
+	overflow: auto;
+	resize: vertical;
 }
 
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
-  height: auto;
+	height: auto;
 }
 
 [type="search"] {
-  outline-offset: -2px;
-  appearance: none;
+	outline-offset: -2px;
+	appearance: none;
 }
 
 [type="search"]::-webkit-search-decoration {
-  appearance: none;
+	appearance: none;
 }
 
 template {
-  display: none;
+	display: none;
 }
 
 [hidden] {
-  display: none !important;
+	display: none !important;
 }

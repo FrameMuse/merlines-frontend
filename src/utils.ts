@@ -2,6 +2,7 @@ import axios from "axios"
 import { DataURL, DataURLBase64 } from "interfaces/common"
 import { DateTime } from "luxon"
 import { Dispatch, SetStateAction, useState } from "react"
+import { toast } from "react-toastify"
 
 import { monthNamesDate, weekDays } from "./constants"
 
@@ -323,6 +324,24 @@ export function usePending<F extends (...args: any[]) => any>(fn: F | undefined 
  * @returns
  */
 export const isImageFile = (file: File) => file.type.includes("image")
+
+
+
+
+export function getFormElements<K extends string>(elements: HTMLFormControlsCollection, ...keys: K[]): Record<K, string> | null {
+  const data = Object.fromEntries(keys.map(key => [key, ""])) as Record<K, string>
+
+  for (const element of elements) {
+    if (!(element instanceof HTMLInputElement)) continue
+    if (!keys.includes(element.name as K)) continue
+    if (!element.value.length) return null
+
+    data[element.name as K] = element.value
+  }
+
+  return data
+}
+
 
 export {
   getRandomInteger,

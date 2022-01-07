@@ -1,6 +1,8 @@
 import { ValuesOf } from "interfaces/common"
 import { AuthedUser, UnauthedUser, User } from "interfaces/user"
 
+import PNGMeliodas from "./meliodas.jpg"
+
 const initialState: UnauthedUser = {
   authed: false
 }
@@ -24,7 +26,7 @@ export default (state = initialState, action: Action): User => {
   switch (action.type) {
 
     case "USER_LOGIN":
-      return { ...action.payload, authed: true }
+      return { ...action.payload, authed: true, avatar: PNGMeliodas }
 
     case "USER_LOGOUT":
       return initialState

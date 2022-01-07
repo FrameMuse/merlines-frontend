@@ -110,7 +110,7 @@ const MainCollectionSlider = () => {
     setNumberOfActiveSlides(getNumberOfActiveSlides())
   }, [blockSlickToGo, slideNumber, numberOfActiveSlides])
 
-  const { payload } = useQuery(getBlogArticles(1, 8, "подборки"))
+  const { payload } = useQuery(getBlogArticles(1, 8, { tags__contains: "подборки" }))
 
   return (
     <div>
