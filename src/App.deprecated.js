@@ -13,10 +13,7 @@ import LandingPage from "./components/LandingPage/LandingPage"
 import Main from "./components/Main/Main"
 import MobileTicketFilter from "./components/MobileTicketFilter/MobileTicketFilter"
 import Partners from "./components/Partners/Partners"
-import UpdAccessPopup from "./components/Popups/UpdAccessPopup"
-import UpdAccessPopupConfirm from "./components/Popups/UpdAccessPopupConfirm"
-import UpdAccessPopupReset from "./components/Popups/UpdAccessPopupReset"
-import UpdAccessPopupResetConfirm from "./components/Popups/UpdAccessPopupResetConfirm"
+import PopupResetConfirm from "./components/Popups/PopupPasswordResetConfirm"
 import PriceCalendar from "./components/PriceCalendar/PriceCalendar"
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy"
 import SearchResult from "./components/SearchResult/SearchResult"
@@ -40,23 +37,10 @@ function DEPRECATED__App__() {
         {tickets && isOpenFilter && (
           <MobileTicketFilter setIsOpenFilter={setIsOpenFilter} />
         )}
-        <Route path={`${routes.activate}/:uid/:token`}>
-          <UpdAccessPopupConfirm />
-        </Route>
-        <Route exact path={routes.resetPassword}>
-          <UpdAccessPopupReset />
-        </Route>
         <Route path={`${routes.resetPasswordConfirm}/:uid/:token`}>
-          <UpdAccessPopupResetConfirm />
+          <PopupResetConfirm />
         </Route>
         <Switch>
-          <Route exact path={routes.signup}>
-            <UpdAccessPopup active={true} />
-          </Route>
-          <Route exact path={routes.login}>
-            <UpdAccessPopup login={true} active={true} />
-            <Subscribe />
-          </Route>
           <Route exact path={[routes.main, routes.bus, routes.train]}>
             <Main />
           </Route>

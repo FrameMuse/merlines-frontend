@@ -8,6 +8,9 @@
 	pointer-events: none;
 	overscroll-behavior: contain;
 
+	cursor: pointer;
+	z-index: 1;
+
 	&--active {
 		pointer-events: initial;
 	}
@@ -25,6 +28,9 @@
 	right: 0;
 	bottom: 0;
 
+	max-width: 50%;
+
+	cursor: initial;
 	overflow: auto;
 	overscroll-behavior: contain;
 
@@ -48,7 +54,7 @@
 
 	@media #{$media-xl} {
 		padding-left: 95px;
-		padding-right: 405px;
+		padding-right: 305px;
 	}
 }
 
@@ -148,6 +154,7 @@
 }
 
 .modal__form {
+	display: grid;
 	margin-top: 20px;
 }
 
@@ -249,8 +256,8 @@
 }
 
 .modal__link-icon {
-	width: 1em;
-	height: 1em;
+	width: 1.25em;
+	height: 1.25em;
 
 	margin-right: 10px;
 }

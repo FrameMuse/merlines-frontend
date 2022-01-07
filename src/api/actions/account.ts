@@ -15,12 +15,12 @@ export const postAccount: Action = {
 }
 
 export const postAccountMePassword: Action = {
-  method: "GET",
+  method: "POST",
   endpoint: "/account/me/password"
 }
 
 export const postAccountPasswordReset: Action = {
-  method: "GET",
+  method: "POST",
   endpoint: "/account/password/reset"
 }
 
@@ -30,32 +30,47 @@ export const getAccountMe: Action<AuthedUser> = {
 }
 
 export const putAccountMe: Action = {
-  method: "GET",
+  method: "PUT",
   endpoint: "/account/me"
 }
 
 export const patchAccountMe: Action = {
-  method: "GET",
+  method: "PATCH",
   endpoint: "/account/me"
 }
 
 export const deleteAccountMe: Action = {
-  method: "GET",
+  method: "DELETE",
   endpoint: "/account/me"
 }
 
 export const postAccountPasswordResetConfirm: Action = {
-  method: "GET",
+  method: "POST",
   endpoint: "/account/password/reset/confirm"
 }
 
-export const postAccountToken: Action<{ token: string }> = {
-  method: "GET",
-  endpoint: "/account/token"
-}
+export const postAccountRegister = (userData: {
+  email: string
+  password: string
+  first_name: string
+  last_name: string
+}): Action<{ id: number }> => ({
+  method: "POST",
+  endpoint: "/account/register",
+  body: { ...userData }
+})
+
+export const postAccountToken = (userData: {
+  email: string
+  password: string
+}): Action<{ token: string }> => ({
+  method: "POST",
+  endpoint: "/account/token",
+  body: { ...userData }
+})
 
 export const deleteAccountToken: Action = {
-  method: "GET",
+  method: "DELETE",
   endpoint: "/account/token"
 }
 
