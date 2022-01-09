@@ -110,11 +110,11 @@ function useOpenPopup() {
 
     if (session === null) return
     if (session.length === 0) {
-      history.push("/error/500")
+      history.replace("/error/500")
       return
     }
 
-    history.push("/")
+    history.replace("/")
     Popup.open(PopupPasswordResetConfirm, { session })
   }, [location.search])
 }
