@@ -7,12 +7,12 @@ import SearchResultWeekPriceList from "./SearchResultWeekPriceList"
 
 function SearchResultWeekPrice() {
   return (
-    <aside className="price-week">
+    <div className="price-week">
       <div className="price-week__container">
         <SearchResultWeekPriceHeader />
         <SearchResultWeekPriceList />
       </div>
-    </aside>
+    </div>
   )
 }
 

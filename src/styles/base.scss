@@ -2,177 +2,182 @@
 @import "mixin";
 
 * {
-  position: relative;
-  box-sizing: border-box;
+	position: relative;
+	box-sizing: border-box;
 }
 
 input {
-  outline-color: #315c9d;
+	outline-color: #315c9d;
 }
 
 input[tabindex="-1"] {
-  outline: none;
+	outline: none;
 }
 
 :root {
-  --color-white: #{$color-white};
-  --color-black: #{$color-black};
-  --color-base: #{$color-base};
-  --color-blue: #{$color-blue};
-  --color-hover-blue: #{$color-hover-blue};
-  --color-btn: #{$color-btn};
-  --color-light-blue: #{$color-light-blue};
-  --color-light-blue-2: #{$color-light-blue-2};
-  --color-grey: #{$color-grey};
-  --color-grey-2: #{$color-grey-2};
-  --color-grey-3: #{$color-grey-3};
-  --color-green: #{$color-green};
-  --color-border: #{$color-border};
-  --color-border-secondary: #{$color-border-secondary};
-  --color-border-third: #{$color-border-third};
-  --color-vk: #{$color-vk};
-  --color-tg: #{$color-tg};
-  --color-fb: #{$color-fb};
-  --color-icon: #{$color-icon};
-  --color-red: #{$color-red};
-  --color-simple-white: #{$color-simple-white};
+	--color-white: #{$color-white};
+	--color-black: #{$color-black};
+	--color-base: #{$color-base};
+	--color-blue: #{$color-blue};
+	--color-hover-blue: #{$color-hover-blue};
+	--color-btn: #{$color-btn};
+	--color-light-blue: #{$color-light-blue};
+	--color-light-blue-2: #{$color-light-blue-2};
+	--color-grey: #{$color-grey};
+	--color-grey-2: #{$color-grey-2};
+	--color-grey-3: #{$color-grey-3};
+	--color-green: #{$color-green};
+	--color-border: #{$color-border};
+	--color-border-secondary: #{$color-border-secondary};
+	--color-border-third: #{$color-border-third};
+	--color-vk: #{$color-vk};
+	--color-tg: #{$color-tg};
+	--color-fb: #{$color-fb};
+	--color-icon: #{$color-icon};
+	--color-red: #{$color-red};
+	--color-simple-white: #{$color-simple-white};
 }
 
 .page {
-  height: 100%;
-  scroll-behavior: smooth;
+	height: 100%;
+	scroll-behavior: smooth;
 }
 
 .page__body {
-  font: $font-weight #{$font-size}/#{$line-height} $main-font;
-  color: var(--color-base);
-  background-color: white;
-  letter-spacing: $letter-spacing;
-  min-width: $width-xs;
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: min-content 1fr min-content;
+	font: $font-weight #{$font-size}/#{$line-height} $main-font;
+	color: var(--color-base);
+	background-color: white;
+	letter-spacing: $letter-spacing;
+	min-width: $width-xs;
+	min-height: 100%;
+	display: grid;
+	grid-template-rows: min-content 1fr min-content;
 }
 
 a {
-  background-color: transparent;
-  text-decoration: none;
+	background-color: transparent;
+	text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
-  }
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 img {
-  max-width: 100%;
-  height: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 a.ghost {
-  position: absolute;
-  inset: 0;
+	position: absolute;
+	inset: 0;
+}
+
+span.weak {
+	white-space: nowrap;
+	color: #A1A1A1;
 }
 
 // Общее стили для текстовых страниц
 .uppercase {
-  text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .nowrap {
-  white-space: nowrap;
+	white-space: nowrap;
 }
 
 .h1 {
-  font-family: $title-font;
-  font-size: 36px;
-  line-height: 1.2;
+	font-family: $title-font;
+	font-size: 36px;
+	line-height: 1.2;
 }
 
 .h2 {
-  font-family: $title-font;
-  font-size: 24px;
-  line-height: 1.2;
-  margin-bottom: 20px;
+	font-family: $title-font;
+	font-size: 24px;
+	line-height: 1.2;
+	margin-bottom: 20px;
 
-  @media #{$media-md} {
-    font-size: 36px;
-  }
+	@media #{$media-md} {
+		font-size: 36px;
+	}
 }
 
 .h3 {
-  font-family: $title-font;
-  font-size: 18px;
-  line-height: 1.25;
+	font-family: $title-font;
+	font-size: 18px;
+	line-height: 1.25;
 
-  @media #{$media-md} {
-    font-size: 24px;
-  }
+	@media #{$media-md} {
+		font-size: 24px;
+	}
 }
 
 .date {
-  color: var(--color-grey);
+	color: var(--color-grey);
 
-  @media #{$media-md} {
-    font-size: 16px;
-  }
+	@media #{$media-md} {
+		font-size: 16px;
+	}
 }
 
 .list {
-  @include ul;
+	@include ul;
 
-  margin-top: 21px;
+	margin-top: 21px;
 
-  @media #{$media-md} {
-    margin-top: 30px;
-  }
+	@media #{$media-md} {
+		margin-top: 30px;
+	}
 }
 
 .item {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .link {
-  color: var(--color-blue);
-  line-height: 1.25;
-  text-decoration: underline;
+	color: var(--color-blue);
+	line-height: 1.25;
+	text-decoration: underline;
 
-  @media #{$media-md} {
-    font-size: 18px;
-  }
+	@media #{$media-md} {
+		font-size: 18px;
+	}
 }
 
 .text {
-  line-height: 1.25;
-  margin-bottom: 10px;
+	line-height: 1.25;
+	margin-bottom: 10px;
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+	&:last-child {
+		margin-bottom: 0;
+	}
 
-  &--grey {
-    color: var(--color-grey);
-  }
+	&--grey {
+		color: var(--color-grey);
+	}
 
-  @media #{$media-md} {
-    text-align: left;
-    margin-bottom: 15px;
-  }
+	@media #{$media-md} {
+		text-align: left;
+		margin-bottom: 15px;
+	}
 }
 
 .text-number {
-  font-weight: 700;
+	font-weight: 700;
 }
 
 .text-link {
-  color: var(--color-blue);
-  font-size: inherit;
-  text-decoration: underline;
+	color: var(--color-blue);
+	font-size: inherit;
+	text-decoration: underline;
 }
 
 .block-hidden {
-  display: none;
+	display: none;
 }

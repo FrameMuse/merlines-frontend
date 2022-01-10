@@ -69,22 +69,12 @@ function SearchResultTicketMini({
           {handbags ? (
             handbags === "" ? (
               <>
-                <Icon
-                  className="ticket-mini__bottom-icon"
-                  name="baggage"
-                  width="30"
-                  height="15"
-                />{" "}
+                <Icon name="baggage" className="ticket-mini__bottom-icon" />{" "}
                 'Нет информации'
               </>
             ) : (
               <>
-                <Icon
-                  className="ticket-mini__bottom-icon"
-                  name="baggage"
-                  width="30"
-                  height="15"
-                />
+                <Icon name="baggage" className="ticket-mini__bottom-icon" />
                 - ручная кладь включена{" "}
               </>
             )

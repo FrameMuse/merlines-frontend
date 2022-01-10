@@ -1,7 +1,5 @@
-// import { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { setTicketDilerName } from '../../../reducers/searchResultSlice';
-import { separateThousand } from "../../../../../../utils"
+import { separateThousand } from "utils"
+
 import SearchResultTicketBuy from "./SearchResultTicketBuy"
 
 function SearchResultTicketOffer({
@@ -11,11 +9,6 @@ function SearchResultTicketOffer({
   ticketDealerLogo,
   link
 }) {
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(setTicketDilerName(ticketDealerName))
-  // }, [ticketDealerName]);
 
   return (
     <div className="ticket__content-top">

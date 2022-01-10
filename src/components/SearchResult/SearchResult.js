@@ -2,7 +2,7 @@ import "./ticket.scss"
 import "./ticket-list.scss"
 import "./ticket-mini.scss"
 
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
@@ -16,17 +16,15 @@ import { selectFilter } from "../../reducers/filtersSlice"
 import { setRouteFrom, setRouteTo } from "../../reducers/mainSearchSlice"
 import {
   selectSearchResult,
-  setSearchData
+  setSearchData,
 } from "../../reducers/searchResultSlice"
 import meta from "../../seo/meta"
 import parseParamsFromRoute from "../../services/parseParamsFromRoute"
 import Icon from "../common/Icon"
-import ScrollOnTopTest from "../common/ScrollOnTopTest"
 import Loader from "../Loader/Loader"
 import LoaderClose from "../Loader/LoaderClose"
 import SearchForm from "../SearchForm/SearchForm"
 import SearchFormMini from "../SearchForm/SearchFormMini"
-import airTicketsDataParser from "./searchReasultDataParsers/airTicketsDataParser"
 import SearchResultTicketList from "./SearchResultTicketList/SearchResultTicketList"
 import { transfersFilter } from "./utils"
 
@@ -34,23 +32,19 @@ function SearchResult({ setIsOpenFilter }) {
   const location = useLocation()
   const dispatch = useDispatch()
   const {
-    searchData: { tickets }
+    searchData: { tickets },
   } = useSelector(selectSearchResult)
   const { transfers } = useSelector(selectFilter)
   const [searchParams, setSearchParams] = useState("")
   const [isSearchFormOpen, setIsSearchFormOpen] = useState(true)
 
-  // const [loadedState, setLoadedState] = useState('loading')
-  // const [dataFromRequest, setDataFromRequest] = useState()
-
-  // const accessData = useSelector(selectAccessData);
   const windowSize = useWindowSize()
   const query = useQuery()
 
   const loadStatuses = {
     success: "Success",
     loading: "loading",
-    failed: "Failure"
+    failed: "Failure",
   }
 
   const [searchData, setData] = useState([])
@@ -74,16 +68,6 @@ function SearchResult({ setIsOpenFilter }) {
     }
   }, [windowSize])
 
-  // const getTrainTickets = async () => {
-  //   const testParams = getParsParamsFromRout()
-  //   const result = await api.getTickets(testParams.routeParams);
-  //   return result
-  // }
-
-  // const useGetTrainTicketAction = () => {
-  //   return asyncAction(getTrainTickets);
-  // }
-
   const getParsParamsFromRout = () =>
     parseParamsFromRoute(
       location.pathname,
@@ -102,7 +86,7 @@ function SearchResult({ setIsOpenFilter }) {
     const params = {
       origin: 62,
       destination: 254,
-      depart_date: "2021-06-03"
+      depart_date: "2021-06-03",
     }
     return await api.getBusTickets(params)
   }
@@ -127,7 +111,7 @@ function SearchResult({ setIsOpenFilter }) {
     if (airTicketsResult.type === loadStatuses.success) {
       console.log("Seccess")
       dispatch(
-        setSearchData(airTicketsDataParser(airTicketsResult.result.data))
+        setSearchData([])
       )
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -178,62 +162,11 @@ function SearchResult({ setIsOpenFilter }) {
           )}
         />
       </Helmet>
-      <ScrollOnTopTest />
-      {airTicketsResult.type === "Success" ||
-        (bussTicketsResult.type === "Success" && transport === "bus") ? (
-          <section className="ticket-list">
-            <div className="ticket-list-form__container">
-              {isSearchFormOpen ? (
-                <>
-                  <SearchForm searchResult={true} />
-                  <div className="form-close">
-                    <button
-                      onClick={() => setIsSearchFormOpen(!isSearchFormOpen)}
-                      className="form-close__btn"
-                      type="button"
-                    >
-                      <Icon
-                        className="form-close__icon"
-                        name="arrow-angle"
-                        width="20"
-                        height="20"
-                      />
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <SearchFormMini
-                  openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
-                />
-              )}
-            </div>
-            <div className="ticket-list__container">
-              {/*<SearchResultWeekPrice />*/}
-              {/*<aside className="ticket-list__left">*/}
-              {/*  <SearchResultSubscribePrice />*/}
-              {/*  {tickets && <SearchResultFilters checkboxes={returnInputs(tickets, transfers)} />}*/}
-              {/*</aside>*/}
-              <SearchResultTicketList
-                tickets={tickets}
-                transfers={transfers}
-                searchData={tickets}
-                filterData={searchData}
-                loadedState={airTicketsResult.type}
-                bussTicketsResult={bussTicketsResult}
-                // trainTicketsResult={trainTicketsResult}
-              />
-            </div>
-            <div
-              onClick={() => setIsOpenFilter(true)}
-              className="ticket-list__open-filter"
-            >
-            фильтры
-            </div>
-          </section>
-        ) : (
-          <>
+      {window ? (
+        <section className="ticket-list">
+          <div className="ticket-list-form__container">
             {isSearchFormOpen ? (
-              <Loader loadedState={airTicketsResult.type}>
+              <>
                 <SearchForm searchResult={true} />
                 <div className="form-close">
                   <button
@@ -241,24 +174,50 @@ function SearchResult({ setIsOpenFilter }) {
                     className="form-close__btn"
                     type="button"
                   >
-                    <Icon
-                      className="form-close__icon"
-                      name="arrow-angle"
-                      width="20"
-                      height="20"
-                    />
+                    <Icon name="arrow-angle" className="form-close__icon" />
                   </button>
                 </div>
-              </Loader>
+              </>
             ) : (
-              <LoaderClose>
-                <SearchFormMini
-                  openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
-                />
-              </LoaderClose>
+              <SearchFormMini
+                openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
+              />
             )}
-          </>
-        )}
+          </div>
+          <div className="ticket-list__container">
+            <SearchResultTicketList
+              tickets={tickets}
+              transfers={transfers}
+              searchData={tickets}
+              filterData={searchData}
+              loadedState={true}
+              bussTicketsResult={bussTicketsResult}
+            />
+          </div>
+          <button className="ticket-list__open-filter" onClick={() => setIsOpenFilter(true)}>фильтры</button>
+        </section>
+      ) : (
+        <>
+          {isSearchFormOpen ? (
+            <Loader loadedState={airTicketsResult.type}>
+              <SearchForm />
+              <div className="form-close">
+                <button
+                  onClick={() => setIsSearchFormOpen(!isSearchFormOpen)}
+                  className="form-close__btn"
+                  type="button"
+                >
+                  <Icon name="arrow-angle" className="form-close__icon" />
+                </button>
+              </div>
+            </Loader>
+          ) : (
+            <LoaderClose>
+              <SearchFormMini openForm={() => setIsSearchFormOpen(!isSearchFormOpen)} />
+            </LoaderClose>
+          )}
+        </>
+      )}
     </>
   )
 }

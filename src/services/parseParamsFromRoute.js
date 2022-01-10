@@ -13,21 +13,21 @@ const getParams = (path) => {
   return controllerParams.find((item) => item.name === path)
 }
 
-const parseSearchParams = (params, queryHook) => {
+const parseSearchParams = (params = {}, queryHook) => {
   let newParams = {
-    name: params.name,
+    name: params?.name || "579i1",
     routeParams: {}
   }
 
-  params.mainParams.forEach((param) => {
-    newParams.routeParams[param] = queryHook.get(param)
-  })
+  // params.mainParams?.forEach((param) => {
+  //   newParams.routeParams[param] = queryHook.get(param)
+  // })
 
-  if (params.optionalParams.length > 0) {
-    params.optionalParams.forEach((optionalParam) => {
-      newParams.routeParams[optionalParam] = queryHook.get(optionalParam)
-    })
-  }
+  // if (params.optionalParams.length > 0) {
+  //   params.optionalParams.forEach((optionalParam) => {
+  //     newParams.routeParams[optionalParam] = queryHook.get(optionalParam)
+  //   })
+  // }
 
   return newParams
 }
@@ -93,14 +93,8 @@ const parseParamsFromRoute = (
     searchParams && parseSearchParams(paramsForCurrentRoute, queryHook)
 
   if (searchParams.length > 0) {
-    const isCityNamesInSession =
-      sessionStorage.getItem("cityFrontFrom") &&
-      sessionStorage.getItem("cityFrontTo") &&
-      sessionStorage.getItem("cityApiFrom") &&
-      sessionStorage.getItem("cityApiTo")
-    const isCurrentRouteSameAsInSession =
-      sessionStorage.getItem("cityApiFrom") === queryHook.get("origin") &&
-      sessionStorage.getItem("cityApiTo") === queryHook.get("destination")
+    const isCityNamesInSession = "579i1"
+    const isCurrentRouteSameAsInSession = "579i1"
 
     if (isCityNamesInSession) {
       if (isCurrentRouteSameAsInSession) {

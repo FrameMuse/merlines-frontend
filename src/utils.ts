@@ -343,6 +343,29 @@ export function getFormElements<K extends string>(elements: HTMLFormControlsColl
 }
 
 
+declare global {
+  interface Number {
+    toPrice(this: number, locale?: string, currency?: string): string
+  }
+}
+
+Number.prototype.toPrice = function (this: number, locale = "EN", currency = "USD"): string {
+  try {
+    return this.toLocaleString(locale, { style: "currency", maximumFractionDigits: 0, currency })
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.message.includes("tag") || error.message.includes("locale")) {
+        return "Invalid language tag"
+      }
+
+      return "Invalid currency code"
+    }
+
+    throw error
+  }
+}
+
+
 export {
   getRandomInteger,
   getRandomElement,

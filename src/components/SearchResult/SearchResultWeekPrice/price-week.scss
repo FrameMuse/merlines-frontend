@@ -2,147 +2,151 @@
 @import "../../../styles/mixin.scss";
 
 .price-week {
-  width: 100vw;
-  padding-left: $gapSm;
-  margin-bottom: 16px;
-  box-sizing: border-box;
+	width: 100vw;
+	padding-left: $gapSm;
+	margin-bottom: 16px;
+	box-sizing: border-box;
 
-  @media #{$media-md} {
-    padding-left: $gapLg;
-  }
-  @media #{$media-lg} {
-    grid-column: 1/-1;
-    padding-left: 0;
-  }
-  @media #{$media-xl} {
-    grid-column: auto;
-    width: auto;
-    margin-bottom: 0;
-    padding-left: 0;
-    order: 3;
-    align-self: flex-start;
-    position: sticky;
-    top: 20px;
-  }
+	@media #{$media-md} {
+		padding-left: $gapLg;
+	}
+
+	@media #{$media-lg} {
+		grid-column: 1/-1;
+		padding-left: 0;
+	}
+
+	@media #{$media-xl} {
+		grid-column: auto;
+		width: auto;
+		margin-bottom: 0;
+		padding-left: 0;
+		order: 3;
+		align-self: flex-start;
+		position: sticky;
+		top: 20px;
+	}
 }
 
 .price-week__container {
-  box-shadow: $shadow;
+	box-shadow: $shadow;
 
-  @media #{$media-xl} {
-    max-width: 160px;
-    box-shadow: none;
-  }
+	@media #{$media-xl} {
+		max-width: 160px;
+		box-shadow: none;
+	}
 }
 
 .price-week__header {
-  display: none;
-  width: 160px;
-  height: 60px;
-  border: 1px solid var(--color-border-third);
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-bottom: 15px;
-  padding: 14px 20px;
+	display: none;
+	width: 160px;
+	height: 60px;
+	border: 1px solid var(--color-border-third);
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-bottom: 15px;
+	padding: 14px 20px;
 
-  @media #{$media-xl} {
-    display: block;
-  }
+	@media #{$media-xl} {
+		display: block;
+	}
 }
 
 .price-week__title {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 2px;
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 2px;
 
-  @media #{$media-xl} {
-    margin-bottom: 0;
-  }
+	@media #{$media-xl} {
+		margin-bottom: 0;
+	}
 }
 
 .price-week__info {
-  color: var(--color-grey);
-  font-size: 12px;
+	color: var(--color-grey);
+	font-size: 12px;
 }
 
 .price-week__list {
-  @include ul;
+	@include ul;
 
-  display: flex;
-  box-shadow: $shadow;
+	display: flex;
+	box-shadow: $shadow;
 
-  @media #{$media-xl} {
-    flex-direction: column;
-  }
+	@media #{$media-xl} {
+		flex-direction: column;
+	}
 }
 
 .price-week__item {
-  min-width: 160px;
-  padding: 14px 20px 12px;
-  background-color: var(--color-white);
-  border-right: 1px solid var(--color-border-third);
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: 0.2s;
+	min-width: 160px;
+	padding: 14px 20px 12px;
+	background-color: var(--color-white);
+	border-right: 1px solid var(--color-border-third);
+	box-sizing: border-box;
+	cursor: pointer;
+	transition: 0.2s;
 
-  &:first-child {
-    border-radius: 4px 0 0 4px;
-  }
+	&:first-child {
+		border-radius: 4px 0 0 4px;
+	}
 
-  &:last-child {
-    border-right: none;
-    border-radius: 0 4px 4px 0;
-  }
+	&:last-child {
+		border-right: none;
+		border-radius: 0 4px 4px 0;
+	}
 
-  &:hover,
-  &:focus {
-    @include hoverBlock;
+	&:hover,
+	&:focus {
+		@include hoverBlock;
 
-    .price-week__date {
-      color: var(--color-light-blue);
-    }
-  }
+		.price-week__date {
+			color: var(--color-light-blue);
+		}
+	}
 
-  &--active {
-    color: var(--color-white);
-    font-weight: 700;
-    background-color: var(--color-blue);
+	&--active {
+		color: var(--color-white);
+		font-weight: 700;
+		background-color: var(--color-blue);
 
-    .price-week__date {
-      color: var(--color-light-blue);
-    }
-  }
+		.price-week__date {
+			color: var(--color-light-blue);
+		}
+	}
 
-  @media #{$media-md} {
-    padding-left: 21px;
-  }
-  @media #{$media-lg} {
-    padding-left: 22px;
-  }
-  @media #{$media-xl} {
-    border-right: none;
-    border-bottom: 1px solid var(--color-border-third);
-    padding-top: 14px;
-    padding-bottom: 11px;
+	@media #{$media-md} {
+		padding-left: 21px;
+	}
 
-    &:first-child {
-      border-radius: 4px 4px 0 0;
-    }
+	@media #{$media-lg} {
+		padding-left: 22px;
+	}
 
-    &:last-child {
-      border-bottom: none;
-      border-radius: 0 0 4px 4px;
-    }
-  }
+	@media #{$media-xl} {
+		border-right: none;
+		border-bottom: 1px solid var(--color-border-third);
+		padding-top: 14px;
+		padding-bottom: 11px;
+
+		&:first-child {
+			border-radius: 4px 4px 0 0;
+		}
+
+		&:last-child {
+			border-bottom: none;
+			border-radius: 0 0 4px 4px;
+		}
+	}
 }
 
 .price-week__price {
-  font-weight: 700;
-  margin-bottom: 4px;
+	font-weight: 700;
+	margin-bottom: 4px;
 }
 
 .price-week__date {
-  color: var(--color-grey);
-  font-family: $title-font;
-  font-size: 12px;
+	color: var(--color-grey);
+	font-family: $title-font;
+	font-size: 12px;
 }

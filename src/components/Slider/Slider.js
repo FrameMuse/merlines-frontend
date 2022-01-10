@@ -319,7 +319,7 @@ class Slider extends React.Component {
     min: 0,
     max: 30,
     step: 1,
-    pageFn: (step) => step * 10,
+    pageFn: (step) => step / 1000000,
     minDistance: 0,
     defaultValue: 0,
     orientation: "horizontal",

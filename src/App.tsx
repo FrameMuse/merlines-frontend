@@ -5,6 +5,7 @@ import Footer from "components/Footer/Footer"
 import Header from "components/Header/Header"
 import Main from "components/Main/Main"
 import PopupPasswordResetConfirm from "components/Popups/PopupPasswordResetConfirm"
+import SearchResult from "components/SearchResult/SearchResult"
 import Subscribe from "components/Subscribe/Subscribe"
 import ErrorView from "components/TechnicalPages/ErrorView"
 import UserCabinet from "components/UserCabinet/UserCabinet"
@@ -49,6 +50,7 @@ function AppRouter() {
       <Route path="/blog"><Blog /><Subscribe /></Route>
       <Route path="/" exact><Main /><Subscribe /></Route>
 
+      <Route path="/search" exact><SearchResult setIsOpenFilter={() => { 1 }} /><Subscribe /></Route>
 
 
       <Route path="/error/:code" render={props => <ErrorView {...props.match.params} />} />
@@ -68,7 +70,7 @@ function useUserAuth() {
 
     localStorage.setItem("token", token)
     ClientAPI
-      .query(getAccountMe) // Token is taken from localStorage in requestIntercepter
+      .query(getAccountMe) // Token is taken from localStorage in requestInterceptor
       .then(({ error, payload }) => {
         if (error || !payload || payload.error) return
 
