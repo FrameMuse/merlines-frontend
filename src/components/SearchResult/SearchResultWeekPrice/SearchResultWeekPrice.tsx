@@ -1,15 +1,16 @@
 import "./price-week.scss"
 
-import React from "react"
-
-import SearchResultWeekPriceHeader from "./SearchResultWeekPriceHeader"
 import SearchResultWeekPriceList from "./SearchResultWeekPriceList"
+
 
 function SearchResultWeekPrice() {
   return (
     <div className="price-week">
       <div className="price-week__container">
-        <SearchResultWeekPriceHeader />
+        <div className="price-week__header">
+          <h2 className="price-week__title">Цены на неделю</h2>
+          <span className="price-week__info">самолёты</span>
+        </div>
         <SearchResultWeekPriceList />
       </div>
     </div>

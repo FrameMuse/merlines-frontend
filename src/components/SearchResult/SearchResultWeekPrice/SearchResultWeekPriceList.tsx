@@ -5,15 +5,11 @@ function SearchResultWeekPriceList() {
   const week = makeWeek()
 
   return (
-    <ul className="price-week__list">
+    <div className="price-week__list">
       {week.map((day, index) => (
-        <SearchResultWeekPriceCard
-          key={index}
-          price={day.price}
-          date={day.date}
-        />
+        <SearchResultWeekPriceCard {...day} key={index} />
       ))}
-    </ul>
+    </div>
   )
 }
 
