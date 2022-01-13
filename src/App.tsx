@@ -49,7 +49,7 @@ function AppRouter() {
       <Route path="/blog"><Blog /><Subscribe /></Route>
       <Route path="/" exact><Main /><Subscribe /></Route>
 
-      <Route path="/search" exact><SearchResult setIsOpenFilter={() => { 1 }} /><Subscribe /></Route>
+      <Route path="/search" exact><SearchResult /><Subscribe /></Route>
 
 
       <Route path="/error/:code" render={props => <ErrorView {...props.match.params} />} />

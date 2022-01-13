@@ -1,0 +1,155 @@
+.ticket {
+	display: flex;
+	align-items: center;
+
+	border-radius: 0.25em;
+	overflow: hidden;
+	box-shadow: 0 0 14px -4px #ccc;
+}
+
+/* Info */
+
+.ticket-info {
+	flex: 1;
+
+	display: grid;
+	row-gap: 1.5em;
+
+	padding: 1em;
+}
+
+.ticket-info__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+
+.ticket-info__logos {
+	display: flex;
+	gap: 0.5em;
+
+	img {
+		width: 1.5em;
+		height: 1.5em;
+
+		border-radius: 50%;
+		object-fit: contain;
+	}
+}
+
+/* Events */
+
+.ticket-events {
+	display: flex;
+	gap: 0.75em;
+}
+
+.ticket-events__button {
+	.ticket-events__icon {
+		color: #A1A1A1;
+		transition: 250ms ease color;
+	}
+
+	&:hover,
+	&--active {
+		.ticket-events__icon {
+			color: var(--color-blue);
+		}
+	}
+}
+
+.ticket-events__icon {
+	width: 1.25em;
+	height: 1.25em;
+}
+
+/* Timeline */
+
+.ticket-timeline {
+	display: grid;
+	row-gap: 0.25em;
+}
+
+.ticket-timeline__dates {
+	display: flex;
+	justify-content: space-between;
+
+	span {
+		color: #A1A1A1;
+	}
+}
+
+.ticket-timeline__cities {
+	display: flex;
+	justify-content: space-between;
+}
+
+.ticket-timeline__times {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	span {
+		font-size: 1.75em;
+		font-weight: 800;
+	}
+}
+
+/* Timeline Visual */
+
+.ticket-timeline-visual {
+	flex: 1;
+	// display: grid;
+	// justify-content: center;
+
+	margin: 0 2em;
+}
+
+.ticket-timeline-visual__text {
+	position: absolute;
+	top: -1.75em;
+
+	width: 100%;
+	text-align: center;
+	color: #A1A1A1;
+}
+
+
+/* Timeline Entries */
+
+.ticket-timeline-entries {
+	display: flex;
+	align-items: center;
+
+	width: 100%;
+	height: 0.35em;
+	border-radius: 10em;
+}
+
+.ticket-timeline-entry {
+	$percentage: calc(var(--percentage, 25) * 1%);
+
+	width: $percentage;
+	height: inherit;
+
+	background: #A1A1A1;
+
+	cursor: pointer;
+
+	&:hover {
+		background: var(--color-blue)
+	}
+}
+
+.ticket-timeline-entries__travel {
+	@extend .ticket-timeline-entry;
+	border-radius: inherit;
+}
+
+.ticket-timeline-entries__transfer {
+	@extend .ticket-timeline-entry;
+
+	height: 2px;
+}
