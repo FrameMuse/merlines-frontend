@@ -2,6 +2,7 @@
 import "./Ticket.style.scss"
 
 import Icon from "components/common/Icon"
+import { useState } from "react"
 import { classWithModifiers } from "utils"
 
 // DD
@@ -13,13 +14,33 @@ interface TicketProps {
 }
 
 function Ticket(props: TicketProps) {
+  const [isDetailsExpanded, setIsDetailsExpanded] = useState(false)
+  const [hasBaggage, setHasBaggage] = useState(false) // False if has only luggage
   return (
     <div className="ticket">
-      <TicketInfo />
-      {/* <div className="ticket-side"></div>
-      <div className="ticket__details">
+      <div className="ticket__container">
+        <TicketInfo />
+        <div className="ticket-side">
+          <div className="ticket-baggage" aria->
+            <button className={classWithModifiers("ticket-baggage__entry", !hasBaggage && "active")} type="button" aria-selected={!hasBaggage} onClick={() => setHasBaggage(false)}>
+              <Icon className="ticket-baggage__icon" name="baggage" />
+              <span className="ticket-baggage__text">бесплатно</span>
+            </button>
+            <button className={classWithModifiers("ticket-baggage__entry", hasBaggage && "active")} type="button" aria-selected={hasBaggage} onClick={() => setHasBaggage(true)}>
+              <Icon className="ticket-baggage__icon ticket-baggage__icon--baggage" name="baggageLg" />
+              <span className="ticket-baggage__text">+ 3 500 ₽</span>
+            </button>
+          </div>
+          <div className="ticket-side__price">130 000 ₽</div>
+          <button className={classWithModifiers("ticket-side-button", isDetailsExpanded && "pressed")} aria-details="toggle details" aria-pressed={isDetailsExpanded} onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}>
+            <span className="ticket-side-button__text">Подробнее</span>
+            <Icon className="ticket-side-button__icon" name="chevron" />
+          </button>
+        </div>
+      </div>
+      <div className={classWithModifiers("ticket__details", isDetailsExpanded && "expanded")} aria-expanded={isDetailsExpanded}>
         <TicketOffers />
-      </div> */}
+      </div>
     </div>
   )
 }

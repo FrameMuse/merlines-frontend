@@ -1,10 +1,15 @@
 .ticket {
-	display: flex;
-	align-items: center;
+	display: grid;
 
+	background: white;
 	border-radius: 0.25em;
+
 	overflow: hidden;
 	box-shadow: 0 0 14px -4px #ccc;
+}
+
+.ticket__container {
+	display: flex;
 }
 
 /* Info */
@@ -16,6 +21,7 @@
 	row-gap: 1.5em;
 
 	padding: 1em;
+	padding-bottom: 1.5em;
 }
 
 .ticket-info__header {
@@ -61,8 +67,8 @@
 }
 
 .ticket-events__icon {
-	width: 1.25em;
-	height: 1.25em;
+	width: 1em;
+	height: 1em;
 }
 
 /* Timeline */
@@ -109,7 +115,7 @@
 
 .ticket-timeline-visual__text {
 	position: absolute;
-	top: -1.75em;
+	top: -1.5em;
 
 	width: 100%;
 	text-align: center;
@@ -151,5 +157,102 @@
 .ticket-timeline-entries__transfer {
 	@extend .ticket-timeline-entry;
 
-	height: 2px;
+	height: 1px;
+}
+
+/* Side */
+
+.ticket-side {
+	display: grid;
+	align-content: space-between;
+	border-left: 1px solid #EEEEEE;
+}
+
+.ticket-side__price {
+	// padding: 1rem 0;
+	text-align: center;
+	font-size: 1.25em;
+	font-weight: 700;
+}
+
+/* Baggage*/
+
+.ticket-baggage {
+	display: flex;
+}
+
+.ticket-baggage__entry {
+	flex: 1;
+
+	display: grid;
+	justify-items: center;
+	row-gap: 0.25em;
+
+	padding: 0.75em;
+	background: #EEEEEE;
+	border-bottom: 1px solid transparent;
+
+	&--active {
+		background: white;
+		border-color: #EEEEEE;
+
+		.ticket-baggage__icon,
+		.ticket-baggage__text {
+			color: var(--color-blue);
+		}
+	}
+}
+
+.ticket-baggage__icon {
+	aspect-ratio: 1;
+	height: 1.25em;
+	color: #A1A1A1;
+
+	&--baggage {
+		aspect-ratio: 1.8;
+	}
+}
+
+.ticket-baggage__text {
+	color: #A1A1A1;
+	font-size: 0.5rem;
+}
+
+/* Button */
+
+.ticket-side-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+
+	padding: 1em;
+	background: #396EF6;
+	border: 1px solid transparent;
+	color: white;
+	transition: 200ms ease color, 200ms ease background-color;
+
+	&--pressed {
+		color: #396EF6;
+		border-color: currentColor;
+		background: transparent;
+
+		.ticket-side-button__icon {
+			transform: rotateX(0deg);
+		}
+	}
+}
+
+.ticket-side-button__text {
+	color: currentColor;
+	font-size: 1em;
+	font-weight: 400;
+}
+
+.ticket-side-button__icon {
+	width: 0.625em;
+	height: 0.625em;
+	margin-left: 0.25em;
+	transform: rotateX(180deg);
+	color: currentColor;
 }

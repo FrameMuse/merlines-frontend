@@ -38,7 +38,7 @@ function SearchResult() {
                   className="form-close__btn"
                   type="button"
                 >
-                  <Icon name="arrow-angle" className="form-close__icon" />
+                  <Icon name="chevron" className="form-close__icon" />
                 </button>
               </div>
             </>
@@ -61,7 +61,7 @@ function SearchResult() {
           className="form-close__btn"
           type="button"
         >
-          <Icon name="arrow-angle" className="form-close__icon" />
+          <Icon name="chevron" className="form-close__icon" />
         </button>
       </div>
       <SearchFormMini openForm={() => setIsSearchFormOpen(!isSearchFormOpen)} />

@@ -21,7 +21,7 @@ function SearchFilter(props: SearchFilterProps) {
         {props.extraLabel && (
           <span className="weak">({props.extraLabel})</span>
         )}
-        <Icon name="arrow-angle" className={classWithModifiers("search-filter__icon", hidden && "down")} />
+        <Icon name="chevron" className={classWithModifiers("search-filter__icon", hidden && "down")} />
       </button>
       <div className={classWithModifiers("search-filter__container", hidden && "hidden")}>{props.children}</div>
     </div>

@@ -61,7 +61,7 @@ function AdminEditUsersUser(props: AdminEditUsersUserProps) {
         <div className="edit-user__name">{props.first_name} {props.last_name}</div>
         <div className="edit-user__id">#{props.id}</div>
         <div className="edit-user__toggle">
-          <Icon name="arrow-angle" className={classWithModifiers("edit-user__icon", isOpen && "up")} />
+          <Icon name="chevron" className={classWithModifiers("edit-user__icon", isOpen && "up")} />
         </div>
       </div>
       <div className={classWithModifiers("edit-user__content", isOpen && "open")}>

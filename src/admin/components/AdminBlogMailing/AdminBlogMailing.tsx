@@ -65,7 +65,7 @@ function AdminBlogMailingEntry(props: MailingEntryType) {
 
         {/* <div className={classWithModifiers("blog-mailing-entry__status", props.status)}>{capitalize(props.status)}</div> */}
         <div className="blog-mailing-entry__toggle">
-          <Icon name="arrow-angle" className={classWithModifiers("blog-mailing-entry__icon", active && "up")} />
+          <Icon name="chevron" className={classWithModifiers("blog-mailing-entry__icon", active && "up")} />
         </div>
       </div>
       <div className={classWithModifiers("blog-mailing-entry__body", active && "active")}>

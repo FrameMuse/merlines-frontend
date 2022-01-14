@@ -84,7 +84,7 @@ function BlogSection(props: BlogSectionProps) {
       {!isLastPage && (
         <button className="section__more">
           <span>загрузить еще</span>
-          <Icon name="arrow-angle" className="section__more-icon" />
+          <Icon name="chevron" className="section__more-icon" />
         </button>
       )}
     </section>
