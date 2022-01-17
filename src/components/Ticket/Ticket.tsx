@@ -7,17 +7,16 @@ import { classWithModifiers } from "utils"
 
 // DD
 import DDPNG from "./Group.png"
+import MegaPNG from "./mega.png"
 
 
-interface TicketProps {
-
-}
+interface TicketProps { }
 
 function Ticket(props: TicketProps) {
   const [isDetailsExpanded, setIsDetailsExpanded] = useState(false)
   const [hasBaggage, setHasBaggage] = useState(false) // False if has only luggage
   return (
-    <div className="ticket">
+    <div className={classWithModifiers("ticket", isDetailsExpanded && "expanded")}>
       <div className="ticket__container">
         <TicketInfo />
         <div className="ticket-side">
@@ -38,7 +37,7 @@ function Ticket(props: TicketProps) {
           </button>
         </div>
       </div>
-      <div className={classWithModifiers("ticket__details", isDetailsExpanded && "expanded")} aria-expanded={isDetailsExpanded}>
+      <div className="ticket__details" aria-expanded={isDetailsExpanded}>
         <TicketOffers />
       </div>
     </div>
@@ -105,16 +104,48 @@ function TicketTimeline() {
 
 function TicketOffers() {
   return (
-    <div className="ticket-orders">
-      <div className="ticket-order"></div>
-      <div className="ticket-orders__more"></div>
+    <div className="ticket-offers">
+      <div className="ticket-offers__list">
+        <TicketOffer price={130000} service={{ title: "mego.travel", image: MegaPNG }} />
+        <TicketOffer price={130000} service={{ title: "mego.travel", image: MegaPNG }} />
+        <TicketOffer price={130000} service={{ title: "mego.travel", image: MegaPNG }} />
+      </div>
+      <div className="ticket-offers__more">
+        <span>ещё 7 предложений</span>
+        <Icon className="ticket-offers__icon" name="chevron" />
+      </div>
     </div>
   )
 }
 
-function TicketTravelTrace() {
+
+interface TicketOfferProps {
+  price: number
+  service: {
+    title: string
+    image: string
+  }
+}
+
+function TicketOffer(props: TicketOfferProps) {
   return (
-    <div className="ticket-travel-trace">
+    <div className="ticket-offer">
+      <div className="ticket-offer__group">
+        <div className="ticket-offer__title">{props.price.toPrice("ru", "rub")}</div>
+        <div className="ticket-offer__desc">цена за 1 взрослого</div>
+      </div>
+      <div className="ticket-offer__group">
+        <img className="ticket-offer__image" src={props.service.image} />
+        <div className="ticket-offer__desc">на {props.service.title}</div>
+      </div>
+      <button className="ticket-offers__submit">Выбрать</button>
+    </div>
+  )
+}
+
+function TicketTrace() {
+  return (
+    <div className="ticket-trace">
 
     </div>
   )

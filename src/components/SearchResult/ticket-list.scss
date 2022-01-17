@@ -91,6 +91,8 @@
 	display: grid;
 	align-content: baseline;
 	row-gap: 3.5em;
+
+	font-family: $title-font;
 }
 
 .ticket-list__transports {

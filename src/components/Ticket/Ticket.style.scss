@@ -6,10 +6,27 @@
 
 	overflow: hidden;
 	box-shadow: 0 0 14px -4px #ccc;
+	transition: 150ms ease box-shadow;
+
+	&--expanded {
+		box-shadow: 0 0 3px 0px #235EF5;
+	}
 }
 
 .ticket__container {
 	display: flex;
+}
+
+.ticket__details {
+	display: none;
+
+	.ticket--expanded & {
+		display: initial;
+	}
+
+	&>:not(:last-child) {
+		border-bottom: 1px solid #EEEEEE;
+	}
 }
 
 /* Info */
@@ -22,6 +39,9 @@
 
 	padding: 1em;
 	padding-bottom: 1.5em;
+
+	border-left: 1px solid #EEEEEE;
+	border-bottom: 1px solid #EEEEEE;
 }
 
 .ticket-info__header {
@@ -99,7 +119,7 @@
 
 	span {
 		font-size: 1.75em;
-		font-weight: 800;
+		font-weight: 700;
 	}
 }
 
@@ -246,7 +266,7 @@
 .ticket-side-button__text {
 	color: currentColor;
 	font-size: 1em;
-	font-weight: 400;
+	font-weight: 500;
 }
 
 .ticket-side-button__icon {
@@ -255,4 +275,70 @@
 	margin-left: 0.25em;
 	transform: rotateX(180deg);
 	color: currentColor;
+}
+
+/* Offers */
+
+.ticket-offers {
+	display: grid;
+}
+
+.ticket-offers__list {
+	display: grid;
+	row-gap: 1.5em;
+
+	padding: 1em;
+}
+
+.ticket-offers__more {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	gap: 0.35em;
+	padding: 0.5em;
+	border-top: 1px solid #EEEEEE;
+	color: var(--color-blue);
+	cursor: pointer;
+
+	&:hover {
+		background: rgba($color: black, $alpha: 0.05);
+	}
+}
+
+.ticket-offers__icon {
+	width: 0.75em;
+	height: 0.75em;
+}
+
+.ticket-offers__submit {
+	padding: 1em 2em;
+	background: #396EF6;
+	border-radius: 0.35em;
+	color: white;
+	font-weight: 600;
+}
+
+/* Offer */
+
+.ticket-offer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.ticket-offer__group {
+	display: grid;
+	justify-items: center;
+	row-gap: 0.5em;
+}
+
+.ticket-offer__title {
+	font-size: 2em;
+	font-weight: 700;
+}
+
+.ticket-offer__desc {
+	color: #A1A1A1;
+	font-weight: 400;
 }
