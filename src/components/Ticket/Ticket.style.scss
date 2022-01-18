@@ -277,20 +277,20 @@
 	color: currentColor;
 }
 
-/* Offers */
+/* Prepositions */
 
-.ticket-offers {
+.ticket-prepositions {
 	display: grid;
 }
 
-.ticket-offers__list {
+.ticket-prepositions__list {
 	display: grid;
 	row-gap: 1.5em;
 
 	padding: 1em;
 }
 
-.ticket-offers__more {
+.ticket-prepositions__more {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -306,12 +306,12 @@
 	}
 }
 
-.ticket-offers__icon {
+.ticket-prepositions__icon {
 	width: 0.75em;
 	height: 0.75em;
 }
 
-.ticket-offers__submit {
+.ticket-prepositions__submit {
 	padding: 1em 2em;
 	background: #396EF6;
 	border-radius: 0.35em;
@@ -319,26 +319,30 @@
 	font-weight: 600;
 }
 
-/* Offer */
+/* Preposition */
 
-.ticket-offer {
+.ticket-preposition {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.ticket-offer__group {
+.ticket-preposition__group {
 	display: grid;
 	justify-items: center;
 	row-gap: 0.5em;
 }
 
-.ticket-offer__title {
+.ticket-preposition__title {
 	font-size: 2em;
 	font-weight: 700;
 }
 
-.ticket-offer__desc {
+.ticket-preposition__desc {
 	color: #A1A1A1;
 	font-weight: 400;
 }
+
+/* Trace*/
+
+.ticket-trace {}
