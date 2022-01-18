@@ -27,7 +27,6 @@ function SearchForm() {
 
   function removeReturnDate() {
     dispatch(updateSearchRoute(0, { returnDate: null }))
-    dispatch(updateSearchHasReturnDate(false))
   }
 
   function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
@@ -45,12 +44,8 @@ function SearchForm() {
       depart_date: route.departureDate?.toISOString().slice(0, 10),
       return_date: route.departureDate?.toISOString().slice(0, 10),
       transport: "air",
-      one_way: search.hasReturnDate,
 
-      passengers_adults: search.passengers.adults,
-      passengers_children: search.passengers.children,
-      passengers_infants: search.passengers.babies,
-      travel_class: search.travelClass
+      ...search.passengers
     })
 
     history.push({

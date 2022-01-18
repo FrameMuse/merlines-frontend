@@ -47,7 +47,7 @@ function FormProfileEditBasic() {
         toast.success("Data changed")
       })
   }
-  if (!user.authed) return <>no auth</>
+  if (!user.auth) return <>no auth</>
   return (
     <form onSubmit={onSubmit} className="form-profile">
       <label className="form-profile__row">

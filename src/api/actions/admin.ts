@@ -2,7 +2,7 @@ import { MailingEntryType } from "admin/components/AdminBlogMailing/AdminBlogMai
 import { Action } from "api/client"
 import { ArticleContentType, BlogTagType } from "interfaces/Blog"
 import { PaginationType } from "interfaces/Django"
-import { AuthedUser } from "interfaces/user"
+import { Client } from "interfaces/user"
 
 
 /* Articles */
@@ -36,7 +36,7 @@ export const getAdminUser = (id: number): Action => ({
   endpoint: "/admin/user/" + id,
 })
 
-export const putAdminUser = (id: number, type: AuthedUser["type"]): Action => ({
+export const putAdminUser = (id: number, type: Client["type"]): Action => ({
   method: "PUT",
   endpoint: "/admin/user/" + id,
   body: { type }
@@ -47,7 +47,7 @@ export const deleteAdminUser = (id: number): Action => ({
   endpoint: "/admin/user/" + id
 })
 
-export const getAdminUsers = (filters: Partial<{ id: number, type: string, first_name: string, page: number, page_size: number }>): Action<PaginationType<AuthedUser>> => ({
+export const getAdminUsers = (filters: Partial<{ id: number, type: string, first_name: string, page: number, page_size: number }>): Action<PaginationType<Client>> => ({
   method: "GET",
   endpoint: "/admin/users",
   params: filters

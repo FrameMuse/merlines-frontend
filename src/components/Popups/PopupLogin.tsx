@@ -35,9 +35,9 @@ function PopupLogin() {
   }
 
   useEffect(() => {
-    if (!user.authed) return
+    if (!user.auth) return
     closeThisPopup()
-  }, [user.authed])
+  }, [user.auth])
 
   return (
     <div style={{ width: "25em" }}>

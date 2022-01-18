@@ -175,7 +175,7 @@ function HeaderSettings() {
       <div className="nav__list nav__list--top">
         <HeaderLink
           modifier="cabinet"
-          href={user.authed ? "/user" : "/login"}
+          href={user.auth ? "/user" : "/login"}
           svgClass="user-off"
           svgName="user-off"
         />

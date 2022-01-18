@@ -1,7 +1,7 @@
-export type User = AuthedUser | UnauthedUser
-export interface AuthedUser {
-  authed: true
-  // If Authed
+export type User = Client | Anonymous
+export interface Client {
+  auth: true
+
   id: number
   first_name: string
   last_name: string
@@ -9,8 +9,8 @@ export interface AuthedUser {
   avatar: string
   type: UserType
 }
-export interface UnauthedUser {
-  authed: false
+export interface Anonymous {
+  auth: false
 }
 
 export enum UserType {

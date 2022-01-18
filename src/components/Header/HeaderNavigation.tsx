@@ -19,14 +19,14 @@ function HeaderNavigation() {
       </button>
       <div className="nav__inner">
         <div className="nav__group">
-          {user.authed && [UserType.Admin, UserType.Editor].includes(user.type) && (
+          {user.auth && [UserType.Admin, UserType.Editor].includes(user.type) && (
             <HeaderLink to="/admin" iconName="arrow">Админ панель</HeaderLink>
           )}
           <HeaderLink to="/blog" iconName="edit">Блог</HeaderLink>
           <HeaderLink to="/price-calendar" iconName="calendar">Календарь цен</HeaderLink>
         </div>
         <div className="nav__group">
-          {user.authed ? (
+          {user.auth ? (
             <HeaderLink to="/user" iconName="user-on" label="text" />
           ) : (
             <button className="nav__link" type="button" onClick={() => Popup.open(PopupLogin)}>

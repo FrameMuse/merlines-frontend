@@ -272,9 +272,14 @@ export function createQuery(QueryObject?: Record<string, any> | null) {
   const QueryKeys = Object.keys(QueryObject)
   const QueryArray = QueryKeys.map(function (key) {
     const value = QueryObject[key]
+    if (value === true) {
+      return encodeURIComponent(key)
+    }
+
     if (value) {
       return encodeURIComponent(key) + "=" + encodeURIComponent(value)
     }
+
     return ""
   })
 

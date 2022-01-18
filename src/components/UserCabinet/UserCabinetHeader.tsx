@@ -7,7 +7,7 @@ import Logout from "../common/Logout"
 
 function UserCabinetHeader() {
   const user = useSelector(state => state.user)
-  if (!user.authed) return <>No Auth</>
+  if (!user.auth) return <>No Auth</>
   return (
     <div className="cabinet__header">
       <div className="cabinet__user">

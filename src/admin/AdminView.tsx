@@ -14,7 +14,7 @@ function AdminView() {
   const user = useSelector(state => state.user)
   return (
     <>
-      {!user.authed && (
+      {!user.auth && (
         <Redirect to="/" />
       )}
       <header className="admin-header">

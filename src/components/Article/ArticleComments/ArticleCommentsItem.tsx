@@ -16,7 +16,7 @@ interface ArticleCommentsItemProps extends ArticleReplyType {
 
 function ArticleCommentsItem(props: ArticleCommentsItemProps) {
   const user = useSelector(state => state.user)
-  const userCanEdit = user.authed && [UserType.Admin, UserType.Editor].includes(user.type)
+  const userCanEdit = user.auth && [UserType.Admin, UserType.Editor].includes(user.type)
 
   const [isDeleted, setIsDeleted] = useState(props.is_deleted)
   const [comments, setComments] = useState<ArticleReplyType[]>(props.replies || [])

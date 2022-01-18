@@ -5,7 +5,7 @@ import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
 import { deleteAdminUser, getAdminUsers, putAdminUser } from "api/actions/admin"
 import ClientAPI from "api/client"
 import Icon from "components/common/Icon"
-import { AuthedUser } from "interfaces/user"
+import { Client } from "interfaces/user"
 import { FormEvent, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { classWithModifiers } from "utils"
@@ -50,7 +50,7 @@ function AdminEditUsers() {
 }
 
 
-interface AdminEditUsersUserProps extends AuthedUser { }
+interface AdminEditUsersUserProps extends Client { }
 
 function AdminEditUsersUser(props: AdminEditUsersUserProps) {
   const [isOpen, setIsOpen] = useState(false)

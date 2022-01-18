@@ -5,7 +5,7 @@ import ClientAPI from "api/client"
 import ArticleCard from "components/Article/ArticleCard"
 import ArticleContent from "components/Article/ArticleContent"
 import { ArticleAuthorType, ArticleContentType } from "interfaces/Blog"
-import { AuthedUser } from "interfaces/user"
+import { Client } from "interfaces/user"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
@@ -154,7 +154,7 @@ interface AdminArticlePreviewProps extends ArticleContentType {
 }
 
 function AdminArticlePreview(props: AdminArticlePreviewProps) {
-  const user = useSelector(state => props.author || state.user) as AuthedUser
+  const user = useSelector(state => props.author || state.user) as Client
   const previewProps = {
     ...props,
     id: 1,
