@@ -12,7 +12,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "keen-slider": "^5.4.0",
     "luxon": "^1.26.0",
-    "nanoid": "^3.1.20",
+    "nanoid": "^3.1.31",
     "react": "^17.0.1",
     "react-analytics-charts": "^1.2.12",
     "react-dom": "^17.0.1",
