@@ -2,7 +2,6 @@ import Slider from "components/Slider/Slider"
 import { useState } from "react"
 
 
-
 interface SearchFilterTimeRangeRangeProps {
   min: number
   max: number

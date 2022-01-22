@@ -11,6 +11,8 @@ import DropDownCalendarSlider from "./DropDownCalendarSlider"
 
 
 interface DropDownCalendarProps {
+  single?: boolean
+
   hasGrouping?: boolean
   hasOffset?: boolean
   parentRef?: MutableRefObject<HTMLDivElement | null>
@@ -40,7 +42,9 @@ function DropDownCalendar(props: DropDownCalendarProps) {
         <div className="drop-down-calendar__container">
           <button onClick={() => props.setIsHidden(true)} className="drop-down-calendar__close-btn">Закрыть</button>
           <DropDownCalendarMonth />
-          <DropDownCalendarMonth secondary />
+          {!props.single && (
+            <DropDownCalendarMonth secondary />
+          )}
         </div>
       </DateCalendarContext.Provider>
     </div>

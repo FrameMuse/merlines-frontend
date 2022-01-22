@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, useEffect, useState } from "react"
+import React, { ChangeEvent, ReactElement, useState } from "react"
 
 import SearchFilterCheckbox, { SearchFilterCheckboxProps } from "./SearchFilterCheckbox"
 
@@ -27,18 +27,10 @@ function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
     setChecks({ ...checks, all: false, [input.name]: input.checked })
   }
 
-
-
-
-  useEffect(() => {
-    console.log(props.name, " => ", checks)
-  }, [checks])
-
-
   return (
     <div className="search-checkboxes">
       <SearchFilterCheckbox children={"Все"} name={"all"} checked={checks.all} onChange={onChange} />
-      {React.Children.map(props.children, (child, index) => (
+      {React.Children.map(props.children, child => (
         <SearchFilterCheckbox {...child.props} checked={!!checks[child.props.name]} onChange={onChange} key={child.props.name} />
       ))}
     </div>

@@ -4,19 +4,18 @@ import "./search-form.scss"
 import { getGeoIp } from "api/actions/geo"
 import DropDownCalendar from "components/DropDownCalendar/DropDownCalendar"
 import { DateCalendarState } from "components/DropDownCalendar/DropDownCalendarReducer"
-import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react"
+import { FormEvent, Fragment, KeyboardEvent, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useClickAway } from "react-use"
-import { updateSearchHasReturnDate } from "redux/reducers/search"
-import { updateSearchRoute } from "redux/reducers/search"
+import { addSearchRoutes, updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
 import { capitalize, classWithModifiers, createQuery } from "utils"
 
 import ClientAPI from "../../api/client"
 import { SearchFormPassengers } from "./SearchFormPassengers"
 import { SearchFormRoute } from "./SearchFormRoute"
 
-function SearchForm() {
+function SearchFormComplicated() {
   const dispatch = useDispatch()
   const history = useHistory()
   const search = useSelector(state => state.search)
@@ -25,8 +24,21 @@ function SearchForm() {
 
   // TODO: Find location by GeoIP
 
+  function setReturnDate() {
+    dispatch(updateSearchHasReturnDate(true))
+  }
   function removeReturnDate() {
+    dispatch(updateSearchHasReturnDate(false))
     dispatch(updateSearchRoute(0, { returnDate: null }))
+  }
+
+  function addSearchRoute() {
+    dispatch(addSearchRoutes({
+      departurePoint: null,
+      departureDate: null,
+      arrivalPoint: null,
+      returnDate: null
+    }))
   }
 
   function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
@@ -40,9 +52,8 @@ function SearchForm() {
 
     const searchQuery = createQuery({
       origin: route.departurePoint?.code,
-      destination: route.arrivalPoint?.code,
-      depart_date: route.departureDate?.toISOString().slice(0, 10),
-      return_date: route.departureDate?.toISOString().slice(0, 10),
+      arrival: route.arrivalPoint?.code,
+      departure_date: route.departureDate?.toISOString().slice(0, 10),
       transport: "air",
 
       ...search.passengers
@@ -76,25 +87,28 @@ function SearchForm() {
   }, [dispatch])
 
   return (
-    <form className="search-form" onSubmit={onSearchSubmit} autoComplete="off">
+    <form className={classWithModifiers("search-form", "complicated")} onSubmit={onSearchSubmit} autoComplete="off">
       <div className="search-form__nav">
-        <button type="button" className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} onClick={() => dispatch(updateSearchHasReturnDate(true))}>
+        <button className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} type="button" onClick={setReturnDate}>
           Туда - обратно
         </button>
-        <button type="button" className={classWithModifiers("search-form__nav-btn", !search.hasReturnDate && "active")} onClick={removeReturnDate}>
+        <button className={classWithModifiers("search-form__nav-btn", !search.hasReturnDate && "active")} type="button" onClick={removeReturnDate}>
           В одну сторону
         </button>
-        <button className="search-form__nav-btn">Сложный маршрут</button>
+        <button className="search-form__nav-btn" type="button" onClick={addSearchRoute}>Сложный маршрут</button>
       </div>
       <div className={classWithModifiers("search-form__inner", formError && "error")}>
         {search.routes.map((route, index) => (
-          <>
-            <SearchFormRoute {...route} index={index} key={index} />
-            <SearchFormDate routeIndex={index} withReturnDate={search.routes.length < 2} />
-          </>
+          <div className="search-form__route" key={index}>
+            <SearchFormRoute {...route} index={index} />
+            <SearchFormDate routeIndex={index} />
+          </div>
         ))}
-        <SearchFormPassengers />
-        <button className="search-form__btn" type="submit">Найти</button>
+        <div className="search-form__actions">
+          <SearchFormPassengers />
+          <button className="search-form__btn search-form__btn--add" type="button" onClick={addSearchRoute}>+ Добавить маршрут</button>
+          <button className="search-form__btn" type="submit">Найти</button>
+        </div>
       </div>
       {/* {!searchResult && <OpenBooking />} */}
     </form>
@@ -104,13 +118,13 @@ function SearchForm() {
 
 interface SearchFormDatingProps {
   routeIndex: number
-  withReturnDate?: boolean
 }
 
 function SearchFormDate(props: SearchFormDatingProps) {
   const dispatch = useDispatch()
+
   const search = useSelector(state => state.search)
-  const searchRoute = useSelector(state => state.search.routes[props.routeIndex])
+  const searchRoute = search.routes[props.routeIndex]
 
   const [isCalendarHidden, setIsCalendarHidden] = useState(true)
   const [hasCalendarOffset, setHasCalendarOffset] = useState(false)
@@ -119,14 +133,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
 
   function onFocus() {
     setIsCalendarHidden(false)
-    setHasCalendarOffset(true)
-  }
-
-  function onReturnDateFocus() {
-    setIsCalendarHidden(false)
-    setHasCalendarOffset(true)
-
-    dispatch(updateSearchHasReturnDate(true))
+    setHasCalendarOffset(false)
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
@@ -142,7 +149,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
     }))
   }
 
-  function texualizeDate(date?: Date | null) {
+  function textualizeDate(date?: Date | null) {
     if (date == null) return ""
 
     const day = date.getDate()
@@ -157,36 +164,23 @@ function SearchFormDate(props: SearchFormDatingProps) {
   return (
     <>
       {/* Departure Date */}
-      <label className="search-form__group search-form__group--date-dep">
+      <label className="search-form__group">
         <input
           className="search-form__input"
           autoComplete="off"
           placeholder="_"
           readOnly
-          value={texualizeDate(searchRoute.departureDate)}
+          value={textualizeDate(searchRoute.departureDate)}
 
           onFocus={onFocus}
           onKeyDown={onKeyDown}
         />
         <div className="search-form__placeholder">{"когда"}</div>
       </label>
-      {/* Return Date */}
-      <label className="search-form__group search-form__group--date-arr">
-        <input
-          className="search-form__input search-form__input--arrival-date"
-          autoComplete="off"
-          placeholder="_"
-          readOnly
-          value={texualizeDate(searchRoute.returnDate)}
-
-          onFocus={onReturnDateFocus}
-          onKeyDown={onKeyDown}
-        />
-        <div className="search-form__placeholder">{"обратно"}</div>
-      </label>
-
       <DropDownCalendar
-        hasGrouping={search.hasReturnDate}
+        single={search.routes.length > 1}
+
+        hasGrouping={search.hasReturnDate && search.routes.length < 2}
         hasOffset={hasCalendarOffset}
         parentRef={calendarRef}
 
@@ -199,4 +193,4 @@ function SearchFormDate(props: SearchFormDatingProps) {
   )
 }
 
-export default SearchForm
+export default SearchFormComplicated

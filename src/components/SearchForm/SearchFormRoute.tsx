@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { SearchRoute, updateSearchRoute } from "redux/reducers/search"
+import search, { SearchRoute, updateSearchRoute } from "redux/reducers/search"
 
 import DropDown from "../DropDown/DropDown"
 import { DropDownElementProps } from "../DropDown/DropDownItem"
@@ -12,6 +12,8 @@ interface SearchFormRouteProps extends SearchRoute {
 
 export function SearchFormRoute(props: SearchFormRouteProps) {
   const dispatch = useDispatch()
+
+  const search = useSelector(state => state.search)
 
   const [departurePointOpen, setDeparturePointOpen] = useState(false)
   const [arrivalPointOpen, setArrivalPointOpen] = useState(false)

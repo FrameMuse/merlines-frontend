@@ -1,6 +1,6 @@
 import { ValuesOf } from "interfaces/common"
+import { MapActions } from "interfaces/reducer"
 import { Anonymous, Client, User } from "interfaces/user"
-import { MapActions } from "redux/helpers"
 
 const initialState: Anonymous = {
   auth: false

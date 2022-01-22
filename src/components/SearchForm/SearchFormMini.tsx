@@ -1,36 +1,32 @@
 import { useSelector } from "react-redux"
 
-import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
 import Icon from "../common/Icon"
 
-function SearchFormMini({ openForm }) {
-  const mainSearchParams = useSelector(selectMainSearchParams)
 
+interface SearchFormMiniProps {
+  openForm: () => void
+}
+
+function SearchFormMini(props: SearchFormMiniProps) {
+  const search = useSelector(state => state.search)
   return (
     <div className="download-close__wrap">
       <div className="download-close__container">
         <div className="download__field download__field--one">
           <span className="download__item download__item--city download__item--icon">
-            {mainSearchParams.route.front.from || ""}
+            {search.routes[0].departureDate?.toLocaleDateString("ru") || ""}
           </span>
           <span className="download__item download__item--city">
-            {mainSearchParams.route.front.to || ""}
+            {search.routes[0].returnDate?.toLocaleDateString("ru") || ""}
           </span>
           <span className="download__counter">+3</span>
           <span className="download__item download__item--date">
-            {mainSearchParams.date.mini.from}
+            {search.routes[0].departurePoint?.name || ""}
           </span>
           <span className="download__item download__item--date">
-            {mainSearchParams.date.mini.to}
+            {search.routes[0].arrivalPoint?.name || ""}
           </span>
-          <span className="download__item download__item--passenger">
-            {mainSearchParams.passengersInfoMini}
-          </span>
-          <button
-            onClick={() => openForm()}
-            className="download__edit"
-            type="button"
-          >
+          <button className="download__edit" type="button" onClick={props.openForm}>
             <Icon
               className="download__edit-icon"
               name="edit"

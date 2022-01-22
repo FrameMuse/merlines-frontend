@@ -3,8 +3,8 @@
 
 .drop-down-calendar {
 	position: fixed;
-	inset: 0;
 	top: 0;
+
 	background-color: var(--color-blue);
 	overflow-y: auto;
 	overscroll-behavior: contain;
@@ -14,7 +14,6 @@
 
 	@media #{$media-md} {
 		bottom: unset;
-		width: 588px;
 		margin-top: 5px;
 		padding: 25px 30px;
 		background-color: var(--color-white);
@@ -76,9 +75,8 @@
 
 	@media #{$media-md} {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 0 38px;
-		width: auto;
+		grid-auto-flow: column;
+		gap: 3em;
 		margin-left: 0;
 		margin-right: 0;
 		padding: 0;
@@ -86,6 +84,7 @@
 }
 
 .drop-down-calendar__wrap {
+	width: 17em;
 	text-align: center;
 	padding: 15px 16px;
 	background-color: var(--color-white);

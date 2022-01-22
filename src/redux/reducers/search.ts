@@ -15,6 +15,7 @@ export interface SearchRoute {
 }
 
 export interface SearchDetails {
+  hasReturnDate: boolean
   travelClass: SearchTravelClass
   routes: SearchRoute[]
   passengers: {
@@ -25,6 +26,7 @@ export interface SearchDetails {
 }
 
 const initialState: SearchDetails = {
+  hasReturnDate: false,
   travelClass: "economy",
   routes: [{ arrivalPoint: null, departurePoint: null, departureDate: new Date, returnDate: null }],
   passengers: {
@@ -63,6 +65,11 @@ export default (state = initialState, action: Action): typeof initialState => {
   }
 }
 
+
+export const updateSearchHasReturnDate = (hasReturnDate: SearchDetails["hasReturnDate"]) => ({
+  type: "SEARCH_UPDATE",
+  payload: { hasReturnDate }
+})
 
 export const updateSearchTravelClass = (travelClass: SearchTravelClass) => ({
   type: "SEARCH_UPDATE",

@@ -1,7 +1,6 @@
 import Slider from "components/Slider/Slider"
 
 
-
 interface SearchFilterRangeProps {
   min: number
   max: number
