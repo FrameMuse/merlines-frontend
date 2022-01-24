@@ -21,10 +21,10 @@ function SearchFormMini(props: SearchFormMiniProps) {
           </span>
           <span className="download__counter">+3</span>
           <span className="download__item download__item--date">
-            {search.routes[0].departurePoint?.name || ""}
+            {search.routes[0].departurePoint?.title || ""}
           </span>
           <span className="download__item download__item--date">
-            {search.routes[0].arrivalPoint?.name || ""}
+            {search.routes[0].arrivalPoint?.title || ""}
           </span>
           <button className="download__edit" type="button" onClick={props.openForm}>
             <Icon

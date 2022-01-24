@@ -1,6 +1,9 @@
-import { FormEvent, useState } from "react"
+import { getGeoAirCities } from "api/actions/geo"
+import ClientAPI from "api/client"
+import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import search, { SearchRoute, updateSearchRoute } from "redux/reducers/search"
+import { SearchAirports, SearchPlace, SearchRoute, updateSearchRoute } from "redux/reducers/search"
+import { classWithModifiers, noop } from "utils"
 
 import DropDown from "../DropDown/DropDown"
 import { DropDownElementProps } from "../DropDown/DropDownItem"
@@ -15,74 +18,113 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
 
   const search = useSelector(state => state.search)
 
-  const [departurePointOpen, setDeparturePointOpen] = useState(false)
-  const [arrivalPointOpen, setArrivalPointOpen] = useState(false)
-
   function updateRouteData<K extends keyof SearchRoute = keyof SearchRoute>(key: K, value: SearchRoute[K]) {
     dispatch(updateSearchRoute(props.index, { [key]: value }))
   }
 
-  function onSelectDeparturePoint(element: DropDownElementProps) {
-    updateRouteData("departurePoint", {
-      code: element.tag,
-      name: element.title
-    })
+  function onChangeDeparturePoint(place: SearchPlace) {
+    updateRouteData("departurePoint", place)
   }
 
-  function onSelectArrivalPoint(element: DropDownElementProps) {
-    updateRouteData("arrivalPoint", {
-      code: element.tag,
-      name: element.title
-    })
+  function onChangeArrivalPoint(place: SearchPlace) {
+    updateRouteData("arrivalPoint", place)
   }
-
-  function onChangeDeparturePoint(event: FormEvent<HTMLInputElement>) {
-    setDeparturePointOpen(true)
-
-    updateRouteData("departurePoint", {
-      code: "___",
-      name: event.currentTarget.value
-    })
-  }
-
-  function onChangeArrivalPoint(event: FormEvent<HTMLInputElement>) {
-    setArrivalPointOpen(true)
-
-    updateRouteData("arrivalPoint", {
-      code: "___",
-      name: event.currentTarget.value
-    })
-  }
-
-
-  const list = [{ tag: "MSK", title: "Москва", iconName: "departures" }, { tag: "SPB", title: "Санкт-Петербург", iconName: "destinations" }]
 
   return (
     <>
-      <label className="search-form__group search-form__group--departure">
-        <input
-          className="search-form__input"
-          autoComplete="off"
-          placeholder="_"
-
-          value={props.departurePoint?.name || ""}
-          onChange={onChangeDeparturePoint} />
-        <div className="search-form__placeholder">{"откуда"}</div>
+      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.departurePoint} onChange={onChangeDeparturePoint}>
         <SearchFormRoutesSwitchButton />
-        <DropDown list={list} isOpen={departurePointOpen} setIsOpen={setDeparturePointOpen} onSelect={onSelectDeparturePoint} />
-      </label>
-      <label className="search-form__group search-form__group--arrival">
-        <input
-          className="search-form__input"
-          autoComplete="off"
-          placeholder="_"
-
-          value={props.arrivalPoint?.name || ""}
-          onChange={onChangeArrivalPoint} />
-        <div className="search-form__placeholder">{"куда"}</div>
-        <DropDown list={list} isOpen={arrivalPointOpen} setIsOpen={setArrivalPointOpen} onSelect={onSelectArrivalPoint} />
-      </label>
+      </SearchFormRouteInput>
+      <SearchFormRouteInput name="arrival" placeholder="куда" state={props.arrivalPoint} onChange={onChangeArrivalPoint} />
     </>
+  )
+}
+
+
+interface SearchFormRouteInputProps {
+  name: string
+  placeholder: string
+  children?: any
+
+  state: SearchPlace | null
+  onChange: Dispatch<SearchPlace>
+}
+
+function SearchFormRouteInput(props: SearchFormRouteInputProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [value, setValue] = useState(props.state?.title)
+  const [places, setPlaces] = useState<SearchAirports[]>([])
+
+  function onChange(event: ChangeEvent<HTMLInputElement>) {
+    const value = event.currentTarget.value
+    setValue(value)
+
+    ClientAPI
+      .query(getGeoAirCities(value))
+      .then(({ error, payload }) => {
+        if (error || !payload) return
+
+        setPlaces(payload.results)
+        setIsOpen(true)
+      })
+  }
+  function onSelect(_element: DropDownElementProps, index: number) {
+    setValue(placesIdList[index].title)
+    props.onChange(placesIdList[index])
+  }
+
+  useEffect(() => {
+    setValue(props.state?.title)
+  }, [props.state])
+
+  const placesIdList = places.flatMap(place => {
+    if (place.airports) {
+      return [{
+        id: place.id,
+        code: place.code,
+        title: place.title,
+      }, ...place.airports]
+    }
+
+    return {
+      id: place.id,
+      code: place.code,
+      title: place.title,
+    }
+  })
+  const dropDownList: DropDownElementProps[] = places.flatMap(place => {
+    if (place.airports) {
+      return [
+        {
+          code: place.code,
+          title: place.title + ", " + place.country_title,
+        },
+        ...place.airports.map(airport => ({
+          code: airport.code,
+          title: airport.title,
+          iconName: "departures"
+        }))
+      ]
+    }
+
+    return {
+      code: place.code,
+      title: place.title,
+    }
+  })
+  return (
+    <label className={classWithModifiers("search-form__group", props.name)}>
+      <input
+        className="search-form__input"
+        autoComplete="off"
+        placeholder="_"
+
+        value={value}
+        onChange={onChange} />
+      <div className="search-form__placeholder">{props.placeholder}</div>
+      <DropDown list={dropDownList} isOpen={isOpen} setIsOpen={setIsOpen} onSelect={onSelect} />
+      {props.children}
+    </label>
   )
 }
 
@@ -92,6 +134,7 @@ function SearchFormRoutesSwitchButton() {
   const search = useSelector(state => state.search)
 
   function switchRoutes() {
+    console.log(search.routes[0])
     // Switch exists for the first and only route
     dispatch(updateSearchRoute(0, {
       arrivalPoint: search.routes[0].departurePoint,

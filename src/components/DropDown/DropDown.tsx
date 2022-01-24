@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { Dispatch, useEffect, useRef, useState } from "react"
 import { useClickAway } from "react-use"
 import { classWithModifiers } from "utils"
 
@@ -8,7 +8,7 @@ import DropDownItem, { DropDownElementProps } from "./DropDownItem"
 interface DropDownProps {
   list: DropDownElementProps[]
   isOpen: boolean
-  setIsOpen: React.Dispatch<boolean>
+  setIsOpen: Dispatch<boolean>
   onSelect?(element: DropDownElementProps, index: number): void
 }
 

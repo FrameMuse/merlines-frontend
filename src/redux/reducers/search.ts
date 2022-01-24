@@ -1,14 +1,19 @@
 export type SearchTravelClass = "business" | "economy"
 
-export interface SearchRoutePoint {
-  name: string
+export interface SearchPlace {
+  id: number
+  title: string
   code: string
-  type?: "airplane" | "train" | "bus"
+}
+
+export interface SearchAirports extends SearchPlace {
+  country_title: string
+  airports: SearchPlace[]
 }
 
 export interface SearchRoute {
-  departurePoint: SearchRoutePoint | null
-  arrivalPoint: SearchRoutePoint | null
+  departurePoint: SearchPlace | null
+  arrivalPoint: SearchPlace | null
 
   departureDate: Date | null
   returnDate: Date | null

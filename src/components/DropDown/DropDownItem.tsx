@@ -1,12 +1,12 @@
-import Icon from "components/common/Icon"
+import Icon, { IconName } from "components/common/Icon"
 import { MouseEventHandler } from "react"
 import { classWithModifiers } from "utils"
 
 
 export interface DropDownElementProps {
   title: string
-  tag: string
-  iconName?: string
+  code: string
+  iconName?: IconName
 }
 
 interface DropDownItemProps extends DropDownElementProps {
@@ -22,7 +22,7 @@ function DropDownItem(props: DropDownItemProps) {
           <Icon className="drop-down__item-icon" name={props.iconName} />
         )}
         <span className="drop-down__item-title">{props.title}</span>
-        <span className="drop-down__item-tag">{props.tag}</span>
+        <span className="drop-down__item-tag">{props.code}</span>
       </div>
     </div>
   )

@@ -75,12 +75,12 @@ function SearchForm() {
   useEffect(() => {
     ClientAPI.query(getGeoIp).then(({ payload }) => {
       if (!payload) return
-      dispatch(updateSearchRoute(0, {
-        departurePoint: {
-          code: payload.region,
-          name: payload.city
-        }
-      }));
+      // dispatch(updateSearchRoute(0, {
+      //   departurePoint: {
+      //     code: payload.region,
+      //     name: payload.city
+      //   }
+      // }));
       (document.querySelector(".search-form__group--arrival .search-form__input") as any)?.focus()
     })
 
