@@ -345,4 +345,181 @@
 
 /* Trace*/
 
-.ticket-trace {}
+.ticket-trace {
+	display: grid;
+	row-gap: 1em;
+
+	padding: 1em;
+	font-size: 0.75rem;
+}
+
+.ticket-trace__group {
+	display: grid;
+	row-gap: 1em;
+}
+
+.ticket-trace__header {
+	display: flex;
+	align-items: center;
+
+	&--transfer {
+		color: #235EF5;
+
+		.ticket-trace__title {
+			font-size: 1.25em;
+		}
+	}
+}
+
+.ticket-trace__title {
+	margin-left: 0.25em;
+	font-size: 1.5em;
+	font-weight: 700;
+}
+
+.ticket-trace__time {
+	margin-left: auto;
+	margin-right: 2.5em;
+	font-weight: 500;
+}
+
+.ticket-trace__container {
+	border-radius: 0.35em;
+	box-shadow: 0 0 8px -2px #ccc;
+	overflow: hidden;
+}
+
+.ticket-trace__entries {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding-left: 0.75em;
+
+	border-top: 1px solid #f2f2f2;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.ticket-trace__entry {
+	display: flex;
+	align-content: center;
+	gap: 0.25em;
+}
+
+.ticket-trace__icon {
+	aspect-ratio: 1;
+	height: 1.25em;
+
+
+	&--chevron {
+		height: 0.75em;
+
+		transform: rotateX(180deg);
+	}
+
+	&--up {
+		transform: rotateX(0deg);
+	}
+
+	&--baggageLg {
+		aspect-ratio: 1.8;
+	}
+}
+
+.ticket-trace__button {
+	display: flex;
+	align-items: center;
+	gap: 0.25em;
+
+	padding: 0.75em 1.5em;
+	background: #396EF6;
+	border: 1px solid transparent;
+	color: white;
+
+	&--active {
+		background: white;
+		border-color: #396EF6;
+		color: #396EF6;
+	}
+}
+
+.ticket-trace__details {
+	display: none;
+	padding: 1.25em 0.75em;
+
+	&--active {
+		display: grid;
+	}
+}
+
+/* Trace Table */
+
+.ticket-trace-table {
+	width: 100%;
+
+	th,
+	td {
+		text-align: left;
+		font-weight: 500;
+	}
+
+	th {
+		padding: 0.5em 0.75em;
+		border-bottom: 1px solid #f2f2f2;
+	}
+
+	td {
+		padding: 0.75em 0.75em;
+	}
+
+	td:nth-child(1) {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		&::after {
+			content: "";
+			padding: 3px;
+			background: #A1A1A1;
+			border-radius: 50%;
+		}
+	}
+
+	tr:not(:last-child) td:nth-child(1)::before {
+		content: "";
+		position: absolute;
+		right: 1em;
+		bottom: -1.25em;
+
+		width: 1px;
+		height: 2.25em;
+
+		transform: translateX(50%);
+
+		background: #A1A1A1;
+	}
+
+	td:nth-child(2) {
+		font-weight: 600;
+	}
+}
+
+
+/// /* Entries */
+
+.entries {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	gap: 1em;
+}
+
+.entries__entry {
+	display: flex;
+	gap: 0.25em;
+}
+
+.entries__key {}
+
+.entries__value {
+	font-weight: 700;
+}

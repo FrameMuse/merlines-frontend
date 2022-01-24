@@ -147,14 +147,116 @@ function TicketPreposition(props: TicketPrepositionProps) {
 function TicketTrace() {
   return (
     <div className="ticket-trace">
-      <div className="ticket-trace__group">
-        <div className="ticket-trace__header">
-          <div className="ticket-trace__title">Туда</div>
-          <div className="ticket-trace__title">Туда</div>
-        </div>
+      <TicketTraceGroup title="Туда" time="25ч 55м в пути" />
+      <TicketTraceGroup title="Пересадка в Стамбуле" time="25ч 55м в пути" type="transfer" />
+    </div>
+  )
+}
 
+
+interface TicketTraceGroupProps {
+  title: string
+  time: string
+  type?: "transfer"
+}
+
+function TicketTraceGroup(props: TicketTraceGroupProps) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  return (
+    <div className="ticket-trace__group">
+      <div className={classWithModifiers("ticket-trace__header", props.type)}>
+        {props.type === "transfer" && (
+          <Icon className="ticket-trace__icon" name="transfer" />
+        )}
+        <div className="ticket-trace__title">{props.title}</div>
+        <div className="ticket-trace__time">{props.time}</div>
+      </div>
+      <div className="ticket-trace__container">
+        <TicketTraceTable />
+        <div className="ticket-trace__entries">
+          <div className="ticket-trace__entry">
+            <Icon className="ticket-trace__icon" name="baggage" />
+            - ручная кладь включена
+            <span className="weak">(8 кг)</span>
+          </div>
+          <div className="ticket-trace__entry">
+            <Icon className="ticket-trace__icon ticket-trace__icon--baggageLg" name="baggageLg" />
+            - багаж включён
+            <span className="weak">(20 кг)</span>
+          </div>
+          <button className={classWithModifiers("ticket-trace__button", isExpanded && "active")} onClick={() => setIsExpanded(!isExpanded)}>
+            <span>о рейсе</span>
+            <Icon className={classWithModifiers("ticket-trace__icon", "chevron", isExpanded && "up")} name="chevron" />
+          </button>
+        </div>
+        <div className={classWithModifiers("ticket-trace__details", isExpanded && "active")}>
+          <div className="entries">
+            <div className="entries__entry">
+              <div className="entries__key">Перевозчик:</div>
+              <div className="entries__value">Аэрофлот</div>
+            </div>
+            <div className="entries__entry">
+              <div className="entries__key">Еда:</div>
+              <div className="entries__value">Бесплатно</div>
+            </div>
+            <div className="entries__entry">
+              <div className="entries__key">Напитки:</div>
+              <div className="entries__value">Платно</div>
+            </div>
+            <div className="entries__entry">
+              <div className="entries__key">Транспорт:</div>
+              <div className="entries__value">AIRBUS A321-100/200</div>
+            </div>
+            <div className="entries__entry">
+              <div className="entries__key">Развлечения:</div>
+              <div className="entries__value">Нет</div>
+            </div>
+            <div className="entries__entry">
+              <div className="entries__key">Зарядка:</div>
+              <div className="entries__value">Есть</div>
+            </div>
+            <div className="entries__entry">
+              <div className="entries__key">Класс:</div>
+              <div className="entries__value">Бизнес</div>
+            </div>
+            <div className="entries__entry">
+              <div className="entries__key">Алкоголь:</div>
+              <div className="entries__value">Бесплатно</div>
+            </div>
+            <div className="entries__entry">
+              <div className="entries__key">Wi-Fi:</div>
+              <div className="entries__value">Нет</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  )
+}
+
+function TicketTraceTable() {
+  return (
+    <table className="ticket-trace-table">
+      <thead>
+        <tr>
+          <th>Airlines</th>
+          <th>рейс: 9U-172</th>
+          <th>5ч 5м</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>02:15</td>
+          <td>Москва, аэропорт Домодедово <span className="weak">(DME)</span></td>
+          <td>20 января, Пн</td>
+        </tr>
+        <tr>
+          <td>07:20</td>
+          <td>Стамбул, аэропорт Сабиха Гёкчен <span className="weak">(SAW)</span></td>
+          <td>20 января, Пн</td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 
