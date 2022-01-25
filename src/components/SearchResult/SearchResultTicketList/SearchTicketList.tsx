@@ -17,7 +17,7 @@ function SearchResultTicketList() {
         </div>
       </div>
       <div className="ticket-list__content">
-        <Ticket />
+        {/* <Ticket /> */}
       </div>
     </>
   )

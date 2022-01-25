@@ -1,20 +1,18 @@
 import "./main-form.scss"
 
-import React from "react"
 import { useSelector } from "react-redux"
 
 import SearchForm from "../../SearchForm/SearchForm"
 import SearchFormComplicated from "../../SearchForm/SearchFormComplicated"
 import MainHeaderSwitcher from "./MainHeaderSwitcher"
-import MainHeaderTitle from "./MainHeaderTitle"
 
-function MainHeader() {
+function MainForm() {
   const search = useSelector(state => state.search)
   return (
     <section className="main-form">
       <div className="main-form__container">
         <div className="main-form__header">
-          <MainHeaderTitle />
+          <h2 className="main-form__title">Ищем и сравниваем билеты на</h2>
           <MainHeaderSwitcher />
         </div>
       </div>
@@ -24,4 +22,4 @@ function MainHeader() {
   )
 }
 
-export default MainHeader
+export default MainForm

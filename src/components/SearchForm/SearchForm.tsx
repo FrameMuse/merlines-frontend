@@ -41,27 +41,42 @@ function SearchForm() {
     }))
   }
 
-  function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
+  function onSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const route = search.routes[0]
-    if (Object.values(route).some(value => !value)) {
+    const route = search.routes[0] // No complicated for now
+
+
+    if (route.arrivalPoint == null) {
       setFormError(true)
       return
     }
 
-    const searchQuery = createQuery({
-      origin: route.departurePoint?.code,
-      destination: route.arrivalPoint?.code,
-      depart_date: route.departureDate?.toISOString().slice(0, 10),
-      return_date: route.departureDate?.toISOString().slice(0, 10),
-      transport: "air",
+    if (route.departurePoint == null) {
+      setFormError(true)
+      return
+    }
 
-      ...search.passengers
+    if (route.departureDate == null) {
+      setFormError(true)
+      return
+    }
+
+
+
+    const searchQuery = createQuery({
+      origin: route.departurePoint.id,
+      destination: route.arrivalPoint.id,
+      date: route.departureDate.toISOString().slice(0, 10),
+      // return_date: route.departureDate?.toISOString().slice(0, 10),
+      // transport: "air",
+
+      // ...search.passengers
     })
 
-    history.push({
-      pathname: "/search-result",
+    history.push("/error")
+    history.replace({
+      pathname: "/search",
       search: "?" + searchQuery,
     })
 
@@ -88,7 +103,7 @@ function SearchForm() {
   }, [dispatch])
 
   return (
-    <form className="search-form" onSubmit={onSearchSubmit} autoComplete="off">
+    <form className="search-form" onSubmit={onSearch} autoComplete="off">
       <div className="search-form__nav">
         <button className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} type="button" onClick={setReturnDate}>
           Туда - обратно

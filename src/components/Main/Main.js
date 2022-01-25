@@ -1,12 +1,12 @@
 import MainCollection from "./MainCollection/MainCollection"
-import MainHeader from "./MainHeader/MainHeader"
+import MainForm from "./MainHeader/MainForm"
 import MainPromo from "./MainPromo/MainPromo"
 import MainSpecial from "./MainSpecial/MainSpecial"
 
 function Main() {
   return (
     <>
-      <MainHeader />
+      <MainForm />
       <MainCollection />
       <MainPromo />
       <MainSpecial />

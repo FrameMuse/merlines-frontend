@@ -154,7 +154,7 @@
 	border-radius: 10em;
 }
 
-.ticket-timeline-entry {
+.ticket-timeline-entries__entry {
 	$percentage: calc(var(--percentage, 25) * 1%);
 
 	width: $percentage;
@@ -167,17 +167,15 @@
 	&:hover {
 		background: var(--color-blue)
 	}
-}
 
-.ticket-timeline-entries__travel {
-	@extend .ticket-timeline-entry;
-	border-radius: inherit;
-}
 
-.ticket-timeline-entries__transfer {
-	@extend .ticket-timeline-entry;
+	&--travel {
+		border-radius: inherit;
+	}
 
-	height: 1px;
+	&--transfer {
+		height: 1px;
+	}
 }
 
 /* Side */

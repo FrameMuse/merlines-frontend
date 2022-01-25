@@ -11,7 +11,10 @@ const filters = [
   { name: "fast", price: 113820 },
   { name: "optimal", price: 73500 }
 ] as const
-function SearchPriceFilter() {
+interface SearchPriceFilterProps {
+
+}
+function SearchPriceFilter(props: SearchPriceFilterProps) {
   const [choice, setChoice] = useState<"cheap" | "fast" | "optimal">("optimal")
   return (
     <div className="filters__container">

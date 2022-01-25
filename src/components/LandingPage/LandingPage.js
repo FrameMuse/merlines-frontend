@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 
 import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
 import Icon from "../common/Icon"
-import MainHeader from "../Main/MainHeader/MainHeader"
+import MainForm from "../Main/MainHeader/MainForm"
 import MainSpecialCard from "../Main/MainSpecial/MainSpecialCard"
 import PriceCalendar from "../PriceCalendar/PriceCalendar"
 import LandingAnswerItem from "./LandingAnswerItem"
@@ -31,7 +31,7 @@ function LandingPage() {
 
   return (
     <section className="landing">
-      <MainHeader />
+      <MainForm />
       <div className="landing__wrap">
         <PriceCalendar isLanding={true} />
         <section className="special landing__special-block">

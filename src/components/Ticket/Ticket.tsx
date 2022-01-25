@@ -6,11 +6,17 @@ import { useState } from "react"
 import { classWithModifiers } from "utils"
 
 // DD
-import DDPNG from "./Group.png"
 import MegaPNG from "./mega.png"
 
 
-interface TicketProps { }
+interface TicketProps {
+  id: number
+  baggagePrice?: number
+  price: number
+  logos: string[]
+
+  timelines: TicketTimelineProps[]
+}
 
 function Ticket(props: TicketProps) {
   const [isDetailsExpanded, setIsDetailsExpanded] = useState(false)
@@ -18,19 +24,35 @@ function Ticket(props: TicketProps) {
   return (
     <div className={classWithModifiers("ticket", isDetailsExpanded && "expanded")}>
       <div className="ticket__container">
-        <TicketInfo />
+        <div className="ticket-info">
+          <div className="ticket-info__header">
+            <div className="ticket-info__logos">
+              {props.logos.map((logo, index) => (
+                <img src={logo} key={index} />
+              ))}
+            </div>
+            <TicketEvents />
+          </div>
+          <div>
+            {props.timelines.map((timeline, index) => (
+              <TicketTimeline {...timeline} key={index} />
+            ))}
+          </div>
+        </div>
         <div className="ticket-side">
           <div className="ticket-baggage">
             <button className={classWithModifiers("ticket-baggage__entry", !hasBaggage && "active")} type="button" aria-selected={!hasBaggage} onClick={() => setHasBaggage(false)}>
               <Icon className="ticket-baggage__icon" name="baggage" />
               <span className="ticket-baggage__text">бесплатно</span>
             </button>
-            <button className={classWithModifiers("ticket-baggage__entry", hasBaggage && "active")} type="button" aria-selected={hasBaggage} onClick={() => setHasBaggage(true)}>
-              <Icon className="ticket-baggage__icon ticket-baggage__icon--baggage" name="baggageLg" />
-              <span className="ticket-baggage__text">+ 3 500 ₽</span>
-            </button>
+            {props.baggagePrice && (
+              <button className={classWithModifiers("ticket-baggage__entry", hasBaggage && "active")} type="button" aria-selected={hasBaggage} onClick={() => setHasBaggage(true)}>
+                <Icon className="ticket-baggage__icon ticket-baggage__icon--baggage" name="baggageLg" />
+                <span className="ticket-baggage__text">+ {props.baggagePrice.toPrice("ru", "rub")}</span>
+              </button>
+            )}
           </div>
-          <div className="ticket-side__price">130 000 ₽</div>
+          <div className="ticket-side__price">{props.price.toPrice("ru", "rub")}</div>
           <button className={classWithModifiers("ticket-side-button", isDetailsExpanded && "pressed")} aria-details="toggle details" aria-pressed={isDetailsExpanded} onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}>
             <span className="ticket-side-button__text">Подробнее</span>
             <Icon className="ticket-side-button__icon" name="chevron" />
@@ -41,20 +63,6 @@ function Ticket(props: TicketProps) {
         <TicketPrepositions />
         <TicketTrace />
       </div>
-    </div>
-  )
-}
-
-function TicketInfo() {
-  return (
-    <div className="ticket-info">
-      <div className="ticket-info__header">
-        <div className="ticket-info__logos">
-          <img src={DDPNG} />
-        </div>
-        <TicketEvents />
-      </div>
-      <TicketTimeline />
     </div>
   )
 }
@@ -76,28 +84,43 @@ function TicketEvents() {
   )
 }
 
-function TicketTimeline() {
+
+interface TicketTimelineProps {
+  departureTime: Date
+  arrivalTime: Date
+  departurePoint: string
+  arrivalPoint: string
+  entries: {
+    type: "travel" | "transfer"
+    percentage: number
+  }[]
+}
+
+function TicketTimeline(props: TicketTimelineProps) {
+  const duration = props.departureTime.getTime() - props.arrivalTime.getTime()
+  const durationHours = Math.floor(duration / 1000 / 60 / 60)
+  const durationMinutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60))
   return (
     <div className="ticket-timeline">
       <div className="ticket-timeline__dates">
-        <span>20 Янв, Пн</span>
-        <span>21 Янв, Вт</span>
+        <span>{props.departureTime.toLocaleDateString("ru", { month: "short", day: "numeric", weekday: "short" })}</span>
+        <span>{props.arrivalTime.toLocaleDateString("ru", { month: "short", day: "numeric", weekday: "short" })}</span>
       </div>
       <div className="ticket-timeline__times">
-        <span>02:15</span>
+        <span>{props.departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</span>
         <div className="ticket-timeline-visual">
-          <div className="ticket-timeline-visual__text">25ч 55м в пути</div>
+          <div className="ticket-timeline-visual__text">{durationHours}ч {durationMinutes}м в пути</div>
           <div className="ticket-timeline-entries">
-            <div className="ticket-timeline-entries__travel" style={{ "--percentage": 50 }} />
-            <div className="ticket-timeline-entries__transfer" style={{ "--percentage": 15 }} />
-            <div className="ticket-timeline-entries__travel" style={{ "--percentage": 35 }} />
+            {props.entries.map((entry, index) => (
+              <div className={classWithModifiers("ticket-timeline-entries__entry", entry.type)} style={{ "--percentage": entry.percentage }} key={index} />
+            ))}
           </div>
         </div>
-        <span>17:20</span>
+        <span>{props.arrivalTime.toLocaleTimeString("ru", { timeStyle: "short" })}</span>
       </div>
       <div className="ticket-timeline__cities">
-        <span>Москва, Домодедово</span>
-        <span>Париж, Орли</span>
+        <span>{props.departurePoint}</span>
+        <span>{props.arrivalPoint}</span>
       </div>
     </div>
   )
