@@ -1,8 +1,10 @@
 // SCSS
 import "./AdminView.style.scss"
 
+import ErrorView from "components/TechnicalPages/ErrorView"
+import { UserType } from "interfaces/user"
 import { useSelector } from "react-redux"
-import { NavLink, Redirect, Route, Switch } from "react-router-dom"
+import { NavLink, Route, Switch } from "react-router-dom"
 
 import AdminAddArticleView from "./views/AdminAddArticleView"
 import AdminBlogView from "./views/AdminBlogView"
@@ -12,11 +14,11 @@ import AdminUsersView from "./views/AdminUsersView"
 
 function AdminView() {
   const user = useSelector(state => state.user)
+  if (!user.auth || ![UserType.Super, UserType.Admin, UserType.Editor].includes(user.type)) {
+    return <ErrorView code="404" />
+  }
   return (
-    <>
-      {!user.auth && (
-        <Redirect to="/" />
-      )}
+    <div className="admin-page">
       <header className="admin-header">
         <div className="topbar">
           <div className="topbar-menu">
@@ -37,7 +39,7 @@ function AdminView() {
           <Route path="/admin/edit-article/:articleId" exact render={props => <AdminEditArticleView articleId={props.match.params.articleId} />} />
         </Switch>
       </main>
-    </>
+    </div>
   )
 }
 

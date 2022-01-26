@@ -1,137 +1,142 @@
 @mixin Indent($padding-top-bottom: 0, $margin-top-bottom: 0) {
-  $side-indent: 2.5vw;
+	$side-indent: 2.5vw;
 
-  max-width: calc(1100px - #{$side-indent});
-  padding: $padding-top-bottom 2.5vw;
-  margin: $margin-top-bottom auto;
+	max-width: calc(1100px - #{$side-indent});
+	padding: $padding-top-bottom 2.5vw;
+	margin: $margin-top-bottom auto;
 }
 
 a {
-  text-decoration: none !important;
+	text-decoration: none !important;
 }
 
 button {
-  all: unset;
+	all: unset;
 
-  cursor: pointer;
+	cursor: pointer;
 }
 
 kbd {
-  background: #eee;
-  border-radius: 3px;
-  border: 1px solid #b4b4b4;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
-  color: #333;
-  display: inline-block;
-  font-size: .85em;
-  font-weight: 700;
-  padding: 2px 4px;
-  white-space: nowrap;
-  line-height: 1;
+	background: #eee;
+	border-radius: 3px;
+	border: 1px solid #b4b4b4;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+	color: #333;
+	display: inline-block;
+	font-size: .85em;
+	font-weight: 700;
+	padding: 2px 4px;
+	white-space: nowrap;
+	line-height: 1;
 }
 
 
+.admin-page {
+	display: flex;
+
+	main {
+		flex: 1;
+	}
+}
+
 .admin-header {
-  background: var(--color-blue);
+	height: 100vw;
+	background: var(--color-blue);
 }
 
 .topbar {
-  @include Indent(1.5em);
+	position: sticky;
+	top: 2.5em;
 
-  overflow: auto;
+	// padding-top: 2.5em;
+	padding-left: 1em;
 }
 
 .topbar-menu {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 1em;
+	display: grid;
 }
 
 .topbar-menu__link {
-  flex-shrink: 0;
+	flex-shrink: 0;
 
-  padding: 0.5em 1.25em;
-  background: rgba($color: white, $alpha: 0.1);
-  border: 2px solid transparent;
-  border-radius: 0.35em;
+	padding: 1em 2em;
+	background: rgba($color: white, $alpha: 0.1);
 
-  color: rgba($color: white, $alpha: 0.5);
+	color: rgba($color: white, $alpha: 0.5);
 
-  transition: 250ms ease color, 250ms ease border-color, 250ms ease background-color;
+	transition: 250ms ease color, 250ms ease border-color, 250ms ease background-color;
 
-  &:hover:not(&--active) {
-    border-color: rgba($color: white, $alpha: 0.25);
-    color: rgba($color: white, $alpha: 1);
-  }
+	&:hover:not(&--active) {
+		color: white;
+	}
 
-  &--active {
-    background: rgba($color: white, $alpha: 0.25);
-    color: rgba($color: white, $alpha: 1);
-  }
+	&--active {
+		background: linear-gradient(to right, rgba($color: white, $alpha: 0.75), white);
+		color: #333;
+	}
 }
 
 /* View Layout */
 
 .admin-view-layout {
-  display: grid;
-  gap: 3.5em;
+	display: grid;
+	gap: 3.5em;
 
-  @include Indent(0, 5em);
+	@include Indent(0, 5em);
 }
 
 .admin-view-layout__title {
-  padding-bottom: 0.25em;
-  margin: unset;
+	padding-bottom: 0.25em;
+	margin: unset;
 
-  border-bottom: 3px solid var(--color-blue);
+	border-bottom: 3px solid var(--color-blue);
 
-  font-size: 2.5rem;
+	font-size: 2.5rem;
 }
 
 .admin-view-layout__container {
-  display: grid;
-  gap: 2.5em;
+	display: grid;
+	gap: 2.5em;
 }
 
 /* Section Layout */
 
 .admin-section-layout {
-  display: grid;
+	display: grid;
 
-  border: 2px solid var(--color-border-third);
-  border-radius: 0.5em;
+	border: 2px solid var(--color-border-third);
+	border-radius: 0.5em;
 }
 
 .admin-section-layout__header {
-  padding: 0.75em;
-  margin: unset;
-  border-bottom: 2px solid var(--color-border-third);
+	padding: 0.75em;
+	margin: unset;
+	border-bottom: 2px solid var(--color-border-third);
 
-  font-size: 1rem;
+	font-size: 1rem;
 }
 
 .admin-section-layout__container {
-  padding: 1.25em;
+	padding: 1.25em;
 }
 
 /* Box Layout */
 
 .admin-box-layout {
-  display: grid;
+	display: grid;
 
-  border: 2px solid var(--color-border-third);
-  border-radius: 0.5em;
+	border: 2px solid var(--color-border-third);
+	border-radius: 0.5em;
 }
 
 .admin-box-layout__header {
-  padding: 0.75em;
-  margin: unset;
-  border-bottom: 2px solid var(--color-border-third);
+	padding: 0.75em;
+	margin: unset;
+	border-bottom: 2px solid var(--color-border-third);
 
-  font-size: 1rem;
+	font-size: 1rem;
 }
 
 .admin-box-layout__container {
-  padding: 1.25em;
+	padding: 1.25em;
 }
