@@ -37,13 +37,18 @@ function SearchResultContainer() {
   const origins = locationSearchParams.getAll("origin")
   const destinations = locationSearchParams.getAll("destination")
   const dates = locationSearchParams.getAll("date")
+  const travel_class = locationSearchParams.get("travel_class")
+
+  if (travel_class == null) {
+    throw new Error("There is no travel_class")
+  }
 
   if (!origins.length || !destinations.length || !origins.length) {
     throw new Error("There is a lack of data")
   }
 
   if ((origins.length !== destinations.length) || (origins.length !== dates.length)) {
-    throw new Error("There is a diffrent amount of trips")
+    throw new Error("There is a diffrent amount of data")
   }
 
   const trips: TripType[] = origins.map((origin, index) => ({
@@ -53,7 +58,7 @@ function SearchResultContainer() {
   }))
 
   return (
-    <SearchResultSessionProvider trips={trips}>
+    <SearchResultSessionProvider trips={trips} travel_class={travel_class}>
       <SearchResultTransportContainer />
     </SearchResultSessionProvider>
   )
@@ -62,11 +67,12 @@ function SearchResultContainer() {
 
 interface SearchResultSessionProviderProps {
   trips: TripType[]
+  travel_class: string
   children: any
 }
 // 2. Create session
 function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
-  const { error, payload, query } = useSuspenseQuery(postTicketsAir(props.trips))
+  const { error, payload, query } = useSuspenseQuery(postTicketsAir(props.trips, props.travel_class))
 
   // Update on location update
   const history = useHistory()
@@ -79,6 +85,7 @@ function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
   return (
     <searchSessionContext.Provider value={{ session: payload.session }}>
       {props.children}
+      1asdasdasdsas
     </searchSessionContext.Provider>
   )
 }

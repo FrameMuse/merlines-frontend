@@ -7,8 +7,8 @@ interface DropDownPassengersTravelClassProps {
 
 function DropDownPassengersTravelClass(props: DropDownPassengersTravelClassProps) {
   const localization: Record<SearchTravelClass, string> = {
-    economy: "Эконом",
-    business: "Бизнес",
+    1: "Эконом",
+    2: "Бизнес",
   }
   const ll = localization[props.name]
   const dispatch = useDispatch()

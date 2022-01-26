@@ -1,4 +1,6 @@
-export type SearchTravelClass = "business" | "economy"
+export enum SearchTravelClass {
+  economy = 1, business
+}
 
 export interface SearchPlace {
   id: number
@@ -32,7 +34,7 @@ export interface SearchDetails {
 
 const initialState: SearchDetails = {
   hasReturnDate: false,
-  travelClass: "economy",
+  travelClass: 1,
   routes: [{ arrivalPoint: null, departurePoint: null, departureDate: new Date, returnDate: null }],
   passengers: {
     adults: 1,

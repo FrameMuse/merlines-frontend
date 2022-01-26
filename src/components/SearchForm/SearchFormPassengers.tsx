@@ -8,8 +8,8 @@ export function SearchFormPassengers() {
       plural: ["пассажир", "пассажира", "пассажиров"]
     },
     travelClasses: {
-      economy: "эконом",
-      business: "бизнес",
+      1: "эконом",
+      2: "бизнес",
     }
   }
   const ll = localization

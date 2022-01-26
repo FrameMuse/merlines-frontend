@@ -17,8 +17,8 @@ function DropDownPassengers() {
         <DropDownPassengersItem name="babies" />
       </div>
       <div className="passengers-list__item">
-        <DropDownPassengersTravelClass name="economy" />
-        <DropDownPassengersTravelClass name="business" />
+        <DropDownPassengersTravelClass name={1} />
+        <DropDownPassengersTravelClass name={2} />
       </div>
     </div>
   )

@@ -43,7 +43,7 @@ export default function SearchResultAirContainer() {
           {results.map(ticket => (
             <Ticket
               id={ticket.id}
-              logos={ticket.trips.flatMap(trip => trip.segments.map(seg => getAirlineLogo(seg.marketing_airline.code)))}
+              logos={[...new Set(ticket.trips.flatMap(trip => trip.segments.map(seg => getAirlineLogo(seg.marketing_airline.code))))]}
               price={ticket.best_offer.price}
               baggagePrice={ticket.price_with_baggage}
               timelines={ticket.trips.map(trip => ({
@@ -84,6 +84,40 @@ export default function SearchResultAirContainer() {
                 ...ticket.best_offer,
                 image: getAgentLogo(ticket.best_offer.gate_id)
               }}
+              groups={ticket.trips.flatMap((trip, index) => {
+                const mainSeg = trip.segments[0]
+
+                const startTime = new Date(trip.start_time).getTime()
+                const endTime = new Date(trip.end_time).getTime()
+                const duration = new Date(endTime - startTime)
+
+                let type = ""
+                if (ticket.trips.length > 2) {
+                  type = "flight"
+                } else {
+                  type = index === 0 ? "departure" : "return"
+                }
+
+                return trip.segments.map((seg, segIndex) => ({
+                  duration,
+                  index,
+                  type: segIndex === 0 ? type : "transfer",
+                  trace: {
+                    flight: seg.flight,
+                    logo: getAirlineLogo(seg.marketing_airline.code),
+                    arrival: {
+                      title: seg.arrival.city.title + ", " + seg.arrival.title,
+                      code: seg.arrival.code,
+                      time: new Date(seg.arrival_time)
+                    },
+                    departure: {
+                      title: seg.departure.city.title + ", " + seg.departure.title,
+                      code: seg.departure.code,
+                      time: new Date(seg.departure_time)
+                    }
+                  }
+                }))
+              })}
               key={ticket.id} />
           ))}
           {(page * page_size) <= payload.count && (

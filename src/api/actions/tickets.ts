@@ -3,10 +3,10 @@ import { PaginationType } from "interfaces/Django"
 import { FiltersType, TicketType, TripType } from "interfaces/Search"
 
 // Create session
-export const postTicketsAir = (trips: TripType[]): Action<{ session: string }> => ({
+export const postTicketsAir = (trips: TripType[], travel_class: string, passengers?: Partial<{ adults: number, children: number, infants: number }>): Action<{ session: string }> => ({
   method: "POST",
   endpoint: "/tickets/air",
-  body: { trips }
+  body: { trips, travel_class, ...passengers }
 })
 
 export const getTicketsAir = (session: string, page: number, page_size: number, filters: Partial<FiltersType>): Action<PaginationType<TicketType> & { in_progress: boolean }> => ({
@@ -61,4 +61,19 @@ export const getTicketsAirFilters = (session: string): Action<{
 }> => ({
   method: "GET",
   endpoint: "/tickets/air/" + session + "/filters"
+})
+
+export const getTicketsAirSegmentAbout = (segmentId: number): Action<{
+  airline: number
+  aircraft: string
+  travel_class: number
+  is_free_food: number
+  is_free_entertainment: number
+  is_free_alcohol: number
+  is_free_beverage: number
+  is_free_power: number
+  is_free_wifi: number
+}> => ({
+  method: "GET",
+  endpoint: "/tickets/air/segment/" + segmentId + "/about"
 })

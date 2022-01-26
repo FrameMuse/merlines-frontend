@@ -14,6 +14,7 @@ interface TicketProps {
 
   bestOffer: TicketOfferProps
   timelines: TicketTimelineProps[]
+  groups: TicketTraceGroupProps[]
 }
 
 function Ticket(props: TicketProps) {
@@ -59,7 +60,7 @@ function Ticket(props: TicketProps) {
       </div>
       <div className="ticket__details" aria-expanded={isDetailsExpanded}>
         <TicketOffers bestOffer={props.bestOffer} />
-        <TicketTrace />
+        <TicketTrace groups={props.groups} />
       </div>
     </div>
   )
@@ -96,18 +97,16 @@ interface TicketTimelineProps {
 
 function TicketTimeline(props: TicketTimelineProps) {
   const duration = props.arrivalTime.getTime() - props.departureTime.getTime()
-  const durationHours = Math.floor(duration / 1000 / 60 / 60)
-  const durationMinutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60))
   return (
     <div className="ticket-timeline">
       <div className="ticket-timeline__dates">
-        <span>{props.departureTime.toLocaleDateString("ru", { month: "short", day: "numeric", weekday: "short" })}</span>
-        <span>{props.arrivalTime.toLocaleDateString("ru", { month: "short", day: "numeric", weekday: "short" })}</span>
+        <span>{getShortDate("ru", props.departureTime)}</span>
+        <span>{getShortDate("ru", props.arrivalTime)}</span>
       </div>
       <div className="ticket-timeline__times">
         <span>{props.departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</span>
         <div className="ticket-timeline-visual">
-          <div className="ticket-timeline-visual__text">{durationHours}ч {durationMinutes}м в пути</div>
+          <div className="ticket-timeline-visual__text">{getDetailedTime("ru", duration)} в пути</div>
           <div className="ticket-timeline-entries">
             {props.entries.map((entry, index) => (
               <div className={classWithModifiers("ticket-timeline-entries__entry", entry.type)} style={{ "--percentage": entry.percentage }} key={index} />
@@ -166,20 +165,27 @@ function TicketOffer(props: TicketOfferProps) {
   )
 }
 
-function TicketTrace() {
+
+interface TicketTraceProps {
+  groups: TicketTraceGroupProps[]
+}
+
+function TicketTrace(props: TicketTraceProps) {
   return (
     <div className="ticket-trace">
-      <TicketTraceGroup title="Туда" time="25ч 55м в пути" />
-      <TicketTraceGroup title="Пересадка в Стамбуле" time="25ч 55м в пути" type="transfer" />
+      {props.groups.map((group, index) => (
+        <TicketTraceGroup {...group} key={index} />
+      ))}
     </div>
   )
 }
 
 
 interface TicketTraceGroupProps {
-  title: string
-  time: string
-  type?: "transfer"
+  duration: Date
+  index: number
+  type: "departure" | "return" | "flight" | "transfer" | string
+  trace: TicketTraceTableProps
 }
 
 function TicketTraceGroup(props: TicketTraceGroupProps) {
@@ -190,12 +196,12 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
         {props.type === "transfer" && (
           <Icon className="ticket-trace__icon" name="transfer" />
         )}
-        <div className="ticket-trace__title">{props.title}</div>
-        <div className="ticket-trace__time">{props.time}</div>
+        <div className="ticket-trace__title">{{ departure: "Туда", return: "Обратно", flight: "Рейс " + (props.index + 1), transfer: "Пересадка в " + props.trace.departure.title }[props.type]}</div>
+        <div className="ticket-trace__time">{getDetailedTime("ru", props.duration)}</div>
       </div>
       <div className="ticket-trace__container">
-        <TicketTraceTable />
-        <div className="ticket-trace__entries">
+        <TicketTraceTable {...props.trace} />
+        {/* <div className="ticket-trace__entries">
           <div className="ticket-trace__entry">
             <Icon className="ticket-trace__icon" name="baggage" />
             - ручная кладь включена
@@ -210,8 +216,8 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
             <span>о рейсе</span>
             <Icon className={classWithModifiers("ticket-trace__icon", "chevron", isExpanded && "up")} name="chevron" />
           </button>
-        </div>
-        <div className={classWithModifiers("ticket-trace__details", isExpanded && "active")}>
+        </div> */}
+        {/* <div className={classWithModifiers("ticket-trace__details", isExpanded && "active")}>
           <div className="entries">
             <div className="entries__entry">
               <div className="entries__key">Перевозчик:</div>
@@ -250,32 +256,51 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
               <div className="entries__value">Нет</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
 }
 
-function TicketTraceTable() {
+
+interface TicketTraceTableProps {
+  logo: string
+  flight: string
+  departure: {
+    time: Date
+    title: string
+    code: string
+  }
+  arrival: {
+    time: Date
+    title: string
+    code: string
+  }
+}
+
+function TicketTraceTable(props: TicketTraceTableProps) {
+  const departureTime = new Date(props.departure.time)
+  const arrivalTime = new Date(props.arrival.time)
+  const duration = arrivalTime.getTime() - departureTime.getTime()
   return (
     <table className="ticket-trace-table">
       <thead>
         <tr>
-          <th>Airlines</th>
-          <th>рейс: 9U-172</th>
-          <th>5ч 5м</th>
+          <th><img className="ticket-trace-table__icon" src={props.logo} /></th>
+          <th>рейс: {props.flight}</th>
+          <th>{getDetailedTime("ru", duration)}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>02:15</td>
-          <td>Москва, аэропорт Домодедово <span className="weak">(DME)</span></td>
-          <td>20 января, Пн</td>
+          <td>{departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</td>
+          <td>{props.departure.title} <span className="weak">({props.departure.code})</span></td>
+          <td>{getShortDate("ru", departureTime)}</td>
         </tr>
         <tr>
-          <td>07:20</td>
-          <td>Стамбул, аэропорт Сабиха Гёкчен <span className="weak">(SAW)</span></td>
-          <td>20 января, Пн</td>
+          <td>{arrivalTime.toLocaleTimeString("ru", { timeStyle: "short" })}</td>
+          <td>{props.arrival.title} <span className="weak">({props.arrival.code})</span></td>
+          <td>{getShortDate("ru", arrivalTime)}</td>
         </tr>
       </tbody>
     </table>
@@ -283,3 +308,14 @@ function TicketTraceTable() {
 }
 
 export default Ticket
+
+function getDetailedTime(lang: string, date: Date | string | number) {
+  const duration = new Date(date).getTime()
+  const hours = Math.floor(duration / 1000 / 60 / 60)
+  const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60))
+  return `${hours}ч, ${minutes}м`
+}
+
+function getShortDate(lang: string, date: Date) {
+  return date.toLocaleDateString(lang, { month: "short", day: "numeric", weekday: "short" })
+}

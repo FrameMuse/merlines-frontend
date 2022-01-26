@@ -68,7 +68,7 @@ function SearchForm() {
       date: route.departureDate.toISOString().slice(0, 10),
       // return_date: route.departureDate?.toISOString().slice(0, 10),
       // transport: "air",
-
+      travel_class: search.travelClass
       // ...search.passengers
     })
 

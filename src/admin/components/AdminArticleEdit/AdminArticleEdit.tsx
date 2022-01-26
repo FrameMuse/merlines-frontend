@@ -141,6 +141,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
       <AdminArticleEditor {...articleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />
       <AdminArticlePreview {...articleData} hidden={!showPreview} author={props.author} />
       <div>
+        <AdminButton onClick={onSubmit} disabled={error}>Сохранить статью</AdminButton>
         <AdminButton onClick={onSubmit} disabled={error}>Опубликовать статью</AdminButton>
       </div>
     </div>

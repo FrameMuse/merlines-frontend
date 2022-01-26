@@ -15,7 +15,7 @@ import AdminUsersView from "./views/AdminUsersView"
 function AdminView() {
   const user = useSelector(state => state.user)
   if (!user.auth || ![UserType.Super, UserType.Admin, UserType.Editor].includes(user.type)) {
-    return <ErrorView code="404" />
+    // return <ErrorView code="404" />
   }
   return (
     <div className="admin-page">

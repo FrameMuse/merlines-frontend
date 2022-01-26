@@ -3,7 +3,7 @@
 
 	max-width: calc(1100px - #{$side-indent});
 	padding: $padding-top-bottom 2.5vw;
-	margin: $margin-top-bottom auto;
+	margin: $margin-top-bottom 0;
 }
 
 a {
@@ -40,7 +40,7 @@ kbd {
 }
 
 .admin-header {
-	height: 100vw;
+	min-height: 100vh;
 	background: var(--color-blue);
 }
 
