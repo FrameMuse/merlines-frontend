@@ -13,8 +13,9 @@ interface TicketProps {
   id: number
   baggagePrice?: number
   price: number
-  logos: string[]
+  logo: string
 
+  bestOffer: TicketOfferProps
   timelines: TicketTimelineProps[]
 }
 
@@ -27,9 +28,7 @@ function Ticket(props: TicketProps) {
         <div className="ticket-info">
           <div className="ticket-info__header">
             <div className="ticket-info__logos">
-              {props.logos.map((logo, index) => (
-                <img src={logo} key={index} />
-              ))}
+              <img src={props.logo} />
             </div>
             <TicketEvents />
           </div>
@@ -60,7 +59,7 @@ function Ticket(props: TicketProps) {
         </div>
       </div>
       <div className="ticket__details" aria-expanded={isDetailsExpanded}>
-        <TicketPrepositions />
+        <TicketOffers bestOffer={props.bestOffer} />
         <TicketTrace />
       </div>
     </div>
@@ -97,7 +96,7 @@ interface TicketTimelineProps {
 }
 
 function TicketTimeline(props: TicketTimelineProps) {
-  const duration = props.departureTime.getTime() - props.arrivalTime.getTime()
+  const duration = props.arrivalTime.getTime() - props.departureTime.getTime()
   const durationHours = Math.floor(duration / 1000 / 60 / 60)
   const durationMinutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60))
   return (
@@ -126,13 +125,16 @@ function TicketTimeline(props: TicketTimelineProps) {
   )
 }
 
-function TicketPrepositions() {
+
+interface TicketOffersProps {
+  bestOffer: TicketOfferProps
+}
+
+function TicketOffers(props: TicketOffersProps) {
   return (
     <div className="ticket-prepositions">
       <div className="ticket-prepositions__list">
-        <TicketPreposition price={130000} service={{ title: "mego.travel", image: MegaPNG }} />
-        <TicketPreposition price={130000} service={{ title: "mego.travel", image: MegaPNG }} />
-        <TicketPreposition price={130000} service={{ title: "mego.travel", image: MegaPNG }} />
+        <TicketOffer {...props.bestOffer} />
       </div>
       <div className="ticket-prepositions__more">
         <span>ещё 7 предложений</span>
@@ -143,15 +145,13 @@ function TicketPrepositions() {
 }
 
 
-interface TicketPrepositionProps {
+interface TicketOfferProps {
   price: number
-  service: {
-    title: string
-    image: string
-  }
+  title: string
+  image: string
 }
 
-function TicketPreposition(props: TicketPrepositionProps) {
+function TicketOffer(props: TicketOfferProps) {
   return (
     <div className="ticket-preposition">
       <div className="ticket-preposition__group">
@@ -159,8 +159,8 @@ function TicketPreposition(props: TicketPrepositionProps) {
         <div className="ticket-preposition__desc">цена за 1 взрослого</div>
       </div>
       <div className="ticket-preposition__group">
-        <img className="ticket-preposition__image" src={props.service.image} />
-        <div className="ticket-preposition__desc">на {props.service.title}</div>
+        <img className="ticket-preposition__image" src={props.image} />
+        <div className="ticket-preposition__desc">на {props.title}</div>
       </div>
       <button className="ticket-prepositions__submit">Выбрать</button>
     </div>

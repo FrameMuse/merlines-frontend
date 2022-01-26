@@ -62,8 +62,6 @@ function SearchForm() {
       return
     }
 
-
-
     const searchQuery = createQuery({
       origin: route.departurePoint.id,
       destination: route.arrivalPoint.id,
@@ -74,8 +72,7 @@ function SearchForm() {
       // ...search.passengers
     })
 
-    history.push("/error")
-    history.replace({
+    history.push({
       pathname: "/search",
       search: "?" + searchQuery,
     })

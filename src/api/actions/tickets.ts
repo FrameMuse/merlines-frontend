@@ -60,5 +60,5 @@ export const getTicketsAirFilters = (session: string): Action<{
   }[]
 }> => ({
   method: "GET",
-  endpoint: "/tickets/air/" + session
+  endpoint: "/tickets/air/" + session + "/filters"
 })

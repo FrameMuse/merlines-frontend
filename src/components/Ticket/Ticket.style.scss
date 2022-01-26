@@ -57,11 +57,8 @@
 	gap: 0.5em;
 
 	img {
-		width: 1.5em;
-		height: 1.5em;
-
-		border-radius: 50%;
-		object-fit: contain;
+		// width: 1.5em;
+		height: 1em;
 	}
 }
 
@@ -339,6 +336,10 @@
 .ticket-preposition__desc {
 	color: #A1A1A1;
 	font-weight: 400;
+}
+
+.ticket-preposition__image {
+	height: 2em;
 }
 
 /* Trace*/

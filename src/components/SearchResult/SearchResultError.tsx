@@ -1,4 +1,4 @@
-import "./error.scss"
+import "../TechnicalPages/error.scss"
 
 function SearchResultTicketError() {
   return (

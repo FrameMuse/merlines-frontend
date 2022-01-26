@@ -1,39 +1,31 @@
 import "./ticket-list.scss"
 
-import { getTicketsAir, getTicketsAirFilters, postTicketsAir } from "api/actions/tickets"
-import SearchResultError from "components/TechnicalPages/SearchResultError"
-import Ticket from "components/Ticket/Ticket"
-import { FiltersType, TripType } from "interfaces/Search"
-import { createContext, Suspense, useContext, useState } from "react"
-import { useQuery, useSuspenseQuery } from "react-fetching-library"
-import { useLocation } from "react-router-dom"
+import { postTicketsAir } from "api/actions/tickets"
+import ErrorBoundary from "components/services/ErrorBoudary"
+import { TripType } from "interfaces/Search"
+import { createContext, Suspense, useEffect } from "react"
+import { useSuspenseQuery } from "react-fetching-library"
+import { useHistory, useLocation } from "react-router-dom"
 
-import Icon from "../common/Icon"
-import Loader from "../Loader/Loader"
-import LoaderClose from "../Loader/LoaderClose"
 import SearchForm from "../SearchForm/SearchForm"
-import SearchFormMini from "../SearchForm/SearchFormMini"
-import SearchFilters from "./SearchResultFilters/SearchFilters"
-import SearchPriceFilter from "./SearchResultFilters/SearchPriceFilter"
-import SearchResultSubscribePrice from "./SearchResultSubscribePrice/SearchResultSubscribePrice"
-import SearchResultTicketList from "./SearchResultTicketList/SearchTicketList"
-import SearchResultWeekPrice from "./SearchResultWeekPrice/SearchResultWeekPrice"
-
-
-function getAirlineLogo(code: string | number) {
-  return `https://pics.avs.io/gates/50/50/${code}.png`
-}
+import SearchResultAirContainer from "./SearchResultAirContainer"
+import SearchResultTicketError from "./SearchResultError"
+import SearchResultLoader from "./SearchResultLoader"
 
 // Request session
-const searchSessionContext = createContext({ session: "" })
+export const searchSessionContext = createContext({ session: "" })
 
 function SearchResult() {
   return (
     <>
-      <section className="main-form">
+      <section className="main-form main-form--small">
         <SearchForm />
       </section>
-      <SearchResultContainer />
+      <ErrorBoundary fallback={<SearchResultTicketError />}>
+        <Suspense fallback={<SearchResultLoader />}>
+          <SearchResultContainer />
+        </Suspense>
+      </ErrorBoundary>
     </>
   )
 }
@@ -42,47 +34,46 @@ function SearchResultContainer() {
   const location = useLocation()
   const locationSearchParams = new URLSearchParams(location.search)
 
-  const origin = locationSearchParams.get("origin")
-  const destination = locationSearchParams.get("destination")
-  const date = locationSearchParams.get("date")
+  const origins = locationSearchParams.getAll("origin")
+  const destinations = locationSearchParams.getAll("destination")
+  const dates = locationSearchParams.getAll("date")
 
-  if (!origin || !destination || !date) {
-    return (
-      <SearchResultError />
-    )
+  if (!origins.length || !destinations.length || !origins.length) {
+    throw new Error("There is a lack of data")
   }
 
-  const trips = [{
+  if ((origins.length !== destinations.length) || (origins.length !== dates.length)) {
+    throw new Error("There is a diffrent amount of trips")
+  }
+
+  const trips: TripType[] = origins.map((origin, index) => ({
     origin: +origin,
-    destination: +destination,
-    date
-  }]
+    destination: +destinations[index],
+    date: dates[index]
+  }))
 
   return (
     <SearchResultSessionProvider trips={trips}>
-      <Suspense fallback={<Loader />}>
-        <SearchResultTicketsContainer />
-      </Suspense>
+      <SearchResultTransportContainer />
     </SearchResultSessionProvider>
   )
 }
 
 
-interface SearchResultBProps {
+interface SearchResultSessionProviderProps {
   trips: TripType[]
   children: any
 }
-
 // 2. Create session
-function SearchResultSessionProvider(props: SearchResultBProps) {
-  const { error, loading, payload } = useQuery(postTicketsAir(props.trips))
+function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
+  const { error, payload, query } = useSuspenseQuery(postTicketsAir(props.trips))
 
-  if (loading) {
-    return <Loader />
-  }
+  // Update on location update
+  const history = useHistory()
+  useEffect(() => history.listen(() => query()), [history])
 
   if (error || !payload) {
-    return <SearchResultError />
+    throw new Error()
   }
 
   return (
@@ -93,67 +84,11 @@ function SearchResultSessionProvider(props: SearchResultBProps) {
 }
 
 // 3. Determine what type transport is used and get relevant tickets
-function SearchResultTicketsContainer() {
+function SearchResultTransportContainer() {
   return (
     <SearchResultAirContainer />
   )
 }
-
-function SearchResultAirContainer() {
-  const [page, setPage] = useState(1)
-  const [page_size] = useState(5)
-  const [filters, setFilters] = useState<Partial<FiltersType>>({})
-
-  const { session } = useContext(searchSessionContext)
-  const { error, payload } = useSuspenseQuery(getTicketsAir(session, page, page_size, filters))
-
-  if (error || !payload) return <SearchResultError />
-
-  return (
-    <section className="ticket-list">
-      <div className="ticket-list__container">
-        <SearchResultWeekPrice />
-        <SearchResultAirFiltersContainer />
-        <div className="ticket-list__content">
-          {payload.results.map(ticket => (
-            <Ticket
-              id={ticket.id}
-              logos={[getAirlineLogo(ticket.best_offer.gate_id)]}
-              price={ticket.best_offer.price}
-              baggagePrice={ticket.price_with_baggage}
-              timelines={ticket.trips[0].segments.map(seg => ({
-                arrivalTime: new Date(seg.arrival_time),
-                departureTime: new Date(seg.departure_time),
-                arrivalPoint: seg.arrival.city + ", " + seg.arrival.title,
-                departurePoint: seg.departure.city + ", " + seg.departure.title,
-                entries: []
-              }))}
-              key={ticket.id}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function SearchResultAirFiltersContainer() {
-  const { session } = useContext(searchSessionContext)
-  const { error, payload } = useSuspenseQuery(getTicketsAirFilters(session))
-
-  if (error || !payload) return <>No filters</>
-
-  return (
-    <div className="ticket-list__left">
-      <SearchResultSubscribePrice />
-      <div className="filters">
-        <SearchPriceFilter />
-        <SearchFilters />
-      </div>
-    </div>
-  )
-}
-
 
 // function SearchResultA() {
 //   const [isSearchFormOpen, setIsSearchFormOpen] = useState(true)

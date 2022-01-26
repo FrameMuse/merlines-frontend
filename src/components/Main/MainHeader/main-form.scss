@@ -17,6 +17,10 @@
   @media #{$media-xl} {
     padding-top: 125px;
   }
+
+	&--small {
+		padding: 2em 0;
+	}
 }
 
 .main-form__container {

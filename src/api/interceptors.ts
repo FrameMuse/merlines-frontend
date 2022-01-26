@@ -20,21 +20,6 @@ export function requestInterceptor() {
 }
 export function responseInterceptor() {
   return async (_action: Action, response: QueryResponse<APIResponseError>) => {
-    try {
-      if (process.env.NODE_ENV === "development") {
-        toast.error(JSON.stringify(response.payload?.error.detail))
-
-        for (const field of Object.values(response.payload?.error.detail) as any) {
-          for (const fieldError of Object.values(field) as any) {
-            toast.error(fieldError.message)
-          }
-        }
-      }
-    } catch (error) {
-      console.error(error)
-    }
-
-
     if (response.payload == null && response.status !== 204) {
       return {
         ...response,
@@ -44,6 +29,20 @@ export function responseInterceptor() {
 
     if (response.payload?.error) {
       toast.error(response.payload.error.code)
+
+      if (process.env.NODE_ENV === "development") {
+        try {
+          for (const field of Object.values(response.payload?.error.detail) as any) {
+            for (const fieldError of Object.values(field) as any) {
+              toast.error(fieldError.message)
+            }
+          }
+        } catch (error) {
+          if (response.payload.error.detail != null) {
+            toast.error(JSON.stringify(response.payload.error.detail))
+          }
+        }
+      }
 
       return {
         ...response,
