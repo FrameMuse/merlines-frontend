@@ -63,16 +63,20 @@ export const getTicketsAirFilters = (session: string): Action<{
   endpoint: "/tickets/air/" + session + "/filters"
 })
 
+enum FreeEntry {
+  no, free, paid
+}
+
 export const getTicketsAirSegmentAbout = (segmentId: number): Action<{
   airline: number
   aircraft: string
   travel_class: number
-  is_free_food: number
-  is_free_entertainment: number
-  is_free_alcohol: number
-  is_free_beverage: number
-  is_free_power: number
-  is_free_wifi: number
+  food: FreeEntry | null
+  entertainment: FreeEntry | null
+  alcohol: FreeEntry | null
+  beverage: FreeEntry | null
+  power: FreeEntry | null
+  wifi: FreeEntry | null
 }> => ({
   method: "GET",
   endpoint: "/tickets/air/segment/" + segmentId + "/about"

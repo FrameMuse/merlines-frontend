@@ -1,8 +1,10 @@
 // SCSS
 import "./Ticket.style.scss"
 
+import { getTicketsAirSegmentAbout } from "api/actions/tickets"
 import Icon from "components/common/Icon"
 import { useState } from "react"
+import { useQuery } from "react-fetching-library"
 import { classWithModifiers } from "utils"
 
 
@@ -183,9 +185,12 @@ function TicketTrace(props: TicketTraceProps) {
 
 interface TicketTraceGroupProps {
   duration: Date
+  id: number
   index: number
   type: "departure" | "return" | "flight" | "transfer" | string
   trace: TicketTraceTableProps
+  handbagsWeight: number | null
+  baggageWeight: number | null
 }
 
 function TicketTraceGroup(props: TicketTraceGroupProps) {
@@ -201,62 +206,92 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
       </div>
       <div className="ticket-trace__container">
         <TicketTraceTable {...props.trace} />
-        {/* <div className="ticket-trace__entries">
+        <div className="ticket-trace__entries">
           <div className="ticket-trace__entry">
             <Icon className="ticket-trace__icon" name="baggage" />
             - ручная кладь включена
-            <span className="weak">(8 кг)</span>
+            {props.handbagsWeight && (
+              <span className="weak">({props.handbagsWeight} кг)</span>
+            )}
           </div>
-          <div className="ticket-trace__entry">
-            <Icon className="ticket-trace__icon ticket-trace__icon--baggageLg" name="baggageLg" />
-            - багаж включён
-            <span className="weak">(20 кг)</span>
-          </div>
+          {props.baggageWeight && (
+            <div className="ticket-trace__entry">
+              <Icon className="ticket-trace__icon ticket-trace__icon--baggageLg" name="baggageLg" />
+              - багаж включён
+              <span className="weak">({props.baggageWeight} кг)</span>
+            </div>
+          )}
           <button className={classWithModifiers("ticket-trace__button", isExpanded && "active")} onClick={() => setIsExpanded(!isExpanded)}>
             <span>о рейсе</span>
             <Icon className={classWithModifiers("ticket-trace__icon", "chevron", isExpanded && "up")} name="chevron" />
           </button>
-        </div> */}
-        {/* <div className={classWithModifiers("ticket-trace__details", isExpanded && "active")}>
-          <div className="entries">
-            <div className="entries__entry">
-              <div className="entries__key">Перевозчик:</div>
-              <div className="entries__value">Аэрофлот</div>
-            </div>
-            <div className="entries__entry">
-              <div className="entries__key">Еда:</div>
-              <div className="entries__value">Бесплатно</div>
-            </div>
-            <div className="entries__entry">
-              <div className="entries__key">Напитки:</div>
-              <div className="entries__value">Платно</div>
-            </div>
-            <div className="entries__entry">
-              <div className="entries__key">Транспорт:</div>
-              <div className="entries__value">AIRBUS A321-100/200</div>
-            </div>
-            <div className="entries__entry">
-              <div className="entries__key">Развлечения:</div>
-              <div className="entries__value">Нет</div>
-            </div>
-            <div className="entries__entry">
-              <div className="entries__key">Зарядка:</div>
-              <div className="entries__value">Есть</div>
-            </div>
-            <div className="entries__entry">
-              <div className="entries__key">Класс:</div>
-              <div className="entries__value">Бизнес</div>
-            </div>
-            <div className="entries__entry">
-              <div className="entries__key">Алкоголь:</div>
-              <div className="entries__value">Бесплатно</div>
-            </div>
-            <div className="entries__entry">
-              <div className="entries__key">Wi-Fi:</div>
-              <div className="entries__value">Нет</div>
-            </div>
+        </div>
+        {isExpanded && (
+          <About segmentId={props.id} />
+        )}
+      </div>
+    </div>
+  )
+}
+
+function About(props: { segmentId: number }) {
+  const { error, loading, payload } = useQuery(getTicketsAirSegmentAbout(props.segmentId))
+  if (loading) return <>Loading...</>
+  if (error || !payload) return <>Error</>
+  const freeEntry = ["Нет", "Бесплатно", "Платно"]
+  return (
+    <div className="ticket-trace__details">
+      <div className="entries">
+        <div className="entries__entry">
+          <div className="entries__key">Перевозчик:</div>
+          <div className="entries__value">{payload.airline}</div>
+        </div>
+        {payload.food && (
+          <div className="entries__entry">
+            <div className="entries__key">Еда:</div>
+            <div className="entries__value">{freeEntry[payload.food]}</div>
           </div>
-        </div> */}
+        )}
+        {payload.beverage && (
+          <div className="entries__entry">
+            <div className="entries__key">Напитки:</div>
+            <div className="entries__value">{freeEntry[payload.beverage]}</div>
+          </div>
+        )}
+        <div className="entries__entry">
+          <div className="entries__key">Транспорт:</div>
+          <div className="entries__value">{payload.aircraft}</div>
+        </div>
+        {payload.entertainment && (
+          <div className="entries__entry">
+            <div className="entries__key">Развлечения:</div>
+            <div className="entries__value">{freeEntry[payload.entertainment]}</div>
+          </div>
+        )}
+        {payload.power && (
+          <div className="entries__entry">
+            <div className="entries__key">Зарядка:</div>
+            <div className="entries__value">{freeEntry[payload.power]}</div>
+          </div>
+        )}
+        {payload.travel_class && (
+          <div className="entries__entry">
+            <div className="entries__key">Класс:</div>
+            <div className="entries__value">{payload.travel_class ? "Бизнес" : "Эконом"}</div>
+          </div>
+        )}
+        {payload.alcohol && (
+          <div className="entries__entry">
+            <div className="entries__key">Алкоголь:</div>
+            <div className="entries__value">{freeEntry[payload.alcohol]}</div>
+          </div>
+        )}
+        {payload.wifi && (
+          <div className="entries__entry">
+            <div className="entries__key">Wi-Fi:</div>
+            <div className="entries__value">{freeEntry[payload.wifi]}</div>
+          </div>
+        )}
       </div>
     </div>
   )

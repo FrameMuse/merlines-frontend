@@ -85,8 +85,6 @@ export default function SearchResultAirContainer() {
                 image: getAgentLogo(ticket.best_offer.gate_id)
               }}
               groups={ticket.trips.flatMap((trip, index) => {
-                const mainSeg = trip.segments[0]
-
                 const startTime = new Date(trip.start_time).getTime()
                 const endTime = new Date(trip.end_time).getTime()
                 const duration = new Date(endTime - startTime)
@@ -101,7 +99,10 @@ export default function SearchResultAirContainer() {
                 return trip.segments.map((seg, segIndex) => ({
                   duration,
                   index,
+                  id: seg.id,
                   type: segIndex === 0 ? type : "transfer",
+                  baggageWeight: seg.baggage_weight,
+                  handbagsWeight: seg.handbags_weight,
                   trace: {
                     flight: seg.flight,
                     logo: getAirlineLogo(seg.marketing_airline.code),

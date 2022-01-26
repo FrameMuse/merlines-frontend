@@ -459,12 +459,8 @@
 }
 
 .ticket-trace__details {
-	display: none;
+	display: grid;
 	padding: 1.25em 0.75em;
-
-	&--active {
-		display: grid;
-	}
 }
 
 /* Trace Table */

@@ -43,6 +43,7 @@ export interface TicketType {
       end_time: string
       segments: [
         {
+          id: number
           departure: {
             id: number
             code: string
