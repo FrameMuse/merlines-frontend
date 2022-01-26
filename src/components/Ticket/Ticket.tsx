@@ -5,15 +5,12 @@ import Icon from "components/common/Icon"
 import { useState } from "react"
 import { classWithModifiers } from "utils"
 
-// DD
-import MegaPNG from "./mega.png"
-
 
 interface TicketProps {
   id: number
   baggagePrice?: number
   price: number
-  logo: string
+  logos: string[]
 
   bestOffer: TicketOfferProps
   timelines: TicketTimelineProps[]
@@ -28,11 +25,13 @@ function Ticket(props: TicketProps) {
         <div className="ticket-info">
           <div className="ticket-info__header">
             <div className="ticket-info__logos">
-              <img src={props.logo} />
+              {props.logos.map((logo, index) => (
+                <img src={logo} key={index} />
+              ))}
             </div>
             <TicketEvents />
           </div>
-          <div>
+          <div className="ticket-info__timelines">
             {props.timelines.map((timeline, index) => (
               <TicketTimeline {...timeline} key={index} />
             ))}

@@ -1,7 +1,7 @@
 import { getTicketsAir, getTicketsAirFilters } from "api/actions/tickets"
 import Ticket from "components/Ticket/Ticket"
-import { FiltersType } from "interfaces/Search"
-import { useContext, useState } from "react"
+import { FiltersType, TicketType } from "interfaces/Search"
+import { useContext, useEffect, useState } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 
 import { searchSessionContext } from "./SearchResult"
@@ -13,6 +13,8 @@ import useTicketsQuery from "./useTicketsQuery"
 
 
 export default function SearchResultAirContainer() {
+  const [results, setResults] = useState<TicketType[]>([])
+
   const [page, setPage] = useState(1)
   const [page_size] = useState(5)
   const [filters, setFilters] = useState<Partial<FiltersType>>({})
@@ -20,8 +22,17 @@ export default function SearchResultAirContainer() {
   const { session } = useContext(searchSessionContext)
   const { error, payload } = useTicketsQuery(getTicketsAir(session, page, page_size, filters))
 
-  if (error || !payload)
+  if (error || !payload) {
     throw new Error()
+  }
+
+  useEffect(() => {
+    if (payload.in_progress) {
+      setResults(payload.results)
+    } else {
+      setResults(oldPayload => [...oldPayload, ...payload.results])
+    }
+  }, [payload])
 
   return (
     <section className="ticket-list">
@@ -29,25 +40,55 @@ export default function SearchResultAirContainer() {
         <SearchResultWeekPrice />
         <SearchResultAirFiltersContainer />
         <div className="ticket-list__content">
-          {payload.results.map(ticket => (
+          {results.map(ticket => (
             <Ticket
               id={ticket.id}
-              logo={getAirlineLogo(ticket.best_offer.gate_id)}
+              logos={ticket.trips.flatMap(trip => trip.segments.map(seg => getAirlineLogo(seg.marketing_airline.code)))}
               price={ticket.best_offer.price}
               baggagePrice={ticket.price_with_baggage}
-              timelines={ticket.trips[0].segments.map(seg => ({
-                arrivalTime: new Date(seg.arrival_time),
-                departureTime: new Date(seg.departure_time),
-                arrivalPoint: seg.arrival.city.title,
-                departurePoint: seg.departure.city.title,
-                entries: []
+              timelines={ticket.trips.map(trip => ({
+                departureTime: new Date(trip.start_time),
+                arrivalTime: new Date(trip.end_time),
+                departurePoint: trip.segments[0].departure.city.title + ", " + trip.segments[0].departure.title,
+                arrivalPoint: trip.segments.slice(-1)[0].arrival.city.title + ", " + trip.segments.slice(-1)[0].arrival.title,
+                entries: trip.segments.flatMap((seg, index) => {
+                  const startTime = new Date(trip.start_time).getTime()
+                  const endTime = new Date(trip.end_time).getTime()
+                  const duration = endTime - startTime
+
+                  const arrivalTime = new Date(seg.arrival_time).getTime()
+                  const departureTime = new Date(seg.departure_time).getTime()
+                  const N = arrivalTime - departureTime
+
+                  const percentage = N / duration * 100
+
+
+                  const nextSeg = trip.segments[index + 1]
+
+                  if (trip.segments.length === index || !nextSeg) {
+                    return { type: "travel", percentage }
+                  }
+
+                  const nextArrivalTime = new Date(nextSeg.arrival_time).getTime()
+                  const nextDepartureTime = new Date(nextSeg.departure_time).getTime()
+                  const nextN = nextDepartureTime - arrivalTime
+                  const nextPercentage = nextN / duration * 100
+
+                  return [
+                    { type: "travel", percentage },
+                    { type: "transfer", percentage: nextPercentage }
+                  ]
+                })
               }))}
               bestOffer={{
                 ...ticket.best_offer,
-                image: getAirlineLogo(ticket.best_offer.gate_id)
+                image: getAgentLogo(ticket.best_offer.gate_id)
               }}
               key={ticket.id} />
           ))}
+          {(page * page_size) <= payload.count && (
+            <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>More</button>
+          )}
         </div>
       </div>
     </section>
@@ -74,6 +115,10 @@ function SearchResultAirFiltersContainer() {
 }
 
 
-function getAirlineLogo(code: string | number) {
+function getAgentLogo(code: string | number) {
   return `https://pics.avs.io/gates/200/50/${code}.png`
+}
+
+function getAirlineLogo(code: string | number) {
+  return `https://pics.avs.io/al_square/36/36/${code}.png`
 }

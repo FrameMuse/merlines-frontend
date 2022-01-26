@@ -57,9 +57,17 @@
 	gap: 0.5em;
 
 	img {
-		// width: 1.5em;
-		height: 1em;
+		width: 2em;
+		height: 2em;
+
+		border-radius: 50%;
+		object-fit: contain;
 	}
+}
+
+.ticket-info__timelines {
+	display: grid;
+	row-gap: 1em;
 }
 
 /* Events */
@@ -107,6 +115,14 @@
 .ticket-timeline__cities {
 	display: flex;
 	justify-content: space-between;
+
+	span {
+		// max-width: 35%;
+		// white-space: nowrap;
+
+		// overflow: hidden;
+		// text-overflow: ellipsis;
+	}
 }
 
 .ticket-timeline__times {
