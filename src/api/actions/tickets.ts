@@ -20,17 +20,14 @@ export const getTicketsAirFilters = (session: string): Action<{
   transfers: number[]
   arrival_dates: string[][]
   travel_times: {
-    list: {
-      min: number
-      max: number
-    }[]
-    type: "range" | "checkbox"
-  }
+    min: number
+    max: number
+  }[]
   transfer_times: {
     min: number
     max: number
   }[]
-  baggage_min_price: number
+  baggage_min_price: number | null
   airlines: {
     id: number
     code: string

@@ -21,11 +21,11 @@ function SearchResult() {
       <section className="main-form main-form--small">
         <SearchForm />
       </section>
-      <ErrorBoundary fallback={<SearchResultTicketError />}>
-        <Suspense fallback={<SearchResultLoader />}>
+      <Suspense fallback={<SearchResultLoader />}>
+        <ErrorBoundary fallback={<SearchResultTicketError />}>
           <SearchResultContainer />
-        </Suspense>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </Suspense>
     </>
   )
 }

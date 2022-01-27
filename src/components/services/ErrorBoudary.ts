@@ -15,8 +15,13 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     errorInfo: null
   }
 
+  static getDerivedStateFromError(error: Error) {
+    // Update state so the next render will show the fallback UI.
+    return { error }
+  }
+
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    this.setState({ error, errorInfo })
+    // this.setState({ error, errorInfo })
   }
 
   render() {

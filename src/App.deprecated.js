@@ -34,9 +34,6 @@ function DEPRECATED__App__() {
       <Header />
       <main id="main-content" className="main">
         {searchData.isOpenRedirect && <TicketRedirect />}
-        {tickets && isOpenFilter && (
-          <MobileTicketFilter setIsOpenFilter={setIsOpenFilter} />
-        )}
         <Route path={`${routes.resetPasswordConfirm}/:uid/:token`}>
           <PopupPasswordResetConfirm />
         </Route>

@@ -1,5 +1,6 @@
-import React, { ChangeEvent, ReactElement, useState } from "react"
+import React, { ChangeEvent, ReactElement, useContext, useEffect, useState } from "react"
 
+import { searchFiltersContext } from "../SearchFilters"
 import SearchFilterCheckbox, { SearchFilterCheckboxProps } from "./SearchFilterCheckbox"
 
 
@@ -9,13 +10,14 @@ interface SearchFilterCheckboxesProps {
 }
 
 function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
-  const [checks, setChecks] = useState<Record<string, boolean>>({ all: true })
+  const [filters, setFilters] = useContext(searchFiltersContext)
+  const [checks, setChecks] = useState<Record<string, boolean>>({})
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const input = event.currentTarget
 
     if (input.name === "all") {
-      setChecks({ all: true })
+      setChecks({})
       return
     }
 
@@ -24,12 +26,20 @@ function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
       return
     }
 
-    setChecks({ ...checks, all: false, [input.name]: input.checked })
+    setChecks({ ...checks, [input.name]: input.checked })
   }
+
+  useEffect(() => {
+    setFilters(({ ...filters, [props.name]: Object.keys(checks).join(",") }))
+  }, [props.name, checks])
+
+  useEffect(() => {
+    if (Object.keys(filters).length === 0) setChecks({})
+  }, [filters])
 
   return (
     <div className="search-checkboxes">
-      <SearchFilterCheckbox children={"Все"} name={"all"} checked={checks.all} onChange={onChange} />
+      <SearchFilterCheckbox name="all" checked={Object.keys(checks).length === 0} onChange={onChange}>{"Все"}</SearchFilterCheckbox>
       {React.Children.map(props.children, child => (
         <SearchFilterCheckbox {...child.props} checked={!!checks[child.props.name]} onChange={onChange} key={child.props.name} />
       ))}

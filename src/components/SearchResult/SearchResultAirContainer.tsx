@@ -1,12 +1,17 @@
 import { getTicketsAir, getTicketsAirFilters } from "api/actions/tickets"
 import Ticket from "components/Ticket/Ticket"
 import { FiltersType, TicketType } from "interfaces/Search"
-import { useContext, useEffect, useState } from "react"
+import { Dispatch, useContext, useEffect, useState } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
+import { pluralize } from "utils"
 
 import { searchSessionContext } from "./SearchResult"
+import SearchFilter from "./SearchResultFilters/SearchFilter"
 import SearchFilters from "./SearchResultFilters/SearchFilters"
 import SearchPriceFilter from "./SearchResultFilters/SearchPriceFilter"
+import SearchFilterCheckbox from "./SearchResultFilters/UX/SearchFilterCheckbox"
+import SearchFilterCheckboxes from "./SearchResultFilters/UX/SearchFilterCheckboxes"
+import SearchFilterTimeRange from "./SearchResultFilters/UX/SearchFilterTimeRange"
 import SearchResultSubscribePrice from "./SearchResultSubscribePrice/SearchResultSubscribePrice"
 import SearchResultWeekPrice from "./SearchResultWeekPrice/SearchResultWeekPrice"
 import useTicketsQuery from "./useTicketsQuery"
@@ -34,11 +39,15 @@ export default function SearchResultAirContainer() {
     }
   }, [payload])
 
+  useEffect(() => {
+    setResults(payload.results)
+  }, [filters])
+
   return (
     <section className="ticket-list">
       <div className="ticket-list__container">
         <SearchResultWeekPrice />
-        <SearchResultAirFiltersContainer />
+        <SearchResultAirFiltersContainer onChange={setFilters} />
         <div className="ticket-list__content">
           {results.map(ticket => (
             <Ticket
@@ -131,19 +140,103 @@ export default function SearchResultAirContainer() {
 }
 
 
-function SearchResultAirFiltersContainer() {
+function SearchResultAirFiltersContainer(props: { onChange: Dispatch<Partial<FiltersType>> }) {
   const { session } = useContext(searchSessionContext)
   const { error, payload } = useSuspenseQuery(getTicketsAirFilters(session))
 
-  if (error || !payload)
-    return <>No filters</>
+  if (error || !payload) return <>No filters</>
+
+  function flightPredicate(child: any, index: number, array: any[]) {
+    if (!child) return null
+
+    if (array.length >= 3) {
+      return [<h3>{"Рейс"} {index + 1}</h3>, child]
+    }
+
+    return [<h3>{index === 0 ? "Туда" : "Обратно"}</h3>, child]
+  }
 
   return (
     <div className="ticket-list__left">
       <SearchResultSubscribePrice />
       <div className="filters">
         <SearchPriceFilter />
-        <SearchFilters />
+        <SearchFilters onChange={props.onChange}>
+          <SearchFilter label="Пересадки">
+            <SearchFilterCheckboxes name="transfers">
+              {/* <SearchFilterCheckbox name="0">Без пересадки</SearchFilterCheckbox> */}
+              {payload.transfers.map(transfer => (
+                <SearchFilterCheckbox name={transfer.toString()}>{transfer > 0 ? pluralize(transfer, ["1 пересадка", "2 пересадки", "3 и более пересадок"]) : "Без пересадки"}</SearchFilterCheckbox>
+              ))}
+              {/* <SearchFilterCheckbox name="1">1 пересадка</SearchFilterCheckbox> */}
+            </SearchFilterCheckboxes>
+          </SearchFilter>
+          <SearchFilter label="Время отправления и прибытия">
+            {/* <h3>{"Рейс"}</h3>
+            <SearchFilterTimeRange name="transfer_time" index={index} {...time} /> */}
+          </SearchFilter>
+          <SearchFilter label="Время в пути">
+            {payload.travel_times.map((time, index) => (
+              <SearchFilterTimeRange name="transfer_time" index={index} {...time} />
+            )).map(flightPredicate)}
+          </SearchFilter>
+          <SearchFilter label="Время пересадки">
+            {payload.travel_times.map((time, index) => (
+              <SearchFilterTimeRange name="transfer_time" index={index} {...time} />
+            )).map(flightPredicate)}
+          </SearchFilter>
+          <SearchFilter label="Багаж">
+            <SearchFilterCheckboxes name="luggage">
+              <SearchFilterCheckbox name="baggage">Только багаж <span className="weak">(от {payload.baggage_min_price?.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
+              <SearchFilterCheckbox name="baggage-luggage">Багаж и ручная кладь <span className="weak">(от 130 000  ₽)</span></SearchFilterCheckbox>
+            </SearchFilterCheckboxes>
+          </SearchFilter>
+          <SearchFilter label="Авиакомпании" extraLabel={payload.airlines.length}>
+            <SearchFilterCheckboxes name="airlines">
+              {payload.airlines.map(airline => (
+                <SearchFilterCheckbox name={airline.id.toString()} key={airline.id}>{airline.title}</SearchFilterCheckbox>
+              ))}
+            </SearchFilterCheckboxes>
+          </SearchFilter>
+          <SearchFilter label="Аэропорты">
+            {payload.airports.map(airport => (
+              <>
+                <>
+                  <h5>Отправление из 1</h5>
+                  <SearchFilterCheckboxes name={`origin_airports[${1}]`}>
+                    {airport.origin.map(origin => (
+                      <SearchFilterCheckbox name={origin.id.toString()} key={origin.id}>{origin.title}</SearchFilterCheckbox>
+                    ))}
+                  </SearchFilterCheckboxes>
+                </>
+                <>
+                  <h5>Прибытие в 2</h5>
+                  <SearchFilterCheckboxes name={`origin_airports[${2}]`}>
+                    {airport.origin.map(origin => (
+                      <SearchFilterCheckbox name={origin.id.toString()} key={origin.id}>{origin.title}</SearchFilterCheckbox>
+                    ))}
+                  </SearchFilterCheckboxes>
+                </>
+              </>
+            )).map(flightPredicate)}
+          </SearchFilter>
+          <SearchFilter label="Аэропорты пересадок">
+            {payload.airports.map(airport => !!airport.transfers.length && (
+              <SearchFilterCheckboxes name={`transfer_airports[${2}]`}>
+                {airport.transfers.map(transfer => (
+                  <SearchFilterCheckbox name={transfer.id.toString()} key={transfer.id}>{transfer.title}</SearchFilterCheckbox>
+                ))}
+              </SearchFilterCheckboxes>
+            )).map(flightPredicate)}
+          </SearchFilter>
+          <SearchFilter label="Агентства" extraLabel={payload.offers.length}>
+            <SearchFilterCheckboxes name="offers">
+              {payload.offers.map(offer => (
+                <SearchFilterCheckbox name={offer.gate_id.toString()} key={offer.gate_id}>{offer.title} <span className="weak">(от {offer.price.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
+              ))}
+            </SearchFilterCheckboxes>
+          </SearchFilter>
+        </SearchFilters>
       </div>
     </div>
   )

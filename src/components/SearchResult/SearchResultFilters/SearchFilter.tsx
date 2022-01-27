@@ -6,7 +6,7 @@ import { classWithModifiers } from "utils"
 interface SearchFilterProps {
   // name: string
   label: string
-  extraLabel?: string
+  extraLabel?: string | number
 
   defaultHidden?: boolean
   children: any

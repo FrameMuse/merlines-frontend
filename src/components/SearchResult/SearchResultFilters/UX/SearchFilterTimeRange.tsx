@@ -1,16 +1,33 @@
 import Slider from "components/Slider/Slider"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
+
+import { searchFiltersContext } from "../SearchFilters"
 
 
 interface SearchFilterTimeRangeRangeProps {
   min: number
   max: number
   name: string
+  index: number
 }
 
 function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
+  const [filters, setFilters] = useContext(searchFiltersContext)
+
   const [min, setMin] = useState(props.min)
   const [max, setMax] = useState(props.max)
+
+  useEffect(() => {
+    setFilters(filters => ({ ...filters, [props.name + "__gte" + `[${props.index}]`]: min }))
+    setFilters(filters => ({ ...filters, [props.name + "__lte" + `[${props.index}]`]: max }))
+  }, [min, max])
+
+  useEffect(() => {
+    if (Object.keys(filters).length === 0) {
+      setMin(props.min)
+      setMax(props.max)
+    }
+  }, [filters])
 
   const minHours = Math.floor(min / 60 / 60)
   const maxHours = Math.floor(max / 60 / 60)
@@ -28,6 +45,7 @@ function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
         trackClassName="horizontal-slider__track"
         min={props.min}
         max={props.max}
+        value={[min, max]}
         defaultValue={[min, max]}
         ariaLabel={["Lower thumb", "Upper thumb"]}
         pearling
