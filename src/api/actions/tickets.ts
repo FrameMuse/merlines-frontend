@@ -17,7 +17,9 @@ export const getTicketsAir = (session: string, page: number, page_size: number, 
 
 export const getTicketsAirFilters = (session: string): Action<{
   in_progress: boolean
-  transfers: number[]
+  transfers: [
+    number
+  ]
   arrival_dates: string[][]
   travel_times: {
     min: number
@@ -27,24 +29,19 @@ export const getTicketsAirFilters = (session: string): Action<{
     min: number
     max: number
   }[]
-  baggage_min_price: number | null
+  baggage_min_price: number
   airlines: {
     id: number
     code: string
     title: string
   }[]
   airports: {
-    origin: {
+    origins: {
       id: number
       code: string
       title: string
     }[]
-    destination: {
-      id: number
-      code: string
-      title: string
-    }[]
-    transfers: {
+    destinations: {
       id: number
       code: string
       title: string
@@ -55,6 +52,28 @@ export const getTicketsAirFilters = (session: string): Action<{
     title: string
     price: number
   }[]
+  trip_cities: {
+    origin: {
+      id: number
+      code: string
+      title: string
+    }
+    destination: {
+      id: number
+      code: string
+      title: string
+    }
+  }[]
+  transfer_cities: {
+    id: number
+    code: string
+    title: string
+    airports: {
+      id: number
+      code: string
+      title: string
+    }[]
+  }[][]
 }> => ({
   method: "GET",
   endpoint: "/tickets/air/" + session + "/filters"
@@ -80,10 +99,16 @@ export const getTicketsAirSegmentAbout = (segmentId: number): Action<{
 })
 
 export const getTicketsAirTicketOffers = (ticketId: number): Action<PaginationType<{
+  id: number
   gate_id: number
   title: string
   price: number
 }>> => ({
   method: "GET",
   endpoint: "/tickets/air/ticket/" + ticketId + "/offers"
+})
+
+export const getTicketsAirOfferLink = (sessionId: string, id: number): Action => ({
+  method: "GET",
+  endpoint: `/tickets/air/${sessionId}/offer/${id}/link`
 })

@@ -81,7 +81,7 @@ function TagArticle(props: TagArticleProps) {
 
           <br /><br /><br />
 
-          <AdminButton onClick={() => history.push("/edit-article/" + props.id)}>Редактировать статью</AdminButton><br /><br />
+          <AdminButton onClick={() => history.push("/admin/edit-article/" + props.id)}>Редактировать статью</AdminButton><br /><br />
           <AdminButton>Опубликовать статью</AdminButton><br /><br />
           <AdminButton>Удалить статью</AdminButton>
         </div>

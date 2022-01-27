@@ -184,7 +184,7 @@ function SearchResultAirFiltersContainer(props: { onChange: Dispatch<Partial<Fil
             <SearchFilterCheckboxes name="transfers">
               {/* <SearchFilterCheckbox name="0">Без пересадки</SearchFilterCheckbox> */}
               {payload.transfers.map(transfer => (
-                <SearchFilterCheckbox name={transfer.toString()}>{transfer > 0 ? pluralize(transfer, ["1 пересадка", "2 пересадки", "3 и более пересадок"]) : "Без пересадки"}</SearchFilterCheckbox>
+                <SearchFilterCheckbox name={transfer.toString()}>{transfer > 0 ? transfer >= 3 ? "3 и более пересадок" : pluralize(transfer, ["1 пересадка", "2 пересадки"]) : "Без пересадки"}</SearchFilterCheckbox>
               ))}
               {/* <SearchFilterCheckbox name="1">1 пересадка</SearchFilterCheckbox> */}
             </SearchFilterCheckboxes>
@@ -222,7 +222,7 @@ function SearchResultAirFiltersContainer(props: { onChange: Dispatch<Partial<Fil
                 <>
                   <h5>Отправление из 1</h5>
                   <SearchFilterCheckboxes name={`origin_airports[${1}]`}>
-                    {airport.origin.map(origin => (
+                    {airport.origins.map(origin => (
                       <SearchFilterCheckbox name={origin.id.toString()} key={origin.id}>{origin.title}</SearchFilterCheckbox>
                     ))}
                   </SearchFilterCheckboxes>
@@ -230,8 +230,8 @@ function SearchResultAirFiltersContainer(props: { onChange: Dispatch<Partial<Fil
                 <>
                   <h5>Прибытие в 2</h5>
                   <SearchFilterCheckboxes name={`origin_airports[${2}]`}>
-                    {airport.origin.map(origin => (
-                      <SearchFilterCheckbox name={origin.id.toString()} key={origin.id}>{origin.title}</SearchFilterCheckbox>
+                    {airport.destinations.map(destination => (
+                      <SearchFilterCheckbox name={destination.id.toString()} key={destination.id}>{destination.title}</SearchFilterCheckbox>
                     ))}
                   </SearchFilterCheckboxes>
                 </>
@@ -239,12 +239,15 @@ function SearchResultAirFiltersContainer(props: { onChange: Dispatch<Partial<Fil
             )).map(flightPredicate)}
           </SearchFilter>
           <SearchFilter label="Аэропорты пересадок">
-            {payload.airports.map(airport => !!airport.transfers.length && (
-              <SearchFilterCheckboxes name={`transfer_airports[${2}]`}>
-                {airport.transfers.map(transfer => (
-                  <SearchFilterCheckbox name={transfer.id.toString()} key={transfer.id}>{transfer.title}</SearchFilterCheckbox>
-                ))}
-              </SearchFilterCheckboxes>
+            {payload.transfer_cities.map((cities, index) => cities.length > 0 && (
+              <>
+                <h3>{index + 1} пересадка</h3>
+                <SearchFilterCheckboxes name={`transfer_airports[${index}]`}>
+                  {cities.map(city => (
+                    <SearchFilterCheckbox name={city.id.toString()} key={city.id}>{city.title}</SearchFilterCheckbox>
+                  ))}
+                </SearchFilterCheckboxes>
+              </>
             )).map(flightPredicate)}
           </SearchFilter>
           <SearchFilter label="Агентства" extraLabel={payload.offers.length}>

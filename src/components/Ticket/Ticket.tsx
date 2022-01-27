@@ -1,9 +1,11 @@
 // SCSS
 import "./Ticket.style.scss"
 
-import { getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
+import { getTicketsAirOfferLink, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
+import { APIOuterLink } from "api/helpers"
 import Icon from "components/common/Icon"
-import { useState } from "react"
+import { searchSessionContext } from "components/SearchResult/SearchResult"
+import { useContext, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { classWithModifiers } from "utils"
 
@@ -156,12 +158,14 @@ function TicketOffers(props: TicketOffersProps) {
 
 
 interface TicketOfferProps {
+  id: number
   price: number
   title: string
   image: string
 }
 
 function TicketOffer(props: TicketOfferProps) {
+  const { session } = useContext(searchSessionContext)
   return (
     <div className="ticket-preposition">
       <div className="ticket-preposition__group">
@@ -172,7 +176,7 @@ function TicketOffer(props: TicketOfferProps) {
         <img className="ticket-preposition__image" src={props.image} />
         <div className="ticket-preposition__desc">на {props.title}</div>
       </div>
-      <button className="ticket-prepositions__submit">Выбрать</button>
+      <APIOuterLink className="ticket-prepositions__submit" action={getTicketsAirOfferLink(session, props.id)}>Выбрать</APIOuterLink>
     </div>
   )
 }

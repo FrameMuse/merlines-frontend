@@ -154,6 +154,7 @@ const simpleOnError = (error: { response: { data: any }; message: any }) => {
  * @return {string} — выбранное слово в зависимости от числа
  */
 const pluralize = (number: number, words: string[]) => {
+  console.log(number)
   number = Math.abs(number) % 100
   const number2 = number % 10
   if (number > 10 && number < 20) return words[2]
