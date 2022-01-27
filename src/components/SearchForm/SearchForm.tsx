@@ -62,19 +62,26 @@ function SearchForm() {
       return
     }
 
-    const searchQuery = createQuery({
+    const searchQuery1 = createQuery({
       origin: route.departurePoint.id,
       destination: route.arrivalPoint.id,
       date: route.departureDate.toISOString().slice(0, 10),
-      // return_date: route.departureDate?.toISOString().slice(0, 10),
-      // transport: "air",
-      travel_class: search.travelClass
-      // ...search.passengers
+    })
+
+    const searchQuery2 = createQuery({
+      origin: route.arrivalPoint.id,
+      destination: route.departurePoint.id,
+      date: route.returnDate?.toISOString().slice(0, 10),
+    })
+
+    const searchQuery = createQuery({
+      travel_class: search.travelClass,
+      ...search.passengers
     })
 
     history.push({
       pathname: "/search",
-      search: "?" + searchQuery,
+      search: "?" + searchQuery + "&" + searchQuery1 + (route.returnDate ? ("&" + searchQuery2) : ""),
     })
 
     console.log(searchQuery)

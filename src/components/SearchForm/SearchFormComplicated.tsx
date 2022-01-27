@@ -44,24 +44,31 @@ function SearchFormComplicated() {
   function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const route = search.routes[0]
-    if (Object.values(route).some(value => !value)) {
+    if (search.routes.some(route => {
+      if (route.arrivalPoint == null) return true
+      if (route.departureDate == null) return true
+      if (route.departurePoint == null) return true
+
+      return false
+    })) {
       setFormError(true)
       return
     }
 
     const searchQuery = createQuery({
-      origin: route.departurePoint?.code,
-      arrival: route.arrivalPoint?.code,
-      departure_date: route.departureDate?.toISOString().slice(0, 10),
-      transport: "air",
-
-      ...search.passengers
+      ...search.passengers,
+      travel_class: search.travelClass
     })
 
+    const searchQueries = search.routes.map(route => createQuery({
+      origin: route.departurePoint?.id,
+      destination: route.arrivalPoint?.id,
+      date: route.departureDate?.toISOString().slice(0, 10)
+    }))
+
     history.push({
-      pathname: "/search-result",
-      search: "?" + searchQuery,
+      pathname: "/search",
+      search: "?" + searchQuery + "&" + searchQueries.join("&"),
     })
 
     console.log(searchQuery)

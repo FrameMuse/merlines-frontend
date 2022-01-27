@@ -144,10 +144,12 @@ function TicketOffers(props: TicketOffersProps) {
           <TicketOffer {...result} image={`https://pics.avs.io/gates/200/50/${result.gate_id}.png`} />
         ))}
       </div>
-      <button className="ticket-prepositions__more" type="button" onClick={() => query()}>
-        <span>показать ещё предложения</span>
-        <Icon className="ticket-prepositions__icon" name="chevron" />
-      </button>
+      {!payload && (
+        <button className="ticket-prepositions__more" type="button" onClick={() => query()}>
+          <span>показать ещё предложения</span>
+          <Icon className="ticket-prepositions__icon" name="chevron" />
+        </button>
+      )}
     </div>
   )
 }

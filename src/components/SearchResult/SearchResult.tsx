@@ -1,11 +1,13 @@
 import "./ticket-list.scss"
 
 import { postTicketsAir } from "api/actions/tickets"
+import SearchFormComplicated from "components/SearchForm/SearchFormComplicated"
 import ErrorBoundary from "components/services/ErrorBoudary"
 import { TripType } from "interfaces/Search"
-import { createContext, Suspense, useEffect } from "react"
+import { createContext, Suspense } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
-import { useHistory, useLocation } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { useLocation } from "react-router-dom"
 
 import SearchForm from "../SearchForm/SearchForm"
 import SearchResultAirContainer from "./SearchResultAirContainer"
@@ -16,10 +18,11 @@ import SearchResultLoader from "./SearchResultLoader"
 export const searchSessionContext = createContext({ session: "" })
 
 function SearchResult() {
+  const search = useSelector(state => state.search)
   return (
     <>
       <section className="main-form main-form--small">
-        <SearchForm />
+        {search.routes.length === 1 ? <SearchForm /> : <SearchFormComplicated />}
       </section>
       <Suspense fallback={<SearchResultLoader />}>
         <ErrorBoundary fallback={<SearchResultTicketError />}>
@@ -48,7 +51,7 @@ function SearchResultContainer() {
   }
 
   if ((origins.length !== destinations.length) || (origins.length !== dates.length)) {
-    throw new Error("There is a diffrent amount of data")
+    throw new Error("There is a different amount of data")
   }
 
   const trips: TripType[] = origins.map((origin, index) => ({
