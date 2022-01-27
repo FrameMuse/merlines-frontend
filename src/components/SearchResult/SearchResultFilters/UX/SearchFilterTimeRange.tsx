@@ -9,6 +9,8 @@ interface SearchFilterTimeRangeRangeProps {
   max: number
   name: string
   index: number
+
+  deltaTime?: boolean
 }
 
 function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
@@ -18,6 +20,12 @@ function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
   const [max, setMax] = useState(props.max)
 
   useEffect(() => {
+    if (props.deltaTime) {
+      setFilters(filters => ({ ...filters, [props.name + "__gte" + `[${props.index}]`]: new Date(min * 1000).toJSON().slice(11, 16) }))
+      setFilters(filters => ({ ...filters, [props.name + "__lte" + `[${props.index}]`]: new Date(max * 1000).toJSON().slice(11, 16) }))
+
+      return
+    }
     setFilters(filters => ({ ...filters, [props.name + "__gte" + `[${props.index}]`]: min }))
     setFilters(filters => ({ ...filters, [props.name + "__lte" + `[${props.index}]`]: max }))
   }, [min, max])

@@ -13,6 +13,7 @@ import SearchFilters from "./SearchResultFilters/SearchFilters"
 import SearchPriceFilter from "./SearchResultFilters/SearchPriceFilter"
 import SearchFilterCheckbox from "./SearchResultFilters/UX/SearchFilterCheckbox"
 import SearchFilterCheckboxes from "./SearchResultFilters/UX/SearchFilterCheckboxes"
+import SearchFilterRange from "./SearchResultFilters/UX/SearchFilterRange"
 import SearchFilterTimeRange from "./SearchResultFilters/UX/SearchFilterTimeRange"
 import SearchResultSubscribePrice from "./SearchResultSubscribePrice/SearchResultSubscribePrice"
 import SearchResultWeekPrice from "./SearchResultWeekPrice/SearchResultWeekPrice"
@@ -190,6 +191,14 @@ function SearchResultAirFiltersContainer(props: { onChange: Dispatch<Partial<Fil
             </SearchFilterCheckboxes>
           </SearchFilter>
           <SearchFilter label="Время отправления и прибытия">
+            {payload.trip_cities.map((trip, index) => (
+              <>
+                <h4>Отправление из {trip.origin.title}</h4>
+                <SearchFilterTimeRange deltaTime min={0} max={86400} name="start_time" index={index} />
+                <h4>Прибытие в {trip.destination.title}</h4>
+                <SearchFilterTimeRange deltaTime min={0} max={86400} name="end_time" index={index} />
+              </>
+            )).map(flightPredicate)}
             {/* <h3>{"Рейс"}</h3>
             <SearchFilterTimeRange name="transfer_time" index={index} {...time} /> */}
           </SearchFilter>
