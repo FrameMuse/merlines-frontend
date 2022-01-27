@@ -30,7 +30,7 @@ function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
   }
 
   useEffect(() => {
-    setFilters(({ ...filters, [props.name]: Object.keys(checks).join(",") }))
+    setFilters(({ ...filters, [props.name]: Object.keys(checks).filter(key => checks[key]).join(",") }))
   }, [props.name, checks])
 
   useEffect(() => {

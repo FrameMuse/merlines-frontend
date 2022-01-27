@@ -6,7 +6,7 @@ import Icon from "components/common/Icon"
 import { useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { toast } from "react-toastify"
-import { capitalize, classWithModifiers } from "utils"
+import { classWithModifiers } from "utils"
 
 import ClientAPI from "../../../api/client"
 import AdminButton from "../AdminButton/AdminButton"
@@ -23,7 +23,7 @@ function AdminBlogMailing() {
   const [createNew, setCreateNew] = useState(false)
 
   const [page, setPage] = useState(1)
-  const [pageSize, setPageSize] = useState(20)
+  const [pageSize] = useState(20)
   const { error, payload } = useQuery(getAdminMailings(page, pageSize))
   if (error || !payload || payload.error) return <>no content</>
   return (
@@ -74,6 +74,11 @@ function AdminBlogMailingEntry(props: MailingEntryType) {
 
         <h4 className="blog-mailing-entry__title">Содержание</h4>
         <p className="blog-mailing-entry__content">{props.content}</p>
+        <div className="blog-mailing-entry__buttons">
+          <AdminButton>Разослать</AdminButton>
+          <AdminButton>Сохранить</AdminButton>
+          <AdminButton>Удалить</AdminButton>
+        </div>
       </div>
     </div>
   )
@@ -108,7 +113,10 @@ function AdminBlogMailingCreateEntry() {
           <h4 className="blog-mailing-entry__title">Содержание</h4>
           <textarea className="blog-mailing-entry__textarea" onChange={event => setContent(event.currentTarget.value)} />
         </div>
-        <div><AdminButton onClick={onSubmit}>Разослать</AdminButton></div>
+        <div className="blog-mailing-entry__buttons">
+          <AdminButton onClick={onSubmit}>Разослать</AdminButton>
+          <AdminButton>Сохранить</AdminButton>
+        </div>
       </div>
     </div>
   )

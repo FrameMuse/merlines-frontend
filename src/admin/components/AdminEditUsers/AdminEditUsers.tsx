@@ -8,14 +8,15 @@ import Icon from "components/common/Icon"
 import { Client } from "interfaces/user"
 import { FormEvent, useState } from "react"
 import { useQuery } from "react-fetching-library"
+import { useSelector } from "react-redux"
 import { classWithModifiers } from "utils"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminSearchFilters from "../AdminSearchFilters/AdminSearchFilters"
 
 
-function AdminEditUsers() {
-  const [filters, setFilters] = useState<Parameters<typeof getAdminUsers>[0]>({})
+function AdminEditUsers(props: { type?: string }) {
+  const [filters, setFilters] = useState<Parameters<typeof getAdminUsers>[0]>({ type: props.type })
   const { loading, payload } = useQuery(getAdminUsers(filters))
 
   function onSearch(event: FormEvent<HTMLFormElement>) {
@@ -36,7 +37,13 @@ function AdminEditUsers() {
       <AdminSearchFilters onSubmit={onSearch} pending={loading}>
         <input type="number" name="id" placeholder="id" />
         <input type="text" name="name" placeholder="name" />
-        <input type="text" name="type" placeholder="type" />
+        <select name="type" defaultValue={props.type}>
+          <option value="1">Banned</option>
+          <option value="2">Default</option>
+          <option value="3">Editor</option>
+          <option value="4">Admin</option>
+          <option value="5">Super</option>
+        </select>
         <input type="text" name="amount" placeholder="amount" />
       </AdminSearchFilters>
       <br />
@@ -85,6 +92,7 @@ function AdminEditUsersUser(props: AdminEditUsersUserProps) {
 }
 
 function AdminEditUsersUserDangerZone(props: AdminEditUsersUserProps) {
+  const user = useSelector(state => state.user)
   const [type, setType] = useState(props.type)
   function onChangeType() {
     if (!window.confirm("Вы уверены, что хотите изменить этого пользователя?")) return
@@ -98,6 +106,11 @@ function AdminEditUsersUserDangerZone(props: AdminEditUsersUserProps) {
 
     return ClientAPI.query(deleteAdminUser(props.id))
   }
+
+  if (user.auth && (user.type <= props.type)) {
+    return null
+  }
+
   return (
     <div className="edit-user-area edit-user-area--danger">
       <div className="edit-user-area__title">Danger Zone</div>

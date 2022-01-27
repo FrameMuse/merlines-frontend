@@ -2,7 +2,8 @@ import "./style.scss"
 import "react-toastify/dist/ReactToastify.css"
 
 import ClientAPI from "api/client"
-import { StrictMode } from "react"
+import ErrorBoundary from "components/services/ErrorBoudary"
+import { StrictMode, Suspense } from "react"
 import ReactDOM from "react-dom"
 import { ClientContextProvider } from "react-fetching-library"
 import { Provider } from "react-redux"
@@ -29,7 +30,11 @@ ReactDOM.render(
       <Provider store={store}>
         <RecoilRoot>
           <ClientContextProvider client={ClientAPI}>
-            <App />
+            <Suspense fallback={<>Loading...</>}>
+              <ErrorBoundary fallback={(e, t) => <>Error: {JSON.stringify(e)} <br /><br /><br /> {JSON.stringify(t)}</>}>
+                <App />
+              </ErrorBoundary>
+            </Suspense>
           </ClientContextProvider>
         </RecoilRoot>
       </Provider>

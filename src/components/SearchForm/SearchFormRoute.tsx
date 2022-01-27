@@ -69,8 +69,12 @@ function SearchFormRouteInput(props: SearchFormRouteInputProps) {
       })
   }
   function onSelect(_element: DropDownElementProps, index: number) {
-    setValue(placesIdList[index].title)
-    props.onChange(placesIdList[index])
+    const element = placesIdList[index]
+    // Check it as there could be empty array
+    if (!element) return
+
+    setValue(element.title)
+    props.onChange(element)
   }
 
   useEffect(() => {

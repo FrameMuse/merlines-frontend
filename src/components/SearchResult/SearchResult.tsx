@@ -4,7 +4,7 @@ import { postTicketsAir } from "api/actions/tickets"
 import SearchFormComplicated from "components/SearchForm/SearchFormComplicated"
 import ErrorBoundary from "components/services/ErrorBoudary"
 import { TripType } from "interfaces/Search"
-import { createContext, Suspense } from "react"
+import { createContext, Suspense, useEffect } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
@@ -24,11 +24,7 @@ function SearchResult() {
       <section className="main-form main-form--small">
         {search.routes.length === 1 ? <SearchForm /> : <SearchFormComplicated />}
       </section>
-      <Suspense fallback={<SearchResultLoader />}>
-        <ErrorBoundary fallback={<SearchResultTicketError />}>
-          <SearchResultContainer />
-        </ErrorBoundary>
-      </Suspense>
+      <SearchResultContainer />
     </>
   )
 }
@@ -61,9 +57,13 @@ function SearchResultContainer() {
   }))
 
   return (
-    <SearchResultSessionProvider trips={trips} travel_class={travel_class}>
-      <SearchResultTransportContainer />
-    </SearchResultSessionProvider>
+    <Suspense fallback={<SearchResultLoader />}>
+      <ErrorBoundary fallback={<SearchResultTicketError />} deps={[location]}>
+        <SearchResultSessionProvider trips={trips} travel_class={travel_class}>
+          <SearchResultTransportContainer />
+        </SearchResultSessionProvider>
+      </ErrorBoundary>
+    </Suspense>
   )
 }
 

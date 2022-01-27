@@ -19,7 +19,7 @@ function HeaderNavigation() {
       </button>
       <div className="nav__inner">
         <div className="nav__group">
-          {user.auth && [UserType.Admin, UserType.Editor].includes(user.type) && (
+          {user.auth && [UserType.Super, UserType.Admin, UserType.Editor].includes(user.type) && (
             <HeaderLink to="/admin" iconName="arrow">Админ панель</HeaderLink>
           )}
           <HeaderLink to="/blog" iconName="edit">Блог</HeaderLink>

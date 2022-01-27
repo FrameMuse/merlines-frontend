@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import { NavLink, Route, Switch } from "react-router-dom"
 
 import AdminAddArticleView from "./views/AdminAddArticleView"
+import AdminAuthorsView from "./views/AdminAuthorsView"
 import AdminBlogView from "./views/AdminBlogView"
 import AdminEditArticleView from "./views/AdminEditArticleView"
 import AdminHomeView from "./views/AdminHomeView"
@@ -15,7 +16,7 @@ import AdminUsersView from "./views/AdminUsersView"
 
 function AdminView() {
   const user = useSelector(state => state.user)
-  if (!user.auth || ![UserType.Super, UserType.Admin, UserType.Editor].includes(user.type)) {
+  if (!user.auth || user.type < UserType.Editor) {
     return <ErrorView code="404" />
   }
   return (
@@ -27,8 +28,9 @@ function AdminView() {
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" exact to="/admin/">Главная</NavLink>
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/blog">Блог</NavLink>
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/users">Пользователи</NavLink>
-            <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/maillings">Рассылки</NavLink>
+            <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/mailings">Рассылки</NavLink>
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/add-article">Добавить статью</NavLink>
+            <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/authors">Авторы</NavLink>
           </div>
         </div>
       </header>
@@ -37,10 +39,12 @@ function AdminView() {
           <Route path="/admin/" exact><AdminHomeView /></Route>
           <Route path="/admin/blog" exact><AdminBlogView /></Route>
           <Route path="/admin/users" exact><AdminUsersView /></Route>
-          <Route path="/admin/maillings" exact><AdminMaillingView /></Route>
+          <Route path="/admin/mailings" exact><AdminMaillingView /></Route>
 
           <Route path="/admin/add-article" exact><AdminAddArticleView /></Route>
           <Route path="/admin/edit-article/:articleId" exact render={props => <AdminEditArticleView articleId={props.match.params.articleId} />} />
+
+          <Route path="/admin/authors" exact><AdminAuthorsView /></Route>
         </Switch>
       </main>
     </div>
