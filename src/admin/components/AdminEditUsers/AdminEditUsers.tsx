@@ -61,7 +61,6 @@ interface AdminEditUsersUserProps extends Client { }
 
 function AdminEditUsersUser(props: AdminEditUsersUserProps) {
   const [isOpen, setIsOpen] = useState(false)
-  return null
   return (
     <div className="edit-user">
       <div className={classWithModifiers("edit-user__header", isOpen && "active")} onClick={() => setIsOpen(!isOpen)}>
