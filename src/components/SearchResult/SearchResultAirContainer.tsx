@@ -1,9 +1,11 @@
 import { getTicketsAir, getTicketsAirFilters } from "api/actions/tickets"
+import ClientAPI, { APIResponseError } from "api/client"
 import Ticket from "components/Ticket/Ticket"
+import { PaginationType } from "interfaces/Django"
 import { FiltersType, TicketType } from "interfaces/Search"
 import { Dispatch, useContext, useEffect, useState } from "react"
-import { useSuspenseQuery } from "react-fetching-library"
-import { pluralize } from "utils"
+import { useQuery, useSuspenseQuery } from "react-fetching-library"
+import { classWithModifiers, pluralize } from "utils"
 
 import { searchSessionContext } from "./SearchResult"
 import SearchFilter from "./SearchResultFilters/SearchFilter"
@@ -25,31 +27,47 @@ export default function SearchResultAirContainer() {
   const [filters, setFilters] = useState<Partial<FiltersType>>({})
 
   const { session } = useContext(searchSessionContext)
-  const { error, payload } = useTicketsQuery(getTicketsAir(session, page, page_size, filters))
+  const { payload: suspensePayload } = useTicketsQuery(getTicketsAir(session, 1, page_size))
+  const response = useQuery(getTicketsAir(session, page, page_size, filters), false)
 
-  if (error || !payload) {
-    throw new Error()
-  }
+  if (!suspensePayload) throw new Error()
 
+  useEffect(() => setResults(suspensePayload.results), [suspensePayload])
+  // useEffect(() => setResults(response.payload?.results || []), [filters])
+  // useEffect(() => setResults(results => [...results, ...response.payload?.results || []]), [response.payload])
   useEffect(() => {
-    if (payload.in_progress) {
-      setResults(payload.results)
-    } else {
-      setResults(oldPayload => [...oldPayload, ...payload.results])
-    }
-  }, [payload])
-
+    response
+      .query()
+      .then(({ error, payload }) => {
+        if (error || !payload) return
+        setResults(results => [...results, ...payload.results])
+      })
+  }, [page])
   useEffect(() => {
-    setResults(payload.results)
+    response
+      .query()
+      .then(({ error, payload }) => {
+        if (error || !payload) return
+        setResults(payload.results)
+      })
   }, [filters])
+  useEffect(() => {
+    if (response.error) return
 
+    let timeout: NodeJS.Timeout
+    if (response.loading && !response.payload) response.query()
+    if (response.payload?.in_progress) {
+      timeout = setTimeout(() => response.query(), 1000)
+    }
+    return () => clearTimeout(timeout)
+  }, [response.payload])
   return (
     <section className="ticket-list">
       <div className="ticket-list__container">
         <SearchResultWeekPrice />
         <SearchResultAirFiltersContainer onChange={setFilters} />
-        <div className="ticket-list__content">
-          {results.map(ticket => (
+        <div className={classWithModifiers("ticket-list__content", response.loading && "loading")}>
+          {results.filter(r => results.some(rs => rs.id === r.id)).map(ticket => (
             <Ticket
               id={ticket.id}
               logos={[...new Set(ticket.trips.flatMap(trip => trip.segments.map(seg => getAirlineLogo(seg.marketing_airline.code))))]}
@@ -130,8 +148,8 @@ export default function SearchResultAirContainer() {
               })}
               key={ticket.id} />
           ))}
-          {(page * page_size) <= payload.count && (
-            <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>More</button>
+          {(page * page_size) <= (response.payload?.count ?? suspensePayload.count) && (
+            <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {page_size} билетов</button>
           )}
         </div>
       </div>

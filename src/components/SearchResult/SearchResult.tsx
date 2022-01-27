@@ -72,20 +72,11 @@ interface SearchResultSessionProviderProps {
 }
 // 2. Create session
 function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
-  const { error, payload, query } = useSuspenseQuery(postTicketsAir(props.trips, props.travel_class))
-
-  // Update on location update
-  const history = useHistory()
-  useEffect(() => history.listen(() => query()), [history])
-
-  if (error || !payload) {
-    throw new Error()
-  }
-
+  const { error, payload } = useSuspenseQuery(postTicketsAir(props.trips, props.travel_class))
+  if (error || !payload) throw new Error()
   return (
     <searchSessionContext.Provider value={{ session: payload.session }}>
       {props.children}
-      1asdasdasdsas
     </searchSessionContext.Provider>
   )
 }

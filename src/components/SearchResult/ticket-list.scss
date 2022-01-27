@@ -93,6 +93,11 @@
 	row-gap: 1em;
 
 	font-family: $title-font;
+
+	&--loading {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 }
 
 .ticket-list__transports {
@@ -305,4 +310,15 @@
 .ticket-list__icon {
 	width: 1em;
 	height: 1em;
+}
+
+.ticket-list__more {
+	padding: 1.25em;
+	flex: 1;
+	background: var(--color-blue);
+	border-radius: 0.25em;
+
+	color: white;
+	text-align: center;
+	font-weight: 600;
 }

@@ -1,7 +1,7 @@
 // SCSS
 import "./Ticket.style.scss"
 
-import { getTicketsAirSegmentAbout } from "api/actions/tickets"
+import { getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
 import Icon from "components/common/Icon"
 import { useState } from "react"
 import { useQuery } from "react-fetching-library"
@@ -61,7 +61,7 @@ function Ticket(props: TicketProps) {
         </div>
       </div>
       <div className="ticket__details" aria-expanded={isDetailsExpanded}>
-        <TicketOffers bestOffer={props.bestOffer} />
+        <TicketOffers ticketId={props.id} bestOffer={props.bestOffer} />
         <TicketTrace groups={props.groups} />
       </div>
     </div>
@@ -127,19 +127,27 @@ function TicketTimeline(props: TicketTimelineProps) {
 
 
 interface TicketOffersProps {
+  ticketId: number
   bestOffer: TicketOfferProps
 }
 
 function TicketOffers(props: TicketOffersProps) {
+  const { error, loading, payload, query } = useQuery(getTicketsAirTicketOffers(props.ticketId), false)
+  if (!loading && (error && !payload)) throw new Error()
   return (
     <div className="ticket-prepositions">
       <div className="ticket-prepositions__list">
-        <TicketOffer {...props.bestOffer} />
+        {!payload && (
+          <TicketOffer {...props.bestOffer} />
+        )}
+        {!!payload && payload.results.map(result => (
+          <TicketOffer {...result} image={`https://pics.avs.io/gates/200/50/${result.gate_id}.png`} />
+        ))}
       </div>
-      <div className="ticket-prepositions__more">
-        <span>ещё 7 предложений</span>
+      <button className="ticket-prepositions__more" type="button" onClick={() => query()}>
+        <span>показать ещё предложения</span>
         <Icon className="ticket-prepositions__icon" name="chevron" />
-      </div>
+      </button>
     </div>
   )
 }

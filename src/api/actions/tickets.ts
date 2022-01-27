@@ -9,7 +9,7 @@ export const postTicketsAir = (trips: TripType[], travel_class: string, passenge
   body: { trips, travel_class, ...passengers }
 })
 
-export const getTicketsAir = (session: string, page: number, page_size: number, filters: Partial<FiltersType>): Action<PaginationType<TicketType> & { in_progress: boolean }> => ({
+export const getTicketsAir = (session: string, page: number, page_size: number, filters?: Partial<FiltersType>): Action<PaginationType<TicketType> & { in_progress: boolean }> => ({
   method: "GET",
   endpoint: "/tickets/air/" + session,
   params: { page, page_size, ...filters }
@@ -77,4 +77,13 @@ export const getTicketsAirSegmentAbout = (segmentId: number): Action<{
 }> => ({
   method: "GET",
   endpoint: "/tickets/air/segment/" + segmentId + "/about"
+})
+
+export const getTicketsAirTicketOffers = (ticketId: number): Action<PaginationType<{
+  gate_id: number
+  title: string
+  price: number
+}>> => ({
+  method: "GET",
+  endpoint: "/tickets/air/ticket/" + ticketId + "/offers"
 })
