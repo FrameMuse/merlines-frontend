@@ -10,7 +10,7 @@ import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 
 import SearchForm from "../SearchForm/SearchForm"
-import SearchResultAirContainer from "./SearchResultAirContainer"
+import SearchResultAirContainer from "./SearchResultContainers/SearchResultAirContainer/SearchResultAirContainer"
 import SearchResultTicketError from "./SearchResultError"
 import SearchResultLoader from "./SearchResultLoader"
 

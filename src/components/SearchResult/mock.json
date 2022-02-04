@@ -1,0 +1,4569 @@
+{
+  "in_progress": false,
+  "count": 268,
+  "results": [
+    {
+      "id": 44241,
+      "price_with_baggage": 3548.0,
+      "best_offer": {
+        "id": 90088,
+        "gate_id": 20,
+        "title": "OneTwoTrip",
+        "price": 2449.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T21:05:00Z",
+          "end_time": "2022-01-29T22:55:00Z",
+          "segments": [
+            {
+              "id": 163084,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T21:05:00Z",
+              "arrival_time": "2022-01-29T22:55:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-182",
+              "handbags_weight": 10,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44245,
+      "price_with_baggage": 3973.0,
+      "best_offer": {
+        "id": 90116,
+        "gate_id": 20,
+        "title": "OneTwoTrip",
+        "price": 2849.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T16:10:00Z",
+          "end_time": "2022-01-29T18:00:00Z",
+          "segments": [
+            {
+              "id": 163092,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T16:10:00Z",
+              "arrival_time": "2022-01-29T18:00:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-234",
+              "handbags_weight": 10,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44243,
+      "price_with_baggage": 3973.0,
+      "best_offer": {
+        "id": 90102,
+        "gate_id": 20,
+        "title": "OneTwoTrip",
+        "price": 2849.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:25:00Z",
+          "end_time": "2022-01-29T12:15:00Z",
+          "segments": [
+            {
+              "id": 163088,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T10:25:00Z",
+              "arrival_time": "2022-01-29T12:15:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-184",
+              "handbags_weight": 10,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44247,
+      "price_with_baggage": 4352.0,
+      "best_offer": {
+        "id": 90130,
+        "gate_id": 239,
+        "title": "Пегас Тур",
+        "price": 3102.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T20:00:00Z",
+          "end_time": "2022-01-29T21:50:00Z",
+          "segments": [
+            {
+              "id": 163096,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T20:00:00Z",
+              "arrival_time": "2022-01-29T21:50:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-2144",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44249,
+      "price_with_baggage": 5327.0,
+      "best_offer": {
+        "id": 90147,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5327.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-31T14:00:00Z",
+          "segments": [
+            {
+              "id": 163100,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163101,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T12:30:00Z",
+              "arrival_time": "2022-01-31T14:00:00Z",
+              "marketing_airline": {
+                "id": 112,
+                "code": "U6",
+                "title": "Ural Airlines"
+              },
+              "flight": "U6-102",
+              "handbags_weight": 5,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63747,
+      "price_with_baggage": 5363.0,
+      "best_offer": {
+        "id": 125428,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5363.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-31T12:05:00Z",
+          "segments": [
+            {
+              "id": 222408,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222409,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222410,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 12475,
+                "code": "KLF",
+                "title": "Grabtsevo Airport",
+                "city": {
+                  "id": 8943,
+                  "code": "KLF",
+                  "title": "Kaluga"
+                }
+              },
+              "departure_time": "2022-01-30T07:30:00Z",
+              "arrival_time": "2022-01-30T09:25:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-403",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222411,
+              "departure": {
+                "id": 12475,
+                "code": "KLF",
+                "title": "Grabtsevo Airport",
+                "city": {
+                  "id": 8943,
+                  "code": "KLF",
+                  "title": "Kaluga"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T11:20:00Z",
+              "arrival_time": "2022-01-31T12:05:00Z",
+              "marketing_airline": {
+                "id": 112,
+                "code": "U6",
+                "title": "Ural Airlines"
+              },
+              "flight": "U6-9118",
+              "handbags_weight": 5,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44251,
+      "price_with_baggage": null,
+      "best_offer": {
+        "id": 90149,
+        "gate_id": 8,
+        "title": "Tickets.ru",
+        "price": 5486.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-29T23:40:00Z",
+          "segments": [
+            {
+              "id": 163105,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163106,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163107,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T21:20:00Z",
+              "arrival_time": "2022-01-29T23:40:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-6932",
+              "handbags_weight": null,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63748,
+      "price_with_baggage": 11259.0,
+      "best_offer": {
+        "id": 125429,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5658.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-30T23:55:00Z",
+          "segments": [
+            {
+              "id": 222412,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222413,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222414,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T21:40:00Z",
+              "arrival_time": "2022-01-30T23:55:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-6932",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63749,
+      "price_with_baggage": 11277.0,
+      "best_offer": {
+        "id": 125430,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5659.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-31T16:10:00Z",
+          "segments": [
+            {
+              "id": 222415,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222416,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222417,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T14:00:00Z",
+              "arrival_time": "2022-01-31T16:10:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-576",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44258,
+      "price_with_baggage": 10282.0,
+      "best_offer": {
+        "id": 90165,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5992.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-29T15:55:00Z",
+          "segments": [
+            {
+              "id": 163121,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163122,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T14:40:00Z",
+              "arrival_time": "2022-01-29T15:55:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1116",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44255,
+      "price_with_baggage": 10282.0,
+      "best_offer": {
+        "id": 90162,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5992.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-31T15:55:00Z",
+          "segments": [
+            {
+              "id": 163114,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163115,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T14:40:00Z",
+              "arrival_time": "2022-01-31T15:55:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1116",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44262,
+      "price_with_baggage": 10282.0,
+      "best_offer": {
+        "id": 90169,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5992.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-30T11:30:00Z",
+          "segments": [
+            {
+              "id": 163131,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163132,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T10:15:00Z",
+              "arrival_time": "2022-01-30T11:30:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1114",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44265,
+      "price_with_baggage": 10282.0,
+      "best_offer": {
+        "id": 90172,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5992.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-29T19:05:00Z",
+          "segments": [
+            {
+              "id": 163138,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163139,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T17:50:00Z",
+              "arrival_time": "2022-01-29T19:05:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1112",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44260,
+      "price_with_baggage": 10282.0,
+      "best_offer": {
+        "id": 90167,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5992.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-30T15:55:00Z",
+          "segments": [
+            {
+              "id": 163126,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163127,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T14:40:00Z",
+              "arrival_time": "2022-01-30T15:55:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1116",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44264,
+      "price_with_baggage": 10282.0,
+      "best_offer": {
+        "id": 90171,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5992.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-30T19:05:00Z",
+          "segments": [
+            {
+              "id": 163136,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163137,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T17:50:00Z",
+              "arrival_time": "2022-01-30T19:05:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1112",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44253,
+      "price_with_baggage": 10282.0,
+      "best_offer": {
+        "id": 90151,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 5992.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-29T23:05:00Z",
+          "segments": [
+            {
+              "id": 163111,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163112,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T21:50:00Z",
+              "arrival_time": "2022-01-29T23:05:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1118",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44269,
+      "price_with_baggage": 9937.0,
+      "best_offer": {
+        "id": 90176,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6038.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-29T16:10:00Z",
+          "segments": [
+            {
+              "id": 163147,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163148,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T14:55:00Z",
+              "arrival_time": "2022-01-29T16:10:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1250",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44267,
+      "price_with_baggage": 9937.0,
+      "best_offer": {
+        "id": 90174,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6038.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-31T16:10:00Z",
+          "segments": [
+            {
+              "id": 163143,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163144,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T14:55:00Z",
+              "arrival_time": "2022-01-31T16:10:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1250",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63750,
+      "price_with_baggage": 11789.0,
+      "best_offer": {
+        "id": 125431,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6187.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-31T09:05:00Z",
+          "segments": [
+            {
+              "id": 222418,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222419,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222420,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T06:50:00Z",
+              "arrival_time": "2022-01-31T09:05:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-160",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63751,
+      "price_with_baggage": 11919.0,
+      "best_offer": {
+        "id": 125432,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6194.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-30T22:45:00Z",
+          "segments": [
+            {
+              "id": 222421,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222422,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222423,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T20:35:00Z",
+              "arrival_time": "2022-01-30T22:45:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-524",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63752,
+      "price_with_baggage": 11689.0,
+      "best_offer": {
+        "id": 125433,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6392.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-30T23:25:00Z",
+          "segments": [
+            {
+              "id": 222424,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222425,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222426,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T21:10:00Z",
+              "arrival_time": "2022-01-30T23:25:00Z",
+              "marketing_airline": {
+                "id": 740,
+                "code": "5N",
+                "title": "Smartavia"
+              },
+              "flight": "5N-282",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63753,
+      "price_with_baggage": 11821.0,
+      "best_offer": {
+        "id": 125434,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6401.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-31T00:30:00Z",
+          "segments": [
+            {
+              "id": 222427,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222428,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222429,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T22:15:00Z",
+              "arrival_time": "2022-01-31T00:30:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-2078",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44271,
+      "price_with_baggage": 10539.0,
+      "best_offer": {
+        "id": 90178,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6580.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T22:55:00Z",
+          "end_time": "2022-01-31T15:20:00Z",
+          "segments": [
+            {
+              "id": 163151,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "departure_time": "2022-01-29T22:55:00Z",
+              "arrival_time": "2022-01-30T00:55:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-142",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163152,
+              "departure": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T12:50:00Z",
+              "arrival_time": "2022-01-31T15:20:00Z",
+              "marketing_airline": {
+                "id": 121,
+                "code": "R3",
+                "title": "Yakutia Airlines"
+              },
+              "flight": "R3-474",
+              "handbags_weight": null,
+              "baggage_weight": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63755,
+      "price_with_baggage": 12265.0,
+      "best_offer": {
+        "id": 125436,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6664.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-30T21:40:00Z",
+          "segments": [
+            {
+              "id": 222433,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222434,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222435,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T19:25:00Z",
+              "arrival_time": "2022-01-30T21:40:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-156",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63754,
+      "price_with_baggage": 12265.0,
+      "best_offer": {
+        "id": 125435,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6664.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-30T17:00:00Z",
+          "segments": [
+            {
+              "id": 222430,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222431,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222432,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T14:45:00Z",
+              "arrival_time": "2022-01-30T17:00:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-158",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44275,
+      "price_with_baggage": 11220.0,
+      "best_offer": {
+        "id": 90197,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6721.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-30T23:05:00Z",
+          "segments": [
+            {
+              "id": 163160,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163161,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T21:50:00Z",
+              "arrival_time": "2022-01-30T23:05:00Z",
+              "marketing_airline": {
+                "id": 495,
+                "code": "S7",
+                "title": "S7 Airlines"
+              },
+              "flight": "S7-1118",
+              "handbags_weight": 10,
+              "baggage_weight": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63756,
+      "price_with_baggage": 11658.0,
+      "best_offer": {
+        "id": 125437,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6735.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-30T23:50:00Z",
+          "segments": [
+            {
+              "id": 222436,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222437,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222438,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T21:30:00Z",
+              "arrival_time": "2022-01-30T23:50:00Z",
+              "marketing_airline": {
+                "id": 393,
+                "code": "N4",
+                "title": "Nordwind Airlines"
+              },
+              "flight": "N4-362",
+              "handbags_weight": null,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63757,
+      "price_with_baggage": 12219.0,
+      "best_offer": {
+        "id": 125438,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6922.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-30T17:35:00Z",
+          "segments": [
+            {
+              "id": 222439,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222440,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222441,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T15:20:00Z",
+              "arrival_time": "2022-01-30T17:35:00Z",
+              "marketing_airline": {
+                "id": 388,
+                "code": "6R",
+                "title": "Alrosa"
+              },
+              "flight": "6R-584",
+              "handbags_weight": null,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44282,
+      "price_with_baggage": 11490.0,
+      "best_offer": {
+        "id": 90204,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6989.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-30T22:30:00Z",
+          "segments": [
+            {
+              "id": 163177,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163178,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T20:55:00Z",
+              "arrival_time": "2022-01-30T22:30:00Z",
+              "marketing_airline": {
+                "id": 434,
+                "code": "SU",
+                "title": "Aeroflot"
+              },
+              "flight": "SU-6470",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44278,
+      "price_with_baggage": 11490.0,
+      "best_offer": {
+        "id": 90200,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6989.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-31T12:25:00Z",
+          "segments": [
+            {
+              "id": 163167,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163168,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T11:10:00Z",
+              "arrival_time": "2022-01-31T12:25:00Z",
+              "marketing_airline": {
+                "id": 434,
+                "code": "SU",
+                "title": "Aeroflot"
+              },
+              "flight": "SU-6466",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44280,
+      "price_with_baggage": 11490.0,
+      "best_offer": {
+        "id": 90202,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6989.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-30T07:25:00Z",
+          "segments": [
+            {
+              "id": 163172,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163173,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T06:05:00Z",
+              "arrival_time": "2022-01-30T07:25:00Z",
+              "marketing_airline": {
+                "id": 434,
+                "code": "SU",
+                "title": "Aeroflot"
+              },
+              "flight": "SU-6468",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44277,
+      "price_with_baggage": 11490.0,
+      "best_offer": {
+        "id": 90199,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 6989.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-31T07:25:00Z",
+          "segments": [
+            {
+              "id": 163165,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163166,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T06:05:00Z",
+              "arrival_time": "2022-01-31T07:25:00Z",
+              "marketing_airline": {
+                "id": 434,
+                "code": "SU",
+                "title": "Aeroflot"
+              },
+              "flight": "SU-6468",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63759,
+      "price_with_baggage": 12775.0,
+      "best_offer": {
+        "id": 125440,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7050.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-31T08:50:00Z",
+          "segments": [
+            {
+              "id": 222445,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222446,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222447,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T06:40:00Z",
+              "arrival_time": "2022-01-31T08:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-536",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63758,
+      "price_with_baggage": 12775.0,
+      "best_offer": {
+        "id": 125439,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7050.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T10:45:00Z",
+          "end_time": "2022-01-30T16:10:00Z",
+          "segments": [
+            {
+              "id": 222442,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "departure_time": "2022-01-29T10:45:00Z",
+              "arrival_time": "2022-01-29T12:20:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-279",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222443,
+              "departure": {
+                "id": 11956,
+                "code": "BZK",
+                "title": "Bryansk International Airport",
+                "city": {
+                  "id": 13059,
+                  "code": "BZK",
+                  "title": "Bryansk"
+                }
+              },
+              "arrival": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "departure_time": "2022-01-29T16:35:00Z",
+              "arrival_time": "2022-01-29T18:35:00Z",
+              "marketing_airline": {
+                "id": 671,
+                "code": "A4",
+                "title": "Azimut"
+              },
+              "flight": "A4-344",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 222444,
+              "departure": {
+                "id": 10785,
+                "code": "KRR",
+                "title": "Krasnodar International Airport",
+                "city": {
+                  "id": 15000,
+                  "code": "KRR",
+                  "title": "Krasnodar"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T14:00:00Z",
+              "arrival_time": "2022-01-30T16:10:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-576",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 45652,
+      "price_with_baggage": 9291.0,
+      "best_offer": {
+        "id": 92254,
+        "gate_id": 183,
+        "title": "Aviakassa",
+        "price": 7414.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-29T22:30:00Z",
+          "segments": [
+            {
+              "id": 166980,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 166981,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T20:55:00Z",
+              "arrival_time": "2022-01-29T22:30:00Z",
+              "marketing_airline": {
+                "id": 434,
+                "code": "SU",
+                "title": "Aeroflot"
+              },
+              "flight": "SU-6470",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 45651,
+      "price_with_baggage": 9291.0,
+      "best_offer": {
+        "id": 92252,
+        "gate_id": 183,
+        "title": "Aviakassa",
+        "price": 7414.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-29T21:10:00Z",
+          "segments": [
+            {
+              "id": 166978,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 166979,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-29T20:00:00Z",
+              "arrival_time": "2022-01-29T21:10:00Z",
+              "marketing_airline": {
+                "id": 434,
+                "code": "SU",
+                "title": "Aeroflot"
+              },
+              "flight": "SU-1337",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44285,
+      "price_with_baggage": 10424.0,
+      "best_offer": {
+        "id": 90207,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7445.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T19:00:00Z",
+          "end_time": "2022-01-31T07:50:00Z",
+          "segments": [
+            {
+              "id": 163184,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "departure_time": "2022-01-29T19:00:00Z",
+              "arrival_time": "2022-01-29T21:35:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-518",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            },
+            {
+              "id": 163185,
+              "departure": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T06:25:00Z",
+              "arrival_time": "2022-01-31T07:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-382",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44284,
+      "price_with_baggage": 10424.0,
+      "best_offer": {
+        "id": 90206,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7445.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T19:00:00Z",
+          "end_time": "2022-01-30T07:50:00Z",
+          "segments": [
+            {
+              "id": 163182,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "departure_time": "2022-01-29T19:00:00Z",
+              "arrival_time": "2022-01-29T21:35:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-518",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            },
+            {
+              "id": 163183,
+              "departure": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T06:25:00Z",
+              "arrival_time": "2022-01-30T07:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-382",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44287,
+      "price_with_baggage": 12506.0,
+      "best_offer": {
+        "id": 90209,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7477.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T22:55:00Z",
+          "end_time": "2022-01-31T20:00:00Z",
+          "segments": [
+            {
+              "id": 163189,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "departure_time": "2022-01-29T22:55:00Z",
+              "arrival_time": "2022-01-30T00:55:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-142",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163190,
+              "departure": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T17:20:00Z",
+              "arrival_time": "2022-01-31T20:00:00Z",
+              "marketing_airline": {
+                "id": 819,
+                "code": "Y7",
+                "title": "NordStar"
+              },
+              "flight": "Y7-401",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44289,
+      "price_with_baggage": 11988.0,
+      "best_offer": {
+        "id": 90211,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7488.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T08:20:00Z",
+          "end_time": "2022-01-30T12:25:00Z",
+          "segments": [
+            {
+              "id": 163194,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "departure_time": "2022-01-29T08:20:00Z",
+              "arrival_time": "2022-01-29T09:50:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-157",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163195,
+              "departure": {
+                "id": 12508,
+                "code": "VOZ",
+                "title": "Voronezh Airport",
+                "city": {
+                  "id": 16937,
+                  "code": "VOZ",
+                  "title": "Voronezh"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T11:10:00Z",
+              "arrival_time": "2022-01-30T12:25:00Z",
+              "marketing_airline": {
+                "id": 434,
+                "code": "SU",
+                "title": "Aeroflot"
+              },
+              "flight": "SU-6466",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44292,
+      "price_with_baggage": null,
+      "best_offer": {
+        "id": 90214,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7672.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T22:55:00Z",
+          "end_time": "2022-01-31T18:55:00Z",
+          "segments": [
+            {
+              "id": 163201,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "departure_time": "2022-01-29T22:55:00Z",
+              "arrival_time": "2022-01-30T00:55:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-142",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163202,
+              "departure": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T16:30:00Z",
+              "arrival_time": "2022-01-31T18:55:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-112",
+              "handbags_weight": null,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44294,
+      "price_with_baggage": 11433.0,
+      "best_offer": {
+        "id": 90216,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7705.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T19:00:00Z",
+          "end_time": "2022-01-31T11:35:00Z",
+          "segments": [
+            {
+              "id": 163206,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "departure_time": "2022-01-29T19:00:00Z",
+              "arrival_time": "2022-01-29T21:35:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-518",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            },
+            {
+              "id": 163207,
+              "departure": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T09:50:00Z",
+              "arrival_time": "2022-01-31T11:35:00Z",
+              "marketing_airline": {
+                "id": 819,
+                "code": "Y7",
+                "title": "NordStar"
+              },
+              "flight": "Y7-1062",
+              "handbags_weight": 10,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44296,
+      "price_with_baggage": 7846.0,
+      "best_offer": {
+        "id": 90218,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7846.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T22:55:00Z",
+          "end_time": "2022-01-31T20:15:00Z",
+          "segments": [
+            {
+              "id": 163211,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "departure_time": "2022-01-29T22:55:00Z",
+              "arrival_time": "2022-01-30T00:55:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-142",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163212,
+              "departure": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "arrival": {
+                "id": 11824,
+                "code": "DME",
+                "title": "Moscow Domodedovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T17:50:00Z",
+              "arrival_time": "2022-01-31T20:15:00Z",
+              "marketing_airline": {
+                "id": 112,
+                "code": "U6",
+                "title": "Ural Airlines"
+              },
+              "flight": "U6-472",
+              "handbags_weight": 5,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44308,
+      "price_with_baggage": 11148.0,
+      "best_offer": {
+        "id": 90230,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7972.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T19:00:00Z",
+          "end_time": "2022-01-30T11:30:00Z",
+          "segments": [
+            {
+              "id": 163241,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "departure_time": "2022-01-29T19:00:00Z",
+              "arrival_time": "2022-01-29T21:35:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-518",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            },
+            {
+              "id": 163242,
+              "departure": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T10:00:00Z",
+              "arrival_time": "2022-01-30T11:30:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-206",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44310,
+      "price_with_baggage": 11148.0,
+      "best_offer": {
+        "id": 90232,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7972.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T19:00:00Z",
+          "end_time": "2022-01-31T10:30:00Z",
+          "segments": [
+            {
+              "id": 163246,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "departure_time": "2022-01-29T19:00:00Z",
+              "arrival_time": "2022-01-29T21:35:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-518",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            },
+            {
+              "id": 163247,
+              "departure": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T09:00:00Z",
+              "arrival_time": "2022-01-31T10:30:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-208",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44304,
+      "price_with_baggage": 11148.0,
+      "best_offer": {
+        "id": 90226,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7972.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T19:00:00Z",
+          "end_time": "2022-01-31T11:30:00Z",
+          "segments": [
+            {
+              "id": 163231,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "departure_time": "2022-01-29T19:00:00Z",
+              "arrival_time": "2022-01-29T21:35:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-518",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            },
+            {
+              "id": 163232,
+              "departure": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T10:00:00Z",
+              "arrival_time": "2022-01-31T11:30:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-206",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44301,
+      "price_with_baggage": 11148.0,
+      "best_offer": {
+        "id": 90223,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7972.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T19:00:00Z",
+          "end_time": "2022-01-30T10:30:00Z",
+          "segments": [
+            {
+              "id": 163224,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "departure_time": "2022-01-29T19:00:00Z",
+              "arrival_time": "2022-01-29T21:35:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-518",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            },
+            {
+              "id": 163225,
+              "departure": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-30T09:00:00Z",
+              "arrival_time": "2022-01-30T10:30:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-208",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44311,
+      "price_with_baggage": 10765.0,
+      "best_offer": {
+        "id": 90233,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 7995.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T19:00:00Z",
+          "end_time": "2022-01-31T05:30:00Z",
+          "segments": [
+            {
+              "id": 163248,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "departure_time": "2022-01-29T19:00:00Z",
+              "arrival_time": "2022-01-29T21:35:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-518",
+              "handbags_weight": null,
+              "baggage_weight": 10
+            },
+            {
+              "id": 163249,
+              "departure": {
+                "id": 9796,
+                "code": "LED",
+                "title": "Pulkovo Airport",
+                "city": {
+                  "id": 11855,
+                  "code": "LED",
+                  "title": "Saint Petersburg"
+                }
+              },
+              "arrival": {
+                "id": 10456,
+                "code": "SVO",
+                "title": "Sheremetyevo International Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T03:50:00Z",
+              "arrival_time": "2022-01-31T05:30:00Z",
+              "marketing_airline": {
+                "id": 393,
+                "code": "N4",
+                "title": "Nordwind Airlines"
+              },
+              "flight": "N4-928",
+              "handbags_weight": null,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44317,
+      "price_with_baggage": null,
+      "best_offer": {
+        "id": 90239,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 8307.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T22:55:00Z",
+          "end_time": "2022-01-31T23:15:00Z",
+          "segments": [
+            {
+              "id": 163263,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "departure_time": "2022-01-29T22:55:00Z",
+              "arrival_time": "2022-01-30T00:55:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-142",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163264,
+              "departure": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T20:50:00Z",
+              "arrival_time": "2022-01-31T23:15:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-120",
+              "handbags_weight": null,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44315,
+      "price_with_baggage": null,
+      "best_offer": {
+        "id": 90237,
+        "gate_id": 70,
+        "title": "KupiBilet.ru",
+        "price": 8307.0
+      },
+      "trips": [
+        {
+          "start_time": "2022-01-29T22:55:00Z",
+          "end_time": "2022-01-31T14:10:00Z",
+          "segments": [
+            {
+              "id": 163258,
+              "departure": {
+                "id": 11983,
+                "code": "VOG",
+                "title": "Volgograd International Airport",
+                "city": {
+                  "id": 15835,
+                  "code": "VOG",
+                  "title": "Volgograd"
+                }
+              },
+              "arrival": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "departure_time": "2022-01-29T22:55:00Z",
+              "arrival_time": "2022-01-30T00:55:00Z",
+              "marketing_airline": {
+                "id": 673,
+                "code": "UT",
+                "title": "Utair"
+              },
+              "flight": "UT-142",
+              "handbags_weight": 5,
+              "baggage_weight": null
+            },
+            {
+              "id": 163259,
+              "departure": {
+                "id": 12014,
+                "code": "AER",
+                "title": "Sochi International Airport",
+                "city": {
+                  "id": 12878,
+                  "code": "AER",
+                  "title": "Adler/Sochi"
+                }
+              },
+              "arrival": {
+                "id": 10899,
+                "code": "VKO",
+                "title": "Vnukovo Airport",
+                "city": {
+                  "id": 14082,
+                  "code": "MOW",
+                  "title": "Moscow"
+                }
+              },
+              "departure_time": "2022-01-31T11:45:00Z",
+              "arrival_time": "2022-01-31T14:10:00Z",
+              "marketing_airline": {
+                "id": 560,
+                "code": "DP",
+                "title": "Pobeda"
+              },
+              "flight": "DP-114",
+              "handbags_weight": null,
+              "baggage_weight": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

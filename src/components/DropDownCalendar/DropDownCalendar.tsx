@@ -20,11 +20,15 @@ interface DropDownCalendarProps {
   isHidden: boolean
   setIsHidden: Dispatch<boolean>
 
+  dates?: DateCalendarState["dates"]
   onChange: Dispatch<DateCalendarState>
 }
 
 function DropDownCalendar(props: DropDownCalendarProps) {
-  const [state, dispatch] = useReducer(DateCalendarReducer, DateCalendarInitialState)
+  const [state, dispatch] = useReducer(DateCalendarReducer, {
+    ...DateCalendarInitialState,
+    dates: props.dates || DateCalendarInitialState.dates
+  })
 
   useEffect(() => props.onChange(state), [state.dates])
   useEffect(() => dispatch(updateDateCalendarHasGrouping(props.hasGrouping)), [props.hasGrouping])

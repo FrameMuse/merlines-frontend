@@ -4,6 +4,9 @@ import { createQuery } from "utils"
 
 import { Action, APIResponseError } from "./client"
 
+
+type Response<T = unknown> = QueryResponse<T & APIResponseError>
+
 export function requestInterceptor() {
   return async (action: Action) => {
     const endpoint = process.env.REACT_APP_BASE_URL + action.endpoint + "/"
@@ -19,7 +22,7 @@ export function requestInterceptor() {
   }
 }
 export function responseInterceptor() {
-  return async (_action: Action, response: QueryResponse<APIResponseError>) => {
+  return async (_action: Action, response: Response) => {
     if (response.payload == null && response.status !== 204) {
       return {
         ...response,
@@ -28,28 +31,38 @@ export function responseInterceptor() {
     }
 
     if (response.payload?.error) {
-      toast.error(response.payload.error.code)
-
-      if (process.env.NODE_ENV === "development") {
-        try {
-          for (const field of Object.values(response.payload?.error.detail) as any) {
-            for (const fieldError of Object.values(field) as any) {
-              toast.error(fieldError.message)
-            }
-          }
-        } catch (error) {
-          if (response.payload.error.detail != null) {
-            toast.error(JSON.stringify(response.payload.error.detail))
-          }
-        }
-      }
-
-      return {
-        ...response,
-        error: true
-      }
+      return responseErrorHandling(response)
     }
 
     return response
   }
+}
+
+function responseErrorHandling(response: Response) {
+  if (response.payload == null) {
+    return { ...response, error: true }
+  }
+
+  toast.error(response.payload.error.code)
+  if (process.env.NODE_ENV === "development") {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      for (const field of Object.values(response.payload?.error.detail) as any) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        for (const fieldError of Object.values(field) as any) {
+          toast.error(fieldError.message)
+        }
+      }
+    } catch (error) {
+      if (response.payload.error.detail != null) {
+        toast.error(JSON.stringify(response.payload.error.detail))
+      } else {
+        toast.error(JSON.stringify(response.payload.error))
+      }
+
+      toast.info(JSON.stringify(error))
+    }
+  }
+
+  return { ...response, error: true }
 }

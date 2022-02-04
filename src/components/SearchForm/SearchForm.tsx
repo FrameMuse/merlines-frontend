@@ -226,6 +226,10 @@ function SearchFormDate(props: SearchFormDatingProps) {
         isHidden={isCalendarHidden}
         setIsHidden={setIsCalendarHidden}
 
+        dates={{
+          first: search.routes[props.routeIndex].departureDate || new Date,
+          second: search.routes[props.routeIndex].returnDate,
+        }}
         onChange={onCalendarStateChange}
       />
     </>

@@ -55,7 +55,7 @@ function Ticket(props: TicketProps) {
               </button>
             )}
           </div>
-          <div className="ticket-side__price">{props.price.toPrice("ru", "rub")}</div>
+          <div className="ticket-side__price">{(props.price + (hasBaggage ? props.bestOffer.price : 0)).toPrice("ru", "rub")}</div>
           <button className={classWithModifiers("ticket-side-button", isDetailsExpanded && "pressed")} aria-details="toggle details" aria-pressed={isDetailsExpanded} onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}>
             <span className="ticket-side-button__text">Подробнее</span>
             <Icon className="ticket-side-button__icon" name="chevron" />

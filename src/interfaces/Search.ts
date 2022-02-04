@@ -5,7 +5,17 @@ export interface TripType {
   date: string
 }
 
-export interface FiltersType {
+
+/*
+
+--------------------------------------
+--------- AIR Search Results ---------
+--------------------------------------
+
+*/
+
+
+export interface AirFiltersType {
   airlines: string
   destination_airports: string
 
@@ -28,7 +38,7 @@ export interface FiltersType {
   travel_time__lte: string
 }
 
-export interface TicketType {
+export interface AirTicketType {
   id: number
   price_with_baggage: number
   best_offer: {
@@ -79,3 +89,27 @@ export interface TicketType {
     }
   ]
 }
+
+
+/*
+
+--------------------------------------
+--------- BUS Search Results ---------
+--------------------------------------
+
+*/
+
+
+
+
+
+/*
+
+----------------------------------------
+--------- TRAIN Search Results ---------
+----------------------------------------
+
+*/
+
+
+

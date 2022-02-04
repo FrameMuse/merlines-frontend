@@ -1,5 +1,4 @@
 import { Action as BaseAction, createClient } from "react-fetching-library"
-import { toast } from "react-toastify"
 
 import { cacheProvider } from "./cache"
 import { requestInterceptor, responseInterceptor } from "./interceptors"

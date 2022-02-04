@@ -1,6 +1,6 @@
 import { Action } from "api/client"
 import { PaginationType } from "interfaces/Django"
-import { FiltersType, TicketType, TripType } from "interfaces/Search"
+import { AirFiltersType, AirTicketType, TripType } from "interfaces/Search"
 
 // Create session
 export const postTicketsAir = (trips: TripType[], travel_class: string, passengers?: Partial<{ adults: number, children: number, infants: number }>): Action<{ session: string }> => ({
@@ -9,10 +9,13 @@ export const postTicketsAir = (trips: TripType[], travel_class: string, passenge
   body: { trips, travel_class, ...passengers }
 })
 
-export const getTicketsAir = (session: string, page: number, page_size: number, filters?: Partial<FiltersType>): Action<PaginationType<TicketType> & { in_progress: boolean }> => ({
+export const getTicketsAir = (session: string, page: number, page_size: number, filters?: Partial<AirFiltersType>): Action<PaginationType<AirTicketType> & { in_progress: boolean }> => ({
   method: "GET",
   endpoint: "/tickets/air/" + session,
-  params: { page, page_size, ...filters }
+  params: { page, page_size, ...filters },
+  config: {
+    skipCache: true
+  }
 })
 
 export const getTicketsAirFilters = (session: string): Action<{
@@ -76,7 +79,10 @@ export const getTicketsAirFilters = (session: string): Action<{
   }[][]
 }> => ({
   method: "GET",
-  endpoint: "/tickets/air/" + session + "/filters"
+  endpoint: `/tickets/air/${session}/filters`,
+  config: {
+    skipCache: true
+  }
 })
 
 enum FreeEntry {
@@ -95,7 +101,7 @@ export const getTicketsAirSegmentAbout = (segmentId: number): Action<{
   wifi: FreeEntry | null
 }> => ({
   method: "GET",
-  endpoint: "/tickets/air/segment/" + segmentId + "/about"
+  endpoint: `/tickets/air/segment/${segmentId}/about`
 })
 
 export const getTicketsAirTicketOffers = (ticketId: number): Action<PaginationType<{
@@ -105,7 +111,7 @@ export const getTicketsAirTicketOffers = (ticketId: number): Action<PaginationTy
   price: number
 }>> => ({
   method: "GET",
-  endpoint: "/tickets/air/ticket/" + ticketId + "/offers"
+  endpoint: `/tickets/air/ticket/${ticketId}/offers`
 })
 
 export const getTicketsAirOfferLink = (sessionId: string, id: number): Action => ({
