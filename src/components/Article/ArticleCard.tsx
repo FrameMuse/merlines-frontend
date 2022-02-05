@@ -14,7 +14,7 @@ function ArticleCard(props: ArticleCardProps) {
       </div>
       <div className="article-card__tags-list">
         {props.tags.map(tag => (
-          <Link key={tag} className="article-card__tags-item" to={"/blog/tag/" + tag}>#{tag}</Link>
+          <Link key={tag} className="article-card__tags-item" to={"/blog?tag=" + tag}>#{tag}</Link>
         ))}
       </div>
       <Link className="article-card__title" to={"/blog/article/" + props.id}>{props.title}</Link>
