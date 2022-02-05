@@ -48,11 +48,11 @@ export function SearchResultAirFilters(props: SearchResultAirFiltersProps) {
           </SearchFilter>
           <SearchFilter label="Время в пути">
             {payload.travel_times.map((time, index) => (
-              <SearchFilterTimeRange name="transfer_time" index={index} {...time} />
+              <SearchFilterTimeRange name="travel_time" index={index} {...time} />
             )).map(flightPredicate)}
           </SearchFilter>
           <SearchFilter label="Время пересадки">
-            {payload.travel_times.map((time, index) => (
+            {payload.transfer_times.map((time, index) => (
               <SearchFilterTimeRange name="transfer_time" index={index} {...time} />
             )).map(flightPredicate)}
           </SearchFilter>
