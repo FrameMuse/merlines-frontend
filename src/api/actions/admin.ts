@@ -36,8 +36,8 @@ export const getAdminUser = (id: number): Action => ({
   endpoint: "/admin/user/" + id,
 })
 
-export const putAdminUser = (id: number, type: Client["type"]): Action => ({
-  method: "PUT",
+export const patchAdminUser = (id: number, type: Client["type"]): Action => ({
+  method: "PATCH",
   endpoint: "/admin/user/" + id,
   body: { type }
 })
@@ -50,6 +50,18 @@ export const deleteAdminUser = (id: number): Action => ({
 export const getAdminUsers = (filters: Partial<{ id: number, type: string, first_name: string, page: number, page_size: number }>): Action<PaginationType<Client>> => ({
   method: "GET",
   endpoint: "/admin/users",
+  params: filters
+})
+
+export const getAdminUsersEditors = (filters: Partial<{ id: number, first_name: string, page: number, page_size: number }>): Action<PaginationType<{
+  id: number
+  first_name: string
+  last_name: string
+  email: string
+  articles_count: number
+}>> => ({
+  method: "GET",
+  endpoint: "/admin/users/editors",
   params: filters
 })
 

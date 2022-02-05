@@ -1,10 +1,10 @@
-import AdminEditUsers from "admin/components/AdminEditUsers/AdminEditUsers"
+import { AdminEditAuthorsContainer } from "admin/components/AdminEditUsers/AdminEditUsers"
 import AdminViewLayout from "admin/layouts/AdminViewLayout"
 
 function AdminAuthorsView() {
   return (
     <AdminViewLayout title="Авторы">
-      <AdminEditUsers type="3" />
+      <AdminEditAuthorsContainer />
     </AdminViewLayout>
   )
 }
