@@ -36,7 +36,7 @@ function Blog() {
           <>
             <BlogSection title="Новое" pageSize={4} filters={{ ordering: "-created_at" }} />
             <BlogSection title="Популярное" pageSize={4} filters={{ ordering: "-likers__count" }} />
-            <BlogSection title="Все" pageSize={12} />
+            <BlogSection title="Все" pageSize={12} showMoreButton />
           </>
         )}
       </div>
@@ -49,6 +49,7 @@ interface BlogSectionProps {
   title: any
   pageSize: number
   filters?: Partial<ArticleFiltersType>
+  showMoreButton?: boolean
 }
 
 function BlogSection(props: BlogSectionProps) {
@@ -81,7 +82,7 @@ function BlogSection(props: BlogSectionProps) {
           <ArticleCard {...article} key={index} />
         ))}
       </div>
-      {!isLastPage && (
+      {!isLastPage && props.showMoreButton && (
         <button className="section__more">
           <span>загрузить еще</span>
           <Icon name="chevron" className="section__more-icon" />
