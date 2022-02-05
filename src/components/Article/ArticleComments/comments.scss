@@ -117,8 +117,9 @@
 }
 
 .comments__item {
-	margin-bottom: 15px;
-	border-top: 1px solid var(--color-border-secondary);
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+	border-bottom: 1px solid var(--color-border-secondary);
 
 	&:last-child {
 		margin-bottom: 0;
@@ -127,12 +128,6 @@
 	@media #{$media-md} {
 		margin-bottom: 18px;
 		padding-left: 95px;
-	}
-
-	@media #{$media-xl} {
-		&:first-child {
-			border-top: none;
-		}
 	}
 }
 
@@ -246,6 +241,10 @@
 
 .comments__text {
 	@include textSm;
+
+	word-break: break-word;
+	// overflow: hidden;
+	// text-overflow: ellipsis;
 
 	@media #{$media-md} {
 		font-size: 14px;
@@ -393,6 +392,8 @@
 
 	color: #A1A1A1;
 	font-weight: 400;
+	line-height: 1.25;
+	word-break: break-word;
 }
 
 .comments__btn-container {

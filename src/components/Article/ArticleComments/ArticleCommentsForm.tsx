@@ -5,6 +5,8 @@ import { Dispatch, FormEvent, useState } from "react"
 import { Link } from "react-router-dom"
 
 
+const MAX_TEXTAREA_LENGTH = 500
+
 interface ArticleCommentsFormProps {
   articleId: number
   reply?: ArticleAuthorType
@@ -46,9 +48,9 @@ function ArticleCommentsForm(props: ArticleCommentsFormProps) {
             </Link>
           </div>
         )}
-        <div className="comments__form-info">(0/500 символов)</div>
+        <div className="comments__form-info">({message.length}/{MAX_TEXTAREA_LENGTH} символов)</div>
       </div>
-      <textarea className="comments__message" placeholder="Введите текст комментария..." onInput={event => setMessage(event.currentTarget.value)} />
+      <textarea className="comments__message" maxLength={MAX_TEXTAREA_LENGTH} placeholder="Введите текст комментария..." onInput={event => setMessage(event.currentTarget.value)} />
       <div className="comments__btn-container">
         <input className="btn comments__btn" type="submit" value="Оставить комментарий" />
         <input className="comments__btn-reset" type="reset" value="Отменить" />
