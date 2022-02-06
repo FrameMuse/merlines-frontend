@@ -117,7 +117,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
   }
 
   async function publish() {
-    const id = props.new ? await postArticle(false) : await patchArticle(false)
+    const id = await patchArticle(false)
     if (!id) return
 
     toast.info("Created!")
