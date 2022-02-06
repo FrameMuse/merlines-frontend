@@ -39,6 +39,13 @@ export function responseInterceptor() {
 }
 
 function responseErrorHandling(response: Response) {
+  if (response.status === 401) {
+    localStorage.removeItem("token")
+    toast.error("Что-то не так с авторизацией")
+    toast.info("Токен был сброшен, авторизуйтесь ещё раз")
+    return { ...response, error: true }
+  }
+
   if (response.payload == null) {
     return { ...response, error: true }
   }
