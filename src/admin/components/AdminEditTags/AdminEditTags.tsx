@@ -2,18 +2,16 @@
 import "./AdminEditTags.style.scss"
 
 import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
-import { deleteAdminTag, postAdminTag, putAdminTag } from "api/actions/admin"
+import { deleteAdminArticle, getAdminArticles, patchAdminArticle } from "api/actions/admin"
 import { getBlogArticles, getBlogTags } from "api/actions/blog"
 import ClientAPI from "api/client"
 import { BlogTagType } from "interfaces/Blog"
-import { useEffect, useState } from "react"
-import { cloneElement } from "react"
+import { useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 
 import AdminButton from "../AdminButton/AdminButton"
-import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
 
 function AdminEditTags() {
@@ -39,7 +37,7 @@ function AdminEditTags() {
 function TagArticles(props: { tag: BlogTagType }) {
   const [page, setPage] = useState(1)
   const [pageSize] = useState(5)
-  const { error, loading, payload } = useQuery(getBlogArticles(page, pageSize, { tags__contains: props.tag.title }))
+  const { error, loading, payload } = useQuery(getAdminArticles(page, pageSize, { tags__contains: props.tag.title }))
   if (error) throw new Error()
   if (loading) return <>Loading...</>
   if (!payload) return <>no content</>
@@ -58,32 +56,59 @@ function TagArticles(props: { tag: BlogTagType }) {
 }
 
 
-interface TagArticleProps {
+export interface TagArticleProps {
   id: number
   title: string
+  author: {
+    id: number
+    first_name: string
+    last_name: string
+  }
   created_at: string
-  status?: number
-  comments?: number
+  comments_count: number
+  deleted_comments_count: number
+  is_draft: boolean
 }
 
 function TagArticle(props: TagArticleProps) {
   const history = useHistory()
   const [hidden, setHidden] = useState(true)
+  const [deleted, setDeleted] = useState(false)
+  const [isDraft, setIsDraft] = useState(props.is_draft)
+  function publishArticle() {
+    ClientAPI
+      .query(patchAdminArticle(props.id, {}, false))
+      .then(({ error }) => {
+        if (error) return
+        toast.info("Article published!")
+        setIsDraft(false)
+      })
+  }
+  function deleteArticle() {
+    ClientAPI
+      .query(deleteAdminArticle(props.id))
+      .then(({ error }) => {
+        if (error) return
+        toast.info("Article deleted!")
+        setDeleted(true)
+      })
+  }
+  if (deleted) return null
   return (
     <section className="admin-section-layout">
       <h3 className="admin-section-layout__header" onClick={() => setHidden(!hidden)}>{props.title}</h3>
       {!hidden && (
         <div className="admin-section-layout__container">
-          Автор: <b>Изя Шниперсон</b> <br /><br />
+          Автор: <b>{props.author.first_name} {props.author.last_name}</b> <br /><br />
           Время создания: <b>{new Date(props.created_at).toLocaleString("ru")}</b> <br /><br />
-          Статус: <b>{props.status}</b> <br /><br />
-          Комментарии: <b>{props.comments} | {props.comments}</b> <br /><br />
+          Статус: <b>{isDraft ? "Черновик" : "Опубликована"}</b> <br /><br />
+          Комментарии: <b>{props.comments_count} | <span className="red">{props.deleted_comments_count}</span></b> <br /><br />
 
           <br /><br /><br />
 
           <AdminButton onClick={() => history.push("/admin/edit-article/" + props.id)}>Редактировать статью</AdminButton><br /><br />
-          <AdminButton>Опубликовать статью</AdminButton><br /><br />
-          <AdminButton>Удалить статью</AdminButton>
+          <AdminButton onClick={publishArticle}>Опубликовать статью</AdminButton><br /><br />
+          <AdminButton onClick={deleteArticle}>Удалить статью</AdminButton>
         </div>
       )}
     </section>

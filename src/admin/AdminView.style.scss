@@ -118,6 +118,10 @@ kbd {
 
 .admin-section-layout__container {
 	padding: 1.25em;
+
+	.red {
+		color: rgba(red, 0.5);
+	}
 }
 
 /* Box Layout */

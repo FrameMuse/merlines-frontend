@@ -1,7 +1,8 @@
 import { MailingEntryType } from "admin/components/AdminBlogMailing/AdminBlogMailing"
+import { TagArticleProps } from "admin/components/AdminEditTags/AdminEditTags"
 import { Action } from "api/client"
 import { ArticleContentType, BlogTagType } from "interfaces/Blog"
-import { PaginationType } from "interfaces/Django"
+import { OrderingType, PaginationType } from "interfaces/Django"
 import { Client } from "interfaces/user"
 
 
@@ -12,16 +13,31 @@ export const getAdminArticle = (articleId: string): Action<ArticleContentType> =
   endpoint: "/admin/articles/" + articleId,
 })
 
-export const postAdminArticle = (data: ArticleContentType): Action<{ id: number }> => ({
-  method: "POST",
+export const getAdminArticles = (page: number, page_size: number, filters: {
+  ordering?: OrderingType<"tags__contains" | "title__icontains">
+  tags__contains?: string
+  title__icontains?: string
+}): Action<PaginationType<TagArticleProps>> => ({
+  method: "GET",
   endpoint: "/admin/articles",
-  body: data
+  params: { page, page_size, ...filters }
 })
 
-export const patchAdminArticle = (id: string, data: ArticleContentType): Action<{ id: number }> => ({
+export const postAdminArticle = (data: ArticleContentType, is_draft?: boolean): Action<{ id: number }> => ({
+  method: "POST",
+  endpoint: "/admin/articles",
+  body: { ...data, is_draft }
+})
+
+export const patchAdminArticle = (id: string | number, data: Partial<ArticleContentType>, is_draft?: boolean): Action<{ id: number }> => ({
   method: "PATCH",
   endpoint: "/admin/article/" + id,
-  body: data
+  body: { ...data, is_draft }
+})
+
+export const deleteAdminArticle = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: "/admin/article/" + id
 })
 
 export const deleteAdminComment = (id: number): Action => ({

@@ -1,7 +1,6 @@
 import AdminArticleEdit from "admin/components/AdminArticleEdit/AdminArticleEdit"
 import AdminViewLayout from "admin/layouts/AdminViewLayout"
 import { getBlogArticle } from "api/actions/blog"
-import { ArticleContentType } from "interfaces/Blog"
 import { useQuery } from "react-fetching-library"
 import { ToastContainer } from "react-toastify"
 
@@ -24,7 +23,8 @@ function AdminArticleEditContainer(props: { articleId: string }) {
     content: payload.content,
     files: payload.files,
     preview: payload.preview,
-    tags: payload.tags
+    tags: payload.tags,
+    is_draft: payload.is_draft
   }
 
   return (

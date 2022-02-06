@@ -29,6 +29,7 @@ export interface ArticleContentType {
   content: string
   preview: string
   tags: string[]
+  is_draft: boolean
   files: ArticleFileType[]
 }
 

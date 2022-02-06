@@ -31,7 +31,8 @@ const sampleArticleData: ArticleContentType = {
   tags: [],
   content: "",
   files: [],
-  preview: ""
+  preview: "",
+  is_draft: false
 }
 
 interface AdminArticleAddProps {
@@ -85,13 +86,13 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
     return errors
   }
 
-  async function postArticle() {
-    const { error, payload } = await ClientAPI.query(postAdminArticle(articleData))
+  async function postArticle(isDraft: boolean) {
+    const { error, payload } = await ClientAPI.query(postAdminArticle(articleData, isDraft))
     if (error || !payload || payload.error) return
 
     return payload.id
   }
-  async function patchArticle() {
+  async function patchArticle(isDraft: boolean) {
     const id = props.edit ? props.id : ""
     const files = articleData.files
 
@@ -101,16 +102,25 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
       }
     }
 
-    const { error, payload } = await ClientAPI.query(patchAdminArticle(id, articleData))
+    const { error, payload } = await ClientAPI.query(patchAdminArticle(id, articleData, isDraft))
     if (error || !payload || payload.error) return
 
     return payload.id
   }
 
-  async function onSubmit() {
-    const id = props.new ? await postArticle() : await patchArticle()
+  async function save() {
+    const id = props.new ? await postArticle(true) : await patchArticle(true)
     if (!id) return
 
+    toast.info("Saved!")
+    history.push("/admin/edit-article/" + id)
+  }
+
+  async function publish() {
+    const id = props.new ? await postArticle(false) : await patchArticle(false)
+    if (!id) return
+
+    toast.info("Created!")
     history.push("/blog/article/" + id)
   }
 
@@ -141,8 +151,8 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
       <AdminArticleEditor {...articleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />
       <AdminArticlePreview {...articleData} hidden={!showPreview} author={props.author} />
       <div>
-        <AdminButton onClick={onSubmit} disabled={error}>Сохранить статью</AdminButton>
-        <AdminButton onClick={onSubmit} disabled={error}>Опубликовать статью</AdminButton>
+        <AdminButton onClick={save} disabled={error}>Сохранить статью</AdminButton>
+        <AdminButton onClick={publish} disabled={error}>Опубликовать статью</AdminButton>
       </div>
     </div>
   )
