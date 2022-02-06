@@ -1,7 +1,7 @@
 // SCSS
 import "./search-form.scss"
 
-import { getGeoIp } from "api/actions/geo"
+import { getGeoIp, getGeoIpAir } from "api/actions/geo"
 import DropDownCalendar from "components/DropDownCalendar/DropDownCalendar"
 import { DateCalendarState } from "components/DropDownCalendar/DropDownCalendarReducer"
 import { FormEvent, Fragment, KeyboardEvent, useEffect, useRef, useState } from "react"
@@ -92,14 +92,11 @@ function SearchForm() {
   }, [search])
 
   useEffect(() => {
-    ClientAPI.query(getGeoIp).then(({ payload }) => {
+    ClientAPI.query(getGeoIpAir).then(({ payload }) => {
       if (!payload) return
-      // dispatch(updateSearchRoute(0, {
-      //   departurePoint: {
-      //     code: payload.region,
-      //     name: payload.city
-      //   }
-      // }));
+      dispatch(updateSearchRoute(0, {
+        departurePoint: payload
+      }));
       (document.querySelector(".search-form__group--arrival .search-form__input") as any)?.focus()
     })
 
