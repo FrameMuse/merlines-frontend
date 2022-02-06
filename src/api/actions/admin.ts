@@ -1,16 +1,19 @@
 import { MailingType } from "admin/components/AdminBlogMailing/AdminBlogMailing"
 import { TagArticleProps } from "admin/components/AdminEditTags/AdminEditTags"
 import { Action } from "api/client"
-import { ArticleContentType, BlogTagType } from "interfaces/Blog"
+import { ArticleAuthorType, ArticleContentType, BlogTagType } from "interfaces/Blog"
 import { OrderingType, PaginationType } from "interfaces/Django"
 import { Client } from "interfaces/user"
 
 
 /* Articles */
 
-export const getAdminArticle = (articleId: string): Action<ArticleContentType> => ({
+export const getAdminArticle = (articleId: string): Action<ArticleContentType & {
+  author: ArticleAuthorType
+  allow_comments: boolean
+}> => ({
   method: "GET",
-  endpoint: "/admin/articles/" + articleId,
+  endpoint: "/admin/article/" + articleId,
 })
 
 export const getAdminArticles = (page: number, page_size: number, filters: {
