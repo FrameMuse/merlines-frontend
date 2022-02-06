@@ -78,85 +78,6 @@ const ApiParams = {
   }
 }
 
-const passengerTypes = [
-  {
-    name: "Взрослые",
-    age: "от 12 лет",
-    apiParam: "passengers_adults"
-  },
-  {
-    name: "Дети",
-    age: "от 2 до 12 лет",
-    apiParam: "passengers_children"
-  },
-  {
-    name: "Младенцы",
-    age: "до 2 лет",
-    apiParam: "passengers_infants"
-  }
-]
-
-const passengerClasses = [
-  {
-    classId: "economy",
-    classType: "Эконом"
-  },
-  {
-    classId: "business",
-    classType: "Бизнес"
-  }
-]
-
-const accessPopupFieldsData = {
-  login: {
-    title: "Войти",
-    data: [
-      {
-        id: "email",
-        type: "email",
-        name: "e-mail",
-        inputName: "email",
-        class: ""
-      },
-      {
-        id: "password",
-        type: "password",
-        name: "пароль",
-        inputName: "password",
-        class: "modal__form-group--last"
-      }
-    ]
-  },
-  registration: {
-    title: "Регистрация",
-    data: [
-      {
-        id: "name",
-        type: "text",
-        name: "имя",
-        inputName: "username",
-        class: ""
-      },
-      // { id: 'surname', type: 'text', name: 'фамилия', inputName: '', class: '' },
-      {
-        id: "email",
-        type: "email",
-        name: "e-mail",
-        inputName: "email",
-        class: ""
-      },
-      {
-        id: "password",
-        type: "password",
-        name: "пароль",
-        inputName: "password",
-        class: ""
-      }
-      // { id: 'password-repeat', type: 'password', name: 'повторите пароль', inputName: '', class: 'modal__form-group--last' },
-    ]
-  }
-}
-
 const validationMessages = {
   name: "Имя должно быть не менее 2 букв",
   surname: "Фамилия должна быть не менее 2 букв",
@@ -258,9 +179,6 @@ export {
   monthNames,
   monthNamesDate,
   weekDays,
-  passengerTypes,
-  passengerClasses,
-  accessPopupFieldsData,
   validationMessages,
   errorMessages,
   footerInfoData,

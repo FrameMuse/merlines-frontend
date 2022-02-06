@@ -242,7 +242,7 @@
 .comments__text {
 	@include textSm;
 
-	word-break: break-word;
+	word-wrap: break-word;
 	// overflow: hidden;
 	// text-overflow: ellipsis;
 
@@ -393,7 +393,7 @@
 	color: #A1A1A1;
 	font-weight: 400;
 	line-height: 1.25;
-	word-break: break-word;
+	word-wrap: break-word;
 }
 
 .comments__btn-container {
