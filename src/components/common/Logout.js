@@ -1,7 +1,5 @@
 import "./logout.scss"
 
-import { deleteAccountToken } from "api/actions/account"
-import ClientAPI from "api/client"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -15,17 +13,11 @@ function Logout() {
 
 
   function onClick() {
-    ClientAPI
-      .query(deleteAccountToken)
-      .then(({ error }) => {
-        if (error) return
+    localStorage.removeItem("token")
+    dispatch(logoutUser)
 
-        localStorage.removeItem("token")
-        dispatch(logoutUser)
-
-        history.push("/")
-        toast.success("Вы успешно вышли")
-      })
+    history.push("/")
+    toast.success("Вы успешно вышли")
   }
 
   return (
