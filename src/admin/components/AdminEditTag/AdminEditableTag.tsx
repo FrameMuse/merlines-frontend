@@ -1,11 +1,12 @@
 // SCSS
 import "./AdminEditTag.style.scss"
 
-import { Dispatch, FocusEvent, useState } from "react"
+import { Dispatch, FocusEvent, MouseEventHandler, useState } from "react"
 import { classWithModifiers } from "utils"
 
 interface AdminEditableTagProps {
   children: string
+  onClick?: MouseEventHandler<HTMLSpanElement>
   onChange: Dispatch<string>
 }
 
@@ -19,7 +20,7 @@ function AdminEditableTag(props: AdminEditableTagProps) {
     props.onChange(textContent)
   }
   return (
-    <span className={classWithModifiers("editable-tag", tag.toUpperCase() === "ПОДБОРКИ" && "important")} contentEditable onBlur={onBlur}>{tag}</span>
+    <span className={classWithModifiers("editable-tag", tag.toUpperCase() === "ПОДБОРКИ" && "important")} contentEditable onClick={props.onClick} onBlur={onBlur}>{tag}</span>
   )
 }
 

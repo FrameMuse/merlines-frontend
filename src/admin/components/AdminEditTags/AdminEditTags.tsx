@@ -2,34 +2,74 @@
 import "./AdminEditTags.style.scss"
 
 import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
-import { deleteAdminArticle, getAdminArticles, patchAdminArticle } from "api/actions/admin"
+import { deleteAdminArticle, deleteAdminTag, getAdminArticles, patchAdminArticle, postAdminTag, putAdminTag } from "api/actions/admin"
 import { getBlogArticles, getBlogTags } from "api/actions/blog"
 import ClientAPI from "api/client"
 import { BlogTagType } from "interfaces/Blog"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 
 import AdminButton from "../AdminButton/AdminButton"
+import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
 
 function AdminEditTags() {
-  const [activeTag, setActiveTag] = useState<BlogTagType | null>(null)
+  const [activeTag, setActiveTag] = useState<BlogTagType>()
+  const [tags, setTags] = useState<BlogTagType[]>([])
   const { error, payload } = useQuery(getBlogTags(1, 0))
-  if (error || !payload) return <>no content</>
-  const tags = payload.results
+  function addTag() {
+    setTags([...tags, { id: 0, title: "НОВЫЙ ТЭГ" }])
+  }
+  function onChange(id: number, value: string | null, index: number) {
+    if (!value?.length) {
+      ClientAPI.query(deleteAdminTag(id))
+        .then(({ error, status }) => {
+          if (error || status !== 204) return
+
+          setTags([...(tags.splice(index, 1), tags)])
+          toast.info("Tag deleted!")
+        })
+      return
+    }
+
+    if (id === 0) {
+      ClientAPI.query(postAdminTag(value))
+        .then(({ error, payload }) => {
+          if (error || !payload || payload.error) return
+
+          setTags((tags[index] = payload, [...tags]))
+          toast.info("Tag created!")
+        })
+
+      return
+    }
+
+    ClientAPI.query(putAdminTag(id, value))
+      .then(({ error, payload }) => {
+        if (error || !payload || payload.error) return
+
+        toast.info("Tag updated!")
+      })
+  }
+  useEffect(() => {
+    if (!payload) return
+
+    setTags(payload.results)
+  }, [payload])
+  if (error || !payload || payload.error) return <>no content</>
   return (
     <AdminSectionLayout header={tags.length + " Тэгов"}>
       <div className="edit-tags">
+        <AdminButton className="edit-tags__button" onClick={addTag}>Добавить</AdminButton>
         <div className="edit-tags__inner">
           {tags.map((tag, index) => (
-            <span className="editable-tag" onClick={() => setActiveTag(tag)} key={index}>{tag.title}</span>
+            <AdminEditableTag onClick={() => setActiveTag(tag)} onChange={value => onChange(tag.id, value, index)} key={tag.id}>{tag.title}</AdminEditableTag>
           ))}
         </div>
-        {activeTag && <TagArticles tag={activeTag} />}
       </div>
-
+      {activeTag && <TagArticles tag={activeTag} />}
     </AdminSectionLayout>
   )
 }

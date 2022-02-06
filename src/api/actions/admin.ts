@@ -1,4 +1,4 @@
-import { MailingEntryType } from "admin/components/AdminBlogMailing/AdminBlogMailing"
+import { MailingType } from "admin/components/AdminBlogMailing/AdminBlogMailing"
 import { TagArticleProps } from "admin/components/AdminEditTags/AdminEditTags"
 import { Action } from "api/client"
 import { ArticleContentType, BlogTagType } from "interfaces/Blog"
@@ -102,14 +102,40 @@ export const deleteAdminTag = (id: number): Action => ({
 
 /* Mailing */
 
-export const getAdminMailings = (page: number, page_size: number): Action<PaginationType<MailingEntryType>> => ({
+export const getAdminMailings = (page: number, page_size: number): Action<PaginationType<Omit<MailingType, "content">>> => ({
   method: "GET",
   endpoint: "/admin/mailings",
   params: { page, page_size }
 })
 
-export const postAdminMailings = (title: string, subject: string, content: string): Action => ({
+export const postAdminMailings = (subject: string, content: string): Action => ({
   method: "POST",
   endpoint: "/admin/mailings",
-  body: { title, subject, content }
+  body: { subject, content }
+})
+
+export const getAdminMailing = (id: number): Action<MailingType> => ({
+  method: "GET",
+  endpoint: "/admin/mailing/" + id
+})
+
+export const patchAdminMailing = (id: number, data: Partial<Pick<MailingType, "content" | "subject">>): Action<{ id: number }> => ({
+  method: "PATCH",
+  endpoint: "/admin/mailing/" + id,
+  body: data
+})
+
+export const deleteAdminMailing = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: "/admin/mailing/" + id
+})
+
+export const postAdminMailingStart = (id: number): Action => ({
+  method: "POST",
+  endpoint: `/admin/mailing/${id}/start`
+})
+
+export const postAdminMailingStop = (id: number): Action => ({
+  method: "POST",
+  endpoint: `/admin/mailing/${id}/stop`
 })
