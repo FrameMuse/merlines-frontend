@@ -54,6 +54,9 @@ export default (state = initialState, action: Action): typeof initialState => {
       return { ...state, ...action.payload }
 
     case "SEARCH_ROUTES_ADD":
+      if (state.routes.length >= 7) {
+        return state
+      }
       return { ...state, routes: [...state.routes, ...action.payload.routes] }
 
     case "SEARCH_ROUTES_UPDATE":
