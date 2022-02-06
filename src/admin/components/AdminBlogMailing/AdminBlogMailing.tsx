@@ -1,23 +1,23 @@
 import "./AdminBlogMailing.style.scss"
 
 import AdminSectionLayout from "admin/layouts/AdminSectionLayout"
-import { getAdminMailings, postAdminMailings } from "api/actions/admin"
+import { deleteAdminMailing, getAdminMailing, getAdminMailings, patchAdminMailing, postAdminMailings, postAdminMailingStart, postAdminMailingStop } from "api/actions/admin"
+import ClientAPI from "api/client"
 import Icon from "components/common/Icon"
 import { useState } from "react"
 import { useQuery } from "react-fetching-library"
-import { toast } from "react-toastify"
+import { toast, ToastContainer } from "react-toastify"
 import { classWithModifiers } from "utils"
 
-import ClientAPI from "../../../api/client"
-import AdminButton from "../AdminButton/AdminButton"
 
-
-export interface MailingEntryType {
+export interface MailingType {
   id: number
-  title: string
   subject: string
   content: string
+  is_running: boolean
 }
+
+import AdminButton from "../AdminButton/AdminButton"
 
 function AdminBlogMailing() {
   const [createNew, setCreateNew] = useState(false)
@@ -48,49 +48,120 @@ function AdminBlogMailing() {
           </div>
         )}
       </div>
+      <ToastContainer />
     </AdminSectionLayout>
   )
 }
 
 
-function AdminBlogMailingEntry(props: MailingEntryType) {
-  const [active, setActive] = useState(false)
+
+interface AdminBlogMailingEntryProps extends Omit<MailingType, "content"> { }
+
+function AdminBlogMailingEntry(props: AdminBlogMailingEntryProps) {
+  const [expanded, setExpanded] = useState(false)
   return (
-    <div className="blog-mailing-entry" onClick={() => setActive(!active)}>
-      <div className={classWithModifiers("blog-mailing-entry__header", active && "active")}>
+    <div className="blog-mailing-entry">
+      <div className={classWithModifiers("blog-mailing-entry__header", expanded && "active")} onClick={() => setExpanded(!expanded)}>
         <div className="blog-mailing-entry__title">
-          {props.title}
+          {props.subject}
           <span className="blog-mailing-entry__weak">ID{props.id}</span>
         </div>
-
-        {/* <div className={classWithModifiers("blog-mailing-entry__status", props.status)}>{capitalize(props.status)}</div> */}
+        <div className={classWithModifiers("blog-mailing-entry__status", props.is_running && "running")}>{props.is_running ? "Рассылается" : "Приостановлена"}</div>
         <div className="blog-mailing-entry__toggle">
-          <Icon name="chevron" className={classWithModifiers("blog-mailing-entry__icon", active && "up")} />
+          <Icon name="chevron" className={classWithModifiers("blog-mailing-entry__icon", expanded && "up")} />
         </div>
       </div>
-      <div className={classWithModifiers("blog-mailing-entry__body", active && "active")}>
-        {/* <h4 className="blog-mailing-entry__title">Детализация</h4>
-        <div className="blog-mailing-entry__details">123</div> */}
+      {expanded && (
+        <AdminBlogMailingEntryBody id={props.id} />
+      )}
+    </div>
+  )
+}
 
+
+interface AdminBlogMailingEntryBodyProps {
+  id: number
+}
+
+function AdminBlogMailingEntryBody(props: AdminBlogMailingEntryBodyProps) {
+  const { error, loading, payload } = useQuery(getAdminMailing(props.id))
+  const [deleted, setDeleted] = useState(false)
+  const [subject, setSubject] = useState<string>()
+  const [content, setContent] = useState<string>()
+
+  if (deleted) return null
+
+  if (error) throw new Error("AdminBlogMailingEntryError")
+  if (loading) return <>Loading...</>
+  if (!payload) return <>No content</>
+
+  function sendMailing() {
+    ClientAPI
+      .query(postAdminMailingStart(props.id))
+      .then(({ error }) => {
+        if (error) return
+        toast.info("Mailing started!")
+      })
+  }
+  function suspendMailing() {
+    ClientAPI
+      .query(postAdminMailingStop(props.id))
+      .then(({ error }) => {
+        if (error) return
+        toast.info("Mailing suspended!")
+      })
+  }
+  function saveMailing() {
+    ClientAPI
+      .query(patchAdminMailing(props.id, { subject, content }))
+      .then(({ error }) => {
+        if (error) return
+        toast.info("Mailing saved!")
+      })
+  }
+  function deleteMailing() {
+    ClientAPI
+      .query(deleteAdminMailing(props.id))
+      .then(({ error }) => {
+        if (error) return
+        toast.info("Mailing deleted!")
+        setDeleted(true)
+      })
+  }
+
+  return (
+    <div className="blog-mailing-entry__body">
+      <div className="blog-mailing-entry__group">
+        <h4 className="blog-mailing-entry__title">Тема</h4>
+        <input type="text" className="blog-mailing-entry__input" defaultValue={payload.subject} onChange={event => setSubject(event.currentTarget.value)} />
+      </div>
+
+      <div className="blog-mailing-entry__group">
         <h4 className="blog-mailing-entry__title">Содержание</h4>
-        <p className="blog-mailing-entry__content">{props.content}</p>
-        <div className="blog-mailing-entry__buttons">
-          <AdminButton>Разослать</AdminButton>
-          <AdminButton>Сохранить</AdminButton>
-          <AdminButton>Удалить</AdminButton>
-        </div>
+        <textarea className="blog-mailing-entry__textarea" defaultValue={payload.content} onChange={event => setContent(event.currentTarget.value)} />
+      </div>
+      {/* <div className="blog-mailing-entry__group">
+        <h4 className="blog-mailing-entry__title">Ифнормация</h4>
+        <ul>
+          <li>Статус: {payload.is_running ? "рассылается" : "приостановлен"}</li>
+        </ul>
+      </div> */}
+      <div className="blog-mailing-entry__buttons">
+        <AdminButton onClick={sendMailing}>Разослать</AdminButton>
+        <AdminButton onClick={suspendMailing}>Приостановить</AdminButton>
+        <AdminButton onClick={saveMailing}>Сохранить</AdminButton>
+        <AdminButton onClick={deleteMailing}>Удалить</AdminButton>
       </div>
     </div>
   )
 }
 
 function AdminBlogMailingCreateEntry() {
-  const [title, setTitle] = useState("")
   const [subject, setSubject] = useState("")
   const [content, setContent] = useState("")
   function onSubmit() {
     return ClientAPI
-      .query(postAdminMailings(title, subject, content))
+      .query(postAdminMailings(subject, content))
       .then(({ error }) => {
         if (error) return
         toast.info("Mailing created")
@@ -99,9 +170,6 @@ function AdminBlogMailingCreateEntry() {
   return (
     <div className="blog-mailing-entry">
       <div className={classWithModifiers("blog-mailing-entry__header", "active")}>
-        <div className="blog-mailing-entry__title">
-          <input type="text" className="blog-mailing-entry__input" onChange={event => setTitle(event.currentTarget.value)} />
-        </div>
       </div>
       <div className={classWithModifiers("blog-mailing-entry__body", "active")}>
         <div className="blog-mailing-entry__group">
@@ -114,8 +182,7 @@ function AdminBlogMailingCreateEntry() {
           <textarea className="blog-mailing-entry__textarea" onChange={event => setContent(event.currentTarget.value)} />
         </div>
         <div className="blog-mailing-entry__buttons">
-          <AdminButton onClick={onSubmit}>Разослать</AdminButton>
-          <AdminButton>Сохранить</AdminButton>
+          <AdminButton onClick={onSubmit}>Создать</AdminButton>
         </div>
       </div>
     </div>

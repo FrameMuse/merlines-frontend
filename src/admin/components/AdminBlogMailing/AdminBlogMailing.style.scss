@@ -59,21 +59,23 @@
 
 	font-weight: 700;
 
+	color: rgba($color: red, $alpha: 0.75);
+
 	&--running {
 		color: rgba($color: orange, $alpha: 0.75)
 	}
 
-	&--done {
-		color: rgba($color: green, $alpha: 0.75)
-	}
+	// &--done {
+	// 	color: rgba($color: green, $alpha: 0.75)
+	// }
 
-	&--canceled {
-		color: rgba($color: red, $alpha: 0.75)
-	}
+	// &--canceled {
+	// 	color: rgba($color: red, $alpha: 0.75)
+	// }
 }
 
 .blog-mailing-entry__toggle {
-	margin-left: auto;
+	// margin-left: auto;
 }
 
 .blog-mailing-entry__icon {
@@ -88,13 +90,9 @@
 }
 
 .blog-mailing-entry__body {
-	display: none;
+	display: grid;
 	gap: 2.5em;
 	padding: 0.75em;
-
-	&--active {
-		display: grid;
-	}
 }
 
 .blog-mailing-entry__input {
