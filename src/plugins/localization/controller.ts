@@ -2,28 +2,39 @@
 
 MIT License
 
-Copyright (c) 2021 Code Pandora Dev
+Copyright (c) 2022 Valery Zinchenko
 
-The full copy of LICENSE is in the root directory
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
 */
 
-import { LocalizationJSONRaw } from "."
+import { LocalizationJSONRaw } from "./config"
 
 /**
  * Loop in object deeply and make it accessible with variables of types: string | number
  */
-type ll<O extends string | number | object | undefined> = {
-  [K in keyof O]: O[K] extends object ? ll<O[K]> & { [x in string | number]: O[K][keyof O[K]] } : O[K]
+type AccessibleDeeply<O extends string | number | object | undefined> = {
+  [K in keyof O]: O[K] extends object ? AccessibleDeeply<O[K]> & { [x in string | number]: O[K][keyof O[K]] } : O[K]
 }
 
-export type LocalizationJSON = ll<LocalizationJSONRaw>
+export type llType = AccessibleDeeply<LocalizationJSONRaw>
+
+type Interceptor = (ll: llType) => llType
 
 class Localization {
   private static defaultLanguage = "en"
 
   private static listeners: Set<Function> = new Set
-  private static storage = new Map<string, LocalizationJSON>()
+  private static interceptors: Set<Interceptor> = new Set
+  public static storage = new Map<string, llType>()
 
   private static set lang(lang: string) {
     localStorage.setItem("lang", lang)
@@ -36,16 +47,31 @@ class Localization {
     this.defaultLanguage = lang
   }
 
-  public static add(lang: string, data: LocalizationJSON) {
-    this.storage.set(lang, data)
+  public static add(lang: string, data: llType) {
+    try {
+      this.storage.set(
+        lang,
+        [...this.interceptors.values()].reduce((result, next) => next(result), data)
+      )
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error("LocalizationInterceptorError: " + error.message)
+      }
+
+      throw error
+    }
   }
 
-  public static get(): LocalizationJSON | undefined {
+  public static get(): llType | undefined {
     if (this.storage.has(this.lang)) {
       return this.storage.get(this.lang)
     }
 
     return this.storage.get(this.defaultLanguage)
+  }
+
+  public static getLangs(): string[] {
+    return [...this.storage.keys()]
   }
 
   public static transit(lang: string) {
@@ -63,15 +89,21 @@ class Localization {
       this.listeners.delete(listener)
     }
   }
-}
 
-export function Localize<Selected extends Record<string, unknown> = LocalizationJSON>(selector: (ll?: LocalizationJSON) => Selected | undefined): Partial<Selected> {
-  try {
-    const ll = Localization.get()
-    return selector(ll) || {}
-  } catch (error) {
-    return {}
+  public static addInterceptor(interceptor: Interceptor) {
+    this.interceptors.add(interceptor)
   }
 }
 
+export function Localize<Selected extends Record<string, unknown> = llType>(selector: (ll: llType) => Selected | undefined): Selected {
+  const ll = Localization.get()
+  if (!ll) throw new TypeError("LocalizeError: no localization gotten")
+
+  const selection = selector(ll)
+  if (!selection) throw new TypeError("LocalizeError: bad selector => " + selector.toString().split("=>")[1].replace(/ /g, ""))
+
+  return selection
+}
+
 export default Localization
+require("./config")
