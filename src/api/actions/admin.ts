@@ -8,14 +8,6 @@ import { Client } from "interfaces/user"
 
 /* Articles */
 
-export const getAdminArticle = (articleId: string): Action<ArticleContentType & {
-  author: ArticleAuthorType
-  allow_comments: boolean
-}> => ({
-  method: "GET",
-  endpoint: "/admin/article/" + articleId,
-})
-
 export const getAdminArticles = (page: number, page_size: number, filters: {
   ordering?: OrderingType<"tags__contains" | "title__icontains">
   tags__contains?: string
@@ -24,6 +16,14 @@ export const getAdminArticles = (page: number, page_size: number, filters: {
   method: "GET",
   endpoint: "/admin/articles",
   params: { page, page_size, ...filters }
+})
+
+export const getAdminArticle = (articleId: string): Action<ArticleContentType & {
+  author: ArticleAuthorType
+  allow_comments: boolean
+}> => ({
+  method: "GET",
+  endpoint: "/admin/article/" + articleId,
 })
 
 export const postAdminArticle = (data: ArticleContentType, is_draft?: boolean): Action<{ id: number }> => ({

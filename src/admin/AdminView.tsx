@@ -26,11 +26,15 @@ function AdminView() {
           <div className="topbar-menu">
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" exact to="/">Вернуться</NavLink>
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" exact to="/admin/">Главная</NavLink>
+            {user.type >= UserType.Admin && (
+              <>
+                <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/mailings">Рассылки</NavLink>
+                <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/users">Пользователи</NavLink>
+                <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/authors">Авторы</NavLink>
+              </>
+            )}
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/blog">Блог</NavLink>
-            <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/users">Пользователи</NavLink>
-            <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/mailings">Рассылки</NavLink>
             <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/add-article">Добавить статью</NavLink>
-            <NavLink className="topbar-menu__link" activeClassName="topbar-menu__link--active" to="/admin/authors">Авторы</NavLink>
           </div>
         </div>
       </header>

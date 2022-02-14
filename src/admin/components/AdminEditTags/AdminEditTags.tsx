@@ -6,8 +6,10 @@ import { deleteAdminArticle, deleteAdminTag, getAdminArticles, patchAdminArticle
 import { getBlogArticles, getBlogTags } from "api/actions/blog"
 import ClientAPI from "api/client"
 import { BlogTagType } from "interfaces/Blog"
+import { UserType } from "interfaces/user"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
+import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 
@@ -16,6 +18,7 @@ import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
 
 
 function AdminEditTags() {
+  const user = useSelector(state => state.user)
   const [activeTag, setActiveTag] = useState<BlogTagType>()
   const [tags, setTags] = useState<BlogTagType[]>([])
   const { error, payload } = useQuery(getBlogTags(1, 0))
@@ -55,14 +58,15 @@ function AdminEditTags() {
   }
   useEffect(() => {
     if (!payload) return
-
     setTags(payload.results)
   }, [payload])
   if (error || !payload || payload.error) return <>no content</>
   return (
     <AdminSectionLayout header={tags.length + " Тэгов"}>
       <div className="edit-tags">
-        <AdminButton className="edit-tags__button" onClick={addTag}>Добавить</AdminButton>
+        {user.auth && user.type >= UserType.Admin && (
+          <AdminButton className="edit-tags__button" onClick={addTag}>Добавить</AdminButton>
+        )}
         <div className="edit-tags__inner">
           {tags.map((tag, index) => (
             <AdminEditableTag onClick={() => setActiveTag(tag)} onChange={value => onChange(tag.id, value, index)} key={tag.id}>{tag.title}</AdminEditableTag>

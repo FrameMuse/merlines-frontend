@@ -4,6 +4,7 @@ import "./form-profile.scss"
 import { patchAccountMe, putAccountMePassword } from "api/actions/account"
 import ClientAPI from "api/client"
 import InputPassword from "components/Popups/InputPassword"
+import { FormElements } from "interfaces/common"
 import { FormEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
@@ -35,8 +36,12 @@ function FormProfileEditBasic() {
     const form = event.currentTarget
     // TODO: Save
 
-    const userData = getFormElements(form.elements, "first_name", "last_name")
-    if (!userData) return
+    const elements = form.elements as FormElements<"first_name" | "last_name">
+    const userData = {
+      first_name: elements.first_name.value,
+      last_name: elements.last_name.value
+    }
+    if (!userData.first_name.length) return
 
     ClientAPI
       .query(patchAccountMe(userData))

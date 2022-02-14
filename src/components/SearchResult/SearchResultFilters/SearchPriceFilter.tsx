@@ -12,9 +12,10 @@ const filters = [
   { name: "optimal", price: 73500 }
 ] as const
 interface SearchPriceFilterProps {
-
+  // filters
 }
 function SearchPriceFilter(props: SearchPriceFilterProps) {
+  // const [filters, setFilters] = useContext(searchFiltersContext)
   const [choice, setChoice] = useState<"cheap" | "fast" | "optimal">("optimal")
   return (
     <div className="filters__container">

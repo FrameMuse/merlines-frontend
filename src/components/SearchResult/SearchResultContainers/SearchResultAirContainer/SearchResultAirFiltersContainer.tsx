@@ -27,7 +27,7 @@ export function SearchResultAirFilters(props: SearchResultAirFiltersProps) {
     <div className="ticket-list__left">
       <SearchResultSubscribePrice />
       <div className="filters">
-        <SearchPriceFilter />
+        {/* <SearchPriceFilter /> */}
         <SearchFilters onChange={props.onChange}>
           <SearchFilter label="Пересадки">
             <SearchFilterCheckboxes name="transfers">
