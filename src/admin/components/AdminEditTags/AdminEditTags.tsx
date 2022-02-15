@@ -7,6 +7,7 @@ import { getBlogArticles, getBlogTags } from "api/actions/blog"
 import ClientAPI from "api/client"
 import { BlogTagType } from "interfaces/Blog"
 import { FormElements } from "interfaces/common"
+import { OrderingType } from "interfaces/Django"
 import { UserType } from "interfaces/user"
 import { FormEvent, useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
@@ -85,6 +86,8 @@ function TagArticles(props: { tag: BlogTagType }) {
   const [page, setPage] = useState(1)
   const [pageSize] = useState(5)
   const [filters, setFilters] = useState<Partial<{
+    ordering?: OrderingType<"tags__contains" | "title__icontains" | "author_name" | "created_at" | "is_draft">
+
     tags__contains?: string
     title__icontains?: string
     author_name?: string
@@ -98,28 +101,26 @@ function TagArticles(props: { tag: BlogTagType }) {
   function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const target = event.currentTarget
-    const elements = target.elements as FormElements<"author_name" | "created_at" | "is_draft">
+    // const target = event.currentTarget
+    // const elements = target.elements as FormElements<"author_name" | "created_at" | "is_draft">
 
-    setPage(1)
-    setFilters({
-      author_name: elements.author_name.value || undefined,
-      created_at: elements.created_at.value || undefined,
-      is_draft: elements.is_draft.checked || undefined
-    })
+    // setPage(1)
+    // setFilters({
+    //   author_name: elements.author_name.value || undefined,
+    //   created_at: elements.created_at.value || undefined,
+    //   is_draft: elements.is_draft.checked || undefined
+    // })
   }
   return (
     <div className="edit-tags__container">
       <h2>#{props.tag.title.toUpperCase()}</h2>
       <div>
         <AdminSearchFilters onSubmit={onSearchSubmit}>
-          <input name="author_name" placeholder="Имя Автора" defaultValue={filters.author_name} />
-          <input name="created_at" type="datetime-local" placeholder="Дата" defaultValue={filters.author_name} />
-          <label>
-            Черновик?
-            {" "}
-            <input name="is_draft" type="checkbox" placeholder="Имя Автора" defaultChecked={filters.is_draft} />
-          </label>
+          <select onChange={event => setFilters({ ordering: event.currentTarget.value as any })}>
+            <option value="author_name">Имя автора</option>
+            <option value="created_at">Дата создания</option>
+            <option value="is_draft">Черновик?</option>
+          </select>
         </AdminSearchFilters>
       </div>
       {payload.results.map(article => (
