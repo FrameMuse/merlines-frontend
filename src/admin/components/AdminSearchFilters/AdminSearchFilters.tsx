@@ -8,7 +8,7 @@ import AdminButton from "../AdminButton/AdminButton"
 interface AdminSearchFiltersProps {
   children: any
   pending?: boolean
-  onSubmit?(form: FormEvent<HTMLFormElement>): Promise<unknown> | void
+  onSubmit?(form: FormEvent<HTMLFormElement>): Promise<void> | void
 }
 
 function AdminSearchFilters(props: AdminSearchFiltersProps) {

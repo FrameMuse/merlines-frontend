@@ -2,6 +2,7 @@ import axios from "axios"
 import { DataURL, DataURLBase64 } from "interfaces/common"
 import { DateTime } from "luxon"
 import { Dispatch, SetStateAction, useState } from "react"
+import { AnyIfEmpty } from "react-redux"
 import { toast } from "react-toastify"
 
 import { monthNamesDate, weekDays } from "./constants"
@@ -333,13 +334,15 @@ export const isImageFile = (file: File) => file.type.includes("image")
 
 
 
-export function getFormElements<K extends string>(elements: HTMLFormControlsCollection, ...keys: K[]): Record<K, string> | null {
+type IfNever<T, S> = [T] extends [never] ? S : T
+export function getFormElements<E extends HTMLFormControlsCollection, K extends IfNever<Exclude<keyof E, keyof HTMLFormControlsCollection>, string>>(elements: E, ...keys: K[]): Record<K, string> {
+  // Set default values
   const data = Object.fromEntries(keys.map(key => [key, ""])) as Record<K, string>
 
   for (const element of elements) {
     if (!(element instanceof HTMLInputElement)) continue
     if (!keys.includes(element.name as K)) continue
-    if (!element.value.length) return null
+    if (!element.value.length) continue
 
     data[element.name as K] = element.value
   }

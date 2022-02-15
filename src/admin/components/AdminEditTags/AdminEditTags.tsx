@@ -6,15 +6,18 @@ import { deleteAdminArticle, deleteAdminTag, getAdminArticles, patchAdminArticle
 import { getBlogArticles, getBlogTags } from "api/actions/blog"
 import ClientAPI from "api/client"
 import { BlogTagType } from "interfaces/Blog"
+import { FormElements } from "interfaces/common"
 import { UserType } from "interfaces/user"
-import { useEffect, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
+import { getFormElements } from "utils"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
+import AdminSearchFilters from "../AdminSearchFilters/AdminSearchFilters"
 
 
 function AdminEditTags() {
@@ -81,14 +84,44 @@ function AdminEditTags() {
 function TagArticles(props: { tag: BlogTagType }) {
   const [page, setPage] = useState(1)
   const [pageSize] = useState(5)
-  const { error, loading, payload } = useQuery(getAdminArticles(page, pageSize, { tags__contains: props.tag.title }))
+  const [filters, setFilters] = useState<Partial<{
+    tags__contains?: string
+    title__icontains?: string
+    author_name?: string
+    created_at?: string
+    is_draft?: boolean
+  }>>({})
+  const { error, loading, payload } = useQuery(getAdminArticles(page, pageSize, { tags__contains: props.tag.title, ...filters }))
   if (error) throw new Error()
   if (loading) return <>Loading...</>
   if (!payload) return <>no content</>
+  function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const target = event.currentTarget
+    const elements = target.elements as FormElements<"author_name" | "created_at" | "is_draft">
+
+    setPage(1)
+    setFilters({
+      author_name: elements.author_name.value || undefined,
+      created_at: elements.created_at.value || undefined,
+      is_draft: elements.is_draft.checked || undefined
+    })
+  }
   return (
     <div className="edit-tags__container">
       <h2>#{props.tag.title.toUpperCase()}</h2>
-
+      <div>
+        <AdminSearchFilters onSubmit={onSearchSubmit}>
+          <input name="author_name" placeholder="Имя Автора" defaultValue={filters.author_name} />
+          <input name="created_at" type="datetime-local" placeholder="Дата" defaultValue={filters.author_name} />
+          <label>
+            Черновик?
+            {" "}
+            <input name="is_draft" type="checkbox" placeholder="Имя Автора" defaultChecked={filters.is_draft} />
+          </label>
+        </AdminSearchFilters>
+      </div>
       {payload.results.map(article => (
         <TagArticle {...article} key={article.id} />
       ))}

@@ -9,9 +9,13 @@ import { Client } from "interfaces/user"
 /* Articles */
 
 export const getAdminArticles = (page: number, page_size: number, filters: {
-  ordering?: OrderingType<"tags__contains" | "title__icontains">
+  ordering?: OrderingType<"tags__contains" | "title__icontains" | "author_name" | "created_at" | "is_draft">
+
   tags__contains?: string
   title__icontains?: string
+  author_name?: string
+  created_at?: string
+  is_draft?: boolean
 }): Action<PaginationType<TagArticleProps>> => ({
   method: "GET",
   endpoint: "/admin/articles",
