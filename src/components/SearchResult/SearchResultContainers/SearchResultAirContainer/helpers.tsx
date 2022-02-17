@@ -7,7 +7,12 @@ export function getAirlineLogo(code: string | number) {
   return `https://pics.avs.io/al_square/36/36/${code}.png`
 }
 
-export function flightPredicate<C = ReactNode>(child: C, index: number, array: C[]) {
+
+/**
+ *
+ * Mapping flight determination either numeric or linguistic for given child
+ */
+export function flightPredicate<C extends ReactNode>(child: C, index: number, array: C[]) {
   if (!child) return null
 
   if (array.length >= 3) {

@@ -6,7 +6,7 @@ import { classWithModifiers, someEqual } from "utils"
 import { searchSessionContext } from "../../SearchResult"
 import { SearchResultTickets, useTicketsSuspenseQuery } from "../../SearchResultTickets"
 import SearchResultWeekPrice from "../../SearchResultWeekPrice/SearchResultWeekPrice"
-import { SearchResultAirFilters } from "./SearchResultAirFiltersContainer"
+import { SearchResultAirFiltersContainer } from "./SearchResultAirFiltersContainer"
 import SearchResultAirTicket from "./SearchResultAirTicket"
 
 
@@ -25,7 +25,7 @@ export default function SearchResultAirContainer() {
   return (
     <SearchResultTickets>
       <SearchResultWeekPrice />
-      <SearchResultAirFilters onChange={setFilters} />
+      <SearchResultAirFiltersContainer onChange={setFilters} />
       <div className={classWithModifiers("ticket-list__content", false && "loading")}>
         {results.filter(someEqual("id")).map(ticket => (
           <SearchResultAirTicket {...ticket} key={ticket.id} />

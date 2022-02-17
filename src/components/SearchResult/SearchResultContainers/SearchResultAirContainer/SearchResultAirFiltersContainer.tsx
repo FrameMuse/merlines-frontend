@@ -1,13 +1,12 @@
 import { getTicketsAirFilters } from "api/actions/tickets"
 import { AirFiltersType } from "interfaces/Search"
-import { Dispatch, useContext } from "react"
+import { useContext } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { pluralize } from "utils"
 
 import { searchSessionContext } from "../../SearchResult"
 import SearchFilter from "../../SearchResultFilters/SearchFilter"
-import SearchFilters from "../../SearchResultFilters/SearchFilters"
-import SearchPriceFilter from "../../SearchResultFilters/SearchPriceFilter"
+import SearchFilters, { SearchFiltersBaseProps } from "../../SearchResultFilters/SearchFilters"
 import SearchFilterCheckbox from "../../SearchResultFilters/UX/SearchFilterCheckbox"
 import SearchFilterCheckboxes from "../../SearchResultFilters/UX/SearchFilterCheckboxes"
 import SearchFilterTimeRange from "../../SearchResultFilters/UX/SearchFilterTimeRange"
@@ -15,11 +14,9 @@ import SearchResultSubscribePrice from "../../SearchResultSubscribePrice/SearchR
 import { flightPredicate } from "./helpers"
 
 
-interface SearchResultAirFiltersProps {
-  onChange: Dispatch<Partial<AirFiltersType>>
-}
+interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersType> { }
 
-export function SearchResultAirFilters(props: SearchResultAirFiltersProps) {
+export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersProps) {
   const { session } = useContext(searchSessionContext)
   const { error, payload } = useSuspenseQuery(getTicketsAirFilters(session))
   if (error || !payload) return <>No filters</>
