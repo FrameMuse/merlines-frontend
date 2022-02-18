@@ -34,7 +34,7 @@
     "synchronousWatchDirectory": true,
     // Finally, two additional settings for reducing the amount of possible
     // files to track  work from these directories
-    "excludeDirectories": ["**/node_modules", "_build"],
+    "excludeDirectories": ["**/node_modules", "build"],
     "excludeFiles": ["build/fileWhichChangesOften.ts"]
   },
   "include": [
