@@ -1,5 +1,8 @@
 # Merlines descriptions
 
+Design:
+https://www.figma.com/file/wHMm0t2uCZ50CBH8fJvJq1/Merlines
+
 ## Principles
 
 - No contractions, a name should be written fully (except: id, js, ts...)
