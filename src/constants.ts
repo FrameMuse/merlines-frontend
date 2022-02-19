@@ -1,10 +1,10 @@
 import routes from "./routes"
 
-const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
+export const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
 
-const BASE_URL = "http://api.merlines.ru/api/v1"
+export const BASE_URL = "http://api.merlines.ru/api/v1"
 
-const monthNames = [
+export const monthNames = [
   "Январь",
   "Февраль",
   "Март",
@@ -19,7 +19,22 @@ const monthNames = [
   "Декабрь"
 ]
 
-const monthNamesDate = {
+export const declinedMonthNames = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь"
+]
+
+export const monthNamesDate = {
   1: "Января",
   2: "Февраля",
   3: "Марта",
@@ -33,7 +48,7 @@ const monthNamesDate = {
   11: "Ноября",
   12: "Декабря"
 }
-const monthsShortNamesByNumbers = {
+export const monthsShortNamesByNumbers = {
   1: "Янв",
   2: "Фев",
   3: "Мар",
@@ -47,7 +62,7 @@ const monthsShortNamesByNumbers = {
   11: "Ноя",
   12: "Дек"
 }
-const weekDaysByNumbers = {
+export const weekDaysByNumbers = {
   1: "Пн",
   2: "Вт",
   3: "Ср",
@@ -56,7 +71,7 @@ const weekDaysByNumbers = {
   6: "Сб",
   7: "Вс"
 }
-const Transport = {
+export const Transport = {
   air: {
     name: "Самолёты",
     path: "air"
@@ -71,27 +86,19 @@ const Transport = {
   }
 }
 
-const ApiParams = {
+export const ApiParams = {
   priceCalendar: {
     month: "month",
     day: "day"
   }
 }
 
-const validationMessages = {
-  name: "Имя должно быть не менее 2 букв",
-  surname: "Фамилия должна быть не менее 2 букв",
-  email: "Введите корректный e-mail",
-  password: "Пароль должен быть не менее 8 символов",
-  confirmPassword: "Пароль не совпадает"
-}
-
-const errorMessages = {
+export const errorMessages = {
   error404: "Запрашиваемый ресурс не найден",
   error500: "Сервер не отвечает"
 }
 
-const footerInfoData = [
+export const footerInfoData = [
   {
     name: "О НАС",
     link: routes.footer.aboutUs,
@@ -165,24 +172,9 @@ const footerInfoData = [
   }
 ]
 
-const lkNavConfig = [
+export const lkNavConfig = [
   { itemName: "Избранное", svgName: "star", route: routes.lk.base },
   { itemName: "История", svgName: "history", route: routes.lk.history },
   { itemName: "Подписки", svgName: "notice", route: routes.lk.subscribes },
   { itemName: "Задать вопрос", svgName: "question", route: routes.lk.question }
 ]
-
-export {
-  Transport,
-  BASE_URL,
-  ApiParams,
-  monthNames,
-  monthNamesDate,
-  weekDays,
-  validationMessages,
-  errorMessages,
-  footerInfoData,
-  lkNavConfig,
-  monthsShortNamesByNumbers,
-  weekDaysByNumbers
-}
