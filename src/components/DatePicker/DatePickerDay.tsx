@@ -12,12 +12,6 @@ interface DatePickerDayProps {
 }
 
 function DatePickerDay(props: DatePickerDayProps) {
-  // const dateNow = new Date
-  // const dateTime = props.date.getTime()
-  // const firstDateTime = props.value[0].getTime()
-  // const secondDateTime = props.value[1]?.getTime() || NaN
-  // const hoveredDateTime = props.hoveredDate?.getTime() || NaN
-
   function onDatePick() {
     props.onDatePick(props.date)
   }
