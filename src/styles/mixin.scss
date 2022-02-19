@@ -254,6 +254,7 @@
 }
 
 @mixin FadeOutDownOnHidden {
+	top: 0em;
   &--hidden {
     top: 1em;
     opacity: 0;

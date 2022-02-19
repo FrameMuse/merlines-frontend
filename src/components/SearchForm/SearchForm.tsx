@@ -1,17 +1,15 @@
 // SCSS
 import "./search-form.scss"
 
-import { getGeoIp, getGeoIpAir } from "api/actions/geo"
-import DropDownCalendar from "components/DropDownCalendar/DropDownCalendar"
-import { DateCalendarState } from "components/DropDownCalendar/DropDownCalendarReducer"
-import { FormEvent, Fragment, KeyboardEvent, useEffect, useRef, useState } from "react"
+import { getGeoIpAir } from "api/actions/geo"
+import { FormEvent, Fragment, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { useClickAway } from "react-use"
 import { addSearchRoutes, updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
-import { capitalize, classWithModifiers, createQuery } from "utils"
+import { classWithModifiers, createQuery } from "utils"
 
 import ClientAPI from "../../api/client"
+import SearchFormDate from "./SearchFormDates"
 import { SearchFormPassengers } from "./SearchFormPassengers"
 import { SearchFormRoute } from "./SearchFormRoute"
 
