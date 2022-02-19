@@ -134,7 +134,7 @@
 	}
 
 	@media #{$media-xl} {
-		grid-template-columns: 196px 196px 165px 165px 225px 158px;
+		grid-template-columns: 25fr 25fr 21fr 21fr 29fr 21fr;
 	}
 
 	@include Mobile {

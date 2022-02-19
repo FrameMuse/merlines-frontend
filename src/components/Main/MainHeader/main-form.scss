@@ -2,17 +2,20 @@
 @import "../../../styles/mixin";
 
 .main-form {
-  padding-top: 121px;
-  padding-bottom: 230px; /* TODO: tmp, refactor to 100vh ? */
+  padding-top: 14px;
+  padding-bottom: 40px; /* TODO: tmp, refactor to 100vh ? */
   background-color: var(--color-blue);
 
-  @media screen and (min-width: 768px) and (max-width: 991px){
+  @media #{$media-md} {
     padding-top: 64px;
     padding-bottom: 140px; /* TODO: tmp, refactor to 100vh ? */
   }
-  @media screen and (min-width: 992px) and (max-width: 1169px) {
+  @media #{$media-lg} {
     padding-top: 49px;
     padding-bottom: 200px; /* TODO: tmp, refactor to 100vh ? */
+  }
+  @media #{$media-xl} {
+    padding-top: 125px;
   }
 
 	&--small {
@@ -31,7 +34,7 @@
     margin-bottom: 52px;
   }
   @media #{$media-lg} {
-    margin-bottom: 68px;
+    margin-bottom: 60px;
   }
   @media #{$media-xl} {
     padding-left: 95px;
@@ -60,7 +63,6 @@
 .main-form__item {
   display: flex;
   justify-content: center;
-	gap: 5px;
   flex-direction: column;
   color: var(--color-icon);
   align-items: center;
@@ -106,8 +108,8 @@
     height: 50px;
   }
   @media #{$media-xl} {
-    width: 44px;
-    height: 46px;
+    width: 45px;
+    height: 50px;
   }
 }
 
