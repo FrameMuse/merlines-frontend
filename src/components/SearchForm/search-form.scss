@@ -518,6 +518,52 @@
 	}
 }
 
+.search-form__dates {
+	@media #{$media-md} {
+		position: absolute;
+		top: 67%;
+		left: 1em;
+
+		// transform: translateX(-50%);
+		@include FadeOutDownOnHidden;
+		transition: 250ms ease left, 200ms ease opacity;
+
+		&::before {
+			@include rectangle;
+
+			left: 10vw;
+			transform: none;
+			transition: 250ms ease left;
+		}
+
+		&--offset {
+			&::before {
+				left: 30vw;
+			}
+		}
+	}
+
+	@media #{$media-lg} {
+		top: 100%;
+		left: 50%;
+
+		transform: translateX(-50%);
+
+		&::before {
+			@include rectangle;
+
+			left: 35%;
+			transform: translateX(-50%);
+		}
+
+		&--offset {
+			&::before {
+				left: 65%;
+			}
+		}
+	}
+}
+
 .search-form__route {
 	display: flex;
 

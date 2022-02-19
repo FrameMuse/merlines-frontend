@@ -22,7 +22,7 @@
 	border: 2px solid rgb(198, 14, 14);
 }
 
-.drop-down-calendar-select {
+.date-picker-select {
 	cursor: pointer;
 	opacity: 0;
 	position: absolute;
@@ -32,7 +32,7 @@
 	height: 100%;
 }
 
-.drop-down-calendar__header {
+.date-picker__header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -42,7 +42,7 @@
 	margin-right: auto;
 }
 
-.drop-down-calendar__month-control {
+.date-picker__month-control {
 	margin-left: 10px;
 	position: relative;
 	top: 0;
