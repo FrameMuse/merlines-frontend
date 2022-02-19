@@ -1,9 +1,9 @@
 import { Action } from "api/client"
 import { PaginationType } from "interfaces/Django"
-import { AirFiltersType, AirTicketType, TripType } from "interfaces/Search"
+import { AirFiltersType, AirTicketType, RouteType } from "interfaces/Search"
 
 // Create session
-export const postTicketsAir = (trips: TripType[], travel_class: string, passengers?: Partial<{ adults: number, children: number, infants: number }>): Action<{ session: string }> => ({
+export const postTicketsAir = (trips: RouteType[], travel_class: number, passengers?: Partial<{ adults: number, children: number, infants: number }>): Action<{ session: string }> => ({
   method: "POST",
   endpoint: "/tickets/air",
   body: { trips, travel_class, ...passengers }

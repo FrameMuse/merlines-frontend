@@ -1,9 +1,9 @@
 import { getGeoAirCities } from "api/actions/geo"
 import ClientAPI from "api/client"
-import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from "react"
+import { ChangeEvent, Dispatch, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { SearchAirports, SearchPlace, SearchRoute, updateSearchRoute } from "redux/reducers/search"
-import { classWithModifiers, noop } from "utils"
+import { classWithModifiers } from "utils"
 
 import DropDown from "../DropDown/DropDown"
 import { DropDownElementProps } from "../DropDown/DropDownItem"
@@ -15,8 +15,6 @@ interface SearchFormRouteProps extends SearchRoute {
 
 export function SearchFormRoute(props: SearchFormRouteProps) {
   const dispatch = useDispatch()
-
-  const search = useSelector(state => state.search)
 
   function updateRouteData<K extends keyof SearchRoute = keyof SearchRoute>(key: K, value: SearchRoute[K]) {
     dispatch(updateSearchRoute(props.index, { [key]: value }))

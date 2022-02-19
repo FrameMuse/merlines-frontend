@@ -2,8 +2,6 @@ import Icon from "components/common/Icon"
 import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, useState } from "react"
 import { classWithModifiers } from "utils"
 
-import { validationMessages } from "../../constants"
-
 
 interface InputPasswordProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> { }
 
@@ -18,7 +16,7 @@ function InputPassword(props: InputPasswordProps) {
     <label className="input-group">
       <input {...props} children={undefined} type={isShown ? "text" : "password"} className="input-group__input" onChange={onChange} />
       <div className={classWithModifiers("input-group__label", !isValid && "error")}>
-        {isValid ? props.placeholder : validationMessages.password}
+        {isValid ? props.placeholder : "ll"}
       </div>
 
       <button

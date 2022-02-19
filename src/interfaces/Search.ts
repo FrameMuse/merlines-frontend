@@ -1,5 +1,5 @@
 
-export interface TripType {
+export interface RouteType {
   origin: number
   destination: number
   date: string

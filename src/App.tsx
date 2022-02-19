@@ -49,12 +49,16 @@ function AppRouter() {
       <Route path="/blog"><Blog /><Subscribe /></Route>
       <Route path="/" exact><Main /><Subscribe /></Route>
 
-      <Route path="/search" exact><SearchResult /><Subscribe /></Route>
+      <Route path={[
+        "/search/:routes/:passengers?/C:travelClass?",
+        // "/search/:routes/C:travelClass?",
+        "/search/:routes/:passengers?",
+      ]}><SearchResult /><Subscribe /></Route>
 
 
       <Route path="/error/:code" render={props => <ErrorView {...props.match.params} />} />
       <Route><ErrorView code="404" /></Route>
-    </Switch>
+    </Switch >
   )
 }
 

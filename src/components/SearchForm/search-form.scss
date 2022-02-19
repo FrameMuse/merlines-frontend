@@ -519,6 +519,8 @@
 }
 
 .search-form__dates {
+	z-index: 11;
+
 	@media #{$media-md} {
 		position: absolute;
 		top: 67%;

@@ -1,13 +1,11 @@
 import "./ticket-list.scss"
 
 import { postTicketsAir } from "api/actions/tickets"
-import SearchFormComplicated from "components/SearchForm/SearchFormComplicated"
+import { useParametricSearchData } from "components/SearchForm/SearchForm.utils"
 import ErrorBoundary from "components/services/ErrorBoudary"
-import { TripType } from "interfaces/Search"
-import { createContext, Suspense, useEffect } from "react"
+import { RouteType } from "interfaces/Search"
+import { createContext, ReactNode, Suspense } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
-import { useSelector } from "react-redux"
-import { useLocation } from "react-router-dom"
 
 import SearchForm from "../SearchForm/SearchForm"
 import SearchResultAirContainer from "./SearchResultContainers/SearchResultAirContainer/SearchResultAirContainer"
@@ -18,64 +16,45 @@ import SearchResultLoader from "./SearchResultLoader"
 export const searchSessionContext = createContext({ session: "" })
 
 function SearchResult() {
-  const search = useSelector(state => state.search)
   return (
     <>
       <section className="main-form main-form--small">
-        {search.routes.length === 1 ? <SearchForm /> : <SearchFormComplicated />}
+        <SearchForm />
       </section>
-      <SearchResultContainer />
+      <ErrorBoundary fallback={<SearchResultTicketError />} deps={[location]}>
+        <SearchResultContainer />
+      </ErrorBoundary>
     </>
   )
 }
 // 1. Validate search data
 function SearchResultContainer() {
-  const location = useLocation()
-  const locationSearchParams = new URLSearchParams(location.search)
-
-  const origins = locationSearchParams.getAll("origin")
-  const destinations = locationSearchParams.getAll("destination")
-  const dates = locationSearchParams.getAll("date")
-  const travel_class = locationSearchParams.get("travel_class")
-
-  if (travel_class == null) {
-    throw new Error("There is no travel_class")
-  }
-
-  if (!origins.length || !destinations.length || !origins.length) {
-    throw new Error("There is a lack of data")
-  }
-
-  if ((origins.length !== destinations.length) || (origins.length !== dates.length)) {
-    throw new Error("There is a different amount of data")
-  }
-
-  const trips: TripType[] = origins.map((origin, index) => ({
-    origin: +origin,
-    destination: +destinations[index],
-    date: dates[index]
-  }))
-
+  const searchData = useParametricSearchData()
+  console.log(searchData)
   return (
     <Suspense fallback={<SearchResultLoader />}>
-      <ErrorBoundary fallback={<SearchResultTicketError />} deps={[location]}>
-        <SearchResultSessionProvider trips={trips} travel_class={travel_class}>
-          <SearchResultTransportContainer />
-        </SearchResultSessionProvider>
-      </ErrorBoundary>
+      <SearchResultSessionProvider routes={searchData.routes} travelClass={searchData.travelClass} passengers={searchData.passengers}>
+        <SearchResultTransportContainer />
+      </SearchResultSessionProvider>
     </Suspense>
   )
 }
 
 
 interface SearchResultSessionProviderProps {
-  trips: TripType[]
-  travel_class: string
-  children: any
+  routes: RouteType[]
+  travelClass?: number
+  passengers?: Partial<{
+    adults: number
+    children: number
+    infants: number
+  }>
+
+  children: ReactNode
 }
 // 2. Create session
 function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
-  const { error, payload } = useSuspenseQuery(postTicketsAir(props.trips, props.travel_class))
+  const { error, payload } = useSuspenseQuery(postTicketsAir(props.routes, props.travelClass || 1, props.passengers))
   if (error || !payload) throw new Error()
   return (
     <searchSessionContext.Provider value={{ session: payload.session }}>
