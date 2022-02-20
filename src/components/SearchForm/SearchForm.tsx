@@ -4,10 +4,10 @@ import "./search-form.scss"
 import { FormEvent, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { addSearchRoutes, updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
+import { addSearchRoutes, updateSearch, updateSearchHasReturnDate, updateSearchRoute, updateSearchTransport, updateSearchTravelClass } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
-import { stringifySearchData } from "./SearchForm.utils"
+import { stringifySearchData, useParametricSearchData } from "./SearchForm.utils"
 import SearchFormDate from "./SearchFormDates"
 import { SearchFormPassengers } from "./SearchFormPassengers"
 import { SearchFormRoute } from "./SearchFormRoute"
@@ -29,9 +29,9 @@ function SearchForm() {
 
   function addSearchRoute() {
     dispatch(addSearchRoutes({
-      departurePoint: null,
-      departureDate: null,
-      arrivalPoint: null,
+      origin: null,
+      date: null,
+      destination: null,
       returnDate: null
     }))
   }
@@ -40,13 +40,13 @@ function SearchForm() {
     event.preventDefault()
 
     const route = search.routes[0]
-    if (route.arrivalPoint == null) {
+    if (route.destination == null) {
       return setFormError(true)
     }
-    if (route.departurePoint == null) {
+    if (route.origin == null) {
       return setFormError(true)
     }
-    if (route.departureDate == null) {
+    if (route.date == null) {
       return setFormError(true)
     }
 

@@ -23,11 +23,11 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
   }
 
   function onChangeDeparturePoint(place: SearchPlace) {
-    updateRouteData("departurePoint", place)
+    updateRouteData("origin", place)
   }
 
   function onChangeArrivalPoint(place: SearchPlace) {
-    updateRouteData("arrivalPoint", place)
+    updateRouteData("destination", place)
   }
 
   useEffect(() => {
@@ -37,16 +37,16 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
         if (!payload) return
 
         inputRef.current?.focus()
-        dispatch(updateSearchRoute(0, { departurePoint: payload }))
+        dispatch(updateSearchRoute(0, { origin: payload }))
       })
   }, [])
 
   return (
     <>
-      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.departurePoint} onChange={onChangeDeparturePoint} inputRef={inputRef}>
+      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.origin} onChange={onChangeDeparturePoint} inputRef={inputRef}>
         <SearchFormRoutesSwitchButton />
       </SearchFormRouteInput>
-      <SearchFormRouteInput name="arrival" placeholder="куда" state={props.arrivalPoint} onChange={onChangeArrivalPoint} />
+      <SearchFormRouteInput name="arrival" placeholder="куда" state={props.destination} onChange={onChangeArrivalPoint} />
     </>
   )
 }
@@ -153,8 +153,8 @@ function SearchFormRoutesSwitchButton() {
     console.log(search.routes[0])
     // Switch exists for the first and only route
     dispatch(updateSearchRoute(0, {
-      arrivalPoint: search.routes[0].departurePoint,
-      departurePoint: search.routes[0].arrivalPoint,
+      destination: search.routes[0].origin,
+      origin: search.routes[0].destination,
     }))
   }
 

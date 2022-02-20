@@ -1,12 +1,13 @@
 import "./ticket-list.scss"
 
 import { postTicketsAir } from "api/actions/tickets"
-import { useParametricSearchData } from "components/SearchForm/SearchForm.utils"
+import { useParametricSearchData, useSearchParamsEvaluation } from "components/SearchForm/SearchForm.utils"
 import ErrorBoundary from "components/services/ErrorBoudary"
 import { RouteType } from "interfaces/Search"
 import { createContext, ReactNode, Suspense } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { Helmet } from "react-helmet"
+import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { SearchDetails, SearchTravelClass } from "redux/reducers/search"
 import { interpolate } from "utils"
@@ -35,7 +36,14 @@ function SearchResult() {
 }
 // 1. Validate search data
 function SearchResultContainer() {
+  useSearchParamsEvaluation()
   const searchData = useParametricSearchData()
+  if (!searchData.transport || !["plane", "bus", "train"].includes(searchData.transport)) {
+    throw new Error("useParametricSearchDataError: wrong `transport`")
+  }
+  if (searchData.routes.length === 0) {
+    throw new Error("useParametricSearchDataError: no `routes` param")
+  }
   return (
     <SearchSessionProviderSuspense {...searchData}>
       <SearchTicketsMeta />
@@ -78,7 +86,10 @@ function SearchTicketsContainer(props: SearchTicketsContainerProps) {
 }
 
 function SearchTicketsMeta() {
-  const searchData = useParametricSearchData()
+  const search = useSelector(state => state.search)
+  if (search.routes[0].origin === null || search.routes[0].destination === null) {
+    throw new Error("SearchTicketsMetaError: Empty route")
+  }
 
   const title = `Авиабилеты из {origin} в {destination}. Цены на прямые рейсы {travelClass} класса`
   const desc = `Дешевые авиабилеты из {origin} ({originCode}) в {destination} ({destinationCode}) на merlines.ru. Лучшие цены на прямые рейсы {travelClass} класса {isChildren}`
@@ -86,20 +97,20 @@ function SearchTicketsMeta() {
     <Helmet>
       <title>
         {interpolate(title, {
-          origin: searchData.routes[0].origin,
-          destination: searchData.routes[0].destination,
-          travelClass: Object.keys(SearchTravelClass)[Object.values(SearchTravelClass).indexOf(String(searchData.travelClass || 1))]
+          origin: search.routes[0].origin.title,
+          destination: search.routes[0].destination.title,
+          travelClass: SearchTravelClass[search.travelClass]
         })}
       </title>
       <meta
         name="description"
         content={interpolate(desc, {
-          origin: searchData.routes[0].origin,
-          originCode: "CDE",
-          destination: searchData.routes[0].destination,
-          destinationCode: "CDE",
-          travelClass: Object.keys(SearchTravelClass)[Object.values(SearchTravelClass).indexOf(String(searchData.travelClass || 1))],
-          isChildren: searchData.passengers?.children || searchData.passengers?.infants ? "с детьми" : ""
+          origin: search.routes[0].origin.title,
+          originCode: search.routes[0].origin.code || "CDE",
+          destination: search.routes[0].destination.title,
+          destinationCode: search.routes[0].destination.code || "CDE",
+          travelClass: SearchTravelClass[search.travelClass],
+          isChildren: search.passengers?.children || search.passengers?.infants ? "с детьми" : ""
         })}
       />
     </Helmet>
@@ -131,12 +142,7 @@ function SearchTicketsMeta() {
 //             />
 //           )}
 //         </div>
-//         <div className="ticket-list__container">
-//           <SearchResultTicketList />
-//         </div>
-//         <button className="ticket-list__open-filter">фильтры</button>
 //       </section>
-//       <Loader></Loader>
 //       <SearchForm />
 //       <div className="form-close">
 //         <button
@@ -148,7 +154,6 @@ function SearchTicketsMeta() {
 //         </button>
 //       </div>
 //       <SearchFormMini openForm={() => setIsSearchFormOpen(!isSearchFormOpen)} />
-//       {/* <LoaderClose></LoaderClose> */}
 //     </>
 //   )
 // }

@@ -1,6 +1,8 @@
 import _ from "lodash"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
-import { SearchDetails } from "redux/reducers/search"
+import { SearchDetails, updateSearch, updateSearchRoute, updateSearchTransport, updateSearchTravelClass } from "redux/reducers/search"
 
 import { declinedMonthNames } from "../../constants"
 
@@ -17,22 +19,22 @@ export function humanizeDate(date?: Date | null) {
 export function stringifyRoutes(searchRoutes: SearchDetails["routes"]) {
   const stringifyDate = (date: Date) => date.toJSON().slice(2, 10).replace(/-/g, "")
   const routes = searchRoutes.flatMap(route => {
-    if (!route.departurePoint || !route.arrivalPoint || !route.departureDate) {
+    if (!route.origin || !route.destination || !route.date) {
       throw new TypeError("StringifyRoutesError: Lack of data in a route")
     }
 
     return {
       ...route,
-      departurePoint: route.departurePoint.id,
-      arrivalPoint: route.arrivalPoint.id,
-      departureDate: stringifyDate(route.departureDate)
+      origin: route.origin.id,
+      destination: route.destination.id,
+      date: stringifyDate(route.date)
     }
   })
   return routes.map(route => {
-    if (route.returnDate) {
-      return `${route.departurePoint}<>${route.arrivalPoint}^${route.departureDate}~${stringifyDate(route.returnDate)}`
+    if (route.returnDate && routes.length === 1) {
+      return `${route.origin}<>${route.destination}^${route.date}~${stringifyDate(route.returnDate)}`
     }
-    return `${route.departurePoint}>${route.arrivalPoint}^${route.departureDate}`
+    return `${route.origin}>${route.destination}^${route.date}`
   }).join("|")
 }
 
@@ -98,23 +100,61 @@ function parseSearchTravelClass(stringTravelClass?: string): number | undefined 
 export function useParametricSearchData(): ParametricSearchData {
   const params = useParams<Record<"transport" | "routes" | "passengers" | "travelClass", string | undefined>>()
 
-  const transport = params.transport
+  const transport = params.transport || null
   const routes = parseSearchRoutes(params.routes)
   const passengers = parseSearchPassengers(params.passengers)
   const travelClass = parseSearchTravelClass(params.travelClass)
 
-  if (transport == null) {
-    throw new Error("useParametricSearchDataError: no `transport` param")
-  }
-  if (routes.length === 0) {
-    throw new Error("useParametricSearchDataError: no `routes` param")
-  }
-
   return { transport, routes, travelClass, passengers }
 }
 
+export function useSearchParamsEvaluation() {
+  const dispatch = useDispatch()
+  const searchData = useParametricSearchData()
+  useEffect(() => {
+    if (searchData.travelClass) {
+      dispatch(updateSearchTravelClass(searchData.travelClass))
+    }
+    if (searchData.transport && ["plane", "bus", "train"].includes(searchData.transport)) {
+      dispatch(updateSearchTransport(searchData.transport as "train" | "bus" | "plane"))
+    }
+    dispatch(updateSearch({
+      hasReturnDate: !!searchData.routes[0].returnDate && searchData.routes.length === 0,
+      passengers: {
+        adults: 1,
+        children: 0,
+        infants: 0,
+        ...searchData.passengers
+      }
+    }))
+
+    async function updateRoutes() {
+      await searchData.routes.map(async (route, index) => {
+        // const { } = await ClientAPI.query(getGeoAirCities)
+        dispatch(updateSearchRoute(index, {
+          origin: {
+            id: route.origin,
+            title: "" + route.origin,
+            code: "CDE"
+          },
+          destination: {
+            id: route.destination,
+            title: "" + route.origin,
+            code: "CDE"
+          },
+          date: route.date ? new Date(route.date) : null,
+          returnDate: route.returnDate ? new Date(route.returnDate) : null
+        }))
+      })
+
+    }
+
+    updateRoutes()
+  }, [searchData])
+}
+
 export interface ParametricSearchData {
-  transport: string
+  transport: string | null
   routes: {
     origin: number
     destination: number

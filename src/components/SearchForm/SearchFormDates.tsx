@@ -44,7 +44,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
 
   function onDatesChange(value: DatePickerValue) {
     dispatch(updateSearchRoute(props.routeIndex, {
-      departureDate: value[0],
+      date: value[0],
       returnDate: value[1]
     }))
   }
@@ -60,7 +60,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
           autoComplete="off"
           placeholder="_"
           readOnly
-          value={humanizeDate(searchRoute.departureDate)}
+          value={humanizeDate(searchRoute.date)}
 
           onFocus={onFocus}
           onKeyDown={onKeyDown} />
@@ -84,7 +84,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
 
       <div className={classWithModifiers("search-form__dates", hasCalendarOffset && "offset", isCalendarHidden && "hidden")}>
         <DatePicker
-          value={[searchRoute.departureDate, searchRoute.returnDate]}
+          value={[searchRoute.date, searchRoute.returnDate]}
           onChange={onDatesChange}
           ranged={search.hasReturnDate && search.routes.length === 1}
           parentRef={calendarRef} />
