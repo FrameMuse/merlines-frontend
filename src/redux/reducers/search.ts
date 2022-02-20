@@ -5,7 +5,7 @@ export enum SearchTravelClass {
 export interface SearchPlace {
   id: number
   title: string
-  code: string
+  code?: string
 }
 
 export interface SearchAirports extends SearchPlace {
@@ -23,23 +23,25 @@ export interface SearchRoute {
 
 export interface SearchDetails {
   hasReturnDate: boolean
+  transport: "plane" | "bus" | "train"
   travelClass: SearchTravelClass
   routes: SearchRoute[]
   passengers: {
     adults: number
     children: number
-    babies: number
+    infants: number
   }
 }
 
 const initialState: SearchDetails = {
   hasReturnDate: false,
+  transport: "plane",
   travelClass: 1,
   routes: [{ arrivalPoint: null, departurePoint: null, departureDate: new Date, returnDate: null }],
   passengers: {
     adults: 1,
     children: 0,
-    babies: 0
+    infants: 0
   }
 }
 

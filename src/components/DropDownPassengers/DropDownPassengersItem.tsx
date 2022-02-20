@@ -16,7 +16,7 @@ function DropDownPassengersItem(props: DropDownPassengersItemProps) {
       title: "Дети",
       desc: "от 2 до 12 лет",
     },
-    babies: {
+    infants: {
       title: "Младенцы",
       desc: "до 2 лет",
     }

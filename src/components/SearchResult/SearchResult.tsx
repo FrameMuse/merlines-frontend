@@ -6,16 +6,18 @@ import ErrorBoundary from "components/services/ErrorBoudary"
 import { RouteType } from "interfaces/Search"
 import { createContext, ReactNode, Suspense } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
+import { useLocation } from "react-router-dom"
+import { SearchDetails } from "redux/reducers/search"
 
 import SearchForm from "../SearchForm/SearchForm"
 import SearchResultAirContainer from "./SearchResultContainers/SearchResultAirContainer/SearchResultAirContainer"
 import SearchResultTicketError from "./SearchResultError"
 import SearchResultLoader from "./SearchResultLoader"
 
-// Request session
 export const searchSessionContext = createContext({ session: "" })
 
 function SearchResult() {
+  const location = useLocation()
   return (
     <>
       <section className="main-form main-form--small">
@@ -32,30 +34,29 @@ function SearchResult() {
 // 1. Validate search data
 function SearchResultContainer() {
   const searchData = useParametricSearchData()
-  if (!searchData.routes) {
+  if (searchData.transport === null) {
+    throw new Error("useParametricSearchDataError: no `transport` param")
+  }
+  if (searchData.routes.length === 0) {
     throw new Error("useParametricSearchDataError: no `routes` param")
   }
   return (
-    <SearchResultSessionProvider routes={searchData.routes} travelClass={searchData.travelClass} passengers={searchData.passengers}>
-      <SearchResultTransportContainer />
-    </SearchResultSessionProvider>
+    <SearchSessionProviderSuspense {...searchData}>
+      <SearchTicketsContainer transport={searchData.transport} />
+    </SearchSessionProviderSuspense>
   )
 }
 
 
 interface SearchResultSessionProviderProps {
   routes: RouteType[]
-  travelClass?: number
-  passengers?: Partial<{
-    adults: number
-    children: number
-    infants: number
-  }>
+  travelClass?: SearchDetails["travelClass"]
+  passengers?: Partial<SearchDetails["passengers"]>
 
   children: ReactNode
 }
 // 2. Create session
-function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
+function SearchSessionProviderSuspense(props: SearchResultSessionProviderProps) {
   const { error, payload } = useSuspenseQuery(postTicketsAir(props.routes, props.travelClass || 1, props.passengers))
   if (error || !payload) throw new Error()
   return (
@@ -66,10 +67,17 @@ function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
 }
 
 // 3. Determine what type transport is used and get relevant tickets
-function SearchResultTransportContainer() {
-  return (
-    <SearchResultAirContainer />
-  )
+interface SearchTicketsContainerProps {
+  transport: SearchDetails["transport"] | (string & {})
+}
+function SearchTicketsContainer(props: SearchTicketsContainerProps) {
+  switch (props.transport) {
+    case "plane":
+      return <SearchResultAirContainer />
+
+    default:
+      throw new Error("SearchTicketsContainerError: unknown transport")
+  }
 }
 
 // function SearchResultA() {

@@ -36,18 +36,18 @@ export function stringifyRoutes(searchRoutes: SearchDetails["routes"]) {
   }).join("|")
 }
 
-export function stringifyPassengers({ adults, children, babies }: SearchDetails["passengers"]) {
-  if (adults === 1 && (children + babies) === 0) {
+export function stringifyPassengers({ adults, children, infants }: SearchDetails["passengers"]) {
+  if (adults === 1 && (children + infants) === 0) {
     return ""
   }
-  if (adults > 1 && (children + babies) === 0) {
+  if (adults > 1 && (children + infants) === 0) {
     return `${adults}`
   }
-  if (adults > 1 && children > 0 && babies === 0) {
+  if (adults > 1 && children > 0 && infants === 0) {
     return `${adults}:${children}`
   }
 
-  return `${adults}:${children}:${babies}`
+  return `${adults}:${children}:${infants}`
 }
 
 export function stringifyTravelClass(travelClass: SearchDetails["travelClass"]) {
@@ -94,14 +94,27 @@ function parseSearchTravelClass(stringTravelClass?: string): number | undefined 
   return +travelClass
 }
 
-export function useParametricSearchData() {
-  const params = useParams<Record<"routes" | "passengers" | "travelClass", string | undefined>>()
+export function useParametricSearchData(): ParametricSearchData {
+  const params = useParams<Record<"transport" | "routes" | "passengers" | "travelClass", string | undefined>>()
 
+  const transport = params.transport || null
   const routes = parseSearchRoutes(params.routes)
   const passengers = parseSearchPassengers(params.passengers)
   const travelClass = parseSearchTravelClass(params.travelClass)
 
-  return { routes, travelClass, passengers }
+  return { transport, routes, travelClass, passengers }
+}
+
+export interface ParametricSearchData {
+  transport: string | null
+  routes: {
+    origin: number
+    destination: number
+    date: string
+    returnDate?: string
+  }[]
+  travelClass?: number
+  passengers?: Partial<SearchDetails["passengers"]>
 }
 
 // origin=MSK

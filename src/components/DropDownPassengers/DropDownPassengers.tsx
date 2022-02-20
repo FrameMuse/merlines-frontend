@@ -1,10 +1,6 @@
 // SCSS
 import "./passengers-list.scss"
 
-// import { useEffect, useRef, useState } from "react"
-// import { useClickAway } from "react-use"
-import { classWithModifiers } from "utils"
-
 import DropDownPassengersItem from "./DropDownPassengersItem"
 import DropDownPassengersTravelClass from "./DropDownPassengersTravelClass"
 
@@ -14,7 +10,7 @@ function DropDownPassengers() {
       <div className="passengers-list__item">
         <DropDownPassengersItem name="adults" />
         <DropDownPassengersItem name="children" />
-        <DropDownPassengersItem name="babies" />
+        <DropDownPassengersItem name="infants" />
       </div>
       <div className="passengers-list__item">
         <DropDownPassengersTravelClass name={1} />
