@@ -43,7 +43,7 @@ export function stringifyPassengers({ adults, children, infants }: SearchDetails
   if (adults > 1 && (children + infants) === 0) {
     return `${adults}`
   }
-  if (adults > 1 && children > 0 && infants === 0) {
+  if (adults >= 1 && children > 0 && infants === 0) {
     return `${adults}:${children}`
   }
 
