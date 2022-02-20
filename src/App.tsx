@@ -1,10 +1,18 @@
 import AdminView from "admin/AdminView"
 import { getAccountMe } from "api/actions/account"
 import ClientAPI from "api/client"
+import About from "components/About/About"
+import AboutProject from "components/AboutProject/AboutProject"
+import Advertising from "components/Advertising/Advertising"
+import { CookiePolicy } from "components/CookiePolicy/CookiePolicy"
+import FAQ from "components/FAQ/FAQ"
 import Footer from "components/Footer/Footer"
 import Header from "components/Header/Header"
+import LandingPage from "components/LandingPage/LandingPage"
 import Main from "components/Main/Main"
+import Partners from "components/Partners/Partners"
 import PopupPasswordResetConfirm from "components/Popups/PopupPasswordResetConfirm"
+import PrivacyPolicy from "components/PrivacyPolicy/PrivacyPolicy"
 import SearchResult from "components/SearchResult/SearchResult"
 import Subscribe from "components/Subscribe/Subscribe"
 import ErrorView from "components/TechnicalPages/ErrorView"
@@ -15,6 +23,7 @@ import { useDispatch } from "react-redux"
 import { Route, Switch, useHistory, useLocation } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import { loginUser } from "redux/reducers/user"
+import routes from "routes"
 
 import Article from "./components/Article/Article"
 import Blog from "./components/Blog/Blog"
@@ -50,10 +59,20 @@ function AppRouter() {
       <Route path="/" exact><Main /><Subscribe /></Route>
 
       <Route path={[
-        "/search/:routes/:passengers?/C:travelClass?",
-        "/search/:routes/:passengers?",
+        "/search/:transport/:routes/:passengers?/C:travelClass?",
+        "/search/:transport/:routes/:passengers?",
       ]}><SearchResult /><Subscribe /></Route>
 
+      <Route path={routes.footer.aboutUs}><About /></Route>
+      <Route path={routes.footer.aboutProject}><AboutProject /></Route>
+      <Route path={routes.footer.rules}><ErrorView code="404" /></Route>
+      <Route path={routes.footer.cookies}><CookiePolicy /></Route>
+      <Route path={routes.footer.privacyPolicy}><PrivacyPolicy /></Route>
+      <Route path={routes.footer.advertising}><Advertising /></Route>
+      <Route path={routes.footer.priceList}><Advertising /></Route>
+      <Route path={routes.footer.forPartners}><Partners /></Route>
+      <Route path={routes.footer.faq}><FAQ /></Route>
+      <Route path={routes.landing}><LandingPage /><Subscribe /></Route>
 
       <Route path="/error/:code" render={props => <ErrorView {...props.match.params} />} />
       <Route><ErrorView code="404" /></Route>

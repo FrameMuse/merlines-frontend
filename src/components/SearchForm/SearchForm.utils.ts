@@ -55,11 +55,12 @@ export function stringifyTravelClass(travelClass: SearchDetails["travelClass"]) 
 }
 
 export function stringifySearchData(search: Omit<SearchDetails, "hasReturnDate">) {
+  const TRANSPORT = search.transport
   const ROUTES = stringifyRoutes(search.routes)
   const PASSENGERS = stringifyPassengers(search.passengers)
   const CLASS = search.travelClass === 1 ? "" : search.travelClass
 
-  return "/search/" + ROUTES + (PASSENGERS && ("/" + PASSENGERS)) + (CLASS && "/C" + CLASS)
+  return "/search/" + TRANSPORT + "/" + ROUTES + (PASSENGERS && ("/" + PASSENGERS)) + (CLASS && "/C" + CLASS)
 }
 
 function parseSearchRoutes(stringRoutes?: string) {
