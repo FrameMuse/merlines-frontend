@@ -54,19 +54,22 @@ export function stringifyTravelClass(travelClass: SearchDetails["travelClass"]) 
   return travelClass === 1 ? "" : travelClass
 }
 
-export function useParametricSearchData() {
-  const params = useParams<Record<"routes" | "passengers" | "travelClass", string | undefined>>()
-  if (!params.routes) {
-    throw new Error("ParseSearchDataError: no routes given")
-  }
+export function stringifySearchData(search: Omit<SearchDetails, "hasReturnDate">) {
+  const ROUTES = stringifyRoutes(search.routes)
+  const PASSENGERS = stringifyPassengers(search.passengers)
+  const CLASS = search.travelClass === 1 ? "" : search.travelClass
 
-  // ---ROUTES---
+  return "/search/" + ROUTES + (PASSENGERS && ("/" + PASSENGERS)) + (CLASS && "/C" + CLASS)
+}
+
+function parseSearchRoutes(stringRoutes?: string) {
+  if (stringRoutes == null) return []
 
   const routes = []
   const regex = /(\w+)<?>(\w+)\^(\d+)(?:~(\d+))?/g
   let matches
 
-  while ((matches = regex.exec(params.routes)) !== null) {
+  while ((matches = regex.exec(stringRoutes)) !== null) {
     const [, origin, destination, date, returnDate] = matches as RegExpExecArray & [string, string, string, string, string | undefined]
     routes.push({
       origin: +origin,
@@ -76,19 +79,29 @@ export function useParametricSearchData() {
     })
   }
 
-  // ---PASSENGERS---
+  return routes
+}
 
-  const [adults, children, infants] = (params.passengers?.split(":") || []).map(Number) as (number | undefined)[]
+function parseSearchPassengers(stringPassengers?: string) {
+  if (stringPassengers == null) return stringPassengers
+  const [adults, children, infants] = (stringPassengers.split(":") || []).map(Number) as (number | undefined)[]
+  return { adults, children, infants }
+}
 
-  // --
+function parseSearchTravelClass(stringTravelClass?: string): number | undefined {
+  if (stringTravelClass == null) return stringTravelClass
+  const travelClass = stringTravelClass.replace("C", "")
+  return +travelClass
+}
 
-  const travelClass = params.travelClass?.replace("C", "")
+export function useParametricSearchData() {
+  const params = useParams<Record<"routes" | "passengers" | "travelClass", string | undefined>>()
 
-  return {
-    routes,
-    travelClass: travelClass ? Number(travelClass) : undefined,
-    passengers: params.passengers ? { adults, children, infants } : undefined
-  }
+  const routes = parseSearchRoutes(params.routes)
+  const passengers = parseSearchPassengers(params.passengers)
+  const travelClass = parseSearchTravelClass(params.travelClass)
+
+  return { routes, travelClass, passengers }
 }
 
 // origin=MSK
@@ -107,6 +120,3 @@ export function useParametricSearchData() {
  * /search/[CITY]<->[CITY]:[DATE]~[DATE]/[ADULTS]:[CHILDREN]:[INFANTS]/[CLASS]
  */
 
-// export function composeLocationSearchRoutes(locationSearch: Location["search"]) {
-//   const locationSearchParams = new URLSearchParams(locationSearch)
-// }

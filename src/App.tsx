@@ -51,7 +51,6 @@ function AppRouter() {
 
       <Route path={[
         "/search/:routes/:passengers?/C:travelClass?",
-        // "/search/:routes/C:travelClass?",
         "/search/:routes/:passengers?",
       ]}><SearchResult /><Subscribe /></Route>
 

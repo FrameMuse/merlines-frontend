@@ -1,15 +1,13 @@
 // SCSS
 import "./search-form.scss"
 
-import { getGeoIpAir } from "api/actions/geo"
 import { FormEvent, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { addSearchRoutes, updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
-import ClientAPI from "../../api/client"
-import { stringifyPassengers, stringifyRoutes } from "./SearchForm.utils"
+import { stringifySearchData } from "./SearchForm.utils"
 import SearchFormDate from "./SearchFormDates"
 import { SearchFormPassengers } from "./SearchFormPassengers"
 import { SearchFormRoute } from "./SearchFormRoute"
@@ -52,44 +50,10 @@ function SearchForm() {
       return setFormError(true)
     }
 
-    // const searchQuery1 = createQuery({
-    //   origin: route.departurePoint.id,
-    //   destination: route.arrivalPoint.id,
-    //   date: route.departureDate.toISOString().slice(0, 10),
-    // })
-
-    // const searchQuery2 = createQuery({
-    //   origin: route.arrivalPoint.id,
-    //   destination: route.departurePoint.id,
-    //   date: route.returnDate?.toISOString().slice(0, 10),
-    // })
-
-    // const searchQuery = createQuery({
-    //   travel_class: search.travelClass,
-    //   ...search.passengers
-    // })
-
-    const ROUTES = stringifyRoutes(search.routes)
-    const PASSENGERS = stringifyPassengers(search.passengers)
-    const CLASS = search.travelClass === 1 ? "" : search.travelClass
-
-    history.push({
-      pathname: "/search/" + ROUTES + (PASSENGERS && ("/" + PASSENGERS)) + (CLASS && "/C" + CLASS)
-    })
+    history.push({ pathname: stringifySearchData(search) })
   }
 
   useEffect(() => setFormError(false), [search])
-  useEffect(() => {
-    ClientAPI.query(getGeoIpAir).then(({ payload }) => {
-      if (!payload) return
-      dispatch(updateSearchRoute(0, {
-        departurePoint: payload
-      }));
-      (document.querySelector(".search-form__group--arrival .search-form__input") as any)?.focus()
-    })
-
-
-  }, [dispatch])
 
   return (
     <form className={classWithModifiers("search-form", search.routes.length > 1 && "complicated")} onSubmit={onSearch} autoComplete="off">

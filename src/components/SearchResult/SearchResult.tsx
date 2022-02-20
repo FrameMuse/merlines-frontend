@@ -22,7 +22,9 @@ function SearchResult() {
         <SearchForm />
       </section>
       <ErrorBoundary fallback={<SearchResultTicketError />} deps={[location]}>
-        <SearchResultContainer />
+        <Suspense fallback={<SearchResultLoader />}>
+          <SearchResultContainer />
+        </Suspense>
       </ErrorBoundary>
     </>
   )
@@ -30,13 +32,13 @@ function SearchResult() {
 // 1. Validate search data
 function SearchResultContainer() {
   const searchData = useParametricSearchData()
-  console.log(searchData)
+  if (!searchData.routes) {
+    throw new Error("useParametricSearchDataError: no `routes` param")
+  }
   return (
-    <Suspense fallback={<SearchResultLoader />}>
-      <SearchResultSessionProvider routes={searchData.routes} travelClass={searchData.travelClass} passengers={searchData.passengers}>
-        <SearchResultTransportContainer />
-      </SearchResultSessionProvider>
-    </Suspense>
+    <SearchResultSessionProvider routes={searchData.routes} travelClass={searchData.travelClass} passengers={searchData.passengers}>
+      <SearchResultTransportContainer />
+    </SearchResultSessionProvider>
   )
 }
 

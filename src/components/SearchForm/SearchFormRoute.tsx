@@ -1,6 +1,7 @@
-import { getGeoAirCities } from "api/actions/geo"
+import { getGeoAirCities, getGeoIpAir } from "api/actions/geo"
 import ClientAPI from "api/client"
-import { ChangeEvent, Dispatch, useEffect, useState } from "react"
+import { ChangeEvent, Dispatch, MutableRefObject, useEffect, useRef, useState } from "react"
+import { ReactNode } from "react-markdown/lib/react-markdown"
 import { useDispatch, useSelector } from "react-redux"
 import { SearchAirports, SearchPlace, SearchRoute, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
@@ -15,6 +16,7 @@ interface SearchFormRouteProps extends SearchRoute {
 
 export function SearchFormRoute(props: SearchFormRouteProps) {
   const dispatch = useDispatch()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   function updateRouteData<K extends keyof SearchRoute = keyof SearchRoute>(key: K, value: SearchRoute[K]) {
     dispatch(updateSearchRoute(props.index, { [key]: value }))
@@ -28,9 +30,20 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
     updateRouteData("arrivalPoint", place)
   }
 
+  useEffect(() => {
+    ClientAPI
+      .query(getGeoIpAir)
+      .then(({ payload }) => {
+        if (!payload) return
+
+        inputRef.current?.focus()
+        dispatch(updateSearchRoute(0, { departurePoint: payload }))
+      })
+  }, [])
+
   return (
     <>
-      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.departurePoint} onChange={onChangeDeparturePoint}>
+      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.departurePoint} onChange={onChangeDeparturePoint} inputRef={inputRef}>
         <SearchFormRoutesSwitchButton />
       </SearchFormRouteInput>
       <SearchFormRouteInput name="arrival" placeholder="куда" state={props.arrivalPoint} onChange={onChangeArrivalPoint} />
@@ -42,10 +55,12 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
 interface SearchFormRouteInputProps {
   name: string
   placeholder: string
-  children?: any
+  inputRef?: MutableRefObject<HTMLInputElement | null>
 
   state: SearchPlace | null
   onChange: Dispatch<SearchPlace>
+
+  children?: ReactNode
 }
 
 function SearchFormRouteInput(props: SearchFormRouteInputProps) {
@@ -75,9 +90,7 @@ function SearchFormRouteInput(props: SearchFormRouteInputProps) {
     props.onChange(element)
   }
 
-  useEffect(() => {
-    setValue(props.state?.title)
-  }, [props.state])
+  useEffect(() => setValue(props.state?.title), [props.state])
 
   const placesIdList = places.flatMap(place => {
     if (place.airports) {
@@ -122,7 +135,8 @@ function SearchFormRouteInput(props: SearchFormRouteInputProps) {
         placeholder="_"
 
         value={value}
-        onChange={onChange} />
+        onChange={onChange}
+        ref={props.inputRef} />
       <div className="search-form__placeholder">{props.placeholder}</div>
       <DropDown list={dropDownList} isOpen={isOpen} setIsOpen={setIsOpen} onSelect={onSelect} />
       {props.children}
