@@ -387,6 +387,27 @@ export function someEqual<T>(key: keyof T) {
 }
 
 
+
+// export function inter<V = unknown>(value: V, vars: Record<string, string | number>) {
+//   if (!value) throw new TypeError("interError: empty value gotten")
+//   const varKeys = Object.keys(vars)
+//   if (value instanceof Array) {
+//     return value.flatMap(a => a).map(interpolate)
+//   }
+//   return interpolate(value)
+// }
+
+
+type ExtractInterpolations<T extends string> = T extends `${infer _Start}{${infer V}}${infer Rest}` ? V | ExtractInterpolations<Rest> : never
+
+/**
+ * Interpolates {variable} in string
+ */
+export function interpolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, string | number>): string {
+  const varKeys = Object.keys(vars) as ExtractInterpolations<T>[]
+  return varKeys.reduce((result: string, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
+}
+
 export {
   getRandomInteger,
   getRandomElement,

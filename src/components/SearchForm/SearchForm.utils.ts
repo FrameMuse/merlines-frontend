@@ -98,16 +98,23 @@ function parseSearchTravelClass(stringTravelClass?: string): number | undefined 
 export function useParametricSearchData(): ParametricSearchData {
   const params = useParams<Record<"transport" | "routes" | "passengers" | "travelClass", string | undefined>>()
 
-  const transport = params.transport || null
+  const transport = params.transport
   const routes = parseSearchRoutes(params.routes)
   const passengers = parseSearchPassengers(params.passengers)
   const travelClass = parseSearchTravelClass(params.travelClass)
+
+  if (transport == null) {
+    throw new Error("useParametricSearchDataError: no `transport` param")
+  }
+  if (routes.length === 0) {
+    throw new Error("useParametricSearchDataError: no `routes` param")
+  }
 
   return { transport, routes, travelClass, passengers }
 }
 
 export interface ParametricSearchData {
-  transport: string | null
+  transport: string
   routes: {
     origin: number
     destination: number

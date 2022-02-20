@@ -6,8 +6,10 @@ import ErrorBoundary from "components/services/ErrorBoudary"
 import { RouteType } from "interfaces/Search"
 import { createContext, ReactNode, Suspense } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
+import { Helmet } from "react-helmet"
 import { useLocation } from "react-router-dom"
-import { SearchDetails } from "redux/reducers/search"
+import { SearchDetails, SearchTravelClass } from "redux/reducers/search"
+import { interpolate } from "utils"
 
 import SearchForm from "../SearchForm/SearchForm"
 import SearchResultAirContainer from "./SearchResultContainers/SearchResultAirContainer/SearchResultAirContainer"
@@ -34,14 +36,9 @@ function SearchResult() {
 // 1. Validate search data
 function SearchResultContainer() {
   const searchData = useParametricSearchData()
-  if (searchData.transport === null) {
-    throw new Error("useParametricSearchDataError: no `transport` param")
-  }
-  if (searchData.routes.length === 0) {
-    throw new Error("useParametricSearchDataError: no `routes` param")
-  }
   return (
     <SearchSessionProviderSuspense {...searchData}>
+      <SearchTicketsMeta />
       <SearchTicketsContainer transport={searchData.transport} />
     </SearchSessionProviderSuspense>
   )
@@ -80,24 +77,39 @@ function SearchTicketsContainer(props: SearchTicketsContainerProps) {
   }
 }
 
+function SearchTicketsMeta() {
+  const searchData = useParametricSearchData()
+
+  const title = `Авиабилеты из {origin} в {destination}. Цены на прямые рейсы {travelClass} класса`
+  const desc = `Дешевые авиабилеты из {origin} ({originCode}) в {destination} ({destinationCode}) на merlines.ru. Лучшие цены на прямые рейсы {travelClass} класса {isChildren}`
+  return (
+    <Helmet>
+      <title>
+        {interpolate(title, {
+          origin: searchData.routes[0].origin,
+          destination: searchData.routes[0].destination,
+          travelClass: Object.keys(SearchTravelClass)[Object.values(SearchTravelClass).indexOf(String(searchData.travelClass || 1))]
+        })}
+      </title>
+      <meta
+        name="description"
+        content={interpolate(desc, {
+          origin: searchData.routes[0].origin,
+          originCode: "CDE",
+          destination: searchData.routes[0].destination,
+          destinationCode: "CDE",
+          travelClass: Object.keys(SearchTravelClass)[Object.values(SearchTravelClass).indexOf(String(searchData.travelClass || 1))],
+          isChildren: searchData.passengers?.children || searchData.passengers?.infants ? "с детьми" : ""
+        })}
+      />
+    </Helmet>
+  )
+}
+
 // function SearchResultA() {
 //   const [isSearchFormOpen, setIsSearchFormOpen] = useState(true)
 //   return (
 //     <>
-//       {/* <Helmet>
-//         <title>{meta.generateTitle(cityFrom, cityTo, travelClass)}</title>
-//         <meta
-//           name="description"
-//           content={meta.generateMetaDescription(
-//             cityFrom,
-//             cityFromCode,
-//             cityTo,
-//             cityToCode,
-//             travelClass,
-//             isChildren
-//           )}
-//         />
-//       </Helmet> */}
 //       <section className="ticket-list">
 //         <div className="ticket-list-form__container">
 //           {isSearchFormOpen ? (
