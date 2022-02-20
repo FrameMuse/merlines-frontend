@@ -4,7 +4,7 @@ import { SearchDetails } from "redux/reducers/search"
 
 import { declinedMonthNames } from "../../constants"
 
-export function textualizeDate(date?: Date | null) {
+export function humanizeDate(date?: Date | null) {
   if (date == null) return ""
 
   const day = date.getDate()

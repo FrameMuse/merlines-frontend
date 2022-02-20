@@ -6,7 +6,7 @@ import { useClickAway } from "react-use"
 import { updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
-import { textualizeDate } from "./SearchForm.utils"
+import { humanizeDate } from "./SearchForm.utils"
 
 interface SearchFormDatingProps {
   routeIndex: number
@@ -60,7 +60,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
           autoComplete="off"
           placeholder="_"
           readOnly
-          value={textualizeDate(searchRoute.departureDate)}
+          value={humanizeDate(searchRoute.departureDate)}
 
           onFocus={onFocus}
           onKeyDown={onKeyDown} />
@@ -74,7 +74,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
             autoComplete="off"
             placeholder="_"
             readOnly
-            value={textualizeDate(searchRoute.returnDate)}
+            value={humanizeDate(searchRoute.returnDate)}
 
             onFocus={onReturnDateFocus}
             onKeyDown={onKeyDown} />
