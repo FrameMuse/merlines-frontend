@@ -1,6 +1,6 @@
 import _ from "lodash"
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { SearchDetails, updateSearch, updateSearchRoute, updateSearchTransport, updateSearchTravelClass } from "redux/reducers/search"
 
@@ -111,6 +111,7 @@ export function useParametricSearchData(): ParametricSearchData {
 export function useSearchParamsEvaluation() {
   const dispatch = useDispatch()
   const searchData = useParametricSearchData()
+  const searchRoutes = useSelector(state => state.search.routes)
   useEffect(() => {
     if (searchData.travelClass) {
       dispatch(updateSearchTravelClass(searchData.travelClass))
@@ -129,19 +130,22 @@ export function useSearchParamsEvaluation() {
     }))
 
     async function updateRoutes() {
-      await searchData.routes.map(async (route, index) => {
+      await searchData.routes.forEach(async (route, index) => {
         // const { } = await ClientAPI.query(getGeoAirCities)
+        const origin = searchRoutes[index].origin?.id === route.origin ? searchRoutes[index].origin : {
+          id: route.origin,
+          title: "" + route.origin,
+          code: "CDE"
+        }
+
+        const destination = searchRoutes[index].destination?.id === route.destination ? searchRoutes[index].destination : {
+          id: route.destination,
+          title: "" + route.origin,
+          code: "CDE"
+        }
         dispatch(updateSearchRoute(index, {
-          origin: {
-            id: route.origin,
-            title: "" + route.origin,
-            code: "CDE"
-          },
-          destination: {
-            id: route.destination,
-            title: "" + route.origin,
-            code: "CDE"
-          },
+          origin,
+          destination,
           date: route.date ? new Date(route.date) : null,
           returnDate: route.returnDate ? new Date(route.returnDate) : null
         }))

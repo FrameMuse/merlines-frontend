@@ -1,13 +1,13 @@
 // SCSS
 import "./search-form.scss"
 
-import { FormEvent, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { addSearchRoutes, updateSearch, updateSearchHasReturnDate, updateSearchRoute, updateSearchTransport, updateSearchTravelClass } from "redux/reducers/search"
+import { addSearchRoutes, updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
-import { stringifySearchData, useParametricSearchData } from "./SearchForm.utils"
+import { stringifySearchData } from "./SearchForm.utils"
 import SearchFormDate from "./SearchFormDates"
 import { SearchFormPassengers } from "./SearchFormPassengers"
 import { SearchFormRoute } from "./SearchFormRoute"
@@ -36,9 +36,7 @@ function SearchForm() {
     }))
   }
 
-  function onSearch(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
+  function onSearch() {
     const route = search.routes[0]
     if (route.destination == null) {
       return setFormError(true)
@@ -56,7 +54,7 @@ function SearchForm() {
   useEffect(() => setFormError(false), [search])
 
   return (
-    <form className={classWithModifiers("search-form", search.routes.length > 1 && "complicated")} onSubmit={onSearch} autoComplete="off">
+    <form className={classWithModifiers("search-form", search.routes.length > 1 && "complicated")} autoComplete="off">
       <div className="search-form__nav">
         <button className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} type="button" onClick={setReturnDate}>
           Туда - обратно
@@ -71,7 +69,7 @@ function SearchForm() {
           <SearchFormRoute {...search.routes[0]} index={0} />
           <SearchFormDate routeIndex={0} />
           <SearchFormPassengers />
-          <button className="search-form__btn" type="submit">Найти</button>
+          <button className="search-form__btn" type="button" onClick={onSearch}>Найти</button>
         </div>
       )}
       {search.routes.length > 1 && (
@@ -87,7 +85,7 @@ function SearchForm() {
             <button className="search-form__btn search-form__btn--add" type="button" disabled={search.routes.length >= 7} onClick={addSearchRoute}>
               {search.routes.length < 7 ? "+ Добавить маршрут" : "Максимум маршрутов"}
             </button>
-            <button className="search-form__btn" type="submit">Найти</button>
+            <button className="search-form__btn" type="button" onClick={onSearch}>Найти</button>
           </div>
         </div>
       )}

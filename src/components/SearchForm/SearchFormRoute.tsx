@@ -3,6 +3,7 @@ import ClientAPI from "api/client"
 import { ChangeEvent, Dispatch, MutableRefObject, useEffect, useRef, useState } from "react"
 import { ReactNode } from "react-markdown/lib/react-markdown"
 import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router"
 import { SearchAirports, SearchPlace, SearchRoute, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
@@ -18,19 +19,21 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
   const dispatch = useDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
 
-  function updateRouteData<K extends keyof SearchRoute = keyof SearchRoute>(key: K, value: SearchRoute[K]) {
-    dispatch(updateSearchRoute(props.index, { [key]: value }))
-  }
-
   function onChangeDeparturePoint(place: SearchPlace) {
-    updateRouteData("origin", place)
+    dispatch(updateSearchRoute(props.index, { origin: place }))
   }
 
   function onChangeArrivalPoint(place: SearchPlace) {
-    updateRouteData("destination", place)
+    dispatch(updateSearchRoute(props.index, { destination: place }))
   }
 
+  const search = useSelector(state => state.search)
+  const params = useParams<{ routes?: string }>()
+
   useEffect(() => {
+    if (params.routes != null) return
+    if (search.routes[0].origin != null) return
+
     ClientAPI
       .query(getGeoIpAir)
       .then(({ payload }) => {
@@ -39,14 +42,14 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
         inputRef.current?.focus()
         dispatch(updateSearchRoute(0, { origin: payload }))
       })
-  }, [])
+  }, [search.routes[0].origin, params.routes])
 
   return (
     <>
-      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.origin} onChange={onChangeDeparturePoint} inputRef={inputRef}>
+      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.origin} onChange={onChangeDeparturePoint}>
         <SearchFormRoutesSwitchButton />
       </SearchFormRouteInput>
-      <SearchFormRouteInput name="arrival" placeholder="куда" state={props.destination} onChange={onChangeArrivalPoint} />
+      <SearchFormRouteInput name="arrival" placeholder="куда" state={props.destination} onChange={onChangeArrivalPoint} inputRef={inputRef} />
     </>
   )
 }
