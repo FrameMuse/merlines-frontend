@@ -1,16 +1,18 @@
 import "./ticket-list.scss"
 
 import { postTicketsAir } from "api/actions/tickets"
+import Icon from "components/common/Icon"
 import { useParametricSearchData, useSearchParamsEvaluation } from "components/SearchForm/SearchForm.utils"
+import SearchFormMini from "components/SearchForm/SearchFormMini"
 import ErrorBoundary from "components/services/ErrorBoudary"
 import { RouteType } from "interfaces/Search"
-import { createContext, ReactNode, Suspense } from "react"
+import { createContext, ReactNode, Suspense, useState } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { Helmet } from "react-helmet"
 import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { SearchDetails, SearchTravelClass } from "redux/reducers/search"
-import { interpolate } from "utils"
+import { classWithModifiers, interpolate } from "utils"
 
 import SearchForm from "../SearchForm/SearchForm"
 import SearchResultAirContainer from "./SearchResultContainers/SearchResultAirContainer/SearchResultAirContainer"
@@ -24,7 +26,8 @@ function SearchResult() {
   return (
     <>
       <section className="main-form main-form--small">
-        <SearchForm />
+        {/* <SearchForm /> */}
+        <SearchResultA />
       </section>
       <ErrorBoundary fallback={<SearchResultTicketError />} deps={[location]}>
         <Suspense fallback={<SearchResultLoader />}>
@@ -117,45 +120,27 @@ function SearchTicketsMeta() {
   )
 }
 
-// function SearchResultA() {
-//   const [isSearchFormOpen, setIsSearchFormOpen] = useState(true)
-//   return (
-//     <>
-//       <section className="ticket-list">
-//         <div className="ticket-list-form__container">
-//           {isSearchFormOpen ? (
-//             <>
-//               <SearchForm />
-//               <div className="form-close">
-//                 <button
-//                   onClick={() => setIsSearchFormOpen(!isSearchFormOpen)}
-//                   className="form-close__btn"
-//                   type="button"
-//                 >
-//                   <Icon name="chevron" className="form-close__icon" />
-//                 </button>
-//               </div>
-//             </>
-//           ) : (
-//             <SearchFormMini
-//               openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
-//             />
-//           )}
-//         </div>
-//       </section>
-//       <SearchForm />
-//       <div className="form-close">
-//         <button
-//           onClick={() => setIsSearchFormOpen(!isSearchFormOpen)}
-//           className="form-close__btn"
-//           type="button"
-//         >
-//           <Icon name="chevron" className="form-close__icon" />
-//         </button>
-//       </div>
-//       <SearchFormMini openForm={() => setIsSearchFormOpen(!isSearchFormOpen)} />
-//     </>
-//   )
-// }
+function SearchResultA() {
+  const [isMiniMode, setIsExpanded] = useState(true)
+  return (
+    <>
+      <div className={classWithModifiers("form-mini__form", isMiniMode && "mini-mode")}>
+        <SearchForm />
+        <div className="form-close">
+          <button
+            onClick={() => setIsExpanded(!isMiniMode)}
+            className="form-close__btn"
+            type="button"
+          >
+            <Icon name="chevron" className="form-close__icon" />
+          </button>
+        </div>
+      </div>
+      <div className={classWithModifiers("form-mini__mini", isMiniMode && "mini-mode")}>
+        <SearchFormMini openForm={() => setIsExpanded(!isMiniMode)} />
+      </div>
+    </>
+  )
+}
 
 export default SearchResult

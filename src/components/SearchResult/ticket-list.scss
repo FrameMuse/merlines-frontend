@@ -322,3 +322,27 @@
 	text-align: center;
 	font-weight: 600;
 }
+
+.form-mini__form {
+	&--mini-mode {
+		display: none;
+	}
+
+	@media screen and (min-width: #{$width-xl}) {
+		display: initial;
+
+		.form-close {
+			display: none;
+		}
+	}
+}
+
+.form-mini__mini {
+	&:not(&--mini-mode) {
+		display: none;
+	}
+
+	@media screen and (min-width: #{$width-xl}) {
+		display: none;
+	}
+}
