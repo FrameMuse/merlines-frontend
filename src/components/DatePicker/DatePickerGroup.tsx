@@ -23,7 +23,7 @@ interface DatePickerGroupProps {
 
 function DatePickerGroup(props: DatePickerGroupProps) {
   const cursorDate = offsetDateMonth(props.cursorDate, props.offset || 0)
-  const onCursorDateChange = (date: Date) => props.onCursorDateChange(offsetDateMonth(date, props.offset || 0))
+  const onCursorDateChange = (date: Date) => props.onCursorDateChange(offsetDateMonth(date, -(props.offset || 0)))
 
   const monthName = cursorDate.toLocaleDateString("ru", { month: "long" })
   const fullYear = cursorDate.getFullYear()
