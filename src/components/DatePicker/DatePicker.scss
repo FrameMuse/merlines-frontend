@@ -12,7 +12,6 @@
 		border-radius: 4px;
 		box-shadow: $shadow;
 		box-sizing: border-box;
-		overflow-y: visible;
 
 		display: grid;
 		align-items: center;
@@ -294,28 +293,6 @@
 			border-color: transparentize($color-blue, 0.6);
 			cursor: default;
 		}
-	}
-}
-
-.date-picker__close-btn {
-	@include resetBtn;
-	@include crossIcon;
-
-	color: var(--color-white);
-	font-size: 14px;
-	font-weight: 500;
-	padding-right: 20px;
-	position: absolute;
-	top: 15px;
-	right: 15px;
-
-	&::before,
-	&::after {
-		background-color: var(--color-white);
-	}
-
-	@media #{$media-md} {
-		display: none;
 	}
 }
 

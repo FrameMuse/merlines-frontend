@@ -573,6 +573,29 @@
 	}
 }
 
+.search-form__dates-close {
+	@include resetBtn;
+	@include crossIcon;
+
+	color: var(--color-white);
+	font-size: 14px;
+	font-weight: 500;
+	padding-right: 20px;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 1;
+
+	&::before,
+	&::after {
+		background-color: var(--color-white);
+	}
+
+	@media #{$media-md} {
+		display: none;
+	}
+}
+
 .search-form__route {
 	display: flex;
 

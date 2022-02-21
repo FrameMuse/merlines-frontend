@@ -45,6 +45,8 @@ const initialState: SearchDetails = {
   }
 }
 
+Object.freeze(initialState)
+
 type Action =
   { type: "SEARCH_UPDATE" | "SEARCH_ROUTES_ADD" | "SEARCH_PASSENGERS_UPDATE", payload: typeof initialState }
   | { type: "SEARCH_ROUTES_UPDATE", payload: { index: number; route: SearchRoute } }
@@ -81,6 +83,13 @@ export const updateSearch = (payload: Partial<SearchDetails>) => ({
   type: "SEARCH_UPDATE",
   payload
 })
+
+export const resetSearchRoutes = {
+  type: "SEARCH_UPDATE",
+  payload: {
+    routes: initialState.routes
+  }
+}
 
 export const updateSearchHasReturnDate = (hasReturnDate: SearchDetails["hasReturnDate"]) => ({
   type: "SEARCH_UPDATE",

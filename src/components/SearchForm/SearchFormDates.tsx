@@ -18,18 +18,18 @@ function SearchFormDate(props: SearchFormDatingProps) {
   const search = useSelector(state => state.search)
   const searchRoute = search.routes[props.routeIndex]
 
-  const [isCalendarHidden, setIsCalendarHidden] = useState(true)
+  const [isDatePickerHidden, setIsDatePickerHidden] = useState(true)
   const [hasCalendarOffset, setHasCalendarOffset] = useState(false)
 
   const datesRef = useRef<HTMLDivElement | null>(null)
 
   function onFocus() {
-    setIsCalendarHidden(false)
+    setIsDatePickerHidden(false)
     setHasCalendarOffset(false)
   }
 
   function onReturnDateFocus() {
-    setIsCalendarHidden(false)
+    setIsDatePickerHidden(false)
     setHasCalendarOffset(true)
 
     dispatch(updateSearchHasReturnDate(true))
@@ -39,7 +39,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
     if (event.key !== "Tab")
       return
 
-    setIsCalendarHidden(true)
+    setIsDatePickerHidden(true)
   }
 
   function onDatesChange(value: DatePickerValue) {
@@ -49,7 +49,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
     }))
   }
 
-  useClickAway(datesRef, () => setIsCalendarHidden(true))
+  useClickAway(datesRef, () => setIsDatePickerHidden(true))
 
   return (
     <>
@@ -82,7 +82,8 @@ function SearchFormDate(props: SearchFormDatingProps) {
         </label>
       )}
 
-      <div className={classWithModifiers("search-form__dates", hasCalendarOffset && "offset", isCalendarHidden && "hidden")} ref={datesRef}>
+      <div className={classWithModifiers("search-form__dates", hasCalendarOffset && "offset", isDatePickerHidden && "hidden")} ref={datesRef}>
+        <button className="search-form__dates-close" type="button" onClick={() => setIsDatePickerHidden(true)}>Закрыть</button>
         <DatePicker
           value={[searchRoute.date, searchRoute.returnDate]}
           onChange={onDatesChange}
