@@ -24,7 +24,14 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   const updateContent = (event: FormEvent<HTMLTextAreaElement>) => setContent(event.currentTarget.value)
 
   const addTag = () => setTags([...tags, "Новый тэг"])
-  const updateTag = (value: string, index: number) => (tags[index] = value, setTags([...tags.filter(Boolean)]))
+  const updateTag = (value: string, index: number) => {
+    if (value.length === 0) {
+      if (!window.confirm("Удалить тэг?")) return
+    }
+
+    tags[index] = value
+    setTags([...tags.filter(Boolean)])
+  }
 
   async function addFiles(filesToAdd: File[]) {
     // Filter by file

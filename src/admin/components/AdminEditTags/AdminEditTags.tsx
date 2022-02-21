@@ -31,6 +31,7 @@ function AdminEditTags() {
   }
   function onChange(id: number, value: string | null, index: number) {
     if (!value?.length) {
+      if (!window.confirm("Удалить тэг?")) return
       ClientAPI.query(deleteAdminTag(id))
         .then(({ error, status }) => {
           if (error || status !== 204) return

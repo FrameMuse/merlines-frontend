@@ -20,7 +20,7 @@ function AdminEditableTag(props: AdminEditableTagProps) {
     if (!user.auth || user.type < UserType.Admin) return
 
     const tagsDatalist = document.getElementById("tags-datalist") as HTMLDListElement | null
-    if (tagsDatalist != null) {
+    if (tagsDatalist != null && tag.length > 0) {
       const isNoOccurs = [...tagsDatalist.children].every(option => !(option instanceof HTMLOptionElement) || option.value !== tag)
       if (isNoOccurs) {
         alert("Нету такого тэга")
