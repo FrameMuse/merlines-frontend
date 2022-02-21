@@ -1,25 +1,29 @@
 .editable-tag {
-  outline: none;
+	outline: none;
 
-  padding: 0.5em 1em;
-  border: 2px solid var(--color-border-third);
-  border-radius: 0.35em;
+	padding: 0.5em 1em;
+	border: 2px solid var(--color-border-third);
+	border-radius: 0.35em;
 
-  font-weight: 600;
-  text-transform: uppercase;
+	font-weight: 600;
+	text-transform: uppercase;
 
-  transition: 500ms ease-out border-color;
+	transition: 500ms ease-out border-color;
 
-  &:hover,
-  &:focus {
-    background: var(--color-simple-white);
-  }
+	&:hover,
+	&:focus {
+		background: var(--color-simple-white);
+	}
 
-  &::before {
-    content: "#";
-  }
+	&::before {
+		content: "#";
+	}
 
-  &--important {
-    border-color: rgba($color: red, $alpha: 0.35);
-  }
+	&--important {
+		border-color: rgba($color: red, $alpha: 0.35);
+	}
+}
+
+.editable-tag__input {
+	border: unset;
 }

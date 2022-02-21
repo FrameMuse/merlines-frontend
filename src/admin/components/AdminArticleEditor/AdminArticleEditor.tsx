@@ -159,7 +159,6 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
   )
 }
 
-
 /**
  * Generates unique file name
  * @returns last 20 (or given) amount of chars from base64 code
