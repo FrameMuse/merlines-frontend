@@ -3,8 +3,6 @@
 
 .date-picker {
 	background-color: var(--color-blue);
-	overflow-y: auto;
-	overscroll-behavior: contain;
 
 	@media #{$media-md} {
 		bottom: unset;

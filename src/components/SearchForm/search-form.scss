@@ -515,49 +515,60 @@
 }
 
 .search-form__dates {
-	z-index: 11;
+	position: absolute;
+	top: 100%;
+	left: 50%;
 
-	@media #{$media-md} {
-		position: absolute;
-		top: 67%;
-		left: 1em;
+	transform: translateX(-50%);
+	transition: 250ms ease top, 200ms ease opacity;
 
-		// transform: translateX(-50%);
-		@include FadeOutDownOnHidden;
-		transition: 250ms ease left, 200ms ease opacity;
+	z-index: 1;
+
+	&::before {
+		@include rectangle;
+
+		left: 35%;
+		transform: translateX(-50%);
+		transition: 250ms ease left;
+	}
+
+	&--offset::before {
+		left: 65%;
+	}
+
+	&--hidden {
+		top: calc(100% + 1em);
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	@include Tablet {
+		top: calc(100% - 4em);
 
 		&::before {
-			@include rectangle;
-
-			left: 10vw;
-			transform: none;
-			transition: 250ms ease left;
+			left: 2.5em;
 		}
 
-		&--offset {
-			&::before {
-				left: 30vw;
-			}
+		&--offset::before {
+			left: 35%;
+		}
+
+		&--hidden {
+			top: calc(100% - 3em);
 		}
 	}
 
-	@media #{$media-lg} {
-		top: 100%;
-		left: 50%;
+	@media screen and (max-width: #{$width-md - 1px}) {
+		position: fixed;
+		inset: 0;
 
-		transform: translateX(-50%);
+		transform: unset;
+
+		overflow: auto;
+		overscroll-behavior: contain;
 
 		&::before {
-			@include rectangle;
-
-			left: 35%;
-			transform: translateX(-50%);
-		}
-
-		&--offset {
-			&::before {
-				left: 65%;
-			}
+			content: unset;
 		}
 	}
 }

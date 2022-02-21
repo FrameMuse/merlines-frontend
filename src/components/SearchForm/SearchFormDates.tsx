@@ -21,7 +21,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
   const [isCalendarHidden, setIsCalendarHidden] = useState(true)
   const [hasCalendarOffset, setHasCalendarOffset] = useState(false)
 
-  const calendarRef = useRef<HTMLDivElement | null>(null)
+  const datesRef = useRef<HTMLDivElement | null>(null)
 
   function onFocus() {
     setIsCalendarHidden(false)
@@ -49,7 +49,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
     }))
   }
 
-  useClickAway(calendarRef, () => setIsCalendarHidden(true))
+  useClickAway(datesRef, () => setIsCalendarHidden(true))
 
   return (
     <>
@@ -82,12 +82,11 @@ function SearchFormDate(props: SearchFormDatingProps) {
         </label>
       )}
 
-      <div className={classWithModifiers("search-form__dates", hasCalendarOffset && "offset", isCalendarHidden && "hidden")}>
+      <div className={classWithModifiers("search-form__dates", hasCalendarOffset && "offset", isCalendarHidden && "hidden")} ref={datesRef}>
         <DatePicker
           value={[searchRoute.date, searchRoute.returnDate]}
           onChange={onDatesChange}
-          ranged={search.hasReturnDate && search.routes.length === 1}
-          parentRef={calendarRef} />
+          ranged={search.hasReturnDate && search.routes.length === 1} />
       </div>
     </>
   )

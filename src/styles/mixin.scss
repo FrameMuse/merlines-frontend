@@ -253,17 +253,6 @@
   }
 }
 
-@mixin FadeOutDownOnHidden {
-	top: 0em;
-  &--hidden {
-    top: 1em;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  transition: 250ms ease top, 200ms ease opacity;
-}
-
 @mixin FadeOutDownOnFocus($parent, $initTop: null) {
   top: calc(1em + #{$initTop});
   opacity: 0;
