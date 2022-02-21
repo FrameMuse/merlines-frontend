@@ -149,18 +149,6 @@
 	}
 }
 
-.section__arrow {
-	width: 1.25em;
-	height: 1.25em;
-
-	&--disabled {
-		pointer-events: none;
-		cursor: not-allowed;
-
-		content-visibility: hidden;
-	}
-}
-
 .section__container {
 	@include container;
 }
@@ -236,4 +224,15 @@
 .section__text {
 	color: var(--color-grey);
 	line-height: 1.25;
+}
+
+
+.section__arrow {
+	width: 1.25em;
+	height: 1.25em;
+
+	&--disabled {
+		color: var(--color-grey);
+		cursor: not-allowed;
+	}
 }
