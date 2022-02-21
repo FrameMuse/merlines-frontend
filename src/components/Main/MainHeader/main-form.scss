@@ -12,7 +12,11 @@
   }
   @media screen and (min-width: 992px) and (max-width: 1169px) {
     padding-top: 49px;
+<<<<<<< HEAD
     padding-bottom: 234px; /* TODO: tmp, refactor to 100vh ? */
+=======
+    padding-bottom: 200px; /* TODO: tmp, refactor to 100vh ? */
+>>>>>>> e370e92feb3991a65874f35e2f544fe2eb63a0d6
   }
 
 	&--small {
@@ -31,7 +35,11 @@
     margin-bottom: 52px;
   }
   @media #{$media-lg} {
+<<<<<<< HEAD
     margin-bottom: 59px;
+=======
+    margin-bottom: 68px;
+>>>>>>> e370e92feb3991a65874f35e2f544fe2eb63a0d6
   }
   @media #{$media-xl} {
     padding-left: 95px;
