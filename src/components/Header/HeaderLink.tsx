@@ -15,7 +15,7 @@ function HeaderLink(props: HeaderLinkProps) {
   return (
     <NavLink className="nav__link" to={props.to}>
       {props.iconName && (
-        <Icon name={props.iconName} className="nav__link-icon" />
+        <Icon name={props.iconName} className="nav__icon" />
       )}
       {props.children}
       {props.label && (

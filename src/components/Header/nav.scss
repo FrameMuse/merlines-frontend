@@ -8,6 +8,12 @@
 	align-items: center;
 	z-index: 1;
 
+	&>*:not(:last-child) {
+		padding-right: 2em;
+		margin-right: 2em;
+		border-right: 1px solid #396EF6;
+	}
+
 	@include Tablet {
 		position: absolute;
 		right: 0;
@@ -26,6 +32,11 @@
 			opacity: 1;
 			transform: translateY(0%);
 			pointer-events: initial;
+		}
+
+		&>*:not(:last-child) {
+			margin-right: unset;
+			border-right: unset;
 		}
 	}
 }
@@ -85,10 +96,11 @@
 .nav__group {
 	display: flex;
 	align-items: center;
+	gap: 2.5em;
 
 	@include Tablet {
 		display: grid;
-		row-gap: 0.5em;
+		row-gap: 1em;
 
 		padding: 1em 1.75em;
 		background: white;
@@ -99,6 +111,7 @@
 	}
 }
 
+
 .nav__link {
 	display: flex;
 	align-items: center;
@@ -106,52 +119,11 @@
 	white-space: nowrap;
 
 	color: var(--color-base);
-	margin-bottom: 15px;
 	transition: 200ms color;
 	position: relative;
 
-	&:last-child {
-		margin-bottom: 0;
-	}
-
 	&--hide {
 		display: none;
-	}
-
-	&--russia::before {
-		@include navLinkBefore;
-
-		background-image: url("./../../img/icons/russia.svg");
-	}
-
-	&--english::before {
-		@include navLinkBefore;
-
-		background-image: url("./../../img/icons/united-kingdom.svg");
-	}
-
-	&--deutsch::before {
-		@include navLinkBefore;
-
-		background-image: url("./../../img/icons/germany.svg");
-	}
-
-	&--rub::before {
-		@include navLinkBeforeText;
-
-		content: "₽";
-	}
-
-	&--usd::before {
-		@include navLinkBeforeText;
-
-		content: "$";
-	}
-
-	&--eur::before {
-		@include navLinkBeforeText;
-
-		content: "€";
 	}
 
 	&:hover,
@@ -159,42 +131,39 @@
 		color: var(--color-blue);
 	}
 
+	.nav__icon {
+		margin-right: 0.75em;
+	}
+
 	@media #{$media-lg} {
 		color: var(--color-white);
 		font-size: 12px;
-		margin-right: 25px;
-		margin-bottom: 0;
-		padding-left: 20px;
-
-		&:last-child {
-			margin-right: 0;
-		}
 
 		&:hover,
 		&:focus {
 			color: var(--color-white);
 		}
-
-		&--hide {
-			display: block;
-		}
-
-		&--user {
-			display: none;
-		}
-
-		&--cabinet {
-			padding-left: 12px;
-			padding-right: 12px;
-		}
 	}
 }
 
-.nav__link-icon {
+.nav__icon {
 	width: 1.25em;
 	height: 1.25em;
+	transition: 250ms ease transform;
 
-	margin-right: 0.75em;
+	@include Tablet {
+		width: 0.75em;
+		height: 0.75em;
+	}
+
+	&--chevron {
+		width: 0.5em;
+		height: 0.5em;
+	}
+
+	&--up {
+		transform: rotateX(180deg);
+	}
 }
 
 .nav__link-text {
@@ -261,42 +230,85 @@
 	}
 }
 
-.nav__sublist {
-	display: none;
-	flex-direction: column;
+.nav-sublist {}
 
-	.nav__link {
-		margin-bottom: 10px;
+.nav-sublist__label {
+	display: flex;
+	align-items: center;
+	gap: 1.5em;
 
-		&:last-child {
-			margin-bottom: 0;
+	color: white;
+	cursor: pointer;
+	white-space: nowrap;
+
+
+	&>* {
+		display: none;
+	}
+
+	&>:first-child {
+		display: unset;
+	}
+
+
+	@include Tablet {
+		color: #333;
+
+		span,
+		svg {
+			display: unset;
+		}
+	}
+}
+
+.nav-sublist__menu {
+	position: absolute;
+	top: 2em;
+	left: 50%;
+
+	display: grid;
+	row-gap: 1em;
+
+	padding: 1.5em;
+	background: white;
+	border-radius: 0.5em;
+	transform: translateX(-50%);
+	transition: 250ms ease transform, 250ms ease opacity;
+
+	&:not(&--expanded) {
+		opacity: 0;
+		transform: translateX(-50%) translateY(1em);
+		pointer-events: none;
+
+		@include Tablet {
+			opacity: unset;
+			transform: unset;
+			pointer-events: unset;
+			display: none;
 		}
 	}
 
-	@media #{$media-lg} {
-		width: 220px;
-		margin-top: 19px;
-		padding: 17px 20px 18px 54px;
-		background-color: var(--color-white);
-		border-radius: 4px;
-		box-shadow: $shadow-2;
-		box-sizing: border-box;
-		position: absolute;
-		top: 100%;
-		transform: translateX(-50%);
+	@include Tablet {
+		position: relative;
+		top: unset;
+		left: unset;
+		transform: unset;
+		padding: unset;
+		margin-top: 1em;
+	}
+}
 
-		.nav__link {
-			color: var(--color-base);
-			font-size: 14px;
+.nav-sublist__item {
+	display: flex;
+	align-items: center;
+	gap: 1.5em;
 
-			&::before {
-				font-size: 18px;
-			}
+	white-space: nowrap;
+	cursor: pointer;
 
-			&:hover,
-			&:focus {
-				color: var(--color-blue);
-			}
+	@include Tablet {
+		&--active {
+			color: #396EF6;
 		}
 	}
 }
