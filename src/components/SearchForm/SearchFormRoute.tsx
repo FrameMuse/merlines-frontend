@@ -32,7 +32,7 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
 
   useEffect(() => {
     if (params.routes != null) return
-    if (search.routes[0].origin != null) return
+    if (search.routes[0].origin != null || search.routes[0].destination != null) return
 
     ClientAPI
       .query(getGeoIpAir)
@@ -42,7 +42,7 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
         inputRef.current?.focus()
         dispatch(updateSearchRoute(0, { origin: payload }))
       })
-  }, [search.routes[0].origin, params.routes])
+  }, [search.routes[0], params.routes])
 
   return (
     <>
@@ -137,7 +137,7 @@ function SearchFormRouteInput(props: SearchFormRouteInputProps) {
         autoComplete="off"
         placeholder="_"
 
-        value={value}
+        value={value || ""}
         onChange={onChange}
         ref={props.inputRef} />
       <div className="search-form__placeholder">{props.placeholder}</div>
