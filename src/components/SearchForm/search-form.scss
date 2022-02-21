@@ -674,3 +674,25 @@
 	color: #396EF6;
 	text-align: center;
 }
+
+
+.search-form__icon {
+	position: absolute;
+	top: 0;
+	right: -1.5em;
+	bottom: 0;
+
+	color: white;
+
+	width: 0.75em;
+	height: 0.75em;
+	margin: auto 0;
+	cursor: pointer;
+
+	@include Tablet {
+		right: -0.75em;
+
+		width: 0.5em;
+		height: 0.5em;
+	}
+}

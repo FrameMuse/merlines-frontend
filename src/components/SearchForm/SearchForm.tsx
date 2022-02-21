@@ -1,10 +1,11 @@
 // SCSS
 import "./search-form.scss"
 
+import Icon from "components/common/Icon"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { addSearchRoutes, resetSearchRoutes, updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
+import { addSearchRoutes, resetSearchRoutes, updateSearch, updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
 import { stringifySearchData } from "./SearchForm.utils"
@@ -34,6 +35,10 @@ function SearchForm() {
       destination: null,
       returnDate: null
     }))
+  }
+
+  function removeSearchRoute(index1: number) {
+    dispatch(updateSearch({ routes: search.routes.filter((_, index2) => index1 !== index2) }))
   }
 
   function clearSearch() {
@@ -88,6 +93,7 @@ function SearchForm() {
               <div className="search-form__route" key={index}>
                 <SearchFormRoute {...route} index={index} />
                 <SearchFormDate routeIndex={index} />
+                <Icon className="search-form__icon" name="close" onClick={() => removeSearchRoute(index)} />
               </div>
             ))}
             <div className="search-form__actions">
