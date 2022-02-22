@@ -1,4 +1,5 @@
 import { getTicketsAir } from "api/actions/tickets"
+import TransportSwitcher from "components/SearchResult/TransportSwitcher"
 import { AirFiltersType, AirTicketType } from "interfaces/Search"
 import { useContext, useEffect, useState } from "react"
 import { classWithModifiers, someEqual } from "utils"
@@ -27,6 +28,7 @@ export default function SearchResultAirContainer() {
       <SearchResultWeekPrice />
       <SearchResultAirFiltersContainer onChange={setFilters} />
       <div className={classWithModifiers("ticket-list__content", false && "loading")}>
+        <TransportSwitcher />
         {results.filter(someEqual("id")).map(ticket => (
           <SearchResultAirTicket {...ticket} key={ticket.id} />
         ))}

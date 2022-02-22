@@ -27,7 +27,7 @@ function SearchResult() {
     <>
       <section className="main-form main-form--small">
         {/* <SearchForm /> */}
-        <SearchResultA />
+        <SearchResultForm />
       </section>
       <ErrorBoundary fallback={<SearchResultTicketError />} deps={[location]}>
         <Suspense fallback={<SearchResultLoader />}>
@@ -120,7 +120,7 @@ function SearchTicketsMeta() {
   )
 }
 
-function SearchResultA() {
+function SearchResultForm() {
   const [isMiniMode, setIsExpanded] = useState(true)
   return (
     <>
