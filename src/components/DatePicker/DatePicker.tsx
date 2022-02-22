@@ -23,7 +23,7 @@ function DatePicker(props: DatePickerProps) {
 
   function updateDates(date: Date) {
     if (props.ranged) {
-      const [date1, date2] = dates
+      const [date1, date2] = props.value || dates
 
       if (date1 && date2) {
         return setDates([date, null])
