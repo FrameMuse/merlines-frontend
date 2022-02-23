@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom"
 
-import { fromISOtoString } from "../../utils"
-
 function LandingCollectionItem({ imgSrc, title, tag, ISODate }) {
   return (
     <li className="section__item">
@@ -14,7 +12,7 @@ function LandingCollectionItem({ imgSrc, title, tag, ISODate }) {
           {title}
         </Link>
         <time className="article-card__date" dateTime={ISODate}>
-          {fromISOtoString(ISODate)}
+          {ISODate}
         </time>
       </div>
     </li>

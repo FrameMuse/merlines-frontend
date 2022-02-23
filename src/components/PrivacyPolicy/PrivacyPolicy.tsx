@@ -1,10 +1,8 @@
-import React from "react"
-
 import Subscribe from "../Subscribe/Subscribe"
 
 const PrivacyPolicy = () => {
-  const scrollToElement = (element) => {
-    document.querySelector(`#${element}`).scrollIntoView()
+  function scrollIntoView(id: string) {
+    document.querySelector(`#${id}`)?.scrollIntoView()
   }
   return (
     <>
@@ -23,7 +21,7 @@ const PrivacyPolicy = () => {
             <li className="item">
               <div
                 className="link"
-                onClick={() => scrollToElement("general-provisions")}
+                onClick={() => scrollIntoView("general-provisions")}
               >
                 1. Общие положения
               </div>
@@ -31,7 +29,7 @@ const PrivacyPolicy = () => {
             <li className="item">
               <div
                 className="link"
-                onClick={() => scrollToElement("basic-concepts")}
+                onClick={() => scrollIntoView("basic-concepts")}
               >
                 2. Основные понятия, используемые в Политике
               </div>
@@ -39,7 +37,7 @@ const PrivacyPolicy = () => {
             <li className="item">
               <div
                 className="link"
-                onClick={() => scrollToElement("personal-information")}
+                onClick={() => scrollIntoView("personal-information")}
               >
                 3. Персональные данные Пользователя, которые обрабатывает
                 Оператор
@@ -49,7 +47,7 @@ const PrivacyPolicy = () => {
               <div
                 className="link"
                 onClick={() =>
-                  scrollToElement("purposes-of-processing-personal-data")
+                  scrollIntoView("purposes-of-processing-personal-data")
                 }
               >
                 4. Цели обработки персональных данных
@@ -58,14 +56,14 @@ const PrivacyPolicy = () => {
             <li className="item">
               <div
                 className="link"
-                onClick={() => scrollToElement("user-consent")}
+                onClick={() => scrollIntoView("user-consent")}
               >
                 5. Согласие Пользователя. Правовые основания обработки
                 персональных данных.
               </div>
             </li>
             <li className="item">
-              <div className="link" onClick={() => scrollToElement("security")}>
+              <div className="link" onClick={() => scrollIntoView("security")}>
                 6. Безопасность, порядок и условия сбора, хранения, передачи и
                 других видов обработки персональных данных
               </div>
@@ -73,7 +71,7 @@ const PrivacyPolicy = () => {
             <li className="item">
               <div
                 className="link"
-                onClick={() => scrollToElement("responsibility")}
+                onClick={() => scrollIntoView("responsibility")}
               >
                 7. Ответственность
               </div>
@@ -81,7 +79,7 @@ const PrivacyPolicy = () => {
             <li className="item">
               <div
                 className="link"
-                onClick={() => scrollToElement("final-provisions")}
+                onClick={() => scrollIntoView("final-provisions")}
               >
                 8. Заключительные положения
               </div>
