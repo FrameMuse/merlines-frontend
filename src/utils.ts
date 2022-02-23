@@ -82,18 +82,6 @@ export const capitalize = (str?: string | null): string => {
   return str[0].toUpperCase() + str.slice(1)
 }
 
-const isPreviousDay = (date: { toISO: () => string | any[]; month: number; day: number; year: number }) => {
-  if (date) {
-    const isCurrentDay =
-      date.toISO().slice(0, 10) === DateTime.now().toISO().slice(0, 10) ||
-      (date.month === DateTime.now().month && date.day > DateTime.now().day) ||
-      date.month > DateTime.now().month ||
-      date.year > DateTime.now().year
-
-    return !isCurrentDay
-  }
-}
-
 const formatDateToDayWeek = (date = DateTime.now()) => {
   return `${date.day} ${monthNamesDate[date.month]}, ${capitalize(
     date.reconfigure({ locale: "ru-RU" }).weekdayShort
@@ -406,7 +394,6 @@ export {
   getBetterPrice,
   convertIdToRoute,
   getDaysInterval,
-  isPreviousDay,
   addNoPriceMonths,
   isEmpty,
   setAxiosAuthToken,

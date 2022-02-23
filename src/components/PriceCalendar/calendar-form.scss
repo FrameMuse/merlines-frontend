@@ -1,173 +1,177 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-.calendar-form__header {
-  margin-left: 15px;
-  margin-bottom: 16px;
+.price-calendar-form__header {
+	margin-left: 15px;
+	margin-bottom: 16px;
 
-  @media #{$media-md} {
-    margin-left: 20px;
-    margin-bottom: 14px;
-  }
-  @media #{$media-lg} {
-    margin-bottom: 16px;
-  }
+	@media #{$media-md} {
+		margin-left: 20px;
+		margin-bottom: 14px;
+	}
+
+	@media #{$media-lg} {
+		margin-bottom: 16px;
+	}
 }
 
-.calendar-form__btn {
-  @include resetBtn;
+.price-calendar-form__btn {
+	@include resetBtn;
 
-  color: var(--color-grey);
-  font-size: 14px;
-  text-align: left;
-  margin-right: 38px;
-  transition: 0.2s;
+	color: var(--color-grey);
+	font-size: 14px;
+	text-align: left;
+	margin-right: 38px;
+	transition: 0.2s;
 
-  &:last-child {
-    margin-right: 0;
-  }
+	&:last-child {
+		margin-right: 0;
+	}
 
-  &:hover,
-  &:focus {
-    color: var(--color-blue);
-  }
+	&:hover,
+	&:focus {
+		color: var(--color-blue);
+	}
 
-  &--active {
-    color: var(--color-blue);
-    font-weight: 700;
-  }
+	&--active {
+		color: var(--color-blue);
+		font-weight: 700;
+	}
 }
 
-.calendar-form__inner {
-  border-radius: 4px;
-  box-shadow: $shadow;
+.price-calendar-form__inner {
+	border-radius: 4px;
+	box-shadow: $shadow;
 
-  @media #{$media-md} {
-    display: grid;
-    grid-template-columns: 9fr 9fr 5fr;
-  }
-  @media #{$media-lg} {
-    grid-template-columns: 17fr 17fr 9fr;
-  }
-  @media #{$media-xl} {
-    grid-template-columns: 9fr 9fr 5fr;
-  }
+	@media #{$media-md} {
+		display: grid;
+		grid-template-columns: 9fr 9fr 5fr;
+	}
+
+	@media #{$media-lg} {
+		grid-template-columns: 17fr 17fr 9fr;
+	}
+
+	@media #{$media-xl} {
+		grid-template-columns: 9fr 9fr 5fr;
+	}
 }
 
-.calendar-form__group {
-  position: relative;
-  border-top: 1px solid var(--color-blue);
+.price-calendar-form__group {
+	position: relative;
+	border-top: 1px solid var(--color-blue);
 
-  &:first-child {
-    border-top: none;
-  }
+	&:first-child {
+		border-top: none;
+	}
 
-  &--active {
-    .block-hidden {
-      display: block;
-    }
-  }
+	&--active {
+		.block-hidden {
+			display: block;
+		}
+	}
 
-  &--departure {
-    .calendar-form__input {
-      border-radius: 4px 4px 0 0;
-    }
-  }
+	&--departure {
+		.price-calendar-form__input {
+			border-radius: 4px 4px 0 0;
+		}
+	}
 
-  @media #{$media-md} {
-    border-top: none;
+	@media #{$media-md} {
+		border-top: none;
 
-    &:first-child {
-      border-top: none;
-      border-right: 1px solid var(--color-blue);
-    }
+		&:first-child {
+			border-top: none;
+			border-right: 1px solid var(--color-blue);
+		}
 
-    &--departure {
-      .calendar-form__input {
-        border-radius: 4px 0 0 4px;
-      }
-    }
-  }
+		&--departure {
+			.price-calendar-form__input {
+				border-radius: 4px 0 0 4px;
+			}
+		}
+	}
 }
 
-.calendar-form__input {
-  @include formInput;
+.price-calendar-form__input {
+	@include formInput;
 
-  height: 49px;
-  padding: 19px 17px 5px;
-  border: none;
-  border-radius: 0;
+	height: 49px;
+	padding: 19px 17px 5px;
+	border: none;
+	border-radius: 0;
 
-  @include floatingLabel(calendar-form__label, 10px, 7px, 17px);
+	@include floatingLabel(calendar-form__label, 10px, 7px, 17px);
 
-  @media #{$media-md} {
-    height: 60px;
-    padding-left: 20px;
-    padding-bottom: 6px;
+	@media #{$media-md} {
+		height: 60px;
+		padding-left: 20px;
+		padding-bottom: 6px;
 
-    @include floatingLabel(calendar-form__label, 10px, 9px, 20px);
+		@include floatingLabel(calendar-form__label, 10px, 9px, 20px);
 
-    &--arrival {
-      padding-left: 34px;
+		&--arrival {
+			padding-left: 34px;
 
-      @include floatingLabel(calendar-form__label, 10px, 9px, 34px);
-    }
-  }
-  @media #{$media-lg} {
-    font-size: 16px;
-  }
+			@include floatingLabel(calendar-form__label, 10px, 9px, 34px);
+		}
+	}
+
+	@media #{$media-lg} {
+		font-size: 16px;
+	}
 }
 
-.calendar-form__label {
-  @include formLabel;
+.price-calendar-form__label {
+	@include formLabel;
 
-  top: 15px;
-  left: 17px;
+	top: 15px;
+	left: 17px;
 
-  @media #{$media-md} {
-    top: 20px;
-    left: 20px;
+	@media #{$media-md} {
+		top: 20px;
+		left: 20px;
 
-    &--arrival {
-      left: 34px;
-    }
-  }
+		&--arrival {
+			left: 34px;
+		}
+	}
 }
 
-.calendar-form__switch {
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: 35px;
-  right: 35px;
-  z-index: 1;
-  text-indent: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  background-image: url("./../../img/icons/switch.svg");
-  background-color: white;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  border-radius: 50%;
-  border: 1px solid var(--color-blue);
-  cursor: pointer;
+.price-calendar-form__switch {
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 35px;
+	right: 35px;
+	z-index: 1;
+	text-indent: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	background-image: url("./../../img/icons/switch.svg");
+	background-color: white;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	border-radius: 50%;
+	border: 1px solid var(--color-blue);
+	cursor: pointer;
 
-  @media #{$media-md} {
-    top: 15px;
-    right: 0;
-    transform: translateX(50%) rotate(90deg);
-  }
+	@media #{$media-md} {
+		top: 15px;
+		right: 0;
+		transform: translateX(50%) rotate(90deg);
+	}
 }
 
-.calendar-form__submit {
-  @include buttonSubmit;
+.price-calendar-form__submit {
+	@include buttonSubmit;
 
-  width: 100%;
-  padding: 15px 15px 16px;
-  border-radius: 0 0 4px 4px;
+	width: 100%;
+	padding: 15px 15px 16px;
+	border-radius: 0 0 4px 4px;
 
-  @media #{$media-md} {
-    border-radius: 0 4px 4px 0;
-  }
+	@media #{$media-md} {
+		border-radius: 0 4px 4px 0;
+	}
 }
