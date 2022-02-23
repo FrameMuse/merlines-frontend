@@ -43,6 +43,14 @@ class Localization {
     return localStorage.getItem("lang") || this.defaultLanguage
   }
 
+  /**
+   * When you're relying on `getLang` for updating language, you should do a proper component update(use `useLocalization` hook)
+   * @returns current language
+   */
+  public static getLang(): string {
+    return this.lang
+  }
+
   public static setDefault(lang: string) {
     this.defaultLanguage = lang
   }
