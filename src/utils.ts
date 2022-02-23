@@ -1,9 +1,8 @@
 import axios from "axios"
-import { DataURL, DataURLBase64 } from "interfaces/common"
+import { DataURLBase64 } from "interfaces/common"
 import { DateTime } from "luxon"
+import Localization from "plugins/localization/controller"
 import { Dispatch, SetStateAction, useState } from "react"
-import { AnyIfEmpty } from "react-redux"
-import { toast } from "react-toastify"
 
 import { monthNamesDate, weekDays } from "./constants"
 
@@ -35,8 +34,7 @@ const getBetterPrice = (data: any[], transport: string) => {
 
 const convertIdToRoute = (id: any) => `/blog/article/${id}`
 
-const dateToMonthName = (date: string | number | Date) =>
-  new Date(date).toLocaleString("ru", { month: "long" })
+export const dateToMonthName = (date: string | number | Date) => new Date(date).toLocaleString(Localization.getLang(), { month: "long" })
 
 const getDaysInterval = (date: any, calendar: string | undefined) => {
   const currentMonth = DateTime.isDateTime(date) ? date : DateTime.fromISO(date)
@@ -77,13 +75,6 @@ const getDaysInterval = (date: any, calendar: string | undefined) => {
         ).endOf("week")
     }
   }
-}
-
-/**
- * @returns { any }
- */
-export function noop() {
-  /* Do nothing */
 }
 
 export const capitalize = (str?: string | null): string => {
@@ -414,7 +405,6 @@ export {
   getTwoRandomElements,
   getBetterPrice,
   convertIdToRoute,
-  dateToMonthName,
   getDaysInterval,
   isPreviousDay,
   addNoPriceMonths,

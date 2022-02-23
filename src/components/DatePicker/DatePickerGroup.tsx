@@ -1,6 +1,6 @@
 import { getAmountOfDays, getFirstWeekday, offsetDateMonth, setDateDay } from "date.helpers"
 import { Dispatch } from "react"
-import { capitalize, classWithModifiers } from "utils"
+import { capitalize, classWithModifiers, dateToMonthName } from "utils"
 
 import { weekDays } from "../../constants"
 import Icon from "../common/Icon"
@@ -25,7 +25,7 @@ function DatePickerGroup(props: DatePickerGroupProps) {
   const cursorDate = offsetDateMonth(props.cursorDate, props.offset || 0)
   const onCursorDateChange = (date: Date) => props.onCursorDateChange(offsetDateMonth(date, -(props.offset || 0)))
 
-  const monthName = cursorDate.toLocaleDateString("ru", { month: "long" })
+  const monthName = dateToMonthName(cursorDate)
   const fullYear = cursorDate.getFullYear()
   return (
     <div className="date-picker__wrap date-picker__wrap--active">
