@@ -14,10 +14,10 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
       price={props.best_offer.price}
       baggagePrice={props.price_with_baggage}
       timelines={props.trips.map(trip => ({
-        departureTime: new Date(trip.start_time),
-        arrivalTime: new Date(trip.end_time),
-        departurePoint: trip.segments[0].departure.city.title + ", " + trip.segments[0].departure.title,
-        arrivalPoint: trip.segments.slice(-1)[0].arrival.city.title + ", " + trip.segments.slice(-1)[0].arrival.title,
+        departureDate: new Date(trip.start_time),
+        arrivalDate: new Date(trip.end_time),
+        origin: trip.segments[0].departure.city.title + ", " + trip.segments[0].departure.title,
+        destination: trip.segments.slice(-1)[0].arrival.city.title + ", " + trip.segments.slice(-1)[0].arrival.title,
         entries: trip.segments.flatMap((seg, index) => {
           const startTime = new Date(trip.start_time).getTime()
           const endTime = new Date(trip.end_time).getTime()

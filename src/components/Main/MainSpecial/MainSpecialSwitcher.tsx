@@ -1,5 +1,4 @@
 import { Link, useHistory, useLocation } from "react-router-dom"
-import { setAir, setBus, setTrain } from "reducers/mainSearchSlice"
 import { classWithModifiers } from "utils"
 
 import Icon from "../../common/Icon"
