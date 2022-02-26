@@ -1,16 +1,8 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-.drop-down-calendar {
-	position: fixed;
-	top: 0;
-
+.date-picker {
 	background-color: var(--color-blue);
-	overflow-y: auto;
-	overscroll-behavior: contain;
-	z-index: 11;
-
-	@include FadeOutDownOnHidden;
 
 	@media #{$media-md} {
 		bottom: unset;
@@ -20,55 +12,13 @@
 		border-radius: 4px;
 		box-shadow: $shadow;
 		box-sizing: border-box;
-		overflow-y: visible;
-
-		position: absolute;
-		top: 67%;
-		left: 1em;
 
 		display: grid;
 		align-items: center;
-
-		// transform: translateX(-50%);
-		transition: 250ms ease left, 200ms ease opacity;
-
-		&::before {
-			@include rectangle;
-
-			left: 10vw;
-			transform: none;
-			transition: 250ms ease left;
-		}
-
-		&--offset {
-			&::before {
-				left: 30vw;
-			}
-		}
-	}
-
-	@media #{$media-lg} {
-		top: 100%;
-		left: 50%;
-
-		transform: translateX(-50%);
-
-		&::before {
-			@include rectangle;
-
-			left: 35%;
-			transform: translateX(-50%);
-		}
-
-		&--offset {
-			&::before {
-				left: 65%;
-			}
-		}
 	}
 }
 
-.drop-down-calendar__container {
+.date-picker__container {
 	display: grid;
 	justify-content: center;
 	padding: 47px 15px;
@@ -83,7 +33,7 @@
 	}
 }
 
-.drop-down-calendar__wrap {
+.date-picker__wrap {
 	width: 17em;
 	text-align: center;
 	padding: 15px 16px;
@@ -111,31 +61,31 @@
 	}
 }
 
-.drop-down-calendar__header {
+.date-picker__header {
 	display: inline-block;
 	margin-bottom: 20px;
 	position: relative;
 
 	&--active {
-		.drop-down-calendar__list {
+		.date-picker__list {
 			visibility: visible;
 		}
 	}
 }
 
-.drop-down-calendar__title {
+.date-picker__title {
 	@media #{$media-md} {
 		cursor: pointer;
 	}
 }
 
-.drop-down-calendar__month {
+.date-picker__month {
 	&::after {
 		content: ",";
 	}
 }
 
-.drop-down-calendar__month-control {
+.date-picker__month-control {
 	display: none;
 
 	@media #{$media-md} {
@@ -148,7 +98,7 @@
 	}
 }
 
-.drop-down-calendar-arrow {
+.date-picker-arrow {
 	width: 0.5em;
 	height: 0.5em;
 
@@ -163,7 +113,7 @@
 	}
 }
 
-.drop-down-calendar__list {
+.date-picker__list {
 	display: none;
 
 	@media #{$media-md} {
@@ -185,7 +135,7 @@
 	}
 }
 
-.drop-down-calendar__item {
+.date-picker__item {
 	@media #{$media-md} {
 		margin-bottom: 3px;
 		transition: 0.2s;
@@ -212,24 +162,24 @@
 	}
 }
 
-.drop-down-calendar__dates {
+.date-picker__dates {
 	width: 100%;
 	font-size: 12px;
 	text-align: center;
 }
 
-.drop-down-calendar__row {
+.date-picker__row {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
 	gap: 5px;
 }
 
-.drop-down-calendar__day-name {
+.date-picker__day-name {
 	color: var(--color-blue);
 	margin-bottom: 5px;
 }
 
-.drop-down-calendar__days-list {
+.date-picker__days-list {
 	position: relative;
 	z-index: 0;
 
@@ -245,7 +195,7 @@
 	}
 }
 
-.drop-down-calendar__day {
+.date-picker__day {
 	position: relative;
 
 	display: flex;
@@ -294,7 +244,7 @@
 	}
 }
 
-.drop-down-calendar__control {
+.date-picker__control {
 	display: none;
 
 	@media #{$media-md} {
@@ -306,7 +256,12 @@
 	}
 }
 
-.drop-down-calendar__control-btn {
+.date-picker__control-icon {
+	width: 10px;
+	height: 10px;
+}
+
+.date-picker__control-btn {
 	transition: color 150ms ease, background-color 150ms ease,
 		border-color 150ms ease;
 
@@ -341,29 +296,7 @@
 	}
 }
 
-.drop-down-calendar__close-btn {
-	@include resetBtn;
-	@include crossIcon;
-
-	color: var(--color-white);
-	font-size: 14px;
-	font-weight: 500;
-	padding-right: 20px;
-	position: absolute;
-	top: 15px;
-	right: 15px;
-
-	&::before,
-	&::after {
-		background-color: var(--color-white);
-	}
-
-	@media #{$media-md} {
-		display: none;
-	}
-}
-
-.drop-down-calendar__form {
+.date-picker__form {
 	margin-bottom: 15px;
 	border-radius: 4px;
 	overflow: hidden;

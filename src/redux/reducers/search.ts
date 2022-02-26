@@ -5,7 +5,7 @@ export enum SearchTravelClass {
 export interface SearchPlace {
   id: number
   title: string
-  code: string
+  code?: string
 }
 
 export interface SearchAirports extends SearchPlace {
@@ -14,34 +14,38 @@ export interface SearchAirports extends SearchPlace {
 }
 
 export interface SearchRoute {
-  departurePoint: SearchPlace | null
-  arrivalPoint: SearchPlace | null
+  origin: SearchPlace | null
+  destination: SearchPlace | null
 
-  departureDate: Date | null
+  date: Date | null
   returnDate: Date | null
 }
 
 export interface SearchDetails {
   hasReturnDate: boolean
+  transport: "plane" | "bus" | "train"
   travelClass: SearchTravelClass
   routes: SearchRoute[]
   passengers: {
     adults: number
     children: number
-    babies: number
+    infants: number
   }
 }
 
 const initialState: SearchDetails = {
   hasReturnDate: false,
+  transport: "plane",
   travelClass: 1,
-  routes: [{ arrivalPoint: null, departurePoint: null, departureDate: new Date, returnDate: null }],
+  routes: [{ destination: null, origin: null, date: new Date, returnDate: null }],
   passengers: {
     adults: 1,
     children: 0,
-    babies: 0
+    infants: 0
   }
 }
+
+Object.freeze(initialState)
 
 type Action =
   { type: "SEARCH_UPDATE" | "SEARCH_ROUTES_ADD" | "SEARCH_PASSENGERS_UPDATE", payload: typeof initialState }
@@ -75,6 +79,17 @@ export default (state = initialState, action: Action): typeof initialState => {
   }
 }
 
+export const updateSearch = (payload: Partial<SearchDetails>) => ({
+  type: "SEARCH_UPDATE",
+  payload
+})
+
+export const resetSearchRoutes = {
+  type: "SEARCH_UPDATE",
+  payload: {
+    routes: initialState.routes
+  }
+}
 
 export const updateSearchHasReturnDate = (hasReturnDate: SearchDetails["hasReturnDate"]) => ({
   type: "SEARCH_UPDATE",
@@ -84,6 +99,11 @@ export const updateSearchHasReturnDate = (hasReturnDate: SearchDetails["hasRetur
 export const updateSearchTravelClass = (travelClass: SearchTravelClass) => ({
   type: "SEARCH_UPDATE",
   payload: { travelClass }
+})
+
+export const updateSearchTransport = (transport: SearchDetails["transport"]) => ({
+  type: "SEARCH_UPDATE",
+  payload: { transport }
 })
 
 export const addSearchRoutes = (...routes: SearchRoute[]) => ({

@@ -200,6 +200,7 @@ function AdminEditUsersUserDangerZone(props: AdminEditUsersUserProps) {
             <option value="4">admin</option>
             <option value="3">editor</option>
             <option value="2">default</option>
+            <option value="1" disabled>banned</option>
           </select>
           <AdminButton color="red" onClick={onChangeType}>Изменить роль</AdminButton>
           <AdminButton color="red" onClick={onBan}>Забанить</AdminButton>

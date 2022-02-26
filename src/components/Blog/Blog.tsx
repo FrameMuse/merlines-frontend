@@ -6,6 +6,7 @@ import Icon from "components/common/Icon"
 import { OrderingType } from "interfaces/Django"
 import { useState } from "react"
 import { useQuery } from "react-fetching-library"
+import { ReactNode } from "react-markdown/lib/react-markdown"
 import { useLocation } from "react-router-dom"
 import { classWithModifiers } from "utils"
 
@@ -46,7 +47,7 @@ function Blog() {
 
 
 interface BlogSectionProps {
-  title: any
+  title: ReactNode
   pageSize: number
   filters?: Partial<ArticleFiltersType>
   showMoreButton?: boolean
@@ -54,10 +55,14 @@ interface BlogSectionProps {
 
 function BlogSection(props: BlogSectionProps) {
   const [page, setPage] = useState(1)
-  const [pageSize] = useState(props.pageSize)
-
+  const [pageSize, setPageSize] = useState(props.pageSize)
   const { error, loading, payload } = useQuery(getBlogArticles(page, pageSize, props.filters))
   if (error || !payload) return <>no content</>
+
+  function updatePage(by: 1 | -1) {
+    setPage(page + by)
+    setPageSize(props.pageSize)
+  }
 
   const isLastPage = (page * pageSize) >= payload.count
   return (
@@ -65,16 +70,12 @@ function BlogSection(props: BlogSectionProps) {
       <div className="section__header">
         <h2 className="section__title">{props.title}</h2>
         <div className="section__control">
-          <Icon
-            name="arrow-slider"
-            className={classWithModifiers("section__arrow", "left", page === 1 && "disabled")}
-            onClick={() => setPage(page - 1)}
-          />
-          <Icon
-            name="arrow-slider"
-            className={classWithModifiers("section__arrow", "right", isLastPage && "disabled")}
-            onClick={() => setPage(page + 1)}
-          />
+          <button disabled={page === 1} onClick={() => updatePage(-1)}>
+            <Icon className={classWithModifiers("section__arrow", "left", page === 1 && "disabled")} name="arrow-slider" />
+          </button>
+          <button disabled={isLastPage} onClick={() => updatePage(+1)}>
+            <Icon className={classWithModifiers("section__arrow", "right", isLastPage && "disabled")} name="arrow-slider" />
+          </button>
         </div>
       </div>
       <div className="section__list">
@@ -83,7 +84,7 @@ function BlogSection(props: BlogSectionProps) {
         ))}
       </div>
       {!isLastPage && props.showMoreButton && (
-        <button className="section__more">
+        <button className="section__more" onClick={() => setPageSize(pageSize + props.pageSize)}>
           <span>загрузить еще</span>
           <Icon name="chevron" className="section__more-icon" />
         </button>

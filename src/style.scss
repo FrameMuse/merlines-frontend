@@ -85,3 +85,8 @@
 /** //@import "blocks/faq.scss"; **/
 /** //@import "blocks/project.scss"; **/
 /** //@import "blocks/ticket-mobile.scss"; **/
+
+::selection {
+	color: white;
+	background: rgba(#1648c7, 1);
+}

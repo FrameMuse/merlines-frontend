@@ -1,12 +1,14 @@
 import "./AdminArticleEdit.style.scss"
 
 import { patchAdminArticle, postAdminArticle } from "api/actions/admin"
+import { getBlogTags } from "api/actions/blog"
 import ClientAPI from "api/client"
 import ArticleCard from "components/Article/ArticleCard"
 import ArticleContent from "components/Article/ArticleContent"
 import { ArticleAuthorType, ArticleContentType } from "interfaces/Blog"
 import { Client } from "interfaces/user"
 import { useEffect, useState } from "react"
+import { useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -150,6 +152,7 @@ function AdminArticleEdit(props: AdminArticleAddProps | AdminArticleEditProps) {
       </div>
       <AdminArticleEditor {...articleData} hidden={showPreview} onChange={data => setArticleData({ ...articleData, ...data })} />
       <AdminArticlePreview {...articleData} hidden={!showPreview} author={props.author} />
+      <TagsDatalist />
       <div>
         <AdminButton onClick={save} disabled={error}>Сохранить статью</AdminButton>
         <AdminButton onClick={publish} disabled={error}>Опубликовать статью</AdminButton>
@@ -198,6 +201,20 @@ function AdminArticlePreview(props: AdminArticlePreviewProps) {
         </div>
       </div>
     </div>
+  )
+}
+
+function TagsDatalist() {
+  const { error, loading, payload } = useQuery(getBlogTags(1, 100))
+  if (error) throw new Error("useQuery error")
+  if (loading) return <>loading...</>
+  if (!payload) return <>no content</>
+  return (
+    <datalist id="tags-datalist">
+      {payload.results.map(tag => (
+        <option value={tag.title} key={tag.id} />
+      ))}
+    </datalist>
   )
 }
 

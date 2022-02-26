@@ -14,17 +14,17 @@ function SearchFormMini(props: SearchFormMiniProps) {
       <div className="download-close__container">
         <div className="download__field download__field--one">
           <span className="download__item download__item--city download__item--icon">
-            {search.routes[0].departureDate?.toLocaleDateString("ru") || ""}
+            {search.routes[0].date?.toLocaleDateString("ru") || ""}
           </span>
           <span className="download__item download__item--city">
             {search.routes[0].returnDate?.toLocaleDateString("ru") || ""}
           </span>
           <span className="download__counter">+3</span>
           <span className="download__item download__item--date">
-            {search.routes[0].departurePoint?.title || ""}
+            {search.routes[0].origin?.title || ""}
           </span>
           <span className="download__item download__item--date">
-            {search.routes[0].arrivalPoint?.title || ""}
+            {search.routes[0].destination?.title || ""}
           </span>
           <button className="download__edit" type="button" onClick={props.openForm}>
             <Icon

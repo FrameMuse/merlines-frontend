@@ -2,22 +2,43 @@
 @import "../../../styles/mixin";
 
 .main-form {
-  padding-top: 121px;
-  padding-bottom: 230px; /* TODO: tmp, refactor to 100vh ? */
-  background-color: var(--color-blue);
+	padding-top: 121px;
+	padding-bottom: 230px;
+	/* TODO: tmp, refactor to 100vh ? */
+	background-color: var(--color-blue);
 
-  @media screen and (min-width: 768px) and (max-width: 991px){
-    padding-top: 64px;
-    padding-bottom: 140px; /* TODO: tmp, refactor to 100vh ? */
-  }
-  @media screen and (min-width: 992px) and (max-width: 1169px) {
-    padding-top: 49px;
-<<<<<<< HEAD
-    padding-bottom: 234px; /* TODO: tmp, refactor to 100vh ? */
-=======
-    padding-bottom: 200px; /* TODO: tmp, refactor to 100vh ? */
->>>>>>> e370e92feb3991a65874f35e2f544fe2eb63a0d6
-  }
+	@media screen and (min-width: 768px) and (max-width: 991px) {
+		padding-top: 64px;
+		padding-bottom: 140px;
+		/* TODO: tmp, refactor to 100vh ? */
+	}
+
+	@media screen and (min-width: 992px) and (max-width: 1169px) {
+		padding-top: 49px;
+		padding-bottom: 234px;
+		/* TODO: tmp, refactor to 100vh ? */
+	}
+
+	padding-top: 14px;
+	padding-bottom: 40px;
+	/* TODO: tmp, refactor to 100vh ? */
+	background-color: var(--color-blue);
+
+	@media #{$media-md} {
+		padding-top: 64px;
+		padding-bottom: 140px;
+		/* TODO: tmp, refactor to 100vh ? */
+	}
+
+	@media #{$media-lg} {
+		padding-top: 49px;
+		padding-bottom: 200px;
+		/* TODO: tmp, refactor to 100vh ? */
+	}
+
+	@media #{$media-xl} {
+		padding-top: 125px;
+	}
 
 	&--small {
 		padding: 2em 0;
@@ -25,104 +46,106 @@
 }
 
 .main-form__container {
-  @include container;
+	@include container;
 }
 
 .main-form__header {
-  margin-bottom: 25px;
+	margin-bottom: 25px;
 
-  @media #{$media-md} {
-    margin-bottom: 52px;
-  }
-  @media #{$media-lg} {
-<<<<<<< HEAD
-    margin-bottom: 59px;
-=======
-    margin-bottom: 68px;
->>>>>>> e370e92feb3991a65874f35e2f544fe2eb63a0d6
-  }
-  @media #{$media-xl} {
-    padding-left: 95px;
-  }
+	@media #{$media-md} {
+		margin-bottom: 52px;
+	}
+
+	@media #{$media-lg} {
+		margin-bottom: 60px;
+	}
+
+	@media #{$media-xl} {
+		padding-left: 95px;
+	}
 }
 
 .main-form__title {
-  @include h2;
+	@include h2;
 
-  color: var(--color-white);
-  margin-bottom: 16px;
+	color: var(--color-white);
+	margin-bottom: 16px;
 
-  @media #{$media-md} {
-    max-width: 420px;
-    margin-bottom: 20px;
-  }
-  @media #{$media-xl} {
-    margin-bottom: 15px;
-  }
+	@media #{$media-md} {
+		max-width: 420px;
+		margin-bottom: 20px;
+	}
+
+	@media #{$media-xl} {
+		margin-bottom: 15px;
+	}
 }
 
 .main-form__nav {
-  display: flex;
+	display: flex;
 }
 
 .main-form__item {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 	gap: 5px;
-  flex-direction: column;
-  color: var(--color-icon);
-  align-items: center;
-  margin-right: 18px;
-  transition: 0.2s;
-  cursor: pointer;
+	flex-direction: column;
+	color: var(--color-icon);
+	align-items: center;
+	margin-right: 18px;
+	transition: 0.2s;
+	cursor: pointer;
 
-  &:last-child {
-    margin-right: 0;
-  }
+	&:last-child {
+		margin-right: 0;
+	}
 
-  &:hover,
-  &:focus {
-    color: var(--color-white);
-    text-decoration: none;
-  }
+	&:hover,
+	&:focus {
+		color: var(--color-white);
+		text-decoration: none;
+	}
 
-  &--active {
-    color: var(--color-white);
-  }
+	&--active {
+		color: var(--color-white);
+	}
 
-  @media #{$media-md} {
-    margin-right: 24px;
-  }
-  @media #{$media-xl} {
-    margin-right: 25px;
-  }
+	@media #{$media-md} {
+		margin-right: 24px;
+	}
+
+	@media #{$media-xl} {
+		margin-right: 25px;
+	}
 }
 
 .main-form__icon {
-  margin-bottom: 3px;
+	margin-bottom: 3px;
 
-  @media #{$media-md} {
-    width: 39px;
-    height: 46px;
+	@media #{$media-md} {
+		width: 39px;
+		height: 46px;
 
-    &:first-child {
-      width: 44px;
-    }
-  }
-  @media #{$media-lg} {
-    width: 45px;
-    height: 50px;
-  }
-  @media #{$media-xl} {
-    width: 44px;
-    height: 46px;
-  }
+		&:first-child {
+			width: 44px;
+		}
+	}
+
+	@media #{$media-lg} {
+		width: 45px;
+		height: 50px;
+	}
+
+	@media #{$media-xl} {
+		width: 44px;
+		height: 46px;
+	}
 }
 
 .main-form__item-text {
-  font-size: 10px;
+	font-size: 10px;
 
-  @media #{$media-md} {
-    font-size: 12px;
-  }
+	@media #{$media-md} {
+		font-size: 12px;
+	}
 }

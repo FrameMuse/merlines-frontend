@@ -20,12 +20,16 @@ import { useEffect, useState } from "react"
 
 import Localization, { llType, Localize } from "./controller"
 
-function useLocalization<Selected extends Record<string, unknown> = llType>(selector: (ll: llType) => Selected | undefined): Selected {
-  const [localization, updateLocalization] = useState(Localize(selector))
+function useLocalization<Selector extends ((ll: llType) => Selected | undefined) | undefined, Selected extends Record<string, unknown> = llType>(selector?: Selector): Selector extends undefined ? {} : Selected {
+  const [localization, setLocalization] = useState(selector ? Localize(selector) : {} as never)
   useEffect(() => {
-    return Localization.onTransition(() => updateLocalization(Localize(selector)))
+    return Localization.onTransition(() => {
+      if (!selector) {
+        return setLocalization({} as never)
+      }
+      setLocalization(Localize(selector))
+    })
   }, [])
-  if (!localization) throw new TypeError("useLocalizationError: undefined localization. Try reloading the page.")
   return localization
 }
 

@@ -1,7 +1,6 @@
 import AdminArticleEdit from "admin/components/AdminArticleEdit/AdminArticleEdit"
 import AdminViewLayout from "admin/layouts/AdminViewLayout"
 import { getAdminArticle } from "api/actions/admin"
-import { getBlogArticle } from "api/actions/blog"
 import { useQuery } from "react-fetching-library"
 import { ToastContainer } from "react-toastify"
 

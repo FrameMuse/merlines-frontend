@@ -1,81 +1,71 @@
 import "./ticket-list.scss"
 
 import { postTicketsAir } from "api/actions/tickets"
-import SearchFormComplicated from "components/SearchForm/SearchFormComplicated"
+import Icon from "components/common/Icon"
+import { useParametricSearchData, useSearchParamsEvaluation } from "components/SearchForm/SearchForm.utils"
+import SearchFormMini from "components/SearchForm/SearchFormMini"
 import ErrorBoundary from "components/services/ErrorBoudary"
-import { TripType } from "interfaces/Search"
-import { createContext, Suspense, useEffect } from "react"
+import { RouteType } from "interfaces/Search"
+import { createContext, ReactNode, Suspense, useState } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
+import { Helmet } from "react-helmet"
 import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
+import { SearchDetails, SearchTravelClass } from "redux/reducers/search"
+import { classWithModifiers, interpolate } from "utils"
 
 import SearchForm from "../SearchForm/SearchForm"
 import SearchResultAirContainer from "./SearchResultContainers/SearchResultAirContainer/SearchResultAirContainer"
 import SearchResultTicketError from "./SearchResultError"
 import SearchResultLoader from "./SearchResultLoader"
 
-// Request session
 export const searchSessionContext = createContext({ session: "" })
 
 function SearchResult() {
-  const search = useSelector(state => state.search)
+  const location = useLocation()
   return (
     <>
       <section className="main-form main-form--small">
-        {search.routes.length === 1 ? <SearchForm /> : <SearchFormComplicated />}
+        {/* <SearchForm /> */}
+        <SearchResultForm />
       </section>
-      <SearchResultContainer />
+      <ErrorBoundary fallback={<SearchResultTicketError />} deps={[location]}>
+        <Suspense fallback={<SearchResultLoader />}>
+          <SearchResultContainer />
+        </Suspense>
+      </ErrorBoundary>
     </>
   )
 }
 // 1. Validate search data
 function SearchResultContainer() {
-  const location = useLocation()
-  const locationSearchParams = new URLSearchParams(location.search)
-
-  const origins = locationSearchParams.getAll("origin")
-  const destinations = locationSearchParams.getAll("destination")
-  const dates = locationSearchParams.getAll("date")
-  const travel_class = locationSearchParams.get("travel_class")
-
-  if (travel_class == null) {
-    throw new Error("There is no travel_class")
+  useSearchParamsEvaluation()
+  const searchData = useParametricSearchData()
+  if (!searchData.transport || !["plane", "bus", "train"].includes(searchData.transport)) {
+    throw new Error("useParametricSearchDataError: wrong `transport`")
   }
-
-  if (!origins.length || !destinations.length || !origins.length) {
-    throw new Error("There is a lack of data")
+  if (searchData.routes.length === 0) {
+    throw new Error("useParametricSearchDataError: no `routes` param")
   }
-
-  if ((origins.length !== destinations.length) || (origins.length !== dates.length)) {
-    throw new Error("There is a different amount of data")
-  }
-
-  const trips: TripType[] = origins.map((origin, index) => ({
-    origin: +origin,
-    destination: +destinations[index],
-    date: dates[index]
-  }))
-
   return (
-    <Suspense fallback={<SearchResultLoader />}>
-      <ErrorBoundary fallback={<SearchResultTicketError />} deps={[location]}>
-        <SearchResultSessionProvider trips={trips} travel_class={travel_class}>
-          <SearchResultTransportContainer />
-        </SearchResultSessionProvider>
-      </ErrorBoundary>
-    </Suspense>
+    <SearchSessionProviderSuspense {...searchData}>
+      <SearchTicketsMeta />
+      <SearchTicketsContainer transport={searchData.transport} />
+    </SearchSessionProviderSuspense>
   )
 }
 
 
 interface SearchResultSessionProviderProps {
-  trips: TripType[]
-  travel_class: string
-  children: any
+  routes: RouteType[]
+  travelClass?: SearchDetails["travelClass"]
+  passengers?: Partial<SearchDetails["passengers"]>
+
+  children: ReactNode
 }
 // 2. Create session
-function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
-  const { error, payload } = useSuspenseQuery(postTicketsAir(props.trips, props.travel_class))
+function SearchSessionProviderSuspense(props: SearchResultSessionProviderProps) {
+  const { error, payload } = useSuspenseQuery(postTicketsAir(props.routes, props.travelClass || 1, props.passengers))
   if (error || !payload) throw new Error()
   return (
     <searchSessionContext.Provider value={{ session: payload.session }}>
@@ -85,71 +75,72 @@ function SearchResultSessionProvider(props: SearchResultSessionProviderProps) {
 }
 
 // 3. Determine what type transport is used and get relevant tickets
-function SearchResultTransportContainer() {
+interface SearchTicketsContainerProps {
+  transport: SearchDetails["transport"] | (string & {})
+}
+function SearchTicketsContainer(props: SearchTicketsContainerProps) {
+  switch (props.transport) {
+    case "plane":
+      return <SearchResultAirContainer />
+
+    default:
+      throw new Error("SearchTicketsContainerError: unknown transport")
+  }
+}
+
+function SearchTicketsMeta() {
+  const search = useSelector(state => state.search)
+  if (search.routes[0].origin === null || search.routes[0].destination === null) {
+    throw new Error("SearchTicketsMetaError: Empty route")
+  }
+
+  const title = `Авиабилеты из {origin} в {destination}. Цены на прямые рейсы {travelClass} класса`
+  const desc = `Дешевые авиабилеты из {origin} ({originCode}) в {destination} ({destinationCode}) на merlines.ru. Лучшие цены на прямые рейсы {travelClass} класса {isChildren}`
   return (
-    <SearchResultAirContainer />
+    <Helmet>
+      <title>
+        {interpolate(title, {
+          origin: search.routes[0].origin.title,
+          destination: search.routes[0].destination.title,
+          travelClass: SearchTravelClass[search.travelClass]
+        })}
+      </title>
+      <meta
+        name="description"
+        content={interpolate(desc, {
+          origin: search.routes[0].origin.title,
+          originCode: search.routes[0].origin.code || "CDE",
+          destination: search.routes[0].destination.title,
+          destinationCode: search.routes[0].destination.code || "CDE",
+          travelClass: SearchTravelClass[search.travelClass],
+          isChildren: search.passengers?.children || search.passengers?.infants ? "с детьми" : ""
+        })}
+      />
+    </Helmet>
   )
 }
 
-// function SearchResultA() {
-//   const [isSearchFormOpen, setIsSearchFormOpen] = useState(true)
-//   return (
-//     <>
-//       {/* <Helmet>
-//         <title>{meta.generateTitle(cityFrom, cityTo, travelClass)}</title>
-//         <meta
-//           name="description"
-//           content={meta.generateMetaDescription(
-//             cityFrom,
-//             cityFromCode,
-//             cityTo,
-//             cityToCode,
-//             travelClass,
-//             isChildren
-//           )}
-//         />
-//       </Helmet> */}
-//       <section className="ticket-list">
-//         <div className="ticket-list-form__container">
-//           {isSearchFormOpen ? (
-//             <>
-//               <SearchForm />
-//               <div className="form-close">
-//                 <button
-//                   onClick={() => setIsSearchFormOpen(!isSearchFormOpen)}
-//                   className="form-close__btn"
-//                   type="button"
-//                 >
-//                   <Icon name="chevron" className="form-close__icon" />
-//                 </button>
-//               </div>
-//             </>
-//           ) : (
-//             <SearchFormMini
-//               openForm={() => setIsSearchFormOpen(!isSearchFormOpen)}
-//             />
-//           )}
-//         </div>
-//         <div className="ticket-list__container">
-//           <SearchResultTicketList />
-//         </div>
-//         <button className="ticket-list__open-filter">фильтры</button>
-//       </section>
-//       <Loader></Loader>
-//       <SearchForm />
-//       <div className="form-close">
-//         <button
-//           onClick={() => setIsSearchFormOpen(!isSearchFormOpen)}
-//           className="form-close__btn"
-//           type="button"
-//         >
-//           <Icon name="chevron" className="form-close__icon" />
-//         </button>
-//       </div>
-//       <SearchFormMini openForm={() => setIsSearchFormOpen(!isSearchFormOpen)} />
-//       {/* <LoaderClose></LoaderClose> */}
-//     </>
-//   )
-// }
+function SearchResultForm() {
+  const [isMiniMode, setIsExpanded] = useState(true)
+  return (
+    <>
+      <div className={classWithModifiers("form-mini__form", isMiniMode && "mini-mode")}>
+        <SearchForm />
+        <div className="form-close">
+          <button
+            onClick={() => setIsExpanded(!isMiniMode)}
+            className="form-close__btn"
+            type="button"
+          >
+            <Icon name="chevron" className="form-close__icon" />
+          </button>
+        </div>
+      </div>
+      <div className={classWithModifiers("form-mini__mini", isMiniMode && "mini-mode")}>
+        <SearchFormMini openForm={() => setIsExpanded(!isMiniMode)} />
+      </div>
+    </>
+  )
+}
 
 export default SearchResult

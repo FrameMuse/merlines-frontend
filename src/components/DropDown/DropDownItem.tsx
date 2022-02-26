@@ -5,7 +5,7 @@ import { classWithModifiers } from "utils"
 
 export interface DropDownElementProps {
   title: string
-  code: string
+  code?: string
   iconName?: IconName
 }
 
@@ -22,7 +22,9 @@ function DropDownItem(props: DropDownItemProps) {
           <Icon className="drop-down__item-icon" name={props.iconName} />
         )}
         <span className="drop-down__item-title">{props.title}</span>
-        <span className="drop-down__item-tag">{props.code}</span>
+        {props.code && (
+          <span className="drop-down__item-tag">{props.code}</span>
+        )}
       </div>
     </div>
   )

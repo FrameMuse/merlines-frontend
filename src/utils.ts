@@ -1,9 +1,8 @@
 import axios from "axios"
-import { DataURL, DataURLBase64 } from "interfaces/common"
+import { DataURLBase64 } from "interfaces/common"
 import { DateTime } from "luxon"
+import Localization from "plugins/localization/controller"
 import { Dispatch, SetStateAction, useState } from "react"
-import { AnyIfEmpty } from "react-redux"
-import { toast } from "react-toastify"
 
 import { monthNamesDate, weekDays } from "./constants"
 
@@ -35,8 +34,7 @@ const getBetterPrice = (data: any[], transport: string) => {
 
 const convertIdToRoute = (id: any) => `/blog/article/${id}`
 
-const dateToMonthName = (date: string | number | Date) =>
-  new Date(date).toLocaleString("ru", { month: "long" })
+export const dateToMonthName = (date: string | number | Date) => new Date(date).toLocaleString(Localization.getLang(), { month: "long" })
 
 const getDaysInterval = (date: any, calendar: string | undefined) => {
   const currentMonth = DateTime.isDateTime(date) ? date : DateTime.fromISO(date)
@@ -77,13 +75,6 @@ const getDaysInterval = (date: any, calendar: string | undefined) => {
         ).endOf("week")
     }
   }
-}
-
-/**
- * @returns { any }
- */
-export function noop() {
-  /* Do nothing */
 }
 
 export const capitalize = (str?: string | null): string => {
@@ -387,13 +378,33 @@ export function someEqual<T>(key: keyof T) {
 }
 
 
+
+// export function inter<V = unknown>(value: V, vars: Record<string, string | number>) {
+//   if (!value) throw new TypeError("interError: empty value gotten")
+//   const varKeys = Object.keys(vars)
+//   if (value instanceof Array) {
+//     return value.flatMap(a => a).map(interpolate)
+//   }
+//   return interpolate(value)
+// }
+
+
+type ExtractInterpolations<T extends string> = T extends `${infer _Start}{${infer V}}${infer Rest}` ? V | ExtractInterpolations<Rest> : never
+
+/**
+ * Interpolates {variable} in string
+ */
+export function interpolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, string | number>): string {
+  const varKeys = Object.keys(vars) as ExtractInterpolations<T>[]
+  return varKeys.reduce((result: string, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
+}
+
 export {
   getRandomInteger,
   getRandomElement,
   getTwoRandomElements,
   getBetterPrice,
   convertIdToRoute,
-  dateToMonthName,
   getDaysInterval,
   isPreviousDay,
   addNoPriceMonths,

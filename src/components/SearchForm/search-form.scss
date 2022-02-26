@@ -453,10 +453,6 @@
 	@media #{$media-lg} {
 		margin-top: 1px;
 	}
-
-	@media #{$media-xl} {
-		display: none;
-	}
 }
 
 .form-close__btn {
@@ -515,6 +511,88 @@
 				}
 			}
 		}
+	}
+}
+
+.search-form__dates {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+
+	transform: translateX(-50%);
+	transition: 250ms ease top, 200ms ease opacity;
+
+	z-index: 1;
+
+	&::before {
+		@include rectangle;
+
+		left: 35%;
+		transform: translateX(-50%);
+		transition: 250ms ease left;
+	}
+
+	&--offset::before {
+		left: 65%;
+	}
+
+	&--hidden {
+		top: calc(100% + 1em);
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	@include Tablet {
+		top: calc(100% - 4em);
+
+		&::before {
+			left: 2.5em;
+		}
+
+		&--offset::before {
+			left: 35%;
+		}
+
+		&--hidden {
+			top: calc(100% - 3em);
+		}
+	}
+
+	@media screen and (max-width: #{$width-md - 1px}) {
+		position: fixed;
+		inset: 0;
+
+		transform: unset;
+
+		overflow: auto;
+		overscroll-behavior: contain;
+
+		&::before {
+			content: unset;
+		}
+	}
+}
+
+.search-form__dates-close {
+	@include resetBtn;
+	@include crossIcon;
+
+	color: var(--color-white);
+	font-size: 14px;
+	font-weight: 500;
+	padding-right: 20px;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 1;
+
+	&::before,
+	&::after {
+		background-color: var(--color-white);
+	}
+
+	@media #{$media-md} {
+		display: none;
 	}
 }
 
@@ -595,4 +673,26 @@
 	border-radius: unset !important;
 	color: #396EF6;
 	text-align: center;
+}
+
+
+.search-form__icon {
+	position: absolute;
+	top: 0;
+	right: -1.5em;
+	bottom: 0;
+
+	color: white;
+
+	width: 0.75em;
+	height: 0.75em;
+	margin: auto 0;
+	cursor: pointer;
+
+	@include Tablet {
+		right: -0.75em;
+
+		width: 0.5em;
+		height: 0.5em;
+	}
 }

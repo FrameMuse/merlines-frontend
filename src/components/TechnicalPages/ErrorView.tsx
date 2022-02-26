@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 
 interface ErrorViewProps {
-  code: string | number
+  code: "404" | 404 | ((string | number) & {})
 }
 
 function ErrorView(props: ErrorViewProps) {

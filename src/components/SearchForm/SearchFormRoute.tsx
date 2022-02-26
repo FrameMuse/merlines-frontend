@@ -1,9 +1,11 @@
-import { getGeoAirCities } from "api/actions/geo"
+import { getGeoAirCities, getGeoIpAir } from "api/actions/geo"
 import ClientAPI from "api/client"
-import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from "react"
+import { ChangeEvent, Dispatch, MutableRefObject, useEffect, useRef, useState } from "react"
+import { ReactNode } from "react-markdown/lib/react-markdown"
 import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router"
 import { SearchAirports, SearchPlace, SearchRoute, updateSearchRoute } from "redux/reducers/search"
-import { classWithModifiers, noop } from "utils"
+import { classWithModifiers } from "utils"
 
 import DropDown from "../DropDown/DropDown"
 import { DropDownElementProps } from "../DropDown/DropDownItem"
@@ -15,27 +17,39 @@ interface SearchFormRouteProps extends SearchRoute {
 
 export function SearchFormRoute(props: SearchFormRouteProps) {
   const dispatch = useDispatch()
-
-  const search = useSelector(state => state.search)
-
-  function updateRouteData<K extends keyof SearchRoute = keyof SearchRoute>(key: K, value: SearchRoute[K]) {
-    dispatch(updateSearchRoute(props.index, { [key]: value }))
-  }
+  const inputRef = useRef<HTMLInputElement>(null)
 
   function onChangeDeparturePoint(place: SearchPlace) {
-    updateRouteData("departurePoint", place)
+    dispatch(updateSearchRoute(props.index, { origin: place }))
   }
 
   function onChangeArrivalPoint(place: SearchPlace) {
-    updateRouteData("arrivalPoint", place)
+    dispatch(updateSearchRoute(props.index, { destination: place }))
   }
+
+  const search = useSelector(state => state.search)
+  const params = useParams<{ routes?: string }>()
+
+  useEffect(() => {
+    if (params.routes != null) return
+    if (search.routes[0].origin != null || search.routes[0].destination != null) return
+
+    ClientAPI
+      .query(getGeoIpAir)
+      .then(({ payload }) => {
+        if (!payload) return
+
+        inputRef.current?.focus()
+        dispatch(updateSearchRoute(0, { origin: payload }))
+      })
+  }, [search.routes[0], params.routes])
 
   return (
     <>
-      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.departurePoint} onChange={onChangeDeparturePoint}>
+      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.origin} onChange={onChangeDeparturePoint}>
         <SearchFormRoutesSwitchButton />
       </SearchFormRouteInput>
-      <SearchFormRouteInput name="arrival" placeholder="куда" state={props.arrivalPoint} onChange={onChangeArrivalPoint} />
+      <SearchFormRouteInput name="arrival" placeholder="куда" state={props.destination} onChange={onChangeArrivalPoint} inputRef={inputRef} />
     </>
   )
 }
@@ -44,10 +58,12 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
 interface SearchFormRouteInputProps {
   name: string
   placeholder: string
-  children?: any
+  inputRef?: MutableRefObject<HTMLInputElement | null>
 
   state: SearchPlace | null
   onChange: Dispatch<SearchPlace>
+
+  children?: ReactNode
 }
 
 function SearchFormRouteInput(props: SearchFormRouteInputProps) {
@@ -77,9 +93,7 @@ function SearchFormRouteInput(props: SearchFormRouteInputProps) {
     props.onChange(element)
   }
 
-  useEffect(() => {
-    setValue(props.state?.title)
-  }, [props.state])
+  useEffect(() => setValue(props.state?.title), [props.state])
 
   const placesIdList = places.flatMap(place => {
     if (place.airports) {
@@ -123,8 +137,9 @@ function SearchFormRouteInput(props: SearchFormRouteInputProps) {
         autoComplete="off"
         placeholder="_"
 
-        value={value}
-        onChange={onChange} />
+        value={value || ""}
+        onChange={onChange}
+        ref={props.inputRef} />
       <div className="search-form__placeholder">{props.placeholder}</div>
       <DropDown list={dropDownList} isOpen={isOpen} setIsOpen={setIsOpen} onSelect={onSelect} />
       {props.children}
@@ -141,8 +156,8 @@ function SearchFormRoutesSwitchButton() {
     console.log(search.routes[0])
     // Switch exists for the first and only route
     dispatch(updateSearchRoute(0, {
-      arrivalPoint: search.routes[0].departurePoint,
-      departurePoint: search.routes[0].arrivalPoint,
+      destination: search.routes[0].origin,
+      origin: search.routes[0].destination,
     }))
   }
 
