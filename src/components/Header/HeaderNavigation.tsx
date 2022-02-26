@@ -27,7 +27,9 @@ function HeaderNavigation() {
         </div>
         <div className="nav__group">
           {user.auth ? (
-            <HeaderLink to="/user" iconName="user-on" label="text" />
+            <HeaderLink to="/user">
+              <img src={user.avatar} alt="avatar" className="nav__link-image" />
+            </HeaderLink>
           ) : (
             <button className="nav__link" type="button" onClick={() => Popup.open(PopupLogin)}>
               <Icon name="user-off" className="nav__link-icon" />

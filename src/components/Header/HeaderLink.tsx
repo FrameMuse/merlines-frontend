@@ -1,3 +1,4 @@
+import { ReactNode } from "react"
 import { NavLink } from "react-router-dom"
 
 import Icon, { IconName } from "../common/Icon"
@@ -7,7 +8,7 @@ interface HeaderLinkProps {
   to: string
   label?: string
   iconName?: IconName
-  children?: string
+  children?: ReactNode
 }
 
 function HeaderLink(props: HeaderLinkProps) {
