@@ -3,22 +3,23 @@
 
 .advantages {
   color: var(--color-white);
-  padding-top: 31px;
-  padding-bottom: 44px;
+  padding-top: 65px;
+  padding-bottom: 0;
   background-color: var(--color-blue);
   overflow: hidden;
 
-  @media #{$media-md} {
+	@media screen and (min-width: 768px) and (max-width: 991px) {
     padding-top: 50px;
     padding-bottom: 45px;
   }
-  @media #{$media-lg} {
+	@media screen and (min-width: 992px) and (max-width: 1169px) {
+<<<<<<< HEAD
+
+=======
+>>>>>>> e370e92feb3991a65874f35e2f544fe2eb63a0d6
     padding-bottom: 56px;
   }
-  @media #{$media-xl} {
-    padding-top: 62px;
-    padding-bottom: 64px;
-  }
+
 }
 
 .advantages__container {
