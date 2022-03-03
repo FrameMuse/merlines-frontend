@@ -2,8 +2,8 @@ import { classWithModifiers } from "utils"
 
 
 interface SearchResultWeekPriceCardProps {
-  price: number
   date: string
+  price: number
 }
 
 function SearchResultWeekPriceCard(props: SearchResultWeekPriceCardProps) {

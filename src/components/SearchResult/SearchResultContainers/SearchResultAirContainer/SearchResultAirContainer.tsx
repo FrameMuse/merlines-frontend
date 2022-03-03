@@ -21,7 +21,7 @@ export default function SearchResultAirContainer() {
   const { session } = useContext(searchSessionContext)
   const { payload } = useTicketsSuspenseQuery(getTicketsAir(session, page, page_size, filters))
 
-  useEffect(() => setResults(payload.results), [payload])
+  useEffect(() => payload && setResults(payload.results), [payload])
 
   return (
     <SearchResultTickets>
@@ -32,7 +32,7 @@ export default function SearchResultAirContainer() {
         {results.filter(someEqual("id")).map(ticket => (
           <SearchResultAirTicket {...ticket} key={ticket.id} />
         ))}
-        {(page * page_size) <= (payload?.count ?? payload.count) && (
+        {(page * page_size) <= (payload?.count ?? (payload?.count || 0)) && (
           <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {page_size} билетов</button>
         )}
       </div>
