@@ -14,8 +14,9 @@ function SearchResultWeekPriceList() {
   }
 
   const route = searchData.routes[0]
+  const [year, month, day] = route.date.split("-")
 
-  const { error, loading, payload: weekDays } = useQuery(getCalendarAirWeek(route.origin, route.destination, route.date))
+  const { error, loading, payload: weekDays } = useQuery(getCalendarAirWeek(route.origin, route.destination, year, month, day))
   if (error) throw new Error("useQuery error")
   if (loading) return <>loading...</>
   if (!weekDays) return <>no content</>
