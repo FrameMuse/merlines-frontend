@@ -28,7 +28,7 @@ function LandingPage() {
     <section className="landing">
       <MainForm />
       <div className="landing__wrap">
-        <PriceCalendar isLanding={true} />
+        {/* <PriceCalendar isLanding={true} /> */}
         <section className="special landing__special-block">
           <div className="special__container">
             <div className="special__inner">

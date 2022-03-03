@@ -13,6 +13,7 @@ import LandingPage from "components/LandingPage/LandingPage"
 import Main from "components/Main/Main"
 import Partners from "components/Partners/Partners"
 import PopupPasswordResetConfirm from "components/Popups/PopupPasswordResetConfirm"
+import PriceCalendar from "components/PriceCalendar/PriceCalendar"
 import PrivacyPolicy from "components/PrivacyPolicy/PrivacyPolicy"
 import SearchResult from "components/SearchResult/SearchResult"
 import Subscribe from "components/Subscribe/Subscribe"
@@ -56,6 +57,9 @@ function AppRouter() {
 
       <Route path="/blog/article/:articleId" render={props => [<Article {...props.match.params} />, <Subscribe />]} />
       <Route path="/blog"><Blog /><Subscribe /></Route>
+
+      <Route path="/price-calendar"><PriceCalendar /></Route>
+
       <Route path="/" exact><Main /><Subscribe /></Route>
 
       <Route path={[
