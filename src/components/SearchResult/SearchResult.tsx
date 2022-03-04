@@ -1,5 +1,6 @@
 import "./ticket-list.scss"
 
+import { getCalendarAirWeek } from "api/actions/calendar"
 import { postTicketsAir } from "api/actions/tickets"
 import Icon from "components/common/Icon"
 import { useParametricSearchData, useSearchParamsEvaluation } from "components/SearchForm/SearchForm.utils"
@@ -20,6 +21,10 @@ import SearchResultTicketError from "./SearchResultError"
 import SearchResultLoader from "./SearchResultLoader"
 
 export const searchSessionContext = createContext({ session: "" })
+export const searchWeekPricesContext = createContext<({
+  date: string
+  price: number
+} | undefined)[]>([])
 
 function SearchResult() {
   const location = useLocation()
@@ -52,12 +57,16 @@ function SearchResultContainer() {
 
   return (
     <SearchSessionProviderSuspense {...searchData} routes={routes}>
+      <SearchWeekPricesProviderSuspense {...searchData}>
+        <SearchTicketsMeta />
+        <SearchTicketsContainer transport={searchData.transport} />
+      </SearchWeekPricesProviderSuspense>
     </SearchSessionProviderSuspense>
   )
 }
 
 
-interface SearchResultSessionProviderProps {
+interface SearchResultProviderProps {
   routes: RouteType[]
   travelClass?: SearchDetails["travelClass"]
   passengers?: Partial<SearchDetails["passengers"]>
@@ -65,17 +74,33 @@ interface SearchResultSessionProviderProps {
   children: ReactNode
 }
 // 2. Create session
-function SearchSessionProviderSuspense(props: SearchResultSessionProviderProps) {
-  const { error, payload } = useSuspenseQuery(postTicketsAir(props.routes, props.travelClass || 1, props.passengers))
-  if (error || !payload) throw new Error()
+function SearchSessionProviderSuspense(props: SearchResultProviderProps) {
+  const { payload } = useSuspenseQuery(postTicketsAir(props.routes, props.travelClass || 1, props.passengers))
+  if (!payload) throw new Error("no payload")
+
   return (
-    <searchSessionContext.Provider value={{ session: payload.session }}>
+    <searchSessionContext.Provider value={payload}>
       {props.children}
     </searchSessionContext.Provider>
   )
 }
 
-// 3. Determine what type transport is used and get relevant tickets
+// 3. Get price calendar for current week
+function SearchWeekPricesProviderSuspense(props: SearchResultProviderProps) {
+  const route = props.routes[0]
+  const [year, month, day] = route.date.split("-")
+
+  const { payload } = useSuspenseQuery(getCalendarAirWeek(route.origin, route.destination, year, month, day))
+  if (!payload) throw new Error("no payload")
+
+  return (
+    <searchWeekPricesContext.Provider value={payload}>
+      {props.children}
+    </searchWeekPricesContext.Provider>
+  )
+}
+
+// 4. Determine what type transport is used and get relevant tickets
 interface SearchTicketsContainerProps {
   transport: SearchDetails["transport"] | (string & {})
 }

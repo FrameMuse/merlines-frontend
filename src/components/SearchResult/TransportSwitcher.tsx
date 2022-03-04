@@ -4,8 +4,13 @@ import Icon from "components/common/Icon"
 import useSearchTransport from "hooks/useSearchTransport"
 import { classWithModifiers } from "utils"
 
-function TransportSwitcher() {
+interface TransportSwitcherProps {
+  prices: [number?, number?, number?]
+}
+
+function TransportSwitcher(props: TransportSwitcherProps) {
   const [transport, setTransport] = useSearchTransport()
+  const [planePrice, trainPrice, busPrice] = props.prices
   return (
     <nav className="transports ticket-list__transports">
       <button className={classWithModifiers("transports-link", transport === "plane" && "active")} onClick={() => setTransport("plane")}>
@@ -14,7 +19,7 @@ function TransportSwitcher() {
           <span className="transports-link__title">
             {"Самолёты"}
           </span>
-          <span className="transports-link__price">{(100).toPrice()}</span>
+          <span className="transports-link__price">{planePrice?.toPrice("ru", "rub") ?? "..."}</span>
         </div>
       </button>
       <button className={classWithModifiers("transports-link", transport === "train" && "active")} onClick={() => setTransport("train")}>
@@ -23,7 +28,7 @@ function TransportSwitcher() {
           <span className="transports-link__title">
             {"Поезда"}
           </span>
-          <span className="transports-link__price">{(100).toPrice()}</span>
+          <span className="transports-link__price">{trainPrice?.toPrice("ru", "rub") ?? "..."}</span>
         </div>
       </button>
       <button className={classWithModifiers("transports-link", transport === "bus" && "active")} onClick={() => setTransport("bus")}>
@@ -32,7 +37,7 @@ function TransportSwitcher() {
           <span className="transports-link__title">
             {"Автобусы"}
           </span>
-          <span className="transports-link__price">{(100).toPrice()}</span>
+          <span className="transports-link__price">{busPrice?.toPrice("ru", "rub") ?? "..."}</span>
         </div>
       </button>
     </nav>

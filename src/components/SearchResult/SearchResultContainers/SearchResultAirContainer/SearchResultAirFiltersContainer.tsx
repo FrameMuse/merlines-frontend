@@ -1,10 +1,11 @@
 import { getTicketsAirFilters } from "api/actions/tickets"
+import SearchPriceFilter from "components/SearchResult/SearchResultFilters/SearchPriceFilter"
 import { AirFiltersType } from "interfaces/Search"
 import { useContext } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { pluralize } from "utils"
 
-import { searchSessionContext } from "../../SearchResult"
+import { searchSessionContext, searchWeekPricesContext } from "../../SearchResult"
 import SearchFilter from "../../SearchResultFilters/SearchFilter"
 import SearchFilters, { SearchFiltersBaseProps } from "../../SearchResultFilters/SearchFilters"
 import SearchFilterCheckbox from "../../SearchResultFilters/UX/SearchFilterCheckbox"
@@ -18,13 +19,15 @@ interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersT
 
 export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersProps) {
   const { session } = useContext(searchSessionContext)
+  const weekPrices = useContext(searchWeekPricesContext)
+
   const { error, payload } = useSuspenseQuery(getTicketsAirFilters(session))
   if (error || !payload) return <>No filters</>
   return (
     <div className="ticket-list__left">
       <SearchResultSubscribePrice />
       <div className="filters">
-        {/* <SearchPriceFilter /> */}
+        <SearchPriceFilter prices={[weekPrices?.[0]?.price, 0, 0]} />
         <SearchFilters onChange={props.onChange}>
           <SearchFilter label="Пересадки">
             <SearchFilterCheckboxes name="transfers">
