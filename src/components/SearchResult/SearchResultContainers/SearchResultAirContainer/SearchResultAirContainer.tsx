@@ -19,15 +19,23 @@ export default function SearchResultAirContainer() {
   const [filters, setFilters] = useState<Partial<AirFiltersType>>({})
 
   const { session } = useContext(searchSessionContext)
-  const { payload } = useTicketsSuspenseQuery(getTicketsAir(session, page, page_size, filters))
+  const { payload, loading } = useTicketsSuspenseQuery(getTicketsAir(session, page, page_size, filters))
 
-  useEffect(() => payload && setResults(payload.results), [payload])
+  useEffect(() => setPage(1), [filters])
+  useEffect(() => {
+    if (!payload) return
+    if (page > 1) {
+      setResults(results => [...results, ...payload.results])
+      return
+    }
+    setResults(payload.results)
+  }, [payload])
 
   return (
-    <SearchResultTickets>
+    <SearchResultTickets loading={!payload && loading}>
       <SearchResultWeekPrice />
       <SearchResultAirFiltersContainer onChange={setFilters} />
-      <div className={classWithModifiers("ticket-list__content", false && "loading")}>
+      <div className={classWithModifiers("ticket-list__content", loading && "loading")}>
         <TransportSwitcher />
         {results.filter(someEqual("id")).map(ticket => (
           <SearchResultAirTicket {...ticket} key={ticket.id} />
