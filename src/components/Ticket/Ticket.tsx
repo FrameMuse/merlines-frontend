@@ -1,12 +1,15 @@
 // SCSS
 import "./Ticket.style.scss"
 
+import { deleteFavourite, postFavourites } from "api/actions/favourites"
 import { getTicketsAirOfferLink, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
+import ClientAPI from "api/client"
 import { APIOuterLink } from "api/helpers"
 import Icon from "components/common/Icon"
 import { searchSessionContext } from "components/SearchResult/SearchResult"
 import { useContext, useState } from "react"
 import { useQuery } from "react-fetching-library"
+import { useSelector } from "react-redux"
 import { classWithModifiers } from "utils"
 
 
@@ -34,7 +37,7 @@ function Ticket(props: TicketProps) {
                 <img src={logo} key={index} />
               ))}
             </div>
-            <TicketEvents />
+            <TicketEvents ticketId={props.id} />
           </div>
           <div className="ticket-info__timelines">
             {props.timelines.map((timeline, index) => (
@@ -70,14 +73,54 @@ function Ticket(props: TicketProps) {
   )
 }
 
-function TicketEvents() {
-  const active = true
+interface TicketEventsProps {
+  ticketId: number
+  noticeChecked?: boolean
+  favouriteChecked?: boolean
+}
+
+function TicketEvents(props: TicketEventsProps) {
+  const [noticeChecked, setNoticeChecked] = useState(props.noticeChecked)
+  const [favouriteChecked, setFavouriteChecked] = useState(props.favouriteChecked)
+  const transport = useSelector(state => state.search.transport)
+  function onFavourite() {
+    if (favouriteChecked) {
+      ClientAPI
+        .query(deleteFavourite(transport, props.ticketId))
+        .then(() => {
+          setFavouriteChecked(false)
+        })
+      return
+    }
+
+    ClientAPI
+      .query(postFavourites(transport, props.ticketId))
+      .then(() => {
+        setFavouriteChecked(true)
+      })
+  }
+  function onNotice() {
+    if (noticeChecked) {
+      ClientAPI
+        .query(deleteFavourite(transport, props.ticketId))
+        .then(() => {
+          setNoticeChecked(false)
+        })
+      return
+    }
+
+    ClientAPI
+      .query(postFavourites(transport, props.ticketId))
+      .then(() => {
+        setNoticeChecked(true)
+      })
+  }
   return (
     <div className="ticket-events">
-      <button className={classWithModifiers("ticket-events__button", active && "active")} type="button" aria-label="notice me if changes" aria-checked={false}>
+      <button className={classWithModifiers("ticket-events__button", noticeChecked && "active")} type="button" onClick={onNotice} aria-label="notice me if changed" aria-checked={noticeChecked}>
         <Icon className="ticket-events__icon" name="notice" />
       </button>
-      <button className={classWithModifiers("ticket-events__button")} type="button" aria-label="add to favorites" aria-checked={false}>
+      <button className={classWithModifiers("ticket-events__button", favouriteChecked && "active")} type="button" onClick={onFavourite} aria-label="add to favorites" aria-checked={favouriteChecked}>
         <Icon className="ticket-events__icon" name="star" />
       </button>
       <button className="ticket-events__button" type="button" aria-label="share it">

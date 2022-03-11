@@ -87,7 +87,7 @@ function parseSearchRoutes(stringRoutes?: string) {
 
 function parseSearchPassengers(stringPassengers?: string) {
   if (stringPassengers == null) return stringPassengers
-  const [adults, children, infants] = (stringPassengers.split(":") || []).map(Number) as (number | undefined)[]
+  const [adults, children, infants] = (stringPassengers.split(":")).map(Number) as (number | undefined)[]
   return { adults, children, infants }
 }
 
@@ -122,10 +122,9 @@ export function useSearchParamsEvaluation() {
     dispatch(updateSearch({
       hasReturnDate: !!searchData.routes[0].returnDate && searchData.routes.length === 0,
       passengers: {
-        adults: 1,
-        children: 0,
-        infants: 0,
-        ...searchData.passengers
+        adults: searchData.passengers?.adults || 1,
+        children: searchData.passengers?.children || 0,
+        infants: searchData.passengers?.infants || 0
       }
     }))
 

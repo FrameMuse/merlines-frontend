@@ -1,44 +1,8 @@
-export type TransportType = "airplane" | "train" | "bus"
-export interface RouteType {
-  origin: number
-  destination: number
-  date: string
-}
+import { Action } from "api/client"
+import { PaginationType } from "interfaces/Django"
+import { SearchDetails } from "redux/reducers/search"
 
-
-/*
-
---------------------------------------
---------- AIR Search Results ---------
---------------------------------------
-
-*/
-
-
-export interface AirFiltersType {
-  airlines: string
-  destination_airports: string
-
-  end_date__in: string
-  end_time__gte: string
-  end_time__lte: string
-
-  offers: string
-  origin_airports: string
-
-  start_time__gte: string
-  start_time__lte: string
-
-  transfers: string
-  transfer_airports: string
-  transfer_time__gte: string
-  transfer_time__lte: string
-
-  travel_time__gte: string
-  travel_time__lte: string
-}
-
-export interface AirTicketType {
+export const getFavourites = (type: SearchDetails["transport"], page: number, page_size: number): Action<PaginationType<{
   id: number
   price_with_baggage: number
   best_offer: {
@@ -76,6 +40,7 @@ export interface AirTicketType {
           }
           departure_time: string
           arrival_time: string
+          duration: string
           marketing_airline: {
             id: number
             code: string
@@ -88,28 +53,21 @@ export interface AirTicketType {
       ]
     }
   ]
-}
+  is_favorite: boolean
+  type: string
+}>> => ({
+  method: "GET",
+  endpoint: `/favourites/${type}`,
+  params: { page, page_size }
+})
 
+export const postFavourites = (type: SearchDetails["transport"], ticket: number): Action<{}> => ({
+  method: "POST",
+  endpoint: `/favourites/${type}`,
+  body: { ticket }
+})
 
-/*
-
---------------------------------------
---------- BUS Search Results ---------
---------------------------------------
-
-*/
-
-
-
-
-
-/*
-
-----------------------------------------
---------- TRAIN Search Results ---------
-----------------------------------------
-
-*/
-
-
-
+export const deleteFavourite = (type: SearchDetails["transport"], ticketId: number): Action => ({
+  method: "DELETE",
+  endpoint: `/favourites/${type}/${ticketId}`
+})
