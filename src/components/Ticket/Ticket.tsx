@@ -115,6 +115,9 @@ function TicketEvents(props: TicketEventsProps) {
         setNoticeChecked(true)
       })
   }
+  function onShare() {
+    alert("Поделитесь этой ссылкой " + window.location)
+  }
   return (
     <div className="ticket-events">
       <button className={classWithModifiers("ticket-events__button", noticeChecked && "active")} type="button" onClick={onNotice} aria-label="notice me if changed" aria-checked={noticeChecked}>
@@ -123,7 +126,7 @@ function TicketEvents(props: TicketEventsProps) {
       <button className={classWithModifiers("ticket-events__button", favouriteChecked && "active")} type="button" onClick={onFavourite} aria-label="add to favorites" aria-checked={favouriteChecked}>
         <Icon className="ticket-events__icon" name="star" />
       </button>
-      <button className="ticket-events__button" type="button" aria-label="share it">
+      <button className="ticket-events__button" type="button" onClick={onShare} aria-label="share it">
         <Icon className="ticket-events__icon" name="share" />
       </button>
     </div>
