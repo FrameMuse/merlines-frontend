@@ -1,5 +1,5 @@
-import LkContentClearAll from "./LkContent/LkContentClearAll"
-import UserCabinetContentRoute from "./LkContent/UserCabinetContentRoute"
+import LkContentClearAll from "./UserCabinetViews/LkContentClearAll"
+import UserCabinetContentRoute from "./UserCabinetViews/UserCabinetContentRoute"
 
 function LkHistory() {
   return (

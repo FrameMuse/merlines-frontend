@@ -1,5 +1,4 @@
-// SCSS
-import "./form-profile.scss"
+import "../form-profile.scss"
 
 import { patchAccountMe, putAccountMePassword } from "api/actions/account"
 import ClientAPI from "api/client"

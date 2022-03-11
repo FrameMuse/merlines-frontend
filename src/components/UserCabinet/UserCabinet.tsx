@@ -3,9 +3,9 @@ import "./cabinet.scss"
 import Icon, { IconName } from "components/common/Icon"
 import { NavLink } from "react-router-dom"
 
-import LkClearHistory from "./LkClearHistory"
-import UserCabinetContent from "./LkContent/UserCabinetContent"
 import UserCabinetHeader from "./UserCabinetHeader"
+import LkClearHistory from "./UserCabinetViews/LkClearHistory"
+import UserCabinetRoutes from "./UserCabinetViews/UserCabinetRoutes"
 
 
 function UserCabinet() {
@@ -17,13 +17,13 @@ function UserCabinet() {
           <div className="cabinet__inner">
             <div className="cabinet__col cabinet__col--nav">
               <nav className="cabinet__nav">
-                <UserCabinetNavLink to="/user" iconName="star">Избранное</UserCabinetNavLink>
+                <UserCabinetNavLink to="/user/favourites" iconName="star">Избранное</UserCabinetNavLink>
                 <UserCabinetNavLink to="/user/history" iconName="history">История</UserCabinetNavLink>
                 <UserCabinetNavLink to="/user/subscribes" iconName="notice">Подписки</UserCabinetNavLink>
                 <UserCabinetNavLink to="/user/question" iconName="question">Задать вопрос</UserCabinetNavLink>
               </nav>
             </div>
-            <UserCabinetContent />
+            <UserCabinetRoutes />
           </div>
         </div>
       </section>
@@ -41,7 +41,7 @@ interface LkNavLinkProps {
 
 function UserCabinetNavLink(props: LkNavLinkProps) {
   return (
-    <NavLink className="cabinet__nav-item" activeClassName="cabinet__nav-item--active" exact to={props.to}>
+    <NavLink className="cabinet__nav-item" activeClassName="cabinet__nav-item--active" to={props.to}>
       {props.children}
       {" "}
       <Icon name={props.iconName} className="cabinet__nav-icon" />

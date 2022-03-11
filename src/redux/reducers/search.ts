@@ -23,7 +23,7 @@ export interface SearchRoute {
 
 export interface SearchDetails {
   hasReturnDate: boolean
-  transport: "plane" | "bus" | "train"
+  transport: "air" | "bus" | "train"
   travelClass: SearchTravelClass
   routes: SearchRoute[]
   passengers: {
@@ -35,7 +35,7 @@ export interface SearchDetails {
 
 const initialState: SearchDetails = {
   hasReturnDate: false,
-  transport: "plane",
+  transport: "air",
   travelClass: 1,
   routes: [{ destination: null, origin: null, date: new Date, returnDate: null }],
   passengers: {

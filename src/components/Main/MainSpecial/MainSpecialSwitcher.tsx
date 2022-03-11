@@ -7,7 +7,7 @@ import Icon from "../../common/Icon"
 function MainSpecialSwitcher() {
   return (
     <div className="special-nav special__special-nav">
-      <MainSpecialSwitcherLink type="plane" />
+      <MainSpecialSwitcherLink type="air" />
       <MainSpecialSwitcherLink type="train" />
       <MainSpecialSwitcherLink type="bus" />
     </div>
@@ -17,7 +17,7 @@ function MainSpecialSwitcher() {
 
 
 interface MainSpecialSwitcherLinkProps {
-  type: "plane" | "train" | "bus"
+  type: "air" | "train" | "bus"
 }
 
 function MainSpecialSwitcherLink(props: MainSpecialSwitcherLinkProps) {

@@ -13,7 +13,7 @@ function TransportSwitcher(props: TransportSwitcherProps) {
   const [planePrice, trainPrice, busPrice] = props.prices
   return (
     <nav className="transports ticket-list__transports">
-      <button className={classWithModifiers("transports-link", transport === "plane" && "active")} onClick={() => setTransport("plane")}>
+      <button className={classWithModifiers("transports-link", transport === "air" && "active")} onClick={() => setTransport("air")}>
         <Icon className="transports-link__icon" name="plane" />
         <div className="transports-link__header">
           <span className="transports-link__title">

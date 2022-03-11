@@ -7,7 +7,7 @@ function MainHeaderSwitcher() {
   const [transport, setTransport] = useSearchTransport()
   return (
     <div className="main-form__nav">
-      <button className={classWithModifiers("main-form__item", transport === "plane" && "active")} onClick={() => setTransport("plane")}>
+      <button className={classWithModifiers("main-form__item", transport === "air" && "active")} onClick={() => setTransport("air")}>
         <Icon className="main-form__icon" name="plane" />
         <span className="main-form__item-text">самолёт</span>
       </button>

@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-import LkContentClearAll from "./LkContent/LkContentClearAll"
-import UserCabinetContentRoute from "./LkContent/UserCabinetContentRoute"
-import LkSwitcher from "./LkSwitcher"
+import UserCabinetSwitcher from "../UserCabinetSwitcher"
+import LkContentClearAll from "./LkContentClearAll"
+import UserCabinetContentRoute from "./UserCabinetContentRoute"
 
 function UserCabinetSubscription() {
   const [isActiveRoutes, setIsActiveRoutes] = useState()
@@ -12,11 +12,7 @@ function UserCabinetSubscription() {
     <>
       <div className="cabinet__col-wrap cabinet__col-wrap--subscription">
         <h2 className="cabinet__title cabinet__title--history">Подписки</h2>
-        <LkSwitcher
-          setIsActiveRoutes={setIsActiveRoutes}
-          setIsActiveTickets={setIsActiveTickets}
-          subscribes
-        />
+        <UserCabinetSwitcher basename="/user/subscribes" />
         <LkContentClearAll subscribe />
       </div>
       {isActiveRoutes && (

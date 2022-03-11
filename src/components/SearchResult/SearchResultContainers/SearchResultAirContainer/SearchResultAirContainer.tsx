@@ -16,10 +16,10 @@ export default function SearchResultAirContainer() {
   const weekPrices = useContext(searchWeekPricesContext)
 
   const [page, setPage] = useState(1)
-  const [page_size] = useState(5)
+  const [pageSize] = useState(5)
   const [filters, setFilters] = useState<Partial<AirFiltersType>>({})
   const [results, setResults] = useState<AirTicketType[]>([])
-  const { payload, loading } = useTicketsSuspenseQuery(getTicketsAir(session, page, page_size, filters))
+  const { payload, loading } = useTicketsSuspenseQuery(getTicketsAir(session, page, pageSize, filters))
 
   useEffect(() => setPage(1), [filters])
   useEffect(() => {
@@ -40,8 +40,8 @@ export default function SearchResultAirContainer() {
         {results.filter(someEqual("id")).map(ticket => (
           <SearchResultAirTicket {...ticket} key={ticket.id} />
         ))}
-        {(page * page_size) <= (payload?.count ?? (payload?.count || 0)) && (
-          <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {page_size} билетов</button>
+        {(page * pageSize) <= (payload?.count ?? (payload?.count || 0)) && (
+          <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {pageSize} билетов</button>
         )}
       </div>
     </SearchResultTickets>
