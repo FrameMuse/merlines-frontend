@@ -29,7 +29,7 @@ function UserCabinetFavourites() {
           {payload.results.map(ticket => (
             <SearchResultAirTicket {...ticket} key={ticket.id} />
           ))}
-          {(page * pageSize) <= (payload?.count ?? (payload?.count || 0)) && (
+          {(page * pageSize) <= payload.count && (
             <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {pageSize} билетов</button>
           )}
         </div>
