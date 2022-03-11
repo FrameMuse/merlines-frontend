@@ -116,8 +116,8 @@ export function useSearchParamsEvaluation() {
     if (searchData.travelClass) {
       dispatch(updateSearchTravelClass(searchData.travelClass))
     }
-    if (searchData.transport && ["plane", "bus", "train"].includes(searchData.transport)) {
-      dispatch(updateSearchTransport(searchData.transport as "train" | "bus" | "air"))
+    if (searchData.transport && ["air", "bus", "train"].includes(searchData.transport)) {
+      dispatch(updateSearchTransport(searchData.transport as "air" | "bus" | "air"))
     }
     dispatch(updateSearch({
       hasReturnDate: !!searchData.routes[0].returnDate && searchData.routes.length === 0,

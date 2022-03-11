@@ -46,7 +46,7 @@ function SearchResult() {
 function SearchResultContainer() {
   useSearchParamsEvaluation()
   const searchData = useParametricSearchData()
-  if (!searchData.transport || !["plane", "bus", "train"].includes(searchData.transport)) {
+  if (!searchData.transport || !["air", "bus", "train"].includes(searchData.transport)) {
     throw new Error("useParametricSearchDataError: wrong `transport`")
   }
   if (searchData.routes.length === 0) {
@@ -106,7 +106,7 @@ interface SearchTicketsContainerProps {
 }
 function SearchTicketsContainer(props: SearchTicketsContainerProps) {
   switch (props.transport) {
-    case "plane":
+    case "air":
       return <SearchResultAirContainer />
 
     default:

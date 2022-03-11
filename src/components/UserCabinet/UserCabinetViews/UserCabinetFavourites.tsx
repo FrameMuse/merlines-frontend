@@ -24,19 +24,19 @@ function UserCabinetFavourites() {
         <h2 className="cabinet__title">Избраное</h2>
         {/* <UserCabinetSwitcher basename="/user/favourites" /> */}
       </div>
-      <div className="cabinet__empty cabinet__empty--subscription">
-        <div className={classWithModifiers("ticket-list__content", loading && "loading")}>
-          {payload.results.map(ticket => (
-            <SearchResultAirTicket {...ticket} key={ticket.id} />
-          ))}
-          {(page * pageSize) <= payload.count && (
-            <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {pageSize} билетов</button>
-          )}
-        </div>
-        {payload.results.length === 0 && (
-          <h3 className="cabinet__empty-text">В данном разделе пока пусто</h3>
+      <div className={classWithModifiers("ticket-list__content", loading && "loading")}>
+        {payload.results.map(ticket => (
+          <SearchResultAirTicket {...ticket} key={ticket.id} />
+        ))}
+        {(page * pageSize) <= payload.count && (
+          <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {pageSize} билетов</button>
         )}
       </div>
+      {payload.results.length === 0 && (
+        <div className="cabinet__empty cabinet__empty--subscription">
+          <h3 className="cabinet__empty-text">В данном разделе пока пусто</h3>
+        </div>
+      )}
       {/* <div className="cabinet__empty cabinet__empty--subscription">
         <Switch>
           <Redirect from="/user/favourites" to="/user/favourites/routes" exact />
