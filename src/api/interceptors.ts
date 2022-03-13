@@ -16,8 +16,7 @@ export function requestInterceptor() {
       ...action,
       endpoint: endpoint + (query && "?" + query),
       headers: {
-        Authorization: !action.config?.skipAuth && localStorage.getItem("token") || "",
-        Currency: "RUB"
+        Authorization: !action.config?.skipAuth && localStorage.getItem("token") || ""
       }
     }
   }

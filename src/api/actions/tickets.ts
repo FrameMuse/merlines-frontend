@@ -6,7 +6,7 @@ import { AirFiltersType, AirTicketType, RouteType } from "interfaces/Search"
 export const postTicketsAir = (trips: RouteType[], travel_class: number, passengers?: Partial<{ adults: number, children: number, infants: number }>): Action<{ session: string }> => ({
   method: "POST",
   endpoint: "/tickets/air",
-  body: { trips, travel_class, ...passengers }
+  body: { trips, travel_class, ...passengers, currency: "RUB" }
 })
 
 export const getTicketsAir = (session: string, page: number, page_size: number, filters?: Partial<AirFiltersType>): Action<PaginationType<AirTicketType> & { in_progress: boolean }> => ({
