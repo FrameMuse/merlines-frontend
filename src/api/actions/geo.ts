@@ -16,6 +16,15 @@ export const getGeoAirCities = (title__icontains: string): Action<PaginationType
   params: { page_size: 5, title__icontains }
 })
 
+export const getGeoAirCity = (id: number): Action<{
+  id: number
+  title: string
+  code: string
+}> => ({
+  method: "GET",
+  endpoint: `/geo/air/cities/${id}`
+})
+
 export const getGeoIpAir: Action<SearchPlace> = {
   method: "GET",
   endpoint: "/geo/ip/air"

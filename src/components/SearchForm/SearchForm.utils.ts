@@ -1,3 +1,5 @@
+import { getGeoAirCity } from "api/actions/geo"
+import ClientAPI from "api/client"
 import _ from "lodash"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -117,7 +119,7 @@ export function useSearchParamsEvaluation() {
       dispatch(updateSearchTravelClass(searchData.travelClass))
     }
     if (searchData.transport && ["air", "bus", "train"].includes(searchData.transport)) {
-      dispatch(updateSearchTransport(searchData.transport as "air" | "bus" | "air"))
+      dispatch(updateSearchTransport(searchData.transport as SearchDetails["transport"]))
     }
     dispatch(updateSearch({
       hasReturnDate: !!searchData.routes[0].returnDate && searchData.routes.length === 0,
@@ -130,24 +132,33 @@ export function useSearchParamsEvaluation() {
 
     async function updateRoutes() {
       await searchData.routes.forEach(async (route, index) => {
-        // const { } = await ClientAPI.query(getGeoAirCities)
-        const origin = searchRoutes[index].origin?.id === route.origin ? searchRoutes[index].origin : {
-          id: route.origin,
-          title: "" + route.origin,
-          code: "CDE"
-        }
-
-        const destination = searchRoutes[index].destination?.id === route.destination ? searchRoutes[index].destination : {
-          id: route.destination,
-          title: "" + route.origin,
-          code: "CDE"
-        }
         dispatch(updateSearchRoute(index, {
-          origin,
-          destination,
+          origin: {
+            id: route.origin,
+            title: ""
+          },
+          destination: {
+            id: route.destination,
+            title: ""
+          },
           date: route.date ? new Date(route.date) : null,
           returnDate: route.returnDate ? new Date(route.returnDate) : null
         }))
+
+        if (searchRoutes[index].origin?.title.length === 0) {
+          const { error, payload } = await ClientAPI.query(getGeoAirCity(route.origin))
+          if (!error && payload) {
+            dispatch(updateSearchRoute(index, { origin: payload }))
+          }
+        }
+
+        if (searchRoutes[index].destination?.title.length === 0) {
+          const { error, payload } = await ClientAPI.query(getGeoAirCity(route.destination))
+          console.log(payload)
+          if (!error && payload) {
+            dispatch(updateSearchRoute(index, { destination: payload }))
+          }
+        }
       })
 
     }
