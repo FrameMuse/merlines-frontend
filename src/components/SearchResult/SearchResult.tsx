@@ -110,7 +110,12 @@ function SearchTicketsContainer(props: SearchTicketsContainerProps) {
       return <SearchResultAirContainer />
 
     default:
-      throw new Error("SearchTicketsContainerError: unknown transport")
+      return (
+        <div className="ticket-list__error">
+          <h2 className="ticket-list__title">Поиск билетов на {({ train: "поезда", bus: "автобусы" } as never)[props.transport]} ещё в разработке</h2>
+          <p className="ticket-list__error-head">Мы работает над этим</p>
+        </div>
+      )
   }
 }
 
