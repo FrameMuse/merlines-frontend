@@ -3,7 +3,7 @@ import SearchPriceFilter from "components/SearchResult/SearchResultFilters/Searc
 import { AirFiltersType } from "interfaces/Search"
 import React, { useContext } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
-import { pluralize } from "utils"
+import {numberToLetter, pluralize} from "utils"
 
 import { searchSessionContext, searchWeekPricesContext } from "../../SearchResult"
 import SearchFilter from "../../SearchResultFilters/SearchFilter"
@@ -100,7 +100,9 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           <SearchFilter label="Аэропорты пересадок">
             {payload.transfer_cities.map((cities, index) => cities.length > 0 && (
               <>
-                <h3>{index + 1} пересадка</h3>
+                <h3 className={"search-filter__transfer-title"}>
+                  {numberToLetter(index + 1)} пересадка
+                </h3>
                 <SearchFilterCheckboxes name={`transfer_airports[${index}]`}>
                   {cities.map(city => (
                     <SearchFilterCheckbox name={city.id.toString()} key={city.id}>{city.title}</SearchFilterCheckbox>

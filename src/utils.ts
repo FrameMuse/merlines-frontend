@@ -11,6 +11,23 @@ const getRandomInteger = (min = 0, max = 1) => {
   return Math.round(rand)
 }
 
+const numberToLetter = (n: number): string => {
+  switch (n){
+    case 1:
+      return "Первая"
+    case 2:
+      return "Вторая"
+    case 3:
+      return "Третья"
+    case 4:
+      return "Четвертая"
+    case 5:
+      return "Пятая"
+    default:
+      return ""
+  }
+}
+
 const getRandomElement = (arr: string | any[]) => arr[Math.floor(Math.random() * arr.length)]
 
 const getTwoRandomElements = (arr: any[]) => {
@@ -400,6 +417,7 @@ export function interpolate<T extends string>(value: T, vars: Record<ExtractInte
 }
 
 export {
+  numberToLetter,
   getRandomInteger,
   getRandomElement,
   getTwoRandomElements,
