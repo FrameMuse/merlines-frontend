@@ -92,6 +92,11 @@
 
 .cabinet__user-inner {
 	margin-top: 9px;
+	margin-left: 10px;
+
+	@media #{$media-md} {
+		margin-left: 15px;
+	}
 }
 
 .cabinet__user-text {

@@ -5,17 +5,14 @@ import React from "react"
 interface props {
   avatar: string
   firstName: string
+  size?:"small"
 }
 
-const UserAvatar: React.FC<props> = ({avatar, firstName}) => {
+const UserAvatar: React.FC<props> = ({avatar, firstName, size}) => {
   return (
-    <>
-      {avatar ? <img src={avatar} alt="avatar" className="nav__link-image"/> :
-        <div className={"user-avatar__placeholder"}>
-          {firstName.substring(0, 1)}
-        </div>
-      }
-    </>
+    <div className={["user-avatar", size ? `user-avatar--${size}` : ""].join(" ")}>
+      {avatar ? <img src={avatar} alt="avatar" className="nav__link-image"/> : firstName.substring(0, 1)}
+    </div>
   )
 }
 

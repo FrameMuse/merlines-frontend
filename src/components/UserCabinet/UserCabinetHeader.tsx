@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 
 import Icon from "../common/Icon"
 import Logout from "../common/Logout"
+import UserAvatar from "../UserAvatar/UserAvatar"
 
 function UserCabinetHeader() {
   const user = useSelector(state => state.user)
@@ -11,7 +12,7 @@ function UserCabinetHeader() {
   return (
     <div className="cabinet__header">
       <div className="cabinet__user">
-        <img className="cabinet__user-avatar" src={user.avatar} alt="avatar" />
+        <UserAvatar avatar={user.avatar} firstName={user.first_name} />
         <div className="cabinet__user-inner">
           <div className="cabinet__user-text">Здравствуйте,</div>
           <div className="cabinet__user-name">
