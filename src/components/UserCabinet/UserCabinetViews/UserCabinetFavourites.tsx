@@ -1,9 +1,12 @@
-import { getFavourites } from "api/actions/favourites"
-import SearchResultAirTicket from "components/SearchResult/SearchResultContainers/SearchResultAirContainer/SearchResultAirTicket"
-import { useState } from "react"
-import { useQuery } from "react-fetching-library"
-import { useSelector } from "react-redux"
-import { classWithModifiers } from "utils"
+import {getFavourites} from "api/actions/favourites"
+import SearchResultAirTicket
+  from "components/SearchResult/SearchResultContainers/SearchResultAirContainer/SearchResultAirTicket"
+import {useEffect, useState} from "react"
+import {useQuery} from "react-fetching-library"
+import {useSelector} from "react-redux"
+import {classWithModifiers} from "utils"
+
+import {AirTicketType} from "../../../interfaces/Search"
 
 
 function UserCabinetFavourites() {
@@ -11,7 +14,17 @@ function UserCabinetFavourites() {
 
   const [page, setPage] = useState(1)
   const [pageSize] = useState(5)
+  const [results, setResults] = useState<AirTicketType[]>([])
   const { error, loading, payload } = useQuery(getFavourites(transport, page, pageSize), true)
+
+  useEffect(() => {
+    if (!payload) return
+    if (page > 1) {
+      setResults(results => [...results, ...payload.results])
+      return
+    }
+    setResults(payload.results)
+  }, [payload])
 
   if (error) throw new Error("useQuery error")
   if (loading) return <>loading...</>
@@ -25,7 +38,7 @@ function UserCabinetFavourites() {
         {/* <UserCabinetSwitcher basename="/user/favourites" /> */}
       </div>
       <div className={classWithModifiers("ticket-list__content", loading && "loading")}>
-        {payload.results.map(ticket => (
+        {results.map(ticket => (
           <SearchResultAirTicket {...ticket} key={ticket.id} />
         ))}
         {(page * pageSize) <= payload.count && (
