@@ -8,7 +8,7 @@ function UserCabinetFeedback() {
       <p className="cabinet__text">
         Если на странице блога в разделе
         {" "}
-        <Link to="/blog/?tag=faq">#FAQ</Link>
+        <Link to="/faq">#FAQ</Link>
         {" "}
         вы не нашли ответ на интересующий вас вопрос относительно нашего
         сервиса, то вы можете задать его здесь и мы ответим как можно скорее.
