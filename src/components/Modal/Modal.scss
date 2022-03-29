@@ -1,0 +1,85 @@
+@import "../../styles/vars";
+@import "../../styles/mixin";
+
+.modal {
+	pointer-events: initial;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	background: rgba($color: #235EF5, $alpha: 0.95);
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(0.95) translateY(-25%);
+	transition: 350ms ease opacity, 250ms ease transform;
+
+	z-index: 998;
+
+	&--show {
+		opacity: 1;
+		visibility: visible;
+		transform: scale(1) translateY(0%);
+	}
+
+	&__close-btn {
+		position: absolute;
+		z-index: 1000;
+		top: -30px;
+		right: 0;
+		color: white;
+		font-size: 14px;
+		display: flex;
+		align-items: center;
+		&-icon {
+			margin-left: 10px;
+		}
+	}
+
+	&__backdrop {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 999;
+	}
+
+	&__body {
+		position: fixed;
+		left: 15px;
+		right: 15px;
+		top: 150px;
+		z-index: 1000;
+		background-color: white;
+		padding: 30px 23px;
+		border-radius: 4px;
+
+	}
+	&__content {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 22px;
+		color: $color-base;
+	}
+}
+
+
+@media #{$media-md} {
+	.modal {
+		&__body {
+			top: 230px;
+			right: auto;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 450px;
+			padding: 30px;
+		}
+		&__content {
+			font-size: 24px;
+			line-height: 29px;
+		}
+	}
+}
