@@ -13,6 +13,8 @@ import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { classWithModifiers } from "utils"
 
+import {humanizeDate} from "../SearchForm/SearchForm.utils"
+
 
 interface TicketProps {
   id: number
@@ -158,8 +160,8 @@ function TicketTimeline(props: TicketTimelineProps) {
   return (
     <div className="ticket-timeline">
       <div className="ticket-timeline__dates">
-        <span>{getShortDate("ru", props.departureTime)}</span>
-        <span>{getShortDate("ru", props.arrivalTime)}</span>
+        <span>{humanizeDate(props.departureTime)}</span>
+        <span>{humanizeDate( props.arrivalTime)}</span>
       </div>
       <div className="ticket-timeline__times">
         <span>{props.departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</span>
@@ -398,12 +400,12 @@ function TicketTraceTable(props: TicketTraceTableProps) {
         <tr>
           <td>{departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</td>
           <td>{props.departure.title} <span className="weak">({props.departure.code})</span></td>
-          <td>{getShortDate("ru", departureTime)}</td>
+          <td>{humanizeDate(departureTime)}</td>
         </tr>
         <tr>
           <td>{arrivalTime.toLocaleTimeString("ru", { timeStyle: "short" })}</td>
           <td>{props.arrival.title} <span className="weak">({props.arrival.code})</span></td>
-          <td>{getShortDate("ru", arrivalTime)}</td>
+          <td>{humanizeDate(arrivalTime)}</td>
         </tr>
       </tbody>
     </table>
@@ -419,6 +421,6 @@ function getDetailedTime(lang: string, date: Date | string | number) {
   return `${hours}ч, ${minutes}м`
 }
 
-function getShortDate(lang: string, date: Date) {
-  return date.toLocaleDateString(lang, { month: "short", day: "numeric", weekday: "short" })
-}
+// function getShortDate(lang: string, date: Date) {
+//   return date.toLocaleDateString(lang, { month: "short", day: "numeric", weekday: "short" })
+// }
