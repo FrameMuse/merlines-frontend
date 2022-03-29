@@ -10,6 +10,8 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
   return (
     <Ticket
       id={props.id}
+      isFavourite={props.is_favorite}
+      isTracked={props.is_tracked}
       logos={[...new Set(props.trips.flatMap(trip => trip.segments.map(seg => getAirlineLogo(seg.marketing_airline.code))))]}
       price={props.best_offer.price}
       baggagePrice={props.price_with_baggage}

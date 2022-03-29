@@ -11,7 +11,7 @@ function UserCabinetFavourites() {
 
   const [page, setPage] = useState(1)
   const [pageSize] = useState(5)
-  const { error, loading, payload } = useQuery(getFavourites(transport, page, pageSize))
+  const { error, loading, payload } = useQuery(getFavourites(transport, page, pageSize), true)
 
   if (error) throw new Error("useQuery error")
   if (loading) return <>loading...</>

@@ -10,11 +10,14 @@ import { searchSessionContext } from "components/SearchResult/SearchResult"
 import { useContext, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
+import { toast } from "react-toastify"
 import { classWithModifiers } from "utils"
 
 
 interface TicketProps {
   id: number
+  isFavourite:boolean
+  isTracked: boolean
   baggagePrice?: number
   price: number
   logos: string[]
@@ -37,7 +40,7 @@ function Ticket(props: TicketProps) {
                 <img src={logo} key={index} />
               ))}
             </div>
-            <TicketEvents ticketId={props.id} />
+            <TicketEvents noticeChecked={props.isTracked} favouriteChecked={props.isFavourite} ticketId={props.id} />
           </div>
           <div className="ticket-info__timelines">
             {props.timelines.map((timeline, index) => (
@@ -89,6 +92,11 @@ function TicketEvents(props: TicketEventsProps) {
         .query(deleteFavourite(transport, props.ticketId))
         .then(() => {
           setFavouriteChecked(false)
+          toast.success("Маршрут был удален из списка избранного!", {
+            autoClose: 2500,
+            pauseOnHover: false,
+            closeOnClick: true,
+          })
         })
       return
     }

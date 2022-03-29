@@ -54,6 +54,7 @@ export const getFavourites = (type: SearchDetails["transport"], page: number, pa
     }
   ]
   is_favorite: boolean
+  is_tracked: boolean
   type: string
 }>> => ({
   method: "GET",
