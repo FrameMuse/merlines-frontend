@@ -58,7 +58,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           </SearchFilter>
           <SearchFilter label="Багаж">
             <SearchFilterCheckboxes name="baggage">
-              <SearchFilterCheckbox name="baggage">С Багажом <span className="weak">(от {payload.baggage_min_price?.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
+              <SearchFilterCheckbox name="baggage">С багажом <span className="weak">(от {payload.baggage_min_price?.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
               <SearchFilterCheckbox name="handbags">Без багажа <span className="weak">(от 130 000  ₽)</span></SearchFilterCheckbox>
             </SearchFilterCheckboxes>
           </SearchFilter>
