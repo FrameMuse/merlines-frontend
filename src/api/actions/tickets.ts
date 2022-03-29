@@ -71,6 +71,11 @@ export const getTicketsAirFilters = (session: string): Action<{
     id: number
     code: string
     title: string
+    country:{
+      code: string
+      id: number
+      title: string
+    }
     airports: {
       id: number
       code: string

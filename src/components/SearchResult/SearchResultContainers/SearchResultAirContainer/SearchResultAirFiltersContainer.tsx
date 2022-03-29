@@ -104,7 +104,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
                   {numberToLetter(index + 1)} пересадка
                 </h3>
                 <span className={"search-filter__transfer-country"}>
-                  CountryName
+                  {cities[0].country.title}
                 </span>
                 <SearchFilterCheckboxes name={`transfer_airports[${index}]`}>
                   {cities.map(city => (
