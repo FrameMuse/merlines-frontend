@@ -7,7 +7,7 @@ import SearchFilterCheckbox, { SearchFilterCheckboxProps } from "./SearchFilterC
 interface SearchFilterCheckboxesProps {
   name: string
   resetBtn?: boolean
-  children: ReactElement<SearchFilterCheckboxProps>[]
+  children: ReactElement<SearchFilterCheckboxProps>[] | ReactElement<SearchFilterCheckboxesProps>
 }
 
 function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {

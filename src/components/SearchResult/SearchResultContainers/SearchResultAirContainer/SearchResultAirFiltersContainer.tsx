@@ -1,7 +1,7 @@
 import { getTicketsAirFilters } from "api/actions/tickets"
 import SearchPriceFilter from "components/SearchResult/SearchResultFilters/SearchPriceFilter"
 import { AirFiltersType } from "interfaces/Search"
-import { useContext } from "react"
+import React, { useContext } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { pluralize } from "utils"
 
@@ -58,8 +58,10 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           </SearchFilter>
           <SearchFilter label="Багаж">
             <SearchFilterCheckboxes name="baggage">
-              <SearchFilterCheckbox name="baggage">С багажом <span className="weak">(от {payload.baggage_min_price?.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
-              <SearchFilterCheckbox name="handbags">Без багажа <span className="weak">(от 130 000  ₽)</span></SearchFilterCheckbox>
+              <SearchFilterCheckbox name="baggage">С багажом <span
+                className="weak">(от {payload.baggage_min_price?.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
+              <SearchFilterCheckbox name="handbags">Без багажа <span
+                className="weak">(от 130 000  ₽)</span></SearchFilterCheckbox>
             </SearchFilterCheckboxes>
           </SearchFilter>
           <SearchFilter label="Авиакомпании" extraLabel={payload.airlines.length}>
@@ -70,24 +72,28 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
             </SearchFilterCheckboxes>
           </SearchFilter>
           <SearchFilter label="Аэропорты">
-            {payload.airports.map(airport => (
+            {payload.airports.map(airport =>(
               <>
-                <>
-                  <h5>Отправление из 1</h5>
-                  <SearchFilterCheckboxes name={`origin_airports[${1}]`}>
-                    {airport.origins.map(origin => (
-                      <SearchFilterCheckbox name={origin.id.toString()} key={origin.id}>{origin.title}</SearchFilterCheckbox>
-                    ))}
-                  </SearchFilterCheckboxes>
-                </>
-                <>
-                  <h5>Прибытие в 2</h5>
-                  <SearchFilterCheckboxes name={`origin_airports[${2}]`}>
-                    {airport.destinations.map(destination => (
-                      <SearchFilterCheckbox name={destination.id.toString()} key={destination.id}>{destination.title}</SearchFilterCheckbox>
-                    ))}
-                  </SearchFilterCheckboxes>
-                </>
+                {airport.origins.map(({title, id}) => (
+                  <React.Fragment key={id}>
+                    <h5>Отправление из {title}</h5>
+                    <SearchFilterCheckboxes name={`origin_airports[${1}]`}>
+                      <SearchFilterCheckbox name={id.toString()}>
+                        {title}
+                      </SearchFilterCheckbox>
+                    </SearchFilterCheckboxes>
+                  </React.Fragment>
+                ))}
+                {airport.destinations.map(({title, id}) => (
+                  <React.Fragment key={id}>
+                    <h5>Прибытие в {title}</h5>
+                    <SearchFilterCheckboxes name={`origin_airports[${2}]`}>
+                      <SearchFilterCheckbox name={id.toString()}>
+                        {title}
+                      </SearchFilterCheckbox>
+                    </SearchFilterCheckboxes>
+                  </React.Fragment>
+                ))}
               </>
             )).map(flightPredicate)}
           </SearchFilter>
