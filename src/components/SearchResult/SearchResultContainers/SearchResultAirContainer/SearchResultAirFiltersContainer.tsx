@@ -63,7 +63,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
             </SearchFilterCheckboxes>
           </SearchFilter>
           <SearchFilter label="Авиакомпании" extraLabel={payload.airlines.length}>
-            <SearchFilterCheckboxes name="airlines">
+            <SearchFilterCheckboxes resetBtn={true} name="airlines">
               {payload.airlines.map(airline => (
                 <SearchFilterCheckbox name={airline.id.toString()} key={airline.id}>{airline.title}</SearchFilterCheckbox>
               ))}
