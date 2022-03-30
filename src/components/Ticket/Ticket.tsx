@@ -164,7 +164,7 @@ function TicketTimeline(props: TicketTimelineProps) {
         <span>{humanizeDate( props.arrivalTime)}</span>
       </div>
       <div className="ticket-timeline__times">
-        <span>{props.departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</span>
+        <span>{props.departureTime.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
         <div className="ticket-timeline-visual">
           <div className="ticket-timeline-visual__text">{getDetailedTime("ru", duration)} в пути</div>
           <div className="ticket-timeline-entries">
@@ -173,7 +173,7 @@ function TicketTimeline(props: TicketTimelineProps) {
             ))}
           </div>
         </div>
-        <span>{props.arrivalTime.toLocaleTimeString("ru", { timeStyle: "short" })}</span>
+        <span>{props.arrivalTime.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
       </div>
       <div className="ticket-timeline__cities">
         <span>{props.departurePoint}</span>
