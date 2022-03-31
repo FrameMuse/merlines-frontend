@@ -13,6 +13,7 @@ import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { classWithModifiers } from "utils"
 
+import {deleteTrackingTicket, postTrackingTicket} from "../../api/actions/tracking"
 import {humanizeDate} from "../SearchForm/SearchForm.utils"
 
 
@@ -85,6 +86,7 @@ interface TicketEventsProps {
 }
 
 function TicketEvents(props: TicketEventsProps) {
+  const {session} = useContext(searchSessionContext)
   const [noticeChecked, setNoticeChecked] = useState(props.noticeChecked)
   const [favouriteChecked, setFavouriteChecked] = useState(props.favouriteChecked)
   const transport = useSelector(state => state.search.transport)
@@ -112,15 +114,20 @@ function TicketEvents(props: TicketEventsProps) {
   function onNotice() {
     if (noticeChecked) {
       ClientAPI
-        .query(deleteFavourite(transport, props.ticketId))
+        .query(deleteTrackingTicket(transport, props.ticketId))
         .then(() => {
           setNoticeChecked(false)
+          toast.success("Билет больше не отслеживается!", {
+            autoClose: 2500,
+            pauseOnHover: false,
+            closeOnClick: true,
+          })
         })
       return
     }
 
     ClientAPI
-      .query(postFavourites(transport, props.ticketId))
+      .query(postTrackingTicket(transport, session, props.ticketId))
       .then(() => {
         setNoticeChecked(true)
       })

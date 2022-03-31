@@ -15,7 +15,9 @@ import SearchResultSubscribePrice from "../../SearchResultSubscribePrice/SearchR
 import { flightPredicate } from "./helpers"
 
 
-interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersType> { }
+interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersType> {
+  isTracked?:boolean
+}
 
 export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersProps) {
   const { session } = useContext(searchSessionContext)
@@ -25,7 +27,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
   if (error || !payload) return <>No filters</>
   return (
     <div className="ticket-list__left">
-      <SearchResultSubscribePrice />
+      <SearchResultSubscribePrice isTracked={props.isTracked} />
       <div className="filters">
         <SearchPriceFilter prices={[weekPrices?.[0]?.price, 0, 0]} />
         <SearchFilters onChange={props.onChange}>

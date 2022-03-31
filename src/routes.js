@@ -16,7 +16,11 @@ const routes = {
   lk: {
     base: "/lk",
     history: "/lk/history",
-    subscribes: "/lk/subscribes",
+    subscribes: {
+      routes: "lk/subscribes/routes",
+      tickets: "lk/subscribes/tickets"
+    },
+    subscribedQueries: "/lk/subscribes/routes",
     question: "/lk/question",
     edit: "/lk/edit"
   },
