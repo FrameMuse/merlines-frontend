@@ -1,9 +1,12 @@
 import React from "react"
 
+import useLocalization from "../../../plugins/localization/hook"
+
 const MainCollectionSubtitle = () => {
+  const ll = useLocalization(ll => ll)
   return (
     <p className="section__text">
-      Если вы не знаете где провести выходные или отпуск, то вы по адресу!
+      {ll.main.ourCollectionsSubtitle}
     </p>
   )
 }

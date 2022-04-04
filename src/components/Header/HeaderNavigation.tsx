@@ -8,10 +8,12 @@ import {useClickAway} from "react-use"
 import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
 
 import {currencyType, languageType} from "../../interfaces/common"
+import useLocalization from "../../plugins/localization/hook"
 import UserAvatar from "../UserAvatar/UserAvatar"
 import HeaderLink from "./HeaderLink"
 
 function HeaderNavigation() {
+  const ll = useLocalization(ll => ll)
   const user = useSelector(state => state.user)
   const [isActive, setIsActive] = useState(false)
   const [currency, setCurrency] = useState<currencyType>(getDefaultSelectedCurrency())
@@ -38,22 +40,22 @@ function HeaderNavigation() {
           {user.auth && [UserType.Super, UserType.Admin, UserType.Editor].includes(user.type) && (
             <HeaderLink to="/admin" iconName="arrow">Админ панель</HeaderLink>
           )}
-          <HeaderLink to="/blog" iconName="edit">Блог</HeaderLink>
-          <HeaderLink to="/price-calendar" iconName="calendar">Календарь цен</HeaderLink>
+          <HeaderLink to="/blog" iconName="edit">{ll.main.blog}</HeaderLink>
+          <HeaderLink to="/price-calendar" iconName="calendar">{ll.main.priceCalendar}</HeaderLink>
         </div>
         <div className="nav__group">
           <NavSublist value={currency} onChange={handleChangeCurrency}>
             <option value="rub">
               <Icon className="nav__icon" name="rub"/>
-              <span>Российский рубль</span>
+              <span>{ll.main.currencies.rouble}</span>
             </option>
             <option value="usd">
               <Icon className="nav__icon" name="usd"/>
-              <span>Доллар США</span>
+              <span>{ll.main.currencies.dollar}</span>
             </option>
             <option value="eur">
               <Icon className="nav__icon" name="eur"/>
-              <span>Евро</span>
+              <span>{ll.main.currencies.euro}</span>
             </option>
           </NavSublist>
           <NavSublist value={language} onChange={handleChangeLanguage}>
@@ -79,7 +81,7 @@ function HeaderNavigation() {
           ) : (
             <button className="nav__link" type="button" onClick={() => Popup.open(PopupLogin)}>
               <Icon name="user-off" className="nav__icon"/>
-              <span className="nav__link-text">Войти</span>
+              <span className="nav__link-text">{ll.main.signIn}</span>
             </button>
           )}
         </div>

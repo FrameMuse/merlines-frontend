@@ -1,5 +1,8 @@
+import useLocalization from "../../../plugins/localization/hook"
+
 function MainPromoTitle() {
-  return <h2 className="advantages__title">Ищите с уверенностью</h2>
+  const ll = useLocalization(ll => ll)
+  return <h2 className="advantages__title">{ll.main.searchWithConfidenceTitle}</h2>
 }
 
 export default MainPromoTitle

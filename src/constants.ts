@@ -1,4 +1,6 @@
+import {Localize} from "./plugins/localization/controller"
 import routes from "./routes"
+const ll = Localize(ll => ll)
 
 export const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
 
@@ -100,7 +102,7 @@ export const errorMessages = {
 
 export const footerInfoData = [
   {
-    name: "О НАС",
+    name: ll.main.aboutUs,
     link: routes.footer.aboutUs,
     links: [
       {
@@ -110,49 +112,49 @@ export const footerInfoData = [
     ]
   },
   {
-    name: "Правила",
+    name: ll.main.rules,
     link: routes.footer.rules,
     links: [
       {
-        name: "Cookies",
+        name: ll.main.cookies,
         link: routes.footer.cookies
       },
       {
-        name: "Политика конфинден­циальности",
+        name: ll.main.privacyPolicy,
         link: routes.footer.privacyPolicy
       }
     ]
   },
   {
-    name: "Реклама",
+    name: ll.main.advertising,
     link: routes.footer.advertising,
     links: [
       {
-        name: "Прайс-лист",
+        name: ll.main.priceList,
         link: routes.footer.priceList
       },
       {
-        name: "Партнёрам",
+        name: ll.main.forPartners,
         link: routes.footer.forPartners
       }
     ]
   },
   {
-    name: "Помощь",
+    name: ll.main.help,
     link: routes.footer.help,
     links: [
       {
-        name: "FAQ",
+        name: ll.main.faq,
         link: routes.footer.faq
       },
       {
-        name: "Задать вопрос",
+        name: ll.main.askQuestion,
         link: routes.footer.askQuestion
       }
     ]
   },
   {
-    name: "Социальные сети",
+    name: ll.main.socialNetworks,
     link: routes.footer.socialNetwork,
     modifier: "social",
     links: [
@@ -173,8 +175,8 @@ export const footerInfoData = [
 ]
 
 export const lkNavConfig = [
-  { itemName: "Избранное", svgName: "star", route: routes.lk.base },
-  { itemName: "История", svgName: "history", route: routes.lk.history },
-  { itemName: "Подписки", svgName: "notice", route: routes.lk.subscribes },
-  { itemName: "Задать вопрос", svgName: "question", route: routes.lk.question }
+  { itemName: ll.main.favourites, svgName: "star", route: routes.lk.base },
+  { itemName: ll.main.history, svgName: "history", route: routes.lk.history },
+  { itemName: ll.main.subscribes, svgName: "notice", route: routes.lk.subscribes },
+  { itemName: ll.main.askQuestion, svgName: "question", route: routes.lk.question }
 ]

@@ -1,7 +1,10 @@
+import useLocalization from "../../../plugins/localization/hook"
+
 function MainPromoSubtitle() {
+  const ll = useLocalization(ll => ll)
   return (
     <p className="advantages__text">
-      Мы даем те гарантии, которых нет у конкурентов!
+      {ll.main.searchWithConfidenceSubtitle}
     </p>
   )
 }

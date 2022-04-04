@@ -6,6 +6,7 @@ import { useClickAway } from "react-use"
 import { updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
+import useLocalization from "../../plugins/localization/hook"
 import { humanizeDate } from "./SearchForm.utils"
 
 interface SearchFormDatingProps {
@@ -14,6 +15,7 @@ interface SearchFormDatingProps {
 
 function SearchFormDate(props: SearchFormDatingProps) {
   const dispatch = useDispatch()
+  const ll = useLocalization(ll => ll)
 
   const search = useSelector(state => state.search)
   const searchRoute = search.routes[props.routeIndex]
@@ -64,7 +66,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
 
           onFocus={onFocus}
           onKeyDown={onKeyDown} />
-        <div className="search-form__placeholder">{"когда"}</div>
+        <div className="search-form__placeholder">{ll.main.when}</div>
       </label>
       {/* Return Date */}
       {search.routes.length === 1 && (
@@ -78,7 +80,7 @@ function SearchFormDate(props: SearchFormDatingProps) {
 
             onFocus={onReturnDateFocus}
             onKeyDown={onKeyDown} />
-          <div className="search-form__placeholder">{"обратно"}</div>
+          <div className="search-form__placeholder">{ll.main.back}</div>
         </label>
       )}
 
