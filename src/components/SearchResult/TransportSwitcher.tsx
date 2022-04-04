@@ -2,7 +2,7 @@ import "./transports.scss"
 
 import Icon from "components/common/Icon"
 import useSearchTransport from "hooks/useSearchTransport"
-import { classWithModifiers } from "utils"
+import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
 
 interface TransportSwitcherProps {
   prices: [number?, number?, number?]
@@ -19,7 +19,7 @@ function TransportSwitcher(props: TransportSwitcherProps) {
           <span className="transports-link__title">
             {"Самолёты"}
           </span>
-          <span className="transports-link__price">{planePrice?.toPrice("ru", "rub") ?? "..."}</span>
+          <span className="transports-link__price">{planePrice?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency()) ?? "..."}</span>
         </div>
       </button>
       <button className={classWithModifiers("transports-link", transport === "train" && "active")} onClick={() => setTransport("train")}>
@@ -28,7 +28,7 @@ function TransportSwitcher(props: TransportSwitcherProps) {
           <span className="transports-link__title">
             {"Поезда"}
           </span>
-          <span className="transports-link__price">{trainPrice?.toPrice("ru", "rub") ?? "..."}</span>
+          <span className="transports-link__price">{trainPrice?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency()) ?? "..."}</span>
         </div>
       </button>
       <button className={classWithModifiers("transports-link", transport === "bus" && "active")} onClick={() => setTransport("bus")}>
@@ -37,7 +37,7 @@ function TransportSwitcher(props: TransportSwitcherProps) {
           <span className="transports-link__title">
             {"Автобусы"}
           </span>
-          <span className="transports-link__price">{busPrice?.toPrice("ru", "rub") ?? "..."}</span>
+          <span className="transports-link__price">{busPrice?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency()) ?? "..."}</span>
         </div>
       </button>
     </nav>

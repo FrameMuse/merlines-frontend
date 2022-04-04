@@ -3,7 +3,7 @@ import SearchPriceFilter from "components/SearchResult/SearchResultFilters/Searc
 import { AirFiltersType } from "interfaces/Search"
 import React, { useContext } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
-import {numberToLetter, pluralize} from "utils"
+import {getDefaultSelectedCurrency, getDefaultSelectedLanguage, numberToLetter, pluralize} from "utils"
 
 import { searchSessionContext, searchWeekPricesContext } from "../../SearchResult"
 import SearchFilter from "../../SearchResultFilters/SearchFilter"
@@ -61,7 +61,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           <SearchFilter label="Багаж">
             <SearchFilterCheckboxes name="baggage">
               <SearchFilterCheckbox name="baggage">С багажом <span
-                className="weak">(от {payload.baggage_min_price?.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
+                className="weak">(от {payload.baggage_min_price?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())})</span></SearchFilterCheckbox>
               <SearchFilterCheckbox name="handbags">Без багажа <span
                 className="weak">(от 130 000  ₽)</span></SearchFilterCheckbox>
             </SearchFilterCheckboxes>
@@ -119,7 +119,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           <SearchFilter label="Агентства" extraLabel={payload.offers.length}>
             <SearchFilterCheckboxes name="offers">
               {payload.offers.map(offer => (
-                <SearchFilterCheckbox name={offer.gate_id.toString()} key={offer.gate_id}>{offer.title} <span className="weak">(от {offer.price.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
+                <SearchFilterCheckbox name={offer.gate_id.toString()} key={offer.gate_id}>{offer.title} <span className="weak">(от {offer.price.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())})</span></SearchFilterCheckbox>
               ))}
             </SearchFilterCheckboxes>
           </SearchFilter>

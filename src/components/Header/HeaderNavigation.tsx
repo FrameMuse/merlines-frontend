@@ -5,16 +5,29 @@ import {Popup} from "plugins/popup"
 import {Children, Dispatch, ReactElement, ReactNode, useRef, useState} from "react"
 import {useSelector} from "react-redux"
 import {useClickAway} from "react-use"
-import {classWithModifiers} from "utils"
+import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
 
+import {currencyType, languageType} from "../../interfaces/common"
 import UserAvatar from "../UserAvatar/UserAvatar"
 import HeaderLink from "./HeaderLink"
 
 function HeaderNavigation() {
   const user = useSelector(state => state.user)
   const [isActive, setIsActive] = useState(false)
-  const [currency, setCurrency] = useState<"rub" | "usd" | "eur">("rub")
-  const [language, setLanguage] = useState<"ru" | "en" | "de">("ru")
+  const [currency, setCurrency] = useState<currencyType>(getDefaultSelectedCurrency())
+  const [language, setLanguage] = useState<languageType>(getDefaultSelectedLanguage())
+
+  const handleChangeCurrency = (value: currencyType) => {
+    setCurrency(value)
+    localStorage.setItem("currency", value)
+    window.location.reload()
+  }
+  const handleChangeLanguage = (value: languageType) => {
+    setLanguage(value)
+    localStorage.setItem("language", value)
+    window.location.reload()
+  }
+
   return (
     <nav className={classWithModifiers("nav", isActive && "active")}>
       <button className="nav__toggle" type="button" onClick={() => setIsActive(!isActive)}>
@@ -29,7 +42,7 @@ function HeaderNavigation() {
           <HeaderLink to="/price-calendar" iconName="calendar">Календарь цен</HeaderLink>
         </div>
         <div className="nav__group">
-          <NavSublist value={currency} onChange={setCurrency}>
+          <NavSublist value={currency} onChange={handleChangeCurrency}>
             <option value="rub">
               <Icon className="nav__icon" name="rub"/>
               <span>Российский рубль</span>
@@ -43,7 +56,7 @@ function HeaderNavigation() {
               <span>Евро</span>
             </option>
           </NavSublist>
-          <NavSublist value={language} onChange={setLanguage}>
+          <NavSublist value={language} onChange={handleChangeLanguage}>
             <option value="ru">
               <Icon className="nav__icon" name="russia"/>
               <span>Русский язык</span>
@@ -92,11 +105,12 @@ function NavSublist<V>(props: NavSublistProps<V>) {
     <div className="nav-sublist" ref={parentRef}>
       <div className="nav-sublist__label" onClick={() => setExpanded(!expanded)}>
         {options.find(option => option.value === props.value)?.children}
-        <span><Icon className={classWithModifiers("nav__icon", "chevron", expanded && "up")} name="chevron" /></span>
+        <span><Icon className={classWithModifiers("nav__icon", "chevron", expanded && "up")} name="chevron"/></span>
       </div>
       <div className={classWithModifiers("nav-sublist__menu", expanded && "expanded")}>
         {options.map((option, index) => (
-          <div className={classWithModifiers("nav-sublist__item", option.value === props.value && "active")} onClick={() => (props.onChange(option.value), setExpanded(false))} key={index}>{option.children}</div>
+          <div className={classWithModifiers("nav-sublist__item", option.value === props.value && "active")}
+            onClick={() => (props.onChange(option.value), setExpanded(false))} key={index}>{option.children}</div>
         ))}
       </div>
     </div>

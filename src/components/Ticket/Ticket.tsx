@@ -11,7 +11,7 @@ import { useContext, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
-import { classWithModifiers } from "utils"
+import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
 
 import {deleteTrackingTicket, postTrackingTicket} from "../../api/actions/tracking"
 import {humanizeDate} from "../SearchForm/SearchForm.utils"
@@ -60,11 +60,11 @@ function Ticket(props: TicketProps) {
             {props.baggagePrice && (
               <button className={classWithModifiers("ticket-baggage__entry", hasBaggage && "active")} type="button" aria-selected={hasBaggage} onClick={() => setHasBaggage(true)}>
                 <Icon className="ticket-baggage__icon ticket-baggage__icon--baggage" name="baggageLg" />
-                <span className="ticket-baggage__text">+ {props.baggagePrice.toPrice("ru", "rub")}</span>
+                <span className="ticket-baggage__text">+ {props.baggagePrice.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</span>
               </button>
             )}
           </div>
-          <div className="ticket-side__price">{(props.price + (hasBaggage ? props.bestOffer.price : 0)).toPrice("ru", "rub")}</div>
+          <div className="ticket-side__price">{(props.price + (hasBaggage ? props.bestOffer.price : 0)).toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
           <button className={classWithModifiers("ticket-side-button", isDetailsExpanded && "pressed")} aria-details="toggle details" aria-pressed={isDetailsExpanded} onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}>
             <span className="ticket-side-button__text">Подробнее</span>
             <Icon className="ticket-side-button__icon" name="chevron" />
@@ -232,7 +232,7 @@ function TicketOffer(props: TicketOfferProps) {
   return (
     <div className="ticket-preposition">
       <div className="ticket-preposition__group">
-        <div className="ticket-preposition__title">{props.price.toPrice("ru", "rub")}</div>
+        <div className="ticket-preposition__title">{props.price.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
         <div className="ticket-preposition__desc">цена за 1 взрослого</div>
       </div>
       <div className="ticket-preposition__group">

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { DataURLBase64 } from "interfaces/common"
+import {currencyType, DataURLBase64, languageType} from "interfaces/common"
 import { DateTime } from "luxon"
 import Localization from "plugins/localization/controller"
 import { Dispatch, SetStateAction, useState } from "react"
@@ -414,6 +414,13 @@ type ExtractInterpolations<T extends string> = T extends `${infer _Start}{${infe
 export function interpolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, string | number>): string {
   const varKeys = Object.keys(vars) as ExtractInterpolations<T>[]
   return varKeys.reduce((result: string, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
+}
+export const getDefaultSelectedLanguage = (): languageType => {
+  return localStorage.getItem("language") as languageType || "ru"
+}
+
+export const getDefaultSelectedCurrency = () : currencyType => {
+  return localStorage.getItem("currency") as currencyType || "rub"
 }
 
 export {

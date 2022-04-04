@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { classWithModifiers } from "utils"
+import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
 
 enum Prices {
   cheap, fast, optimal
@@ -23,7 +23,7 @@ function SearchPriceFilter(props: SearchPriceFilterProps) {
         {props.prices.map((price, index) => price != null && (
           <button className={classWithModifiers("filters__sort-btn", index === choice && "active")} type="button" onClick={() => setChoice(index)} key={index}>
             <span className="filters__sort-text">{ll[Prices[index]]}</span>
-            <span className="filters__sort-price">от {price?.toPrice("ru", "rub") ?? "..."}</span>
+            <span className="filters__sort-price">от {price?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency()) ?? "..."}</span>
           </button>
         ))}
       </div>
