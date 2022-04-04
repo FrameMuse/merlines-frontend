@@ -1,5 +1,4 @@
 import "./PriceCalendar.scss"
-import "./calendar-form.scss"
 
 import TransportSwitcher from "../SearchResult/TransportSwitcher"
 import PriceCalendarDays from "./PriceCalendarDays/PriceCalendarDays"
@@ -14,7 +13,7 @@ function PriceCalendar() {
           setPickedMonthName={setPickedMonthName}
         />
         {!mainSearchParams.one_way && <PriceCalendarVacationSlider />} */}
-        <TransportSwitcher />
+        <TransportSwitcher prices={[1200,12200,2220]} />
         <div className="price-calendar__list">
           {/* {priceCalendarData.bus.months.length ? (
             priceCalendarData.bus.months.map((month, index) => (

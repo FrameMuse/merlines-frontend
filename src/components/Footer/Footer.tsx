@@ -1,9 +1,11 @@
 import "./Footer.scss"
 
 import { footerInfoData } from "../../constants"
+import useLocalization from "../../plugins/localization/hook"
 import FooterInfoBlock from "./FooterInfoBlock"
 
 function Footer() {
+  const ll = useLocalization(ll => ll)
   const fullYear = new Date().getFullYear()
   return (
     <footer className="footer">
@@ -15,8 +17,7 @@ function Footer() {
         </div>
         <div className="footer__copyright">
           <p className="footer__copyright-text">
-            © 2018-{fullYear}, ООО «Транспортно-туристическая компания
-            МерЛайнс»
+            © 2018-{fullYear}, {ll.main.copyright}
           </p>
         </div>
       </div>

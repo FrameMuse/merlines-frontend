@@ -4,7 +4,6 @@ import Icon, { IconName } from "components/common/Icon"
 import { NavLink } from "react-router-dom"
 
 import UserCabinetHeader from "./UserCabinetHeader"
-import LkClearHistory from "./UserCabinetViews/LkClearHistory"
 import UserCabinetRoutes from "./UserCabinetViews/UserCabinetRoutes"
 
 
@@ -27,7 +26,6 @@ function UserCabinet() {
           </div>
         </div>
       </section>
-      <LkClearHistory />
     </>
   )
 }
