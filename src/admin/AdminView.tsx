@@ -1,7 +1,7 @@
 // SCSS
 import "./AdminView.style.scss"
 
-import ErrorView from "components/TechnicalPages/ErrorView"
+import ErrorView from "components/ErrorView/ErrorView"
 import { UserType } from "interfaces/user"
 import { useSelector } from "react-redux"
 import { NavLink, Route, Switch } from "react-router-dom"

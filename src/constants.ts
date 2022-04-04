@@ -161,13 +161,13 @@ export const footerInfoData = [
       {
         name: "Instagram",
         link: routes.footer.instagram,
-        linkClass: "footer__link--instagram",
+        modifier: "footer__link--instagram",
         svg: "instagram"
       },
       {
         name: "Facebook",
         link: routes.footer.facebook,
-        linkClass: "footer__link--facebook",
+        modifier: "footer__link--facebook",
         svg: "facebook"
       }
     ]

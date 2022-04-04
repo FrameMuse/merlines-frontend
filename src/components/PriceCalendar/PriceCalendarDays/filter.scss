@@ -1,127 +1,119 @@
 @import "../../../styles/vars.scss";
 @import "../../../styles/mixin.scss";
 
-.filter {
-  position: relative;
-  z-index: 2;
+.price-calendar-filter {
+	position: relative;
+	z-index: 2;
 
-  &--opened {
-    .filter__inner {
-      display: block;
-    }
-  }
-
-  &--closed {
-    .filter__inner {
-      display: none;
-    }
-  }
+	&:not(&--expanded) {
+		display: none;
+	}
 }
 
-.filter__inner {
-  display: none;
-  width: 290px;
-  padding: 20px 15px 65px;
-  background-color: var(--color-white);
-  box-sizing: border-box;
-  box-shadow: $shadow;
-  position: absolute;
-  top: 26px;
-  right: 0;
+.price-calendar-filter__inner {
+	width: 290px;
+	padding: 20px 15px 65px;
+	background-color: var(--color-white);
+	box-sizing: border-box;
+	box-shadow: $shadow;
+	position: absolute;
+	top: 26px;
+	right: 0;
 
-  @media #{$media-md} {
-    padding-left: 18px;
-    box-shadow: -15px 0 15px rgba(24, 50, 115, 0.1);
-  }
-  @media #{$media-lg} {
-    padding-left: 19px;
-  }
+	@media #{$media-md} {
+		padding-left: 18px;
+		box-shadow: -15px 0 15px rgba(24, 50, 115, 0.1);
+	}
+
+	@media #{$media-lg} {
+		padding-left: 19px;
+	}
 }
 
-.filter__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
+.price-calendar-filter__top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 18px;
 }
 
-.filter__title {
-  font-family: $title-font;
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 0;
+.price-calendar-filter__title {
+	font-family: $title-font;
+	font-size: 18px;
+	font-weight: 700;
+	margin-bottom: 0;
 }
 
-.filter__clear {
-  @include resetBtn;
+.price-calendar-filter__clear {
+	@include resetBtn;
 
-  color: var(--color-blue);
-  font-size: 12px;
-  font-weight: 500;
+	color: var(--color-blue);
+	font-size: 12px;
+	font-weight: 500;
 }
 
-.filter__list {
-  @include ul;
+.price-calendar-filter__list {
+	@include ul;
 }
 
-.filter__item {
-  margin-bottom: 7px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--color-border-third);
-  position: relative;
+.price-calendar-filter__item {
+	margin-bottom: 7px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--color-border-third);
+	position: relative;
 
-  &::after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    background-image: url("./../../../img/icons/arrow-filter.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-    position: absolute;
-    top: 5px;
-    right: 0;
-  }
+	&::after {
+		content: "";
+		width: 10px;
+		height: 10px;
+		background-image: url("./../../../img/icons/arrow-filter.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		cursor: pointer;
+		position: absolute;
+		top: 5px;
+		right: 0;
+	}
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+	&:last-child {
+		margin-bottom: 0;
+	}
 
-  &--closed {
-    .filter__item-inner {
-      display: none;
-    }
-  }
+	&--closed {
+		.price-calendar-filter__item-inner {
+			display: none;
+		}
+	}
 
-  &--opened {
-    padding-bottom: 15px;
+	&--opened {
+		padding-bottom: 15px;
 
-    &::after {
-      transform: rotate(180deg);
-    }
+		&::after {
+			transform: rotate(180deg);
+		}
 
-    .filter__item-inner {
-      display: block;
-    }
-  }
+		.price-calendar-filter__item-inner {
+			display: block;
+		}
+	}
 
-  @media #{$media-lg} {
-    margin-bottom: 8px;
-  }
+	@media #{$media-lg} {
+		margin-bottom: 8px;
+	}
 }
 
-.filter__item-btn {
-  @include resetBtn;
+.price-calendar-filter__item-btn {
+	@include resetBtn;
 
-  width: 100%;
-  text-align: left;
+	width: 100%;
+	text-align: left;
 }
 
-.filter__item-inner {
-  margin-top: 13px;
+.price-calendar-filter__item-inner {
+	margin-top: 13px;
 
-  @media #{$media-md} {
-    margin-top: 16px;
-  }
+	@media #{$media-md} {
+		margin-top: 16px;
+	}
 }

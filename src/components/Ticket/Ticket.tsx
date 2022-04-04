@@ -151,27 +151,29 @@ function TicketEvents(props: TicketEventsProps) {
 }
 
 
-interface TicketTimelineProps {
-  departureTime: Date
-  arrivalTime: Date
-  departurePoint: string
-  arrivalPoint: string
+export interface TicketTimelineProps {
+  origin: string
+  destination: string
+
+  departureDate: Date
+  arrivalDate: Date
+
   entries: {
     type: "travel" | "transfer"
     percentage: number
   }[]
 }
 
-function TicketTimeline(props: TicketTimelineProps) {
-  const duration = props.arrivalTime.getTime() - props.departureTime.getTime()
+export function TicketTimeline(props: TicketTimelineProps) {
+  const duration = props.arrivalDate.getTime() - props.departureDate.getTime()
   return (
     <div className="ticket-timeline">
       <div className="ticket-timeline__dates">
-        <span>{humanizeDate(props.departureTime)}</span>
-        <span>{humanizeDate( props.arrivalTime)}</span>
+        <span>{humanizeDate(props.departureDate)}</span>
+        <span>{humanizeDate( props.arrivalDate)}</span>
       </div>
       <div className="ticket-timeline__times">
-        <span>{props.departureTime.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
+        <span>{props.departureDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
         <div className="ticket-timeline-visual">
           <div className="ticket-timeline-visual__text">{getDetailedTime("ru", duration)} в пути</div>
           <div className="ticket-timeline-entries">
@@ -180,11 +182,11 @@ function TicketTimeline(props: TicketTimelineProps) {
             ))}
           </div>
         </div>
-        <span>{props.arrivalTime.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
+        <span>{props.arrivalDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
       </div>
       <div className="ticket-timeline__cities">
-        <span>{props.departurePoint}</span>
-        <span>{props.arrivalPoint}</span>
+        <span>{props.origin}</span>
+        <span>{props.destination}</span>
       </div>
     </div>
   )

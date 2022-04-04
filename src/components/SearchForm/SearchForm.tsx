@@ -67,7 +67,7 @@ function SearchForm() {
   return (
     <>
       {search.routes.length === 1 && (
-        <form className="search-form" autoComplete="off">
+        <div className="search-form">
           <div className="search-form__nav">
             <button className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} type="button" onClick={setReturnDate}>
               {ll.main.bothWays}
@@ -87,10 +87,10 @@ function SearchForm() {
               {ll.main.toFind}
             </button>
           </div>
-        </form>
+        </div>
       )}
       {search.routes.length > 1 && (
-        <form className={classWithModifiers("search-form", "complicated")} autoComplete="off">
+        <div className={classWithModifiers("search-form", "complicated")}>
           <div className="search-form__nav">
             <button className="search-form__nav-btn" type="button" onClick={clearSearch}>
               {ll.main.simpleRoute}
@@ -114,7 +114,7 @@ function SearchForm() {
               </button>
             </div>
           </div>
-        </form>
+        </div>
       )}
       {/* {!searchResult && <OpenBooking />} */}
     </>

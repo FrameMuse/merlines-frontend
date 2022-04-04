@@ -5,6 +5,7 @@ import About from "components/About/About"
 import AboutProject from "components/AboutProject/AboutProject"
 import Advertising from "components/Advertising/Advertising"
 import { CookiePolicy } from "components/CookiePolicy/CookiePolicy"
+import ErrorView from "components/ErrorView/ErrorView"
 import FAQ from "components/FAQ/FAQ"
 import Footer from "components/Footer/Footer"
 import Header from "components/Header/Header"
@@ -12,10 +13,10 @@ import LandingPage from "components/LandingPage/LandingPage"
 import Main from "components/Main/Main"
 import Partners from "components/Partners/Partners"
 import PopupPasswordResetConfirm from "components/Popups/PopupPasswordResetConfirm"
+import PriceCalendar from "components/PriceCalendar/PriceCalendar"
 import PrivacyPolicy from "components/PrivacyPolicy/PrivacyPolicy"
 import SearchResult from "components/SearchResult/SearchResult"
 import Subscribe from "components/Subscribe/Subscribe"
-import ErrorView from "components/TechnicalPages/ErrorView"
 import UserCabinet from "components/UserCabinet/UserCabinet"
 import { Popup, PopupContainer } from "plugins/popup"
 import { useEffect, useState } from "react"
@@ -56,6 +57,9 @@ function AppRouter() {
 
       <Route path="/blog/article/:articleId" render={props => [<Article {...props.match.params} />, <Subscribe />]} />
       <Route path="/blog"><Blog /><Subscribe /></Route>
+
+      <Route path="/price-calendar"><PriceCalendar /></Route>
+
       <Route path="/" exact><Main /><Subscribe /></Route>
 
       <Route path={[
