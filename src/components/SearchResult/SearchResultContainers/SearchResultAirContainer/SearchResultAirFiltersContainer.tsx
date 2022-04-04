@@ -1,9 +1,9 @@
 import { getTicketsAirFilters } from "api/actions/tickets"
 import SearchPriceFilter from "components/SearchResult/SearchResultFilters/SearchPriceFilter"
 import { AirFiltersType } from "interfaces/Search"
-import { useContext } from "react"
+import React, { useContext } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
-import { pluralize } from "utils"
+import {getDefaultSelectedCurrency, getDefaultSelectedLanguage, numberToLetter, pluralize} from "utils"
 
 import { searchSessionContext, searchWeekPricesContext } from "../../SearchResult"
 import SearchFilter from "../../SearchResultFilters/SearchFilter"
@@ -15,7 +15,9 @@ import SearchResultSubscribePrice from "../../SearchResultSubscribePrice/SearchR
 import { flightPredicate } from "./helpers"
 
 
-interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersType> { }
+interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersType> {
+  isTracked?:boolean
+}
 
 export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersProps) {
   const { session } = useContext(searchSessionContext)
@@ -25,7 +27,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
   if (error || !payload) return <>No filters</>
   return (
     <div className="ticket-list__left">
-      <SearchResultSubscribePrice />
+      <SearchResultSubscribePrice isTracked={props.isTracked} />
       <div className="filters">
         <SearchPriceFilter prices={[weekPrices?.[0]?.price, 0, 0]} />
         <SearchFilters onChange={props.onChange}>
@@ -58,43 +60,54 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           </SearchFilter>
           <SearchFilter label="Багаж">
             <SearchFilterCheckboxes name="baggage">
-              <SearchFilterCheckbox name="baggage">С Багажом <span className="weak">(от {payload.baggage_min_price?.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
-              <SearchFilterCheckbox name="handbags">Без багажа <span className="weak">(от 130 000  ₽)</span></SearchFilterCheckbox>
+              <SearchFilterCheckbox name="baggage">С багажом <span
+                className="weak">(от {payload.baggage_min_price?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())})</span></SearchFilterCheckbox>
+              <SearchFilterCheckbox name="handbags">Без багажа <span
+                className="weak">(от 130 000  ₽)</span></SearchFilterCheckbox>
             </SearchFilterCheckboxes>
           </SearchFilter>
           <SearchFilter label="Авиакомпании" extraLabel={payload.airlines.length}>
-            <SearchFilterCheckboxes name="airlines">
+            <SearchFilterCheckboxes resetBtn={true} name="airlines">
               {payload.airlines.map(airline => (
                 <SearchFilterCheckbox name={airline.id.toString()} key={airline.id}>{airline.title}</SearchFilterCheckbox>
               ))}
             </SearchFilterCheckboxes>
           </SearchFilter>
           <SearchFilter label="Аэропорты">
-            {payload.airports.map(airport => (
+            {payload.airports.map(airport =>(
               <>
-                <>
-                  <h5>Отправление из 1</h5>
-                  <SearchFilterCheckboxes name={`origin_airports[${1}]`}>
-                    {airport.origins.map(origin => (
-                      <SearchFilterCheckbox name={origin.id.toString()} key={origin.id}>{origin.title}</SearchFilterCheckbox>
-                    ))}
-                  </SearchFilterCheckboxes>
-                </>
-                <>
-                  <h5>Прибытие в 2</h5>
-                  <SearchFilterCheckboxes name={`origin_airports[${2}]`}>
-                    {airport.destinations.map(destination => (
-                      <SearchFilterCheckbox name={destination.id.toString()} key={destination.id}>{destination.title}</SearchFilterCheckbox>
-                    ))}
-                  </SearchFilterCheckboxes>
-                </>
+                {airport.origins.map(({title, id}) => (
+                  <React.Fragment key={id}>
+                    <h5>Отправление из {title}</h5>
+                    <SearchFilterCheckboxes name={`origin_airports[${1}]`}>
+                      <SearchFilterCheckbox name={id.toString()}>
+                        {title}
+                      </SearchFilterCheckbox>
+                    </SearchFilterCheckboxes>
+                  </React.Fragment>
+                ))}
+                {airport.destinations.map(({title, id}) => (
+                  <React.Fragment key={id}>
+                    <h5>Прибытие в {title}</h5>
+                    <SearchFilterCheckboxes name={`origin_airports[${2}]`}>
+                      <SearchFilterCheckbox name={id.toString()}>
+                        {title}
+                      </SearchFilterCheckbox>
+                    </SearchFilterCheckboxes>
+                  </React.Fragment>
+                ))}
               </>
             )).map(flightPredicate)}
           </SearchFilter>
           <SearchFilter label="Аэропорты пересадок">
             {payload.transfer_cities.map((cities, index) => cities.length > 0 && (
               <>
-                <h3>{index + 1} пересадка</h3>
+                <h3 className={"search-filter__transfer-title"}>
+                  {numberToLetter(index + 1)} пересадка
+                </h3>
+                <span className={"search-filter__transfer-country"}>
+                  {cities[0].country.title}
+                </span>
                 <SearchFilterCheckboxes name={`transfer_airports[${index}]`}>
                   {cities.map(city => (
                     <SearchFilterCheckbox name={city.id.toString()} key={city.id}>{city.title}</SearchFilterCheckbox>
@@ -106,7 +119,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           <SearchFilter label="Агентства" extraLabel={payload.offers.length}>
             <SearchFilterCheckboxes name="offers">
               {payload.offers.map(offer => (
-                <SearchFilterCheckbox name={offer.gate_id.toString()} key={offer.gate_id}>{offer.title} <span className="weak">(от {offer.price.toPrice("ru", "rub")})</span></SearchFilterCheckbox>
+                <SearchFilterCheckbox name={offer.gate_id.toString()} key={offer.gate_id}>{offer.title} <span className="weak">(от {offer.price.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())})</span></SearchFilterCheckbox>
               ))}
             </SearchFilterCheckboxes>
           </SearchFilter>

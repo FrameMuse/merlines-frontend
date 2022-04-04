@@ -10,11 +10,17 @@ import { searchSessionContext } from "components/SearchResult/SearchResult"
 import { useContext, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
-import { classWithModifiers } from "utils"
+import { toast } from "react-toastify"
+import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
+
+import {deleteTrackingTicket, postTrackingTicket} from "../../api/actions/tracking"
+import {humanizeDate} from "../SearchForm/SearchForm.utils"
 
 
 interface TicketProps {
   id: number
+  isFavourite:boolean
+  isTracked: boolean
   baggagePrice?: number
   price: number
   logos: string[]
@@ -37,7 +43,7 @@ function Ticket(props: TicketProps) {
                 <img src={logo} key={index} />
               ))}
             </div>
-            <TicketEvents ticketId={props.id} />
+            <TicketEvents noticeChecked={props.isTracked} favouriteChecked={props.isFavourite} ticketId={props.id} />
           </div>
           <div className="ticket-info__timelines">
             {props.timelines.map((timeline, index) => (
@@ -54,11 +60,11 @@ function Ticket(props: TicketProps) {
             {props.baggagePrice && (
               <button className={classWithModifiers("ticket-baggage__entry", hasBaggage && "active")} type="button" aria-selected={hasBaggage} onClick={() => setHasBaggage(true)}>
                 <Icon className="ticket-baggage__icon ticket-baggage__icon--baggage" name="baggageLg" />
-                <span className="ticket-baggage__text">+ {props.baggagePrice.toPrice("ru", "rub")}</span>
+                <span className="ticket-baggage__text">+ {props.baggagePrice.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</span>
               </button>
             )}
           </div>
-          <div className="ticket-side__price">{(props.price + (hasBaggage ? props.bestOffer.price : 0)).toPrice("ru", "rub")}</div>
+          <div className="ticket-side__price">{(props.price + (hasBaggage ? props.bestOffer.price : 0)).toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
           <button className={classWithModifiers("ticket-side-button", isDetailsExpanded && "pressed")} aria-details="toggle details" aria-pressed={isDetailsExpanded} onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}>
             <span className="ticket-side-button__text">Подробнее</span>
             <Icon className="ticket-side-button__icon" name="chevron" />
@@ -80,6 +86,7 @@ interface TicketEventsProps {
 }
 
 function TicketEvents(props: TicketEventsProps) {
+  const {session} = useContext(searchSessionContext)
   const [noticeChecked, setNoticeChecked] = useState(props.noticeChecked)
   const [favouriteChecked, setFavouriteChecked] = useState(props.favouriteChecked)
   const transport = useSelector(state => state.search.transport)
@@ -89,6 +96,11 @@ function TicketEvents(props: TicketEventsProps) {
         .query(deleteFavourite(transport, props.ticketId))
         .then(() => {
           setFavouriteChecked(false)
+          toast.success("Маршрут был удален из списка избранного!", {
+            autoClose: 2500,
+            pauseOnHover: false,
+            closeOnClick: true,
+          })
         })
       return
     }
@@ -102,15 +114,20 @@ function TicketEvents(props: TicketEventsProps) {
   function onNotice() {
     if (noticeChecked) {
       ClientAPI
-        .query(deleteFavourite(transport, props.ticketId))
+        .query(deleteTrackingTicket(transport, props.ticketId))
         .then(() => {
           setNoticeChecked(false)
+          toast.success("Билет больше не отслеживается!", {
+            autoClose: 2500,
+            pauseOnHover: false,
+            closeOnClick: true,
+          })
         })
       return
     }
 
     ClientAPI
-      .query(postFavourites(transport, props.ticketId))
+      .query(postTrackingTicket(transport, session, props.ticketId))
       .then(() => {
         setNoticeChecked(true)
       })
@@ -134,27 +151,29 @@ function TicketEvents(props: TicketEventsProps) {
 }
 
 
-interface TicketTimelineProps {
-  departureTime: Date
-  arrivalTime: Date
-  departurePoint: string
-  arrivalPoint: string
+export interface TicketTimelineProps {
+  origin: string
+  destination: string
+
+  departureDate: Date
+  arrivalDate: Date
+
   entries: {
     type: "travel" | "transfer"
     percentage: number
   }[]
 }
 
-function TicketTimeline(props: TicketTimelineProps) {
-  const duration = props.arrivalTime.getTime() - props.departureTime.getTime()
+export function TicketTimeline(props: TicketTimelineProps) {
+  const duration = props.arrivalDate.getTime() - props.departureDate.getTime()
   return (
     <div className="ticket-timeline">
       <div className="ticket-timeline__dates">
-        <span>{getShortDate("ru", props.departureTime)}</span>
-        <span>{getShortDate("ru", props.arrivalTime)}</span>
+        <span>{humanizeDate(props.departureDate)}</span>
+        <span>{humanizeDate( props.arrivalDate)}</span>
       </div>
       <div className="ticket-timeline__times">
-        <span>{props.departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</span>
+        <span>{props.departureDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
         <div className="ticket-timeline-visual">
           <div className="ticket-timeline-visual__text">{getDetailedTime("ru", duration)} в пути</div>
           <div className="ticket-timeline-entries">
@@ -163,11 +182,11 @@ function TicketTimeline(props: TicketTimelineProps) {
             ))}
           </div>
         </div>
-        <span>{props.arrivalTime.toLocaleTimeString("ru", { timeStyle: "short" })}</span>
+        <span>{props.arrivalDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
       </div>
       <div className="ticket-timeline__cities">
-        <span>{props.departurePoint}</span>
-        <span>{props.arrivalPoint}</span>
+        <span>{props.origin}</span>
+        <span>{props.destination}</span>
       </div>
     </div>
   )
@@ -215,7 +234,7 @@ function TicketOffer(props: TicketOfferProps) {
   return (
     <div className="ticket-preposition">
       <div className="ticket-preposition__group">
-        <div className="ticket-preposition__title">{props.price.toPrice("ru", "rub")}</div>
+        <div className="ticket-preposition__title">{props.price.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
         <div className="ticket-preposition__desc">цена за 1 взрослого</div>
       </div>
       <div className="ticket-preposition__group">
@@ -390,12 +409,12 @@ function TicketTraceTable(props: TicketTraceTableProps) {
         <tr>
           <td>{departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</td>
           <td>{props.departure.title} <span className="weak">({props.departure.code})</span></td>
-          <td>{getShortDate("ru", departureTime)}</td>
+          <td>{humanizeDate(departureTime)}</td>
         </tr>
         <tr>
           <td>{arrivalTime.toLocaleTimeString("ru", { timeStyle: "short" })}</td>
           <td>{props.arrival.title} <span className="weak">({props.arrival.code})</span></td>
-          <td>{getShortDate("ru", arrivalTime)}</td>
+          <td>{humanizeDate(arrivalTime)}</td>
         </tr>
       </tbody>
     </table>
@@ -411,6 +430,6 @@ function getDetailedTime(lang: string, date: Date | string | number) {
   return `${hours}ч, ${minutes}м`
 }
 
-function getShortDate(lang: string, date: Date) {
-  return date.toLocaleDateString(lang, { month: "short", day: "numeric", weekday: "short" })
-}
+// function getShortDate(lang: string, date: Date) {
+//   return date.toLocaleDateString(lang, { month: "short", day: "numeric", weekday: "short" })
+// }

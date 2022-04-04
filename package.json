@@ -13,7 +13,6 @@
     "html-react-parser": "^1.4.6",
     "keen-slider": "^5.4.0",
     "lodash": "^4.17.21",
-    "luxon": "^1.28.0",
     "nanoid": "^3.1.31",
     "react": "^17.0.1",
     "react-analytics-charts": "^1.2.12",

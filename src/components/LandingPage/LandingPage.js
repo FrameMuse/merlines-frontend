@@ -3,10 +3,8 @@ import "./answers.scss"
 import "./landing.scss"
 import "./price-dynamics.scss"
 
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
-import { selectMainSearchParams } from "../../reducers/mainSearchSlice"
 import Icon from "../common/Icon"
 import MainForm from "../Main/MainHeader/MainForm"
 import MainSpecialCard from "../Main/MainSpecial/MainSpecialCard"
@@ -26,14 +24,11 @@ import LandingSpecialTicket from "./LandingSpecialTicket"
 import LandingTransportSwitcher from "./LandingTransportSwitcher"
 
 function LandingPage() {
-  const mainSearchParams = useSelector(selectMainSearchParams)
-  const currentRoute = `${mainSearchParams.route.front.from} - ${mainSearchParams.route.front.to}`
-
   return (
     <section className="landing">
       <MainForm />
       <div className="landing__wrap">
-        <PriceCalendar isLanding={true} />
+        {/* <PriceCalendar isLanding={true} /> */}
         <section className="special landing__special-block">
           <div className="special__container">
             <div className="special__inner">
@@ -57,7 +52,7 @@ function LandingPage() {
         </section>
         <section className="landing__about">
           <div className="landing__container">
-            <h2 className="landing__about-title">{`Почему у нас самые дешёвые билеты ${currentRoute}?`}</h2>
+            <h2 className="landing__about-title">{`Почему у нас самые дешёвые билеты ${0}?`}</h2>
             <p className="landing__about-text">{aboutText.firstPart}</p>
             <p className="landing__about-text">{aboutText.secondPart}</p>
             <div className="button-text landing__button-text">
@@ -99,7 +94,7 @@ function LandingPage() {
             <h2 className="landing__special-title">
               Спецпредложения авиакомпаний
             </h2>
-            <p className="landing__text-info">{`Направление: ${currentRoute}`}</p>
+            <p className="landing__text-info">{`Направление: ${0}`}</p>
             <div className="landing__special-inner">
               {specialTickets.map((ticket, index) => (
                 <LandingSpecialTicket
@@ -116,14 +111,14 @@ function LandingPage() {
           <div className="landing__container">
             <h2 className="landing__popular-title">Популярные направления</h2>
             <div className="landing__popular-inner">
-              {popularDirections.map((direction, index) => (
+              {/* {popularDirections.map((direction, index) => (
                 <LandingPopularDirectionItem
                   key={index}
                   from={mainSearchParams.route.front.from}
                   to={mainSearchParams.route.front.to}
                   price={direction.price}
                 />
-              ))}
+              ))} */}
             </div>
           </div>
         </section>
@@ -133,7 +128,7 @@ function LandingPage() {
               <h2 className="price-dynamics__title">Динамика цен</h2>
               <LandingTransportSwitcher />
             </div>
-            <p className="landing__text-info">{`Направление: ${currentRoute}`}</p>
+            {/* <p className="landing__text-info">{`Направление: ${currentRoute}`}</p> */}
             <div className="price-dynamics__nav">
               <Link
                 className="price-dynamics__nav-link price-dynamics__nav-link--active"
@@ -162,10 +157,10 @@ function LandingPage() {
               , а мы ответим как можно скорее!
             </p>
             <div className="answers__inner">
-              <LandingAnswerItem currentRoute={currentRoute} />
-              <LandingAnswerItem currentRoute={currentRoute} />
-              <LandingAnswerItem currentRoute={currentRoute} />
-              <LandingAnswerItem currentRoute={currentRoute} />
+              <LandingAnswerItem currentRoute={{}} />
+              <LandingAnswerItem currentRoute={{}} />
+              <LandingAnswerItem currentRoute={{}} />
+              <LandingAnswerItem currentRoute={{}} />
             </div>
           </div>
         </section>

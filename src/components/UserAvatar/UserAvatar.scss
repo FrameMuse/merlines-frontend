@@ -1,0 +1,10 @@
+@import "../../styles/mixin";
+.user-avatar {
+
+	@include userAvatar;
+	&--small {
+		width: 35px;
+		height: 35px;
+		font-size: 16px;
+	}
+}

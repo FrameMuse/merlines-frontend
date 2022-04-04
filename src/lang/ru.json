@@ -1,5 +1,70 @@
 {
   "lang": {
     "code": "ru"
+  },
+  "main": {
+    "searchTickets": "Ищем и сравниваем билеты на",
+    "airplane": "Самолёт",
+    "train": "Поезд",
+    "bus": "Автобус",
+    "bothWays": "Туда и обратно",
+    "oneWay": "В одну строну",
+    "difficultRoute": "Сложный маршрут",
+    "simpleRoute": "Простой маршрут",
+    "rightHereRightNow": "Прямо здесь и сейчас",
+    "specialOffers": "Спецпредложения",
+    "origin": "откуда",
+    "destination": "куда",
+    "when": "когда",
+    "back": "обратно",
+    "passengers": {
+      "text": "пассажиры",
+      "plural": ["пассажир", "пассажира", "пассажиров"]
+    },
+    "travelClasses": {
+      "1": "эконом",
+      "2": "бизнес"
+    },
+    "economClass": "Эконом",
+    "businessClass": "Бизнес класс",
+    "and": "и",
+    "class": "класс",
+    "toFind": "Найти",
+    "addRoute": "Добавить маршрут",
+    "maxRoutes": "Максимум маршрутов",
+    "swap": "Поменять местами",
+    "ourCollectionsTitle": "Наши подборки",
+    "ourCollectionsSubtitle": "Если вы не знаете где провести выходные или отпуск, то вы по адресу!",
+    "searchWithConfidenceTitle": "Ищите с уверенностью",
+    "searchWithConfidenceSubtitle": "Мы даем те гарантии, которых нет у конкурентов!",
+    "getNotified": "Получайте уведомления",
+    "getNotifiedSubtitle": "И первым узнавайте о скидках и выгодных предложениях!",
+    "subscribe": {
+      "text": "Нажимая «Подписаться», Вы соглашаетесь с",
+      "link": "правилами использования сервиса и обработки персональных данных"
+    },
+    "currencies": {
+      "rouble": "Российский рубль",
+      "dollar": "Доллар США",
+      "euro": "Евро"
+    },
+    "blog": "Блог",
+    "priceCalendar": "Календарь цен",
+    "signIn": "Войти",
+    "copyright": "ООО «Транспортно-туристическая компания МерЛайнс»",
+    "aboutUs": "О нас",
+    "rules": "Правила",
+    "cookies": "Cookies",
+    "privacyPolicy": "Политика конфиденциальности",
+    "advertising": "Реклама",
+    "priceList": "Прайс-лист",
+    "forPartners": "Партнёрам",
+    "help": "Помощь",
+    "faq": "FAQ",
+    "askQuestion":"Задать вопрос",
+    "socialNetworks": "Социальные сети",
+    "favourites": "Избранное",
+    "history": "История",
+    "subscribes": "Подписки"
   }
 }

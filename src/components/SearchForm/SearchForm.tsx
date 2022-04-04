@@ -8,12 +8,14 @@ import { useHistory } from "react-router-dom"
 import { addSearchRoutes, resetSearchRoutes, updateSearch, updateSearchHasReturnDate, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
+import useLocalization from "../../plugins/localization/hook"
 import { stringifySearchData } from "./SearchForm.utils"
 import SearchFormDate from "./SearchFormDates"
 import { SearchFormPassengers } from "./SearchFormPassengers"
 import { SearchFormRoute } from "./SearchFormRoute"
 
 function SearchForm() {
+  const ll = useLocalization(ll => ll)
   const dispatch = useDispatch()
   const history = useHistory()
   const search = useSelector(state => state.search)
@@ -65,28 +67,34 @@ function SearchForm() {
   return (
     <>
       {search.routes.length === 1 && (
-        <form className="search-form" autoComplete="off">
+        <div className="search-form">
           <div className="search-form__nav">
             <button className={classWithModifiers("search-form__nav-btn", search.hasReturnDate && "active")} type="button" onClick={setReturnDate}>
-              Туда - обратно
+              {ll.main.bothWays}
             </button>
             <button className={classWithModifiers("search-form__nav-btn", !search.hasReturnDate && "active")} type="button" onClick={removeReturnDate}>
-              В одну сторону
+              {ll.main.oneWay}
             </button>
-            <button className="search-form__nav-btn" type="button" onClick={addSearchRoute}>Сложный маршрут</button>
+            <button className="search-form__nav-btn" type="button" onClick={addSearchRoute}>
+              {ll.main.difficultRoute}
+            </button>
           </div>
           <div className={classWithModifiers("search-form__inner", formError && "error")}>
             <SearchFormRoute {...search.routes[0]} index={0} />
             <SearchFormDate routeIndex={0} />
             <SearchFormPassengers />
-            <button className="search-form__btn" type="button" onClick={onSearch}>Найти</button>
+            <button className="search-form__btn" type="button" onClick={onSearch}>
+              {ll.main.toFind}
+            </button>
           </div>
-        </form>
+        </div>
       )}
       {search.routes.length > 1 && (
-        <form className={classWithModifiers("search-form", "complicated")} autoComplete="off">
+        <div className={classWithModifiers("search-form", "complicated")}>
           <div className="search-form__nav">
-            <button className="search-form__nav-btn" type="button" onClick={clearSearch}>Простой маршрут</button>
+            <button className="search-form__nav-btn" type="button" onClick={clearSearch}>
+              {ll.main.simpleRoute}
+            </button>
           </div>
           <div className={classWithModifiers("search-form__inner", formError && "error")}>
             {search.routes.map((route, index) => (
@@ -99,12 +107,14 @@ function SearchForm() {
             <div className="search-form__actions">
               <SearchFormPassengers />
               <button className="search-form__btn search-form__btn--add" type="button" disabled={search.routes.length >= 7} onClick={addSearchRoute}>
-                {search.routes.length < 7 ? "+ Добавить маршрут" : "Максимум маршрутов"}
+                {search.routes.length < 7 ? `+ ${ll.main.addRoute}` : `${ll.main.maxRoutes}`}
               </button>
-              <button className="search-form__btn" type="button" onClick={onSearch}>Найти</button>
+              <button className="search-form__btn" type="button" onClick={onSearch}>
+                {ll.main.toFind}
+              </button>
             </div>
           </div>
-        </form>
+        </div>
       )}
       {/* {!searchResult && <OpenBooking />} */}
     </>

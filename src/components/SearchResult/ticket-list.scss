@@ -346,3 +346,92 @@
 		display: none;
 	}
 }
+
+
+
+.ticket-list {
+	&__subscribe {
+		&-arrow {
+			transform: rotateZ(180deg);
+			margin: 0 10px
+		}
+
+		&-input {
+			margin-top: 20px;
+			font-family: $main-font;
+			font-size: 16px;
+			line-height: 1;
+			font-weight: 500;
+			width: 100%;
+			padding: 15px 20px;
+			border: none;
+			border-radius: 4px;
+			display: flex;
+			align-items: center;
+			box-sizing: border-box;
+			box-shadow: 0 0 15px rgba(24, 50, 115, 0.1);
+			height: 60px;
+
+			@include floatingLabel(ticket-list__subscribe-placeholder, 10px, 0px, 17px);
+
+			@media #{$media-lg} {
+				font-size: 14px;
+			}
+
+			@media #{$media-xl} {
+				font-size: 16px;
+			}
+		}
+
+		&-placeholder {
+			@include formLabel;
+			font-weight: 500;
+
+			top: 15px;
+			left: 20px;
+			cursor: text;
+			pointer-events: none;
+
+			@media #{$media-lg} {
+				font-size: 14px;
+			}
+
+			@media #{$media-xl} {
+				font-size: 16px;
+			}
+		}
+
+		&-submit {
+			display: block;
+			width: 100%;
+			box-sizing: border-box;
+			border-radius: 4px;
+			font-size: 14px;
+			text-align: center;
+			font-family: "Inter", sans-serif;
+			padding: 15px 40px;
+			color: var(--color-white);
+			background-color: var(--color-blue);
+			margin-top: 10px;
+			&:disabled {
+				background-color: var(--color-grey);
+				color: var(--color-white);
+				pointer-events: none;
+			}
+		}
+
+		&-prompt {
+			display: block;
+			margin-top: 10px;
+			font-family: "Inter", sans-serif;
+			font-weight: 500;
+			font-size: 12px;
+			line-height: 15px;
+			color: var(--color-grey);
+			a {
+				color: var(--color-grey);
+				text-decoration: underline!important;
+			}
+		}
+	}
+}

@@ -41,6 +41,8 @@ export interface AirFiltersType {
 export interface AirTicketType {
   id: number
   price_with_baggage: number
+  is_favorite: boolean
+  is_tracked: boolean
   best_offer: {
     id: number
     gate_id: number

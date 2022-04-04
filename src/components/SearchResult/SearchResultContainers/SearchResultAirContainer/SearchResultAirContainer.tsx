@@ -34,7 +34,7 @@ export default function SearchResultAirContainer() {
   return (
     <SearchResultTickets loading={!payload && loading}>
       <SearchResultWeekPrice />
-      <SearchResultAirFiltersContainer onChange={setFilters} />
+      <SearchResultAirFiltersContainer isTracked={payload?.is_tracked} onChange={setFilters} />
       <div className={classWithModifiers("ticket-list__content", loading && "loading")}>
         <TransportSwitcher prices={[weekPrices?.[0]?.price]} />
         {results.filter(someEqual("id")).map(ticket => (

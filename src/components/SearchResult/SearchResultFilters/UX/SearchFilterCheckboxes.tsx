@@ -6,7 +6,8 @@ import SearchFilterCheckbox, { SearchFilterCheckboxProps } from "./SearchFilterC
 
 interface SearchFilterCheckboxesProps {
   name: string
-  children: ReactElement<SearchFilterCheckboxProps>[]
+  resetBtn?: boolean
+  children: ReactElement<SearchFilterCheckboxProps>[] | ReactElement<SearchFilterCheckboxesProps>
 }
 
 function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
@@ -29,6 +30,10 @@ function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
     setChecks({ ...checks, [input.name]: input.checked })
   }
 
+  function onReset() {
+    setChecks({})
+  }
+
   useEffect(() => {
     setFilters(({ ...filters, [props.name]: Object.keys(checks).filter(key => checks[key]).join(",") }))
   }, [props.name, checks])
@@ -39,6 +44,14 @@ function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
 
   return (
     <div className="search-checkboxes">
+      {props.resetBtn &&
+      <button onClick={onReset} className={"search-filter__reset-btn"}>
+        <svg className={"search-filter__reset-icon"} width="15" height="15">
+          <use href="img/sprite.svg#close" />
+        </svg>
+        сбросить все
+      </button>}
+
       <SearchFilterCheckbox name="all" checked={Object.keys(checks).length === 0} onChange={onChange}>{"Все"}</SearchFilterCheckbox>
       {React.Children.map(props.children, child => (
         <SearchFilterCheckbox {...child.props} checked={!!checks[child.props.name]} onChange={onChange} key={child.props.name} />

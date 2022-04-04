@@ -7,6 +7,7 @@ import { useParams } from "react-router"
 import { SearchAirports, SearchPlace, SearchRoute, updateSearchRoute } from "redux/reducers/search"
 import { classWithModifiers } from "utils"
 
+import useLocalization from "../../plugins/localization/hook"
 import DropDown from "../DropDown/DropDown"
 import { DropDownElementProps } from "../DropDown/DropDownItem"
 
@@ -16,6 +17,7 @@ interface SearchFormRouteProps extends SearchRoute {
 }
 
 export function SearchFormRoute(props: SearchFormRouteProps) {
+  const ll = useLocalization(ll => ll)
   const dispatch = useDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -46,10 +48,10 @@ export function SearchFormRoute(props: SearchFormRouteProps) {
 
   return (
     <>
-      <SearchFormRouteInput name="departure" placeholder="откуда" state={props.origin} onChange={onChangeDeparturePoint}>
+      <SearchFormRouteInput name="departure" placeholder={ll.main.origin} state={props.origin} onChange={onChangeDeparturePoint}>
         <SearchFormRoutesSwitchButton />
       </SearchFormRouteInput>
-      <SearchFormRouteInput name="arrival" placeholder="куда" state={props.destination} onChange={onChangeArrivalPoint} inputRef={inputRef} />
+      <SearchFormRouteInput name="arrival" placeholder={ll.main.destination} state={props.destination} onChange={onChangeArrivalPoint} inputRef={inputRef} />
     </>
   )
 }
@@ -149,6 +151,7 @@ function SearchFormRouteInput(props: SearchFormRouteInputProps) {
 
 
 function SearchFormRoutesSwitchButton() {
+  const ll = useLocalization(ll => ll)
   const dispatch = useDispatch()
   const search = useSelector(state => state.search)
 
@@ -162,5 +165,5 @@ function SearchFormRoutesSwitchButton() {
   }
 
   if (search.routes.length > 1) return null
-  return <button onClick={switchRoutes} type="button" className="search-form__switch">Поменять местами</button>
+  return <button onClick={switchRoutes} type="button" className="search-form__switch">{ll.main.swap}</button>
 }
