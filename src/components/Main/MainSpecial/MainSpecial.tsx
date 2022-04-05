@@ -1,5 +1,5 @@
 import useLocalization from "../../../plugins/localization/hook"
-import MainSpecialList from "./MainSpecialList"
+import MainSpecialListContainer from "./MainSpecialListContainer"
 import MainSpecialSwitcher from "./MainSpecialSwitcher"
 
 function MainSpecial() {
@@ -15,7 +15,7 @@ function MainSpecial() {
         </div>
       </div>
       <div className="special__wrap">
-        <MainSpecialList />
+        <MainSpecialListContainer />
       </div>
     </section>
   )
