@@ -4,11 +4,14 @@ import Icon from "components/common/Icon"
 import useSearchTransport from "hooks/useSearchTransport"
 import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
 
+import useLocalization from "../../plugins/localization/hook"
+
 interface TransportSwitcherProps {
   prices: [number?, number?, number?]
 }
 
 function TransportSwitcher(props: TransportSwitcherProps) {
+  const ll = useLocalization(ll => ll)
   const [transport, setTransport] = useSearchTransport()
   const [planePrice, trainPrice, busPrice] = props.prices
   return (
@@ -17,7 +20,7 @@ function TransportSwitcher(props: TransportSwitcherProps) {
         <Icon className="transports-link__icon" name="plane" />
         <div className="transports-link__header">
           <span className="transports-link__title">
-            {"Самолёты"}
+            {ll.priceCalendar.airplanes}
           </span>
           <span className="transports-link__price">{planePrice?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency()) ?? "..."}</span>
         </div>
@@ -26,7 +29,7 @@ function TransportSwitcher(props: TransportSwitcherProps) {
         <Icon className="transports-link__icon" name="train" />
         <div className="transports-link__header">
           <span className="transports-link__title">
-            {"Поезда"}
+            {ll.priceCalendar.trains}
           </span>
           <span className="transports-link__price">{trainPrice?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency()) ?? "..."}</span>
         </div>
@@ -35,7 +38,7 @@ function TransportSwitcher(props: TransportSwitcherProps) {
         <Icon className="transports-link__icon" name="bus" />
         <div className="transports-link__header">
           <span className="transports-link__title">
-            {"Автобусы"}
+            {ll.priceCalendar.buses}
           </span>
           <span className="transports-link__price">{busPrice?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency()) ?? "..."}</span>
         </div>

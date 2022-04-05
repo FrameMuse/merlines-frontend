@@ -4,16 +4,18 @@ import {useSelector} from "react-redux"
 
 import {deleteAllTrackingTickets, getTrackingTickets, ITrackingTicket} from "../../../api/actions/tracking"
 import ClientAPI from "../../../api/client"
+import useLocalization from "../../../plugins/localization/hook"
 import {classWithModifiers} from "../../../utils"
-import Modal from "../../Modal/Modal"
 import SearchResultAirTicket
   from "../../SearchResult/SearchResultContainers/SearchResultAirContainer/SearchResultAirTicket"
+import UserCabinetModal from "./UserCabinetModal"
 
 interface props {
 
 }
 
 const UserCabinetSubscribedTickets: React.FC<props> = () => {
+  const ll = useLocalization(ll => ll)
   const transport = useSelector(state => state.search.transport)
 
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
@@ -48,11 +50,11 @@ const UserCabinetSubscribedTickets: React.FC<props> = () => {
   return (
     <>
       <div className="cabinet__col-wrap cabinet__col-wrap--subscription">
-        <h2 className="cabinet__title">Билеты</h2>
+        <h2 className="cabinet__title">{ll.lk.tickets}</h2>
         {results.length ? (
           <div className={classWithModifiers("button-text", "cabinet", "right")}>
             <button className="button-text__btn" type="button" onClick={handleChangeModalState}>
-              очистить всю историю
+              {ll.lk.clearHistory}
             </button>
           </div>
         ) : null}
@@ -64,30 +66,15 @@ const UserCabinetSubscribedTickets: React.FC<props> = () => {
           ))}
           {(page * pageSize) <= payload.count && (
             <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>
-              Загрузить ещё {pageSize} билетов
+              {ll.lk.loadMore} {pageSize} {ll.lk.moreTickets}
             </button>
           )}
         </div> :
         <div className="cabinet__empty cabinet__empty--subscription">
-          <h3 className="cabinet__empty-text">В данном разделе пока пусто</h3>
+          <h3 className="cabinet__empty-text">{ll.main.emptyText}</h3>
         </div>
       }
-
-      <Modal visible={deleteModal} onCancel={handleChangeModalState}>
-        <div className={"cabinet__history-delete-wrap"}>
-          <p className={"cabinet__history-delete-text"}>
-            Вы уверенны, что хотите очистить список подписанных билетов?
-          </p>
-          <div className={"cabinet__history-delete-buttons"}>
-            <button className={"cabinet__history-delete-submit"} onClick={onDeleteTickets}>
-              Удалить
-            </button>
-            <button className={"cabinet__history-delete-cancel"} onClick={handleChangeModalState}>
-              Не удалять
-            </button>
-          </div>
-        </div>
-      </Modal>
+      <UserCabinetModal visible={deleteModal} handleOk={onDeleteTickets} handleCancel={handleChangeModalState}/>
     </>
   )
 }

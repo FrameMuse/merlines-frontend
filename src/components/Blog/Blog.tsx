@@ -10,6 +10,7 @@ import { ReactNode } from "react-markdown/lib/react-markdown"
 import { useLocation } from "react-router-dom"
 import { classWithModifiers } from "utils"
 
+import useLocalization from "../../plugins/localization/hook"
 import BlogNavigation from "./BlogNavigation"
 
 
@@ -20,6 +21,7 @@ export interface ArticleFiltersType {
 }
 
 function Blog() {
+  const ll = useLocalization(ll => ll)
   const location = useLocation()
   const locationSearch = new URLSearchParams(location.search)
 
@@ -35,9 +37,9 @@ function Blog() {
           <BlogSection title={searchSectionTitle} pageSize={12} filters={{ tags__contains: activeTag, title__icontains: searchValue }} />
         ) : (
           <>
-            <BlogSection title="Новое" pageSize={4} filters={{ ordering: "-created_at" }} />
-            <BlogSection title="Популярное" pageSize={4} filters={{ ordering: "-likers__count" }} />
-            <BlogSection title="Все" pageSize={12} showMoreButton />
+            <BlogSection title={ll.blog.new} pageSize={4} filters={{ ordering: "-created_at" }} />
+            <BlogSection title={ll.blog.popular} pageSize={4} filters={{ ordering: "-likers__count" }} />
+            <BlogSection title={ll.blog.all} pageSize={12} showMoreButton />
           </>
         )}
       </div>
@@ -54,6 +56,7 @@ interface BlogSectionProps {
 }
 
 function BlogSection(props: BlogSectionProps) {
+  const ll = useLocalization(ll => ll)
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(props.pageSize)
   const { error, loading, payload } = useQuery(getBlogArticles(page, pageSize, props.filters))
@@ -85,7 +88,7 @@ function BlogSection(props: BlogSectionProps) {
       </div>
       {!isLastPage && props.showMoreButton && (
         <button className="section__more" onClick={() => setPageSize(pageSize + props.pageSize)}>
-          <span>загрузить еще</span>
+          <span>{ll.blog.loadMore}</span>
           <Icon name="chevron" className="section__more-icon" />
         </button>
       )}

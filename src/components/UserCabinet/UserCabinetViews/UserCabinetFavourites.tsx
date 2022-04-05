@@ -7,9 +7,11 @@ import {useSelector} from "react-redux"
 import {classWithModifiers} from "utils"
 
 import {AirTicketType} from "../../../interfaces/Search"
+import useLocalization from "../../../plugins/localization/hook"
 
 
 function UserCabinetFavourites() {
+  const ll = useLocalization(ll => ll)
   const transport = useSelector(state => state.search.transport)
 
   const [page, setPage] = useState(1)
@@ -34,7 +36,7 @@ function UserCabinetFavourites() {
   return (
     <>
       <div className="cabinet__col-wrap cabinet__col-wrap--subscription">
-        <h2 className="cabinet__title">Избраное</h2>
+        <h2 className="cabinet__title">{ll.main.favourites}</h2>
         {/* <UserCabinetSwitcher basename="/user/favourites" /> */}
       </div>
       <div className={classWithModifiers("ticket-list__content", loading && "loading")}>
@@ -42,12 +44,14 @@ function UserCabinetFavourites() {
           <SearchResultAirTicket {...ticket} key={ticket.id} />
         ))}
         {(page * pageSize) <= payload.count && (
-          <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {pageSize} билетов</button>
+          <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>{
+            ll.lk.loadMore} {pageSize} {ll.lk.moreTickets}
+          </button>
         )}
       </div>
       {payload.results.length === 0 && (
         <div className="cabinet__empty cabinet__empty--subscription">
-          <h3 className="cabinet__empty-text">В данном разделе пока пусто</h3>
+          <h3 className="cabinet__empty-text">{ll.main.emptyText}</h3>
         </div>
       )}
       {/* <div className="cabinet__empty cabinet__empty--subscription">

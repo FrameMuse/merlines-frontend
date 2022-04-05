@@ -5,9 +5,11 @@ import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 import { logoutUser } from "redux/reducers/user"
 
+import useLocalization from "../../plugins/localization/hook"
 import Icon from "./Icon"
 
 function Logout() {
+  const ll = useLocalization(ll => ll)
   const history = useHistory()
   const dispatch = useDispatch()
 
@@ -22,7 +24,7 @@ function Logout() {
 
   return (
     <button className="cabinet__logout" type="button" onClick={onClick}>
-      Выйти
+      {ll.lk.exit}
       {" "}
       <Icon
         className="cabinet__logout-icon"
