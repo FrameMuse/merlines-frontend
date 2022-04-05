@@ -22,6 +22,7 @@ export default function SearchResultAirContainer() {
   const { payload, loading } = useTicketsSuspenseQuery(getTicketsAir(session, page, pageSize, filters))
 
   useEffect(() => setPage(1), [filters])
+  useEffect(() => setResults([]), [session])
   useEffect(() => {
     if (!payload) return
     if (page > 1) {
@@ -32,7 +33,7 @@ export default function SearchResultAirContainer() {
   }, [payload])
 
   return (
-    <SearchResultTickets loading={!payload && loading}>
+    <SearchResultTickets loading={results.length === 0 && loading}>
       <SearchResultWeekPrice />
       <SearchResultAirFiltersContainer isTracked={payload?.is_tracked} onChange={setFilters} />
       <div className={classWithModifiers("ticket-list__content", loading && "loading")}>

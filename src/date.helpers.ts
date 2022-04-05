@@ -30,11 +30,7 @@ export function getAmountOfDays(date: Date) {
   return newDate.getDate()
 }
 
-const weekdays = [null, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-
 export function getFirstWeekday(date: Date) {
   const dateInstance = setDateDay(date, 1)
-
-  const weekday = dateInstance.toLocaleDateString("en", { weekday: "short" })
-  return weekdays.indexOf(weekday)
+  return dateInstance.getDay()
 }

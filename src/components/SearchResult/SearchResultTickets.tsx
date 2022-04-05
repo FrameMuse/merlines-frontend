@@ -6,7 +6,6 @@ import { useQuery } from "react-fetching-library"
 
 import SearchResultLoader from "./SearchResultLoader"
 
-
 export function useTicketsSuspenseQuery<T extends PaginationType & { in_progress: boolean }>(action: Action<T>) {
   const timeoutRef = useRef<NodeJS.Timeout>()
   const response = useQuery(action)

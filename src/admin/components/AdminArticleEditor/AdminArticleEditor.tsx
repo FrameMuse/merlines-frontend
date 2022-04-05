@@ -167,15 +167,11 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
 }
 
 /**
- * Generates unique file name
- * @returns last 20 (or given) amount of chars from base64 code
+ * Generates "unique" file name
  */
 export function getFileId(file?: File | null) {
   if (file == null) return ""
-
   return `${file.lastModified}-${file.size}-${file.name}`
-
-  // return file.name
 }
 
 export default AdminArticleEditor
