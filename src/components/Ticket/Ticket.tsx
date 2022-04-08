@@ -14,6 +14,7 @@ import { toast } from "react-toastify"
 import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
 
 import {deleteTrackingTicket, postTrackingTicket} from "../../api/actions/tracking"
+import useLocalization from "../../plugins/localization/hook"
 import {humanizeDate} from "../SearchForm/SearchForm.utils"
 
 
@@ -31,8 +32,10 @@ interface TicketProps {
 }
 
 function Ticket(props: TicketProps) {
+  const ll = useLocalization(ll => ll)
   const [isDetailsExpanded, setIsDetailsExpanded] = useState(false)
   const [hasBaggage, setHasBaggage] = useState(false) // False if has only luggage
+
   return (
     <div className={classWithModifiers("ticket", isDetailsExpanded && "expanded")}>
       <div className="ticket__container">
@@ -55,7 +58,7 @@ function Ticket(props: TicketProps) {
           <div className="ticket-baggage">
             <button className={classWithModifiers("ticket-baggage__entry", !hasBaggage && "active")} type="button" aria-selected={!hasBaggage} onClick={() => setHasBaggage(false)}>
               <Icon className="ticket-baggage__icon" name="baggage" />
-              <span className="ticket-baggage__text">бесплатно</span>
+              <span className="ticket-baggage__text">{ll.searchResult.free}</span>
             </button>
             {props.baggagePrice && (
               <button className={classWithModifiers("ticket-baggage__entry", hasBaggage && "active")} type="button" aria-selected={hasBaggage} onClick={() => setHasBaggage(true)}>
@@ -66,7 +69,7 @@ function Ticket(props: TicketProps) {
           </div>
           <div className="ticket-side__price">{(props.price + (hasBaggage ? props.bestOffer.price : 0)).toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
           <button className={classWithModifiers("ticket-side-button", isDetailsExpanded && "pressed")} aria-details="toggle details" aria-pressed={isDetailsExpanded} onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}>
-            <span className="ticket-side-button__text">Подробнее</span>
+            <span className="ticket-side-button__text">{ll.searchResult.details}</span>
             <Icon className="ticket-side-button__icon" name="chevron" />
           </button>
         </div>
@@ -86,6 +89,7 @@ interface TicketEventsProps {
 }
 
 function TicketEvents(props: TicketEventsProps) {
+  const ll = useLocalization(ll => ll)
   const {session} = useContext(searchSessionContext)
   const [noticeChecked, setNoticeChecked] = useState(props.noticeChecked)
   const [favouriteChecked, setFavouriteChecked] = useState(props.favouriteChecked)
@@ -96,7 +100,7 @@ function TicketEvents(props: TicketEventsProps) {
         .query(deleteFavourite(transport, props.ticketId))
         .then(() => {
           setFavouriteChecked(false)
-          toast.success("Маршрут был удален из списка избранного!", {
+          toast.success(ll.searchResult.deleteFromFavSuccess, {
             autoClose: 2500,
             pauseOnHover: false,
             closeOnClick: true,
@@ -117,7 +121,7 @@ function TicketEvents(props: TicketEventsProps) {
         .query(deleteTrackingTicket(transport, props.ticketId))
         .then(() => {
           setNoticeChecked(false)
-          toast.success("Билет больше не отслеживается!", {
+          toast.success(ll.searchResult.noticeCanceled, {
             autoClose: 2500,
             pauseOnHover: false,
             closeOnClick: true,
@@ -133,7 +137,7 @@ function TicketEvents(props: TicketEventsProps) {
       })
   }
   function onShare() {
-    alert("Поделитесь этой ссылкой " + window.location)
+    alert(ll.searchResult.shareLink + window.location)
   }
   return (
     <div className="ticket-events">
@@ -165,6 +169,7 @@ export interface TicketTimelineProps {
 }
 
 export function TicketTimeline(props: TicketTimelineProps) {
+  const ll = useLocalization(ll => ll)
   const duration = props.arrivalDate.getTime() - props.departureDate.getTime()
   return (
     <div className="ticket-timeline">
@@ -175,7 +180,9 @@ export function TicketTimeline(props: TicketTimelineProps) {
       <div className="ticket-timeline__times">
         <span>{props.departureDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
         <div className="ticket-timeline-visual">
-          <div className="ticket-timeline-visual__text">{getDetailedTime("ru", duration)} в пути</div>
+          <div className="ticket-timeline-visual__text">
+            {getDetailedTime("ru", duration)} {ll.searchResult.inTransit}
+          </div>
           <div className="ticket-timeline-entries">
             {props.entries.map((entry, index) => (
               <div className={classWithModifiers("ticket-timeline-entries__entry", entry.type)} style={{ "--percentage": entry.percentage }} key={index} />
@@ -199,6 +206,7 @@ interface TicketOffersProps {
 }
 
 function TicketOffers(props: TicketOffersProps) {
+  const ll = useLocalization(ll => ll)
   const { error, loading, payload, query } = useQuery(getTicketsAirTicketOffers(props.ticketId), false)
   if (!loading && (error && !payload)) throw new Error()
   return (
@@ -213,7 +221,7 @@ function TicketOffers(props: TicketOffersProps) {
       </div>
       {!payload && (
         <button className="ticket-prepositions__more" type="button" onClick={() => query()}>
-          <span>показать ещё предложения</span>
+          <span>{ll.searchResult.showMoreOffer}</span>
           <Icon className="ticket-prepositions__icon" name="chevron" />
         </button>
       )}
@@ -230,18 +238,19 @@ interface TicketOfferProps {
 }
 
 function TicketOffer(props: TicketOfferProps) {
+  const ll = useLocalization(ll => ll)
   const { session } = useContext(searchSessionContext)
   return (
     <div className="ticket-preposition">
       <div className="ticket-preposition__group">
         <div className="ticket-preposition__title">{props.price.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
-        <div className="ticket-preposition__desc">цена за 1 взрослого</div>
+        <div className="ticket-preposition__desc">{ll.searchResult.pricePerOneAdult}</div>
       </div>
       <div className="ticket-preposition__group">
         <img className="ticket-preposition__image" src={props.image} />
-        <div className="ticket-preposition__desc">на {props.title}</div>
+        <div className="ticket-preposition__desc">{ll.searchResult.to} {props.title}</div>
       </div>
-      <APIOuterLink className="ticket-prepositions__submit" action={getTicketsAirOfferLink(session, props.id)}>Выбрать</APIOuterLink>
+      <APIOuterLink className="ticket-prepositions__submit" action={getTicketsAirOfferLink(session, props.id)}>{ll.searchResult.choose}</APIOuterLink>
     </div>
   )
 }
@@ -273,6 +282,8 @@ interface TicketTraceGroupProps {
 }
 
 function TicketTraceGroup(props: TicketTraceGroupProps) {
+  const ll = useLocalization(ll => ll)
+
   const [isExpanded, setIsExpanded] = useState(false)
   return (
     <div className="ticket-trace__group">
@@ -280,7 +291,13 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
         {props.type === "transfer" && (
           <Icon className="ticket-trace__icon" name="transfer" />
         )}
-        <div className="ticket-trace__title">{{ departure: "Туда", return: "Обратно", flight: "Рейс " + (props.index + 1), transfer: "Пересадка в " + props.trace.departure.title }[props.type]}</div>
+        <div className="ticket-trace__title">
+          {{
+            departure: ll.main.there,
+            return: ll.main.back,
+            flight: ll.searchResult.flight + (props.index + 1),
+            transfer: ll.searchResult.transferIn + props.trace.departure.title }[props.type]}
+        </div>
         <div className="ticket-trace__time">{getDetailedTime("ru", props.duration)}</div>
       </div>
       <div className="ticket-trace__container">
@@ -288,20 +305,20 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
         <div className="ticket-trace__entries">
           <div className="ticket-trace__entry">
             <Icon className="ticket-trace__icon" name="baggage" />
-            - ручная кладь включена
+            - {ll.searchResult.handLuggageIncluded}
             {props.handbagsWeight && (
-              <span className="weak">({props.handbagsWeight} кг)</span>
+              <span className="weak">({props.handbagsWeight} {ll.searchResult.kg})</span>
             )}
           </div>
           {props.baggageWeight && (
             <div className="ticket-trace__entry">
               <Icon className="ticket-trace__icon ticket-trace__icon--baggageLg" name="baggageLg" />
-              - багаж включён
-              <span className="weak">({props.baggageWeight} кг)</span>
+              - {ll.searchResult.baggageIncluded}
+              <span className="weak">({props.baggageWeight} {ll.searchResult.kg})</span>
             </div>
           )}
           <button className={classWithModifiers("ticket-trace__button", isExpanded && "active")} onClick={() => setIsExpanded(!isExpanded)}>
-            <span>о рейсе</span>
+            <span>{ll.searchResult.aboutFlight}</span>
             <Icon className={classWithModifiers("ticket-trace__icon", "chevron", isExpanded && "up")} name="chevron" />
           </button>
         </div>
@@ -314,54 +331,55 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
 }
 
 function About(props: { segmentId: number }) {
+  const ll = useLocalization(ll => ll)
   const { error, loading, payload } = useQuery(getTicketsAirSegmentAbout(props.segmentId))
   if (loading) return <>Loading...</>
   if (error || !payload) return <>Error</>
-  const freeEntry = ["Нет", "Бесплатно", "Платно"]
+  const freeEntry = [ll.searchResult.no, ll.searchResult.free, ll.searchResult.forAFee]
   return (
     <div className="ticket-trace__details">
       <div className="entries">
         <div className="entries__entry">
-          <div className="entries__key">Перевозчик:</div>
+          <div className="entries__key">{ll.searchResult.carrier}:</div>
           <div className="entries__value">{payload.airline}</div>
         </div>
         {payload.food && (
           <div className="entries__entry">
-            <div className="entries__key">Еда:</div>
+            <div className="entries__key">{ll.searchResult.food}:</div>
             <div className="entries__value">{freeEntry[payload.food]}</div>
           </div>
         )}
         {payload.beverage && (
           <div className="entries__entry">
-            <div className="entries__key">Напитки:</div>
+            <div className="entries__key">{ll.searchResult.drinks}:</div>
             <div className="entries__value">{freeEntry[payload.beverage]}</div>
           </div>
         )}
         <div className="entries__entry">
-          <div className="entries__key">Транспорт:</div>
+          <div className="entries__key">{ll.searchResult.transport}:</div>
           <div className="entries__value">{payload.aircraft}</div>
         </div>
         {payload.entertainment && (
           <div className="entries__entry">
-            <div className="entries__key">Развлечения:</div>
+            <div className="entries__key">{ll.searchResult.entrainment}:</div>
             <div className="entries__value">{freeEntry[payload.entertainment]}</div>
           </div>
         )}
         {payload.power && (
           <div className="entries__entry">
-            <div className="entries__key">Зарядка:</div>
+            <div className="entries__key">{ll.searchResult.charger}:</div>
             <div className="entries__value">{freeEntry[payload.power]}</div>
           </div>
         )}
         {payload.travel_class && (
           <div className="entries__entry">
-            <div className="entries__key">Класс:</div>
+            <div className="entries__key">{ll.main.class}:</div>
             <div className="entries__value">{payload.travel_class ? "Бизнес" : "Эконом"}</div>
           </div>
         )}
         {payload.alcohol && (
           <div className="entries__entry">
-            <div className="entries__key">Алкоголь:</div>
+            <div className="entries__key">{ll.searchResult.alcohol}:</div>
             <div className="entries__value">{freeEntry[payload.alcohol]}</div>
           </div>
         )}
@@ -393,6 +411,7 @@ interface TicketTraceTableProps {
 }
 
 function TicketTraceTable(props: TicketTraceTableProps) {
+  const ll = useLocalization(ll => ll)
   const departureTime = new Date(props.departure.time)
   const arrivalTime = new Date(props.arrival.time)
   const duration = arrivalTime.getTime() - departureTime.getTime()
@@ -401,7 +420,7 @@ function TicketTraceTable(props: TicketTraceTableProps) {
       <thead>
         <tr>
           <th><img className="ticket-trace-table__icon" src={props.logo} /></th>
-          <th>рейс: {props.flight}</th>
+          <th>{ll.searchResult.flight}: {props.flight}</th>
           <th>{getDetailedTime("ru", duration)}</th>
         </tr>
       </thead>

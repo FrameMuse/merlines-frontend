@@ -4,7 +4,7 @@ import SearchResultAirTicket
 import {useEffect, useState} from "react"
 import {useQuery} from "react-fetching-library"
 import {useSelector} from "react-redux"
-import {classWithModifiers} from "utils"
+import {classWithModifiers, interpolate} from "utils"
 
 import {AirTicketType} from "../../../interfaces/Search"
 import useLocalization from "../../../plugins/localization/hook"
@@ -44,8 +44,10 @@ function UserCabinetFavourites() {
           <SearchResultAirTicket {...ticket} key={ticket.id} />
         ))}
         {(page * pageSize) <= payload.count && (
-          <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>{
-            ll.lk.loadMore} {pageSize} {ll.lk.moreTickets}
+          <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>
+            {interpolate(ll.lk.loadMoreTickets, {
+              count: pageSize
+            })}
           </button>
         )}
       </div>

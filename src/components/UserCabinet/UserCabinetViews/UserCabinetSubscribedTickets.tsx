@@ -5,7 +5,7 @@ import {useSelector} from "react-redux"
 import {deleteAllTrackingTickets, getTrackingTickets, ITrackingTicket} from "../../../api/actions/tracking"
 import ClientAPI from "../../../api/client"
 import useLocalization from "../../../plugins/localization/hook"
-import {classWithModifiers} from "../../../utils"
+import {classWithModifiers, interpolate} from "../../../utils"
 import SearchResultAirTicket
   from "../../SearchResult/SearchResultContainers/SearchResultAirContainer/SearchResultAirTicket"
 import UserCabinetModal from "./UserCabinetModal"
@@ -66,7 +66,9 @@ const UserCabinetSubscribedTickets: React.FC<props> = () => {
           ))}
           {(page * pageSize) <= payload.count && (
             <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>
-              {ll.lk.loadMore} {pageSize} {ll.lk.moreTickets}
+              {interpolate(ll.lk.loadMoreTickets, {
+                count: pageSize
+              })}
             </button>
           )}
         </div> :

@@ -2,8 +2,10 @@
 import "./filters.scss"
 
 import useDebounce from "hooks/useDebounce"
-import { noop } from "lodash"
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react"
+import {noop} from "lodash"
+import {createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react"
+
+import useLocalization from "../../../plugins/localization/hook"
 
 
 type SearchFiltersType = Record<string, string | number | boolean | undefined>
@@ -24,7 +26,7 @@ function SearchFilters(props: SearchFiltersProps) {
   return (
     <searchFiltersContext.Provider value={reducer}>
       <div className="filters__container">
-        <SearchFiltersHeader />
+        <SearchFiltersHeader/>
         <div className="search-filters">{props.children}</div>
       </div>
     </searchFiltersContext.Provider>
@@ -33,10 +35,13 @@ function SearchFilters(props: SearchFiltersProps) {
 
 function SearchFiltersHeader() {
   const [, setFilters] = useContext(searchFiltersContext)
+  const ll = useLocalization(ll => ll)
   return (
     <div className="filters__header">
-      <h2 className="filters__title">Фильтры</h2>
-      <button className="filters__clear" type="button" onClick={() => setFilters({})}>очистить все</button>
+      <h2 className="filters__title">{ll.searchResult.filters}</h2>
+      <button className="filters__clear" type="button" onClick={() => setFilters({})}>
+        {ll.searchResult.clearAll}
+      </button>
     </div>
   )
 }

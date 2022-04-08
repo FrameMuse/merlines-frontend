@@ -1,6 +1,7 @@
 import Slider from "components/Slider/Slider"
 import { useContext, useEffect, useState } from "react"
 
+import useLocalization from "../../../../plugins/localization/hook"
 import { searchFiltersContext } from "../SearchFilters"
 
 
@@ -14,6 +15,7 @@ interface SearchFilterTimeRangeRangeProps {
 }
 
 function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
+  const ll = useLocalization(ll => ll)
   const [filters, setFilters] = useContext(searchFiltersContext)
 
   const [min, setMin] = useState(props.min)
@@ -44,8 +46,8 @@ function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
   return (
     <div className="range range--travel filters__range">
       <div className="range__time">
-        <span className="range__time-item">от {minHours}ч {minMinutes}м</span>
-        <span className="range__time-item">до {maxHours}ч {maxMinutes}м</span>
+        <span className="range__time-item">{ll.main.from} {minHours}ч {minMinutes}м</span>
+        <span className="range__time-item">{ll.main.to} {maxHours}ч {maxMinutes}м</span>
       </div>
       <Slider
         className="horizontal-slider"
