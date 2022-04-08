@@ -67,7 +67,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           </SearchFilter>
           <SearchFilter label={ll.searchResult.baggage}>
             <SearchFilterCheckboxes name="baggage">
-              <SearchFilterCheckbox name="baggage">{ll.searchResult.withBaggage} <span
+              <SearchFilterCheckbox name="baggage">{ll.searchResult.withoutBaggage} <span
                 className="weak">(от {payload.baggage_min_price?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())})</span></SearchFilterCheckbox>
               <SearchFilterCheckbox name="handbags">{ll.searchResult.withBaggage} <span
                 className="weak">(от 130 000  ₽)</span></SearchFilterCheckbox>
