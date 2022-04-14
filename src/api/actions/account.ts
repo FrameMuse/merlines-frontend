@@ -101,3 +101,9 @@ export const getAccountSocialInstagram: Action = {
   method: "GET",
   endpoint: "/account/social/instagram"
 }
+
+export const postAccountSupport = (text: string): Action<{}> => ({
+  method: "POST",
+  endpoint: "/account/me/supports",
+  body: { text }
+})
