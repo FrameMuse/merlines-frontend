@@ -7,7 +7,6 @@ interface MainSpecialCardProps {
   image?: string
   from: string
   to: string
-  city: string
   price: number
 }
 
@@ -16,15 +15,14 @@ function MainSpecialCard(props: MainSpecialCardProps) {
     <div className={classWithModifiers("special__item", props.isBest && "big")}>
       {props.isBest && (
         <div className="special__item-box">
-          <img className="special__item-img" src={props.image} alt={props.city} />
+          <img className="special__item-img" src={props.image} alt={props.to} />
         </div>
       )}
       <div className="special__item-head">
         <span className="special__item-city">{props.from}</span>
         <Icon name="arrow" className="special__icon-arrow" />
-        <span className="special__item-city">{props.to}</span>
       </div>
-      <h3 className="special__item-title">{props.city}</h3>
+      <h3 className="special__item-title">{props.to}</h3>
       <div className="special__item-text">{`от ${props.price} ₽`}</div>
     </div>
   )
