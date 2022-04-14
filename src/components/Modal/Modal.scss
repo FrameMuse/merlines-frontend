@@ -1,7 +1,7 @@
 @import "../../styles/vars";
 @import "../../styles/mixin";
 
-.modal {
+.m-popup {
 	pointer-events: initial;
 	position: fixed;
 	top: 0;
@@ -70,19 +70,19 @@
 
 
 @media #{$media-md} {
+	.m-popup {
+		&__body {
+			top: 230px;
+			right: auto;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 450px;
+			padding: 30px;
+		}
 
-	&__body {
-		top: 230px;
-		right: auto;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 450px;
-		padding: 30px;
+		&__content {
+			font-size: 24px;
+			line-height: 29px;
+		}
 	}
-
-	&__content {
-		font-size: 24px;
-		line-height: 29px;
-	}
-}
 }
