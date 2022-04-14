@@ -4,12 +4,14 @@ import {useSelector} from "react-redux"
 
 import {deleteAllTrackingQueries, deleteTrackingQuery, getTrackingQueries} from "../../../api/actions/tracking"
 import ClientAPI, {Action} from "../../../api/client"
-import {classWithModifiers} from "../../../utils"
-import Modal from "../../Modal/Modal"
+import useLocalization from "../../../plugins/localization/hook"
+import {classWithModifiers, pluralize} from "../../../utils"
 import {humanizeDate} from "../../SearchForm/SearchForm.utils"
+import UserCabinetModal from "./UserCabinetModal"
 
 
 function UserCabinetSubscribedQueries() {
+  const ll = useLocalization(ll => ll)
   const transport = useSelector(state => state.search.transport)
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
   const [page, setPage] = useState(1)
@@ -48,11 +50,11 @@ function UserCabinetSubscribedQueries() {
   return (
     <>
       <div className="cabinet__col-wrap">
-        <h2 className="cabinet__title cabinet__title--history">Маршруты</h2>
+        <h2 className="cabinet__title cabinet__title--history">{ll.lk.routes}</h2>
         {results.length ? (
           <div className={classWithModifiers("button-text", "cabinet", "right")}>
             <button className="button-text__btn" type="button" onClick={handleChangeModalState}>
-              очистить всю историю
+              {ll.lk.clearHistory}
             </button>
           </div>
         ) : null}
@@ -60,55 +62,49 @@ function UserCabinetSubscribedQueries() {
       {!results.length ?
         (
           <div className="cabinet__empty cabinet__empty--subscription">
-            <h3 className="cabinet__empty-text">В данном разделе пока пусто</h3>
+            <h3 className="cabinet__empty-text">{ll.main.emptyText}</h3>
           </div>
         ) :
         <div className="cabinet__col-list">
-          {results.map(({adults, children, infants, id, trips}) => (
-            <div className="cabinet__col-item" key={id}>
-              <div className="download__field download__field--cabinet download__field--one">
-                {trips.map((trip, idx) => (
-                  <Fragment key={idx}>
-                    <span className="download__item download__item--city download__item--icon">
-                      {trip.origin.title}
-                    </span>
-                    <span className="download__item download__item--city">
-                      {trip.destination.title}
-                    </span>
-                    <span className="download__item download__item--date">
-                      {humanizeDate(new Date(trip.date))}
-                    </span>
-                  </Fragment>
-                ))}
-                <span className="download__item download__item--passenger">
-                  {children + infants + adults} пассажир (-ов) / эконом
-                </span>
-                <button
-                  className="download__edit download__edit--clear"
-                  type="button"
-                  onClick={() => onDeleteTrackingQuery(id)}
-                />
+          {results.map(({adults, children, infants, travel_class, id, trips}) => {
+            const passengersCount = adults + children + infants
+
+            return (
+              <div className="cabinet__col-item" key={id}>
+                <div className="download__field download__field--cabinet download__field--one">
+                  {trips.map((trip, idx) => (
+                    <Fragment key={idx}>
+                      <span className="download__item download__item--city download__item--icon">
+                        {trip.origin.title}
+                      </span>
+                      <span className="download__item download__item--city">
+                        {trip.destination.title}
+                      </span>
+                      <span className="download__item download__item--date">
+                        {humanizeDate(new Date(trip.date))}
+                      </span>
+                    </Fragment>
+                  ))}
+                  <span className="download__item download__item--passenger">
+                    {passengersCount} {pluralize(passengersCount, ll.main.passengers.plural)} / {ll.main.travelClasses[travel_class]}
+                  </span>
+                  <button
+                    className="download__edit download__edit--clear"
+                    type="button"
+                    onClick={() => onDeleteTrackingQuery(id)}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       }
 
-      <Modal visible={deleteModal} onCancel={handleChangeModalState}>
-        <div className={"cabinet__history-delete-wrap"}>
-          <p className={"cabinet__history-delete-text"}>
-            Вы уверенны, что хотите очистить список подписанных маршрутов?
-          </p>
-          <div className={"cabinet__history-delete-buttons"}>
-            <button className={"cabinet__history-delete-submit"} onClick={onDeleteAllTrackingQueries}>
-              Удалить
-            </button>
-            <button className={"cabinet__history-delete-cancel"} onClick={handleChangeModalState}>
-              Не удалять
-            </button>
-          </div>
-        </div>
-      </Modal>
+      <UserCabinetModal
+        visible={deleteModal}
+        handleOk={onDeleteAllTrackingQueries}
+        handleCancel={handleChangeModalState}
+      />
     </>
   )
 }

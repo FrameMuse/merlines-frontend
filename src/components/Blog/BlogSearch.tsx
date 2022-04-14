@@ -5,11 +5,13 @@ import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { classWithModifiers } from "utils"
 
+import useLocalization from "../../plugins/localization/hook"
 import Icon from "../common/Icon"
 
 
 
 function BlogSearch() {
+  const ll = useLocalization(ll => ll)
   const history = useHistory()
 
   const [value, setValue] = useState("")
@@ -46,17 +48,17 @@ function BlogSearch() {
       <div className={classWithModifiers("search-modal", isActive && "active")}>
         <div className="search-modal__container">
           <button className="search-modal__close" type="button" onClick={onToggle}>
-            <span>закрыть</span>
+            <span>{ll.main.close}</span>
             <Icon name="close" className="search-modal__icon" />
           </button>
           <div className="search-modal__wrapper">
             <div className="search-modal__header">
-              <div className="search-modal__title">Поисковая строка</div>
-              <div className="search-modal__desc">Введите запрос, который вас интересует</div>
+              <div className="search-modal__title">{ll.blog.searchTitle}</div>
+              <div className="search-modal__desc">{ll.blog.searchDesc}</div>
             </div>
             <form className="search-modal__search" onSubmit={onSubmit}>
               <input type="text" className="search-modal__input" ref={searchRef} onChange={onChange} />
-              <button className="search-modal__submit" type="submit">Искать</button>
+              <button className="search-modal__submit" type="submit">{ll.blog.search}</button>
             </form>
           </div>
         </div>

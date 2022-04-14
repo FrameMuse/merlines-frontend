@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ReactElement, useContext, useEffect, useState } from "react"
 
+import useLocalization from "../../../../plugins/localization/hook"
 import { searchFiltersContext } from "../SearchFilters"
 import SearchFilterCheckbox, { SearchFilterCheckboxProps } from "./SearchFilterCheckbox"
 
@@ -11,6 +12,7 @@ interface SearchFilterCheckboxesProps {
 }
 
 function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
+  const ll = useLocalization(ll => ll)
   const [filters, setFilters] = useContext(searchFiltersContext)
   const [checks, setChecks] = useState<Record<string, boolean>>({})
 
@@ -49,10 +51,12 @@ function SearchFilterCheckboxes(props: SearchFilterCheckboxesProps) {
         <svg className={"search-filter__reset-icon"} width="15" height="15">
           <use href="img/sprite.svg#close" />
         </svg>
-        сбросить все
+        {ll.searchResult.resetAll}
       </button>}
 
-      <SearchFilterCheckbox name="all" checked={Object.keys(checks).length === 0} onChange={onChange}>{"Все"}</SearchFilterCheckbox>
+      <SearchFilterCheckbox name="all" checked={Object.keys(checks).length === 0} onChange={onChange}>
+        {ll.searchResult.all}
+      </SearchFilterCheckbox>
       {React.Children.map(props.children, child => (
         <SearchFilterCheckbox {...child.props} checked={!!checks[child.props.name]} onChange={onChange} key={child.props.name} />
       ))}

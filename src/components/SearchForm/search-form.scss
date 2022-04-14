@@ -301,6 +301,7 @@
 	left: 17px;
 	cursor: text;
 	pointer-events: none;
+	text-transform: lowercase;
 
 	@media #{$media-md} {
 		top: 20px;

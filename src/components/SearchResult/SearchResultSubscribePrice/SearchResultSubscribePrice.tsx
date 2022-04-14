@@ -8,6 +8,7 @@ import {postTrackingQuery} from "../../../api/actions/tracking"
 import ClientAPI from "../../../api/client"
 import arrow from "../../../img/icons/arrow-slider.svg"
 import {Client} from "../../../interfaces/user"
+import useLocalization from "../../../plugins/localization/hook"
 import Icon from "../../common/Icon"
 import {searchSessionContext} from "../SearchResult"
 
@@ -17,6 +18,8 @@ interface SearchResultSubscribePriceProps {
 }
 
 function SearchResultSubscribePrice(props: SearchResultSubscribePriceProps) {
+  const ll = useLocalization(ll => ll)
+  const [isTracked, setIsTracked] = useState<boolean>(!!props.isTracked)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const user = useSelector(state => state.user) as Client
 
@@ -30,11 +33,12 @@ function SearchResultSubscribePrice(props: SearchResultSubscribePriceProps) {
   async function subscribeToQuery() {
     setIsLoading(true)
     await ClientAPI.query(postTrackingQuery(transport, session)).then(() => {
-      toast.success("Подписка на маршрут оформлена!", {
+      toast.success(ll.searchResult.routeSubscribed, {
         autoClose: 2500,
         pauseOnHover: false,
         closeOnClick: true,
       })
+      setIsTracked(true)
     })
     handleChangeModalState()
     setIsLoading(false)
@@ -45,7 +49,7 @@ function SearchResultSubscribePrice(props: SearchResultSubscribePriceProps) {
     <Fragment>
       <button className="ticket-list__notice" type="button" onClick={handleChangeModalState}>
         <span className="ticket-list__notice-text">
-          {props.isTracked ? "Цена отслеживается" : "Отслеживать цену"}
+          {isTracked ? ll.searchResult.isRouteTracked : ll.searchResult.isRouteNotTracked}
         </span>
         <Icon name={"notice"} className="ticket-list__icon"/>
       </button>
@@ -75,11 +79,12 @@ function SearchResultSubscribePrice(props: SearchResultSubscribePriceProps) {
             onClick={subscribeToQuery}
             disabled={isLoading}
           >
-            Подтвердить подписку
+            {ll.main.acceptSubscribe}
           </button>
           <span className={"ticket-list__subscribe-prompt"}>
-              Нажимая "Подтвердить подписку" Вы соглашаетесь с <Link to={"/privacy"}>
-              правилами использования сервиса и обработки персональных данных
+            {ll.main.subscribePrivacyText.beforeLink}
+            <Link to={"/privacy"}>
+              {ll.main.subscribePrivacyText.link}
             </Link>
           </span>
         </div>

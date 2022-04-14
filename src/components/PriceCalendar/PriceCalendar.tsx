@@ -1,13 +1,15 @@
 import "./PriceCalendar.scss"
 
+import useLocalization from "../../plugins/localization/hook"
 import TransportSwitcher from "../SearchResult/TransportSwitcher"
 import PriceCalendarDays from "./PriceCalendarDays/PriceCalendarDays"
 
 function PriceCalendar() {
+  const ll = useLocalization(ll => ll)
   return (
     <section className="price-calendar calendar--days">
       <div className="price-calendar-container">
-        <h2 className="price-calendar__title">Календарь низких цен</h2>
+        <h2 className="price-calendar__title">{ll.priceCalendar.title}</h2>
         {/* <PriceCalendarSearch
           transport={priceCalendarData.air.transport}
           setPickedMonthName={setPickedMonthName}

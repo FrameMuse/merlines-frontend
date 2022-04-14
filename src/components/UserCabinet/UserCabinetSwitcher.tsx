@@ -1,10 +1,13 @@
 import { NavLink } from "react-router-dom"
 
+import useLocalization from "../../plugins/localization/hook"
+
 interface UserCabinetSwitcherProps {
   basename: string
 }
 
 function UserCabinetSwitcher(props: UserCabinetSwitcherProps) {
+  const ll = useLocalization(ll => ll)
   // const mainClass = classMerge("subnav-link", subscribes && "cabinet__subnav")
   return (
     <div className="subnav cabinet__subnav">
@@ -12,12 +15,16 @@ function UserCabinetSwitcher(props: UserCabinetSwitcherProps) {
         className="subnav-link"
         activeClassName="subnav-link--active"
         to={props.basename + "/routes"}
-      >Маршруты</NavLink>
+      >
+        {ll.lk.routes}
+      </NavLink>
       <NavLink
         className="subnav-link"
         activeClassName="subnav-link--active"
         to={props.basename + "/tickets"}
-      >Билеты</NavLink>
+      >
+        {ll.lk.tickets}
+      </NavLink>
     </div>
   )
 }
