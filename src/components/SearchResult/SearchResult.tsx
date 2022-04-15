@@ -7,6 +7,7 @@ import { useParametricSearchData, useSearchParamsEvaluation } from "components/S
 import SearchFormMini from "components/SearchForm/SearchFormMini"
 import ErrorBoundary from "components/services/ErrorBoudary"
 import { RouteType } from "interfaces/Search"
+import _ from "lodash"
 import { createContext, ReactNode, Suspense, useState } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { Helmet } from "react-helmet"
@@ -79,7 +80,7 @@ function SearchSessionProviderSuspense(props: SearchResultProviderProps) {
   if (!payload) throw new Error("no payload")
 
   return (
-    <searchSessionContext.Provider value={payload}>
+    <searchSessionContext.Provider value={{ ...payload }}>
       {props.children}
     </searchSessionContext.Provider>
   )

@@ -1,28 +1,57 @@
 import { Action } from "api/client"
-import { PaginationType } from "interfaces/Django"
-import _ from "lodash"
-import { ReactNode, useRef } from "react"
-import { useQuery } from "react-fetching-library"
+import { ReactNode, useRef, useState } from "react"
+import { QueryError, QueryResponse, useClient } from "react-fetching-library"
 
 import SearchResultLoader from "./SearchResultLoader"
 
-export function useTicketsSuspenseQuery<T extends PaginationType & { in_progress: boolean }>(action: Action<T>) {
-  const timeoutRef = useRef<NodeJS.Timeout>()
-  const response = useQuery(action)
+export function useProgressiveSuspenseQuery<T extends { in_progress: boolean, results: unknown[] }>(action: Action<T>) {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  if (response.payload) {
-    timeoutRef.current && clearTimeout(timeoutRef.current)
-    if (response.payload.count === 0 && response.payload.in_progress) {
-      timeoutRef.current = setTimeout(() => response.query(), 2500)
-      throw new Promise(_.noop)
-    }
+  const [flag, setFlag] = useState(false)
+  const { suspenseCache, query } = useClient()
 
-    if (response.payload.count === 0 && !response.payload.in_progress) {
-      throw new Error("There is no results")
-    }
+  const suspenseCacheItem = suspenseCache.get(action)
+
+  if (suspenseCacheItem && suspenseCacheItem.response == null) {
+    throw suspenseCacheItem.fetch
   }
 
-  return response
+  if (suspenseCacheItem?.response) {
+    const response = suspenseCacheItem.response as QueryResponse<T>
+    if (response.error) {
+      throw new QueryError("useProgressiveSuspenseQuery", response)
+    }
+
+    if (response.payload) {
+      if (response.payload.in_progress) {
+        timeoutRef.current && clearTimeout(timeoutRef.current)
+        if (response.payload.results.length > 0) {
+          timeoutRef.current = setTimeout(() => {
+            forceUpdate().then(() => setFlag(!flag))
+          }, 2500)
+          return { ...response, passiveLoading: true }
+        } else {
+          throw new Promise<void>(resolve => {
+            timeoutRef.current = setTimeout(() => {
+              suspenseCache.remove(action)
+              resolve()
+            }, 2500)
+          })
+        }
+      }
+    }
+
+    return { ...response, passiveLoading: false }
+  }
+
+  function forceUpdate() {
+    const fetch = query(action, true)
+    suspenseCache.add(action, { fetch })
+    fetch.then(response => suspenseCache.add(action, { fetch, response }))
+    return fetch
+  }
+
+  throw forceUpdate()
 }
 
 interface SearchResultTicketsProps {

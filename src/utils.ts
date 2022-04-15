@@ -1,9 +1,9 @@
-import {currencyType, DataURLBase64, languageType} from "interfaces/common"
+import { currencyType, DataURLBase64, languageType } from "interfaces/common"
 import Localization from "plugins/localization/controller"
 import { Dispatch, SetStateAction, useState } from "react"
 
 export const numberToLetter = (n: number): string => {
-  switch (n){
+  switch (n) {
     case 1:
       return "Первая"
     case 2:
@@ -194,8 +194,8 @@ Number.prototype.toPrice = function (this: number, locale = "EN", currency = "US
  * if some of elements are equal
  */
 export function someEqual<T>(key: keyof T) {
-  return (value: T, _index: number, array: T[]): boolean => {
-    return array.some(someValue => someValue[key] === value[key])
+  return (value: T, index: number, array: T[]): boolean => {
+    return index === array.map(d => d[key]).lastIndexOf(value[key])
   }
 }
 
@@ -224,6 +224,6 @@ export const getDefaultSelectedLanguage = (): languageType => {
   return localStorage.getItem("language") as languageType || "ru"
 }
 
-export const getDefaultSelectedCurrency = () : currencyType => {
+export const getDefaultSelectedCurrency = (): currencyType => {
   return localStorage.getItem("currency") as currencyType || "rub"
 }

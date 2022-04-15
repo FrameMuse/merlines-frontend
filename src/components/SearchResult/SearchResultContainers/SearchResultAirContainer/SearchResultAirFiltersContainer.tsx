@@ -1,19 +1,19 @@
-import {getTicketsAirFilters} from "api/actions/tickets"
+import { getTicketsAirFilters } from "api/actions/tickets"
 import SearchPriceFilter from "components/SearchResult/SearchResultFilters/SearchPriceFilter"
-import {AirFiltersType} from "interfaces/Search"
-import React, {useContext} from "react"
-import {useSuspenseQuery} from "react-fetching-library"
-import {getDefaultSelectedCurrency, getDefaultSelectedLanguage, numberToLetter, pluralize} from "utils"
+import { AirFiltersType } from "interfaces/Search"
+import useLocalization from "plugins/localization/hook"
+import React, { useContext, useEffect } from "react"
+import { useSuspenseQuery } from "react-fetching-library"
+import { getDefaultSelectedCurrency, getDefaultSelectedLanguage, numberToLetter, pluralize } from "utils"
 
-import useLocalization from "../../../../plugins/localization/hook"
-import {searchSessionContext, searchWeekPricesContext} from "../../SearchResult"
+import { searchSessionContext, searchWeekPricesContext } from "../../SearchResult"
 import SearchFilter from "../../SearchResultFilters/SearchFilter"
-import SearchFilters, {SearchFiltersBaseProps} from "../../SearchResultFilters/SearchFilters"
+import SearchFilters, { SearchFiltersBaseProps } from "../../SearchResultFilters/SearchFilters"
 import SearchFilterCheckbox from "../../SearchResultFilters/UX/SearchFilterCheckbox"
 import SearchFilterCheckboxes from "../../SearchResultFilters/UX/SearchFilterCheckboxes"
 import SearchFilterTimeRange from "../../SearchResultFilters/UX/SearchFilterTimeRange"
 import SearchResultSubscribePrice from "../../SearchResultSubscribePrice/SearchResultSubscribePrice"
-import {flightPredicate} from "./helpers"
+import { flightPredicate } from "./helpers"
 
 
 interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersType> {
@@ -22,20 +22,20 @@ interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersT
 
 export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersProps) {
   const ll = useLocalization(ll => ll)
-  const {session} = useContext(searchSessionContext)
+  const { session } = useContext(searchSessionContext)
   const weekPrices = useContext(searchWeekPricesContext)
 
-  const {error, payload} = useSuspenseQuery(getTicketsAirFilters(session))
+  const { error, payload } = useSuspenseQuery(getTicketsAirFilters(session))
   if (error || !payload) return <>No filters</>
   return (
     <div className="ticket-list__left">
-      <SearchResultSubscribePrice isTracked={props.isTracked}/>
+      <SearchResultSubscribePrice isTracked={props.isTracked} />
       <div className="filters">
-        <SearchPriceFilter prices={[weekPrices?.[0]?.price, 0, 0]}/>
+        <SearchPriceFilter prices={[weekPrices?.[0]?.price, 0, 0]} />
         <SearchFilters onChange={props.onChange}>
           <SearchFilter label={ll.searchResult.transfers.title}>
             <SearchFilterCheckboxes name="transfers">
-              {payload.transfers.map(transfer => (
+              {payload.transfers.slice(0, 4).map(transfer => (
                 <SearchFilterCheckbox name={transfer.toString()}>
                   {transfer > 0 ?
                     transfer >= 3 ? ll.searchResult.threeAndMoreTransfers :
@@ -49,9 +49,9 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
             {payload.trip_cities.map((trip, index) => (
               <>
                 <h4>{ll.searchResult.departureFrom} {trip.origin.title}</h4>
-                <SearchFilterTimeRange deltaTime min={0} max={86400} name="start_time" index={index}/>
+                <SearchFilterTimeRange deltaTime min={0} max={86400} name="start_time" index={index} />
                 <h4>{ll.searchResult.arrivalTo} {trip.destination.title}</h4>
-                <SearchFilterTimeRange deltaTime min={0} max={86400} name="end_time" index={index}/>
+                <SearchFilterTimeRange deltaTime min={0} max={86400} name="end_time" index={index} />
               </>
             )).map(flightPredicate)}
           </SearchFilter>
@@ -83,7 +83,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
           <SearchFilter label={ll.searchResult.airports}>
             {payload.airports.map(airport => (
               <>
-                {airport.origins.map(({title, id}) => (
+                {airport.origins.map(({ title, id }) => (
                   <React.Fragment key={id}>
                     <h5>{ll.searchResult.departureFrom} {title}</h5>
                     <SearchFilterCheckboxes name={`origin_airports[${1}]`}>
@@ -93,7 +93,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
                     </SearchFilterCheckboxes>
                   </React.Fragment>
                 ))}
-                {airport.destinations.map(({title, id}) => (
+                {airport.destinations.map(({ title, id }) => (
                   <React.Fragment key={id}>
                     <h5>{ll.searchResult.arrivalTo} {title}</h5>
                     <SearchFilterCheckboxes name={`origin_airports[${2}]`}>
