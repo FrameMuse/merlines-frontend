@@ -21,7 +21,9 @@ function SearchResultAirContainer() {
   if (payload == null) {
     throw new Error("no payload")
   }
-
+  if (payload.results.length === 0) {
+    throw new Error("no results")
+  }
   const [filters, setFilters] = useState<Partial<AirFiltersType>>({})
   return (
     <SearchResultTickets>
