@@ -9,7 +9,7 @@ export const postTicketsAir = (trips: RouteType[], travel_class: number, passeng
   body: { trips, travel_class, ...passengers, currency: "RUB" }
 })
 
-export const getTicketsAir = (session: string, page: number, page_size: number, filters?: Partial<AirFiltersType>): Action<PaginationType<AirTicketType> & { in_progress: boolean, is_tracked: boolean }> => ({
+export const getTicketsAir = (session: string, page: number, page_size: number, filters?: Partial<AirFiltersType> & { ordering?: "best_price" | "final_time" }): Action<PaginationType<AirTicketType> & { in_progress: boolean, is_tracked: boolean }> => ({
   method: "GET",
   endpoint: "/tickets/air/" + session,
   params: { page, page_size, ...filters },
@@ -20,6 +20,7 @@ export const getTicketsAir = (session: string, page: number, page_size: number, 
 
 export const getTicketsAirFilters = (session: string): Action<{
   in_progress: boolean
+  best_price_of_faster: number
   transfers: [
     number
   ]
@@ -71,7 +72,7 @@ export const getTicketsAirFilters = (session: string): Action<{
     id: number
     code: string
     title: string
-    country:{
+    country: {
       code: string
       id: number
       title: string

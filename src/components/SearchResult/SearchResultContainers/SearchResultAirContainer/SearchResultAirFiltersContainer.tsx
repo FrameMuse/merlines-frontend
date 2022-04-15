@@ -2,7 +2,7 @@ import { getTicketsAirFilters } from "api/actions/tickets"
 import SearchPriceFilter from "components/SearchResult/SearchResultFilters/SearchPriceFilter"
 import { AirFiltersType } from "interfaces/Search"
 import useLocalization from "plugins/localization/hook"
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { getDefaultSelectedCurrency, getDefaultSelectedLanguage, numberToLetter, pluralize } from "utils"
 
@@ -16,14 +16,19 @@ import SearchResultSubscribePrice from "../../SearchResultSubscribePrice/SearchR
 import { flightPredicate } from "./helpers"
 
 
-interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersType> {
+interface SearchResultAirFiltersProps extends SearchFiltersBaseProps<AirFiltersType & { ordering?: "best_price" | "final_time" }> {
   isTracked?: boolean
 }
 
 export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersProps) {
   const ll = useLocalization(ll => ll)
+
+  const [filters, setFilters] = useState<Partial<AirFiltersType> & { ordering?: "best_price" | "final_time" }>({})
   const { session } = useContext(searchSessionContext)
   const weekPrices = useContext(searchWeekPricesContext)
+
+  useEffect(() => props.onChange(filters), [filters])
+
 
   const { error, payload } = useSuspenseQuery(getTicketsAirFilters(session))
   if (error || !payload) return <>No filters</>
@@ -31,8 +36,8 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
     <div className="ticket-list__left">
       <SearchResultSubscribePrice isTracked={props.isTracked} />
       <div className="filters">
-        <SearchPriceFilter prices={[weekPrices?.[0]?.price, 0, 0]} />
-        <SearchFilters onChange={props.onChange}>
+        <SearchPriceFilter prices={[weekPrices?.[0]?.price, payload.best_price_of_faster]} onChange={value => props.onChange({ ...filters, ordering: value === "cheap" ? "best_price" : "final_time" })} />
+        <SearchFilters onChange={setFilters}>
           <SearchFilter label={ll.searchResult.transfers.title}>
             <SearchFilterCheckboxes name="transfers">
               {payload.transfers.slice(0, 4).map(transfer => (

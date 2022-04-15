@@ -1,7 +1,7 @@
-import {useState} from "react"
-import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
-
-import useLocalization from "../../../plugins/localization/hook"
+import useLocalization from "plugins/localization/hook"
+import { Dispatch } from "react"
+import { useState } from "react"
+import { classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
 
 enum Prices {
   cheap, fast, optimal
@@ -9,6 +9,7 @@ enum Prices {
 
 interface SearchPriceFilterProps {
   prices: [number?, number?, number?]
+  onChange?: Dispatch<keyof typeof Prices>
 }
 
 function SearchPriceFilter(props: SearchPriceFilterProps) {
@@ -21,7 +22,7 @@ function SearchPriceFilter(props: SearchPriceFilterProps) {
       <div className="filters__sort">
         {props.prices.map((price, index) => price != null && (
           <button className={classWithModifiers("filters__sort-btn", index === choice && "active")} type="button"
-            onClick={() => setChoice(index)} key={index}>
+            onClick={() => (setChoice(index), props.onChange?.(Prices[index] as never))} key={index}>
             <span className="filters__sort-text">{ll.searchResult[Prices[index]]}</span>
             <span
               className="filters__sort-price">от {price?.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency()) ?? "..."}</span>
