@@ -22,8 +22,13 @@
 	&--important {
 		border-color: rgba($color: red, $alpha: 0.35);
 	}
+
+	&--selected {
+		border-color: rgba($color: blue, $alpha: 0.35);
+	}
 }
 
 .editable-tag__input {
+	width: 8em;
 	border: unset;
 }

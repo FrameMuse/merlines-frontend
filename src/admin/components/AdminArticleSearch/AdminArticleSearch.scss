@@ -1,0 +1,28 @@
+.admin-article-search {
+	display: grid;
+	gap: 2em;
+}
+
+.admin-article-search__search {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	gap: 2.5em;
+}
+
+.admin-article-search__input {
+	flex: 1;
+
+	padding: 0.75em 1em;
+	background: white;
+	border: 1px solid #d9d6d6;
+	border-radius: 0.35em;
+}
+
+.admin-article-search__buttons {
+	display: flex;
+	gap: 1em;
+
+	margin-left: auto;
+}

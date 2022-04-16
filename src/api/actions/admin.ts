@@ -1,5 +1,5 @@
 import { MailingType } from "admin/components/AdminBlogMailing/AdminBlogMailing"
-import { TagArticleProps } from "admin/components/AdminEditTags/AdminEditTags"
+import { AdminArticleType } from "admin/components/AdminEditTags/AdminEditTags"
 import { Action } from "api/client"
 import { ArticleAuthorType, ArticleContentType, BlogTagType } from "interfaces/Blog"
 import { OrderingType, PaginationType } from "interfaces/Django"
@@ -9,17 +9,20 @@ import { Client } from "interfaces/user"
 /* Articles */
 
 export const getAdminArticles = (page: number, page_size: number, filters: {
-  ordering?: OrderingType<"tags__contains" | "title__icontains" | "author_name" | "created_at" | "is_draft">
+  ordering?: OrderingType<"tags__contains" | "title__icontains" | "author_name" | "created_at" | "is_draft" | (string & {})>
 
   tags__contains?: string
   title__icontains?: string
   author_name?: string
   created_at?: string
   is_draft?: boolean
-}): Action<PaginationType<TagArticleProps>> => ({
+}): Action<PaginationType<AdminArticleType>> => ({
   method: "GET",
   endpoint: "/admin/articles",
-  params: { page, page_size, ...filters }
+  params: { page, page_size, ...filters },
+  config: {
+    skipCache: true
+  }
 })
 
 export const getAdminArticle = (articleId: string): Action<ArticleContentType & {

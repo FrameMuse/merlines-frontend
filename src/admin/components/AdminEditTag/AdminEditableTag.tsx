@@ -2,13 +2,14 @@
 import "./AdminEditTag.style.scss"
 
 import { UserType } from "interfaces/user"
-import { Dispatch, MouseEventHandler, useRef, useState } from "react"
+import { Dispatch, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { classWithModifiers } from "utils"
 
 interface AdminEditableTagProps {
+  selected?: boolean
   children: string
-  onClick?: MouseEventHandler<HTMLSpanElement>
+  onFocus?(): void
   onChange: Dispatch<string>
 }
 
@@ -37,14 +38,16 @@ function AdminEditableTag(props: AdminEditableTagProps) {
   }
 
   return (
-    <div className={classWithModifiers("editable-tag", tag.toUpperCase() === "ПОДБОРКИ" && "important")}>
+    <div className={classWithModifiers("editable-tag", tag.toUpperCase() === "ПОДБОРКИ" && "important", props.selected && "selected")}>
       <input
         className="editable-tag__input"
         disabled={!user.auth || user.type < UserType.Admin}
         list="tags-datalist"
         required
         value={tag}
-        onChange={event => setTag(event.currentTarget.value)} onBlur={onBlur}
+        onChange={event => setTag(event.currentTarget.value)}
+        onFocus={props.onFocus}
+        onBlur={onBlur}
       />
     </div>
   )

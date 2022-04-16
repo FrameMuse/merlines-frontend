@@ -1,13 +1,14 @@
 import Icon from "components/common/Icon"
 import PopupLogin from "components/Popups/PopupLogin"
-import {UserType} from "interfaces/user"
-import {Popup} from "plugins/popup"
-import {Children, Dispatch, ReactElement, ReactNode, useRef, useState} from "react"
-import {useSelector} from "react-redux"
-import {useClickAway} from "react-use"
-import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
+import { UserType } from "interfaces/user"
+import Localization from "plugins/localization/controller"
+import { Popup } from "plugins/popup"
+import { Children, Dispatch, ReactElement, ReactNode, useRef, useState } from "react"
+import { useSelector } from "react-redux"
+import { useClickAway } from "react-use"
+import { classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
 
-import {currencyType, languageType} from "../../interfaces/common"
+import { currencyType, languageType } from "../../interfaces/common"
 import useLocalization from "../../plugins/localization/hook"
 import UserAvatar from "../UserAvatar/UserAvatar"
 import HeaderLink from "./HeaderLink"
@@ -33,7 +34,7 @@ function HeaderNavigation() {
   return (
     <nav className={classWithModifiers("nav", isActive && "active")}>
       <button className="nav__toggle" type="button" onClick={() => setIsActive(!isActive)}>
-        <span className="nav__toggle-item" aria-label="Открыть меню"/>
+        <span className="nav__toggle-item" aria-label="Открыть меню" />
       </button>
       <div className="nav__inner">
         <div className="nav__group">
@@ -46,29 +47,29 @@ function HeaderNavigation() {
         <div className="nav__group">
           <NavSublist value={currency} onChange={handleChangeCurrency}>
             <option value="rub">
-              <Icon className="nav__icon" name="rub"/>
+              <Icon className="nav__icon" name="rub" />
               <span>{ll.main.currencies.rouble}</span>
             </option>
             <option value="usd">
-              <Icon className="nav__icon" name="usd"/>
+              <Icon className="nav__icon" name="usd" />
               <span>{ll.main.currencies.dollar}</span>
             </option>
             <option value="eur">
-              <Icon className="nav__icon" name="eur"/>
+              <Icon className="nav__icon" name="eur" />
               <span>{ll.main.currencies.euro}</span>
             </option>
           </NavSublist>
           <NavSublist value={language} onChange={handleChangeLanguage}>
             <option value="ru">
-              <Icon className="nav__icon" name="russia"/>
+              <Icon className="nav__icon" name="russia" />
               <span>Русский язык</span>
             </option>
             <option value="en">
-              <Icon className="nav__icon" name="kingdom"/>
+              <Icon className="nav__icon" name="kingdom" />
               <span>English</span>
             </option>
             <option value="de">
-              <Icon className="nav__icon" name="germany"/>
+              <Icon className="nav__icon" name="germany" />
               <span>Deutsch</span>
             </option>
           </NavSublist>
@@ -76,11 +77,11 @@ function HeaderNavigation() {
         <div className="nav__group">
           {user.auth ? (
             <HeaderLink to="/user">
-              <UserAvatar avatar={user.avatar} firstName={user.first_name} size={"small"}/>
+              <UserAvatar avatar={user.avatar} firstName={user.first_name} size={"small"} />
             </HeaderLink>
           ) : (
             <button className="nav__link" type="button" onClick={() => Popup.open(PopupLogin)}>
-              <Icon name="user-off" className="nav__icon"/>
+              <Icon name="user-off" className="nav__icon" />
               <span className="nav__link-text">{ll.main.signIn}</span>
             </button>
           )}
@@ -107,7 +108,7 @@ function NavSublist<V>(props: NavSublistProps<V>) {
     <div className="nav-sublist" ref={parentRef}>
       <div className="nav-sublist__label" onClick={() => setExpanded(!expanded)}>
         {options.find(option => option.value === props.value)?.children}
-        <span><Icon className={classWithModifiers("nav__icon", "chevron", expanded && "up")} name="chevron"/></span>
+        <span><Icon className={classWithModifiers("nav__icon", "chevron", expanded && "up")} name="chevron" /></span>
       </div>
       <div className={classWithModifiers("nav-sublist__menu", expanded && "expanded")}>
         {options.map((option, index) => (

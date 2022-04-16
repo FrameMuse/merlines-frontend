@@ -82,7 +82,8 @@ kbd {
 	display: grid;
 	gap: 3.5em;
 
-	@include Indent(0, 5em);
+	padding: 0 2.5vw;
+	margin: 5em 0;
 }
 
 .admin-view-layout__title {
@@ -96,6 +97,7 @@ kbd {
 
 .admin-view-layout__container {
 	display: grid;
+	justify-items: flex-start;
 	gap: 2.5em;
 }
 
@@ -103,6 +105,8 @@ kbd {
 
 .admin-section-layout {
 	display: grid;
+
+	min-width: 900px;
 
 	border: 2px solid var(--color-border-third);
 	border-radius: 0.5em;

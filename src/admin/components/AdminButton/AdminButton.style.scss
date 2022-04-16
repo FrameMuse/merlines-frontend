@@ -1,43 +1,43 @@
 .admin-button {
-  position: relative;
+	position: relative;
 
-  padding: 0.75em 1em;
-  background: var(--color-blue);
-  border: 2px solid transparent;
-  border-radius: 0.35em;
+	padding: 0.75em 1em;
+	background: var(--color-blue);
+	border: 2px solid transparent;
+	border-radius: 0.35em;
 
-  color: white;
-  transition: 250ms ease color, 250ms ease border-color, 250ms ease background-color, 250ms ease box-shadow;
+	color: white;
+	transition: 250ms ease color, 250ms ease border-color, 250ms ease background-color, 250ms ease box-shadow;
 
-  // &:hover:not(:disabled) {
-  //   box-shadow: 0 0 8px 2px rgba($color: black, $alpha: 0.25);
-  // }
+	// &:hover:not(:disabled) {
+	//   box-shadow: 0 0 8px 2px rgba($color: black, $alpha: 0.25);
+	// }
 
-  &:active {
-    transform: scale(0.95);
-  }
+	&:active:not(:disabled) {
+		transform: scale(0.95);
+	}
 
-  &:disabled {
-    background: white;
-    border-color: var(--color-blue);
-    color: #333;
-    cursor: not-allowed;
-  }
+	&:disabled {
+		background: white;
+		border-color: var(--color-blue);
+		color: #333;
+		cursor: not-allowed;
+	}
 
-  &--red {
-    background: rgba($color: red, $alpha: 0.75);
-  }
+	&--red {
+		background: rgba($color: red, $alpha: 0.75);
+	}
 
-  &--gray {
-    background: white;
-    // background: var(--color-grey-3);
-    border-color: #dadee3;
-    border-radius: 0.35em;
+	&--gray {
+		background: white;
+		// background: var(--color-grey-3);
+		border-color: #dadee3;
+		border-radius: 0.35em;
 
-    color: #333;
+		color: #333;
 
-    &:hover {
-      background: #eef0f3;
-    }
-  }
+		&:hover {
+			background: #eef0f3;
+		}
+	}
 }
