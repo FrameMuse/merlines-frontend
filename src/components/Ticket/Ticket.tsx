@@ -11,16 +11,16 @@ import { useContext, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
-import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
+import { classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
 
-import {deleteTrackingTicket, postTrackingTicket} from "../../api/actions/tracking"
+import { deleteTrackingTicket, postTrackingTicket } from "../../api/actions/tracking"
 import useLocalization from "../../plugins/localization/hook"
-import {humanizeDate} from "../SearchForm/SearchForm.utils"
+import { humanizeDate } from "../SearchForm/SearchForm.utils"
 
 
 interface TicketProps {
   id: number
-  isFavourite:boolean
+  isFavourite: boolean
   isTracked: boolean
   baggagePrice?: number
   price: number
@@ -90,7 +90,7 @@ interface TicketEventsProps {
 
 function TicketEvents(props: TicketEventsProps) {
   const ll = useLocalization(ll => ll)
-  const {session} = useContext(searchSessionContext)
+  const { session } = useContext(searchSessionContext)
   const [noticeChecked, setNoticeChecked] = useState(props.noticeChecked)
   const [favouriteChecked, setFavouriteChecked] = useState(props.favouriteChecked)
   const transport = useSelector(state => state.search.transport)
@@ -175,7 +175,7 @@ export function TicketTimeline(props: TicketTimelineProps) {
     <div className="ticket-timeline">
       <div className="ticket-timeline__dates">
         <span>{humanizeDate(props.departureDate)}</span>
-        <span>{humanizeDate( props.arrivalDate)}</span>
+        <span>{humanizeDate(props.arrivalDate)}</span>
       </div>
       <div className="ticket-timeline__times">
         <span>{props.departureDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
@@ -296,7 +296,8 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
             departure: ll.main.there,
             return: ll.main.back,
             flight: ll.searchResult.flight + (props.index + 1),
-            transfer: ll.searchResult.transferIn + props.trace.departure.title }[props.type]}
+            transfer: ll.searchResult.transferIn + props.trace.departure.title
+          }[props.type]}
         </div>
         <div className="ticket-trace__time">{getDetailedTime("ru", props.duration)}</div>
       </div>
@@ -426,12 +427,12 @@ function TicketTraceTable(props: TicketTraceTableProps) {
       </thead>
       <tbody>
         <tr>
-          <td>{departureTime.toLocaleTimeString("ru", { timeStyle: "short" })}</td>
+          <td>{departureTime.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</td>
           <td>{props.departure.title} <span className="weak">({props.departure.code})</span></td>
           <td>{humanizeDate(departureTime)}</td>
         </tr>
         <tr>
-          <td>{arrivalTime.toLocaleTimeString("ru", { timeStyle: "short" })}</td>
+          <td>{arrivalTime.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</td>
           <td>{props.arrival.title} <span className="weak">({props.arrival.code})</span></td>
           <td>{humanizeDate(arrivalTime)}</td>
         </tr>
