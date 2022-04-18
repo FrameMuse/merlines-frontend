@@ -3,8 +3,6 @@ import ArticleSocialItem from "./ArticleSocialItem"
 function ArticleSocial() {
   const socialItemsConfig = [
     { name: "vk", link: "#", svg: "vkontakte" },
-    { name: "tg", link: "#", svg: "telegram" },
-    { name: "fb", link: "#", svg: "facebook" }
   ]
 
   return (

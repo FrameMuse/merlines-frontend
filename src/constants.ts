@@ -1,4 +1,4 @@
-import {Localize} from "./plugins/localization/controller"
+import { Localize } from "./plugins/localization/controller"
 import routes from "./routes"
 const ll = Localize(ll => ll)
 
@@ -157,20 +157,20 @@ export const footerInfoData = [
     name: ll.main.socialNetworks,
     link: routes.footer.socialNetwork,
     modifier: "social",
-    links: [
-      {
-        name: "Instagram",
-        link: routes.footer.instagram,
-        modifier: "footer__link--instagram",
-        svg: "instagram"
-      },
-      {
-        name: "Facebook",
-        link: routes.footer.facebook,
-        modifier: "footer__link--facebook",
-        svg: "facebook"
-      }
-    ]
+    // links: [
+    //   {
+    //     name: "Instagram",
+    //     link: routes.footer.instagram,
+    //     modifier: "footer__link--instagram",
+    //     svg: "instagram"
+    //   },
+    //   {
+    //     name: "Facebook",
+    //     link: routes.footer.facebook,
+    //     modifier: "footer__link--facebook",
+    //     svg: "facebook"
+    //   }
+    // ]
   }
 ]
 

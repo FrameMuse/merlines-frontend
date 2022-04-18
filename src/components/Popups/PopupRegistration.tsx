@@ -73,7 +73,7 @@ function PopupRegistration() {
       </form>
       <div className="modal__middle">или</div>
       <h2 className="modal__title modal__title--social">Регистрация через...</h2>
-      <div className="modal__social">
+      {/* <div className="modal__social">
         <div className="modal__item">
           <APIOuterLink className="modal__link" action={getAccountSocialInstagram}>
             <Icon name="instagram" className="modal__link-icon" />
@@ -86,7 +86,7 @@ function PopupRegistration() {
             Facebook
           </APIOuterLink>
         </li>
-      </div>
+      </div> */}
     </div>
   )
 }
