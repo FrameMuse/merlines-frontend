@@ -1,4 +1,5 @@
 import { Action } from "api/client"
+import { DataURLBase64 } from "interfaces/common"
 import { Client } from "interfaces/user"
 
 export const getAccount: Action = {
@@ -51,7 +52,7 @@ export const putAccountMe: Action = {
   endpoint: "/account/me"
 }
 
-export const patchAccountMe = (userData: Partial<Pick<Client, "first_name" | "last_name">>): Action<Client> => ({
+export const patchAccountMe = (userData: Partial<Pick<Client, "first_name" | "last_name"> & { avatar: DataURLBase64 }>): Action<Client> => ({
   method: "PATCH",
   endpoint: "/account/me",
   body: userData
