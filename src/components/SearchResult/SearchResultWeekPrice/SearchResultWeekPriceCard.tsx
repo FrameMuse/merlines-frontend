@@ -1,5 +1,5 @@
 import { humanizeDate } from "components/SearchForm/SearchForm.utils"
-import {classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
+import { classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
 
 
 interface SearchResultWeekPriceCardProps {
@@ -14,7 +14,7 @@ function SearchResultWeekPriceCard(props: SearchResultWeekPriceCardProps) {
   const date = new Date(props.date)
   return (
     <button className={classWithModifiers("price-week__item", props.active && "active")} type="button" onClick={props.onClick}>
-      <div className="price-week__price">{props.price.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
+      <div className="price-week__price">от {props.price.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
       <div className="price-week__date">{humanizeDate(date)}</div>
     </button>
   )
