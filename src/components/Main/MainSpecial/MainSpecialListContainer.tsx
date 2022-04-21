@@ -26,14 +26,14 @@ function MainSpecialListContainer() {
       <MainSpecialCard
         isBest
         image="img/special/2.jpg"
-        from={search.routes[0].origin?.title || ""}
-        to={bestSpecial.destination.title}
+        origin={search.routes[0].origin}
+        destination={bestSpecial.destination}
         price={bestSpecial.price}
       />
       {specials.map((special, index) => (
         <MainSpecialCard
-          from={search.routes[0].origin?.title || ""}
-          to={special.destination.title}
+          origin={search.routes[0].origin}
+          destination={special.destination}
           price={special.price}
           key={index}
         />

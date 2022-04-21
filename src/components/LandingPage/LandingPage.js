@@ -41,8 +41,8 @@ function LandingPage() {
               {specialData.map((special, index) => (
                 <MainSpecialCard
                   key={index}
-                  from={special.cardFrom}
-                  to={special.cardTo}
+                  origin={special.cardFrom}
+                  destination={special.cardTo}
                   city={special.cardToCity}
                   price={special.cardPrice}
                 />
