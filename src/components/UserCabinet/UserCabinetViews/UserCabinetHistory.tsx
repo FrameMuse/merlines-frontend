@@ -1,11 +1,12 @@
-import {deleteHistory, deleteHistoryChunk, getHistory} from "api/actions/history"
-import ClientAPI, {Action} from "api/client"
-import {Fragment, useEffect, useState} from "react"
-import {useQuery} from "react-fetching-library"
-import {classWithModifiers, pluralize} from "utils"
+import { deleteHistory, deleteHistoryChunk, getHistory } from "api/actions/history"
+import ClientAPI, { Action } from "api/client"
+import { Fragment, useEffect, useState } from "react"
+import { useQuery } from "react-fetching-library"
+import { Link } from "react-router-dom"
+import { classWithModifiers, pluralize } from "utils"
 
 import useLocalization from "../../../plugins/localization/hook"
-import {humanizeDate} from "../../SearchForm/SearchForm.utils"
+import { humanizeDate, stringifySearchData } from "../../SearchForm/SearchForm.utils"
 import UserCabinetModal from "./UserCabinetModal"
 
 function UserCabinetHistory() {
@@ -16,7 +17,7 @@ function UserCabinetHistory() {
 
   const [results, setResults] = useState<(ReturnType<typeof getHistory> extends Action<infer A> ? A : never)["results"]>([])
 
-  const {error, loading, payload, query} = useQuery(getHistory(page, pageSize))
+  const { error, loading, payload, query } = useQuery(getHistory(page, pageSize))
   useEffect(() => {
     if (!payload) return
     setResults(payload.results)
@@ -53,7 +54,13 @@ function UserCabinetHistory() {
         )}
       </div>
       <div className="cabinet__col-list">
-        {results.map(({adults, children, infants, id, travel_class, trips}) => {
+        {results.map(({ adults, children, infants, id, travel_class, trips }) => {
+          const link = stringifySearchData({
+            passengers: { adults, children, infants },
+            routes: trips.map(trip => ({ ...trip, returnDate: null, date: new Date(trip.date) })),
+            transport: "air",
+            travelClass: travel_class
+          })
           const passengersCount = adults + children + infants
           return (
             <div className="cabinet__col-item" key={id}>
@@ -80,6 +87,7 @@ function UserCabinetHistory() {
                   onClick={() => onDeleteHistoryChunk(id)}
                 />
               </div>
+              <Link className="ghost" to={link} />
             </div>
           )
         })}
@@ -89,7 +97,7 @@ function UserCabinetHistory() {
           <h3 className="cabinet__empty-text">{ll.main.emptyText}</h3>
         </div>
       )}
-      <UserCabinetModal visible={deleteModal} handleCancel={handleChangeModalState} handleOk={onDeleteHistory}/>
+      <UserCabinetModal visible={deleteModal} handleCancel={handleChangeModalState} handleOk={onDeleteHistory} />
     </>
   )
 }

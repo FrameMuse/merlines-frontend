@@ -1,12 +1,13 @@
-import React, {Fragment, useEffect, useState} from "react"
-import {useQuery} from "react-fetching-library"
-import {useSelector} from "react-redux"
+import React, { Fragment, useEffect, useState } from "react"
+import { useQuery } from "react-fetching-library"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 
-import {deleteAllTrackingQueries, deleteTrackingQuery, getTrackingQueries} from "../../../api/actions/tracking"
-import ClientAPI, {Action} from "../../../api/client"
+import { deleteAllTrackingQueries, deleteTrackingQuery, getTrackingQueries } from "../../../api/actions/tracking"
+import ClientAPI, { Action } from "../../../api/client"
 import useLocalization from "../../../plugins/localization/hook"
-import {classWithModifiers, pluralize} from "../../../utils"
-import {humanizeDate} from "../../SearchForm/SearchForm.utils"
+import { classWithModifiers, pluralize } from "../../../utils"
+import { humanizeDate, stringifySearchData } from "../../SearchForm/SearchForm.utils"
 import UserCabinetModal from "./UserCabinetModal"
 
 
@@ -19,7 +20,7 @@ function UserCabinetSubscribedQueries() {
 
   const [results, setResults] = useState<(ReturnType<typeof getTrackingQueries> extends Action<infer A> ? A : never)["results"]>([])
 
-  const {error, loading, payload, status} = useQuery(getTrackingQueries(transport, page, pageSize))
+  const { error, loading, payload, status } = useQuery(getTrackingQueries(transport, page, pageSize))
 
   useEffect(() => {
     if (status === 200 && payload) {
@@ -66,9 +67,14 @@ function UserCabinetSubscribedQueries() {
           </div>
         ) :
         <div className="cabinet__col-list">
-          {results.map(({adults, children, infants, travel_class, id, trips}) => {
+          {results.map(({ adults, children, infants, travel_class, id, trips }) => {
+            const link = stringifySearchData({
+              passengers: { adults, children, infants },
+              routes: trips.map(trip => ({ ...trip, returnDate: null, date: new Date(trip.date) })),
+              transport: "air",
+              travelClass: travel_class
+            })
             const passengersCount = adults + children + infants
-
             return (
               <div className="cabinet__col-item" key={id}>
                 <div className="download__field download__field--cabinet download__field--one">
@@ -94,6 +100,7 @@ function UserCabinetSubscribedQueries() {
                     onClick={() => onDeleteTrackingQuery(id)}
                   />
                 </div>
+                <Link className="ghost" to={link} />
               </div>
             )
           })}
