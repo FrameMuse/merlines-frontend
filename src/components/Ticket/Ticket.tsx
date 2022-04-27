@@ -36,6 +36,7 @@ function Ticket(props: TicketProps) {
   const [isDetailsExpanded, setIsDetailsExpanded] = useState(false)
   const [hasBaggage, setHasBaggage] = useState(false) // False if has only luggage
 
+  const formattedPrice = (props.price + (hasBaggage ? (props.baggagePrice ?? 0) : 0)).toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())
   return (
     <div className={classWithModifiers("ticket", isDetailsExpanded && "expanded")}>
       <div className="ticket__container">
@@ -67,9 +68,10 @@ function Ticket(props: TicketProps) {
               </button>
             )}
           </div>
-          <div className="ticket-side__price">{(props.price + (hasBaggage ? (props.baggagePrice ?? 0) : 0)).toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
+          <div className="ticket-side__price">{formattedPrice}</div>
           <button className={classWithModifiers("ticket-side-button", isDetailsExpanded && "pressed")} aria-details="toggle details" aria-pressed={isDetailsExpanded} onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}>
             <span className="ticket-side-button__text">{ll.searchResult.detailed}</span>
+            <span className="ticket-side-button__text-mobile">{formattedPrice}</span>
             <Icon className="ticket-side-button__icon" name="chevron" />
           </button>
         </div>

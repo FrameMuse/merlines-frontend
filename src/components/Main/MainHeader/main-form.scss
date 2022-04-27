@@ -122,6 +122,9 @@
 .main-form__icon {
 	margin-bottom: 3px;
 
+	width: 2em;
+	height: 2em;
+
 	@media #{$media-md} {
 		width: 39px;
 		height: 46px;

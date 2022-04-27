@@ -1,3 +1,5 @@
+@import "~styles/mixin";
+
 .ticket {
 	display: grid;
 
@@ -15,6 +17,10 @@
 
 .ticket__container {
 	display: flex;
+
+	@include Mobile {
+		display: grid;
+	}
 }
 
 .ticket__details {
@@ -197,6 +203,11 @@
 	display: grid;
 	align-content: space-between;
 	border-left: 1px solid #EEEEEE;
+
+	@include Mobile {
+		display: flex;
+		// justify-content: stretch;
+	}
 }
 
 .ticket-side__price {
@@ -204,12 +215,20 @@
 	text-align: center;
 	font-size: 1.25em;
 	font-weight: 700;
+
+	@include Mobile {
+		display: none;
+	}
 }
 
 /* Baggage*/
 
 .ticket-baggage {
 	display: flex;
+
+	@include Mobile {
+		flex-grow: 1;
+	}
 }
 
 .ticket-baggage__entry {
@@ -242,11 +261,20 @@
 	&--baggage {
 		aspect-ratio: 1.8;
 	}
+
+
+	@include Mobile {
+		height: 1.75em;
+	}
 }
 
 .ticket-baggage__text {
 	color: #A1A1A1;
 	font-size: 0.5rem;
+
+	@include Mobile {
+		font-size: 0.75rem;
+	}
 }
 
 /* Button */
@@ -272,12 +300,31 @@
 			transform: rotateX(0deg);
 		}
 	}
+
+	@include Mobile {
+		padding: 1em 5%;
+	}
 }
 
 .ticket-side-button__text {
 	color: currentColor;
 	font-size: 1em;
 	font-weight: 500;
+
+	@include Mobile {
+		display: none;
+	}
+}
+
+.ticket-side-button__text-mobile {
+	display: none;
+
+	font-size: 1.25rem;
+	font-weight: bold;
+
+	@include Mobile {
+		display: unset;
+	}
 }
 
 .ticket-side-button__icon {
@@ -286,6 +333,10 @@
 	margin-left: 0.25em;
 	transform: rotateX(180deg);
 	color: currentColor;
+
+	@include Mobile {
+		margin-left: 0.75em;
+	}
 }
 
 /* Prepositions */
@@ -328,6 +379,14 @@
 	border-radius: 0.35em;
 	color: white;
 	font-weight: 600;
+
+	@include Mobile {
+		grid-row: 2;
+		grid-column: 1 / 2 span;
+
+		margin-top: 1em;
+		text-align: center;
+	}
 }
 
 /* Preposition */
@@ -336,6 +395,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@include Mobile {
+		display: grid;
+		grid-auto-flow: column;
+	}
 }
 
 .ticket-preposition__group {
@@ -413,12 +477,25 @@
 
 	border-top: 1px solid #f2f2f2;
 	border-bottom: 1px solid #f2f2f2;
+
+	@include Mobile {
+		display: grid;
+		gap: 1em;
+		justify-content: stretch;
+
+		padding-left: unset;
+		padding-top: 1em;
+	}
 }
 
 .ticket-trace__entry {
 	display: flex;
 	align-content: center;
 	gap: 0.25em;
+
+	@include Mobile {
+		padding: 0 0.75em;
+	}
 }
 
 .ticket-trace__icon {
@@ -455,6 +532,10 @@
 		background: white;
 		border-color: #396EF6;
 		color: #396EF6;
+	}
+
+	@include Mobile {
+		justify-content: center;
 	}
 }
 
@@ -529,6 +610,10 @@
 	display: grid;
 	grid-template-columns: auto auto auto;
 	gap: 1em;
+
+	@include Mobile {
+		grid-template-columns: unset;
+	}
 }
 
 .entries__entry {

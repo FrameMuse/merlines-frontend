@@ -2,13 +2,13 @@
 @import "../../../styles/mixin.scss";
 
 .price-week {
-	width: 100vw;
 	padding-left: $gapSm;
 	margin-bottom: 16px;
 	box-sizing: border-box;
 
-	@media #{$media-md} {
-		padding-left: $gapLg;
+	@include Tablet {
+		padding: unset;
+		overflow: auto;
 	}
 
 	@media #{$media-lg} {
@@ -68,8 +68,6 @@
 }
 
 .price-week__list {
-	@include ul;
-
 	display: flex;
 	box-shadow: $shadow;
 
@@ -79,7 +77,8 @@
 }
 
 .price-week__item {
-	min-width: 160px;
+	flex-grow: 1;
+	flex-shrink: 0;
 	padding: 14px 20px 12px;
 	background-color: var(--color-white);
 	border-right: 1px solid var(--color-border-third);

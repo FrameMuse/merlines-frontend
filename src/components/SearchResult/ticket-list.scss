@@ -65,7 +65,7 @@
 		display: grid;
 		grid-template-columns: 290px 1fr;
 		gap: 0 30px;
-		padding-left: $gapMd;
+		padding-inline: $gapMd;
 	}
 
 	@media #{$media-xl} {
@@ -75,6 +75,13 @@
 		grid-template-columns: 25% 1fr auto;
 		gap: 30px;
 		padding-top: 28px;
+	}
+
+	@include Tablet {
+		display: grid;
+		justify-content: stretch;
+
+		padding-inline: $gapMd;
 	}
 }
 
@@ -413,6 +420,7 @@
 			color: var(--color-white);
 			background-color: var(--color-blue);
 			margin-top: 10px;
+
 			&:disabled {
 				background-color: var(--color-grey);
 				color: var(--color-white);
@@ -428,9 +436,10 @@
 			font-size: 12px;
 			line-height: 15px;
 			color: var(--color-grey);
+
 			a {
 				color: var(--color-grey);
-				text-decoration: underline!important;
+				text-decoration: underline !important;
 			}
 		}
 	}
