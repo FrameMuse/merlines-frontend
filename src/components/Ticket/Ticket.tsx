@@ -209,7 +209,8 @@ interface TicketOffersProps {
 
 function TicketOffers(props: TicketOffersProps) {
   const ll = useLocalization(ll => ll)
-  const { error, loading, payload, query } = useQuery(getTicketsAirTicketOffers(props.ticketId), false)
+  const { session } = useContext(searchSessionContext)
+  const { error, loading, payload, query } = useQuery(getTicketsAirTicketOffers(session, props.ticketId), false)
   if (!loading && (error && !payload)) throw new Error()
   return (
     <div className="ticket-prepositions">

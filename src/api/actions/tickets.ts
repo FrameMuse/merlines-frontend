@@ -110,14 +110,14 @@ export const getTicketsAirSegmentAbout = (segmentId: number): Action<{
   endpoint: `/tickets/air/segment/${segmentId}/about`
 })
 
-export const getTicketsAirTicketOffers = (ticketId: number): Action<PaginationType<{
+export const getTicketsAirTicketOffers = (session: string, ticketId: number): Action<PaginationType<{
   id: number
   gate_id: number
   title: string
   price: number
 }>> => ({
   method: "GET",
-  endpoint: `/tickets/air/ticket/${ticketId}/offers`
+  endpoint: `/tickets/air/${session}/${ticketId}/offers`
 })
 
 export const getTicketsAirOfferLink = (sessionId: string, id: number): Action => ({
