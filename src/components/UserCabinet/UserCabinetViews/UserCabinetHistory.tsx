@@ -19,6 +19,14 @@ function UserCabinetHistory() {
 
   const { error, loading, payload, query } = useQuery(getHistory(page, pageSize))
   useEffect(() => {
+    if (results.length > 0) return
+
+    if (payload == null) return
+    if (payload.count <= 10) return
+
+    query()
+  }, [results, payload])
+  useEffect(() => {
     if (!payload) return
     setResults(payload.results)
   }, [payload])
@@ -92,7 +100,7 @@ function UserCabinetHistory() {
           )
         })}
       </div>
-      {payload.results.length === 0 && (
+      {results.length === 0 && (
         <div className="cabinet__empty cabinet__empty--subscription">
           <h3 className="cabinet__empty-text">{ll.main.emptyText}</h3>
         </div>
