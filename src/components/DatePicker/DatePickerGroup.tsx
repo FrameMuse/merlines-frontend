@@ -51,17 +51,22 @@ function DatePickerGroup(props: DatePickerGroupProps) {
           ))}
         </div>
         <div className="date-picker__days-list" style={{ "--first-week-day": getFirstWeekday(cursorDate) }}>
-          {[...Array(getAmountOfDays(cursorDate))].map((_, index) => (
-            <DatePickerDay
-              date={setDateDay(cursorDate, index + 1)} key={index}
-              onDatePick={props.onDateChange}
-              onDateEnter={props.onTargetDateChange}
+          {[...Array(getAmountOfDays(cursorDate))].map((_, index) => {
+            const date = setDateDay(cursorDate, index + 1)
+            return (
+              <DatePickerDay
+                date={date}
+                onDatePick={props.onDateChange}
+                onDateEnter={props.onTargetDateChange}
 
-              active={props.dates.some(date => date?.getDate() === setDateDay(cursorDate, index + 1).getDate() && date?.getMonth() === setDateDay(cursorDate, index + 1).getMonth())}
-              group={isInDatesInterval(setDateDay(cursorDate, index + 1), props.dates, props.targetDate)}
-              disabled={setDateDay(cursorDate, index + 2).getTime() < Date.now()}
-            />
-          ))}
+                active={someDatesEqual(date, ...props.dates)}
+                group={isInDatesInterval(date, props.dates, props.targetDate)}
+                disabled={setDateDay(cursorDate, index + 2).getTime() < Date.now()}
+
+                key={index}
+              />
+            )
+          })}
         </div>
       </div>
     </div>
@@ -91,4 +96,13 @@ function isInDatesInterval(comparedDate: Date, dates: DatePickerValue, targetDat
   }
 
   return false
+}
+
+function someDatesEqual(comparedDate: Date, ...dates: (Date | null | undefined)[]) {
+  return dates.some(date => (
+    !!date
+    && date.getDate() === comparedDate.getDate()
+    && date.getMonth() === comparedDate.getMonth()
+    && date.getFullYear() === comparedDate.getFullYear()
+  ))
 }
