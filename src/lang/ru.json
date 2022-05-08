@@ -188,5 +188,8 @@
     "entertainment": "Развлечения",
     "charger": "Зарядка",
     "alcohol": "Алкоголь"
+  },
+  "errors": {
+    "token_email_not_found": "Почта не найдена"
   }
 }

@@ -1,6 +1,7 @@
+import Localization from "plugins/localization/controller"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
-import {createQuery, getDefaultSelectedCurrency, getDefaultSelectedLanguage} from "utils"
+import { createQuery, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
 
 import { Action, APIResponseError } from "./client"
 
@@ -52,7 +53,9 @@ function responseErrorHandling(response: Response) {
     return { ...response, error: true }
   }
 
-  toast.error(response.payload.error.code)
+  const llErrors = Localization.get()?.errors
+
+  toast.error(llErrors?.[response.payload.error.code] || response.payload.error.code)
   if (process.env.NODE_ENV === "development") {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
