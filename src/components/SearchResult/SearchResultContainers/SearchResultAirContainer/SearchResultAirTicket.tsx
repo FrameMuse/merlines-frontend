@@ -54,10 +54,6 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
         image: getAgentLogo(props.best_offer.gate_id)
       }}
       groups={props.trips.flatMap((trip, index) => {
-        const startTime = new Date(trip.start_time).getTime()
-        const endTime = new Date(trip.end_time).getTime()
-        const duration = new Date(endTime - startTime)
-
         let type = ""
         if (props.trips.length > 2) {
           type = "flight"
@@ -66,7 +62,7 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
         }
 
         return trip.segments.map((seg, segIndex) => ({
-          duration,
+          duration: Number(seg.duration),
           index,
           id: seg.id,
           type: segIndex === 0 ? type : "transfer",
