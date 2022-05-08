@@ -50,7 +50,7 @@ function DatePickerGroup(props: DatePickerGroupProps) {
             </div>
           ))}
         </div>
-        <div className="date-picker__days-list" style={{ "--first-week-day": getFirstWeekday(props.cursorDate) }}>
+        <div className="date-picker__days-list" style={{ "--first-week-day": getFirstWeekday(cursorDate) }}>
           {[...Array(getAmountOfDays(cursorDate))].map((_, index) => (
             <DatePickerDay
               date={setDateDay(cursorDate, index + 1)} key={index}
