@@ -183,7 +183,7 @@ export function TicketTimeline(props: TicketTimelineProps) {
         <span>{props.departureDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
         <div className="ticket-timeline-visual">
           <div className="ticket-timeline-visual__text">
-            {getDetailedTime("ru", duration)} {ll.searchResult.inTransit}
+            {humanizeDuration("ru", duration)} {ll.searchResult.inTransit}
           </div>
           <div className="ticket-timeline-entries">
             {props.entries.map((entry, index) => (
@@ -274,7 +274,7 @@ function TicketTrace(props: TicketTraceProps) {
 
 
 interface TicketTraceGroupProps {
-  duration: Date
+  duration: number
   id: number
   index: number
   type: "departure" | "return" | "flight" | "transfer" | string
@@ -301,7 +301,7 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
             transfer: ll.searchResult.transferIn + props.trace.departure.title
           }[props.type]}
         </div>
-        <div className="ticket-trace__time">{getDetailedTime("ru", props.duration)}</div>
+        <div className="ticket-trace__time">{humanizeDuration("ru", props.duration)}</div>
       </div>
       <div className="ticket-trace__container">
         <TicketTraceTable {...props.trace} />
@@ -424,7 +424,7 @@ function TicketTraceTable(props: TicketTraceTableProps) {
         <tr>
           <th><img className="ticket-trace-table__icon" src={props.logo} /></th>
           <th>{ll.searchResult.flight}: {props.flight}</th>
-          <th>{getDetailedTime("ru", duration)}</th>
+          <th>{humanizeDuration("ru", duration)}</th>
         </tr>
       </thead>
       <tbody>
@@ -445,11 +445,18 @@ function TicketTraceTable(props: TicketTraceTableProps) {
 
 export default Ticket
 
-function getDetailedTime(lang: string, date: Date | string | number) {
-  const duration = new Date(date).getTime()
+function humanizeDuration(lang: string, duration: number) {
   const hours = Math.floor(duration / 1000 / 60 / 60)
   const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60))
-  return `${hours}ч, ${minutes}м`
+
+  switch (lang) {
+    case "ru":
+      return `${hours}ч, ${minutes}м`
+    case "en":
+      return `${hours}h, ${minutes}m`
+    default:
+      return `${hours}:${minutes}`
+  }
 }
 
 // function getShortDate(lang: string, date: Date) {

@@ -56,6 +56,7 @@ export interface AirTicketType {
       segments: [
         {
           id: number
+          duration: string // ex. 02:55:00 | hh:mm:ss
           departure: {
             id: number
             code: string
