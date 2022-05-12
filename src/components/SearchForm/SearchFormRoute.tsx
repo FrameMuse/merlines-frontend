@@ -156,7 +156,7 @@ function SearchFormRoutesSwitchButton() {
   const search = useSelector(state => state.search)
 
   function switchRoutes() {
-    console.log(search.routes[0])
+    // console.log(search.routes[0])
     // Switch exists for the first and only route
     dispatch(updateSearchRoute(0, {
       destination: search.routes[0].origin,

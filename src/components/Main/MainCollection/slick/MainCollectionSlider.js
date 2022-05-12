@@ -41,7 +41,7 @@ const MainCollectionSlider = () => {
       res = await MockSlides
       setSlides(res)
     } catch (e) {
-      console.log("MainCollectionSlides.getSlides", e)
+      // console.log("MainCollectionSlides.getSlides", e)
     }
   }
 

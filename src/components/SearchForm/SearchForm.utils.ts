@@ -154,7 +154,7 @@ export function useSearchParamsEvaluation() {
 
         if (searchRoutes[index].destination?.title.length === 0) {
           const { error, payload } = await ClientAPI.query(getGeoAirCity(route.destination))
-          console.log(payload)
+          // console.log(payload)
           if (!error && payload) {
             dispatch(updateSearchRoute(index, { destination: payload }))
           }

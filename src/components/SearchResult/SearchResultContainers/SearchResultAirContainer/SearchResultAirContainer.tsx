@@ -66,8 +66,6 @@ function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerP
     setResults(results => [...results, ...payload.results])
   }, [payload])
 
-  console.log(results.filter(someEqual("id")))
-
   return (
     <div className={classWithModifiers("ticket-list__content", (props.loading || loading) && "loading")}>
       <TransportSwitcher prices={[weekPrices?.[0]?.price]} />

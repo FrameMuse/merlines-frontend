@@ -14,7 +14,7 @@ interface FooterInfoBlockProps {
 }
 
 function FooterInfoBlock(props: FooterInfoBlockProps) {
-  console.log(props.links)
+  // console.log(props.links)
   return (
     <div className={classWithModifiers("footer__col", props.modifier)}>
       <h2 className="footer__title">{props.title}</h2>

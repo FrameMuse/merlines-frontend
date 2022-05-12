@@ -84,7 +84,7 @@ function MainPromoList() {
   })
 
   const handleClick = (evt) => {
-    console.log(evt.target.classList)
+    // console.log(evt.target.classList)
   }
 
   return (
