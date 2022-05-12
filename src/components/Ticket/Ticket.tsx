@@ -424,7 +424,7 @@ function TicketTraceTable(props: TicketTraceTableProps) {
         <tr>
           <th><img className="ticket-trace-table__icon" src={props.logo} /></th>
           <th>{ll.searchResult.flight}: {props.flight}</th>
-          <th>{humanizeDuration("ru", duration)}</th>
+          <th>{humanizeDuration("ru", duration / 1000)}</th>
         </tr>
       </thead>
       <tbody>
@@ -445,9 +445,9 @@ function TicketTraceTable(props: TicketTraceTableProps) {
 
 export default Ticket
 
-function humanizeDuration(lang: string, duration: number) {
-  const hours = Math.floor(duration / 1000 / 60 / 60)
-  const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60))
+function humanizeDuration(lang: string, durationInSeconds: number) {
+  const hours = Math.floor(durationInSeconds / 60 / 60)
+  const minutes = Math.floor((durationInSeconds % (1000 * 60 * 60)) / (1000 * 60))
 
   switch (lang) {
     case "ru":
