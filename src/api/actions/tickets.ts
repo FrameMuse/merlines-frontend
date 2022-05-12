@@ -120,7 +120,7 @@ export const getTicketsAirTicketOffers = (session: string, ticketId: number): Ac
   endpoint: `/tickets/air/${session}/${ticketId}/offers`
 })
 
-export const getTicketsAirOfferLink = (sessionId: string, id: number): Action => ({
+export const getTicketsAirOfferLink = (sessionId: string, id: number): Action<{ link: string }> => ({
   method: "GET",
   endpoint: `/tickets/air/${sessionId}/offer/${id}/link`
 })

@@ -4,11 +4,10 @@ import "./Ticket.style.scss"
 import { deleteFavourite, postFavourites } from "api/actions/favourites"
 import { getTicketsAirOfferLink, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
 import ClientAPI from "api/client"
-import { APIOuterLink } from "api/helpers"
 import Icon from "components/common/Icon"
 import { searchSessionContext } from "components/SearchResult/SearchResult"
 import { useContext, useState } from "react"
-import { useQuery } from "react-fetching-library"
+import { useClient, useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
@@ -242,7 +241,17 @@ interface TicketOfferProps {
 
 function TicketOffer(props: TicketOfferProps) {
   const ll = useLocalization(ll => ll)
+  const client = useClient()
+  const [link, setLink] = useState<string>()
   const { session } = useContext(searchSessionContext)
+  async function redirectToOffer() {
+    const { error, payload } = await client.query(getTicketsAirOfferLink(session, props.id))
+    if (error) return
+    if (payload == null) return
+
+    setLink(payload.link)
+    window.open(payload.link)
+  }
   return (
     <div className="ticket-preposition">
       <div className="ticket-preposition__group">
@@ -253,7 +262,10 @@ function TicketOffer(props: TicketOfferProps) {
         <img className="ticket-preposition__image" src={props.image} />
         <div className="ticket-preposition__desc">{ll.searchResult.to} {props.title}</div>
       </div>
-      <APIOuterLink className="ticket-prepositions__submit" action={getTicketsAirOfferLink(session, props.id)}>{ll.searchResult.choose}</APIOuterLink>
+      {link != null && (
+        <p>{ll.searchResult.didntOpen} <a href={link} rel="noopener noreferrer" target="_blank"></a></p>
+      )}
+      <button className="ticket-prepositions__submit" type="button" onClick={redirectToOffer}>{ll.searchResult.choose}</button>
     </div>
   )
 }
