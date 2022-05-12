@@ -27,7 +27,7 @@ function AdminStats() {
           СТАТИСТИКА
           СТАТИСТИКА
         </AdminBoxLayout> */}
-        <AnalyticsDashboard
+        {/* <AnalyticsDashboard
           authOptions={{ clientId: process.env.REACT_APP_GA_CLIENT_ID }}
           renderCharts={(gapi, viewId) => {
             const chartStyles = {
@@ -36,7 +36,6 @@ function AdminStats() {
             }
             return (
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {/* View ID: {viewId} */}
                 <SessionsByDateChart
                   gapi={gapi}
                   viewId={viewId}
@@ -65,7 +64,7 @@ function AdminStats() {
               </div>
             )
           }}
-        />
+        /> */}
       </div>
     </div>
   )
