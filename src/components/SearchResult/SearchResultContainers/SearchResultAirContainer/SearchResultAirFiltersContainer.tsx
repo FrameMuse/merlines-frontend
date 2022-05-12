@@ -36,7 +36,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
     <div className="ticket-list__left">
       <SearchResultSubscribePrice isTracked={props.isTracked} />
       <div className="filters">
-        <SearchPriceFilter prices={[weekPrices?.[0]?.price, payload.best_price_of_faster]} onChange={value => props.onChange({ ...filters, ordering: value === "cheap" ? "best_price" : "final_time" })} />
+        <SearchPriceFilter prices={[payload.best_price || weekPrices?.[0]?.price, payload.best_price_of_faster]} onChange={value => props.onChange({ ...filters, ordering: value === "cheap" ? "best_price" : "final_time" })} />
         <SearchFilters onChange={setFilters}>
           <SearchFilter label={ll.searchResult.transfers.title}>
             <SearchFilterCheckboxes name="transfers">

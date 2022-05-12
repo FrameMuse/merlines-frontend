@@ -20,6 +20,7 @@ export const getTicketsAir = (session: string, page: number, page_size: number, 
 
 export const getTicketsAirFilters = (session: string): Action<{
   in_progress: boolean
+  best_price: number
   best_price_of_faster: number
   transfers: [
     number
