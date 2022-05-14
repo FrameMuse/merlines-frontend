@@ -182,7 +182,7 @@ export function TicketTimeline(props: TicketTimelineProps) {
         <span>{props.departureDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
         <div className="ticket-timeline-visual">
           <div className="ticket-timeline-visual__text">
-            {humanizeDuration("ru", duration)} {ll.searchResult.inTransit}
+            {humanizeSecondsDuration("ru", duration / 1000)} {ll.searchResult.inTransit}
           </div>
           <div className="ticket-timeline-entries">
             {props.entries.map((entry, index) => (
@@ -300,6 +300,8 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
   const ll = useLocalization(ll => ll)
 
   const [isExpanded, setIsExpanded] = useState(false)
+
+  console.log(<div className="ticket-trace__time">{humanizeSecondsDuration("ru", props.duration)}</div>)
   return (
     <div className="ticket-trace__group">
       <div className={classWithModifiers("ticket-trace__header", props.type)}>
@@ -311,10 +313,10 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
             departure: ll.main.there,
             return: ll.main.back,
             flight: ll.searchResult.flight + (props.index + 1),
-            transfer: ll.searchResult.transferIn + props.trace.departure.title
+            transfer: ll.searchResult.transferIn + " " + props.trace.departure.title
           }[props.type]}
         </div>
-        <div className="ticket-trace__time">{humanizeDuration("ru", props.duration)}</div>
+        <div className="ticket-trace__time">{humanizeSecondsDuration("ru", props.duration)}</div>
       </div>
       <div className="ticket-trace__container">
         <TicketTraceTable {...props.trace} />
@@ -437,7 +439,7 @@ function TicketTraceTable(props: TicketTraceTableProps) {
         <tr>
           <th><img className="ticket-trace-table__icon" src={props.logo} /></th>
           <th>{ll.searchResult.flight}: {props.flight}</th>
-          <th>{humanizeDuration("ru", duration / 1000)}</th>
+          <th>{humanizeSecondsDuration("ru", duration / 1000)}</th>
         </tr>
       </thead>
       <tbody>
@@ -458,7 +460,7 @@ function TicketTraceTable(props: TicketTraceTableProps) {
 
 export default Ticket
 
-function humanizeDuration(lang: string, durationInSeconds: number) {
+function humanizeSecondsDuration(lang: string, durationInSeconds: number) {
   const hours = Math.floor(durationInSeconds / 60 / 60)
   const minutes = Math.floor((durationInSeconds % (1000 * 60 * 60)) / (1000 * 60))
 

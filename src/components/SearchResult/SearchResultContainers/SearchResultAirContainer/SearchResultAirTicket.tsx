@@ -61,25 +61,25 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
           type = index === 0 ? "departure" : "return"
         }
 
-        return trip.segments.map((seg, segIndex) => ({
-          duration: Number(seg.duration),
+        return trip.segments.map((segment, segIndex) => ({
+          duration: Number(segment.duration),
           index,
-          id: seg.id,
+          id: segment.id,
           type: segIndex === 0 ? type : "transfer",
-          baggageWeight: seg.baggage_weight,
-          handbagsWeight: seg.handbags_weight,
+          baggageWeight: segment.baggage_weight,
+          handbagsWeight: segment.handbags_weight,
           trace: {
-            flight: seg.flight,
-            logo: getAirlineLogo(seg.marketing_airline.code),
+            flight: segment.flight,
+            logo: getAirlineLogo(segment.marketing_airline.code),
             arrival: {
-              title: seg.arrival.city.title + ", " + seg.arrival.title,
-              code: seg.arrival.code,
-              time: new Date(seg.arrival_time)
+              title: segment.arrival.city.title + ", " + segment.arrival.title,
+              code: segment.arrival.code,
+              time: new Date(segment.arrival_time)
             },
             departure: {
-              title: seg.departure.city.title + ", " + seg.departure.title,
-              code: seg.departure.code,
-              time: new Date(seg.departure_time)
+              title: segment.departure.city.title + ", " + segment.departure.title,
+              code: segment.departure.code,
+              time: new Date(segment.departure_time)
             }
           }
         }))
