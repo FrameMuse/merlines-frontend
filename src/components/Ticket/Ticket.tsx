@@ -298,10 +298,7 @@ interface TicketTraceGroupProps {
 
 function TicketTraceGroup(props: TicketTraceGroupProps) {
   const ll = useLocalization(ll => ll)
-
   const [isExpanded, setIsExpanded] = useState(false)
-
-  console.log(<div className="ticket-trace__time">{humanizeSecondsDuration("ru", props.duration)}</div>)
   return (
     <div className="ticket-trace__group">
       <div className={classWithModifiers("ticket-trace__header", props.type)}>
