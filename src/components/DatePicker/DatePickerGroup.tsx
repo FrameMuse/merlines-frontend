@@ -1,5 +1,5 @@
 import { getAmountOfDays, getFirstWeekday, offsetDateMonth, setDateDay } from "date.helpers"
-import { Dispatch } from "react"
+import { Dispatch, useEffect } from "react"
 import { capitalize, classWithModifiers, dateToMonthName } from "utils"
 
 import { weekDays } from "../../constants"
