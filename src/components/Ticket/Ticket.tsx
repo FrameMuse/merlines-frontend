@@ -287,7 +287,7 @@ function TicketTrace(props: TicketTraceProps) {
 
 
 interface TicketTraceGroupProps {
-  duration: number
+  transferDuration: number
   id: number
   index: number
   type: "departure" | "return" | "flight" | "transfer" | string
@@ -313,7 +313,7 @@ function TicketTraceGroup(props: TicketTraceGroupProps) {
             transfer: ll.searchResult.transferIn + " " + props.trace.departure.title
           }[props.type]}
         </div>
-        <div className="ticket-trace__time">{humanizeSecondsDuration("ru", props.duration)}</div>
+        <div className="ticket-trace__time">{humanizeSecondsDuration("ru", props.transferDuration)}</div>
       </div>
       <div className="ticket-trace__container">
         <TicketTraceTable {...props.trace} />
@@ -413,6 +413,7 @@ function About(props: { segmentId: number }) {
 interface TicketTraceTableProps {
   logo: string
   flight: string
+  duration: number
   departure: {
     time: Date
     title: string
@@ -429,14 +430,13 @@ function TicketTraceTable(props: TicketTraceTableProps) {
   const ll = useLocalization(ll => ll)
   const departureTime = new Date(props.departure.time)
   const arrivalTime = new Date(props.arrival.time)
-  const duration = arrivalTime.getTime() - departureTime.getTime()
   return (
     <table className="ticket-trace-table">
       <thead>
         <tr>
           <th><img className="ticket-trace-table__icon" src={props.logo} /></th>
           <th>{ll.searchResult.flight}: {props.flight}</th>
-          <th>{humanizeSecondsDuration("ru", duration / 1000)}</th>
+          <th>{humanizeSecondsDuration("ru", props.duration)}</th>
         </tr>
       </thead>
       <tbody>

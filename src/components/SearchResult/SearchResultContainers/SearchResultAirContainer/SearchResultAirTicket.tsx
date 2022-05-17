@@ -20,13 +20,14 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
         arrivalDate: new Date(trip.end_time),
         origin: trip.segments[0].departure.city.title + ", " + trip.segments[0].departure.title,
         destination: trip.segments.slice(-1)[0].arrival.city.title + ", " + trip.segments.slice(-1)[0].arrival.title,
-        entries: trip.segments.flatMap((seg, index) => {
-          const startTime = new Date(trip.start_time).getTime()
-          const endTime = new Date(trip.end_time).getTime()
-          const duration = endTime - startTime
+        entries: trip.segments.flatMap((segment, index) => {
+          // const startTime = new Date(trip.start_time).getTime()
+          // const endTime = new Date(trip.end_time).getTime()
+          // const duration = endTime - startTime
+          const duration = Number(segment.duration)
 
-          const arrivalTime = new Date(seg.arrival_time).getTime()
-          const departureTime = new Date(seg.departure_time).getTime()
+          const arrivalTime = new Date(segment.arrival_time).getTime()
+          const departureTime = new Date(segment.departure_time).getTime()
           const N = arrivalTime - departureTime
 
           const percentage = N / duration * 100
@@ -61,28 +62,42 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
           type = index === 0 ? "departure" : "return"
         }
 
-        return trip.segments.map((segment, segIndex) => ({
-          duration: Number(segment.duration),
-          index,
-          id: segment.id,
-          type: segIndex === 0 ? type : "transfer",
-          baggageWeight: segment.baggage_weight,
-          handbagsWeight: segment.handbags_weight,
-          trace: {
-            flight: segment.flight,
-            logo: getAirlineLogo(segment.marketing_airline.code),
-            arrival: {
-              title: segment.arrival.city.title + ", " + segment.arrival.title,
-              code: segment.arrival.code,
-              time: new Date(segment.arrival_time)
-            },
-            departure: {
-              title: segment.departure.city.title + ", " + segment.departure.title,
-              code: segment.departure.code,
-              time: new Date(segment.departure_time)
+        const startTime = new Date(trip.start_time).getTime()
+        const endTime = new Date(trip.end_time).getTime()
+        let duration = endTime - startTime
+
+        return trip.segments.map((segment, index) => {
+          const prevSegment = trip.segments[index - 1]
+          if (prevSegment != null) {
+            const prevSegmentArrival = new Date(prevSegment.arrival_time)
+            const segmentDeparture = new Date(segment.departure_time)
+
+            duration = segmentDeparture.getTime() - prevSegmentArrival.getTime()
+          }
+          return {
+            transferDuration: duration,
+            index,
+            id: segment.id,
+            type: index === 0 ? type : "transfer",
+            baggageWeight: segment.baggage_weight,
+            handbagsWeight: segment.handbags_weight,
+            trace: {
+              duration: Number(segment.duration),
+              flight: segment.flight,
+              logo: getAirlineLogo(segment.marketing_airline.code),
+              arrival: {
+                title: segment.arrival.city.title + ", " + segment.arrival.title,
+                code: segment.arrival.code,
+                time: new Date(segment.arrival_time)
+              },
+              departure: {
+                title: segment.departure.city.title + ", " + segment.departure.title,
+                code: segment.departure.code,
+                time: new Date(segment.departure_time)
+              }
             }
           }
-        }))
+        })
       })}
     />
   )
