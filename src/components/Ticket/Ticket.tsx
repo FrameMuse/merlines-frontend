@@ -157,6 +157,8 @@ function TicketEvents(props: TicketEventsProps) {
 
 
 export interface TicketTimelineProps {
+  duration: number
+
   origin: string
   destination: string
 
