@@ -459,7 +459,7 @@ export default Ticket
 
 function humanizeSecondsDuration(lang: string, durationInSeconds: number) {
   const hours = Math.floor(durationInSeconds / 60 / 60)
-  const minutes = Math.floor((durationInSeconds % (1000 * 60 * 60)) / (1000 * 60))
+  const minutes = Math.floor((durationInSeconds % (60 * 60)) / (60))
 
   switch (lang) {
     case "ru":
