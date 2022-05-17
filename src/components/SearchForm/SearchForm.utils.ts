@@ -131,6 +131,7 @@ export function useSearchParamsEvaluation() {
     }))
 
     async function updateRoutes() {
+      dispatch(updateSearch({ hasReturnDate: searchData.routes[0].returnDate !== null }))
       await searchData.routes.forEach(async (route, index) => {
         dispatch(updateSearchRoute(index, {
           origin: {
