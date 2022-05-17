@@ -54,7 +54,7 @@ function SearchResultContainer() {
     throw new Error("useParametricSearchDataError: no `routes` param")
   }
 
-  const routes = searchData.routes.flatMap(route => route.returnDate ? [{ ...route, returnDate: undefined }, { ...route, date: route.returnDate, returnDate: undefined }] : route)
+  const routes = searchData.routes.flatMap(route => route.returnDate ? [{ ...route, returnDate: undefined }, { origin: route.destination, destination: route.origin, date: route.returnDate, returnDate: undefined }] : route)
 
   return (
     <SearchSessionProviderSuspense {...searchData} routes={routes}>
