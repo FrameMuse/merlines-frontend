@@ -103,7 +103,7 @@ function SearchFormRouteInput(props: SearchFormRouteInputProps) {
         id: place.id,
         code: place.code,
         title: place.title,
-      }, ...place.airports]
+      }, ...place.airports.map(airport => ({ ...airport, id: place.id }))]
     }
 
     return {
