@@ -32,8 +32,16 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
     props.onChange(filters)
   }
 
+  const { error, payload, query } = useSuspenseQuery(getTicketsAirFilters(session))
+  useEffect(() => {
+    if (payload == null) return
+    if (payload.in_progress === false) return
 
-  const { error, payload } = useSuspenseQuery(getTicketsAirFilters(session))
+    const interval = setInterval(() => { query() }, 5 * 1000)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [payload])
   if (error || !payload) return <>No filters</>
   return (
     <div className="ticket-list__left">
