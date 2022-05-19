@@ -27,7 +27,7 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
             transfersDuration = segmentDeparture.getTime() - prevSegmentArrival.getTime()
           }
 
-          return result + Number(segment.duration) + transfersDuration
+          return result + Number(segment.duration) + transfersDuration / 1000
         }, 0),
         departureDate: new Date(trip.start_time),
         arrivalDate: new Date(trip.end_time),
@@ -71,9 +71,9 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
           type = index === 0 ? "departure" : "return"
         }
 
-        const startTime = new Date(trip.start_time).getTime()
-        const endTime = new Date(trip.end_time).getTime()
-        let duration = endTime - startTime
+        // const startTime = new Date(trip.start_time).getTime()
+        // const endTime = new Date(trip.end_time).getTime()
+        // let duration = endTime - startTime
 
         return trip.segments.map((segment, index) => {
           const prevSegment = trip.segments[index - 1]
@@ -81,10 +81,10 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
             const prevSegmentArrival = new Date(prevSegment.arrival_time)
             const segmentDeparture = new Date(segment.departure_time)
 
-            duration = segmentDeparture.getTime() - prevSegmentArrival.getTime()
+            // duration = segmentDeparture.getTime() - prevSegmentArrival.getTime()
           }
           return {
-            transferDuration: duration / 1000,
+            transferDuration: Number(segment.duration),
             index,
             id: segment.id,
             type: index === 0 ? type : "transfer",

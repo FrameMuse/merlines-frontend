@@ -184,7 +184,7 @@ export function TicketTimeline(props: TicketTimelineProps) {
         <span>{props.departureDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
         <div className="ticket-timeline-visual">
           <div className="ticket-timeline-visual__text">
-            {humanizeSecondsDuration("ru", duration / 1000)} {ll.searchResult.inTransit}
+            {humanizeSecondsDuration("ru", props.duration)} {ll.searchResult.inTransit}
           </div>
           <div className="ticket-timeline-entries">
             {props.entries.map((entry, index) => (
