@@ -27,7 +27,10 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
   const { session } = useContext(searchSessionContext)
   const weekPrices = useContext(searchWeekPricesContext)
 
-  useEffect(() => props.onChange(filters), [filters])
+  function onChange(value: Partial<SearchFiltersType>) {
+    setFilters(value)
+    props.onChange(filters)
+  }
 
 
   const { error, payload } = useSuspenseQuery(getTicketsAirFilters(session))
@@ -37,7 +40,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
       <SearchResultSubscribePrice isTracked={props.isTracked} />
       <div className="filters">
         <SearchPriceFilter prices={[payload.best_price || weekPrices?.[0]?.price, payload.best_price_of_faster]} onChange={value => props.onChange({ ...filters, ordering: value === "cheap" ? "best_price" : "final_time" })} />
-        <SearchFilters onChange={setFilters}>
+        <SearchFilters onChange={onChange}>
           <SearchFilter label={ll.searchResult.transfers.title}>
             <SearchFilterCheckboxes name="transfers">
               {payload.transfers.slice(0, 4).map(transfer => (
