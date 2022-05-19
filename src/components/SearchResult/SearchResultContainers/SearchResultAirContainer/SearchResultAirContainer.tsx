@@ -47,7 +47,7 @@ function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerP
   const weekPrices = useContext(searchWeekPricesContext)
 
   const [page, setPage] = useState(1)
-  const [pageSize] = useState(5)
+  const [pageSize] = useState(10)
 
   const { error, loading, payload } = useQuery(getTicketsAir(session, page, pageSize, props.filters))
   if (error) {
