@@ -1,0 +1,75 @@
+@import "~styles/vars";
+@import "~styles/mixin";
+
+.cookie {
+	background-color: var(--color-white);
+	box-shadow: $shadow-3;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 20;
+
+	&--closed {
+		display: none;
+	}
+}
+
+.cookie__container {
+	@include container;
+
+	padding-top: 25px;
+	padding-bottom: 25px;
+
+	@media #{$media-md} {
+		display: grid;
+		grid-template-columns: 15fr 7fr;
+		gap: 30px;
+		padding-top: 37px;
+		padding-bottom: 35px;
+	}
+
+	@media #{$media-lg} {
+		gap: 110px;
+		padding-left: 111px;
+		padding-right: 111px;
+	}
+
+	@media #{$media-xl} {
+		grid-template-columns: 36fr 17fr;
+		gap: 125px;
+		max-width: 920px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.cookie__text {
+	margin-bottom: 0;
+}
+
+.cookie__text-underline {
+	text-decoration: underline;
+}
+
+.cookie__button {
+	@include resetBtn;
+	@include button;
+
+	display: block;
+	width: 100%;
+	margin-top: 20px;
+	padding: 20px 20px 21px;
+	border-radius: 4px;
+
+	@media (min-width: 380px) {
+		width: 350px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	@media #{$media-md} {
+		width: 100%;
+		margin: 0;
+	}
+}

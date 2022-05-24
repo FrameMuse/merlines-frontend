@@ -1,0 +1,47 @@
+@import "~styles/vars";
+@import "~styles/mixin";
+
+.policy {
+	padding-top: 40px;
+	padding-bottom: 40px;
+
+	@media #{$media-md} {
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+
+	@media #{$media-lg} {
+		padding-top: 70px;
+		padding-bottom: 70px;
+	}
+
+	@media #{$media-xl} {
+		padding-top: 60px;
+		padding-bottom: 80px;
+	}
+}
+
+.policy__container {
+	@include container;
+}
+
+.policy__h2 {
+	font-size: 18px;
+	line-height: 1.25;
+	margin-bottom: 5px;
+
+	@media #{$media-md} {
+		font-size: 24px;
+		margin-bottom: 15px;
+	}
+}
+
+.policy__h3 {
+	margin-top: 40px;
+	margin-bottom: 20px;
+
+	@media #{$media-md} {
+		margin-top: 50px;
+		margin-bottom: 25px;
+	}
+}

@@ -13,7 +13,7 @@ import { SearchResultAirFiltersContainer } from "./SearchResultAirFiltersContain
 import SearchResultAirTicket from "./SearchResultAirTicket"
 
 const DEFAULT_PAGE = 1
-const DEFAULT_PAGE_SIZE = 5
+const DEFAULT_PAGE_SIZE = 10
 
 function SearchResultAirContainer() {
   const { session } = useContext(searchSessionContext)

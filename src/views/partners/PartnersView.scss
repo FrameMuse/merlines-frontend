@@ -1,0 +1,272 @@
+@import "~styles/vars";
+@import "~styles/mixin";
+
+.partners {
+	padding-bottom: 60px;
+
+	@media #{$media-md} {
+		padding-bottom: 70px;
+	}
+}
+
+.partners__container {
+	@include container;
+}
+
+.partners__head {
+	padding-top: 280px;
+	padding-bottom: 50px;
+	background-color: var(--color-white);
+	background-image: url("../../images/business-meeting-mobile.png");
+	background-repeat: no-repeat;
+	background-position: center 34px;
+	background-blend-mode: luminosity;
+	background-size: 290px 217px;
+
+	@media (min-resolution: 2dppx) {
+		background-image: url("../../images/business-meeting-mobile@2x.png");
+	}
+
+	@media #{$media-md} {
+		padding-top: 102px;
+		padding-bottom: 153px;
+		background-image: url("../../images/business-meeting-tablet.png");
+		background-position: right 102px;
+		background-size: 360px 269px;
+
+		@media (min-resolution: 2dppx) {
+			background-image: url("../../images/business-meeting-tablet@2x.png");
+		}
+
+		&>* {
+			margin-right: 52%;
+		}
+	}
+
+	@media #{$media-lg} {
+		padding-top: 60px;
+		padding-bottom: 187px;
+		background-image: url("../../images/business-meeting-laptop.png");
+		background-position: right 60px;
+		background-size: 449px 336px;
+
+		@media (min-resolution: 2dppx) {
+			background-image: url("../../images/business-meeting-laptop@2x.png");
+		}
+	}
+
+	@media #{$media-xl} {
+		padding-top: 70px;
+		padding-bottom: 220px;
+		background-image: url("../../images/business-meeting-desktop.png");
+		background-position: right 68px;
+		background-size: 540px 404px;
+
+		@media (min-resolution: 2dppx) {
+			background-image: url("../../images/business-meeting-desktop@2x.png");
+		}
+
+		&>* {
+			margin-right: 55%;
+		}
+	}
+}
+
+.partners__h1 {
+	margin-bottom: 20px;
+
+	@media #{$media-md} {
+		margin-top: 62px;
+	}
+
+	@media #{$media-lg} {
+		margin-top: 104px;
+	}
+
+	@media #{$media-xl} {
+		margin-top: 137px;
+	}
+}
+
+.partners__advantages {
+	color: var(--color-white);
+	padding-top: 54px;
+	padding-bottom: 52px;
+	background-color: var(--color-blue);
+
+	@media #{$media-md} {
+		padding-bottom: 46px;
+	}
+
+	@media #{$media-lg} {
+		padding-bottom: 60px;
+	}
+
+	@media #{$media-xl} {
+		padding-bottom: 85px;
+	}
+}
+
+.partners__advantages-list {
+	@include ul;
+
+	display: grid;
+	gap: 41px;
+	margin-top: 45px;
+
+	@media #{$media-md} {
+		grid-template-columns: 1fr 1fr;
+		gap: 30px;
+		margin-top: 30px;
+	}
+
+	@media #{$media-lg} {
+		gap: 50px 30px;
+	}
+
+	@media #{$media-xl} {
+		gap: 45px 30px;
+		margin-top: 33px;
+	}
+}
+
+.partners__advantages-number {
+	display: block;
+	font-family: $title-font;
+	font-size: 64px;
+	font-weight: 700;
+	margin-bottom: 21px;
+}
+
+.partners__advantages-h3 {
+	margin-bottom: 10px;
+
+	@media #{$media-md} {
+		font-size: 18px;
+	}
+}
+
+.partners__profit {
+	display: grid;
+	gap: 30px;
+	padding-top: 42px;
+	padding-bottom: 64px;
+
+	@media #{$media-md} {
+		grid-template-columns: 1fr 1fr;
+		column-gap: 49px;
+		padding-top: 50px;
+		padding-bottom: 72px;
+	}
+
+	@media #{$media-lg} {
+		column-gap: 63px;
+	}
+
+	@media #{$media-xl} {
+		column-gap: 56px;
+		padding-top: 52px;
+	}
+}
+
+.partners__profit-h2 {
+	margin-bottom: 20px;
+
+	@media #{$media-md} {
+		margin-bottom: 30px;
+	}
+}
+
+.partners__profit-text {
+	color: var(--color-grey-2);
+
+	@media #{$media-lg} {
+		padding-right: 35px;
+	}
+
+	@media #{$media-xl} {
+		width: 545px;
+	}
+}
+
+.partners__profit-list {
+	@include ul;
+}
+
+.partners__profit-item {
+	margin-bottom: 21px;
+	padding-left: 53px;
+	position: relative;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&::before {
+		content: "";
+		width: 33px;
+		height: 33px;
+		background-repeat: no-repeat;
+		position: absolute;
+		top: 3px;
+		left: 0;
+	}
+
+	&--client::before {
+		background-image: url("../../img/icons/client.svg");
+	}
+
+	&--sale::before {
+		background-image: url("../../img/icons/sale.svg");
+	}
+
+	&--promotion::before {
+		background-image: url("../../img/icons/promotion.svg");
+	}
+
+	@media #{$media-md} {
+		margin-bottom: 31px;
+	}
+
+	@media #{$media-lg} {
+		margin-bottom: 40px;
+		padding-left: 63px;
+	}
+
+	@media #{$media-xl} {
+		margin-bottom: 57px;
+	}
+}
+
+.partners__profit-h3 {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.partners__special {
+	padding-bottom: 60px;
+
+	@media #{$media-md} {
+		padding-bottom: 70px;
+	}
+
+	@media #{$media-lg} {
+		padding-bottom: 73px;
+	}
+
+	@media #{$media-xl} {
+		padding-bottom: 74px;
+	}
+}
+
+.partners__special-text {
+	max-width: 635px;
+}
+
+.partners__special-cards {
+	margin-top: 40px;
+
+	@media #{$media-md} {
+		margin-top: 30px;
+	}
+}

@@ -3,7 +3,7 @@ import SearchPriceFilter from "components/SearchResult/SearchResultFilters/Searc
 import { AirFiltersType } from "interfaces/Search"
 import useLocalization from "plugins/localization/hook"
 import { useContext, useEffect, useState } from "react"
-import { useSuspenseQuery } from "react-fetching-library"
+import { useQuery, useSuspenseQuery } from "react-fetching-library"
 import { getDefaultSelectedCurrency, getDefaultSelectedLanguage, numberToLetter, pluralize } from "utils"
 
 import { searchSessionContext, searchWeekPricesContext } from "../../SearchResult"
@@ -32,7 +32,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
     props.onChange(filters)
   }
 
-  const { error, payload, query } = useSuspenseQuery(getTicketsAirFilters(session))
+  const { error, payload, query } = useQuery(getTicketsAirFilters(session))
   useEffect(() => {
     if (payload == null) return
     if (payload.in_progress === false) return

@@ -2,13 +2,12 @@
 import "./filters.scss"
 
 import useDebounce from "hooks/useDebounce"
-import {noop} from "lodash"
-import {createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react"
+import { noop } from "lodash"
+import useLocalization from "plugins/localization/hook"
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react"
 
-import useLocalization from "../../../plugins/localization/hook"
 
-
-type SearchFiltersType = Record<string, string | number | boolean | undefined>
+export type SearchFiltersType = Record<string, string | number | boolean | undefined>
 export const searchFiltersContext = createContext<[SearchFiltersType, Dispatch<SetStateAction<SearchFiltersType>>]>([{}, noop])
 
 export interface SearchFiltersBaseProps<T extends object> {
@@ -26,7 +25,7 @@ function SearchFilters(props: SearchFiltersProps) {
   return (
     <searchFiltersContext.Provider value={reducer}>
       <div className="filters__container">
-        <SearchFiltersHeader/>
+        <SearchFiltersHeader />
         <div className="search-filters">{props.children}</div>
       </div>
     </searchFiltersContext.Provider>
