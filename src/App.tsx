@@ -22,6 +22,7 @@ import AboutView from "views/about/AboutView"
 import CookiesView from "views/cookies/CookiesView"
 import FAQView from "views/faq/FAQView"
 import PartnersView from "views/partners/PartnersView"
+import PriceListView from "views/price-list/PriceListView"
 import PrivacyPolicyView from "views/privacy-policy/PrivacyPolicyView"
 
 import Article from "./components/Article/Article"
@@ -68,10 +69,10 @@ function AppRouter() {
       <Route path={routes.footer.aboutUs}><AboutView /></Route>
       {/* <Route path={routes.footer.aboutProject}><AboutProject /></Route> */}
       {/* <Route path={routes.footer.rules}><ErrorView code="404" /></Route> */}
-      <Route path={routes.footer.cookies}><CookiesView /></Route>
+      {/* <Route path={routes.footer.cookies}><CookiesView /></Route> */}
       <Route path={routes.footer.privacyPolicy}><PrivacyPolicyView /></Route>
       {/* <Route path={routes.footer.advertising}><Advertising /></Route> */}
-      {/* <Route path={routes.footer.priceList}><Advertising /></Route> */}
+      {/* <Route path={routes.footer.priceList}><PriceListView /></Route> */}
       <Route path={routes.footer.forPartners}><PartnersView /></Route>
       <Route path={routes.footer.faq}><FAQView /></Route>
       <Route path={routes.landing}><LandingPage /><Subscribe /></Route>

@@ -36,7 +36,7 @@ const routes = {
     cookies: "/cookies",
     privacyPolicy: "/privacy",
     advertising: "/ad",
-    priceList: "/price",
+    priceList: "/price-list",
     forPartners: "/partners",
     help: "/help",
     faq: "/faq",

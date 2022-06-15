@@ -5,7 +5,9 @@ import { deleteFavourite, postFavourites } from "api/actions/favourites"
 import { getTicketsAirOfferLink, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
 import ClientAPI from "api/client"
 import Icon from "components/common/Icon"
+import TicketRedirect from "components/Popups/TicketRedirect/TicketRedirect"
 import { searchSessionContext } from "components/SearchResult/SearchResult"
+import { Popup } from "plugins/popup"
 import { useContext, useState } from "react"
 import { useClient, useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
@@ -243,17 +245,9 @@ interface TicketOfferProps {
 
 function TicketOffer(props: TicketOfferProps) {
   const ll = useLocalization(ll => ll)
-  const client = useClient()
-  const [link, setLink] = useState<string>()
   const { session } = useContext(searchSessionContext)
-  async function redirectToOffer() {
-    const { error, payload } = await client.query(getTicketsAirOfferLink(session, props.id))
-    if (error) return
-    if (payload == null) return
 
-    setLink(payload.link)
-    window.open(payload.link)
-  }
+  const action = getTicketsAirOfferLink(session, props.id)
   return (
     <div className="ticket-preposition">
       <div className="ticket-preposition__group">
@@ -264,10 +258,7 @@ function TicketOffer(props: TicketOfferProps) {
         <img className="ticket-preposition__image" src={props.image} />
         <div className="ticket-preposition__desc">{ll.searchResult.to} {props.title}</div>
       </div>
-      {link != null && (
-        <p>{ll.searchResult.didntOpen} <a href={link} rel="noopener noreferrer" target="_blank"></a></p>
-      )}
-      <button className="ticket-prepositions__submit" type="button" onClick={redirectToOffer}>{ll.searchResult.choose}</button>
+      <button className="ticket-prepositions__submit" type="button" onClick={() => Popup.open(TicketRedirect, { action, image: props.image, name: props.title })}>{ll.searchResult.choose}</button>
     </div>
   )
 }
@@ -472,7 +463,3 @@ function humanizeSecondsDuration(lang: string, durationInSeconds: number) {
       return `${hours}:${minutes}`
   }
 }
-
-// function getShortDate(lang: string, date: Date) {
-//   return date.toLocaleDateString(lang, { month: "short", day: "numeric", weekday: "short" })
-// }
