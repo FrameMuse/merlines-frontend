@@ -139,6 +139,7 @@
     "sorting": "Отсортировать",
     "filters": "Фильтры",
     "clearAll": "очистить все",
+    "none": "Нету",
     "transfers": {
       "title": "Пересадки",
       "plural": [
@@ -186,6 +187,7 @@
     "food": "Еда",
     "drinks": "Напитки",
     "transport": "Транспорт",
+    "entrainment": "Услуги",
     "entertainment": "Развлечения",
     "charger": "Зарядка",
     "alcohol": "Алкоголь"

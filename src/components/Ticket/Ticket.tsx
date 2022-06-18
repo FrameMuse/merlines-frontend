@@ -2,7 +2,7 @@
 import "./Ticket.style.scss"
 
 import { deleteFavourite, postFavourites } from "api/actions/favourites"
-import { getTicketsAirOfferLink, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
+import { FreeEntry, getTicketsAirOfferLink, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
 import ClientAPI from "api/client"
 import Icon from "components/common/Icon"
 import TicketRedirect from "components/Popups/TicketRedirect/TicketRedirect"
@@ -351,52 +351,41 @@ function About(props: { segmentId: number }) {
           <div className="entries__key">{ll.searchResult.carrier}:</div>
           <div className="entries__value">{payload.airline}</div>
         </div>
-        {payload.food && (
-          <div className="entries__entry">
-            <div className="entries__key">{ll.searchResult.food}:</div>
-            <div className="entries__value">{freeEntry[payload.food]}</div>
-          </div>
-        )}
-        {payload.beverage && (
-          <div className="entries__entry">
-            <div className="entries__key">{ll.searchResult.drinks}:</div>
-            <div className="entries__value">{freeEntry[payload.beverage]}</div>
-          </div>
-        )}
+        <div className="entries__entry">
+          <div className="entries__key">{ll.searchResult.food}:</div>
+          <div className="entries__value">{freeEntry[payload.food ?? FreeEntry.no]}</div>
+        </div>
+
+        <div className="entries__entry">
+          <div className="entries__key">{ll.searchResult.drinks}:</div>
+          <div className="entries__value">{freeEntry[payload.beverage ?? FreeEntry.no]}</div>
+        </div>
         <div className="entries__entry">
           <div className="entries__key">{ll.searchResult.transport}:</div>
           <div className="entries__value">{payload.aircraft}</div>
         </div>
-        {payload.entertainment && (
-          <div className="entries__entry">
-            <div className="entries__key">{ll.searchResult.entrainment}:</div>
-            <div className="entries__value">{freeEntry[payload.entertainment]}</div>
-          </div>
-        )}
-        {payload.power && (
-          <div className="entries__entry">
-            <div className="entries__key">{ll.searchResult.charger}:</div>
-            <div className="entries__value">{freeEntry[payload.power]}</div>
-          </div>
-        )}
-        {payload.travel_class && (
-          <div className="entries__entry">
-            <div className="entries__key">{ll.main.class}:</div>
-            <div className="entries__value">{payload.travel_class ? "Бизнес" : "Эконом"}</div>
-          </div>
-        )}
-        {payload.alcohol && (
-          <div className="entries__entry">
-            <div className="entries__key">{ll.searchResult.alcohol}:</div>
-            <div className="entries__value">{freeEntry[payload.alcohol]}</div>
-          </div>
-        )}
-        {payload.wifi && (
-          <div className="entries__entry">
-            <div className="entries__key">Wi-Fi:</div>
-            <div className="entries__value">{freeEntry[payload.wifi]}</div>
-          </div>
-        )}
+
+        <div className="entries__entry">
+          <div className="entries__key">{ll.searchResult.entrainment}:</div>
+          <div className="entries__value">{freeEntry[payload.entertainment ?? FreeEntry.no]}</div>
+        </div>
+
+        <div className="entries__entry">
+          <div className="entries__key">{ll.searchResult.charger}:</div>
+          <div className="entries__value">{freeEntry[payload.power ?? FreeEntry.no]}</div>
+        </div>
+        <div className="entries__entry">
+          <div className="entries__key">{ll.main.class}:</div>
+          <div className="entries__value">{payload.travel_class ? "Бизнес" : "Эконом"}</div>
+        </div>
+        <div className="entries__entry">
+          <div className="entries__key">{ll.searchResult.alcohol}:</div>
+          <div className="entries__value">{freeEntry[payload.alcohol ?? FreeEntry.no]}</div>
+        </div>
+        <div className="entries__entry">
+          <div className="entries__key">Wi-Fi:</div>
+          <div className="entries__value">{freeEntry[payload.wifi ?? FreeEntry.no]}</div>
+        </div>
       </div>
     </div>
   )

@@ -92,7 +92,7 @@ export const getTicketsAirFilters = (session: string): Action<{
   }
 })
 
-enum FreeEntry {
+export enum FreeEntry {
   no, free, paid
 }
 
