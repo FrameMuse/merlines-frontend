@@ -4,7 +4,7 @@ import React, { useEffect } from "react"
 
 interface props {
   visible: boolean
-  onCancel: () => void
+  onCancel?: () => void
   closeBtn?: boolean
 }
 
@@ -25,7 +25,7 @@ const Modal: React.FC<props> = ({ visible, closeBtn, children, onCancel }) => {
           </svg>
         </button>}
         <div className={"m-popup__content"}>
-          {children}
+          {visible && children}
         </div>
       </div>
     </div>

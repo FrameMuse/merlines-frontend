@@ -8,7 +8,7 @@ import Icon from "../../common/Icon"
 
 interface TicketRedirectProps {
   action: ReturnType<typeof getTicketsAirOfferLink>
-  name: string
+  title: string
   image: string
 }
 
@@ -25,7 +25,7 @@ function TicketRedirect(props: TicketRedirectProps) {
   }
   useEffect(() => { redirectToOffer() }, [])
   return (
-    <section className="transfer overlay">
+    <section className="transfer">
       <div className="transfer__container">
         <div className="transfer__content">
           <Icon className="transfer__loading" name="loading" />
@@ -33,7 +33,7 @@ function TicketRedirect(props: TicketRedirectProps) {
             Немного терпения, переходим на сайт
             {" "}
             {link && (
-              <a target="_blank" className="transfer__link" href={link}>{props.name}</a>
+              <a target="_blank" className="transfer__link" href={link}>{props.title}</a>
             )}
           </p>
           <div className="transfer__logo">

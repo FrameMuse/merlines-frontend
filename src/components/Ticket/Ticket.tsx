@@ -5,6 +5,7 @@ import { deleteFavourite, postFavourites } from "api/actions/favourites"
 import { FreeEntry, getTicketsAirOfferLink, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
 import ClientAPI from "api/client"
 import Icon from "components/common/Icon"
+import Modal from "components/Modal/Modal"
 import TicketRedirect from "components/Popups/TicketRedirect/TicketRedirect"
 import { searchSessionContext } from "components/SearchResult/SearchResult"
 import { Popup } from "plugins/popup"
@@ -17,6 +18,7 @@ import { classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLangu
 import { deleteTrackingTicket, postTrackingTicket } from "../../api/actions/tracking"
 import useLocalization from "../../plugins/localization/hook"
 import { humanizeDate } from "../SearchForm/SearchForm.utils"
+
 
 
 interface TicketProps {
@@ -246,6 +248,7 @@ interface TicketOfferProps {
 function TicketOffer(props: TicketOfferProps) {
   const ll = useLocalization(ll => ll)
   const { session } = useContext(searchSessionContext)
+  const [visible, setVisible] = useState(false)
 
   const action = getTicketsAirOfferLink(session, props.id)
   return (
@@ -258,7 +261,10 @@ function TicketOffer(props: TicketOfferProps) {
         <img className="ticket-preposition__image" src={props.image} />
         <div className="ticket-preposition__desc">{ll.searchResult.to} {props.title}</div>
       </div>
-      <button className="ticket-prepositions__submit" type="button" onClick={() => Popup.open(TicketRedirect, { action, image: props.image, name: props.title })}>{ll.searchResult.choose}</button>
+      <button className="ticket-prepositions__submit" type="button" onClick={() => setVisible(true)}>{ll.searchResult.choose}</button>
+      <Modal visible={visible} onCancel={() => setVisible(false)}>
+        <TicketRedirect action={action} image={props.image} title={props.title} />
+      </Modal>
     </div>
   )
 }

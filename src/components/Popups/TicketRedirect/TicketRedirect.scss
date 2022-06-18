@@ -48,6 +48,8 @@
 }
 
 .transfer__text {
+	line-height: 1.25;
+
 	font-family: $title-font;
 	font-size: 18px;
 	font-weight: 500;
@@ -64,6 +66,10 @@
 .transfer__link {
 	color: var(--color-base);
 	font-weight: 700;
+
+	&:hover {
+		text-decoration: underline !important;
+	}
 }
 
 .transfer__logo {
