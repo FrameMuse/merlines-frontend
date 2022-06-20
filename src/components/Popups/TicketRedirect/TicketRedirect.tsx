@@ -32,9 +32,7 @@ function TicketRedirect(props: TicketRedirectProps) {
           <p className="transfer__text">
             Немного терпения, переходим на сайт
             {" "}
-            {link && (
-              <a target="_blank" className="transfer__link" href={link}>{props.title}</a>
-            )}
+            <a target="_blank" className="transfer__link" href={link || ""}>{props.title}</a>
           </p>
           <div className="transfer__logo">
             <img src={props.image} alt="transfer compony logo" />

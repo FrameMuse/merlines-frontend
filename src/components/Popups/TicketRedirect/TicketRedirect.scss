@@ -75,6 +75,10 @@
 .transfer__logo {
 	margin-top: 30px;
 
+	img {
+		object-fit: contain;
+	}
+
 	@media #{$media-md} {
 		img {
 			width: 104px;

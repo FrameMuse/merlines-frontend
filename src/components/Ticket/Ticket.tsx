@@ -12,8 +12,9 @@ import { Popup } from "plugins/popup"
 import { useContext, useState } from "react"
 import { useClient, useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
-import { classWithModifiers, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
+import { classWithModifiers, createQuery, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
 
 import { deleteTrackingTicket, postTrackingTicket } from "../../api/actions/tracking"
 import useLocalization from "../../plugins/localization/hook"
@@ -248,9 +249,19 @@ interface TicketOfferProps {
 function TicketOffer(props: TicketOfferProps) {
   const ll = useLocalization(ll => ll)
   const { session } = useContext(searchSessionContext)
-  const [visible, setVisible] = useState(false)
+  // const [visible, setVisible] = useState(false)
+  // const history = useHistory()
 
   const action = getTicketsAirOfferLink(session, props.id)
+  function asd() {
+    const d = window.open("/#!/redirect?" + createQuery({
+      id: props.id,
+      session,
+      image: props.image, title: props.title
+    }), "_blank")
+
+    // history.push("redirect", { action, image: props.image, title: props.title })
+  }
   return (
     <div className="ticket-preposition">
       <div className="ticket-preposition__group">
@@ -261,10 +272,10 @@ function TicketOffer(props: TicketOfferProps) {
         <img className="ticket-preposition__image" src={props.image} />
         <div className="ticket-preposition__desc">{ll.searchResult.to} {props.title}</div>
       </div>
-      <button className="ticket-prepositions__submit" type="button" onClick={() => setVisible(true)}>{ll.searchResult.choose}</button>
-      <Modal visible={visible} onCancel={() => setVisible(false)}>
+      <button className="ticket-prepositions__submit" type="button" onClick={asd}>{ll.searchResult.choose}</button>
+      {/* <Modal visible={visible} onCancel={() => setVisible(false)}>
         <TicketRedirect action={action} image={props.image} title={props.title} />
-      </Modal>
+      </Modal> */}
     </div>
   )
 }

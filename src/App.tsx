@@ -24,6 +24,7 @@ import FAQView from "views/faq/FAQView"
 import PartnersView from "views/partners/PartnersView"
 import PriceListView from "views/price-list/PriceListView"
 import PrivacyPolicyView from "views/privacy-policy/PrivacyPolicyView"
+import RedirectView from "views/redirect/RedirectView"
 
 import Article from "./components/Article/Article"
 import Blog from "./components/Blog/Blog"
@@ -38,7 +39,7 @@ function App() {
       <Route>
         <Header />
         <main id="main-content" className="main">
-          <AppRouter />
+          <AppRoutes />
         </main>
         <Footer />
         <PopupContainer className="modal" />
@@ -49,7 +50,7 @@ function App() {
 }
 
 
-function AppRouter() {
+function AppRoutes() {
   return (
     <Switch>
       <Route path="/user"><UserCabinet /></Route>
@@ -78,6 +79,8 @@ function AppRouter() {
       <Route path={routes.landing}><LandingPage /><Subscribe /></Route>
 
       <Route path="/error/:code" render={props => <ErrorView {...props.match.params} />} />
+
+      <Route path="/redirect"><RedirectView /></Route>
       <Route><ErrorView code="404" /></Route>
     </Switch >
   )
