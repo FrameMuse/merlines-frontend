@@ -19,7 +19,7 @@ function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
   const [filters, setFilters] = useContext(searchFiltersContext)
 
   const [min, setMin] = useState(props.min)
-  const [max, setMax] = useState(props.max)
+  const [max, setMax] = useState(props.max - 1)
 
   useEffect(() => {
     if (props.deltaTime) {
@@ -35,7 +35,7 @@ function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
   useEffect(() => {
     if (Object.keys(filters).length === 0) {
       setMin(props.min)
-      setMax(props.max)
+      setMax(props.max - 1)
     }
   }, [filters])
 
@@ -54,7 +54,7 @@ function SearchFilterTimeRange(props: SearchFilterTimeRangeRangeProps) {
         thumbClassName="horizontal-slider__thumb"
         trackClassName="horizontal-slider__track"
         min={props.min}
-        max={props.max}
+        max={props.max - 1}
         value={[min, max]}
         defaultValue={[min, max]}
         ariaLabel={["Lower thumb", "Upper thumb"]}
