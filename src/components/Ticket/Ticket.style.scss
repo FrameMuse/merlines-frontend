@@ -406,6 +406,17 @@
 	display: grid;
 	justify-items: center;
 	row-gap: 0.5em;
+
+	&:first-child {
+		display: flex;
+		align-items: center;
+
+		margin: 0 auto;
+
+		&>:last-child {
+			margin-left: 1em;
+		}
+	}
 }
 
 .ticket-preposition__title {

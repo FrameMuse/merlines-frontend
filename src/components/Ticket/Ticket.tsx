@@ -262,10 +262,10 @@ function TicketOffer(props: TicketOfferProps) {
   }
   return (
     <div className="ticket-preposition">
-      <div className="ticket-preposition__group">
+      {/* <div className="ticket-preposition__group">
         <div className="ticket-preposition__title">{props.price.toPrice(getDefaultSelectedLanguage(), getDefaultSelectedCurrency())}</div>
         <div className="ticket-preposition__desc">{ll.searchResult.pricePerOneAdult}</div>
-      </div>
+      </div> */}
       <div className="ticket-preposition__group">
         <img className="ticket-preposition__image" src={props.image} />
         <div className="ticket-preposition__desc">{ll.searchResult.to} {props.title}</div>
