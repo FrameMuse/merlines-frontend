@@ -2,17 +2,13 @@
 import "./Ticket.style.scss"
 
 import { deleteFavourite, postFavourites } from "api/actions/favourites"
-import { FreeEntry, getTicketsAirOfferLink, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
-import ClientAPI from "api/client"
+import { FreeEntry, getTicketsAirSegmentAbout, getTicketsAirTicketOffers } from "api/actions/tickets"
+import { isValidResponse } from "api/client"
 import Icon from "components/common/Icon"
-import Modal from "components/Modal/Modal"
-import TicketRedirect from "components/Popups/TicketRedirect/TicketRedirect"
 import { searchSessionContext } from "components/SearchResult/SearchResult"
-import { Popup } from "plugins/popup"
 import { useContext, useState } from "react"
 import { useClient, useQuery } from "react-fetching-library"
 import { useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 import { classWithModifiers, createQuery, getDefaultSelectedCurrency, getDefaultSelectedLanguage } from "utils"
 
@@ -100,47 +96,52 @@ function TicketEvents(props: TicketEventsProps) {
   const [noticeChecked, setNoticeChecked] = useState(props.noticeChecked)
   const [favouriteChecked, setFavouriteChecked] = useState(props.favouriteChecked)
   const transport = useSelector(state => state.search.transport)
-  function onFavourite() {
+  const client = useClient()
+  async function onFavourite() {
+    setFavouriteChecked(!favouriteChecked)
+
     if (favouriteChecked) {
-      ClientAPI
-        .query(deleteFavourite(transport, props.ticketId))
-        .then(() => {
-          setFavouriteChecked(false)
-          toast.success(ll.searchResult.deleteFromFavSuccess, {
-            autoClose: 2500,
-            pauseOnHover: false,
-            closeOnClick: true,
-          })
-        })
-      return
-    }
-
-    ClientAPI
-      .query(postFavourites(transport, props.ticketId))
-      .then(() => {
+      const response = await client.query(deleteFavourite(transport, props.ticketId))
+      if (!isValidResponse(response)) {
         setFavouriteChecked(true)
+        return
+      }
+      toast.success(ll.searchResult.deleteFromFavSuccess, {
+        autoClose: 2500,
+        pauseOnHover: false,
+        closeOnClick: true,
       })
-  }
-  function onNotice() {
-    if (noticeChecked) {
-      ClientAPI
-        .query(deleteTrackingTicket(transport, props.ticketId))
-        .then(() => {
-          setNoticeChecked(false)
-          toast.success(ll.searchResult.noticeCanceled, {
-            autoClose: 2500,
-            pauseOnHover: false,
-            closeOnClick: true,
-          })
-        })
       return
     }
 
-    ClientAPI
-      .query(postTrackingTicket(transport, session, props.ticketId))
-      .then(() => {
+    const response = await client.query(postFavourites(transport, props.ticketId))
+    if (!isValidResponse(response)) {
+      setFavouriteChecked(false)
+      return
+    }
+  }
+  async function onNotice() {
+    setNoticeChecked(!noticeChecked)
+
+    if (noticeChecked) {
+      const response = await client.query(deleteTrackingTicket(transport, props.ticketId))
+      if (!isValidResponse(response)) {
         setNoticeChecked(true)
+        return
+      }
+      toast.success(ll.searchResult.noticeCanceled, {
+        autoClose: 2500,
+        pauseOnHover: false,
+        closeOnClick: true,
       })
+      return
+    }
+
+    const response = await client.query(postTrackingTicket(transport, session, props.ticketId))
+    if (!isValidResponse(response)) {
+      setNoticeChecked(false)
+      return
+    }
   }
   function onShare() {
     alert(ll.searchResult.shareLink + window.location)
@@ -249,12 +250,9 @@ interface TicketOfferProps {
 function TicketOffer(props: TicketOfferProps) {
   const ll = useLocalization(ll => ll)
   const { session } = useContext(searchSessionContext)
-  // const [visible, setVisible] = useState(false)
-  // const history = useHistory()
 
-  const action = getTicketsAirOfferLink(session, props.id)
   function asd() {
-    const d = window.open("/#!/redirect?" + createQuery({
+    window.open("/#!/redirect?" + createQuery({
       id: props.id,
       session,
       image: props.image, title: props.title
