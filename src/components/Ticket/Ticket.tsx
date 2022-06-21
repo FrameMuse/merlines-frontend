@@ -217,20 +217,39 @@ interface TicketOffersProps {
 function TicketOffers(props: TicketOffersProps) {
   const ll = useLocalization(ll => ll)
   const { session } = useContext(searchSessionContext)
-  const { error, loading, payload, query } = useQuery(getTicketsAirTicketOffers(session, props.ticketId), false)
-  if (!loading && (error && !payload)) throw new Error()
+  const { error, payload, query } = useQuery(getTicketsAirTicketOffers(session, props.ticketId), false)
+  const [expanded, setExpanded] = useState(false)
+  if (error) {
+    throw new Error("")
+  }
+  async function showMore() {
+    if (payload == null) {
+      await query()
+    }
+
+    setExpanded(true)
+  }
+  function showLess() {
+    setExpanded(false)
+  }
   return (
     <div className="ticket-prepositions">
       <div className="ticket-prepositions__list">
-        {!payload && (
+        {!expanded && payload == null && (
           <TicketOffer {...props.bestOffer} />
         )}
-        {!!payload && payload.results.map(result => (
-          <TicketOffer {...result} image={`https://pics.avs.io/gates/200/50/${result.gate_id}.png`} />
+        {expanded && payload != null && payload.results.map(offer => (
+          <TicketOffer {...offer} image={`https://pics.avs.io/gates/200/50/${offer.gate_id}.png`} />
         ))}
       </div>
-      {!payload && (
-        <button className="ticket-prepositions__more" type="button" onClick={() => query()}>
+      {expanded && (
+        <button className="ticket-prepositions__more" type="button" onClick={showLess}>
+          <span>{ll.searchResult.showLessOffer}</span>
+          <Icon className="ticket-prepositions__icon" name="chevron" />
+        </button>
+      )}
+      {!expanded && (
+        <button className="ticket-prepositions__more" type="button" onClick={showMore}>
           <span>{ll.searchResult.showMoreOffer}</span>
           <Icon className="ticket-prepositions__icon" name="chevron" />
         </button>
