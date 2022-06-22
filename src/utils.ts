@@ -100,7 +100,7 @@ export function createQuery(QueryObject?: Record<string, any> | null) {
   return QueryArray.filter((query) => query).join("&")
 }
 
-export function toBase64(file: File): Promise<DataURLBase64> {
+export function fileToBase64(file: File): Promise<DataURLBase64> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -108,6 +108,26 @@ export function toBase64(file: File): Promise<DataURLBase64> {
     reader.onload = () => resolve(reader.result as DataURLBase64)
     reader.onerror = reject
   })
+}
+
+
+const getCircularReplacer = () => {
+  const seen = new WeakSet()
+  return (_key: string, value: unknown) => {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) {
+        return
+      }
+      seen.add(value)
+    }
+    return value
+  }
+}
+
+export function toBase64<T = unknown>(value?: T | null) {
+  if (value == null) return String(value)
+  const serializedValue = JSON.stringify(value, getCircularReplacer())
+  return Buffer.from(serializedValue).toString("base64")
 }
 
 

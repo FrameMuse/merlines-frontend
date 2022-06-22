@@ -974,9 +974,7 @@ class Slider extends React.Component {
   }
 
   renderThumb = (style, i) => {
-    const className = `${this.props.thumbClassName} ${
-      this.props.thumbClassName
-    }-${i} ${this.state.index === i ? this.props.thumbActiveClassName : ""}`
+    const className = `${this.props.thumbClassName} ${this.props.thumbClassName}-${i} ${this.state.index === i ? this.props.thumbActiveClassName : ""}`
 
     const props = {
       ref: (r) => {
@@ -1098,7 +1096,7 @@ class Slider extends React.Component {
     }
 
     const { interval } = this.props
-    interval(value)
+    // interval(value)
 
     const tracks = this.props.withTracks ? this.renderTracks(offset) : null
     const thumbs = this.renderThumbs(offset)

@@ -1,10 +1,10 @@
 import { getTicketsAir } from "api/actions/tickets"
-import { Action } from "api/client"
+import { Action, isValidResponse } from "api/client"
 import TransportSwitcher from "components/SearchResult/TransportSwitcher"
 import { AirFiltersType, AirTicketType } from "interfaces/Search"
 import { useContext, useEffect, useState } from "react"
-import { QueryResponse, useClient, useQuery } from "react-fetching-library"
-import { classWithModifiers, someEqual } from "utils"
+import { QueryError, useQuery } from "react-fetching-library"
+import { classWithModifiers, someEqual, toBase64 } from "utils"
 
 import { searchSessionContext, searchWeekPricesContext } from "../../SearchResult"
 import { SearchResultTickets, useProgressiveSuspenseQuery } from "../../SearchResultTickets"
@@ -49,14 +49,15 @@ function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerP
   const [page, setPage] = useState(1)
   const [pageSize] = useState(10)
 
-  const { error, loading, payload } = useQuery(getTicketsAir(session, page, pageSize, props.filters))
-  if (error) {
-    throw new Error("useQuery")
+  const response = useQuery(getTicketsAir(session, page, pageSize, props.filters))
+  if (!response.loading && !isValidResponse(response)) {
+    throw new QueryError("", response)
   }
+  const { loading, payload } = response
 
   const [results, setResults] = useState<AirTicketType[]>(props.defaultPayload.results)
 
-  useEffect(() => setPage(1), [props.filters])
+  useEffect(() => setPage(1), [toBase64(props.filters)])
   useEffect(() => setResults(props.defaultPayload.results), [session])
   useEffect(() => {
     if (payload == null) return
@@ -65,6 +66,9 @@ function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerP
     }
     setResults(results => [...results, ...payload.results])
   }, [payload])
+  useEffect(() => {
+    setResults(props.defaultPayload.results)
+  }, [props.defaultPayload])
 
   return (
     <div className={classWithModifiers("ticket-list__content", (props.loading || loading) && "loading")}>

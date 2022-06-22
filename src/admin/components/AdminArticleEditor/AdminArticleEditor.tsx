@@ -2,7 +2,7 @@ import "./AdminArticleEditor.style.scss"
 
 import { ArticleContentType } from "interfaces/Blog"
 import { ClipboardEvent, Dispatch, DragEvent, FormEvent, useEffect, useState } from "react"
-import { classWithModifiers, isImageFile, toBase64 } from "utils"
+import { classWithModifiers, fileToBase64, isImageFile } from "utils"
 
 import AdminButton from "../AdminButton/AdminButton"
 import AdminEditableTag from "../AdminEditTag/AdminEditableTag"
@@ -39,7 +39,7 @@ function AdminArticleEditor(props: AdminEditArticleProps) {
       const name = getFileId(fileToAdd)
       if (files.some(file => file.name === name)) continue
 
-      const data = await toBase64(fileToAdd)
+      const data = await fileToBase64(fileToAdd)
       // if (files.some(file => file.data === data)) continue
 
       files.push({ name, data })

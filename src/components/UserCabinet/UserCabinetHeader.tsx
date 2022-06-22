@@ -5,7 +5,7 @@ import { useClient } from "react-fetching-library"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { updateUser } from "redux/reducers/user"
-import { toBase64 } from "utils"
+import { fileToBase64 } from "utils"
 
 import useLocalization from "../../plugins/localization/hook"
 import Icon from "../common/Icon"
@@ -16,7 +16,7 @@ function UserCabinetHeader() {
   const dispatch = useDispatch()
   const client = useClient()
   async function putUserAvatar(avatarFile: File, avatarBlob: string) {
-    const avatarBase64 = await toBase64(avatarFile)
+    const avatarBase64 = await fileToBase64(avatarFile)
 
     const { error, payload } = await client.query(patchAccountMe({ avatar: avatarBase64 }))
     if (error) return

@@ -37,7 +37,7 @@ export function SearchResultAirFiltersContainer(props: SearchResultAirFiltersPro
     if (payload == null) return
     if (payload.in_progress === false) return
 
-    const interval = setInterval(() => { query() }, 5 * 1000)
+    const interval = setInterval(() => { query().then(() => setFilters({})) }, 5 * 1000)
     return () => {
       clearInterval(interval)
     }
