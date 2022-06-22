@@ -52,11 +52,6 @@ function SearchResultAirContainer() {
     return <SearchResultLoader />
   }
 
-
-
-
-  // if ()
-
   return (
     <SearchResultTickets>
       <SearchResultWeekPrice />
@@ -78,27 +73,6 @@ interface SearchResultAirTicketsContainerProps {
 function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerProps) {
   const weekPrices = useContext(searchWeekPricesContext)
   const results = props.payload.results
-
-  // const response = useQuery(getTicketsAir(session, page, pageSize, props.filters))
-  // if (!response.loading && !isValidResponse(response)) {
-  //   throw new QueryError("", response)
-  // }
-  // const { loading, payload } = response
-
-  // const [results, setResults] = useState<AirTicketType[]>(props.payload.results)
-
-  // useEffect(() => setPage(1), [toBase64(props.filters)])
-  // useEffect(() => setResults(props.payload.results), [session])
-  // useEffect(() => {
-  //   if (payload == null) return
-  //   if (page === 1) {
-  //     return setResults(payload.results)
-  //   }
-  //   setResults(results => [...results, ...payload.results])
-  // }, [payload])
-  // useEffect(() => {
-  //   setResults(props.payload.results)
-  // }, [props.payload])
 
   return (
     <div className={classWithModifiers("ticket-list__content", props.loading && "loading")}>
