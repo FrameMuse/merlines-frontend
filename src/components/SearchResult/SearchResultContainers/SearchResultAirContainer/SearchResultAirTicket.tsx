@@ -63,31 +63,28 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
         ...props.best_offer,
         image: getAgentLogo(props.best_offer.gate_id)
       }}
-      groups={props.trips.flatMap((trip, index) => {
-        let type = ""
+      groups={props.trips.flatMap((trip, groupIndex) => {
+        let type = groupIndex === 0 ? "departure" : "return"
         if (props.trips.length > 2) {
           type = "flight"
-        } else {
-          type = index === 0 ? "departure" : "return"
         }
 
-        // const startTime = new Date(trip.start_time).getTime()
-        // const endTime = new Date(trip.end_time).getTime()
-        // let duration = endTime - startTime
+        const startTime = new Date(trip.start_time).getTime()
+        const endTime = new Date(trip.end_time).getTime()
+        const totalDuration = (endTime - startTime) / 1000
 
-        return trip.segments.map((segment, index) => {
-          const prevSegment = trip.segments[index - 1]
-          if (prevSegment != null) {
-            const prevSegmentArrival = new Date(prevSegment.arrival_time)
-            const segmentDeparture = new Date(segment.departure_time)
+        return trip.segments.map((segment, segmentIndex) => {
+          const prevSegment = trip.segments[segmentIndex - 1] as (typeof segment) | undefined
 
-            // duration = segmentDeparture.getTime() - prevSegmentArrival.getTime()
-          }
+          const prevSegmentArrival = new Date(prevSegment?.arrival_time ?? 0)
+          const segmentDeparture = new Date(segment.departure_time)
+
+          const transferDuration = (segmentDeparture.getTime() - prevSegmentArrival.getTime()) / 1000
           return {
-            transferDuration: Number(segment.duration),
-            index,
+            transferDuration: prevSegment == null ? totalDuration : transferDuration,
+            index: segmentIndex,
             id: segment.id,
-            type: index === 0 ? type : "transfer",
+            type: segmentIndex === 0 ? type : "transfer",
             baggageWeight: segment.baggage_weight,
             handbagsWeight: segment.handbags_weight,
             trace: {
