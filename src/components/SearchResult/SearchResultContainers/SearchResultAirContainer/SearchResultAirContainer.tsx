@@ -1,83 +1,113 @@
 import { getTicketsAir } from "api/actions/tickets"
 import { Action, isValidResponse } from "api/client"
+import SearchResultLoader from "components/SearchResult/SearchResultLoader"
 import TransportSwitcher from "components/SearchResult/TransportSwitcher"
-import { AirFiltersType, AirTicketType } from "interfaces/Search"
-import { useContext, useEffect, useState } from "react"
-import { QueryError, useQuery } from "react-fetching-library"
-import { classWithModifiers, someEqual, toBase64 } from "utils"
+import { AirFiltersType } from "interfaces/Search"
+import { Dispatch, useContext, useEffect, useState } from "react"
+import { useQuery } from "react-fetching-library"
+import { classWithModifiers, someEqual } from "utils"
 
 import { searchSessionContext, searchWeekPricesContext } from "../../SearchResult"
-import { SearchResultTickets, useProgressiveSuspenseQuery } from "../../SearchResultTickets"
+import { SearchResultTickets } from "../../SearchResultTickets"
 import SearchResultWeekPrice from "../../SearchResultWeekPrice/SearchResultWeekPrice"
 import { SearchResultAirFiltersContainer } from "./SearchResultAirFiltersContainer"
 import SearchResultAirTicket from "./SearchResultAirTicket"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_PAGE_SIZE = 10
+const PING_INTERVAL = 5 * 1000 // every 5 seconds
 
 function SearchResultAirContainer() {
+  const [page, setPage] = useState(DEFAULT_PAGE)
+
+
   const { session } = useContext(searchSessionContext)
-  const { payload, passiveLoading } = useProgressiveSuspenseQuery(getTicketsAir(session, DEFAULT_PAGE, DEFAULT_PAGE_SIZE))
-  if (payload == null) {
+  const [filters, setFilters] = useState<Partial<AirFiltersType>>({})
+
+  const action = getTicketsAir(session, page, DEFAULT_PAGE_SIZE, filters)
+  const response = useQuery(action)
+
+
+
+  useEffect(() => {
+    if (!isValidResponse(response)) return
+    if (response.payload.in_progress === false) return
+
+    const interval = setInterval(() => { response.query() }, PING_INTERVAL)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [response.payload])
+
+
+
+  if (response.payload == null && response.loading) {
+    return <SearchResultLoader />
+  }
+  if (!isValidResponse(response)) {
     throw new Error("no payload")
   }
-  if (payload.results.length === 0) {
-    throw new Error("no results")
+
+  if (response.payload.in_progress && response.payload.results.length === 0) {
+    return <SearchResultLoader />
   }
-  const [filters, setFilters] = useState<Partial<AirFiltersType>>({})
+
+
+
+
+  // if ()
+
   return (
     <SearchResultTickets>
       <SearchResultWeekPrice />
       <SearchResultAirFiltersContainer onChange={setFilters} />
-      <SearchResultAirTicketsContainer filters={filters} loading={passiveLoading} defaultPayload={payload} />
+      <SearchResultAirTicketsContainer loading={response.loading} payload={response.payload} page={page} setPage={setPage} />
     </SearchResultTickets>
   )
 }
 
 
 interface SearchResultAirTicketsContainerProps {
-  filters: Partial<AirFiltersType>
   loading: boolean
+  payload: ReturnType<typeof getTicketsAir> extends Action<infer T> ? T : never
 
-  defaultPayload: ReturnType<typeof getTicketsAir> extends Action<infer T> ? T : never
+  page: number
+  setPage: Dispatch<number>
 }
 
 function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerProps) {
-  const { session } = useContext(searchSessionContext)
   const weekPrices = useContext(searchWeekPricesContext)
+  const results = props.payload.results
 
-  const [page, setPage] = useState(1)
-  const [pageSize] = useState(10)
+  // const response = useQuery(getTicketsAir(session, page, pageSize, props.filters))
+  // if (!response.loading && !isValidResponse(response)) {
+  //   throw new QueryError("", response)
+  // }
+  // const { loading, payload } = response
 
-  const response = useQuery(getTicketsAir(session, page, pageSize, props.filters))
-  if (!response.loading && !isValidResponse(response)) {
-    throw new QueryError("", response)
-  }
-  const { loading, payload } = response
+  // const [results, setResults] = useState<AirTicketType[]>(props.payload.results)
 
-  const [results, setResults] = useState<AirTicketType[]>(props.defaultPayload.results)
-
-  useEffect(() => setPage(1), [toBase64(props.filters)])
-  useEffect(() => setResults(props.defaultPayload.results), [session])
-  useEffect(() => {
-    if (payload == null) return
-    if (page === 1) {
-      return setResults(payload.results)
-    }
-    setResults(results => [...results, ...payload.results])
-  }, [payload])
-  useEffect(() => {
-    setResults(props.defaultPayload.results)
-  }, [props.defaultPayload])
+  // useEffect(() => setPage(1), [toBase64(props.filters)])
+  // useEffect(() => setResults(props.payload.results), [session])
+  // useEffect(() => {
+  //   if (payload == null) return
+  //   if (page === 1) {
+  //     return setResults(payload.results)
+  //   }
+  //   setResults(results => [...results, ...payload.results])
+  // }, [payload])
+  // useEffect(() => {
+  //   setResults(props.payload.results)
+  // }, [props.payload])
 
   return (
-    <div className={classWithModifiers("ticket-list__content", (props.loading || loading) && "loading")}>
+    <div className={classWithModifiers("ticket-list__content", props.loading && "loading")}>
       <TransportSwitcher prices={[weekPrices?.[0]?.price]} />
       {results.filter(someEqual("id")).map(ticket => (
         <SearchResultAirTicket {...ticket} key={ticket.id} />
       ))}
-      {(page * pageSize) < (payload?.count || props.defaultPayload.count) && (
-        <button className="ticket-list__more" type="button" onClick={() => setPage(page + 1)}>Загрузить ещё {pageSize} билетов</button>
+      {(props.page * DEFAULT_PAGE_SIZE) < (props.payload.count) && (
+        <button className="ticket-list__more" type="button" onClick={() => props.setPage(props.page + 1)}>Загрузить ещё {DEFAULT_PAGE_SIZE} билетов</button>
       )}
     </div>
   )

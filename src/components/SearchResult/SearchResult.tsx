@@ -7,7 +7,6 @@ import { useParametricSearchData, useSearchParamsEvaluation } from "components/S
 import SearchFormMini from "components/SearchForm/SearchFormMini"
 import ErrorBoundary from "components/services/ErrorBoudary"
 import { RouteType } from "interfaces/Search"
-import _ from "lodash"
 import { createContext, ReactNode, Suspense, useState } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { Helmet } from "react-helmet"
@@ -19,9 +18,10 @@ import { classWithModifiers, interpolate } from "utils"
 import SearchForm from "../SearchForm/SearchForm"
 import SearchResultAirContainer from "./SearchResultContainers/SearchResultAirContainer/SearchResultAirContainer"
 import SearchResultTicketError from "./SearchResultError"
+import { SearchFiltersType } from "./SearchResultFilters/SearchFilters"
 import SearchResultLoader from "./SearchResultLoader"
 
-export const searchSessionContext = createContext({ session: "" })
+export const searchSessionContext = createContext<{ session: string; filters: SearchFiltersType }>({ session: "", filters: {} })
 export const searchWeekPricesContext = createContext<({
   date: string
   price: number
@@ -80,7 +80,7 @@ function SearchSessionProviderSuspense(props: SearchResultProviderProps) {
   if (!payload) throw new Error("no payload")
 
   return (
-    <searchSessionContext.Provider value={{ ...payload }}>
+    <searchSessionContext.Provider value={{ ...payload, filters: {} }}>
       {props.children}
     </searchSessionContext.Provider>
   )
