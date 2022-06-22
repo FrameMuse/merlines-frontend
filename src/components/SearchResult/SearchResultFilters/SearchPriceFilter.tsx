@@ -20,7 +20,7 @@ function SearchPriceFilter(props: SearchPriceFilterProps) {
     <div className="filters__container">
       <h2 className="visually-hidden">{ll.searchResult.sorting}</h2>
       <div className="filters__sort">
-        {props.prices.map((price, index) => price != null && (
+        {[...Array(3).fill(null)].map((price, index) => (
           <button className={classWithModifiers("filters__sort-btn", index === choice && "active")} type="button"
             onClick={() => (setChoice(index), props.onChange?.(Prices[index] as never))} key={index}>
             <span className="filters__sort-text">{ll.searchResult[Prices[index]]}</span>

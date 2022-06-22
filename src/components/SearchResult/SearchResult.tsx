@@ -3,20 +3,24 @@ import "./ticket-list.scss"
 import { getCalendarAirWeek } from "api/actions/calendar"
 import { postTicketsAir } from "api/actions/tickets"
 import Icon from "components/common/Icon"
-import { useParametricSearchData, useSearchParamsEvaluation } from "components/SearchForm/SearchForm.utils"
+import { stringifySearchData, useParametricSearchData, useSearchParamsEvaluation } from "components/SearchForm/SearchForm.utils"
 import SearchFormMini from "components/SearchForm/SearchFormMini"
 import ErrorBoundary from "components/services/ErrorBoudary"
 import { RouteType } from "interfaces/Search"
-import { createContext, ReactNode, Suspense, useState } from "react"
+import _ from "lodash"
+import useLocalization from "plugins/localization/hook"
+import { createContext, ReactNode, Suspense, useEffect, useState } from "react"
 import { useSuspenseQuery } from "react-fetching-library"
 import { Helmet } from "react-helmet"
 import { useSelector } from "react-redux"
-import { useLocation } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 import { SearchDetails, SearchTravelClass } from "redux/reducers/search"
 import { classWithModifiers, interpolate } from "utils"
 
 import SearchForm from "../SearchForm/SearchForm"
 import SearchResultAirContainer from "./SearchResultContainers/SearchResultAirContainer/SearchResultAirContainer"
+import SearchResultBusContainer from "./SearchResultContainers/SearchResultBusContainer/SearchResultBusContainer"
+import SearchResultTrainContainer from "./SearchResultContainers/SearchResultTrainContainer/SearchResultTrainContainer"
 import SearchResultTicketError from "./SearchResultError"
 import { SearchFiltersType } from "./SearchResultFilters/SearchFilters"
 import SearchResultLoader from "./SearchResultLoader"
@@ -110,28 +114,41 @@ function SearchTicketsContainer(props: SearchTicketsContainerProps) {
     case "air":
       return <SearchResultAirContainer />
 
+    case "bus":
+      return <SearchResultBusContainer />
+
+    case "train":
+      return <SearchResultTrainContainer />
+
     default:
       return (
         <div className="ticket-list__error">
-          <h2 className="ticket-list__title">Поиск билетов на {({ train: "поезда", bus: "автобусы" } as never)[props.transport]} ещё в разработке</h2>
-          <p className="ticket-list__error-head">Мы работает над этим</p>
+          <h2 className="ticket-list__title">Такой вид транспорта не поддерживается</h2>
+          <p className="ticket-list__error-head">Вы можете вернуться на главную</p>
         </div>
       )
   }
 }
 
 function SearchTicketsMeta() {
+  const ll = useLocalization(ll => ll)
   const search = useSelector(state => state.search)
   if (search.routes[0].origin === null || search.routes[0].destination === null) {
     throw new Error("SearchTicketsMetaError: Empty route")
   }
 
-  const title = `Авиабилеты из {origin} в {destination}. Цены на прямые рейсы {travelClass} класса`
-  const desc = `Дешевые авиабилеты из {origin} ({originCode}) в {destination} ({destinationCode}) на merlines.ru. Лучшие цены на прямые рейсы {travelClass} класса {isChildren}`
+  const title = `{transport} из {origin} в {destination}. Цены на прямые рейсы {travelClass} класса`
+  const desc = `Дешевые {transport} из {origin} ({originCode}) в {destination} ({destinationCode}) на merlines.ru. Лучшие цены на прямые рейсы {travelClass} класса {isChildren}`
+  const transports: Record<typeof search.transport, string> = {
+    air: ll.main.airplane,
+    bus: ll.main.bus,
+    train: ll.main.train,
+  }
   return (
     <Helmet>
       <title>
         {interpolate(title, {
+          transport: _.capitalize(transports[search.transport].toLowerCase()),
           origin: search.routes[0].origin.title,
           destination: search.routes[0].destination.title,
           travelClass: SearchTravelClass[search.travelClass]
@@ -140,6 +157,7 @@ function SearchTicketsMeta() {
       <meta
         name="description"
         content={interpolate(desc, {
+          transport: transports[search.transport].toLowerCase(),
           origin: search.routes[0].origin.title,
           originCode: search.routes[0].origin.code || "CDE",
           destination: search.routes[0].destination.title,

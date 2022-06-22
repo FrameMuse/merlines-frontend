@@ -28,6 +28,10 @@ function SearchResultAirContainer() {
   const response = useQuery(action)
 
 
+  // useEffect(() => {
+
+  // }, [page])
+
 
   useEffect(() => {
     if (!isValidResponse(response)) return
@@ -73,6 +77,24 @@ interface SearchResultAirTicketsContainerProps {
 function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerProps) {
   const weekPrices = useContext(searchWeekPricesContext)
   const results = props.payload.results
+
+  if (results.length === 0) {
+    return (
+      <div className="ticket-list__content">
+        <div className="ticket-list__error">
+          <h2 className="ticket-list__title">По вашему запросу билеты не найдены</h2>
+          <p className="ticket-list__error-head">
+            <b>Это могло произойти по следующим причинам:</b>
+            <ul>
+              <ol>Слишком поздние даты</ol>
+              <ol>Все билеты на эту дату раскуплены</ol>
+            </ul>
+            <b>Измените данные поиска</b>
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={classWithModifiers("ticket-list__content", props.loading && "loading")}>

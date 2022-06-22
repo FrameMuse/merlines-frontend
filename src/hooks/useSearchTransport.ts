@@ -1,13 +1,17 @@
+import { stringifySearchData } from "components/SearchForm/SearchForm.utils"
 import { Dispatch } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { SearchDetails, updateSearchTransport } from "redux/reducers/search"
+import { useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
+import { SearchDetails } from "redux/reducers/search"
 
 function useSearchTransport(): [SearchDetails["transport"], Dispatch<SearchDetails["transport"]>] {
-  const dispatch = useDispatch()
-  const transport = useSelector(state => state.search.transport)
-  const setTransport = (transport: SearchDetails["transport"]) => dispatch(updateSearchTransport(transport))
+  const history = useHistory()
+  const search = useSelector(state => state.search)
+  function setTransport(transport: SearchDetails["transport"]) {
+    history.push({ pathname: stringifySearchData({ ...search, transport }) })
+  }
 
-  return [transport, setTransport]
+  return [search.transport, setTransport]
 }
 
 export default useSearchTransport

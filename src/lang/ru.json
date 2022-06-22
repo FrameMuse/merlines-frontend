@@ -191,7 +191,11 @@
     "entrainment": "Услуги",
     "entertainment": "Развлечения",
     "charger": "Зарядка",
-    "alcohol": "Алкоголь"
+    "alcohol": "Алкоголь",
+    "trains": "Поезда",
+    "carts": "Вагоны",
+    "stations": "Вокзалы",
+    "transferStations": "Вокзалы пересадок"
   },
   "errors": {
     "token_email_not_found": "Почта не найдена"

@@ -48,7 +48,7 @@ function SearchResultAirTicket(props: SearchResultAirTicketProps) {
             return { type: "travel", percentage }
           }
 
-          const nextArrivalTime = new Date(nextSeg.arrival_time).getTime()
+          // const nextArrivalTime = new Date(nextSeg.arrival_time).getTime()
           const nextDepartureTime = new Date(nextSeg.departure_time).getTime()
           const nextN = nextDepartureTime - arrivalTime
           const nextPercentage = nextN / duration * 100
