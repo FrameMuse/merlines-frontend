@@ -24,20 +24,14 @@ function SearchResultAirContainer() {
   const { session } = useContext(searchSessionContext)
   const [filters, setFilters] = useState<Partial<AirFiltersType>>({})
 
-  const action = getTicketsAir(session, page, DEFAULT_PAGE_SIZE, filters)
+  const action = getTicketsAir(session, DEFAULT_PAGE, DEFAULT_PAGE_SIZE * page, filters)
   const response = useQuery(action)
-
-
-  // useEffect(() => {
-
-  // }, [page])
-
 
   useEffect(() => {
     if (!isValidResponse(response)) return
     if (response.payload.in_progress === false) return
 
-    const interval = setInterval(() => { response.query() }, PING_INTERVAL)
+    const interval = setInterval(() => response.query(), PING_INTERVAL)
     return () => {
       clearInterval(interval)
     }
@@ -76,9 +70,7 @@ interface SearchResultAirTicketsContainerProps {
 
 function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerProps) {
   const weekPrices = useContext(searchWeekPricesContext)
-  const results = props.payload.results
-
-  if (results.length === 0) {
+  if (props.payload.results.length === 0) {
     return (
       <div className="ticket-list__content">
         <div className="ticket-list__error">
@@ -99,7 +91,7 @@ function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerP
   return (
     <div className={classWithModifiers("ticket-list__content", props.loading && "loading")}>
       <TransportSwitcher prices={[weekPrices?.[0]?.price]} />
-      {results.filter(someEqual("id")).map(ticket => (
+      {props.payload.results.filter(someEqual("id")).map(ticket => (
         <SearchResultAirTicket {...ticket} key={ticket.id} />
       ))}
       {(props.page * DEFAULT_PAGE_SIZE) < (props.payload.count) && (
