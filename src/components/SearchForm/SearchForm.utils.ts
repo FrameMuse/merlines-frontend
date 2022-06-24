@@ -23,7 +23,7 @@ export function humanizeDateUTC(date?: Date | null) {
 
   const day = date.getUTCDate()
   const month = declinedMonthNames[date.getUTCMonth()]
-  const weekday = date.toLocaleDateString("ru", { weekday: "short", timeZone: "GMT" })
+  const weekday = date.toLocaleDateString("ru", { weekday: "short", timeZone: "UTC" })
 
   return `${day} ${_.capitalize(month)}, ${_.capitalize(weekday)}`
 }
