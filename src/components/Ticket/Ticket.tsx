@@ -14,7 +14,7 @@ import { classWithModifiers, createQuery, getDefaultSelectedCurrency, getDefault
 
 import { deleteTrackingTicket, postTrackingTicket } from "../../api/actions/tracking"
 import useLocalization from "../../plugins/localization/hook"
-import { humanizeDate } from "../SearchForm/SearchForm.utils"
+import { humanizeDate, humanizeDateUTC } from "../SearchForm/SearchForm.utils"
 
 
 
@@ -183,8 +183,8 @@ export function TicketTimeline(props: TicketTimelineProps) {
   return (
     <div className="ticket-timeline">
       <div className="ticket-timeline__dates">
-        <span>{humanizeDate(props.departureDate)}</span>
-        <span>{humanizeDate(props.arrivalDate)}</span>
+        <span>{humanizeDateUTC(props.departureDate)}</span>
+        <span>{humanizeDateUTC(props.arrivalDate)}</span>
       </div>
       <div className="ticket-timeline__times">
         <span>{props.departureDate.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</span>
@@ -462,12 +462,12 @@ function TicketTraceTable(props: TicketTraceTableProps) {
         <tr>
           <td>{departureTime.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</td>
           <td>{props.departure.title} <span className="weak">({props.departure.code})</span></td>
-          <td>{humanizeDate(departureTime)}</td>
+          <td>{humanizeDateUTC(departureTime)}</td>
         </tr>
         <tr>
           <td>{arrivalTime.toLocaleTimeString("ru", { timeStyle: "short", timeZone: "UTC" })}</td>
           <td>{props.arrival.title} <span className="weak">({props.arrival.code})</span></td>
-          <td>{humanizeDate(arrivalTime)}</td>
+          <td>{humanizeDateUTC(arrivalTime)}</td>
         </tr>
       </tbody>
     </table>

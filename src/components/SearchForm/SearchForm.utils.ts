@@ -18,6 +18,16 @@ export function humanizeDate(date?: Date | null) {
   return `${day} ${_.capitalize(month)}, ${_.capitalize(weekday)}`
 }
 
+export function humanizeDateUTC(date?: Date | null) {
+  if (date == null) return ""
+
+  const day = date.getUTCDate()
+  const month = declinedMonthNames[date.getUTCMonth()]
+  const weekday = date.toLocaleDateString("ru", { weekday: "short", timeZone: "GMT" })
+
+  return `${day} ${_.capitalize(month)}, ${_.capitalize(weekday)}`
+}
+
 export function stringifyRoutes(searchRoutes: SearchDetails["routes"]) {
   const stringifyDate = (date: Date) => date.toJSON().slice(2, 10).replace(/-/g, "")
   const routes = searchRoutes.flatMap(route => {
