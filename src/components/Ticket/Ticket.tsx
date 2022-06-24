@@ -234,14 +234,12 @@ function TicketOffers(props: TicketOffersProps) {
   }
   return (
     <div className="ticket-prepositions">
+      {/* {!expanded && ( */}
       <div className="ticket-prepositions__list">
-        {!expanded && payload == null && (
-          <TicketOffer {...props.bestOffer} />
-        )}
-        {expanded && payload != null && payload.results.map(offer => (
-          <TicketOffer {...offer} image={`https://pics.avs.io/gates/200/50/${offer.gate_id}.png`} />
-        ))}
+        <TicketOffer {...props.bestOffer} />
       </div>
+      {/* )} */}
+
       {expanded && (
         <button className="ticket-prepositions__more" type="button" onClick={showLess}>
           <span>{ll.searchResult.showLessOffer}</span>
@@ -254,6 +252,11 @@ function TicketOffers(props: TicketOffersProps) {
           <Icon className="ticket-prepositions__icon" name="chevron" />
         </button>
       )}
+      {expanded && payload != null && payload.results.map(offer => (
+        <div className="ticket-prepositions__list">
+          <TicketOffer {...offer} image={`https://pics.avs.io/gates/200/50/${offer.gate_id}.png`} />
+        </div>
+      ))}
     </div>
   )
 }

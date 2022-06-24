@@ -53,12 +53,12 @@ function App() {
 function AppRoutes() {
   return (
     <Switch>
-      <Route path="/user"><UserCabinet /></Route>
+      <Route path="/user"><UserCabinet /><Subscribe /></Route>
 
       <Route path="/blog/article/:articleId" render={props => [<Article {...props.match.params} />, <Subscribe />]} />
       <Route path="/blog"><Blog /><Subscribe /></Route>
 
-      <Route path="/price-calendar"><PriceCalendar /></Route>
+      <Route path="/price-calendar"><PriceCalendar /><Subscribe /></Route>
 
       <Route path="/" exact><Main /><Subscribe /></Route>
 

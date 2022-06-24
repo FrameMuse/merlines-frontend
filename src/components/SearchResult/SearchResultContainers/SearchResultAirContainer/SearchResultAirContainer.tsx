@@ -1,5 +1,6 @@
 import { getTicketsAir } from "api/actions/tickets"
 import { Action, isValidResponse } from "api/client"
+import SearchResultTicketError from "components/SearchResult/SearchResultError"
 import SearchResultLoader from "components/SearchResult/SearchResultLoader"
 import TransportSwitcher from "components/SearchResult/TransportSwitcher"
 import { AirFiltersType } from "interfaces/Search"
@@ -54,7 +55,7 @@ function SearchResultAirContainer() {
     <SearchResultTickets>
       <SearchResultWeekPrice />
       <SearchResultAirFiltersContainer onChange={setFilters} />
-      <SearchResultAirTicketsContainer loading={response.loading} payload={response.payload} page={page} setPage={setPage} />
+      <SearchResultAirTicketsContainer loading={false} payload={response.payload} page={page} setPage={setPage} />
     </SearchResultTickets>
   )
 }
@@ -72,19 +73,7 @@ function SearchResultAirTicketsContainer(props: SearchResultAirTicketsContainerP
   const weekPrices = useContext(searchWeekPricesContext)
   if (props.payload.results.length === 0) {
     return (
-      <div className="ticket-list__content">
-        <div className="ticket-list__error">
-          <h2 className="ticket-list__title">По вашему запросу билеты не найдены</h2>
-          <p className="ticket-list__error-head">
-            <b>Это могло произойти по следующим причинам:</b>
-            <ul>
-              <ol>Слишком поздние даты</ol>
-              <ol>Все билеты на эту дату раскуплены</ol>
-            </ul>
-            <b>Измените данные поиска</b>
-          </p>
-        </div>
-      </div>
+      <SearchResultTicketError />
     )
   }
 

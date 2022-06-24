@@ -404,18 +404,18 @@
 
 .ticket-preposition__group {
 	display: grid;
-	justify-items: center;
+	// justify-items: center;
 	row-gap: 0.5em;
 
 	&:first-child {
-		display: flex;
-		align-items: center;
+		// display: flex;
+		// align-items: center;
 
 		margin: 0 auto;
 
-		&>:last-child {
-			margin-left: 1em;
-		}
+		// &>:last-child {
+		// 	margin-left: 1em;
+		// }
 	}
 }
 
