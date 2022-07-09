@@ -31,8 +31,9 @@ export function humanizeDateUTC(date?: Date | null) {
 export function stringifyRoutes(searchRoutes: SearchDetails["routes"]) {
   const stringifyDate = (date: Date) => date.toJSON().slice(2, 10).replace(/-/g, "")
   const routes = searchRoutes.flatMap(route => {
+    // Filter route if it's not fulfilled or empty
     if (!route.origin || !route.destination || !route.date) {
-      throw new TypeError("StringifyRoutesError: Lack of data in a route")
+      return []
     }
 
     return {
