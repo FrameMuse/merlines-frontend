@@ -9,10 +9,10 @@ interface props {
   handleCancel: () => void
 }
 
-const UserCabinetModal: React.FC<props> = ({visible, handleCancel, handleOk}) => {
+const UserCabinetModal: React.FC<props> = ({ visible, handleCancel, handleOk }) => {
   const ll = useLocalization(ll => ll)
   return (
-    <Modal visible={visible} onCancel={handleCancel}>
+    <Modal maxWidth="32em" visible={visible} onCancel={handleCancel}>
       <div className={"cabinet__history-delete-wrap"}>
         <p className={"cabinet__history-delete-text"}>
           {ll.lk.clearHistoryTitle}
