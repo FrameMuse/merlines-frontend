@@ -1,6 +1,7 @@
 // SCSS
 import "./user.scss"
 
+import UserAvatar from "components/UserAvatar/UserAvatar"
 import { ArticleType } from "interfaces/Blog"
 import { UserType } from "interfaces/user"
 import ReactMarkdown from "react-markdown"
@@ -22,7 +23,7 @@ function ArticleContent(props: ArticleContentProps) {
   const date = new Date(props.created_at).toLocaleString("ru", { dateStyle: "long", timeStyle: "medium" })
   return (
     <section className="article-page">
-      {!props.previewMode && user.auth && [UserType.Admin, UserType.Editor].includes(user.type) && (
+      {!props.previewMode && user.auth && user.type >= UserType.Editor && (
         <EditArticleButton articleId={props.id} />
       )}
       <div className="article-page__container">
@@ -43,7 +44,7 @@ function ArticleContent(props: ArticleContentProps) {
             </ReactMarkdown>
           </div>
           <div className="user user--article">
-            <img className="user__avatar" src={props.author.avatar} alt="avatar" />
+            <UserAvatar avatar={props.author.avatar} firstName={props.author.first_name} />
             <div className="user__inner">
               <div className="user__tag">Автор</div>
               <Link className="user__name" to={"/user/" + props.author.id}>

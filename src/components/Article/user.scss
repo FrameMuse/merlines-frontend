@@ -45,6 +45,7 @@
       }
     }
   }
+
   @media #{$media-xl} {
     &--article {
       margin-top: 22px;
@@ -57,6 +58,7 @@
 }
 
 .user__inner {
+  margin-left: 1em;
   max-width: 225px;
 
   @media #{$media-md} {
