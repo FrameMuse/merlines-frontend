@@ -29,7 +29,7 @@ function PopupPasswordReset() {
   }
 
   return (
-    <>
+    <div style={{ maxWidth: "25em" }}>
       <h2 className="modal__title">Смена пароля</h2>
       <p className="modal__text">
         Для смены пароля введите вашу почту, чтобы мы могли выслать письмо со<br />
@@ -58,7 +58,7 @@ function PopupPasswordReset() {
         Если вы не получили письмо - <Link to="#">нажмите здесь</Link>, мы
         отправим его еще раз
       </p>
-    </>
+    </div>
   )
 }
 
