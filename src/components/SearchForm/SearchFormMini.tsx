@@ -4,7 +4,7 @@ import Icon from "../common/Icon"
 
 
 interface SearchFormMiniProps {
-  openForm: () => void
+  onOpen: () => void
 }
 
 function SearchFormMini(props: SearchFormMiniProps) {
@@ -26,7 +26,7 @@ function SearchFormMini(props: SearchFormMiniProps) {
           <span className="download__item download__item--date">
             {search.routes[0].destination?.title || ""}
           </span>
-          <button className="download__edit" type="button" onClick={props.openForm}>
+          <button className="download__edit" type="button" onClick={props.onOpen}>
             <Icon
               className="download__edit-icon"
               name="edit"

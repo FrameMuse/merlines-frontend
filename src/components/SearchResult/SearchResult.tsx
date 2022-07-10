@@ -171,7 +171,7 @@ function SearchTicketsMeta() {
 }
 
 function SearchResultForm() {
-  const [isMiniMode, setIsExpanded] = useState(true)
+  const [isMiniMode, setIsExpanded] = useState(false)
   return (
     <>
       <div className={classWithModifiers("form-mini__form", isMiniMode && "mini-mode")}>
@@ -187,7 +187,7 @@ function SearchResultForm() {
         </div>
       </div>
       <div className={classWithModifiers("form-mini__mini", isMiniMode && "mini-mode")}>
-        <SearchFormMini openForm={() => setIsExpanded(!isMiniMode)} />
+        <SearchFormMini onOpen={() => setIsExpanded(!isMiniMode)} />
       </div>
     </>
   )
