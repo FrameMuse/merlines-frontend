@@ -102,70 +102,70 @@ export const errorMessages = {
 
 export const footerInfoData = [
   {
-    name: ll.main.aboutUs,
+    title: ll.main.aboutUs,
     link: routes.footer.aboutUs,
     links: [
       {
-        name: "О проекте",
+        title: "О проекте",
         link: routes.footer.aboutProject
       }
     ]
   },
   {
-    name: ll.main.rules,
+    title: ll.main.rules,
     link: routes.footer.rules,
     links: [
       {
-        name: ll.main.cookies,
+        title: ll.main.cookies,
         link: routes.footer.cookies
       },
       {
-        name: ll.main.privacyPolicy,
+        title: ll.main.privacyPolicy,
         link: routes.footer.privacyPolicy
       }
     ]
   },
   {
-    name: ll.main.advertising,
+    title: ll.main.advertising,
     link: routes.footer.advertising,
     links: [
       {
-        name: ll.main.priceList,
+        title: ll.main.priceList,
         link: routes.footer.priceList
       },
       {
-        name: ll.main.forPartners,
+        title: ll.main.forPartners,
         link: routes.footer.forPartners
       }
     ]
   },
   {
-    name: ll.main.help,
+    title: ll.main.help,
     link: routes.footer.help,
     links: [
       {
-        name: ll.main.faq,
+        title: ll.main.faq,
         link: routes.footer.faq
       },
       {
-        name: ll.main.askQuestion,
+        title: ll.main.askQuestion,
         link: routes.footer.askQuestion
       }
     ]
   },
   {
-    name: ll.main.socialNetworks,
+    title: ll.main.socialNetworks,
     link: routes.footer.socialNetwork,
     modifier: "social",
     // links: [
     //   {
-    //     name: "Instagram",
+    //     title: "Instagram",
     //     link: routes.footer.instagram,
     //     modifier: "footer__link--instagram",
     //     svg: "instagram"
     //   },
     //   {
-    //     name: "Facebook",
+    //     title: "Facebook",
     //     link: routes.footer.facebook,
     //     modifier: "footer__link--facebook",
     //     svg: "facebook"

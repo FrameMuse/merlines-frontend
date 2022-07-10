@@ -12,7 +12,7 @@ function Footer() {
       <div className="footer__container">
         <div className="footer__inner">
           {footerInfoData.map((info, index) => (
-            <FooterInfoBlock {...info as any} key={index} />
+            <FooterInfoBlock {...info} key={index} />
           ))}
         </div>
         <div className="footer__copyright">
