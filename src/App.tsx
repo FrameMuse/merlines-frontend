@@ -36,6 +36,7 @@ function App() {
   return (
     <Switch>
       <Route path="/admin"><AdminView /></Route>
+      <Route path="/redirect"><RedirectView /></Route>
       <Route>
         <Header />
         <main id="main-content" className="main">
@@ -73,14 +74,13 @@ function AppRoutes() {
       {/* <Route path={routes.footer.cookies}><CookiesView /></Route> */}
       <Route path={routes.footer.privacyPolicy}><PrivacyPolicyView /></Route>
       {/* <Route path={routes.footer.advertising}><Advertising /></Route> */}
-      {/* <Route path={routes.footer.priceList}><PriceListView /></Route> */}
+      <Route path={routes.footer.priceList}><PriceListView /></Route>
       <Route path={routes.footer.forPartners}><PartnersView /></Route>
       <Route path={routes.footer.faq}><FAQView /></Route>
       <Route path={routes.landing}><LandingPage /><Subscribe /></Route>
 
       <Route path="/error/:code" render={props => <ErrorView {...props.match.params} />} />
 
-      <Route path="/redirect"><RedirectView /></Route>
       <Route><ErrorView code="404" /></Route>
     </Switch >
   )
