@@ -14,7 +14,7 @@ import { classWithModifiers, createQuery, getDefaultSelectedCurrency, getDefault
 
 import { deleteTrackingTicket, postTrackingTicket } from "../../api/actions/tracking"
 import useLocalization from "../../plugins/localization/hook"
-import { humanizeDate, humanizeDateUTC } from "../SearchForm/SearchForm.utils"
+import { humanizeDateUTC } from "../SearchForm/SearchForm.utils"
 
 
 
@@ -179,7 +179,6 @@ export interface TicketTimelineProps {
 
 export function TicketTimeline(props: TicketTimelineProps) {
   const ll = useLocalization(ll => ll)
-  const duration = props.arrivalDate.getTime() - props.departureDate.getTime()
   return (
     <div className="ticket-timeline">
       <div className="ticket-timeline__dates">
@@ -413,7 +412,7 @@ function About(props: { segmentId: number }) {
         </div>
         <div className="entries__entry">
           <div className="entries__key">{ll.main.class}:</div>
-          <div className="entries__value">{payload.travel_class ? "Бизнес" : "Эконом"}</div>
+          <div className="entries__value">{payload.travel_class ? "Эконом" : "Бизнес"}</div>
         </div>
         <div className="entries__entry">
           <div className="entries__key">{ll.searchResult.alcohol}:</div>
