@@ -2,9 +2,12 @@
 @import "../../../styles/mixin.scss";
 
 .price-week {
-	padding-left: $gapSm;
 	margin-bottom: 16px;
 	box-sizing: border-box;
+
+	@include Mobile {
+		padding-left: $gapSm;
+	}
 
 	@include Tablet {
 		padding: unset;

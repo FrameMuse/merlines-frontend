@@ -53,6 +53,6 @@ $media-lg: "screen and (min-width: #{$width-lg})";
 $media-xl: "screen and (min-width: #{$width-xl})";
 
 // Отступы у контейнера
-$gapSm: 0;
-$gapMd: 0;
-$gapLg: 0;
+$gapSm: 15px;
+$gapMd: 30px;
+$gapLg: 39px;

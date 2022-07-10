@@ -3,25 +3,31 @@
 @mixin container {
   margin-left: auto;
   margin-right: auto;
-  padding-left: $gapSm;
-  padding-right: $gapSm;
+
+  @include Mobile {
+    padding-left: $gapSm;
+    padding-right: $gapSm;
+  }
 
   @media #{$media-md} {
     padding-left: $gapLg;
     padding-right: $gapLg;
   }
+
   @media #{$media-lg} {
     max-width: 1110px;
     padding-left: $gapMd;
     padding-right: $gapMd;
   }
 }
+
 @mixin ul {
   list-style: none;
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 0;
 }
+
 @mixin h2 {
   font-family: $title-font;
   font-size: 24px;
@@ -34,6 +40,7 @@
     line-height: 1.2;
   }
 }
+
 @mixin h3 {
   font-family: $title-font;
   font-size: 18px;
@@ -45,10 +52,12 @@
     font-size: 24px;
     margin-bottom: 15px;
   }
+
   @media #{$media-lg} {
     margin-bottom: 20px;
   }
 }
+
 @mixin textSm {
   font-size: 12px;
   line-height: 1.25;
@@ -57,16 +66,19 @@
   @media #{$media-md} {
     font-size: 16px;
   }
+
   @media #{$media-lg} {
     font-size: 18px;
   }
 }
+
 @mixin date {
   color: var(--color-grey);
   font-size: 12px;
   line-height: 1.25;
   font-weight: 500;
 }
+
 @mixin resetBtn {
   padding: 0;
   background: none;
@@ -74,36 +86,40 @@
   border: none;
   cursor: pointer;
 }
+
 @mixin nowrap {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 @mixin userAvatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-	background-color: #A1A1A1;
-	color: white;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-transform: uppercase;
-	font-size: 26px;
-	overflow: hidden;
-	img {
-		width: 100%;
-		height:100%;
-		display: block;
-		object-fit: cover;
-	}
+  background-color: #A1A1A1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 26px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
 
   @media #{$media-md} {
     width: 65px;
     height: 65px;
-		font-size: 40px;
+    font-size: 40px;
   }
 }
+
 @mixin userName {
   font-family: $title-font;
   font-size: 16px;
@@ -114,7 +130,9 @@
     font-size: 24px;
   }
 }
+
 @mixin crossIcon {
+
   &::before,
   &::after {
     content: "";
@@ -131,10 +149,12 @@
   &::before {
     transform: rotate(45deg);
   }
+
   &::after {
     transform: rotate(-45deg);
   }
 }
+
 @mixin button {
   font-family: $main-font;
   font-size: 14px;
@@ -151,9 +171,11 @@
     background-color: var(--color-blue);
   }
 }
+
 @mixin buttonSubmit {
   @include button;
 }
+
 @mixin formInput {
   font-size: 16px;
   font-weight: 500;
@@ -166,6 +188,7 @@
   outline: none;
   appearance: none;
 }
+
 @mixin formLabel {
   color: var(--color-grey);
   font-size: 16px;
@@ -178,28 +201,32 @@
     color: var(--color-red);
   }
 }
+
 @mixin floatingLabel($className, $fontSize, $top, $left) {
   &::placeholder {
     opacity: 0;
   }
 
-  &:not(:placeholder-shown) + .#{$className},
-  &:focus + .#{$className} {
+  &:not(:placeholder-shown)+.#{$className},
+  &:focus+.#{$className} {
     font-size: $fontSize;
     top: $top;
     left: $left;
   }
 }
+
 @mixin ticketButton {
   color: var(--color-blue);
   background-color: var(--color-white);
   border: 1px solid var(--color-blue);
   border-radius: 0;
 }
+
 @mixin hoverBlock {
   color: var(--color-white);
   background-color: var(--color-blue);
 }
+
 @mixin rectangle($size: 10px) {
   content: "";
   width: 0;
@@ -212,6 +239,7 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
 @mixin checkboxLabel {
   position: relative;
   padding-left: 25px;
@@ -243,6 +271,7 @@
     left: 4px;
   }
 }
+
 @mixin navLinkBefore {
   content: "";
   width: 13px;
@@ -254,6 +283,7 @@
   top: 2px;
   left: -30px;
 }
+
 @mixin navLinkBeforeText {
   position: absolute;
   top: 0;
@@ -277,17 +307,18 @@
     pointer-events: initial;
   }
 
-  transition: 250ms ease top, 200ms ease opacity;
+  transition: 250ms ease top,
+  200ms ease opacity;
 }
 
 @mixin Mobile {
-	@media screen and (max-width: #{$width-sm}) {
-		@content;
-	}
+  @media screen and (max-width: #{$width-sm}) {
+    @content;
+  }
 }
 
 @mixin Tablet {
-	@media screen and (max-width: #{$width-lg}) {
-		@content
-	}
+  @media screen and (max-width: #{$width-lg}) {
+    @content
+  }
 }
