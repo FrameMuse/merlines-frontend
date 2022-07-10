@@ -29,7 +29,13 @@ export function humanizeDateUTC(date?: Date | null) {
 }
 
 export function stringifyRoutes(searchRoutes: SearchDetails["routes"]) {
-  const stringifyDate = (date: Date) => date.toJSON().slice(2, 10).replace(/-/g, "")
+  const stringifyDate = (date: Date) => {
+    const year = date.toLocaleString("ru", { year: "2-digit" })
+    const month = date.toLocaleString("ru", { month: "2-digit" })
+    const day = date.toLocaleString("ru", { day: "2-digit" })
+
+    return `${year}${month}${day}`
+  }
   const routes = searchRoutes.flatMap(route => {
     // Filter route if it's not fulfilled or empty
     if (!route.origin || !route.destination || !route.date) {
