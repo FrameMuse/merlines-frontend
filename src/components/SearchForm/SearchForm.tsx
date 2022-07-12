@@ -24,10 +24,12 @@ function SearchForm() {
 
   function setReturnDate() {
     dispatch(updateSearchHasReturnDate(true))
+    dispatch(updateSearch({ routes: search.routes.slice(0, 1) }))
   }
   function removeReturnDate() {
     dispatch(updateSearchHasReturnDate(false))
     dispatch(updateSearchRoute(0, { returnDate: null }))
+    dispatch(updateSearch({ routes: search.routes.slice(0, 1) }))
   }
 
   function addSearchRoute() {
@@ -92,8 +94,14 @@ function SearchForm() {
       {search.routes.length > 1 && (
         <div className={classWithModifiers("search-form", "complicated")}>
           <div className="search-form__nav">
-            <button className="search-form__nav-btn" type="button" onClick={clearSearch}>
-              {ll.main.simpleRoute}
+            <button className="search-form__nav-btn" type="button" onClick={setReturnDate}>
+              {ll.main.bothWays}
+            </button>
+            <button className="search-form__nav-btn" type="button" onClick={removeReturnDate}>
+              {ll.main.oneWay}
+            </button>
+            <button className="search-form__nav-btn search-form__nav-btn--active" type="button" onClick={clearSearch}>
+              {ll.main.difficultRoute}
             </button>
           </div>
           <div className={classWithModifiers("search-form__inner", formError && "error")}>
