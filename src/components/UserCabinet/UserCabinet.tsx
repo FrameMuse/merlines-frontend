@@ -33,13 +33,13 @@ function UserCabinet() {
 }
 
 
-interface LkNavLinkProps {
+interface UserCabinetNavLinkProps {
   to: string
   children: string
   iconName: IconName
 }
 
-function UserCabinetNavLink(props: LkNavLinkProps) {
+function UserCabinetNavLink(props: UserCabinetNavLinkProps) {
   return (
     <NavLink className="cabinet__nav-item" activeClassName="cabinet__nav-item--active" to={props.to}>
       {props.children}
