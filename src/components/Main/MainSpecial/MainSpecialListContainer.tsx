@@ -18,7 +18,7 @@ function MainSpecialListContainer() {
   }, [search.routes[0].origin])
 
   if (loading) return <>Loading...</>
-  if (payload == null) return <>No content</>
+  if (payload?.results == null) return <>No content</>
 
   const [bestSpecial, ...specials] = payload.results
   return (
